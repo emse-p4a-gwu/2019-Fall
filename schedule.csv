@@ -1,0 +1,33 @@
+"Week","Meeting","Date","Topics","Due"
+1,1,1/14,"Intro to course and software",
+1,2,1/16,"RMarkdown & Github",
+2,3,1/21,"Getting familiar with R",Data Camp 1
+2,4,1/23,"Getting familiar with RMarkdown",
+3,5,1/28,"Getting familiar with data frames",Data Camp 2
+3,6,1/30,"Data Wrangling I: The 'verbs' of the `dplyr` library",
+4,7,2/4,"Data Wrangling II: Grouping, summarizing, & pipes (`%>%`)",Data Camp 3
+4,8,2/6,"Data Wrangling III: Joins, reshaping for tidy data",
+5,9,2/11,"Fundamentals of Information Visualization",Project Proposals
+5,10,2/13,"Visualizations I: The grammar of graphics, the `ggplot2` library, plotting points",Data Camp 4
+6,11,2/18,"Visualizations II: Bars, histograms, & boxplots",Data Camp 5
+6,12,2/20,"Visualizations III: Facets, labeling & themes",
+7,13,2/25,"Data input / output & the `here` library",
+7,14,2/27,"In-class workshop: Getting data from the wild",
+8,15,3/3,"Dealing with strings: the `stringr` library",
+8,16,3/5,"Dealing with factors: the `forcats` library",
+9,17,3/10,"R as a programming language: writing your own functions",
+9,18,3/12,"R as a programming language: iteration with loops",
+10,19,3/17,Spring Break: No Class,
+10,20,3/19,Spring Break: No Class,
+11,21,3/24,,
+11,22,3/26,,
+12,23,3/31,,
+12,24,4/2,,
+13,25,4/7,,
+13,26,4/9,,
+14,27,4/14,,
+14,28,4/16,,
+15,29,4/21,,
+15,30,4/23,,
+16,--,4/27,Reading Week,
+17,--,5/4,Final Exam Week,
