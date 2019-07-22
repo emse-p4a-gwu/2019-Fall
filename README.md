@@ -1,5 +1,5 @@
-Repo for the EMSE 6574 Fall 2019 course website
+Course website for the Fall 2019 Section of EMSE 6574: Programming for Analytics
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9d6fe76c-e462-4ed2-91f8-3820b431d9bf/deploy-status)](https://app.netlify.com/sites/modest-wescoff-2a5eef/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a89003f5-8be3-4ff8-a923-152fd995f3dd/deploy-status)](https://app.netlify.com/sites/emse6574/deploys)
 
 [Home Page](https://emse6574.netlify.com/)
