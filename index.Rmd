@@ -18,34 +18,40 @@ options(knitr.kable.NA = '')
 
 # Course Information
 
-| Name:         | EMSE 6574: Programming for Analytics, Section 10 |
-|---------------|--------------------------------------------------|
-| Semester:     | Fall 2019                                        |
-| Meeting Time: | TBD                                              |
-| Location:     | TBD                                              |
+|  |  |
+|---------------------|--------------------------------------------------|
+| Name:&emsp;         | EMSE 6574: Programming for Analytics, Section 10 |
+| Semester:&emsp;     | Fall 2019                                        |
+| Meeting Time:&emsp; | TBD                                              |
+| Location:&emsp;     | TBD                                              |
+
+<vspace:10pt>
 
 # Instructor Information
 
-| Name:           | John Paul Helveston                     |
-|-----------------|-----------------------------------------|
-| Campus Address: | Science & Engineering Hall, Office 2830 |
-| Campus Phone:   | +1 (202) 994-7173                       |
-| Email:          | jph@gwu.edu                             |
-| Office Hours:   | TBD                                     |
+|  |  |
+|-----------------------|-----------------------------------------|
+| Name:&emsp;           | John Paul Helveston                     |
+| Campus Address:&emsp; | Science & Engineering Hall, Office 2830 |
+| Campus Phone:&emsp;   | +1 (202) 994-7173                       |
+| Email:&emsp;          | jph@gwu.edu                             |
+| Office Hours:&emsp;   | TBD                                     |
+
+<vspace:10pt>
 
 # Course Description
 
 ## GW Bulletin Description
 
-Introduction to programming for data analytics using the [R computing language](https://www.r-project.org/); topics include R, RMarkdown, functions, conditionals, loops, debugging, testing, strings, file input/output, algorithmic thinking, coding style, efficiency, information visualization, Monte Carlo methods, webscraping data, packages, .
+Introduction to programming for data analytics using the [R computing language](https://www.r-project.org/); topics include R, RMarkdown, functions, conditionals, loops, strings, file input/output, data visualization, coding style, efficiency, Monte Carlo methods, webscraping data, and package development.
 
 ## Detailed Description
 
-Introduction to programming for data analytics using the [R programming language](https://www.r-project.org/). Topics covered include introduction to the R programming language, structured program design in R, data structures for analytics in R, information visualization, file input/output, basic data analytics methods, data acquisition from real world sources. This course will prepare students for higher level courses in data analytics.
-
-This course provides undergraduate students with a foundation in exploring data in the R programming language. Students will learn how to work with a wide variety of data types and structures as well as fundamental concepts in information visualization. The course will be managed on Github, and students will learn the basics of using git and Github to manage version controlling. All analyses will be conducted to support reproducibility from raw data to results using RMarkdown. There are no prerequisites, and no prior programming experience is necessary to succeed in this class.
+This course provides students with a foundation in programming for data analytics using the [R computing language](https://www.r-project.org/). Emphasis will be on learning how to read, write, and debug code to produce analyses that are easy to understand and fully reproducible. Throughout the course, students will primarily work on individual programming assignments to help practice coding skills. Students will be assessed through quizzes, exams, and a final project. Teaching will involve interactive lectures and recitations with lots of live coding. At the end of the semester, students will demonstrate mastery of the course's topics by working on a 3-week term project. This course will prepare students for higher level courses in data analytics.
 
 ## Prerequisites 
+
+There are no prerequisites, and no prior programming experience is necessary to succeed in this class.
 
 # Learning objectives
 
@@ -81,8 +87,7 @@ All textbooks and references are available for free on the web, though physical 
 # Schedule
 
 ```{r echo=FALSE}
-schedule <- read.csv(here::here('schedule.csv'), header=T)
-kable(schedule) %>%
-    kable_styling(bootstrap_options = c(
-        'striped', 'hover', 'condensed', 'responsive', stripe_color = "#eeeeee"))
+read.csv(here::here('schedule.csv'), header=T) %>% 
+    kable(format = 'html', escape = FALSE) %>% 
+    kable_styling(bootstrap_options = c('striped', 'hover'), full_width = F)
 ```
