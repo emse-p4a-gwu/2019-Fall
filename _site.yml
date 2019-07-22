@@ -13,6 +13,9 @@ navbar:
       menu:
         - text: "Assignment 1"
           href: assignment-1.html
+    - text: "Resources"
+      href: resources.html
 output:
   html_document:
     theme: simplex
+    css: style.css

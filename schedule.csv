@@ -1,33 +1,33 @@
 "Week","Meeting","Date","Topics","Due"
-1,1,1/14,"Intro to course and software",
-1,2,1/16,"RMarkdown & Github",
-2,3,1/21,"Getting familiar with R",Data Camp 1
-2,4,1/23,"Getting familiar with RMarkdown",
-3,5,1/28,"Getting familiar with data frames",Data Camp 2
-3,6,1/30,"Data Wrangling I: The 'verbs' of the `dplyr` library",
-4,7,2/4,"Data Wrangling II: Grouping, summarizing, & pipes (`%>%`)",Data Camp 3
-4,8,2/6,"Data Wrangling III: Joins, reshaping for tidy data",
-5,9,2/11,"Fundamentals of Information Visualization",Project Proposals
-5,10,2/13,"Visualizations I: The grammar of graphics, the `ggplot2` library, plotting points",Data Camp 4
-6,11,2/18,"Visualizations II: Bars, histograms, & boxplots",Data Camp 5
-6,12,2/20,"Visualizations III: Facets, labeling & themes",
-7,13,2/25,"Data input / output & the `here` library",
-7,14,2/27,"In-class workshop: Getting data from the wild",
-8,15,3/3,"Dealing with strings: the `stringr` library",
-8,16,3/5,"Dealing with factors: the `forcats` library",
-9,17,3/10,"R as a programming language: writing your own functions",
-9,18,3/12,"R as a programming language: iteration with loops",
-10,19,3/17,Spring Break: No Class,
-10,20,3/19,Spring Break: No Class,
-11,21,3/24,,
-11,22,3/26,,
-12,23,3/31,,
-12,24,4/2,,
-13,25,4/7,,
-13,26,4/9,,
-14,27,4/14,,
-14,28,4/16,,
-15,29,4/21,,
-15,30,4/23,,
-16,--,4/27,Reading Week,
-17,--,5/4,Final Exam Week,
+1,1,8/27,"Intro to course and software",
+1,2,8/29,"RMarkdown & Github",
+2,3,9/3,"Getting familiar with R",Data Camp 1
+2,4,9/5,"Getting familiar with RMarkdown",
+3,5,9/10,"Getting familiar with data frames",Data Camp 2
+3,6,9/12,"Data Wrangling I: The 'verbs' of the `dplyr` library",
+4,7,9/17,"Data Wrangling II: Grouping, summarizing, & pipes (`%>%`)",Data Camp 3
+4,8,9/19,"Data Wrangling III: Joins, reshaping for tidy data",
+5,9,9/24,"Fundamentals of Information Visualization",Project Proposals
+5,10,9/26,"Visualizations I: The grammar of graphics, the `ggplot2` library, plotting points",Data Camp 4
+6,11,10/1,"Visualizations II: Bars, histograms, & boxplots",Data Camp 5
+6,12,10/3,"Visualizations III: Facets, labeling & themes",
+7,13,10/8,"Data input / output & the `here` library",
+7,14,10/10,"In-class workshop: Getting data from the wild",
+8,15,10/15,"Dealing with strings: the `stringr` library",
+8,16,10/17,"Dealing with factors: the `forcats` library",
+9,17,10/22,"R as a programming language: writing your own functions",
+9,18,10/24,"R as a programming language: iteration with loops",
+10,19,10/29,Spring Break: No Class,
+10,20,10/31,Spring Break: No Class,
+11,21,11/5,,
+11,22,11/7,,
+12,23,11/12,,
+12,24,11/14,,
+13,25,11/19,,
+13,26,11/21,,
+14,27,11/26,,
+14,28,11/28,,
+15,29,12/3,,
+15,30,12/5,,
+16,--,12/10,Reading Week Begins,
+17,--,12/12,Final Exams Begin,

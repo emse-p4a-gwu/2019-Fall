@@ -1,0 +1,34 @@
+---
+title: "Resources"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+# Resources for finding datasets:
+- [Kaggle](https://www.kaggle.com/datasets)
+- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
+- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
+
+# RMarkdown:
+- [Table generator](http://www.tablesgenerator.com/): Create tables and get export code for multiple formats.
+- [Markdown It](https://markdown-it.github.io): Quickly demo Markdown code.
+- [RMarkdown guide](http://www.stat.cmu.edu/~cshalizi/rmarkdown/)
+
+# Plotting in `R`:
+- [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plotting themes
+
+# Tutorials:
+- [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r)
+- [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/)
+
+# Inspiration:
+- [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f)

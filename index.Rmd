@@ -1,9 +1,10 @@
 ---
-title: "EMSE 6574: Programming for Analytics - Syllabus"
+title: "Course Syllabus"
 output:
   html_document:
     toc: true
     toc_float: true
+    number_sections: true
 ---
 
 ```{r setup, include=FALSE}
@@ -15,9 +16,36 @@ knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
 
-# Description
+# Course Information
+
+| Name:         | EMSE 6574: Programming for Analytics, Section 10 |
+|---------------|--------------------------------------------------|
+| Semester:     | Fall 2019                                        |
+| Meeting Time: | TBD                                              |
+| Location:     | TBD                                              |
+
+# Instructor Information
+
+| Name:           | John Paul Helveston                     |
+|-----------------|-----------------------------------------|
+| Campus Address: | Science & Engineering Hall, Office 2830 |
+| Campus Phone:   | +1 (202) 994-7173                       |
+| Email:          | jph@gwu.edu                             |
+| Office Hours:   | TBD                                     |
+
+# Course Description
+
+## GW Bulletin Description
+
+Introduction to programming for data analytics using the [R computing language](https://www.r-project.org/); topics include R, RMarkdown, functions, conditionals, loops, debugging, testing, strings, file input/output, algorithmic thinking, coding style, efficiency, information visualization, Monte Carlo methods, webscraping data, packages, .
+
+## Detailed Description
+
+Introduction to programming for data analytics using the [R programming language](https://www.r-project.org/). Topics covered include introduction to the R programming language, structured program design in R, data structures for analytics in R, information visualization, file input/output, basic data analytics methods, data acquisition from real world sources. This course will prepare students for higher level courses in data analytics.
 
 This course provides undergraduate students with a foundation in exploring data in the R programming language. Students will learn how to work with a wide variety of data types and structures as well as fundamental concepts in information visualization. The course will be managed on Github, and students will learn the basics of using git and Github to manage version controlling. All analyses will be conducted to support reproducibility from raw data to results using RMarkdown. There are no prerequisites, and no prior programming experience is necessary to succeed in this class.
+
+## Prerequisites 
 
 # Learning objectives
 
@@ -50,49 +78,11 @@ All textbooks and references are available for free on the web, though physical 
     - [Data wrangling with the `dplyr` library](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
     - [Data visualization with the `ggplot2` library](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 
-# Preliminary Schedule
-
-### Overview:
-- PART I (Weeks 1-4): R, Git, and Data Management
-- PART II (Weeks 5-9): Exploratory data analysis & data visualization
-- PART III (Weeks 10-14): Reproducibility with RMarkdown
+# Schedule
 
 ```{r echo=FALSE}
 schedule <- read.csv(here::here('schedule.csv'), header=T)
 kable(schedule) %>%
     kable_styling(bootstrap_options = c(
-        'striped', 'hover', 'condensed', 'responsive'))
+        'striped', 'hover', 'condensed', 'responsive', stripe_color = "#eeeeee"))
 ```
-
-# Other resources
-
-### Resources for finding datasets:
-- [Kaggle](https://www.kaggle.com/datasets)
-- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
-- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
-
-### Other texts:
-- Evergreen, Stephanie,
-  "Effective Data Visualization: The Right Chart for the Right Data"
-  [[buy online](https://www.amazon.com/Effective-Data-Visualization-Right-Chart/dp/1544350880/)]
-
-### Markdown:
-- [Table generator](http://www.tablesgenerator.com/): Create tables and get export code for multiple formats.
-- [Markdown It](https://markdown-it.github.io): Quickly demo Markdown code.
-- [RMarkdown guide](http://www.stat.cmu.edu/~cshalizi/rmarkdown/)
-- [Pimp my Rmd](https://holtzy.github.io/Pimp-my-rmd/)
-
-### Plotting in `R`:
-- [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plotting themes
-
-### Tutorials:
-- [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r)
-- [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/)
-
-### Inspiration:
-- [An Incomplete List of Females in Data Visualization](https://stephanieevergreen.com/females-in-dataviz/), by Stephanie Evergreen
-- [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f)
-
-### Examples of EDA in practice:
-- [Death: Reality vs Reported](https://owenshen24.github.io/charting-death/), by Owen Shen
-- [Is Usain Bolt really the fastest man on earth?](https://www.r-bloggers.com/fun-with-statistics-is-usain-bolt-really-the-fastest-man-on-earth/amp/), by Anindya Mozumdar
