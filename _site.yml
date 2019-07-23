@@ -3,18 +3,22 @@ output_dir: "."
 navbar:
   type: inverse
   left:
-    - text: "Syllabus"
+    - text: "Home"
       href: index.html
+    - text: "Syllabus"
+      href: syllabus.html
+    - text: "Resources"
+      href: resources.html
     - text: "Lessons"
       menu:
+        - text: "Getting Started"
+          href: getting-started.html
         - text: "Lesson 1"
           href: lesson-1.html
     - text: "Assignments"
       menu:
         - text: "Assignment 1"
           href: assignment-1.html
-    - text: "Resources"
-      href: resources.html
 output:
   html_document:
     theme: simplex

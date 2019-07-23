@@ -5,7 +5,7 @@
 2,4,9/5,"Getting familiar with RMarkdown",
 3,5,9/10,"Getting familiar with data frames",Data Camp 2
 3,6,9/12,"Data Wrangling I: The 'verbs' of the `dplyr` library",
-4,7,9/17,"Data Wrangling II: Grouping, summarizing, & pipes (`%>%`)",Data Camp 3
+4,7,9/17,"Data Wrangling II: Grouping, summarizing, & pipes",Data Camp 3
 4,8,9/19,"Data Wrangling III: Joins, reshaping for tidy data",
 5,9,9/24,"Fundamentals of Information Visualization",Project Proposals
 5,10,9/26,"Visualizations I: The grammar of graphics, the `ggplot2` library, plotting points",Data Camp 4
