@@ -167,17 +167,18 @@ samp {
 /* Tables
    ========================================================================== */
 
-/**
- * Remove most spacing between table cells.
- */
+th {
+  color: #ffffff;
+  background-color: #d9230f;
+}
 
-/*tr:nth-child(odd) {
-  background-color: #eeeeee;
-}*/
+.table>tbody>tr:nth-of-type(odd) {
+  background-color:#eeeeee;
+}
 
-/*tr:nth-child(even) {
-  background-color: #ffffff;
-}*/
+.table>tbody>tr:nth-of-type(even) {
+  background-color:#ffffff;
+}
 
 /* LAYOUT STYLES */
 body {

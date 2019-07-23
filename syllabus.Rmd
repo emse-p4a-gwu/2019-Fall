@@ -89,6 +89,5 @@ All textbooks and references are available for free on the web, though physical 
 ```{r echo=FALSE}
 read.csv(here::here('schedule.csv'), header=T) %>% 
     kable(format = 'html', escape = FALSE) %>%
-    kable_styling(bootstrap_options = c('striped', 'hover'), full_width = F,
-                  position = "left")
+    kable_styling(full_width = F, position = "left")
 ```
