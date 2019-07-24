@@ -1,0 +1,15 @@
+library(kableExtra)
+library(here)
+schedule <- read.csv(here::here('schedule.csv'), header = T) 
+# Define the start and end dates for class day 1 and 2 
+# (e.g. 1 is tues., 2 is thurs.)
+start1 <- as.Date("2019/08/27")
+end1   <- as.Date("2019/12/10")
+start2 <- as.Date("2019/08/29")
+end2   <- as.Date("2019/12/12")
+date1  <- seq(start1, end1, by = "week")
+date2  <- seq(start2, end2, by = "week")
+date   <- sort(c(date1, date2))
+# Make the schedule data frame
+schedule$Date <- format(date, format="%m/%d")
+schedule <- schedule[c('Week', 'Meeting', 'Date', 'Topics', 'Due')]

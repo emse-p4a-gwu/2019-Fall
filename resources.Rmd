@@ -13,20 +13,38 @@ knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
 
-# Find Datasets
-- [Kaggle](https://www.kaggle.com/datasets)
-- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
-- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
+# Doing stuff in `R`
 
-# RMarkdown
+## Data Wrangling
+- Wickham, Hadley. "R for Data Science"
+[[free online](https://r4ds.had.co.nz/)],
+[[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
+
+## Data Visualization
+- Healy, Kieran. "Data Visualization: A practical introduction"
+[[free online](http://socviz.co/)],
+[[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
+- Wilke, Claus O. "Fundamentals of Data Visualization"
+[[free online](https://serialmentor.com/dataviz/)],
+[[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
+- [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plotting themes
+    
+## RStudio [cheatsheets](https://www.rstudio.com/resources/cheatsheets/):
+- [RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
+- [Data wrangling with the `dplyr` library](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
+- [Data visualization with the `ggplot2` library](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+
+## RMarkdown
 - [Table generator](http://www.tablesgenerator.com/): Create tables and get export code for multiple formats.
 - [Markdown It](https://markdown-it.github.io): Quickly demo Markdown code.
 - [RMarkdown guide](http://www.stat.cmu.edu/~cshalizi/rmarkdown/)
 
-# Plotting in `R`
-- [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plotting themes
+# Finding Datasets
+- [Kaggle](https://www.kaggle.com/datasets)
+- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
+- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
 
-# Tutorials
+# Helpful Tutorials
 - [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r)
 - [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/)
 

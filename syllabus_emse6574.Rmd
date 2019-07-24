@@ -1,15 +1,13 @@
 ---
-title: "Course Syllabus"
+title: "EMSE 6574: Programming for Analytics - Course Syllabus"
 output:
-  html_document:
-    toc: true
-    toc_float: true
-    number_sections: true
+  pdf_document:
+    latex_engine: xelatex
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
-library(here)
+source('makeSchedule.R')
 knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
@@ -81,3 +79,10 @@ All textbooks and references are available for free on the web, though physical 
     - [RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
     - [Data wrangling with the `dplyr` library](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
     - [Data visualization with the `ggplot2` library](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+    
+# Schedule 
+
+```{r echo=FALSE}
+schedule %>% 
+    kable(format = 'markdown', escape = FALSE)
+```

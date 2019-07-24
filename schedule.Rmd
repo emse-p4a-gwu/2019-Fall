@@ -1,0 +1,19 @@
+---
+title: "Schedule"
+output:
+  html_document:
+    number_sections: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+source('makeSchedule.R')
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+```{r echo=FALSE}
+schedule %>% 
+    kable(format = 'html', escape = FALSE) %>%
+    kable_styling(full_width = F, position = "left")
+```
