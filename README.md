@@ -12,7 +12,7 @@ Course in the fundamentals of programming and computational literacy
 
 This section of EMSE 6574: Programming for Analytics is a course aimed at first year undergraduate students. The course provides students with a foundation in programming for data analytics using the R computing language. Emphasis will be on learning how to read, write, test, and debug code to produce comprehensible and reproducible analyses. Throughout the course, students will primarily work on individual programming assignments to help practice coding skills. Students will be assessed through quizzes, exams, and a final project. Teaching will involve interactive lectures and recitations with a lot time spent live coding. At the end of the semester, students will demonstrate mastery of the course’s topics by working on a 3-week term project. This course will prepare students for higher level courses in data analytics.
 
-For more details, please see the [syllabus](https://emse6574-gwu.github.io/2019-Fall).
+For more details, please see the [course website](https://emse6574-gwu.github.io/2019-Fall).
 
 ## Acknowledgements
 
