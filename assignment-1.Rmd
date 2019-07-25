@@ -1,9 +1,6 @@
 ---
 title: "Assignment 1"
-output:
-  html_document:
-    toc: true
-    toc_float: true
+output: html_document
 ---
 
 ## Assignment 1

@@ -3,6 +3,7 @@ title: "Schedule"
 output:
   html_document:
     number_sections: false
+    toc: no
 ---
 
 ```{r setup, include=FALSE}
@@ -15,5 +16,5 @@ options(knitr.kable.NA = '')
 ```{r echo=FALSE}
 schedule %>% 
     kable(format = 'html', escape = FALSE) %>%
-    kable_styling(full_width = F, position = "left")
+    kable_styling('striped', full_width = F, position = "left")
 ```

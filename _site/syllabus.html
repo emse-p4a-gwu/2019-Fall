@@ -11,7 +11,7 @@
 
 
 
-<title>Course Syllabus</title>
+<title>EMSE 6574: Programming for Analytics - Course Syllabus</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,6 +25,14 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link rel="icon" type="image/png" href="image/favicon.ico">
+<style type="text/css">
+
+body {
+  font-size: 14px;
+}
+
+</style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -274,7 +282,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
@@ -283,8 +291,8 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = true;
-    options.smoothScroll = true;
+    options.showAndHide = false;
+    options.smoothScroll = false;
 
     // tocify
     var toc = $("#TOC").tocify(options).data("toc-tocify");
@@ -338,14 +346,18 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
   border-radius: 0px;
 }
 
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
 
 </style>
 
@@ -379,15 +391,12 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html"></a>
+      <a class="navbar-brand" href="index.html">EMSE6574</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="syllabus.html">Syllabus</a>
+  <a href="index.html">Syllabus</a>
 </li>
 <li>
   <a href="schedule.html">Schedule</a>
@@ -434,13 +443,13 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Course Syllabus</h1>
+<h1 class="title toc-ignore">EMSE 6574: Programming for Analytics - Course Syllabus</h1>
 
 </div>
 
 
 <div id="course-information" class="section level1">
-<h1><span class="header-section-number">1</span> Course Information</h1>
+<h1>Course Information</h1>
 <table>
 <tbody>
 <tr class="odd">
@@ -464,7 +473,7 @@ div.tocify {
 <p><vspace:10pt></p>
 </div>
 <div id="instructor-information" class="section level1">
-<h1><span class="header-section-number">2</span> Instructor Information</h1>
+<h1>Instructor Information</h1>
 <table>
 <tbody>
 <tr class="odd">
@@ -492,22 +501,22 @@ div.tocify {
 <p><vspace:10pt></p>
 </div>
 <div id="course-description" class="section level1">
-<h1><span class="header-section-number">3</span> Course Description</h1>
+<h1>Course Description</h1>
 <div id="official-gw-bulletin-description" class="section level2">
-<h2><span class="header-section-number">3.1</span> Official GW Bulletin Description</h2>
+<h2>Official GW Bulletin Description</h2>
 <p>Introduction to programming for data analytics using the <a href="https://www.r-project.org/">R computing language</a>; topics include R, RMarkdown, functions, conditionals, loops, strings, file input/output, data visualization, coding style, efficiency, Monte Carlo methods, webscraping data, and package development.</p>
 </div>
 <div id="unofficial-description" class="section level2">
-<h2><span class="header-section-number">3.2</span> Unofficial Description</h2>
+<h2>Unofficial Description</h2>
 <p>This course provides students with a foundation in programming for data analytics using the <a href="https://www.r-project.org/">R computing language</a>. Emphasis will be on learning how to read, write, test, and debug code to produce comprehensible and reproducible analyses. Throughout the course, students will primarily work on individual programming assignments to help practice coding skills. Students will be assessed through quizzes, exams, and a final project. Teaching will involve interactive lectures and recitations with a lot time spent <a href="*what%20is%20live%20coding*">live coding</a>. At the end of the semester, students will demonstrate mastery of the course’s topics by working on a 3-week term project. This course will prepare students for higher level courses in data analytics.</p>
 </div>
 <div id="prerequisites" class="section level2">
-<h2><span class="header-section-number">3.3</span> Prerequisites</h2>
+<h2>Prerequisites</h2>
 <p>There are no prerequisites, and no prior programming experience is necessary to succeed in this class.</p>
 </div>
 </div>
 <div id="learning-objectives" class="section level1">
-<h1><span class="header-section-number">4</span> Learning objectives</h1>
+<h1>Learning objectives</h1>
 <p>Having successfully completed this course, students will be able to:</p>
 <ul>
 <li>Read, write, test, and debug code to produce comprehensible and reproducible analyses.</li>
@@ -519,7 +528,7 @@ div.tocify {
 </ul>
 </div>
 <div id="texts-references" class="section level1">
-<h1><span class="header-section-number">5</span> Texts / References</h1>
+<h1>Texts / References</h1>
 <p>All textbooks and references are available for free on the web, though physical copies can be purchased if desired:</p>
 <ul>
 <li>Data Wrangling in R:
@@ -539,7 +548,258 @@ div.tocify {
 </ul></li>
 </ul>
 </div>
+<div id="schedule" class="section level1">
+<h1>Schedule</h1>
+<table>
+<colgroup>
+<col width="4%" />
+<col width="6%" />
+<col width="5%" />
+<col width="68%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">Week</th>
+<th align="left">Meeting</th>
+<th align="left">Date</th>
+<th align="left">Topics</th>
+<th align="left">Due</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">1</td>
+<td align="left">08/27</td>
+<td align="left">Intro to course and software</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">2</td>
+<td align="left">08/29</td>
+<td align="left">RMarkdown &amp; Github</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">3</td>
+<td align="left">09/03</td>
+<td align="left">Getting familiar with R</td>
+<td align="left">Data Camp 1</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">4</td>
+<td align="left">09/05</td>
+<td align="left">Getting familiar with RMarkdown</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">5</td>
+<td align="left">09/10</td>
+<td align="left">Getting familiar with data frames</td>
+<td align="left">Data Camp 2</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">6</td>
+<td align="left">09/12</td>
+<td align="left">Data Wrangling I: The ‘verbs’ of the <code>dplyr</code> library</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="left">7</td>
+<td align="left">09/17</td>
+<td align="left">Data Wrangling II: Grouping, summarizing, &amp; pipes</td>
+<td align="left">Data Camp 3</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">8</td>
+<td align="left">09/19</td>
+<td align="left">Data Wrangling III: Joins, reshaping for tidy data</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left">9</td>
+<td align="left">09/24</td>
+<td align="left">Fundamentals of Information Visualization</td>
+<td align="left">Project Proposals</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="left">10</td>
+<td align="left">09/26</td>
+<td align="left">Visualizations I: The grammar of graphics, the <code>ggplot2</code> library, plotting points</td>
+<td align="left">Data Camp 4</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="left">11</td>
+<td align="left">10/01</td>
+<td align="left">Visualizations II: Bars, histograms, &amp; boxplots</td>
+<td align="left">Data Camp 5</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left">12</td>
+<td align="left">10/03</td>
+<td align="left">Visualizations III: Facets, labeling &amp; themes</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="left">13</td>
+<td align="left">10/08</td>
+<td align="left">Data input / output &amp; the <code>here</code> library</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="left">14</td>
+<td align="left">10/10</td>
+<td align="left">In-class workshop: Getting data from the wild</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="left">15</td>
+<td align="left">10/15</td>
+<td align="left">Dealing with strings: the <code>stringr</code> library</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="left">16</td>
+<td align="left">10/17</td>
+<td align="left">Dealing with factors: the <code>forcats</code> library</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="left">17</td>
+<td align="left">10/22</td>
+<td align="left">R as a programming language: writing your own functions</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="left">18</td>
+<td align="left">10/24</td>
+<td align="left">R as a programming language: iteration with loops</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="left">19</td>
+<td align="left">10/29</td>
+<td align="left">Spring Break: No Class</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="left">20</td>
+<td align="left">10/31</td>
+<td align="left">Spring Break: No Class</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="left">21</td>
+<td align="left">11/05</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="left">22</td>
+<td align="left">11/07</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="left">23</td>
+<td align="left">11/12</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">12</td>
+<td align="left">24</td>
+<td align="left">11/14</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">13</td>
+<td align="left">25</td>
+<td align="left">11/19</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="left">26</td>
+<td align="left">11/21</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">14</td>
+<td align="left">27</td>
+<td align="left">11/26</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">14</td>
+<td align="left">28</td>
+<td align="left">11/28</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">15</td>
+<td align="left">29</td>
+<td align="left">12/03</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">15</td>
+<td align="left">30</td>
+<td align="left">12/05</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">16</td>
+<td align="left">–</td>
+<td align="left">12/10</td>
+<td align="left">Reading Week Begins</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">17</td>
+<td align="left">–</td>
+<td align="left">12/12</td>
+<td align="left">Final Exams Begin</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
 
+
+<hr>
+
+<p>This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.</p>
 
 
 </div>
@@ -565,7 +825,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
