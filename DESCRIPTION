@@ -18,4 +18,5 @@ Imports:
     testthat,
     devtools,
     roxygen2,
-    here
+    here,
+    kableExtra
