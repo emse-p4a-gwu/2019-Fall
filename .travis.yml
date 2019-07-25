@@ -2,7 +2,7 @@ language: R
 sudo: false
 cache: packages
 script:
-- Rscript -e "rmarkdown::render_site('.')"
+- Rscript -e "rmarkdown::render_site()"
 - touch _site/.nojekyll
 deploy:
   provider: pages
