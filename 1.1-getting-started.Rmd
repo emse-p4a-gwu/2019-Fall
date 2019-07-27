@@ -12,7 +12,7 @@ Welcome to EMSE 6574!
 
 # Outline
 
-Here's our agenda for today. 
+Here's our agenda for today.
 
 > 1. Introductions.
 > 2. Go over the [course syllabus](https://emse6574-gwu.github.io/2019-Fall/).
@@ -32,7 +32,7 @@ Here's our agenda for today.
 ## Who am I?
 
 ```{r, out.width=250, echo=FALSE}
-knitr::include_graphics(here::here('image', 'helveston.jpeg'))
+knitr::include_graphics(here::here('images', 'helveston.jpeg'))
 ```
 
 Dr. John Helveston
@@ -65,16 +65,16 @@ Afterwards: let's here from a few of you - tell us something you learned!
 
 # The syllabus
 
-Let's go over the [syllabus](https://emse6574-gwu.github.io/2019-Fall/) and the course assignments. 
+Let's go over the [syllabus](https://emse6574-gwu.github.io/2019-Fall/) and the course assignments.
 
 # Course Mantras
 
-Here are some philosophies that will get you far in data analytic work. We will be revisiting these over and over again. 
+Here are some philosophies that will get you far in data analytic work. We will be revisiting these over and over again.
 
-- Embrace plain text (as opposed to rich text). 
+- Embrace plain text (as opposed to rich text).
 - Everything you do should be reproducible.
 
-__Example__: RMarkdown -> HTML. This webpage was generated from [this markdown source file](https://raw.githubusercontent.com/emse6574-gwu/2019-Fall/master/getting-started.Rmd) on GitHub. 
+__Example__: RMarkdown -> HTML. This webpage was generated from [this markdown source file](https://raw.githubusercontent.com/emse6574-gwu/2019-Fall/master/getting-started.Rmd) on GitHub.
 
 If you want to generate the HTML page, download the `.Rmd` file and run the following code in R:
 
@@ -84,7 +84,7 @@ rmarkdown::render('./getting-started.Rmd')
 
 # All the R things
 
-## R 
+## R
 
 ## RStudio
 
@@ -99,8 +99,8 @@ rmarkdown::render('./getting-started.Rmd')
     - RStudio here: <https://www.rstudio.com/products/rstudio/download/preview/>
     - Commentary on installing this stuff can be found at [stat545.com: r-rstudio-install](http://stat545.com/block000_r-rstudio-install.html)
 2. Install git. See [happygitwithr: Section 7](http://happygitwithr.com/install-git.html)
-    - You'll need to work with the command line. 
-    
+    - You'll need to work with the command line.
+
 
 5. Complete [this survey](https://goo.gl/forms/UPvRA6a9WRod8JPb2).
 

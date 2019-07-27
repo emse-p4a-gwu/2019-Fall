@@ -1,7 +1,0 @@
----
-title: "Lesson 1"
-output: html_document
----
-
-## Lesson 1
-

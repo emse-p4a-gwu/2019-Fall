@@ -1,0 +1,21 @@
+---
+title: "Course Sources"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+This course was inspired by many other courses / resources that cover similar material. Below is a table of sources from which content was either directly reused or served as the inspiration for content in this course.
+
+| Name | Author | Links |
+| -------- | --- | --- |
+| STAT 545 | U. of of British Columbia | [course](http://stat545.com/); [github](https://github.com/STAT545-UBC) |
+| EEB313: Quantitative Methods in R for Biology | [U of T Coders](https://uoftcoders.github.io/studyGroup/) | [course](https://uoftcoders.github.io/rcourse/index.html); [github](https://github.com/uoftcoders/rcourse) |
+| Modern Dive | Chester Ismay and Albert Y. Kim | [course](https://moderndive.netlify.com/); [github](https://github.com/moderndive/moderndive_book) |
+| Learning statistics with R | Danielle Navarro | [course](https://djnavarro.github.io/tidylsrbook/); [github](https://github.com/djnavarro/rbook) |
+| Software Carpentry | | [lessons](https://software-carpentry.org/lessons/) |
+| CMU 15-112: Fundamentals of Programming | [David Kosbie](http://www.kosbie.net/cmu/) | [2018 Course](http://www.krivers.net/15112-f18/index.html) |

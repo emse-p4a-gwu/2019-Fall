@@ -5,21 +5,25 @@ exclude:
 - LICENSE
 new_session: true
 navbar:
-  title: EMSE6574
+  title: "EMSE6574: Fall 2019"
   type: inverse
   left:
     - text: "Syllabus"
-      href: index.html
+      menu:
+        - text: View
+          icon: fa-map-o
+          href: index.html
+        - text: Download PDF
+          icon: fa-download
+          href: schedule.pdf
     - text: "Schedule"
       href: schedule.html
     - text: "Resources"
       href: resources.html
     - text: "Lessons"
       menu:
-        - text: "Getting Started"
-          href: getting-started.html
-        - text: "Lesson 1"
-          href: lesson-1.html
+        - text: "1: Getting Started"
+          href: 1.1-getting-started.html
     - text: "Assignments"
       menu:
         - text: "Assignment 1"
@@ -39,8 +43,8 @@ output:
     toc: yes
     toc_depth: 4
     toc_float:
-      collapsed: no
-      smooth_scroll: no
+      collapsed: yes
+      smooth_scroll: yes
     include:
       in_header:
       - _includes/header.html
