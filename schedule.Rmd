@@ -8,13 +8,9 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-source('makeSchedule.R')
 knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
 
-```{r echo=FALSE}
-schedule %>% 
-    kable(format = 'html', escape = FALSE) %>%
-    kable_styling('striped', full_width = F, position = "left")
+```{r child = 'schedule-content.Rmd'}
 ```

@@ -10,7 +10,6 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-source('makeSchedule.R')
 knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
@@ -18,8 +17,5 @@ options(knitr.kable.NA = '')
 ```{r child = 'syllabus-content.Rmd'}
 ```
 
-# Schedule
-
-```{r echo=FALSE}
-kable(schedule, format = 'markdown', escape = FALSE)
+```{r child = 'schedule-content.Rmd'}
 ```
