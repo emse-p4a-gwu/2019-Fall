@@ -1,8 +1,5 @@
 ---
-title: |
-  | Course Syllabus:
-  | EMSE 6574 - Programming for Analytics
-  | Fall 2019
+title: "Syllabus"
 output:
   pdf_document:
     latex_engine: xelatex

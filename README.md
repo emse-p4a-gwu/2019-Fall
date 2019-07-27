@@ -16,4 +16,8 @@ For more details, please see the [course website](https://emse6574-gwu.github.io
 
 ## Acknowledgements
 
+This course was inspired by many other courses / resources that cover similar material - see the [course sources page](https://emse6574-gwu.github.io/2019-Fall/course-sources.html) for more details.
+
 The web interface of this course was inspired by the U. of Toronto coders [R Course](https://uoftcoders.github.io/rcourse/index.html)
+
+

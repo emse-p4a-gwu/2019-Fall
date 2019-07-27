@@ -1,6 +1,7 @@
 ---
 title: "Course Sources"
 output: html_document
+toc: false
 ---
 
 ```{r setup, include=FALSE}

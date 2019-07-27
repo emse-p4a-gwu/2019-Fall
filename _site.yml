@@ -15,7 +15,7 @@ navbar:
           href: index.html
         - text: Download PDF
           icon: fa-download
-          href: schedule.pdf
+          href: https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/syllabus.pdf
     - text: "Schedule"
       href: schedule.html
     - text: "Resources"
@@ -51,6 +51,5 @@ output:
       - _includes/style.html
       after_body: _includes/footer.html
     theme: simplex
-    mathjax: https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
     lib_dir: site_libs
     self_contained: no

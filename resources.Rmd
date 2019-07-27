@@ -25,7 +25,7 @@ options(knitr.kable.NA = '')
 [[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
 - [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plotting themes
 
-## RStudio [cheatsheets](https://www.rstudio.com/resources/cheatsheets/):
+## RStudio [cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
 - [RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
 - [Data wrangling with the `dplyr` library](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
 - [Data visualization with the `ggplot2` library](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
