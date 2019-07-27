@@ -1,18 +1,29 @@
-# Schedule
-
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(readr)
 library(here)
-schedule <- read.csv(here::here('schedule.csv'), header = T)
+library(kableExtra)
+options(knitr.kable.NA = '')
+schedule <- read_csv(here::here('schedule.csv'))
 # Define the start and end dates for class day 1 and 2
-# (e.g. 1 is tues., 2 is thurs.)
-start1 <- as.Date("2019/08/27")
-end1   <- as.Date("2019/12/10")
-start2 <- as.Date("2019/08/29")
-end2   <- as.Date("2019/12/12")
-date1  <- seq(start1, end1, by = "week")
-date2  <- seq(start2, end2, by = "week")
-date   <- sort(c(date1, date2))
+# (e.g. 1 is Monday, 2 is Wednesday)
+start1 <- as.Date("2019/08/26")
+end1   <- as.Date("2019/12/02")
+start2 <- as.Date("2019/08/28")
+end2   <- as.Date("2019/12/04")
+# Set date for reading day and first day of finals 
+reading <- as.Date("2019/12/09")
+finals  <- as.Date("2019/12/12")
+# Format the dates
+date1 <- format(seq(start1, end1, by = "week"), format="%m/%d")
+date2 <- format(seq(start2, end2, by = "week"), format="%m/%d")
+dates <- paste(date1, date2, sep=' &<br>')
+dates <- c(dates, format(c(reading, finals), format="%m/%d"))
 # Make the schedule data frame
-schedule$Date <- format(date, format="%m/%d")
-schedule <- schedule[c('Week', 'Meeting', 'Date', 'Topics', 'Due')]
+schedule$Dates <- dates
+# Define the week 
+schedule$Week <- seq(1:length(dates))
+schedule <- schedule[c('Week', 'Dates', 'Event/Topics', 'Quizzes/Homeworks/Practice')]
+# Render the schedule as markdown
+kable(schedule, format='markdown')
 ```

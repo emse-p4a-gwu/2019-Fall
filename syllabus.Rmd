@@ -14,5 +14,7 @@ options(knitr.kable.NA = '')
 ```{r child = 'syllabus-content.Rmd'}
 ```
 
+# Schedule
+
 ```{r child = 'schedule-content.Rmd'}
 ```

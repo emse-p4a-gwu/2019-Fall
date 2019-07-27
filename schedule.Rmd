@@ -8,7 +8,6 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
 
