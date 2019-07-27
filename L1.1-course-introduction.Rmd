@@ -62,3 +62,10 @@ If you want to generate the HTML page, download the `.Rmd` file and run the foll
 ```{r eval=FALSE}
 rmarkdown::render('./L1.1-course-introduction.Rmd')
 ```
+
+# Getting Help
+
+Sign up for Piazza [HERE](piazza.com/gwu/fall2019/emse6574)
+
+- [**Piazza**](piazza.com/gwu/fall2019/emse6574): Piazza can be used to ask quick questions and receive quick responses without attending office hours in person. This also enables other students to see answers to common questions. Questions on Piazza should be specific and include all needed information. For example, if your code has an error you don't understand, **include the code and the error message** in your question.
+- **Office Hours**: Office hours let you ask questions to TAs and professors directly, and can help you understand concepts and debug programs that you're struggling with alone.

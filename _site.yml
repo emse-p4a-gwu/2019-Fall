@@ -20,14 +20,8 @@ navbar:
       href: schedule.html
     - text: "Resources"
       href: resources.html
-    - text: "Lessons"
-      menu:
-        - text: "1: Getting Started"
-          href: 1.1-getting-started.html
-    - text: "Assignments"
-      menu:
-        - text: "Assignment 1"
-          href: assignment-1.html
+    - text: "Piazza"
+      href: piazza.com/gwu/fall2019/emse6574
   right:
   - icon: fa-bars
     menu:
