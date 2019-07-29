@@ -5,3 +5,8 @@ output: html_document
 
 ## Assignment 1
 
+<!--
+
+Covers basics of R, including working directory questions
+
+ -->

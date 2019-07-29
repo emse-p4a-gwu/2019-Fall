@@ -8,11 +8,27 @@ library(knitr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# What are R and RStudio?
+<!--
+https://psyr.org/getting-started.html
+- Installing
+- R commands
+- Operations
+- Functions
+- RStudio helps
 
-R is a programming language that runs computations while RStudio is an *integrated development environment (IDE)* that provides an interface by adding many convenient features and tools.
+http://stat545.com/block002_hello-r-workspace-wd-project.html
+- Assignments & objects
+- Working Directories & Projects
+-->
 
-Here's a useful analogy:
+
+# R and RStudio
+
+## What's the difference?
+
+R is a programming language that runs computations while RStudio is an *integrated development environment (IDE)* - an interface for working in R with many convenient features and tools.
+
+You can think of the two like this:
 
 * R is like a car's _engine_.
 * RStudio is like a car's _dashboard_.
@@ -21,20 +37,18 @@ R: Engine            |  RStudio: Dashboard
 :-------------------------:|:-------------------------:
 ![](images/engine.jpg){ width=200 }  |  ![](images/dashboard.jpg){ width=250 }
 
-You need an engine (R) to give your car power, but having a speedometer and rearview mirrors (RStudio) helps make driving much easier.
+Your car needs an engine (R) to run, but having a speedometer and rear view mirrors (RStudio) makes driving a lot easier.
 
-
-### Installing R and RStudio
+## Installing R and RStudio
 
 You will first need to download and install both R and RStudio (Desktop version) on your computer.
 
 1. [Download and install R](https://cloud.r-project.org).
 2. [Download and install RStudio](https://www.rstudio.com/products/rstudio/download/preview/).
 
+## Using R via RStudio
 
-### Using R via RStudio
-
-Recall our car analogy from earlier. Much as we don't drive a car by interacting directly with the engine but rather by interacting with elements on the car's dashboard, we won't be using R directly but rather we will use RStudio's interface. After you install R and RStudio on your computer, you'll have two new programs AKA applications you can open. We will always work in RStudio and not R. In other words:
+After you install R and RStudio on your computer, you'll have two new applications you can open. **We will always work in RStudio**. In other words:
 
 R: Do not open this          |  RStudio: Open this
 :-------------------------:|:-------------------------:
@@ -44,5 +58,5 @@ After you open RStudio, you should see the following:
 
 ![](images/rstudio.png)
 
-Note the three panes, which are three panels dividing the screen: The *Console pane*, the *Files pane*, and the *Environment pane*. Over the course of this chapter, you'll come to learn what purpose each of these panes serve.
+Note the three panes, which are three panels dividing the screen: The *Console pane*, the *Files pane*, and the *Environment pane*.
 

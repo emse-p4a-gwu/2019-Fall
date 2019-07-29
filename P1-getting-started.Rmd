@@ -1,0 +1,23 @@
+---
+title: "Practice: Getting Started"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!--
+https://psyr.org/getting-started.html
+- Installing
+- R commands
+- Operations
+- Functions
+- RStudio helps
+
+http://stat545.com/block002_hello-r-workspace-wd-project.html
+- Assignments & objects
+- Working Directories & Projects
+-->
+
