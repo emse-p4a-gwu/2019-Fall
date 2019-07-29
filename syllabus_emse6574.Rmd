@@ -1,6 +1,8 @@
 ---
 title: "Syllabus"
-output: html_document
+output:
+  pdf_document:
+    latex_engine: xelatex
 ---
 
 ```{r setup, include=FALSE}
@@ -11,4 +13,9 @@ options(knitr.kable.NA = '')
 ```
 
 ```{r child = here::here('syllabus', 'main.Rmd')}
+```
+
+# Course Schedule
+
+```{r child = here::here('syllabus', 'schedule.Rmd')}
 ```

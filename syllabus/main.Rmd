@@ -1,0 +1,71 @@
+# Course Information
+
+|  |  |
+|---------------------|--------------------------------------------------|
+| Name:&emsp;         | EMSE 6574: Programming for Analytics, Section 10 |
+| Semester:&emsp;     | Fall 2019                                        |
+| Meeting Time:&emsp; | TBD                                              |
+| Location:&emsp;     | TBD                                              |
+
+# Instructor Information
+
+|  |  |
+|-----------------------|-----------------------------------------|
+| Name:&emsp;           | John Paul Helveston                     |
+| Campus Address:&emsp; | Science & Engineering Hall, Office 2830 |
+| Campus Phone:&emsp;   | +1 (202) 994-7173                       |
+| Email:&emsp;          | jph@gwu.edu                             |
+| Office Hours:&emsp;   | TBD                                     |
+
+# Course Description
+
+## Official GW Bulletin Description
+
+```{r child = 'description-bulletin.Rmd'}
+```
+
+## Unofficial Description
+
+```{r child = 'description-unofficial.Rmd'}
+```
+
+## Prerequisites
+
+There are no prerequisites, and no prior programming experience is necessary to succeed in this class.
+
+# Learning Objectives
+
+```{r child = 'learning-objectives.Rmd'}
+```
+
+# Texts / References
+
+All textbooks and references are available for free on the web, though physical copies can be purchased if desired:
+
+- Data Wrangling in R:
+    - Wickham, Hadley. "R for Data Science"
+    [[free online](https://r4ds.had.co.nz/)],
+    [[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
+- Data Visualization:
+    - Healy, Kieran. "Data Visualization: A practical introduction"
+    [[free online](http://socviz.co/)],
+    [[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
+    - Wilke, Claus O. "Fundamentals of Data Visualization"
+    [[free online](https://serialmentor.com/dataviz/)],
+    [[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
+- Handy R [cheatsheets](https://www.rstudio.com/resources/cheatsheets/):
+    - [RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
+    - [Data wrangling with the `dplyr` library](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
+    - [Data visualization with the `ggplot2` library](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+
+# Getting Help
+
+- [**Piazza**](piazza.com/gwu/fall2019/emse6574): Piazza can be used to ask quick questions and receive quick responses without attending office hours in person. This also enables other students to see answers to common questions. Questions on Piazza should be specific and include all needed information. For example, if your code has an error you don't understand, **include the code and the error message** in your question.
+- **Office Hours**: Office hours let you ask questions to TAs and professors directly, and can help you understand concepts and debug programs that you're struggling with alone.
+
+# Software
+
+Every required software package we use is available for free on the web. This includes:
+
+- R (version 3.6.0 or later), which can be freely downloaded from [The Comprehensive R Archive Network (CRAN)]((https://cloud.r-project.org))
+- RStudio (Desktop Version), a free IDE for R, which can be freely downloaded from [RStudio](https://www.rstudio.com/products/rstudio/download/preview/)

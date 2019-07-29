@@ -1,6 +1,9 @@
 ---
-title: "Syllabus"
-output: html_document
+title: "EMSE 6574: Programming for Analytics, Section 10"
+output:
+  html_document:
+    number_sections: false
+    toc: no
 ---
 
 ```{r setup, include=FALSE}
@@ -10,5 +13,21 @@ knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
 
-```{r child = 'syllabus-content.Rmd'}
+### The George Washington University
+### Fall 2019
+
+**Credits**: 3
+
+**Department**: Engineering Management and Systems Engineering
+
+**Prerequisites**: None
+
+**Description**:
+
+```{r child = here::here('syllabus', 'description-unofficial.Rmd')}
+```
+
+**Learning Objectives**:
+
+```{r child = here::here('syllabus', 'learning-objectives.Rmd')}
 ```

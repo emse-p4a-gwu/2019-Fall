@@ -1,5 +1,5 @@
 ---
-title: "Schedule"
+title: "Course Schedule"
 output:
   html_document:
     number_sections: false
@@ -11,5 +11,7 @@ library(knitr)
 options(knitr.kable.NA = '')
 ```
 
-```{r child = 'schedule-content.Rmd'}
+Below is the week-by-week schedule for the course.
+
+```{r child = here::here('syllabus', 'schedule.Rmd')}
 ```

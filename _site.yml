@@ -8,20 +8,22 @@ navbar:
   title: "EMSE6574: Fall 2019"
   type: inverse
   left:
+    - text: "Home"
+      href: index.html
     - text: "Syllabus"
       menu:
         - text: View
           icon: fa-map-o
-          href: index.html
+          href: syllabus.html
         - text: Download PDF
           icon: fa-download
-          href: https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/syllabus.pdf
+          href: https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/syllabus_emse6574.pdf
     - text: "Schedule"
       href: schedule.html
     - text: "Resources"
       href: resources.html
     - text: "Piazza"
-      href: piazza.com/gwu/fall2019/emse6574
+      href: https://piazza.com/gwu/fall2019/emse6574
   right:
   - icon: fa-bars
     menu:
