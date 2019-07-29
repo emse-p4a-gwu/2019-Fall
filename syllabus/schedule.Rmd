@@ -17,7 +17,7 @@ dates <- c(dates, format(c(makeup, finals), format="%m/%d"))
 schedule$Date <- dates
 # Define the week
 schedule$Week <- c(seq(1:(length(dates)-1)), (length(dates)-1))
-schedule <- schedule[c('Week', 'Date', 'Event/Topics', 'Quizzes/Homeworks/Practice')]
+schedule <- schedule[c('Week', 'Date', 'Event/Topics', 'Quizzes/Practice', 'Assignments')]
 # Render the schedule as markdown
 kable(schedule, format='markdown')
 ```
