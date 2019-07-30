@@ -8,4 +8,13 @@ and the course code is licensed under a [MIT License](LICENSE-MIT.html)
 by [John Helveston](https://www.jhelvy.com).
 
 In addition to my own developed material, I have also modified material from
-other courses and workshops:
+other courses and workshops, including:
+
+| Name | Author | Links |
+| -------- | --- | --- |
+| STAT 545 | U. of of British Columbia | [course](http://stat545.com/); [github](https://github.com/STAT545-UBC) |
+| EEB313: Quantitative Methods in R for Biology | [U of T Coders](https://uoftcoders.github.io/studyGroup/) | [course](https://uoftcoders.github.io/rcourse/index.html); [github](https://github.com/uoftcoders/rcourse) |
+| Modern Dive | Chester Ismay and Albert Y. Kim | [course](https://moderndive.netlify.com/); [github](https://github.com/moderndive/moderndive_book) |
+| Learning statistics with R | Danielle Navarro | [course](https://djnavarro.github.io/tidylsrbook/); [github](https://github.com/djnavarro/rbook) |
+| Software Carpentry | | [lessons](https://software-carpentry.org/lessons/) |
+| CMU 15-112: Fundamentals of Programming | [David Kosbie](http://www.kosbie.net/cmu/) | [2018 Course](http://www.krivers.net/15112-f18/index.html) |
