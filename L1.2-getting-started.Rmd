@@ -8,6 +8,8 @@ library(knitr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+---
+
 <!--
 https://psyr.org/getting-started.html
 - Installing

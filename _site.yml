@@ -22,6 +22,8 @@ navbar:
       href: schedule.html
     - text: "Resources"
       href: resources.html
+    - text: About
+      href: about.html
     - text: "Piazza"
       href: https://piazza.com/gwu/fall2019/emse6574
   right:

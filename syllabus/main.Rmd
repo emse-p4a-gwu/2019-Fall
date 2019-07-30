@@ -134,7 +134,7 @@ In addition to the normal grading scale, we will separately compute your grade u
 
 To compute your AMG score, first use the following to compute your raw score. If the resulting score is higher than a C, set it back to a C.
 
-<div class="tableMedium">
+<div class="tableSmall">
 Course Component | Weight
 -------------------|----
 Best 5 Homeworks  | 20%
@@ -178,10 +178,11 @@ The course instructors may choose to change the scales at their discretion. You 
 
 Learning how to program is like learning how to ride a bicycle - to get better, you must practice writing code yourself. Therefore, we have a set of strict rules regarding what kind of collaboration is allowed, what counts as over-collaboration, and what counts as cheating.
 
-**This section is long, but you should read all of it thoroughly, as we take collaboration and cheating very seriously in this course. To begin, here's a summary:
+**This section is long, but you should read all of it thoroughly, as we take collaboration and cheating very seriously in this course. To begin, here's a summary**:
+
 - Write your own code.
 - Don't look at other people's code.
-- Don't let other students look at your code.**
+- Don't let other students look at your code.
 
 ### Good Collaboration
 
@@ -262,7 +263,7 @@ Penalties may also be accompanied by a letter to the Dean of Student Affairs, ag
 
 Programs are naturally structured, which makes them much easier to compare than hand-written work, and easier to compare than typed essays. We run an automated plagiarism detection system on all assignments to detect copied code. Even if you make many changes to a copied code, it is _excessively_ easy to detect copied code.
 
-**In short: if you copy code, we will be able to tell. Don't copy code!**
+**In short, if you copy code, we will be able to tell - don't copy code!**
 
 ### Grace Period
 
@@ -276,7 +277,7 @@ Sometimes, students panic and copy code right before the deadline, then regret w
 
 ## Late Policy
 
-Each students is allowed three late homework submission days throughout the course. You may use them however you wish. No more than two days can be applied toward a single assignment, as homework solutions will be posted two days after the submission deadline. Late days are meant to cover illness, family emergencies, and religious holidays.
+Each students is allowed **three** late homework submission days throughout the course. You may use them however you wish. No more than two days can be applied toward a single assignment, as homework solutions will be posted two days after the submission deadline. Late days are meant to cover illness, family emergencies, and religious holidays.
 
 ## Policy on Recording
 
@@ -288,9 +289,8 @@ All solutions to homeworks, quizzes, and exams are proprietary. Students are pro
 
 ## Getting Help
 
-- [**Piazza**](piazza.com/gwu/fall2019/emse6574): Piazza can be used to ask quick questions and receive quick responses without attending office hours in person. This also enables other students to see answers to common questions. Questions on Piazza should be specific and include all needed information. For example, if your code has an error you don't understand, **include the code and the error message** in your question.
-- **Office Hours**: Office hours let you ask questions to TAs and professors directly, and can help you understand concepts and debug programs that you're struggling with alone.
-- While the University Library is not a stand in for TAs, you can schedule a consultation for general help with Coding, Programming, Data, Statistical, and GIS. See more at https://academiccommons.gwu.edu/writing-research-help
+```{r child = 'getting-help.Rmd'}
+```
 
 ## What To Do if the Instructor Does Not Arrive
 

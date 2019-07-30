@@ -1,0 +1,6 @@
+---
+title: "Homework 3"
+output: html_document
+---
+
+# Loops

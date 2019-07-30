@@ -1,13 +1,11 @@
 ---
 title: "About"
-output: html_document
-toc: false
+output:
+  html_document:
+    number_sections: false
+    toc: no
 ---
 
-## Course inspiration
-
 This course was inspired by many other courses / resources that cover similar material. A full list of sources from which content was either directly reused or served as the inspiration for content in this course can be found in the [license](LICENSE.html) page.
-
-## Course creators and instructors/TAs
 
 This course was originally created by Dr. John Paul Helveston at the George Washington University for the Fall 2019 semester of EMSE 6574.

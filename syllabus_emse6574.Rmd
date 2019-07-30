@@ -3,11 +3,16 @@ title: "Syllabus"
 output:
   pdf_document:
     latex_engine: xelatex
+fontsize: 11pt
+geometry: margin=1in
+documentclass: article
+
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
 library(here)
+library(kableExtra)
 knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```

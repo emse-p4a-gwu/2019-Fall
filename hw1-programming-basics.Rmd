@@ -1,9 +1,9 @@
 ---
-title: "Assignment 1"
+title: "Homework 1"
 output: html_document
 ---
 
-## Assignment 1
+# Programming Basics
 
 <!--
 

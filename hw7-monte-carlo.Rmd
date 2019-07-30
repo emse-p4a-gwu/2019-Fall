@@ -1,0 +1,6 @@
+---
+title: "Homework 7"
+output: html_document
+---
+
+# Monte Carlo Methods

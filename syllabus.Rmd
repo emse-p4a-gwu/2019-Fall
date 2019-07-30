@@ -10,5 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
 
+---
+
 ```{r child = here::here('syllabus', 'main.Rmd')}
 ```

@@ -1,0 +1,6 @@
+---
+title: "Homework 6"
+output: html_document
+---
+
+# Data Analysis

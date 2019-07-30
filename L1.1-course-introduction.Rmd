@@ -1,14 +1,15 @@
 ---
-title: "Course Orientation"
+title: "Course Introduction"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
+library(here)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Welcome to EMSE 6574!
+---
 
 # Teaching Team
 
@@ -44,9 +45,13 @@ Then switch for another two minutes.
 
 Afterwards: let's here from a few of you - tell us something you learned!
 
+---
+
 # The syllabus
 
 Let's go over the [syllabus](https://emse6574-gwu.github.io/2019-Fall/) and the course assignments.
+
+---
 
 # Course Mantras
 
@@ -60,13 +65,12 @@ Here are some philosophies that will get you far in data analytic work. We will 
 If you want to generate the HTML page, download the `.Rmd` file and run the following code in R:
 
 ```{r eval=FALSE}
-rmarkdown::render('./L1.1-course-introduction.Rmd')
+rmarkdown::render('L1.1-orientation.Rmd')
 ```
+
+---
 
 # Getting Help
 
-Sign up for Piazza [HERE](piazza.com/gwu/fall2019/emse6574)
-
-- [**Piazza**](piazza.com/gwu/fall2019/emse6574): Piazza can be used to ask quick questions and receive quick responses without attending office hours in person. This also enables other students to see answers to common questions. Questions on Piazza should be specific and include all needed information. For example, if your code has an error you don't understand, **include the code and the error message** in your question.
-- **Office Hours**: Office hours let you ask questions to TAs and professors directly, and can help you understand concepts and debug programs that you're struggling with alone.
-- While the University Library is not a stand in for TAs, you can schedule a consultation for general help with Coding, Programming, Data, Statistical, and GIS. See more at https://academiccommons.gwu.edu/writing-research-help
+```{r child = here::here('syllabus', 'getting-help.Rmd')}
+```
