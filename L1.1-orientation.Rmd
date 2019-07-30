@@ -1,5 +1,5 @@
 ---
-title: "Course Introduction"
+title: "Course Orientation"
 output: html_document
 ---
 

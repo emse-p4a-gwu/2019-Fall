@@ -1,21 +1,25 @@
+<!-- Much of the content and policies in this syllabus were inspired by the course 15-112 at Carnegie Mellon University -->
+
 # Course Information
 
-|  |  |
-|---------------------|--------------------------------------------------|
-| Name:&emsp;         | EMSE 6574: Programming for Analytics, Section 10 |
-| Semester:&emsp;     | Fall 2019                                        |
-| Meeting Time:&emsp; | TBD                                              |
-| Location:&emsp;     | TBD                                              |
+ | |
+--------------------|--------------------------------------------------
+Name:&emsp;         | EMSE 6574: Programming for Analytics, Section 10
+Semester:&emsp;     | Fall 2019
+Meeting Time:&emsp; | TBD
+Location:&emsp;     | TBD
 
 # Instructor Information
 
-|  |  |
-|-----------------------|-----------------------------------------|
-| Name:&emsp;           | John Paul Helveston                     |
-| Campus Address:&emsp; | Science & Engineering Hall, Office 2830 |
-| Campus Phone:&emsp;   | +1 (202) 994-7173                       |
-| Email:&emsp;          | jph@gwu.edu                             |
-| Office Hours:&emsp;   | TBD                                     |
+ | |
+----------------------|-----------------------------------------|
+Name:&emsp;           | John Paul Helveston
+Campus Address:&emsp; | Science & Engineering Hall, Office 2830
+Campus Phone:&emsp;   | +1 (202) 994-7173
+Email:&emsp;          | jph@gwu.edu
+Office Hours:&emsp;   | TBD
+
+---
 
 # Course Description
 
@@ -38,9 +42,24 @@ There are no prerequisites, and no prior programming experience is necessary to 
 ```{r child = 'learning-objectives.Rmd'}
 ```
 
-# Texts / References
+---
 
-All textbooks and references are available for free on the web, though physical copies can be purchased if desired:
+# Required Texts & Materials
+
+This course does not require any textbooks. All learning materials and resources will be made freely available on the course [resources webpage](https://emse6574-gwu.github.io/2019-Fall/resources.html).
+
+## Software
+
+All required software for this course is freely available on the web. This includes:
+
+- R (version 3.6.0 or later), which can be downloaded from [The Comprehensive R Archive Network (CRAN)]((https://cloud.r-project.org))
+- RStudio (Desktop Version), a free IDE for R, which can be downloaded from [RStudio](https://www.rstudio.com/products/rstudio/download/preview/)
+
+Go to the course ["Getting Started"](L1.2-getting-started.html) page for installation instructions.
+
+## Other Useful Resources
+
+You will inevitably run into problems while learning R. The best starting point for troubleshooting is Google. In addition, these resources can also be helpful:
 
 - Data Wrangling in R:
     - Wickham, Hadley. "R for Data Science"
@@ -53,19 +72,111 @@ All textbooks and references are available for free on the web, though physical 
     - Wilke, Claus O. "Fundamentals of Data Visualization"
     [[free online](https://serialmentor.com/dataviz/)],
     [[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
-- Handy R [cheatsheets](https://www.rstudio.com/resources/cheatsheets/):
-    - [RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
-    - [Data wrangling with the `dplyr` library](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
-    - [Data visualization with the `ggplot2` library](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+- Handy R ["cheatsheets"](https://www.rstudio.com/resources/cheatsheets/)
+
+---
+
+# Assignments and Grades
+
+## Homework Assignments
+
+Homework assignments contain a mix of coding exercises (reading, debugging, and writing code) and written exercises. They generally assess the material taught the week they are assigned, and should take several hours to complete. You are **strongly** encouraged to start the homeworks early (Tuesday is best, and Thursday at the latest!) and come to office hours for help when needed.
+
+Read the Collaboration Policy about collaborating with fellow students on homeworks. While most problems must be worked on individually, some will be marked as collaborative; on these problems (and these problems only), you may work on code with other students.
+
+Assignments will be graded based on style (modularity, readability, commenting, etc.) and functionality (correctness on all possible test inputs). Your code should be properly annotated with comments that are well-placed, concise, and informative. Your assignments will be graded by your TA, by automated graders, and at times by your instructor.
+
+## Assessments
+
+**Quizzes**:
+
+Quizzes will be given about once every two weeks immediately at the beginning of class. Quizzes cover material from the previous week and the previous homework assignment. Quizzes are designed to be time-intensive, to test for fluency, and to demonstrate where additional study is needed.
+
+**Midterm Exams**:
+
+There will be two midterm exams given in class, as noted in the course schedule. Each exam will cover only material presented in the preceding weeks.
+
+**Final Exam**:
+
+There will be a standard final exam during the final exam period at the end of the semester. This exam will cover material from the entire semester. The final exam is built to allow enough time to attempt all problems.
+
+## Class Participation
+
+Regular class attendance is essential. Much of the class time will be spent doing exercises and coding. Multiple absences, inappropriate or unprofessional behavior during class (such as monopolizing discussions or being rude or disruptive), not participating in classroom exercises, and not being prepared for class will result in a lower grade for the class participation component. As a rule of thumb, the participation grade will be assigned according to the following rubric:
+
+Score | Attendance | Classroom
+----|---------------|-------------------------------
+Low      | Frequently absent | Rude; disruptive; distracting; monopolizes discussions
+Moderate | Attended most classes, but often arrived late or left early | Takes notes; attentive; occasionally contributes in class discussion / exercises
+High     | Attends on time and prepared | Takes notes; attentive; regularly contributes in class discussion / exercises; does not dominate conversation; listens and responds thoughtfully to comments made by others
+
+## Grading Policy
+
+### Standard Grading
+
+Final grades will be calculated as follows:
+
+<div class="shortTable">
+Course Component | Weight | Notes
+---------|----|-------------------------------
+Assignments      | 30%    | Lowest homework grade is dropped
+Quizzes          | 15%    | Lowest quiz grade is dropped
+Midterm Exams    | 30%    | Lowest midterm grade is half-weighted
+Final Exam       | 20%    | Notes
+Attendance & Participation | 5% | Notes
+</div>
+
+### AMD Grading
+
+This Alternative Minimum Grading (AMG) policy is available to everybody, but is designed specifically for those students who struggle in the first part of the course, and then through sustained hard work and dedication manage to elevate their performance in the latter part of the course to a level that merits passing with a C, even if their Standard Grade might be lower than that.
+
+In addition to the normal grading scale, we will separately compute your grade using the following scale. Students do not sign up for AMG grading. Every student will be considered both for Standard Grading and AMG, and their semester grade will be the higher of the two (where the highest grade via AMG is a C).
+
+To compute your AMG score, first use the following to compute your raw score. If the resulting score is higher than a C, set it back to a C.
+
+<div class="shortTable">
+Course Component | Weight
+-----------------|--------
+Best 5 Solo Homeworks | 15%
+Best 5 Quizzes        | 10%
+Best Midterm Exam     | 20%
+Term Project          | 15%
+Final Exam            | 40%
+</div>
+
+Unlike the Standard Grade, effort is heavily factored into your AMG score. To qualify for AMG you must put forth sustained effort, which means meeting the following requirements:
+
+- You cannot miss multiple class periods
+- You cannot miss multiple assignments or quizzes
+- You cannot violate the Collaboration Policy
+
+### Grading Scale
+
+Mid-semester and Final grades will be assigned using the following standard scale:
+
+<div class="shortTable">
+Letter Grade | From | To
+--- | --- | ---
+A+ | 97 | 100
+A  | 93 | 96.99
+A- | 90 | 92.99
+B+ | 87 | 89.99
+B  | 83 | 86.99
+B- | 80 | 82.99
+C+ | 77 | 79.99
+C  | 73 | 76.99
+C- | 70 | 72.99
+D+ | 67 | 69.99
+D  | 63 | 66.99
+D- | 60 | 62.99
+F  | 0  | 59.99
+</div>
+
+The course instructors may choose to change the scales at their discretion. You are guaranteed that your letter grade will never become worse as a result of changing scales.
 
 # Getting Help
 
 - [**Piazza**](piazza.com/gwu/fall2019/emse6574): Piazza can be used to ask quick questions and receive quick responses without attending office hours in person. This also enables other students to see answers to common questions. Questions on Piazza should be specific and include all needed information. For example, if your code has an error you don't understand, **include the code and the error message** in your question.
 - **Office Hours**: Office hours let you ask questions to TAs and professors directly, and can help you understand concepts and debug programs that you're struggling with alone.
 
-# Software
 
-Every required software package we use is available for free on the web. This includes:
-
-- R (version 3.6.0 or later), which can be freely downloaded from [The Comprehensive R Archive Network (CRAN)]((https://cloud.r-project.org))
-- RStudio (Desktop Version), a free IDE for R, which can be freely downloaded from [RStudio](https://www.rstudio.com/products/rstudio/download/preview/)
