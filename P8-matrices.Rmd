@@ -1,0 +1,9 @@
+---
+title: "Practice 8 - Matrices"
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_tweaks.R")
+```
