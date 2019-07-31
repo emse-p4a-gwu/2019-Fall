@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Getting Started</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" href="images/favicon.ico">
+<style type="text/css">
+
+/* General */
+
+h1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 60px;
+}
+h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 50px;
+}
+h3{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+.tableSmall table {
+  width:30%;
+}
+.tableMedium table {
+  width:60%;
+}
+
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EMSE6574: Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Syllabus
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="syllabus.html">
+        <span class="fa fa-map-o"></span>
+         
+        View
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/syllabus_emse6574.pdf">
+        <span class="fa fa-download"></span>
+         
+        Download PDF
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lessons
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="L1.1-course-introduction.html">1.1 - Course Introduction</a>
+    </li>
+    <li>
+      <a href="L1.2-getting-started.html">1.2 - Getting Started</a>
+    </li>
+    <li>
+      <a href="L1.3-programming-basics.html">1.3 - Programming Basics</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="hw1-programming-basics.html">HW 1 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw2-functions.html">HW 2 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw3-loops-strings.html">HW 3 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw4-vectors.html">HW 4 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw5-matrices.html">HW 5 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw6-data-analysis.html">HW 6 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw7-monte-carlo.html">HW 7 - Programming Basics</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="https://piazza.com/gwu/fall2019/emse6574">Piazza</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jph@gwu.edu">
+        <span class="fa fa-envelope"></span>
+         
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/">
+        <span class="fa fa-github"></span>
+         
+        GitHub
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Getting Started</h1>
+
+</div>
+
+
+<!-- Content for this page is sourced from:
+    - Danielle Navarro's website "R for Psychological Science": https://psyr.org/getting-started.html
+    - Jenny Bryan's STAT 545 Course: http://stat545.com/block002_hello-r-workspace-wd-project.html
+    - RStudio primers: https://rstudio.cloud/learn/primers/1.2
+    Xiao Ping Song's Intro2R crash course: https://github.com/xp-song/Intro2R
+-->
+<hr />
+<div id="functions" class="section level1">
+<h1><span class="header-section-number">1</span> Functions</h1>
+<p>You can do a lot with the basic operators like <code>+</code>, <code>-</code>, and <code>*</code>, but to do more advanced calculations you’re going to need to start using functions.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Watch this 2 min video for a quick summary of basic R functions:</p>
+<p><img src="https://vimeo.com/220490105" /></p>
+<p>R has a lot of very useful built-in functions. Suppose I wanted to take the square root of <code>225</code>. The usual notation for this is <span class="math inline">\(\sqrt{25}=5\)</span>, though sometimes you’ll also see it written like this <span class="math inline">\(25^{0.5} = 5\)</span>. This second way of writing it is kind of useful to “remind” you of the mathematical fact that “square root of <span class="math inline">\(x\)</span>” is actually the same as “raising <span class="math inline">\(x\)</span> to the power of 0.5”. And since we already know how to raise things to powers in R, we could do this:</p>
+<pre class="r"><code>225 ^ 0.5</code></pre>
+<pre><code>## [1] 15</code></pre>
+<p>However, we could also compute this using R’s built-in square root function <code>sqrt()</code>:</p>
+<pre class="r"><code>sqrt(225)</code></pre>
+<pre><code>## [1] 15</code></pre>
+<p>Some commonly used functions for individual numbers include:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>exp()</code></td>
+<td>Exponential</td>
+</tr>
+<tr class="even">
+<td><code>sqrt()</code></td>
+<td>Square root</td>
+</tr>
+<tr class="odd">
+<td><code>log(x)</code></td>
+<td>Log base e of <code>x</code> (“natural log”)</td>
+</tr>
+<tr class="even">
+<td><code>factorial()</code></td>
+<td>Factorial</td>
+</tr>
+<tr class="odd">
+<td><code>round(x, digits=0)</code></td>
+<td>Round <code>x</code> to the <code>digits</code> decimal place</td>
+</tr>
+<tr class="even">
+<td><code>abs(x)</code></td>
+<td>Absolute value of <code>x</code></td>
+</tr>
+</tbody>
+</table>
+<p>Some commonly used functions for vectors of values include:</p>
+<table>
+<colgroup>
+<col width="54%" />
+<col width="45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mean(x)</code></td>
+<td>Mean of values in <code>x</code></td>
+</tr>
+<tr class="even">
+<td><code>median(x)</code></td>
+<td>Median of values in <code>x</code></td>
+</tr>
+<tr class="odd">
+<td><code>max(x)</code></td>
+<td>Max element in <code>x</code></td>
+</tr>
+<tr class="even">
+<td><code>min(x)</code></td>
+<td>Min element in <code>x</code></td>
+</tr>
+<tr class="odd">
+<td><code>sum(x)</code></td>
+<td>Sums the elements in <code>x</code></td>
+</tr>
+<tr class="even">
+<td><code>prod(x)</code></td>
+<td>Product of the elements in <code>x</code></td>
+</tr>
+<tr class="odd">
+<td><code>seq(a, b, c)</code></td>
+<td>Creates a sequence of numbers from <code>a</code> to <code>b</code> with step size of <code>c</code></td>
+</tr>
+<tr class="even">
+<td><code>rep(a, b)</code></td>
+<td>Creates a vector with <code>a</code> repeated <code>b</code> times</td>
+</tr>
+</tbody>
+</table>
+<div id="combining-functions" class="section level2">
+<h2><span class="header-section-number">1.1</span> Combining functions</h2>
+<p>In the same way that R allows us to put multiple operations together into a longer command (like <code>1 + 2 * 4</code> for instance), it also lets us put functions together and even combine functions with operators if we so desire. For example, the following is a perfectly legitimate command:</p>
+<pre class="r"><code>sqrt(1 + abs(-8))</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>When R executes this command, starts out by calculating the value of <code>abs(-8)</code>, which produces an intermediate value of <code>8</code>. Having done so, the command simplifies to <code>sqrt(1 + 8)</code>. To solve the square root<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> it first needs to add <code>1 + 8</code> to get <code>9</code>, at which point it evaluates <code>sqrt(9)</code>, and so it finally outputs a value of <code>3</code>.</p>
+<hr />
+</div>
+</div>
+<div id="arguments" class="section level1">
+<h1><span class="header-section-number">2</span> Arguments</h1>
+<p><img src="https://vimeo.com/220490157" /></p>
+<p>When we use a function to do something, we generally refer to this as <strong>calling</strong> the function. The values that we type into the function are referred to as the <strong>arguments</strong> of that function. Some functions can have more than one argument.</p>
+<div id="multiple-arguments" class="section level2">
+<h2><span class="header-section-number">2.1</span> Multiple arguments</h2>
+<p>There’s two more fairly important things that you need to understand about how functions work in R, and that’s the use of “named” arguments, and default values” for arguments. To understand what these two concepts are all about, I’ll introduce another function. The <code>round</code> function can be used to round some value to the nearest whole number. For example, I could type this:</p>
+<pre class="r"><code>round(3.1415)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>Pretty straightforward. However, suppose I only wanted to round it to two decimal places: that is, I want to get <code>3.14</code> as the output. The <code>round</code> function supports this, by allowing you to input a second argument to the function that specifies the number of decimal places that you want to round the number to. In other words, I could do this:</p>
+<pre class="r"><code>round(3.14165, 2)</code></pre>
+<pre><code>## [1] 3.14</code></pre>
+<p>What’s happening here is that I’ve specified two arguments: the first argument is the number that needs to be rounded (i.e., <code>3.1415</code>), the second argument is the number of decimal places that it should be rounded to (i.e., <code>2</code>), and the two arguments are separated by a comma.</p>
+</div>
+<div id="argument-names" class="section level2">
+<h2><span class="header-section-number">2.2</span> Argument names</h2>
+<p>In this simple example, it’s not too hard to remember which argument comes first and which one comes second, but as you might imagine it starts to get very difficult once you start using complicated functions that have lots of arguments. Fortunately, most R functions use <strong>argument names</strong> to make your life a little easier. For the <code>round</code> function, for example, the number that needs to be rounded is specified using the <code>x</code> argument, and the number of decimal points that you want it rounded to is specified using the <code>digits</code> argument:</p>
+<pre class="r"><code>round(x = 3.1415, digits = 2)</code></pre>
+<pre><code>## [1] 3.14</code></pre>
+<p>Notice that this is kind of similar in spirit to variable assignment, except that I used <code>=</code> here, rather than <code>&lt;-</code>. In both cases we’re specifying specific values to be associated with a label. However, there are some differences between what I was doing earlier on when creating variables, and what I’m doing here when specifying arguments, and so as a consequence it’s important that you use <code>=</code> in this context.</p>
+<p>As you can see, specifying the arguments by name involves a lot more typing, but it’s also a lot easier to read. Because of this, the commands in this book will usually specify arguments by name,<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> since that makes it clearer to you what I’m doing. However, one important thing to note is that when specifying the arguments using their names, it doesn’t matter what order you type them in. But if you don’t use the argument names, then you have to input the arguments in the correct order. In other words, these three commands all produce the same output…</p>
+<pre class="r"><code>round(3.14165, 2)
+round(x = 3.1415, digits = 2)
+round(digits = 2, x = 3.1415)</code></pre>
+<pre><code>## [1] 3.14
+## [1] 3.14
+## [1] 3.14</code></pre>
+<p>but this one does not…</p>
+<pre class="r"><code>round(2, 3.14165)</code></pre>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="default-values" class="section level2">
+<h2><span class="header-section-number">2.3</span> Default values</h2>
+<p>Okay, so that’s the first thing I said you’d need to know: argument names. The second thing you need to know about is default values. Notice that the first time I called the <code>round</code> function I didn’t actually specify the <code>digits</code> argument at all, and yet R somehow knew that this meant it should round to the nearest whole number. How did that happen? The answer is that the <code>digits</code> argument has a <strong>default value</strong> of <code>0</code>, meaning that if you decide not to specify a value for <code>digits</code> then R will act as if you had typed <code>digits = 0</code>. This is quite handy: most of the time when you want to round a number you want to round it to the nearest <em>whole</em> number, and it would be pretty annoying to have to specify the <code>digits</code> argument every single time. On the other hand, sometimes you actually do want to round to something other than the nearest whole number, and it would be even more annoying if R didn’t allow this! Thus, by having <code>digits = 0</code> as the default value, we get the best of both worlds.</p>
+<hr />
+</div>
+</div>
+<div id="objects" class="section level1">
+<h1><span class="header-section-number">3</span> Objects</h1>
+<p>In R, all “assignments” have this form:</p>
+<pre class="r"><code>objectName &lt;- value</code></pre>
+<p>where the arrow, <code>&lt;-</code>, means “assign <code>value</code> to <code>objectName</code>”. Watch this 2 min video for a quick summary:</p>
+<p><img src="https://vimeo.com/220493412" /></p>
+<p>The operator <code>&lt;-</code> is a pain to type, so RStudio has a keyboard shortcut: Alt + - (the minus sign). RStudio offers many handy <a href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts">keyboard shortcuts</a>. Also, Alt+Shift+K brings up a keyboard shortcut reference card.</p>
+<p>You can choose almost any name you like for an object, as long as the name does not begin with a <em>number</em> or a special character like <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>, <code>!</code>, <code>@</code>, or <code>&amp;</code>. For example, try assigning <code>2</code> to <code>x</code>:</p>
+<pre class="r"><code>x &lt;- 2</code></pre>
+<p>Now type <code>x</code> again - notice that it returns the value assigned to it!</p>
+<pre class="r"><code>x &lt;- 2</code></pre>
+<p>Notice that RStudio automagically surrounds <code>&lt;-</code> with spaces, which demonstrates a useful code formatting practice. Code is miserable to read on a good day. Give your eyes a break and use spaces.</p>
+<p>Object names cannot start with a digit and cannot contain certain other characters such as a comma or a space. You will be wise to adopt a <a href="http://en.wikipedia.org/wiki/Snake_case">convention for demarcating words</a> in names.</p>
+<pre><code>i_use_snake_case
+other.people.use.periods
+evenOthersUseCamelCase</code></pre>
+<p>Make another assignment</p>
+<pre class="r"><code>this_is_a_really_long_name &lt;- 2.5</code></pre>
+<div id="saving-your-workspace-with-a-.rdata-file" class="section level2">
+<h2><span class="header-section-number">3.1</span> Saving your workspace with a .RData file</h2>
+<p>Upon quitting R, you have to decide if you want to save your workspace, for potential restoration the next time you launch R. RStudio will prompt you to make this decision.</p>
+<p>Quit R/Rstudio, either from the menu, using a keyboard shortcut, or by typing <code>q()</code> in the Console. You’ll get a prompt like this:</p>
+<blockquote>
+<p>Save workspace image to ~/.Rdata?</p>
+</blockquote>
+<p><em>Note where the workspace image is to be saved</em> and then click <code>Save</code>.</p>
+<p>Using your favorite method, visit the directory where image was saved and verify there is a file named <code>.RData</code>. You will also see a file <code>.Rhistory</code>, holding the commands submitted in your recent session.</p>
+<p>Restart RStudio. In the Console you will see a line like this:</p>
+<pre><code>[Workspace loaded from ~/.RData]</code></pre>
+<p>indicating that your workspace has been restored. Look in the Workspace pane and you’ll see the same objects as before. In the History tab of the same pane, you should also see your command history. You’re back in business. This way of starting and stopping analytical work will not serve you well for long but it’s a start.</p>
+<hr />
+</div>
+</div>
+<div id="vectors" class="section level1">
+<h1><span class="header-section-number">4</span> Vectors</h1>
+<p><img src="https://vimeo.com/220490316" /></p>
+<hr />
+</div>
+<div id="types" class="section level1">
+<h1><span class="header-section-number">5</span> Types</h1>
+<p><img src="https://vimeo.com/220490241" /></p>
+<hr />
+</div>
+<div id="lists" class="section level1">
+<h1><span class="header-section-number">6</span> Lists</h1>
+<p><img src="https://vimeo.com/220490360" /></p>
+<hr />
+</div>
+<div id="packages" class="section level1">
+<h1><span class="header-section-number">7</span> Packages</h1>
+<p><img src="https://vimeo.com/220490447" /></p>
+</div>
+<div id="objects-in-r" class="section level1">
+<h1><span class="header-section-number">8</span> Objects in R</h1>
+<div id="variables" class="section level2">
+<h2><span class="header-section-number">8.1</span> Variables</h2>
+<ul>
+<li>Used to store data</li>
+<li>Naming should be consistent/clear
+<ul>
+<li>Case sensitive, no numbers/symbols/whitespace</li>
+<li>E.g. treeHeight_m, species_count</li>
+</ul></li>
+<li><strong>Data types:</strong> Numeric, integer, character, logical (T/F) or complex</li>
+</ul>
+<pre class="r"><code>#numeric data
+x &lt;- 4
+x &lt;- (4+5)/2
+#character data
+x &lt;- &quot;hello&quot;</code></pre>
+</div>
+<div id="data-structures" class="section level2 tabset tabset-fade tabset-pills">
+<h2><span class="header-section-number">8.2</span> Data Structures</h2>
+<div id="vectors-1" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> Vectors</h3>
+<ul>
+<li>Sequential collection of data of the <em>same</em> type</li>
+<li>Coercion occurs if different types are mixed</li>
+<li>Asking and coercion can be done manually to change the vector (data) type</li>
+<li>Note that the <code>c()</code> function combines (concatenates) its arguments to form a vector</li>
+</ul>
+<pre class="r"><code>#numeric vectors
+x &lt;- c(1,3,5,6)
+x &lt;- 1:5
+x &lt;- seq(1,5,1)
+x &lt;- vector(&quot;numeric&quot;, length=10)
+num_vec &lt;- c(TRUE, 2) #in R, TRUE=1, FALSE=0
+is.numeric(num_vec)
+#character vectors
+x &lt;- c(&quot;hello&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;)
+x &lt;- c(1.7, &quot;a&quot;)
+char_vec &lt;- c(&quot;a&quot;, TRUE) #&#39;TRUE&#39; turned from logical to character
+is.character(char_vec)
+x &lt;- as.character(num_vec) #coercion from numeric to character
+x</code></pre>
+</div>
+<div id="lists-1" class="section level3">
+<h3><span class="header-section-number">8.2.2</span> Lists</h3>
+<ul>
+<li>Consist of different elements (i.e. variables/vectors) that can be of <em>different types</em></li>
+<li>Elements in a list are indexed with [[]], individual items are in []</li>
+<li>Functions only be applied to vectors, not lists!</li>
+</ul>
+<pre class="r"><code>mylist &lt;- list(num_vec, char_vec, 1.783, 5L, &quot;hello&quot;) #add L suffix if you explicitly want integers
+mylist
+is.list(mylist) #asking</code></pre>
+</div>
+<div id="factors" class="section level3">
+<h3><span class="header-section-number">8.2.3</span> Factors</h3>
+<ul>
+<li>Used to represent data with limited, discrete categories (i.e. categorical, ordinal, or even binary)</li>
+<li>Can be coded as character or numeric</li>
+<li>Some examples:
+<ul>
+<li>Tom, Dick, Harry</li>
+<li>Blue, Black, Brown (eye color)</li>
+<li>High, Medium, Low (3, 2, 1)</li>
+<li>Strongly disagree, disagree, neutral, agree, strongly agree (-2:2)</li>
+<li>Male, Female (1, 2)</li>
+</ul></li>
+</ul>
+<pre class="r"><code>x &lt;- factor(c(&quot;SA&quot;, &quot;D&quot;, &quot;A&quot;, &quot;A&quot;, &quot;SA&quot;, &quot;Neutral&quot;, &quot;SD&quot;))
+x
+#define order (default is alphabetical)
+x &lt;- factor(c(&quot;SA&quot;, &quot;D&quot;, &quot;A&quot;, &quot;A&quot;, &quot;SA&quot;, &quot;Neutral&quot;, &quot;SD&quot;), levels = c(&quot;SD&quot;, &quot;D&quot;, &quot;Neutral&quot;, &quot;A&quot;, &quot;SA&quot;))
+x
+unclass(x) #show as numbers, with &quot;levels&quot; attribute showing actual text</code></pre>
+</div>
+<div id="matrices" class="section level3">
+<h3><span class="header-section-number">8.2.4</span> Matrices</h3>
+<ul>
+<li>Data in rectangular format (2D array with rows &amp; columns)</li>
+<li>Data must be of the <em>same</em> type!</li>
+<li>More memory efficient than dataframes</li>
+</ul>
+<pre class="r"><code>m &lt;- matrix(1:12, nrow = 4)
+m #data goes in by columns in default mode
+dim(m) #dimensions: no. of rows &amp; cols
+dimnames(m)
+dimnames(m) &lt;- list(c(&quot;Tom&quot;, &quot;Dick&quot;, &quot;Harry&quot;, &quot;Me&quot;), c(&quot;Blue&quot;, &quot;White&quot;, &quot;Red&quot;)) #add names to row/cols
+#size comparisons
+object.size(m) # 264 bytes
+d &lt;- as.data.frame(m) #convert to dataframe
+object.size(d) # 1032 bytes</code></pre>
+</div>
+<div id="dataframes" class="section level3">
+<h3><span class="header-section-number">8.2.5</span> Dataframes</h3>
+<ul>
+<li>Data in rectangular format (2D array with rows &amp; columns)</li>
+<li>Columns can contain <em>different</em> types of data variables (i.e. numeric, character, etc.)</li>
+<li>Each column are vectors/lists of similar length</li>
+<li>Import tabular data as dataframes using <code>read.table()</code> family of functions (i.e. <code>read.csv()</code>, <code>read.delim()</code>)</li>
+</ul>
+<pre class="r"><code>#use data.frame() to manually create df
+ozone &lt;- read.csv(&quot;../data/ozone_data.csv&quot;) #default: headers in first row (header = T)
+is.data.frame(ozone) #check attribute
+head(ozone) #view first few rows only
+dim(ozone) #dimensions: no. of rows &amp; cols
+dimnames(ozone) #row &amp; col names
+names(ozone) #col names, also can use &#39;colnames(ozone)&#39;
+rownames(ozone)
+#extract columns with &#39;$&#39;
+ozone$rad
+ozone$temp</code></pre>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Technically speaking, operators are functions in R: the addition operator <code>+</code> is a convenient way of calling the addition function <code>‘+‘()</code>. Thus <code>10+20</code> is equivalent to the function call <code>‘+‘(20, 30)</code>. Not surprisingly, no-one ever uses this version.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>A note for the mathematically inclined: R does support complex numbers, but unless you explicitly specify that you want them it assumes all calculations must be real valued. By default, the square root of a negative number is treated as undefined: <code>sqrt(-9)</code> will produce <code>NaN</code> (not a number) as its output. To get complex numbers, you would type <code>sqrt(-9+0i)</code> and R would now return <code>0+3i</code>.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>The two functions discussed previously, <code>sqrt</code> and <code>abs</code>, both only have a single argument, <code>x</code>. So I could have typed something like <code>sqrt(x = 225)</code> or <code>abs(x = -13)</code> earlier. The fact that all these functions use <code>x</code> as the name of the argument that corresponds the “main” variable that you’re working with is not entirely a coincidence. That’s a fairly widely used convention. Quite often, the writers of R functions will try to use conventional names like this to make your life easier. Or at least that’s the theory. In practice… it doesn’t always work as well as you’d hope.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+
+<hr>
+
+<p>This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

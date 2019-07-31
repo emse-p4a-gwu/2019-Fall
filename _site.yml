@@ -19,6 +19,30 @@ navbar:
           href: https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/syllabus_emse6574.pdf
     - text: "Schedule"
       href: schedule.html
+    - text: "Lessons"
+      menu:
+        - text: "1.1 - Course Introduction"
+          href: L1.1-course-introduction.html
+        - text: "1.2 - Getting Started"
+          href: L1.2-getting-started.html
+        - text: "1.3 - Programming Basics"
+          href: L1.3-programming-basics.html
+    - text: "Assignments"
+      menu:
+        - text: "HW 1 - Programming Basics"
+          href: hw1-programming-basics.html
+        - text: "HW 2 - Programming Basics"
+          href: hw2-functions.html
+        - text: "HW 3 - Programming Basics"
+          href: hw3-loops-strings.html
+        - text: "HW 4 - Programming Basics"
+          href: hw4-vectors.html
+        - text: "HW 5 - Programming Basics"
+          href: hw5-matrices.html
+        - text: "HW 6 - Programming Basics"
+          href: hw6-data-analysis.html
+        - text: "HW 7 - Programming Basics"
+          href: hw7-monte-carlo.html
     - text: "Resources"
       href: resources.html
     - text: About
