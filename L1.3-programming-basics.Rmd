@@ -3,15 +3,15 @@ title: "Getting Started"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-library(knitr)
-knitr::opts_chunk$set(echo = TRUE)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_tweaks.R")
 ```
 
 <!-- Content for this page is sourced from:
-    Danielle Navarro's website "R for Psychological Science": https://psyr.org/getting-started.html
-    Jenny Bryan's STAT 545 Course: http://stat545.com/block002_hello-r-workspace-wd-project.html
-    RStudio primers: https://rstudio.cloud/learn/primers/1.2
+    - Danielle Navarro's website "R for Psychological Science": https://psyr.org/getting-started.html
+    - Jenny Bryan's STAT 545 Course: http://stat545.com/block002_hello-r-workspace-wd-project.html
+    - RStudio primers: https://rstudio.cloud/learn/primers/1.2
     Xiao Ping Song's Intro2R crash course: https://github.com/xp-song/Intro2R
 -->
 
@@ -114,12 +114,6 @@ round(2, 3.14165)
 ## Default values
 
 Okay, so that’s the first thing I said you’d need to know: argument names. The second thing you need to know about is default values. Notice that the first time I called the `round` function I didn’t actually specify the `digits` argument at all, and yet R somehow knew that this meant it should round to the nearest whole number. How did that happen? The answer is that the `digits` argument has a **default value** of `0`, meaning that if you decide not to specify a value for `digits` then R will act as if you had typed `digits = 0`. This is quite handy: most of the time when you want to round a number you want to round it to the nearest *whole* number, and it would be pretty annoying to have to specify the `digits` argument every single time. On the other hand, sometimes you actually do want to round to something other than the nearest whole number, and it would be even more annoying if R didn’t allow this! Thus, by having `digits = 0` as the default value, we get the best of both worlds.
-
----
-
-# Objects
-
-<!-- Add Jenny's stuff here about objects(), ls(), and rm(y) -->
 
 ---
 

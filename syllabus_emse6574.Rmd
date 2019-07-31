@@ -9,12 +9,9 @@ documentclass: article
 
 ---
 
-```{r setup, include=FALSE}
-library(knitr)
-library(here)
-library(kableExtra)
-knitr::opts_chunk$set(echo = TRUE)
-options(knitr.kable.NA = '')
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_tweaks.R")
 ```
 
 ```{r child = here::here('syllabus', 'main.Rmd')}

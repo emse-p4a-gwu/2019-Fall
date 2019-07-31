@@ -6,9 +6,9 @@ output:
     toc: no
 ---
 
-```{r setup, include=FALSE}
-library(knitr)
-options(knitr.kable.NA = '')
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_tweaks.R")
 ```
 
 Below is the week-by-week schedule for the course.

@@ -3,20 +3,17 @@ title: "Getting Started"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-library(knitr)
-knitr::opts_chunk$set(echo = TRUE)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_tweaks.R")
 ```
 
 <!-- Content for this page is sourced from:
-    Danielle Navarro's website "R for Psychological Science": https://psyr.org/getting-started.html
-    Jenny Bryan's STAT 545 Course: http://stat545.com/block002_hello-r-workspace-wd-project.html
+    - Danielle Navarro's website "R for Psychological Science": https://psyr.org/getting-started.html
+    - Jenny Bryan's STAT 545 Course: http://stat545.com/block002_hello-r-workspace-wd-project.html
 -->
 
 <!--
-https://psyr.org/getting-started.html
-- RStudio helps
-
 http://stat545.com/block002_hello-r-workspace-wd-project.html
 - Working Directories & Projects
 -->
@@ -51,9 +48,11 @@ You will first need to download and install both R and RStudio (Desktop version)
 
 After you install R and RStudio on your computer, you'll have two new applications you can open. **We will always work in RStudio**. In other words:
 
+<div class="tableMedium">
 R: Do not open this          |  RStudio: Open this
 :-------------------------:|:-------------------------:
 ![](images/Rlogo.png){ width=50 }  |  ![](images/RStudio-Ball.png){ width=50 }
+</div>
 
 After you open RStudio, you should see the following:
 
@@ -88,40 +87,39 @@ For example, try typing `r 10 + 20`, then hit enter. You should see this:
 10 + 20
 ```
 
-Not a lot of surprises.
+Not a lot of surprises (for now, ignore the `[1]` you see...we'll get to that).
 
-R also supports three other useful arithme:tic operators
+R also supports three other useful arithmetic operators:
 
 - Powers: `^`
 - Integer division: `%/%`
-- Calculating a modulus: `%%`
+- Modulus: `%%`
 
-Powers (i.e. $x^n$) are represented using the `^` symbol. For example, to calculate $5^4$ in R, we would type:
+**Powers** (i.e. $x$ raised to the power of $n$) are represented using the `^` symbol. For example, to calculate $5^4$ in R, we would type:
 
 ```{r}
 5^4
 ```
 
-Integer division is division in which the fractional part (remainder) is discarded. Note the difference between regular (`/`) and integer (`%/%`) division
+**Integer** division is division in which the fractional part (remainder) is discarded. Note the difference between regular (`/`) and integer (`%/%`) division:
 
-Regular:
 ```{r}
-4 / 3
+4 / 3 # Regular division
 ```
 
-Integer:
 ```{r}
-4 / 3
+4 %/% 3 # Integer division
 ```
 
-Finally, the modulus (aka "mod" operator) is simply the remainder. For
-example,
+With integer division, `3` can only go into `4` once, so `4 %/% 3` returns `1`.
+
+Finally, the **modulus** (aka "mod" operator) simply returns the remainder after doing regular division. For example:
 
 ```{r}
 17 %% 3
 ```
 
-because 17 / 3 = 5 with a remainder of 2
+returns `2` because because `17 / 3` is equal to 5 with a remainder of 2.
 
 ## Order of operations
 
@@ -137,7 +135,7 @@ R first computes `2 * 4` and then adds `1`. If what you actually wanted was for 
 (1 + 2) * 4
 ```
 
-A helpful rule of thumb to remember is that **brackets always come first**. So, if you’re ever unsure about what order R will do things in, an easy solution is to enclose the thing you want it to do first in brackets.
+A helpful rule of thumb to remember is that **brackets always come first**. So, if you're ever unsure about what order R will do things in, an easy solution is to enclose the thing you want it to do first in brackets.
 
 ## R ignores excess spacing
 
@@ -157,20 +155,70 @@ and get exactly the same answer.
 
 ---
 
-# Working Directories and RStudio Projects
+# Objects
+
+In R, all "assignments" have this form:
+
+```{r eval = FALSE}
+objectName <- value
+```
+
+where the arrow, `<-`, means "assign `value` to `objectName`". Watch this 2 min video for a quick summary:
+
+![](https://vimeo.com/220493412)
+
+The operator `<-` is a pain to type, so RStudio has a keyboard shortcut: Alt + - (the minus sign). RStudio offers many handy [keyboard shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts). Also, Alt+Shift+K brings up a keyboard shortcut reference card.
+
+You can choose almost any name you like for an object, as long as the name does not begin with a *number* or a special character like `+`, `-`, `*`, `/`, `^`, `!`, `@`, or `&`. For example, try assigning `2` to `x`:
+
+```{r}
+x <- 2
+```
+
+Now type `x` again - notice that it returns the value assigned to it!
+
+```{r}
+x <- 2
+```
 
 
 
 
+
+Notice that RStudio automagically surrounds `<-` with spaces, which demonstrates a useful code formatting practice. Code is miserable to read on a good day. Give your eyes a break and use spaces.
+
+
+
+Object names cannot start with a digit and cannot contain certain other characters such as a comma or a space. You will be wise to adopt a [convention for demarcating words](http://en.wikipedia.org/wiki/Snake_case) in names.
+
+```
+i_use_snake_case
+other.people.use.periods
+evenOthersUseCamelCase
+```
+
+Make another assignment
+```{r}
+this_is_a_really_long_name <- 2.5
+```
 
 
 
 ## The history pane
 
-R keeps track of your “command history”. If you hit the up key, the R console will show you the most recent command that you’ve typed. Hit it again, and it will show you the command before that.
+R keeps track of your “command history”. If you hit the up key, the R console will show you the most recent command that you've typed. Hit it again, and it will show you the command before that.
 
-The second way to get access to your command history is to look at the history panel in Rstudio. On the upper right hand side of the Rstudio window you’ll see a tab labelled “History”. Click on that, and you’ll see a list of all your recent commands displayed in that panel. It should look something like this:
+The second way to get access to your command history is to look at the history panel in Rstudio. On the upper right hand side of the Rstudio window you'll see a tab labelled “History”. Click on that, and you'll see a list of all your recent commands displayed in that panel. It should look something like this:
 
 <img src="./images/rstudio_history.png" width=400 align="center">
 
 If you double click on one of the commands, it will be copied to the R console.
+
+
+
+
+
+
+---
+
+# Working Directories and RStudio Projects

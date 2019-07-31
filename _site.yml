@@ -6,7 +6,6 @@ exclude:
 new_session: true
 navbar:
   title: "EMSE6574: Fall 2019"
-  type: inverse
   left:
     - text: "Home"
       href: index.html
@@ -41,13 +40,16 @@ output:
     toc: yes
     toc_depth: 4
     toc_float:
-      collapsed: yes
-      smooth_scroll: yes
+      collapsed: no
+      smooth_scroll: no
+    lib_dir: site_libs
+    self_contained: no
     include:
       in_header:
       - _includes/header.html
       - _includes/style.html
       after_body: _includes/footer.html
-    theme: simplex
-    lib_dir: site_libs
-    self_contained: no
+    theme: flatly
+    highlight: textmate
+    number_sections: true
+

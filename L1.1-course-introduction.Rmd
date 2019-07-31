@@ -3,10 +3,9 @@ title: "Course Introduction"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-library(knitr)
-library(here)
-knitr::opts_chunk$set(echo = TRUE)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_tweaks.R")
 ```
 
 ---

@@ -1,16 +1,14 @@
 ---
-title: "EMSE 6574: Programming for Analytics, Section 10"
+title: "EMSE 6574: Programming for Analytics, Section 11"
 output:
   html_document:
     number_sections: false
     toc: no
 ---
 
-```{r setup, include=FALSE}
-library(knitr)
-library(here)
-knitr::opts_chunk$set(echo = TRUE)
-options(knitr.kable.NA = '')
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_tweaks.R")
 ```
 
 ### The George Washington University
