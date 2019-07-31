@@ -55,18 +55,18 @@ navbar:
       menu:
         - text: "HW 1 - Programming Basics"
           href: hw1-programming-basics.html
-        - text: "HW 2 - Programming Basics"
+        - text: "HW 2 - Functions Basics"
           href: hw2-functions.html
-        - text: "HW 3 - Programming Basics"
+        - text: "HW 3 - Loops & Strings"
           href: hw3-loops-strings.html
-        - text: "HW 4 - Programming Basics"
+        - text: "HW 4 - Vectors"
           href: hw4-vectors.html
-        - text: "HW 5 - Programming Basics"
+        - text: "HW 5 - Matrices"
           href: hw5-matrices.html
-        - text: "HW 6 - Programming Basics"
+        - text: "HW 6 - Data Analysis"
           href: hw6-data-analysis.html
-        - text: "HW 7 - Programming Basics"
-          href: hw7-monte-carlo.html
+        - text: "HW 7 - Monte Carlo Methods"
+          href: hw7-monte-carlo-methods.html
     - text: "Resources"
       href: resources.html
     - text: About
