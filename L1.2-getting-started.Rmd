@@ -106,7 +106,7 @@ R also supports three other useful arithmetic operators:
 4 %/% 3 # Integer division
 ```
 
-With integer division, `3` can only go into `4` once, so `4 %/% 3` returns `1`.
+With integer division, 3 can only go into 4 once, so `4 %/% 3` returns `1`.
 
 Finally, the **modulus** (aka "mod" operator) simply returns the remainder after doing regular division. For example:
 
@@ -114,7 +114,7 @@ Finally, the **modulus** (aka "mod" operator) simply returns the remainder after
 17 %% 3
 ```
 
-returns `2` because because `17 / 3` is equal to 5 with a remainder of 2.
+returns `2` because because 17 / 3 is equal to 5 with a remainder of 2.
 
 ## Order of operations
 
