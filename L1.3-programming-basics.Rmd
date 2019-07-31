@@ -1,0 +1,258 @@
+---
+title: "Getting Started"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!-- Content for this page is sourced from:
+    Danielle Navarro's website "R for Psychological Science": https://psyr.org/getting-started.html
+    Jenny Bryan's STAT 545 Course: http://stat545.com/block002_hello-r-workspace-wd-project.html
+    RStudio primers: https://rstudio.cloud/learn/primers/1.2
+    Xiao Ping Song's Intro2R crash course: https://github.com/xp-song/Intro2R
+-->
+
+---
+
+# Functions
+
+The symbols `+`, `-`, `*` and so on are examples of operators. As we’ve seen, you can do quite a lot of calculations just by using these operators. However, in order to do more advanced calculations, you’re going to need to start using functions.^[Technically speaking, operators are functions in R: the addition operator `+` is a convenient way of calling the addition function `‘+‘()`. Thus `10+20` is equivalent to the function call `‘+‘(20, 30)`. Not surprisingly, no-one ever uses this version.]
+
+R has a lot of very useful built-in functions. Suppose I wanted to take the square root of `225`. The usual notation for this is $\sqrt{25}=5$, though sometimes you’ll also see it written like this $25^{0.5} = 5$. This second way of writing it is kind of useful to “remind” you of the mathematical fact that “square root of $x$” is actually the same as “raising $x$ to the power of 0.5”. And since we already know how to raise things to powers in R, we could do this:
+```{r}
+225 ^ 0.5
+```
+
+However, we could also compute this using R's built-in square root function `sqrt()`:
+
+```{r}
+sqrt(225)
+```
+
+Some commonly used functions for individual numbers include:
+
+Function      | Description
+------------- | -----------
+
+`exp()`       | Exponential
+`sqrt()`      | Square root
+`log(x)`      | Log base e of `x` ("natural log")
+`factorial()` | Factorial
+`round(x, digits=0)` | Round `x` to the `digits` decimal place
+`abs(x)`  | Absolute value of `x`
+
+Some commonly used functions for vectors of values include:
+
+Function      | Description
+------------- | -----------
+`mean(x)`     | Mean of values in `x`
+`median(x)`   | Median of values in `x`
+`max(x)`      | Max element in `x`
+`min(x)`      | Min element in `x`
+`sum(x)`      | Sums the elements in `x`
+`prod(x)`     | Product of the elements in `x`
+`seq(a, b, c)` | Creates a sequence of numbers from `a` to `b` with step size of `c`
+`rep(a, b)`    | Creates a vector with `a` repeated `b` times
+
+## Combining functions
+
+In the same way that R allows us to put multiple operations together into a longer command (like `1 + 2 * 4` for instance), it also lets us put functions together and even combine functions with operators if we so desire. For example, the following is a perfectly legitimate command:
+
+```{r}
+sqrt(1 + abs(-8))
+```
+
+When R executes this command, starts out by calculating the value of `abs(-8)`, which produces an intermediate value of `8`. Having done so, the command simplifies to `sqrt(1 + 8)`. To solve the square root^[A note for the mathematically inclined: R does support complex numbers, but unless you explicitly specify that you want them it assumes all calculations must be real valued. By default, the square root of a negative number is treated as undefined: `sqrt(-9)` will produce `NaN` (not a number) as its output. To get complex numbers, you would type `sqrt(-9+0i)` and R would now return `0+3i`.] it first needs to add `1 + 8` to get `9`, at which point it evaluates `sqrt(9)`, and so it finally outputs a value of `3`.
+
+---
+
+# Arguments
+
+When we use a function to do something, we generally refer to this as **calling** the function. The values that we type into the function are referred to as the **arguments** of that function. Some functions can have more than one argument.
+
+## Multiple arguments
+
+There’s two more fairly important things that you need to understand about how functions work in R, and that’s the use of “named” arguments, and default values” for arguments. To understand what these two concepts are all about, I’ll introduce another function. The `round` function can be used to round some value to the nearest whole number. For example, I could type this:
+
+```{r}
+round(3.1415)
+```
+
+Pretty straightforward. However, suppose I only wanted to round it to two decimal places: that is, I want to get `3.14` as the output. The `round` function supports this, by allowing you to input a second argument to the function that specifies the number of decimal places that you want to round the number to. In other words, I could do this:
+
+```{r}
+round(3.14165, 2)
+```
+
+What’s happening here is that I’ve specified two arguments: the first argument is the number that needs to be rounded (i.e., `3.1415`), the second argument is the number of decimal places that it should be rounded to (i.e., `2`), and the two arguments are separated by a comma.
+
+## Argument names
+
+In this simple example, it’s not too hard to remember which argument comes first and which one comes second, but as you might imagine it starts to get very difficult once you start using complicated functions that have lots of arguments. Fortunately, most R functions use **argument names** to make your life a little easier. For the `round` function, for example, the number that needs to be rounded is specified using the `x` argument, and the number of decimal points that you want it rounded to is specified using the `digits` argument:
+
+```{r}
+round(x = 3.1415, digits = 2)
+```
+
+Notice that this is kind of similar in spirit to variable assignment, except that I used `=` here, rather than `<-`. In both cases we’re specifying specific values to be associated with a label. However, there are some differences between what I was doing earlier on when creating variables, and what I’m doing here when specifying arguments, and so as a consequence it’s important that you use `=` in this context.
+
+As you can see, specifying the arguments by name involves a lot more typing, but it’s also a lot easier to read. Because of this, the commands in this book will usually specify arguments by name,^[The two functions discussed previously, `sqrt` and `abs`, both only have a single argument, `x`. So I could have typed something like `sqrt(x = 225)` or `abs(x = -13)` earlier. The fact that all these functions use `x` as the name of the argument that corresponds the “main” variable that you’re working with is not entirely a coincidence. That’s a fairly widely used convention. Quite often, the writers of R functions will try to use conventional names like this to make your life easier. Or at least that’s the theory. In practice... it doesn’t always work as well as you’d hope.] since that makes it clearer to you what I’m doing. However, one important thing to note is that when specifying the arguments using their names, it doesn’t matter what order you type them in. But if you don’t use the argument names, then you have to input the arguments in the correct order. In other words, these three commands all produce the same output...
+
+```{r,results='hold'}
+round(3.14165, 2)
+round(x = 3.1415, digits = 2)
+round(digits = 2, x = 3.1415)
+```
+but this one does not...
+```{r}
+round(2, 3.14165)
+```
+
+## Default values
+
+Okay, so that’s the first thing I said you’d need to know: argument names. The second thing you need to know about is default values. Notice that the first time I called the `round` function I didn’t actually specify the `digits` argument at all, and yet R somehow knew that this meant it should round to the nearest whole number. How did that happen? The answer is that the `digits` argument has a **default value** of `0`, meaning that if you decide not to specify a value for `digits` then R will act as if you had typed `digits = 0`. This is quite handy: most of the time when you want to round a number you want to round it to the nearest *whole* number, and it would be pretty annoying to have to specify the `digits` argument every single time. On the other hand, sometimes you actually do want to round to something other than the nearest whole number, and it would be even more annoying if R didn’t allow this! Thus, by having `digits = 0` as the default value, we get the best of both worlds.
+
+---
+
+# Objects
+
+<!-- Add Jenny's stuff here about objects(), ls(), and rm(y) -->
+
+---
+
+# Vectors
+
+---
+
+# Types
+
+---
+
+# Lists
+
+---
+
+# Packages
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Objects in R
+
+## Variables
+- Used to store data
+- Naming should be consistent/clear
+  - Case sensitive, no numbers/symbols/whitespace
+  - E.g. treeHeight_m, species_count
+- **Data types:** Numeric, integer, character, logical (T/F) or complex
+```{r variables, eval = FALSE}
+#numeric data
+x <- 4
+x <- (4+5)/2
+#character data
+x <- "hello"
+```
+
+## Data Structures {.tabset .tabset-fade .tabset-pills}
+### Vectors
+- Sequential collection of data of the _same_ type
+- Coercion occurs if different types are mixed
+- Asking and coercion can be done manually to change the vector (data) type
+- Note that the `c()` function combines (concatenates) its arguments to form a vector
+```{r eval = FALSE}
+#numeric vectors
+x <- c(1,3,5,6)
+x <- 1:5
+x <- seq(1,5,1)
+x <- vector("numeric", length=10)
+num_vec <- c(TRUE, 2) #in R, TRUE=1, FALSE=0
+is.numeric(num_vec)
+#character vectors
+x <- c("hello", "a", "b", "c")
+x <- c(1.7, "a")
+char_vec <- c("a", TRUE) #'TRUE' turned from logical to character
+is.character(char_vec)
+x <- as.character(num_vec) #coercion from numeric to character
+x
+```
+### Lists
+- Consist of different elements (i.e. variables/vectors) that can be of _different types_
+- Elements in a list are indexed with [[]], individual items are in []
+- Functions only be applied to vectors, not lists!
+```{r eval= FALSE}
+mylist <- list(num_vec, char_vec, 1.783, 5L, "hello") #add L suffix if you explicitly want integers
+mylist
+is.list(mylist) #asking
+```
+
+### Factors
+
+- Used to represent data with limited, discrete categories (i.e. categorical, ordinal, or even binary)
+- Can be coded as character or numeric
+- Some examples:
+  - Tom, Dick, Harry
+  - Blue, Black, Brown (eye color)
+  - High, Medium, Low (3, 2, 1)
+  - Strongly disagree, disagree, neutral, agree, strongly agree (-2:2)
+  - Male, Female (1, 2)
+
+```{r, eval = FALSE}
+x <- factor(c("SA", "D", "A", "A", "SA", "Neutral", "SD"))
+x
+#define order (default is alphabetical)
+x <- factor(c("SA", "D", "A", "A", "SA", "Neutral", "SD"), levels = c("SD", "D", "Neutral", "A", "SA"))
+x
+unclass(x) #show as numbers, with "levels" attribute showing actual text
+```
+
+### Matrices
+- Data in rectangular format (2D array with rows & columns)
+- Data must be of the _same_ type!
+- More memory efficient than dataframes
+```{r eval = FALSE}
+m <- matrix(1:12, nrow = 4)
+m #data goes in by columns in default mode
+dim(m) #dimensions: no. of rows & cols
+dimnames(m)
+dimnames(m) <- list(c("Tom", "Dick", "Harry", "Me"), c("Blue", "White", "Red")) #add names to row/cols
+#size comparisons
+object.size(m) # 264 bytes
+d <- as.data.frame(m) #convert to dataframe
+object.size(d) # 1032 bytes
+```
+
+### Dataframes
+- Data in rectangular format (2D array with rows & columns)
+- Columns can contain _different_ types of data variables (i.e. numeric, character, etc.)
+- Each column are vectors/lists of similar length
+- Import tabular data as dataframes using `read.table()` family of functions (i.e. `read.csv()`, `read.delim()`)
+```{r eval = FALSE}
+#use data.frame() to manually create df
+ozone <- read.csv("../data/ozone_data.csv") #default: headers in first row (header = T)
+is.data.frame(ozone) #check attribute
+head(ozone) #view first few rows only
+dim(ozone) #dimensions: no. of rows & cols
+dimnames(ozone) #row & col names
+names(ozone) #col names, also can use 'colnames(ozone)'
+rownames(ozone)
+#extract columns with '$'
+ozone$rad
+ozone$temp
+```
+

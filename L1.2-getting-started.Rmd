@@ -8,21 +8,20 @@ library(knitr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
----
+<!-- Content for this page is sourced from:
+    Danielle Navarro's website "R for Psychological Science": https://psyr.org/getting-started.html
+    Jenny Bryan's STAT 545 Course: http://stat545.com/block002_hello-r-workspace-wd-project.html
+-->
 
 <!--
 https://psyr.org/getting-started.html
-- Installing
-- R commands
-- Operations
-- Functions
 - RStudio helps
 
 http://stat545.com/block002_hello-r-workspace-wd-project.html
-- Assignments & objects
 - Working Directories & Projects
 -->
 
+---
 
 # R and RStudio
 
@@ -60,5 +59,118 @@ After you open RStudio, you should see the following:
 
 ![](images/rstudio.png)
 
-Note the three panes, which are three panels dividing the screen: The *Console pane*, the *Files pane*, and the *Environment pane*.
+Notice the default panes:
 
+  * Console (entire left)
+  * Environment/History (tabbed in upper right)
+  * Files/Plots/Packages/Help (tabbed in lower right)
+
+FYI: you can change the default location of the panes, among many other things: [Customizing RStudio](https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio).
+
+Go into the Console on the left with the `>` (that's the *command prompt*), and let's get started!
+
+---
+
+# R as a calculator
+
+## Operators
+
+R handles the four basic arithmetic operators using these symbols:
+
+- Addition: `+`
+- Subtraction: `-`
+- Multiplication: `*`
+- Division: `/`
+
+For example, try typing `r 10 + 20`, then hit enter. You should see this:
+
+```{r}
+10 + 20
+```
+
+Not a lot of surprises.
+
+R also supports three other useful arithme:tic operators
+
+- Powers: `^`
+- Integer division: `%/%`
+- Calculating a modulus: `%%`
+
+Powers (i.e. $x^n$) are represented using the `^` symbol. For example, to calculate $5^4$ in R, we would type:
+
+```{r}
+5^4
+```
+
+Integer division is division in which the fractional part (remainder) is discarded. Note the difference between regular (`/`) and integer (`%/%`) division
+
+Regular:
+```{r}
+4 / 3
+```
+
+Integer:
+```{r}
+4 / 3
+```
+
+Finally, the modulus (aka "mod" operator) is simply the remainder. For
+example,
+
+```{r}
+17 %% 3
+```
+
+because 17 / 3 = 5 with a remainder of 2
+
+## Order of operations
+
+R follows the typical BEDMAS order of operations. That is, you first calculate things inside **B**rackets, then calculate **E**xponents, then **D**ivision and **M**ultiplication, then **A**ddition and **S**ubtraction. For a more precise statement, see the [operator precedence](http://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html) for R. For example, if I type:
+
+```{r}
+1 + 2 * 4
+```
+
+R first computes `2 * 4` and then adds `1`. If what you actually wanted was for R to first add `2` to `1`, then you should have added parentheses around `1` and `2`:
+
+```{r}
+(1 + 2) * 4
+```
+
+A helpful rule of thumb to remember is that **brackets always come first**. So, if you’re ever unsure about what order R will do things in, an easy solution is to enclose the thing you want it to do first in brackets.
+
+## R ignores excess spacing
+
+When I typed `10 + 20` before, I could equally have done this
+
+```{r}
+10        + 20
+```
+
+or this
+
+```{r}
+            10   + 20
+```
+
+and get exactly the same answer.
+
+---
+
+# Working Directories and RStudio Projects
+
+
+
+
+
+
+
+## The history pane
+
+R keeps track of your “command history”. If you hit the up key, the R console will show you the most recent command that you’ve typed. Hit it again, and it will show you the command before that.
+
+The second way to get access to your command history is to look at the history panel in Rstudio. On the upper right hand side of the Rstudio window you’ll see a tab labelled “History”. Click on that, and you’ll see a list of all your recent commands displayed in that panel. It should look something like this:
+
+<img src="./images/rstudio_history.png" width=400 align="center">
+
+If you double click on one of the commands, it will be copied to the R console.
