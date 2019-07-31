@@ -27,6 +27,30 @@ navbar:
           href: L1.2-getting-started.html
         - text: "1.3 - Programming Basics"
           href: L1.3-programming-basics.html
+        - text: "3.1 - Functions"
+          href: L3.1-functions.html
+        - text: "4.1 - Conditionals"
+          href: L4.1-conditionals.html
+        - text: "4.2 - Testing"
+          href: L4.2-testing.html
+        - text: "5.1 - Loops"
+          href: L5.1-loops.html
+        - text: "6.1 - Strings"
+          href: L6.1-strings.html
+        - text: "7.1 - Vectors"
+          href: L7.1-vectors.html
+        - text: "7.2 - Sorting"
+          href: L7.2-sorting.html
+        - text: "10.1 - Matrices"
+          href: L10.1-matrices.html
+        - text: "11.1 - Data Frames"
+          href: L11.1-data-frames.html
+        - text: "12.1 - Data Visualizations"
+          href: L12.1-data-visualizations.html
+        - text: "14.1 - Monte Carlo Methods"
+          href: L14.1-monte-carlo-methods.html
+        - text: "15.1 - RMarkdown"
+          href: L15.1-rmarkdown.html
     - text: "Assignments"
       menu:
         - text: "HW 1 - Programming Basics"
