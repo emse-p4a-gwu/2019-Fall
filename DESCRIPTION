@@ -14,7 +14,6 @@ Imports:
     rmarkdown,
     knitr,
     tidyverse,
-    shiny,
     testthat,
     devtools,
     roxygen2,

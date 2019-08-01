@@ -3,17 +3,12 @@ title: "Getting Started"
 output: html_document
 ---
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
-source("knitr_tweaks.R")
+source("knitr_settings.R")
 ```
 
-<!-- Content for this page is sourced from:
-    - Danielle Navarro's website "R for Psychological Science":
-      https://psyr.org/getting-started.html
-    - Jenny Bryan's STAT 545 Course:
-      http://stat545.com/block002_hello-r-workspace-wd-project.html
--->
+[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Soome content in this page is sourced from: 1) Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html); 2) Jenny Bryan's [STAT 545 Course](http://stat545.com/)]
 
 ---
 

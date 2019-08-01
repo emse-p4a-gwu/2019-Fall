@@ -1,17 +1,12 @@
 ---
-title: "Homework 1"
+title: "Homework 1 - Programming Basics"
 output: html_document
 ---
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+<!-- ```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
-source("knitr_tweaks.R")
+source("knitr_settings.R")
 ```
 
-# Programming Basics
+Covers basics of R, including working directory questions -->
 
-<!--
-
-Covers basics of R, including working directory questions
-
- -->

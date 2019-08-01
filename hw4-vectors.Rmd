@@ -1,11 +1,11 @@
 ---
-title: "Homework 4"
+title: "Homework 4 - Vectors"
 output: html_document
 ---
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+<!-- ```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
-source("knitr_tweaks.R")
+source("knitr_settings.R")
 ```
 
-# Vectors
+ -->

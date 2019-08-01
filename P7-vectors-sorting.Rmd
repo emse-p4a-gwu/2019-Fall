@@ -3,7 +3,8 @@ title: "Practice 7 - Vectors & Sorting"
 output: html_document
 ---
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+<!-- ```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
-source("knitr_tweaks.R")
+source("knitr_settings.R")
 ```
+ -->

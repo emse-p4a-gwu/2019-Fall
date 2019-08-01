@@ -16,10 +16,10 @@ other courses and workshops, including:
 
 Name | Author | Links
 --------- | --- | ---
-STAT 545 | U. of of British Columbia | [course](http://stat545.com/); [github](https://github.com/STAT545-UBC)
+STAT 545 | U. of British Columbia | [course](http://stat545.com/); [github](https://github.com/STAT545-UBC)
 EEB313: Quantitative Methods in R for Biology | [U of T Coders](https://uoftcoders.github.io/studyGroup/) | [course](https://uoftcoders.github.io/rcourse/index.html); [github](https://github.com/uoftcoders/rcourse)
-Modern Dive | Chester Ismay and Albert Y. Kim | [course](https://moderndive.netlify.com/); [github](https://github.com/moderndive/moderndive_book)
+Modern Dive | Chester Ismay & Albert Y. Kim | [course](https://moderndive.netlify.com/); [github](https://github.com/moderndive/moderndive_book)
 Learning statistics with R | Danielle Navarro | [course](https://djnavarro.github.io/tidylsrbook/); [github](https://github.com/djnavarro/rbook)
 R for Psychological Science | Danielle Navarro | [course](https://psyr.org/index.html); [github](https://github.com/djnavarro/psyr)
-Software Carpentry | | [lessons](https://software-carpentry.org/lessons/)
-CMU 15-112: Fundamentals of Programming | [David Kosbie](http://www.kosbie.net/cmu/) | [2018 Course](http://www.krivers.net/15112-f18/index.html)
+Software Carpentry | [software-carpentry.org](https://software-carpentry.org/) | [lessons](https://software-carpentry.org/lessons/)
+CMU 15-112: Fundamentals of Programming | [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)| [Spring 2017 Course](http://www.kosbie.net/cmu/spring-17/15-112/)

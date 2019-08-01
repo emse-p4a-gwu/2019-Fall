@@ -1,8 +1,7 @@
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
-library(readr)
 library(here)
-library(kableExtra)
+library(readr)
 options(knitr.kable.NA = '')
 schedule <- read_csv(here::here('syllabus', 'schedule.csv'))
 # Define the first and last of class and finals start date
