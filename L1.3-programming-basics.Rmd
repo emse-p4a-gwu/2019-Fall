@@ -9,10 +9,13 @@ source("knitr_tweaks.R")
 ```
 
 <!-- Content for this page is sourced from:
-    - Danielle Navarro's website "R for Psychological Science": https://psyr.org/getting-started.html
-    - Jenny Bryan's STAT 545 Course: http://stat545.com/block002_hello-r-workspace-wd-project.html
+    - Danielle Navarro's website "R for Psychological Science":
+      https://psyr.org/getting-started.html
+    - Jenny Bryan's STAT 545 Course:
+      http://stat545.com/block002_hello-r-workspace-wd-project.html
     - RStudio primers: https://rstudio.cloud/learn/primers/1.2
-    Xiao Ping Song's Intro2R crash course: https://github.com/xp-song/Intro2R
+    - Xiao Ping Song's Intro2R crash course:
+      https://github.com/xp-song/Intro2R
 -->
 
 ---
@@ -198,40 +201,132 @@ or click the broom in RStudio's Environment pane.
 
 ---
 
-# Vectors
+# Data types
 
+Every programming language has the ability to store data of different types. R recognizes several important basic data types (there are 6 total, but these 4 are all we'll ever use):
 
+Type      | Description                 | Example
+----------|-----------------------------|----------
+numeric   | Numbers                     | `3.14`, `42`, `1.61803398875`
+integer   | A number with no decimal    | `1`, `7`
+character | Text data, a.k.a. "strings" | `"this is a string"`, `"3.14"`
+logical   | Used for comparing objects  | `TRUE`, `FALSE`
 
+To assess the type of any variable, R has two different functions:
 
-> [Watch this 1-minute video for a quick summary of **vectors**](https://vimeo.com/220490316){target="_blank"}
+- `class()` tells us the high level object type
+- `typeof()` tells us the low level object type
 
+We'll use these to explore each data type.
 
+## Numeric & integer types
 
-## Some common functions with vectors
+Numbers in R are of the `numeric` data type, and it is the default computational type. If we assign a decimal value to a variable `x`, it will be of `numeric` type:
 
-Function   | Description  | Example Input | Example Output
----------- | ----------------------------|---------------|----------------
-`mean(x)`     | Mean of values in `x` | `mean(c(1,2,3,4,5))` | ``r mean(c(1,2,3,4,5))``
-`median(x)`   | Median of values in `x` | `median(c(1,2,2,4,5))` | ``r median(c(1,2,2,4,5))``
-`max(x)`      | Max element in `x` | `max(c(1,2,3,4,5))` | ``r max(c(1,2,3,4,5))``
-`min(x)`      | Min element in `x` | `min(c(1,2,3,4,5))` | ``r min(c(1,2,3,4,5))``
-`sum(x)`      | Sums the elements in `x` | `sum(c(1,2,3,4,5))` | ``r sum(c(1,2,3,4,5))``
-`prod(x)`     | Product of the elements in `x` | `prod(c(1,2,3,4,5))` | ``r prod(c(1,2,3,4,5))``
-`seq(a, b, c)` | Creates a sequence of numbers from `a` to `b` with step size of `c` | `seq(1, 5, 1)` | ``r seq(1, 5, 1)``
-`rep(a, b)`    | Creates a vector with `a` repeated `b` times | `rep(1, 5)` | ``r rep(1, 5)``
+```{r}
+x <- 3.14
+class(x)
+```
 
----
+Even if we assign an integer to a variable `y`, it will still be of `numeric` type:
 
-# Types
+```{r}
+y <- 7
+class(y)
+```
 
-> [Watch this 1-minute video for a quick summary of **types**](https://vimeo.com/220490241){target="_blank"}
+The fact that `y` is not an integer can be confirmed with the `is.integer()`function:
 
+```{r}
+is.integer(y)
+```
 
----
+To make a number an integer, you have to use the `as.integer()` function:
 
-# Lists
+```{r}
+z <- as.integer(y)
+class(z)
+is.integer(z)
+```
 
-> [Watch this 1-minute video for a quick summary of **lists**](https://vimeo.com/220490360){target="_blank"}
+Now that we have some non-integer and integer variables stored, we can use the `typeof()` function to distinguish between them in more detail:
+
+```{r}
+typeof(x)
+typeof(y)
+typeof(z)
+```
+
+Notice that `x` and `y` are both `double` types - that just means they are not integers (i.e. they have decimals).
+
+## Character types
+
+A character object is used to represent string values in R. Anything put between single quotes (`''`) or double quotes (`""`) will be stored as a character. For example:
+
+```{r}
+s <- '3.14'
+class(s)
+```
+
+Notice that even though the value assigned to `s` is a number, it is stored as a character because the number is surrounded by quotes. If you mistakenly thought it was stored as a number, R will gladly return an error when you try to do a numerical operation with it:
+
+```{r error=TRUE}
+s + 7
+```
+
+We can also convert objects into character values with the `as.character()` function:
+
+```{r}
+a_number <- 3.14
+class(a_number)
+a_string <- as.character(a_number)
+class(a_string)
+```
+
+We will go into much more detail about character data later on in [Week 6](L6.1-strings.html)
+
+## Logical types
+
+A logical value is usually created when comparing variables. For example, let's compare whether one value is greater than another:
+
+```{r}
+x <- 1
+y <- 2
+z <- x > y # Is x greater than y?
+z
+```
+
+The object `z` now stores the value (`FALSE`) that resulted from comparing `x` and `y`.
+
+To compare whether two values are equal, you have to type the `=` sign twice:
+
+```{r}
+x == y
+```
+
+Here I am asking, "is `x` equal to `y`"? In this case, the answer is `FALSE`.
+
+We will go into more detail about comparing values in R later on in [Week 4](L4.1-conditionals.html)
+
+## Special values
+
+In addition to the four main data types mentioned, there are a few additional "special" types: `Inf`, `NaN`, `NA` and `NULL`.
+
+**Infinity**: `Inf` corresponds to a value that is infinitely large. You can also have `-Inf`. The easiest way to get `Inf` is to divide a positive number by 0:
+
+```{r}
+1/0
+```
+
+**Not a Number**: `NaN` is short for "not a number", and it's basically a reserved keyword that means "there isn't a mathematically defined number for this." For example:
+
+```{r}
+0/0
+```
+
+**Not available**: `NA` indicates that the value that is "supposed" to be stored here is missing. We'll see these much more when we start getting into data structures like vector, matrices, and data frames.
+
+**No value**: `NULL` asserts that the variable genuinely has no value whatsoever, or does not even exist.
 
 
 ---
@@ -243,119 +338,4 @@ Function   | Description  | Example Input | Example Output
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-# Objects in R
-
-## Variables
-- Used to store data
-- Naming should be consistent/clear
-  - Case sensitive, no numbers/symbols/whitespace
-  - E.g. treeHeight_m, species_count
-- **Data types:** Numeric, integer, character, logical (T/F) or complex
-```{r variables, eval = FALSE}
-#numeric data
-x <- 4
-x <- (4+5)/2
-#character data
-x <- "hello"
-```
-
-## Data Structures {.tabset .tabset-fade .tabset-pills}
-### Vectors
-- Sequential collection of data of the _same_ type
-- Coercion occurs if different types are mixed
-- Asking and coercion can be done manually to change the vector (data) type
-- Note that the `c()` function combines (concatenates) its arguments to form a vector
-```{r eval = FALSE}
-#numeric vectors
-x <- c(1,3,5,6)
-x <- 1:5
-x <- seq(1,5,1)
-x <- vector("numeric", length=10)
-num_vec <- c(TRUE, 2) #in R, TRUE=1, FALSE=0
-is.numeric(num_vec)
-#character vectors
-x <- c("hello", "a", "b", "c")
-x <- c(1.7, "a")
-char_vec <- c("a", TRUE) #'TRUE' turned from logical to character
-is.character(char_vec)
-x <- as.character(num_vec) #coercion from numeric to character
-x
-```
-### Lists
-- Consist of different elements (i.e. variables/vectors) that can be of _different types_
-- Elements in a list are indexed with [[]], individual items are in []
-- Functions only be applied to vectors, not lists!
-```{r eval= FALSE}
-mylist <- list(num_vec, char_vec, 1.783, 5L, "hello") #add L suffix if you explicitly want integers
-mylist
-is.list(mylist) #asking
-```
-
-### Factors
-
-- Used to represent data with limited, discrete categories (i.e. categorical, ordinal, or even binary)
-- Can be coded as character or numeric
-- Some examples:
-  - Tom, Dick, Harry
-  - Blue, Black, Brown (eye color)
-  - High, Medium, Low (3, 2, 1)
-  - Strongly disagree, disagree, neutral, agree, strongly agree (-2:2)
-  - Male, Female (1, 2)
-
-```{r, eval = FALSE}
-x <- factor(c("SA", "D", "A", "A", "SA", "Neutral", "SD"))
-x
-#define order (default is alphabetical)
-x <- factor(c("SA", "D", "A", "A", "SA", "Neutral", "SD"), levels = c("SD", "D", "Neutral", "A", "SA"))
-x
-unclass(x) #show as numbers, with "levels" attribute showing actual text
-```
-
-### Matrices
-- Data in rectangular format (2D array with rows & columns)
-- Data must be of the _same_ type!
-- More memory efficient than dataframes
-```{r eval = FALSE}
-m <- matrix(1:12, nrow = 4)
-m #data goes in by columns in default mode
-dim(m) #dimensions: no. of rows & cols
-dimnames(m)
-dimnames(m) <- list(c("Tom", "Dick", "Harry", "Me"), c("Blue", "White", "Red")) #add names to row/cols
-#size comparisons
-object.size(m) # 264 bytes
-d <- as.data.frame(m) #convert to dataframe
-object.size(d) # 1032 bytes
-```
-
-### Dataframes
-- Data in rectangular format (2D array with rows & columns)
-- Columns can contain _different_ types of data variables (i.e. numeric, character, etc.)
-- Each column are vectors/lists of similar length
-- Import tabular data as dataframes using `read.table()` family of functions (i.e. `read.csv()`, `read.delim()`)
-```{r eval = FALSE}
-#use data.frame() to manually create df
-ozone <- read.csv("../data/ozone_data.csv") #default: headers in first row (header = T)
-is.data.frame(ozone) #check attribute
-head(ozone) #view first few rows only
-dim(ozone) #dimensions: no. of rows & cols
-dimnames(ozone) #row & col names
-names(ozone) #col names, also can use 'colnames(ozone)'
-rownames(ozone)
-#extract columns with '$'
-ozone$rad
-ozone$temp
-```
-
-# Footnotes
+**Footnotes**
