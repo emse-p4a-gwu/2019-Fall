@@ -1,5 +1,11 @@
 ---
 title: "MIT License"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
 ---
 
 MIT License

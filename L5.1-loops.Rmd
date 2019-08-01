@@ -17,7 +17,7 @@ source("knitr_tweaks.R")
 
 
 
-
+<!--
 
 
 
@@ -297,3 +297,4 @@ while(word != "STOP") {
 The solutions for these exercises are [here](./scripts/solutions_loops.R).
 
 
+ -->

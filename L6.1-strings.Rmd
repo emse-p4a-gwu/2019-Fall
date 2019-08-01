@@ -13,7 +13,7 @@ source("knitr_tweaks.R")
       https://psyr.org/working-with-text.html
 -->
 
-
+<!--
 ```{css,echo=FALSE}
 h1{
   line-height: 100px;
@@ -300,3 +300,4 @@ No surprises there: `Elizabeth` occurs most frequently, and at the most uniform 
 - The glue package
 - [Text Mining with R](https://www.tidytextmining.com/) by Julia Silge and David Robinson
 
+ -->

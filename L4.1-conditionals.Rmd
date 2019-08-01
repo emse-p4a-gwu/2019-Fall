@@ -14,7 +14,7 @@ source("knitr_tweaks.R")
 -->
 
 
-
+<!--
 
 
 A second kind of flow control that programming languages provide is the ability to evaluate **conditional statements**. Unlike loops, which can repeat over and over again, a conditional statement only executes once, but it can switch between different possible commands depending on a condition that is specified by the programmer. The power of these commands is that they allow the program itself to make choices, and in particular, to make different choices depending on the context in which the program is run. The most prominent of example of a conditional statement is the `if` statement, and the accompanying `else` statement.^[There are other ways of making conditional statements in R. In particular, the `ifelse` function and the `switch` functions can be very useful in different contexts.]
@@ -144,3 +144,4 @@ The solutions for these exercises are [here](./scripts/solutions_branch.R).
 
 
 
+ -->

@@ -14,7 +14,7 @@ source("knitr_tweaks.R")
 -->
 
 
-
+<!--
 
 
 
@@ -172,3 +172,4 @@ for(s in 3:8) {
 
 The solutions for these exercises are [here](./scripts/solutions_functions.R).
 
+ -->

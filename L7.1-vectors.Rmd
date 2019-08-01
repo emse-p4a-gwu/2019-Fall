@@ -28,7 +28,7 @@ Function   | Description  | Example Input | Example Output
 `rep(a, b)`    | Creates a vector with `a` repeated `b` times | `rep(1, 5)` | ``r rep(1, 5)``
 
 
-
+<!--
 
 
 
@@ -235,3 +235,4 @@ At this point, I hope you can see why logical indexing is such a useful thing. I
 
 The solutions for these exercises are [here](./scripts/solutions_vectors.R)
 
+ -->

@@ -69,6 +69,15 @@ navbar:
           href: hw7-monte-carlo-methods.html
     - text: "Resources"
       href: resources.html
+
+    - text: "About"
+      menu:
+        - text: About
+          icon: fa-info
+          href: about.html
+        - text: License
+          icon: fa-gavel
+          href: LICENSE.html
     - text: About
       href: about.html
     - text: "Piazza"

@@ -333,9 +333,27 @@ In addition to the four main data types mentioned, there are a few additional "s
 
 # Packages
 
+When you start R, it only loads the "Base R" functions. But there are thousands and thousands of additional functions stored in **packages**.
+
 > [Watch this 1-minute video for a quick summary of **packages**](https://vimeo.com/220490447){target="_blank"}
 
 
+There is a critical distinction that you need to understand, which is the difference between having a package **installed** on your computer, and having a package **loaded** in an R session. You only need to _install_ a package to your computer once, but you will need to _load_ it whenever you want to use it in any one R session. This relationship is illustrated in the image below:
 
+![](images/packages_schematic.png){ width=800 }
+
+When installing a package, you must put the package name in quotes:
+
+```{r eval=FALSE}
+install.packages("packagename") # This works
+install.packages(packagename)   # This won't work
+```
+
+When loading a package in an R session, you don't have to use quotes (but you can if you want:
+
+```{r eval=FALSE}
+library("packagename") # This works
+library(packagename)   # This also works
+```
 
 **Footnotes**

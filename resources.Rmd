@@ -43,9 +43,11 @@ source("knitr_tweaks.R")
 
 ## RMarkdown
 
-- [Table generator](http://www.tablesgenerator.com/): Create tables and get export code for multiple formats.
+- [60 second markdown guide](https://commonmark.org/help/)
+- [10 minute markdown tutorial](https://commonmark.org/help/tutorial/)
 - [Markdown It](https://markdown-it.github.io): Quickly demo Markdown code.
-- [RMarkdown guide](http://www.stat.cmu.edu/~cshalizi/rmarkdown/)
+- [Table generator](http://www.tablesgenerator.com/): Create tables and get export code for multiple formats.
+- [CMU RMarkdown guide (detailed)](http://www.stat.cmu.edu/~cshalizi/rmarkdown/)
 
 ---
 

@@ -176,6 +176,8 @@ The course instructors may choose to change the scales at their discretion. You 
 
 ## Collaboration Policy
 
+<!-- This policy is mostly copied from the course 15-112 at Carnegie Mellon University -->
+
 Learning how to program is like learning how to ride a bicycle - to get better, you must practice writing code yourself. Therefore, we have a set of strict rules regarding what kind of collaboration is allowed, what counts as over-collaboration, and what counts as cheating.
 
 **This section is long, but you should read all of it thoroughly, as we take collaboration and cheating very seriously in this course. To begin, here's a summary**:
