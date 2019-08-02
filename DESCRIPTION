@@ -18,4 +18,5 @@ Imports:
     devtools,
     roxygen2,
     here,
-    kableExtra
+    kableExtra,
+    wikifacts

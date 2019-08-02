@@ -1,7 +1,0 @@
-Having successfully completed this course, students will be able to:
-
-- Read, write, test, and debug code using top-down design.
-- Use computational thinking to solve problems.
-- Explain the efficiency of algorithms by predicting the Big-O run time of code.
-- Design and write an `R` package and deploy it on [Github](https://github.com/).
-- Design and write an `R` shiny application and deploy it on [Github](https://github.com/).
