@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Getting Started</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" href="images/favicon.ico">
+<style type="text/css">
+
+/* General */
+
+h1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 60px;
+}
+h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 50px;
+}
+h3{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+.tableSmall table {
+  width:30%;
+}
+.tableMedium table {
+  width:60%;
+}
+
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EMSE6574: Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Syllabus
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="syllabus.html">
+        <span class="fa fa-map-o"></span>
+         
+        View
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/syllabus_emse6574.pdf">
+        <span class="fa fa-download"></span>
+         
+        Download PDF
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lessons
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="L1.1-course-introduction.html">1.1 - Course Introduction</a>
+    </li>
+    <li>
+      <a href="L1.2-getting-started.html">1.2 - Getting Started</a>
+    </li>
+    <li>
+      <a href="L1.3-programming-basics.html">1.3 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="L3.1-functions.html">3.1 - Functions</a>
+    </li>
+    <li>
+      <a href="L4.1-conditionals.html">4.1 - Conditionals</a>
+    </li>
+    <li>
+      <a href="L4.2-testing.html">4.2 - Testing</a>
+    </li>
+    <li>
+      <a href="L5.1-loops.html">5.1 - Loops</a>
+    </li>
+    <li>
+      <a href="L6.1-strings.html">6.1 - Strings</a>
+    </li>
+    <li>
+      <a href="L7.1-vectors.html">7.1 - Vectors</a>
+    </li>
+    <li>
+      <a href="L7.2-sorting.html">7.2 - Sorting</a>
+    </li>
+    <li>
+      <a href="L10.1-matrices.html">10.1 - Matrices</a>
+    </li>
+    <li>
+      <a href="L11.1-data-frames.html">11.1 - Data Frames</a>
+    </li>
+    <li>
+      <a href="L12.1-data-visualizations.html">12.1 - Data Visualizations</a>
+    </li>
+    <li>
+      <a href="L14.1-monte-carlo-methods.html">14.1 - Monte Carlo Methods</a>
+    </li>
+    <li>
+      <a href="L15.1-rmarkdown.html">15.1 - RMarkdown</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="hw1-programming-basics.html">HW 1 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw2-functions.html">HW 2 - Functions Basics</a>
+    </li>
+    <li>
+      <a href="hw3-loops-strings.html">HW 3 - Loops &amp; Strings</a>
+    </li>
+    <li>
+      <a href="hw4-vectors.html">HW 4 - Vectors</a>
+    </li>
+    <li>
+      <a href="hw5-matrices.html">HW 5 - Matrices</a>
+    </li>
+    <li>
+      <a href="hw6-data-analysis.html">HW 6 - Data Analysis</a>
+    </li>
+    <li>
+      <a href="hw7-monte-carlo-methods.html">HW 7 - Monte Carlo Methods</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fa fa-info"></span>
+         
+        About
+      </a>
+    </li>
+    <li>
+      <a href="LICENSE.html">
+        <span class="fa fa-gavel"></span>
+         
+        License
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://piazza.com/gwu/fall2019/emse6574">Piazza</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jph@gwu.edu">
+        <span class="fa fa-envelope"></span>
+         
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/">
+        <span class="fa fa-github"></span>
+         
+        GitHub
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Getting Started</h1>
+
+</div>
+
+
+<hr />
+<div id="functions" class="section level1">
+<h1><span class="header-section-number">1</span> Functions</h1>
+<p>You can do a lot with the basic operators like <code>+</code>, <code>-</code>, and <code>*</code>, but to do more advanced calculations you’re going to need to start using functions.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<blockquote>
+<p><a href="https://vimeo.com/220490105" target="_blank">Watch this 1-minute video for a quick summary of <strong>functions</strong></a></p>
+</blockquote>
+<p>R has a lot of very useful built-in functions. Suppose I wanted to take the square root of 225. The usual notation for this is <span class="math inline">\(\sqrt{25}=5\)</span>, though sometimes you’ll also see it written like this <span class="math inline">\(25^{0.5} = 5\)</span>. This second way of writing it is kind of useful to “remind” you of the mathematical fact that “square root of <span class="math inline">\(x\)</span>” is actually the same as “raising <span class="math inline">\(x\)</span> to the power of 0.5”. And since we already know how to raise things to powers in R, we could do this:</p>
+<pre class="r"><code>225 ^ 0.5</code></pre>
+<pre><code>## [1] 15</code></pre>
+<p>However, we could also compute this using R’s built-in square root function <code>sqrt()</code>:</p>
+<pre class="r"><code>sqrt(225)</code></pre>
+<pre><code>## [1] 15</code></pre>
+<div id="some-common-functions" class="section level2">
+<h2><span class="header-section-number">1.1</span> Some common functions</h2>
+<table>
+<colgroup>
+<col width="14%" />
+<col width="40%" />
+<col width="21%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+<th>Example Input</th>
+<th>Example Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>exp()</code></td>
+<td>Exponential</td>
+<td><code>exp(0)</code></td>
+<td><code>1</code></td>
+</tr>
+<tr class="even">
+<td><code>sqrt()</code></td>
+<td>Square root</td>
+<td><code>sqrt(64)</code></td>
+<td><code>8</code></td>
+</tr>
+<tr class="odd">
+<td><code>log(x)</code></td>
+<td>Log base e of <code>x</code> (“natural log”)</td>
+<td><code>log(1)</code></td>
+<td><code>0</code></td>
+</tr>
+<tr class="even">
+<td><code>factorial()</code></td>
+<td>Factorial</td>
+<td><code>factorial(5)</code></td>
+<td><code>120</code></td>
+</tr>
+<tr class="odd">
+<td><code>round(x, digits=0)</code></td>
+<td>Round <code>x</code> to the <code>digits</code> decimal place</td>
+<td><code>round(3.1415, digits=2)</code></td>
+<td><code>3.14</code></td>
+</tr>
+<tr class="even">
+<td><code>abs(x)</code></td>
+<td>Absolute value of <code>x</code></td>
+<td><code>abs(-42)</code></td>
+<td><code>42</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="combining-functions" class="section level2">
+<h2><span class="header-section-number">1.2</span> Combining functions</h2>
+<p>In the same way that R allows us to put multiple operations together into a longer command (like <code>1 + 2 * 4</code> for instance), it also lets us put functions together and even combine functions with operators if we so desire. For example, the following is a perfectly legitimate command:</p>
+<pre class="r"><code>sqrt(1 + abs(-8))</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>When R executes this command, starts out by calculating the value of <code>abs(-8)</code>, which produces an intermediate value of <code>8</code>. The command then simplifies to <code>sqrt(1 + 8)</code>. To solve the square root<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> it first needs to add <code>1 + 8</code> to get <code>9</code>, at which point it evaluates <code>sqrt(9)</code>, and so it finally outputs a value of <code>3</code>.</p>
+<hr />
+</div>
+</div>
+<div id="arguments" class="section level1">
+<h1><span class="header-section-number">2</span> Arguments</h1>
+<p>When we use a function to do something, we generally refer to this as <strong>calling</strong> the function. The values that we type into the function are referred to as the <strong>arguments</strong> of that function. Some functions can have more than one argument.</p>
+<blockquote>
+<p><a href="https://vimeo.com/220490157" target="_blank">Watch this 1-minute video for a quick summary of <strong>arguments</strong></a></p>
+</blockquote>
+<div id="multiple-arguments" class="section level2">
+<h2><span class="header-section-number">2.1</span> Multiple arguments</h2>
+<p>Some functions have more than one argument. For example, the <code>round()</code> function can be used to round some value to the nearest whole number. For example, I could type this:</p>
+<pre class="r"><code>round(3.1415)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>Pretty straightforward. However, suppose I only wanted to round it to two decimal places: that is, I want to get <code>3.14</code> as the output. To do this, you can input a second argument that specifies the number of decimal places that you want to round the number to. To get <code>3.14</code>, I would type this:</p>
+<pre class="r"><code>round(3.14165, 2)</code></pre>
+<pre><code>## [1] 3.14</code></pre>
+</div>
+<div id="argument-names" class="section level2">
+<h2><span class="header-section-number">2.2</span> Argument names</h2>
+<p>In this simple example, it’s not too hard to remember which argument comes first and which one comes second, but it starts to get very difficult once you start using complicated functions that have lots of arguments. Fortunately, most R functions use <strong>argument names</strong> to make your life a little easier. For the <code>round()</code> function, for example, the number that needs to be rounded is specified using the <code>x</code> argument, and the number of decimal points that you want it rounded to is specified using the <code>digits</code> argument:</p>
+<pre class="r"><code>round(x = 3.1415, digits = 2)</code></pre>
+<pre><code>## [1] 3.14</code></pre>
+</div>
+<div id="default-values" class="section level2">
+<h2><span class="header-section-number">2.3</span> Default values</h2>
+<p>Notice that the first time I called the <code>round()</code> function I didn’t actually specify the <code>digits</code> argument at all, and yet R somehow knew that this meant it should round to the nearest whole number. How did that happen? The answer is that the <code>digits</code> argument has a <strong>default value</strong> of <code>0</code>, meaning that if you decide not to specify a value for <code>digits</code> then R will act as if you had typed <code>digits = 0</code>. This is quite handy: most of the time when you want to round a number you want to round it to the nearest <em>whole</em> number, and it would be pretty annoying to have to specify the <code>digits</code> argument every single time. On the other hand, sometimes you actually do want to round to something other than the nearest whole number, and it would be even more annoying if R didn’t allow this! Thus, by having <code>digits = 0</code> as the default value, we get the best of both worlds.</p>
+<p>Finally, not all functions have (or require) arguments:</p>
+<pre class="r"><code>date()</code></pre>
+<pre><code>## [1] &quot;Fri Aug  2 14:55:22 2019&quot;</code></pre>
+<hr />
+</div>
+</div>
+<div id="objects" class="section level1">
+<h1><span class="header-section-number">3</span> Objects</h1>
+<p>In R, all “assignments” have this form:</p>
+<pre class="r"><code>objectName &lt;- value</code></pre>
+<p>where the arrow, <code>&lt;-</code>, means “assign <code>value</code> to <code>objectName</code>”.</p>
+<blockquote>
+<p><a href="https://vimeo.com/220493412" target="_blank">Watch this 1-minute video for a quick summary of <strong>objects</strong></a></p>
+</blockquote>
+<p>The operator <code>&lt;-</code> is a pain to type, so RStudio has a keyboard shortcut: Alt + - (the minus sign). RStudio offers many other handy <a href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts">keyboard shortcuts</a>. Also, Alt+Shift+K brings up a keyboard shortcut reference card.</p>
+<p>To practice, try assigning <code>2</code> to <code>x</code>:</p>
+<pre class="r"><code>x &lt;- 2</code></pre>
+<p>Now type <code>x</code> again - notice that it returns the value assigned to it!</p>
+<pre class="r"><code>x</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>If you overwrite an object with a different value, R will “forget” the previous assigned value and only keep the new assignment:</p>
+<pre class="r"><code>x</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>x &lt;- 42
+x</code></pre>
+<pre><code>## [1] 42</code></pre>
+<p><strong>A note on formatting</strong>: Always surround <code>&lt;-</code> with spaces! Otherwise your code can be confusing. For example, if you typed <code>x&lt;-2</code> (no spaces), it’s not clear if you meant <code>x &lt;- 2</code> or <code>x &lt; -2</code>. The first one assigns <code>2</code> to <code>x</code>, but the second one compares whether <code>x</code> is less than <code>-2</code>.</p>
+<div id="object-names" class="section level2">
+<h2><span class="header-section-number">3.1</span> Object names</h2>
+<p>You can choose almost any name you like for an object, as long as the name does not begin with a <em>number</em> or a special character like <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>, <code>!</code>, <code>@</code>, or <code>&amp;</code>. You will be wise to adopt a <a href="http://en.wikipedia.org/wiki/Snake_case">convention for demarcating words</a> in names. Here are a few:</p>
+<pre><code>snake_case_is_one_choice
+other.people.use.periods
+camelCaseIsAlsoGood</code></pre>
+<p>Make another assignment:</p>
+<pre class="r"><code>this_is_a_really_long_name &lt;- 2.5</code></pre>
+<p>To inspect this, try out RStudio’s completion facility: type the first few characters, press TAB - voila! RStudio auto-completes the long name for you :)</p>
+<p><strong>R is case sensitive</strong>. To understand what this means, try this:</p>
+<pre class="r"><code>cases_matter &lt;- 2^2
+Cases_matter &lt;- 2^3</code></pre>
+<p>Let’s try to inspect:</p>
+<pre class="r"><code>cases_matter</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>Cases_matter</code></pre>
+<pre><code>## [1] 8</code></pre>
+<p>Although the two objects look similar, one has a capital “C”, and R stores that as a different object.</p>
+<p>In general, type carefully. Typos matter. Case matters. <strong>Get better at typing</strong>.</p>
+</div>
+<div id="the-workspace" class="section level2">
+<h2><span class="header-section-number">3.2</span> The workspace</h2>
+<p>Look at your workspace in the upper right pane. The workspace is where user-defined objects accumulate. You can also get a listing of these objects with commands:</p>
+<pre class="r"><code>objects()</code></pre>
+<pre><code>## [1] &quot;cases_matter&quot;               &quot;Cases_matter&quot;              
+## [3] &quot;this_is_a_really_long_name&quot; &quot;x&quot;</code></pre>
+<pre class="r"><code>ls()</code></pre>
+<pre><code>## [1] &quot;cases_matter&quot;               &quot;Cases_matter&quot;              
+## [3] &quot;this_is_a_really_long_name&quot; &quot;x&quot;</code></pre>
+<p>If you want to remove the object named <code>x</code>, you can do this</p>
+<pre class="r"><code>rm(x)</code></pre>
+<p>To remove everything, use this:</p>
+<pre class="r"><code>rm(list = ls())</code></pre>
+<p>or click the broom in RStudio’s Environment pane.</p>
+<hr />
+</div>
+</div>
+<div id="data-types" class="section level1">
+<h1><span class="header-section-number">4</span> Data types</h1>
+<p>Every programming language has the ability to store data of different types. R recognizes several important basic data types (there are 6 total, but these 4 are all we’ll ever use):</p>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>numeric</td>
+<td>Numbers</td>
+<td><code>3.14</code>, <code>42</code>, <code>1.61803398875</code></td>
+</tr>
+<tr class="even">
+<td>integer</td>
+<td>A number with no decimal</td>
+<td><code>1</code>, <code>7</code></td>
+</tr>
+<tr class="odd">
+<td>character</td>
+<td>Text data, a.k.a. “strings”</td>
+<td><code>&quot;this is a string&quot;</code>, <code>&quot;3.14&quot;</code></td>
+</tr>
+<tr class="even">
+<td>logical</td>
+<td>Used for comparing objects</td>
+<td><code>TRUE</code>, <code>FALSE</code></td>
+</tr>
+</tbody>
+</table>
+<p>To assess the type of any variable, R has two different functions:</p>
+<ul>
+<li><code>class()</code> tells us the high level object type</li>
+<li><code>typeof()</code> tells us the low level object type</li>
+</ul>
+<p>We’ll use these to explore each data type.</p>
+<div id="numeric-integer-types" class="section level2">
+<h2><span class="header-section-number">4.1</span> Numeric &amp; integer types</h2>
+<p>Numbers in R are of the <code>numeric</code> data type, and it is the default computational type. If we assign a decimal value to a variable <code>x</code>, it will be of <code>numeric</code> type:</p>
+<pre class="r"><code>x &lt;- 3.14
+class(x)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p>Even if we assign an integer to a variable <code>y</code>, it will still be of <code>numeric</code> type:</p>
+<pre class="r"><code>y &lt;- 7
+class(y)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p>The fact that <code>y</code> is not an integer can be confirmed with the <code>is.integer()</code>function:</p>
+<pre class="r"><code>is.integer(y)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>To make a number an integer, you have to use the <code>as.integer()</code> function:</p>
+<pre class="r"><code>z &lt;- as.integer(y)
+class(z)</code></pre>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>is.integer(z)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Now that we have some non-integer and integer variables stored, we can use the <code>typeof()</code> function to distinguish between them in more detail:</p>
+<pre class="r"><code>typeof(x)</code></pre>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<pre class="r"><code>typeof(y)</code></pre>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<pre class="r"><code>typeof(z)</code></pre>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<p>Notice that <code>x</code> and <code>y</code> are both <code>double</code> types - that just means they are not integers (i.e. they have decimals).</p>
+</div>
+<div id="character-types" class="section level2">
+<h2><span class="header-section-number">4.2</span> Character types</h2>
+<p>A character object is used to represent string values in R. Anything put between single quotes (<code>''</code>) or double quotes (<code>&quot;&quot;</code>) will be stored as a character. For example:</p>
+<pre class="r"><code>s &lt;- &#39;3.14&#39;
+class(s)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>Notice that even though the value assigned to <code>s</code> is a number, it is stored as a character because the number is surrounded by quotes. If you mistakenly thought it was stored as a number, R will gladly return an error when you try to do a numerical operation with it:</p>
+<pre class="r"><code>s + 7</code></pre>
+<pre><code>## Error in s + 7: non-numeric argument to binary operator</code></pre>
+<p>We can also convert objects into character values with the <code>as.character()</code> function:</p>
+<pre class="r"><code>a_number &lt;- 3.14
+class(a_number)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>a_string &lt;- as.character(a_number)
+class(a_string)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>We will go into much more detail about character data later on in <a href="L6.1-strings.html">Week 6</a></p>
+</div>
+<div id="logical-types" class="section level2">
+<h2><span class="header-section-number">4.3</span> Logical types</h2>
+<p>A logical value is usually created when comparing variables. For example, let’s compare whether one value is greater than another:</p>
+<pre class="r"><code>x &lt;- 1
+y &lt;- 2
+z &lt;- x &gt; y # Is x greater than y?
+z</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>The object <code>z</code> now stores the value (<code>FALSE</code>) that resulted from comparing <code>x</code> and <code>y</code>.</p>
+<p>To compare whether two values are equal, you have to type the <code>=</code> sign twice:</p>
+<pre class="r"><code>x == y</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>Here I am asking, “is <code>x</code> equal to <code>y</code>”? In this case, the answer is <code>FALSE</code>.</p>
+<p>We will go into more detail about comparing values in R later on in <a href="L4.1-conditionals.html">Week 4</a></p>
+</div>
+<div id="special-values" class="section level2">
+<h2><span class="header-section-number">4.4</span> Special values</h2>
+<p>In addition to the four main data types mentioned, there are a few additional “special” types: <code>Inf</code>, <code>NaN</code>, <code>NA</code> and <code>NULL</code>.</p>
+<p><strong>Infinity</strong>: <code>Inf</code> corresponds to a value that is infinitely large. You can also have <code>-Inf</code>. The easiest way to get <code>Inf</code> is to divide a positive number by 0:</p>
+<pre class="r"><code>1/0</code></pre>
+<pre><code>## [1] Inf</code></pre>
+<p><strong>Not a Number</strong>: <code>NaN</code> is short for “not a number”, and it’s basically a reserved keyword that means “there isn’t a mathematically defined number for this.” For example:</p>
+<pre class="r"><code>0/0</code></pre>
+<pre><code>## [1] NaN</code></pre>
+<p><strong>Not available</strong>: <code>NA</code> indicates that the value that is “supposed” to be stored here is missing. We’ll see these much more when we start getting into data structures like vector, matrices, and data frames.</p>
+<p><strong>No value</strong>: <code>NULL</code> asserts that the variable genuinely has no value whatsoever, or does not even exist.</p>
+<hr />
+</div>
+</div>
+<div id="packages" class="section level1">
+<h1><span class="header-section-number">5</span> Packages</h1>
+<p>When you start R, it only loads the “Base R” functions. But there are thousands and thousands of additional functions stored in <strong>packages</strong>.</p>
+<blockquote>
+<p><a href="https://vimeo.com/220490447" target="_blank">Watch this 1-minute video for a quick summary of <strong>packages</strong></a></p>
+</blockquote>
+<p>There is a critical distinction that you need to understand, which is the difference between having a package <strong>installed</strong> on your computer, and having a package <strong>loaded</strong> in an R session. You only need to <em>install</em> a package to your computer once, but you will need to <em>load</em> it whenever you want to use it in any one R session. This relationship is illustrated in the image below:</p>
+<p><img src="images/packages_schematic.png" width="800" /></p>
+<p>When installing a package, you must put the package name in quotes:</p>
+<pre class="r"><code>install.packages(&quot;packagename&quot;) # This works
+install.packages(packagename)   # This doesn&#39;t work</code></pre>
+<p>When loading a package in an R session, you don’t have to use quotes (but you can if you want):</p>
+<pre class="r"><code>library(&quot;packagename&quot;) # This works
+library(packagename)   # This also works</code></pre>
+<p>As an example, try installing the <a href="https://github.com/keithmcnulty/wikifacts">Wikifacts</a> package, by Keith McNulty:</p>
+<pre class="r"><code>install.packages(&quot;wikifacts&quot;) # Remember - you only have to do this once!</code></pre>
+<p>Now that you have the package installed on your computer, try loading it using <code>library(wikifacts)</code>, then trying using some of it’s functions:</p>
+<pre class="r"><code>library(wikifacts) # Load the library
+wiki_randomfact()</code></pre>
+<pre><code>## Did you know that on this day in 1916 – An explosion, blamed on Austro-Hungarian saboteurs, sank the Italian dreadnought Leonardo da Vinci. (Courtesy of Wikipedia)</code></pre>
+<pre class="r"><code>wiki_didyouknow()</code></pre>
+<pre><code>## Did you know that, described as being &quot;cursed&quot;, Rispin Mansion was variously used as a SWAT practice ground, a residence, a real-estate showroom, a ghost hunting site, and a nunnery? (Courtesy of Wikipedia)</code></pre>
+<p>In case you’re wondering, the only thing this package does is generate messages containing random facts from <a href="https://www.wikipedia.org/">Wikipedia</a>.</p>
+<hr />
+</div>
+<div id="page-sources" class="section level1">
+<h1><span class="header-section-number">6</span> Page sources</h1>
+<p>Some content on this page has been modified from other courses, including:</p>
+<ul>
+<li>Danielle Navarro’s website <a href="https://psyr.org/index.html">“R for Psychological Science”</a></li>
+<li>Jenny Bryan’s <a href="http://stat545.com/">STAT 545 Course</a></li>
+<li><a href="https://rstudio.cloud/learn/primers/1.2">RStudio primers</a></li>
+<li>Xiao Ping Song’s <a href="https://github.com/xp-song/Intro2R">Intro2R crash course</a></li>
+</ul>
+<hr />
+<p><strong>Footnotes</strong></p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Technically speaking, operators are functions in R: the addition operator <code>+</code> is a convenient way of calling the addition function <code>‘+‘()</code>. Thus <code>10+20</code> is equivalent to the function call <code>‘+‘(20, 30)</code>. Not surprisingly, no-one ever uses this version.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>R does support complex numbers, but unless you explicitly specify that you want them it assumes all calculations must be real valued. By default, the square root of a negative number is treated as undefined: <code>sqrt(-9)</code> will produce <code>NaN</code> (not a number) as its output. To get complex numbers, you would type <code>sqrt(-9+0i)</code> and R would now return <code>0+3i</code>.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+
+<hr>
+
+<p>This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

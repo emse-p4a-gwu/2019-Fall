@@ -1,26 +1,5 @@
 
 
-Review examples from class notes
-onesDigit
-tensDigit
-eggCartons
-militaryTimeToStandardTime
- 
-Write functions
-Here are a bunch of functions you should be able to write now.  These are taken from various recent versions of the 15-112 course notes, so you can Google to find the full descriptions and usually also some test functions.  Any of these may appear (directly or modified) on a quiz or exam!
-
-Data and Expressions Problems
-No loops, no conditionals, no strings, no imports, no recursion
- 
-nthFibonacciNumber(n)
-Write the function nthFibonacciNumber that takes a positive integer n and (without using loops) returns the nth Fibonacci number, so:
-   nthFibonacciNumber(1) returns 1
-   nthFibonacciNumber(2) returns 1
-   nthFibonacciNumber(3) returns 2
-   nthFibonacciNumber(4) returns 3
-   nthFibonacciNumber(5) returns 5
-   nthFibonacciNumber(6) returns 8
-Hint: look at formula (8) here, where phi (in the numerator) is the Golden Ratio. Cool!
  
 integerSquareRoot(x)
 Given a non-negative int x, return the integer value that is closest to its square root.  For example, integerSquareRoot(10) returns 3.

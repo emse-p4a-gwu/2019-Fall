@@ -27,7 +27,7 @@ f <- function(x, y) {
 }
 
 g <- function(x) { 
-    return(is.integer(x) & (x / 10 == x %% 10))
+    return(is.integer(x) & (x %/% 10 == x %% 10))
 } 
  
 h <- function(x) { 
@@ -35,6 +35,23 @@ h <- function(x) {
 } 
 ```
 
+# Write functions
+
+Here are a bunch of functions you should be able to write. Any of these may appear (directly or modified) on a quiz or exam!
+
+## nthFibonacciNumber(n)
+
+Write the function `nthFibonacciNumber(n)` that takes a positive integer `n` and (without using loops) returns the nth [Fibonacci number](https://en.wikipedia.org/wiki/Fibonacci_number). Your function should do this:
+
+Input                 | Output
+----------------------| -------
+nthFibonacciNumber(1) | 1
+nthFibonacciNumber(2) | 1
+nthFibonacciNumber(3) | 2
+nthFibonacciNumber(4) | 3
+nthFibonacciNumber(5) | 5
+nthFibonacciNumber(6) | 8
+   
 ---
 
 # Page sources
