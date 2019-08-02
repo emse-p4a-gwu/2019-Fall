@@ -3,9 +3,3 @@ title: "Homework 6 - Data Analysis"
 output: html_document
 ---
 
-<!-- ```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
-rm(list=objects()) # start with a clean workspace
-source("knitr_settings.R")
-```
-
- -->

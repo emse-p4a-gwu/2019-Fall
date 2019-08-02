@@ -3,9 +3,17 @@ title: "Data Frames"
 output: html_document
 ---
 
-<!-- ```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
-source("knitr_settings.R")
-``` -->
+source("knitr_setup.R")
+```
 
 ---
+
+---
+
+# Page sources
+
+Some content on this page has been modified from other courses, including:
+
+- Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)

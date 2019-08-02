@@ -3,16 +3,14 @@ title: "Functions"
 output: html_document
 ---
 
-```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
-source("knitr_settings.R")
+source("knitr_setup.R")
 ```
 
-[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Some content in this page is sourced from: 1) CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/), by [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)]; 2) Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)]
+We already know how to use built-in functions like `sum()`, `round()`, `sqrt()`, etc. And we can access other functions by installing external packages. But many times there just isn't a function out there to do what you need. Fortunately, you can write your own!
 
 ---
-
-We already know how to use built-in functions like `sum()`, `round()`, `sqrt()`, etc. And we can access other functions by installing external packages. But many times there just isn't a function out there to do what you need. Fortunately, you can write your own!
 
 # Basic syntax
 
@@ -26,7 +24,9 @@ FNAME <- function(ARG1, ARG2, ETC) {
 }
 ```
 
-What this does is create a function with the name `FNAME`, which has arguments `ARG1`, `ARG2`, etc. Whenever the function is called, R executes the statements within the curly braces `{}`, and then returns the `VALUE` inside the `return()` statement. 
+What this does is create a function with the name `FNAME`, which has arguments `ARG1`, `ARG2`, etc. Whenever the function is called, R executes the statements within the curly braces `{}`, and then returns the `VALUE` inside the `return()` statement.
+
+---
 
 # Arguments
 
@@ -37,17 +37,21 @@ square <- function(x) {
   y <- x^2
   return(y)
 }
+```
+```{r}
 square(2)
 square(8)
 ```
 
 Here's a function with multiple arguments:
- 
+
 ```{r}
 sumTwoValues <- function(x, y) {
   value <- x + y
   return(value)
 }
+```
+```{r}
 sumTwoValues(2, 3)
 sumTwoValues(3, 4)
 ```
@@ -58,20 +62,26 @@ Functions don't always have to take arguments. For example:
 doSomething <- function() {
     cat("Carpe diem!") # The cat() function prints whatever's inside it to the console
 }
+```
+```{r}
 doSomething()
 ```
 
-## Default arguments
+**Default arguments**:
 
-Sometimes, a function has a parameter that has a natural defaulth. We can specify that default value in the function definition, then choose whether or not to include it in the function call:
+Sometimes, a function has a parameter that has a natural default. We can specify that default value in the function definition, then choose whether or not to include it in the function call:
 
 ```{r}
 f <- function(x, y=10) {
     return(x + y)
-f(5)     # 15
-f(5, 1)  # 6
 }
 ```
+```{r}
+f(5)     # 15
+f(5, 1)  # 6
+```
+
+---
 
 # The `return()` statement
 
@@ -81,6 +91,8 @@ Here's a basic example of using `return()` to return a value:
 isPositive <- function(x) {
     return (x > 0)
 }
+```
+```{r}
 isPositive(5)  # TRUE
 isPositive(-5) # FALSE
 isPositive(0)  # FALSE
@@ -94,6 +106,8 @@ isPositive <- function(x) {
     return(x > 0)
     cat("Goodbye!") # Does not run ("dead code")
 }
+```
+```{r}
 x <- isPositive(5)  # Prints Hello, then assigns TRUE to x
 x
 ```
@@ -106,14 +120,21 @@ If you don't include a `return()` statement, R will return the value of the last
 f <- function(x) {
     x + 42
 }
+```
+```{r}
 f(5)
-
+```
+```{r}
 f <- function(x) {
     x + 42
     x + 7
 }
+```
+```{r}
 f(5)
 ```
+
+---
 
 # The `cat()` statement
 
@@ -123,6 +144,8 @@ The `cat()` (short for "concatenating") statement prints whatever arguments it i
 printX <- function(x) {
   cat("The value of x provided is", x)
 }
+```
+```{r}
 printX(7)
 printX(42)
 ```
@@ -133,6 +156,8 @@ Mixing up `return()` and `cat()` is a common early mistake. For example:
 cubed <- function(x) {
     cat(x^3)
 }
+```
+```{r}
 cubed(2)   # Seems to work
 2*cubed(2) # Expected 16...didn't work
 ```
@@ -143,9 +168,13 @@ Here's a correct version:
 cubed <- function(x) {
     return(x^3) # That's better!
 }
+```
+```{r}
 cubed(2)   # Works!
 2*cubed(2) # Works!
 ```
+
+---
 
 # Helper functions
 
@@ -169,6 +198,8 @@ b = 4
 hypotenuse(a, b)
 ```
 
+---
+
 # Local vs. global variables
 
 All variables **inside** a function are called _"local"_ variables and will **NOT** be created in the working environment. They can only be used locally within the function. For example:
@@ -178,6 +209,8 @@ minSquared <- function(x, y) {
     smaller = min(x, y)
     return(smaller^2)
 }
+```
+```{r}
 minSquared(3, 4)
 minSquared(4, 3)
 ```
@@ -201,3 +234,12 @@ printN <- function() {
 n = 5
 printN()
 ```
+
+---
+
+# Page sources
+
+Some content on this page has been modified from other courses, including:
+
+- CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/), by [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)
+- Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)

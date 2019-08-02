@@ -3,10 +3,3 @@ title: "Homework 1 - Programming Basics"
 output: html_document
 ---
 
-<!-- ```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
-rm(list=objects()) # start with a clean workspace
-source("knitr_settings.R")
-```
-
-Covers basics of R, including working directory questions -->
-

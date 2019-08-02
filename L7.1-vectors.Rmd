@@ -3,12 +3,19 @@ title: "Vectors"
 output: html_document
 ---
 
-<!-- ```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
-source("knitr_settings.R")
-``` -->
-
-[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Some content in this page is sourced from: 1) Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html); 2) [RStudio primers](https://rstudio.cloud/learn/primers/1.2)]
+source("knitr_setup.R")
+```
 
 ---
 
+---
+
+# Page sources
+
+Some content on this page has been modified from other courses, including:
+
+- CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/), by [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)
+- Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)
+- [RStudio primers](https://rstudio.cloud/learn/primers/1.2)

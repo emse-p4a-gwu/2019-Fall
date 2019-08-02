@@ -3,12 +3,10 @@ title: "Getting Started"
 output: html_document
 ---
 
-```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
-source("knitr_settings.R")
+source("knitr_setup.R")
 ```
-
-[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Some content in this page is sourced from: 1) Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html); 2) Jenny Bryan's [STAT 545 Course](http://stat545.com/)]
 
 ---
 
@@ -250,3 +248,12 @@ I called the file "tutorial.R" and saved it in my R project folder called "demo"
 Now when I open the "demo.Rproj" file, I see in my files pane the "tutorial.R" code script. I can click on that file and continue editing it!
 
 I can also run any line in the script by typing "Command + Enter" (Mac) or "Control + Enter" (Windows).
+
+---
+
+# Page sources
+
+Some content on this page has been modified from other courses, including:
+
+- Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)
+- Jenny Bryan's [STAT 545 Course](http://stat545.com/)
