@@ -363,7 +363,7 @@ In case you're wondering, the only thing this package does is generate messages 
 
 ---
 
-# Page sources
+**Page sources**:
 
 Some content on this page has been modified from other courses, including:
 

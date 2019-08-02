@@ -15,7 +15,7 @@ source("knitr_setup.R")
 
 ---
 
-# References
+**Sources**:
 
 Some content on this page has been modified from other courses, including:
 

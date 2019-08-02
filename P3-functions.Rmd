@@ -1,6 +1,9 @@
 ---
 title: "Practice 3 - Functions"
-output: html_document
+output:
+  html_document:
+    number_sections: false
+    toc: no
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
@@ -11,8 +14,6 @@ source("knitr_setup.R")
 Read these instructions first!
 
 You may not use loops or conditionals (which we haven't covered yet).
-
----
 
 # Mystery Functions
 
@@ -26,50 +27,50 @@ f <- function(x, y) {
     return(abs(d1 - d2) < epsilon)
 }
 
-g <- function(x) { 
+g <- function(x) {
     return(is.integer(x) & (x %/% 10 == x %% 10))
-} 
- 
-h <- function(x) { 
+}
+
+h <- function(x) {
     return(is.integer(x) & (x >= 0) & ((as.integer(round(x**0.5)))^2 == x))
-} 
+}
 ```
 
 # Write functions
 
 Here are a bunch of functions you should be able to write. Any of these may appear (directly or modified) on a quiz or exam!
 
-## nthFibonacciNumber(n)
+### 1) `nthFibonacciNumber(n)`
 
-Write the function `nthFibonacciNumber(n)` that takes a positive integer `n` and (without using loops) returns the nth [Fibonacci number](https://en.wikipedia.org/wiki/Fibonacci_number). Your function should do this:
+Write the function `nthFibonacciNumber(n)` that takes a positive integer `n` and (without using loops) returns the nth [Fibonacci number](https://en.wikipedia.org/wiki/Fibonacci_number). So:
 
-Input                 | Output
-----------------------| -------
-nthFibonacciNumber(1) | 1
-nthFibonacciNumber(2) | 1
-nthFibonacciNumber(3) | 2
-nthFibonacciNumber(4) | 3
-nthFibonacciNumber(5) | 5
-nthFibonacciNumber(6) | 8
-   
-## integerSquareRoot(x)
+- `nthFibonacciNumber(1)` returns `1`
+- `nthFibonacciNumber(2)` returns `1`
+- `nthFibonacciNumber(3)` returns `2`
+- `nthFibonacciNumber(4)` returns `3`
+- `nthFibonacciNumber(5)` returns `5`
+- `nthFibonacciNumber(6)` returns `8`
+
+### 2) `integerSquareRoot(x)`
 
 Given a non-negative integer `x`, return the integer value that is closest to its square root.  For example, `integerSquareRoot(10)` returns `3`.
- 
-## celsiusToFahrenheit(degrees)
+
+### 3) `celsiusToFahrenheit(degrees)`
 
 Given a temperature in Celsius, return the same temperature in Fahrenheit.  So `celsiusToFahrenheit(0)` returns `32`, and `celsiusToFahrenheit(100)` returns `212`.
- 
-## isRightTriangle(x1, y1, x2, y2, x3, y3)
 
-Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return `TRUE` if the triangle formed by connecting the 3 points is a right triangle, and `FALSE` otherwise.  You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint:  Herod's Formula.
- 
-## triangleArea(x1, y1, x2, y2, x3, y3)
-Given six numeric values representing the points (x1, y1), (x2, y2), and (x3, y3), return the area of the triangle formed by connecting the 3 points.  You may ignore the case where the 3 points are collinear (and so do not form a triangle).  Hint:  [Herod's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula).
- 
-## dcHour(londonHour)
+### 4) `isRightTriangle(x1, y1, x2, y2, x3, y3)`
+
+Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return `TRUE` if the triangle formed by connecting the 3 points is a right triangle, and `FALSE` otherwise.  You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Herod's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula).
+
+### 5) `triangleArea(x1, y1, x2, y2, x3, y3)`
+
+Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return the area of the triangle formed by connecting the 3 points.  You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint:  [Herod's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula).
+
+### 6) `dcHour(londonHour)`
 This function takes an integer, the current hour in London, and returns the current hour in Washington DC (which is 5 hours behind London). However, London time is given in 24-hour time (so `londonHour` is between 0 and 23, inclusive), but Washington DC time must be returned in 12-hour time (so the result must be between 1 and 12, inclusive, where "am" and "pm" are ignored). Here are some examples:
 
+<div class="tableMedium">
 `londonHour` | `dcHour(londonHour)`
 -------------| -------------------
 0 (midnight) | 7 (7pm)
@@ -77,8 +78,9 @@ This function takes an integer, the current hour in London, and returns the curr
 12 (noon)    | 7 (7am)
 17 (5pm)     | 12 (noon)
 18 (6pm)     | 1 (1pm)
+</div>
 
-Note: the hardest part is when it is 12 o'clock in Pittsburgh.
+Note: the hardest part is when it is 12 o'clock in DC.
 
 ---
 
