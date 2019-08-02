@@ -1,36 +1,4 @@
----
-title: "Practice 3 - Functions"
-output: html_document
----
 
-```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
-rm(list=objects()) # start with a clean workspace
-source("knitr_setup.R")
-```
-
-Read these instructions first!
-You may not use loops or conditionals (which we haven't covered yet).
-
----
-
-# Mystery Functions
-
-In just a few words of plain English, what does each of the following functions do?  Provide some explanation for your answer.
-
-```
-f <- function(x, y) {
-    epsilon = 0.0000001
-    d1 = abs(x)**2
-    d2 = abs(y)**0.5
-    return abs(d1 - d2) < epsilon
-}
-
-def g(x):
-    return (type(x) == int) and (x/10 == x%10)
- 
-def h(x):
-    return (type(x) == int) and (x >= 0) and ((int(round(x**0.5)))**2 == x)
-```
 
 Review examples from class notes
 onesDigit
