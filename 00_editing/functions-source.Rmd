@@ -1,38 +1,3 @@
----
-title: "Functions"
-output: html_document
----
-
-```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
-rm(list=objects()) # start with a clean workspace
-source("knitr_settings.R")
-```
-
-[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Some content in this page is sourced from: 1) Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)]
-
----
-
-We already know how to use built-in functions (e.g. `sum(2, 3)` produces `5`). 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 In this section I want to talk about functions again. We've been using functions from the beginning, but you’ve learned a lot about R since then, so we can talk about them in more detail. In particular, I want to show you how to create your own. To stick with the same basic framework that I used to describe loops and conditionals, here’s the syntax that you use to create a function:
 

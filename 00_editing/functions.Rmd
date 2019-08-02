@@ -61,18 +61,6 @@ doSomething <- function() {
 doSomething()
 ```
 
-## Default arguments
-
-Sometimes, a function has a parameter that has a natural defaulth. We can specify that default value in the function definition, then choose whether or not to include it in the function call:
-
-```{r}
-f <- function(x, y=10) {
-    return(x + y)
-f(5)     # 15
-f(5, 1)  # 6
-}
-```
-
 # The `return()` statement
 
 Here's a basic example of using `return()` to return a value:
@@ -169,22 +157,11 @@ b = 4
 hypotenuse(a, b)
 ```
 
-# Local vs. global variables
+# Local variables
 
-All variables **inside** a function are called _"local"_ variables and will **NOT** be created in the working environment. They can only be used locally within the function. For example:
+Any commands **inside** the function are _locally computed_. For example, if you make an assignment inside the function (like `x <- 2`), the variable `x` will **NOT** be created in the working environment. It will only be stored locally within the function.
 
 ```{r}
-minSquared <- function(x, y) {
-    smaller = min(x, y)
-    return(smaller^2)
-}
-minSquared(3, 4)
-minSquared(4, 3)
-```
-
-If you try to call a local variable in the global environment, you'll get an error:
-
-```{r error=TRUE}
 square <- function(x) {
   y <- x^2
   return(y)
@@ -192,12 +169,59 @@ square <- function(x) {
 y
 ```
 
-_"Global"_ variables are those in the global environment. These will show up in the "Environment" pane in RStudio. You can call these inside functions, but this is **BAD** practice. Here's an example (**Don't do this!**):
+Parameter and Local variable scope
 
-```{r}
-printN <- function() {
-    cat(n)  # n is not local -- so it is global (bad idea!!!)
-}
+def addOne(x):
+    x = x + 1
+    print "in addOne, x =", x
+    return x
+
+x = 5
+print "first, x =", x
+result = addOne(x)
+print "calling addOne(x) returned:", result
+print "and now x =", x
+
+Another example / Globals (do not do this!)
+
+def printN():
+    print n   # n not local -- so it is global (bad idea!!!)
+
 n = 5
 printN()
-```
+
+
+Local variables
+def minSquared(x,y):
+    smaller = min(x,y)
+    return smaller*smaller
+
+print minSquared(3,4)
+print minSquared(4,3)
+Another example:
+
+def isEvenPositive(x):
+    isEven = ((x % 2) == 0)
+    isPositive = (x > 0)
+    return (isEven and isPositive)
+
+print(isEvenPositive(-2))
+print(isEvenPositive(-1))
+print(isEvenPositive(0))
+print(isEvenPositive(1))
+print(isEvenPositive(2))
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
