@@ -8,7 +8,7 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_settings.R")
 ``` -->
 
-[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Soome content in this page is sourced from: 1) Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)]
+[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Some content in this page is sourced from: 1) Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)]
 
 ---
 

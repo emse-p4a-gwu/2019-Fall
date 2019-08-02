@@ -1,0 +1,68 @@
+---
+title: "Functions"
+output: html_document
+---
+
+```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_settings.R")
+```
+
+[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Some content in this page is sourced from: 1) Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)]
+
+---
+
+We already know how to use built-in functions (e.g. `sum(2, 3)` produces `5`). 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+In this section I want to talk about functions again. We've been using functions from the beginning, but you’ve learned a lot about R since then, so we can talk about them in more detail. In particular, I want to show you how to create your own. To stick with the same basic framework that I used to describe loops and conditionals, here’s the syntax that you use to create a function:
+
+```
+FNAME <- function( ARG1, ARG2, ETC ) {
+  STATEMENT1
+  STATEMENT2
+  ETC
+  return( VALUE )
+}
+```
+What this does is create a function with the name `fname`, which has arguments `arg1`, `arg2` and so forth. Whenever the function is called, R executes the statements in the curly braces, and then outputs the contents of value to the user. Note, however, that R does not execute the function commands inside the workspace. Instead, what it does is create a temporary local environment: all the internal statements in the body of the function are executed there, so they remain invisible to the user. Only the final results in the `value` are returned to the workspace.
+
+## A boring example
+
+To give a simple example of this, let’s create a function called `quadruple` which multiplies its inputs by four.
+```{r}
+quadruple <- function(x) {
+  y <- x * 4
+  return(y)
+}
+```
+When we run this command, nothing happens apart from the fact that a new object appears in the workspace corresponding to the `quadruple` function. Not surprisingly, if we ask R to tell us what kind of object it is, it tells us that it is a function:
+```{r}
+class(quadruple)
+```
+
+And now that we’ve created the `quadruple()` function, we can call it just like any other function:
+```{r}
+quadruple(10)
+```
+An important thing to recognise here is that the two internal variables that the `quadruple` function makes use of, `x` and `y`, stay internal. At no point do either of these variables get created in the workspace.
+

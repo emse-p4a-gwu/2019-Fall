@@ -9,10 +9,14 @@ documentclass: article
 
 ---
 
+[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Some content in this page is sourced from: 1) CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/), by [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)]
+
 ```{r settings, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
 source("knitr_settings.R")
 ```
+
+---
 
 ```{r child = here::here('syllabus', 'main.Rmd')}
 ```

@@ -8,7 +8,7 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_settings.R")
 ```
 
-[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Soome content in this page is sourced from: 1) Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html); 2) Jenny Bryan's [STAT 545 Course](http://stat545.com/); 3) [RStudio primers](https://rstudio.cloud/learn/primers/1.2); 4) Xiao Ping Song's [Intro2R crash course](https://github.com/xp-song/Intro2R)]
+[Note: Some content in this page is sourced from other courses - citations are in the footnotes]^[Some content in this page is sourced from: 1) Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html); 2) Jenny Bryan's [STAT 545 Course](http://stat545.com/); 3) [RStudio primers](https://rstudio.cloud/learn/primers/1.2); 4) Xiao Ping Song's [Intro2R crash course](https://github.com/xp-song/Intro2R)]
 
 ---
 
@@ -329,7 +329,6 @@ When you start R, it only loads the "Base R" functions. But there are thousands 
 
 > [Watch this 1-minute video for a quick summary of **packages**](https://vimeo.com/220490447){target="_blank"}
 
-
 There is a critical distinction that you need to understand, which is the difference between having a package **installed** on your computer, and having a package **loaded** in an R session. You only need to _install_ a package to your computer once, but you will need to _load_ it whenever you want to use it in any one R session. This relationship is illustrated in the image below:
 
 ![](images/packages_schematic.png){ width=800 }
@@ -338,15 +337,31 @@ When installing a package, you must put the package name in quotes:
 
 ```{r eval=FALSE}
 install.packages("packagename") # This works
-install.packages(packagename)   # This won't work
+install.packages(packagename)   # This doesn't work
 ```
 
-When loading a package in an R session, you don't have to use quotes (but you can if you want:
+When loading a package in an R session, you don't have to use quotes (but you can if you want):
 
 ```{r eval=FALSE}
 library("packagename") # This works
 library(packagename)   # This also works
 ```
+
+As an example, try installing the [Wikifacts](https://github.com/keithmcnulty/wikifacts) package, by Keith McNulty:
+
+```{r eval=FALSE}
+install.packages("wikifacts") # Remember - you only have to do this once!
+```
+
+Now that you have the package installed on your computer, try loading it using `library(wikifacts)`, then trying using some of it's functions:
+
+```{r}
+library(wikifacts) # Load the library 
+wiki_randomfact()
+wiki_didyouknow()
+```
+
+In case you're wondering, the only thing this package does is generate messages containing random facts from [Wikipedia](https://www.wikipedia.org/).
 
 ---
 

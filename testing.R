@@ -1,11 +1,7 @@
-# An R script for some common tests
+# Script for testing 
 
 setwd('/Users/jhelvy/gh/EMSE-6574/2019-Fall')
 
-rmarkdown::render('L1.2-getting-started.Rmd')
-rmarkdown::render('L1.3-programming-basics.Rmd')
+rmarkdown::render('00_editing/L3.1-functions.Rmd')
 
-rmarkdown::render('L15.1-rmarkdown.Rmd')
-
-
-rmarkdown::render_site()
+# rmarkdown::render_site()
