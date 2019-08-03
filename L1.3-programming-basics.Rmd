@@ -31,14 +31,14 @@ sqrt(225)
 
 ## Some common functions
 
-Function   | Description  | Example Input | Example Output
----------- | ----------------------------|---------------|----------------
-`exp()`    | Exponential  | `exp(0)` | ``r exp(0)``
-`sqrt()`   | Square root  | `sqrt(64)` | ``r sqrt(64)``
-`log(x)`   | Log base e of `x` ("natural log") | `log(1)` | ``r log(1)``
-`factorial()` | Factorial | `factorial(5)` | ``r factorial(5)``
-`round(x, digits=0)` | Round `x` to the `digits` decimal place | `round(3.1415, digits=2)` | ``r round(3.1415, digits=2)``
-`abs(x)`  | Absolute value of `x` | `abs(-42)` | ``r abs(-42)``
+Function   | Description  | Example
+---------- | ----------------------------|---------------
+`exp()`    | Exponential  | `exp(0)` returns ``r exp(0)``
+`sqrt()`   | Square root  | `sqrt(64)` returns ``r sqrt(64)``
+`log(x)`   | Log base e of `x` ("natural log") | `log(1)` returns ``r log(1)``
+`factorial()` | Factorial | `factorial(5)` returns ``r factorial(5)``
+`round(x, digits=0)` | Round `x` to the `digits` decimal place | `round(3.1415, digits=2)` returns ``r round(3.1415, digits=2)``
+`abs(x)`  | Absolute value of `x` | `abs(-42)` returns ``r abs(-42)``
 
 ## Combining functions
 
@@ -106,7 +106,7 @@ where the arrow, `<-`, means "assign `value` to `objectName`".
 > [Watch this 1-minute video for a quick summary of **objects**](https://vimeo.com/220493412){target="_blank"}
 
 
-The operator `<-` is a pain to type, so RStudio has a keyboard shortcut: Alt + - (the minus sign). RStudio offers many other handy [keyboard shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts). Also, Alt+Shift+K brings up a keyboard shortcut reference card.
+The operator `<-` is a pain to type, so RStudio has a keyboard shortcut: Alt + - (the minus sign). RStudio offers many other handy [keyboard shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts){target="_blank"}. Also, Alt+Shift+K brings up a keyboard shortcut reference card.
 
 To practice, try assigning `2` to `x`:
 
@@ -132,7 +132,7 @@ x
 
 ## Object names
 
-You can choose almost any name you like for an object, as long as the name does not begin with a *number* or a special character like `+`, `-`, `*`, `/`, `^`, `!`, `@`, or `&`. You will be wise to adopt a [convention for demarcating words](http://en.wikipedia.org/wiki/Snake_case) in names. Here are a few:
+You can choose almost any name you like for an object, as long as the name does not begin with a *number* or a special character like `+`, `-`, `*`, `/`, `^`, `!`, `@`, or `&`. You will be wise to adopt a [convention for demarcating words](https://en.wikipedia.org/wiki/Camel_case){target="_blank"} in names. Here are a few:
 
 ```
 snake_case_is_one_choice
@@ -345,7 +345,7 @@ library("packagename") # This works
 library(packagename)   # This also works
 ```
 
-As an example, try installing the [Wikifacts](https://github.com/keithmcnulty/wikifacts) package, by Keith McNulty:
+As an example, try installing the [Wikifacts](https://github.com/keithmcnulty/wikifacts){target="_blank"} package, by Keith McNulty:
 
 ```{r eval=FALSE}
 install.packages("wikifacts") # Remember - you only have to do this once!
@@ -355,11 +355,13 @@ Now that you have the package installed on your computer, try loading it using `
 
 ```{r}
 library(wikifacts) # Load the library
+```
+```{r}
 wiki_randomfact()
 wiki_didyouknow()
 ```
 
-In case you're wondering, the only thing this package does is generate messages containing random facts from [Wikipedia](https://www.wikipedia.org/).
+In case you're wondering, the only thing this package does is generate messages containing random facts from [Wikipedia](https://www.wikipedia.org/){target="_blank"}.
 
 ---
 
