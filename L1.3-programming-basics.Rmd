@@ -1,5 +1,5 @@
 ---
-title: "Getting Started"
+title: "Programming Basics"
 output: html_document
 ---
 
@@ -12,7 +12,7 @@ source("knitr_setup.R")
 
 # Functions
 
-You can do a lot with the basic operators like `+`, `-`, and `*`, but to do more advanced calculations you're going to need to start using functions.^[Technically speaking, operators are functions in R: the addition operator `+` is a convenient way of calling the addition function `‘+‘()`. Thus `10+20` is equivalent to the function call `‘+‘(20, 30)`. Not surprisingly, no-one ever uses this version.]
+You can do a lot with the basic operators like `+`, `-`, and `*`, but to do more advanced calculations you're going to need to start using functions.^[Technically speaking, operators are functions in R: the addition operator `+` is a convenient way of calling the addition function `'+'()`. Thus `10+20` is equivalent to the function call `'+'(20, 30)`. Not surprisingly, no-one ever uses this version.]
 
 > [Watch this 1-minute video for a quick summary of **functions**](https://vimeo.com/220490105){target="_blank"}
 
@@ -31,11 +31,11 @@ sqrt(225)
 
 ## Some common functions
 
-Function   | Description  | Example
----------- | ----------------------------|---------------
+Function   | Description       | Example
+---------- | ------------------|------------------------------
 `exp()`    | Exponential  | `exp(0)` returns ``r exp(0)``
 `sqrt()`   | Square root  | `sqrt(64)` returns ``r sqrt(64)``
-`log(x)`   | Log base e of `x` ("natural log") | `log(1)` returns ``r log(1)``
+`log(x)`   | Natural log of `x` | `log(1)` returns ``r log(1)``
 `factorial()` | Factorial | `factorial(5)` returns ``r factorial(5)``
 `round(x, digits=0)` | Round `x` to the `digits` decimal place | `round(3.1415, digits=2)` returns ``r round(3.1415, digits=2)``
 `abs(x)`  | Absolute value of `x` | `abs(-42)` returns ``r abs(-42)``
@@ -134,11 +134,9 @@ x
 
 You can choose almost any name you like for an object, as long as the name does not begin with a *number* or a special character like `+`, `-`, `*`, `/`, `^`, `!`, `@`, or `&`. You will be wise to adopt a [convention for demarcating words](https://en.wikipedia.org/wiki/Camel_case){target="_blank"} in names. Here are a few:
 
-```
-snake_case_is_one_choice
-other.people.use.periods
-camelCaseIsAlsoGood
-```
+- `snake_case_is_one_choice`
+- `other.people.use.periods`
+- `camelCaseIsAlsoGood`
 
 Make another assignment:
 
