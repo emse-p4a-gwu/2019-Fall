@@ -1,5 +1,8 @@
 ---
 title: "Homework 4 - Vectors"
-output: html_document
+output:
+  html_document:
+    number_sections: false
+    toc: no
 ---
 

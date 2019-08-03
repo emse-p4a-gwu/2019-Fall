@@ -1,5 +1,162 @@
 ---
 title: "Homework 1 - Programming Basics"
-output: html_document
+output:
+  html_document:
+    number_sections: false
+    toc: no
 ---
 
+**Due**: Sunday, 08-Sept. at 8pm
+
+**Rules**:
+
+- This entire homework is **COLLABORATIVE**. You may work in groups of up to 3 students total who are in this course this semester (and then with nobody else except the course instructors).
+- You may not split up the work -- everyone must work on every problem. And you may not simply copy any code but rather truly work together.
+- Even though you work collaboratively, you still must submit your own solutions.
+
+
+---
+
+**Assignment**:
+
+1) Open RStudio and create a new project called "hw1-lastName", replacing "lastName" with your last name.
+
+2) Create a new R script and save it as "hw1.R" in the R project folder you just created.
+
+3) Copy the following code to the top of this script, and fill out your name, GW Net ID, and the names of anyone you worked with:
+
+```{r eval=FALSE}
+# hw1.R
+# Name:      Last, First
+# GW Net ID: your_GWNetID_here
+
+# I worked with the following classmates on this assignment:
+
+# 1) Name: Last, First
+# 2) Name: Last, First
+```
+
+4) Type all of your answers to the following questions in the "hw1.R" script.
+
+5) After completing the questions, create a zip file of all files in your R project folder for this assignment.
+
+6) Submit the zip file on Blackboard by the due deadline.
+
+---
+
+## Questions to answer in "hw1.R" script
+
+### 1) Objects
+
+Create variables to store each of the following values. Use variable names that make sense and are easy to understand:
+
+- The number of seconds in a minute
+- The number of minutes in an hour
+- The number of hours in a day
+- The number of days in a typical year (not a leap year)
+
+Using these variables, calculate:
+
+- The number of seconds in a day
+- The number of seconds in a year
+- The number of minutes in a day
+- The number of minutes in a year
+- The number of hours in a year
+
+### 2) Character data
+
+Load the following string in R:
+
+```{r eval=FALSE}
+string <- 'The quick Brown fox Jumped over the Lazy dog'
+```
+
+Using only the `string` object you just created, the `cat()` function, and the `toupper()` and `tolower()` functions, convert and print out the following variations of the `string` object (hint: you may want to first look up what the `toupper()` and `tolower()` functions do:
+
+```{r eval=FALSE}
+"the quick brown fox jumped over the lazy dog"
+"THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG"
+```
+
+Finally, using only the `string` object you created, the `cat()` function, and the `toTitleCase()` function from the `tools` library, convert and print out the following variation of the `string` object:
+
+```{r eval=FALSE}
+"The Quick Brown Fox Jumped over the Lazy Dog"
+```
+
+### 3) Numeric data 1
+
+Max is looking to purchase a car and is deciding between a Toyota Prius and a Toyota Camry. He knows that based on his driving patterns, he can get an average fuel economy of 55 miles per gallon (mpg) of gasoline with the Prius, which sells for $27,600. He is also considering the cheaper Toyota Camry, which costs $24,000 but only gets 32 mpg on average. He knows he typically drives 15,000 miles each year. For the following questions, assume the price of gas will remain constant at $3.00 / gallon forever.
+
+a) Create variables for the price and fuel economy of each vehicle. Use variable names that make sense and are easy to understand.
+b) Using the variables you created (and only these variables - no other numbers!), compute how many years Max would need to drive the Prius such that the money he saves in lower fuel costs overcomes the higher upfront price compared to the Camry. Ignore inflation and discount rates.
+c) What would the price of gasoline need to be such that the answer to part b) is just 2 years?
+
+### 4) Numeric data 2
+
+Load the following variables into R, then answer the questions below:
+
+```{r eval=FALSE}
+x1 <- 1
+y1 <- 1
+x2 <- 5
+y2 <- 1
+x3 <- 5
+y3 <- 4
+```
+
+a) Compute the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance){target="_blank"} between the points (x1, y1) and (x2, y2) and store this variable as `d1`.
+b) Compute the Euclidean distance between the points (x2, y2) and (x3, y3) and store this variable as `d2`.
+c) Compute the Euclidean distance between the points (x1, y1) and (x3, y3) and store this variable as `d3`.
+d) Is the triangle formed by the points (x1, y1), (x2, y2), and (x3, y3) a [right triangle](https://en.wikipedia.org/wiki/Right_triangle){target="_blank"}? If so, prove it using the variables `d1`, `d2`, and `d3`.
+
+### 5) Logical data
+
+Suppose we fielded a survey that asked respondents to specify their marital status. The responses are stored in a variable called `marital_status` as one of the following:
+
+- `"single"`
+- `"widowed"`
+- `"married"`
+- `"de facto"`
+- `"missing"`
+
+where the `"missing"` variable means the respondent left the question blank. For each of the following, write a single line of code that uses the `marital_status` variable to create the new variable (note that you do not need to run your code in R):
+
+a) `is_single`: Is `TRUE` if the participant is single and `FALSE` otherwise.
+b) `has_spouse`: Is `TRUE` if the participant is married or in a de facto relationship and `FALSE` otherwise.
+c) `not_single_or_missing`: Is `TRUE` if the participant did respond to the question, but is not single.
+
+### 6) Packages
+
+Install the package `TurtleGraphics`
+
+Load the `TurtleGraphics` then use the following command: `turtle_init()`.
+
+What happens?
+
+Read the help information about the `TurtleGraphics` package:
+
+```{r eval=FALSE}
+help(package='TurtleGraphics')
+```
+
+Then read the help information about the `turtle_move()` function in the `TurtleGraphics` package:
+
+```{r eval=FALSE}
+?turtle_move()
+```
+
+Read through the following commands - what do you think is going to happen?
+
+```{r eval=FALSE}
+turtle_init()
+turtle_move(distance = 10, direction = "forward")
+turtle_move(distance = 20, direction = "backward")
+turtle_reset()
+turtle_right(angle = 90, direction = "right")
+turtle_move(distance = 10, direction = "forward")
+turtle_move(distance = 20, direction = "backward")
+turtle_reset()
+```
+
+Now run the above commands - what happened?

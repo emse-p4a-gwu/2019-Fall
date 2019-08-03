@@ -1,5 +1,8 @@
 ---
 title: "Homework 6 - Data Analysis"
-output: html_document
+output:
+  html_document:
+    number_sections: false
+    toc: no
 ---
 

@@ -1,4 +1,7 @@
 ---
 title: "Homework 5 - Matrices"
-output: html_document
+output:
+  html_document:
+    number_sections: false
+    toc: no
 ---
