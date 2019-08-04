@@ -196,7 +196,7 @@ Every programming language has the ability to store data of different types. R r
 Type      | Description                 | Example
 ----------|-----------------------------|----------
 numeric   | Numbers                     | `3.14`, `42`, `1.61803398875`
-integer   | A number with no decimal    | `1`, `7`
+integer   | A number with no decimal    | `1L`, `7L`
 character | Text data, a.k.a. "strings" | `"this is a string"`, `"3.14"`
 logical   | Used for comparing objects  | `TRUE`, `FALSE`
 
@@ -229,8 +229,12 @@ The fact that `y` is not an integer can be confirmed with the `is.integer()`func
 is.integer(y)
 ```
 
-To make a number an integer, you have to use the `as.integer()` function:
+To make a number an integer, you can either add an `L` to the end, or use the `as.integer()` function to coerce it into an integer type:
 
+```{r}
+z <- 7L
+is.integer(z)
+```
 ```{r}
 z <- as.integer(y)
 class(z)
