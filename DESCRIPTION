@@ -19,4 +19,5 @@ Imports:
     roxygen2,
     here,
     kableExtra,
-    wikifacts
+    wikifacts,
+    TurtleGraphics
