@@ -12,19 +12,16 @@ output:
 
 - This entire homework is **COLLABORATIVE**. You may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work -- everyone must work on every problem. And you may not simply copy any code but rather truly work together.
 - Even though you work collaboratively, you still must submit your own solutions.
-- You may not use loops or conditionals (which we've not covered yet).
 
----
-
-**Assignment**:
+**Instructions**:
 
 1) Open RStudio and create a new project called "hw2-lastName", replacing "lastName" with your last name.
 
-2) Download the [hw2.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw/hw2-template.R) and place it in RStudio project folder you just created.
+2) Download the [hw2.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw/hw2-template.R){target="_blank"} and place it in RStudio project folder you just created.
 
 3) Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the "hw2.R" file.
 
-4) Type all of your answers to the following questions in the "hw2.R" script.
+4) Type all of your answers to the questions below in the "hw2.R" script.
 
 5) After completing the questions, create a zip file of all files in your R project folder for this assignment.
 
@@ -32,54 +29,50 @@ output:
 
 ---
 
-## Questions to answer in "hw2.R" script
+**Write solutions to the following functions in your "hw2.R" script.** Rules:
 
-### 1) `kthDigit(x, k)`
+- For functions 1-7, you may **NOT** use loops or conditionals
+- For functions 8-9, you may use conditionals, but you may **NOT** use loops.
 
-Given two integers, `x` and `k`, return the kth digit of `x`, counting from the right. So:
+### 1) `integerSquareRoot(x)`
 
-- `kthDigit(789, 0)` returns `9`
-- `kthDigit(789, 1)` returns `8`
-- `kthDigit(789, 2)` returns `7`
-- `kthDigit(789, 3)` returns `0`
+Given a non-negative integer `n`, return the integer value that is closest to its square root. For example, `integerSquareRoot(10)` returns `3`.
 
-Negative numbers should work, too, so `kthDigit(-789, 0)` returns `9`.
+### 2) `fabricYards(inches)`
 
-### 2) `getTheCents(n)`
+Fabric must be purchased in whole yards. Write a function that takes a non-negative number of inches of fabric desired, and returns the smallest number of whole yards of fabric that must be purchased.  Thus, `fabricYards(1)` is `1` (you need a full yard if you buy one inch) and `fabricYards(36)` is also `1`, but `fabricYards(37)` is `2`.
 
-Write the function `getTheCents(n)` which takes a value `n` (which represents a payment in US dollars) and returns the number of cents in the payment. For example, if n is 2.45, the function should return 45. If n is an integer, the function should return 0, as it has 0 cents; if it isn't a number, it should return `NULL`, because a non-number payment make no cents (ha!). If the payment has partial cents (for example, 3.953), it should be rounded up to the nearest cent (in this example, 96 cents).
+### 3) `fabricExcess(inches)`
 
-### 3) `numberOfPoolBalls(rows)`
+Write a function that takes a non-negative number of inches of fabric desired and returns the number of inches of excess fabric that must be purchased (as purchases must be in whole yards). Thus, since you need a whole yard when you buy 1 inch, `fabricExcess(1)` is `35`. Similarly, `fabricExcess(36)` is `0`, and `fabricExcess(37)` is `35`.
+
+Hint: there are (at least) two good ways to write this. One way involves a simple expression using one of the math operators we have learned. The other way uses `fabricYards(inches)` (which you just wrote!).
+
+### 4) `distance(x1, y1, x2, y2)`
+
+Given four numeric values representing the points `(x1, y1)` and `(x2, y2)`, write the function `distance(x1, y1, x2, y2)` returns the Euclidean distance between those points.
+
+### 5) `isRightTriangle(x1, y1, x2, y2, x3, y3)`
+
+Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return `TRUE` if the triangle formed by connecting the 3 points is a right triangle, and `FALSE` otherwise. You may wish to use the `distance(x1, y1, x2, y2)` function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Herod's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula).
+
+### 6) `numberOfPoolBalls(rows)`
 
 ![](images/poolballs.jpg){ width=150 }
 
 Pool balls are arranged in rows where the first row contains 1 pool ball and each row contains 1 more pool ball than the previous row. Thus, if there are 3 rows, then we'd have 6 total pool balls (1+2+3). Write a function that takes an integer value (the number of rows) and returns another integer value (the number of pool balls in that number of rows). For example, `numberOfPoolBalls(3)` returns `6`. Do not use loops.
 
-### 4) `numberOfPoolBallRows(balls)`
+### 7) `numberOfPoolBallRows(balls)`
 
 This problem is the inverse of the previous problem. In this case, return the number of rows required for the given number of pool balls. Thus, `numberOfPoolBallRows(6)` returns `3`. Note that if any balls must be in a row, then you count that row, and so `numberOfPoolBallRows(7)` returns `4` (since the 4th row must have a single ball in it).
 
-### 5) `isEvenPositiveInt(x)`
+### 8) `isEvenPositiveInt(x)`
 
 Given an arbitrary value `x`, return `TRUE` if it is an integer, and it is positive, and it is even (all 3 must be true), or `FALSE` otherwise. Do not crash if the value is not an integer. So, `isEvenPositiveInt("yikes!")` returns `FALSE` (rather than crashing), and `isEvenPositiveInt(123456)` returns `TRUE`.
 
-### 6) `distance(x1, y1, x2, y2)`
+### 9) `getTheCents(n)`
 
-Given four numeric values representing the points `(x1, y1)` and `(x2, y2)`, write the function `distance(x1, y1, x2, y2)` returns the Euclidean distance between those points.
-
-### 7) `isRightTriangle(x1, y1, x2, y2, x3, y3)`
-
-Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return `TRUE` if the triangle formed by connecting the 3 points is a right triangle, and `FALSE` otherwise. You may wish to use the `distance(x1, y1, x2, y2)` function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Herod's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula).
-
-### 8) `fabricYards(inches)`
-
-Fabric must be purchased in whole yards. Write a function that takes a non-negative number of inches of fabric desired, and returns the smallest number of whole yards of fabric that must be purchased.  Thus, `fabricYards(1)` is `1` (you need a full yard if you buy one inch) and `fabricYards(36)` is also `1`, but `fabricYards(37)` is `2`.
-
-### 9) `fabricExcess(inches)`
-
-Write a function that takes a non-negative number of inches of fabric desired and returns the number of inches of excess fabric that must be purchased (as purchases must be in whole yards). Thus, since you need a whole yard when you buy 1 inch, `fabricExcess(1)` is `35`. Similarly, `fabricExcess(36)` is `0`, and `fabricExcess(37)` is `35`.
-
-Hint: there are (at least) two good ways to write this. One way involves a simple expression using one of the math operators we have learned. The other way uses `fabricYards(inches)` (which you just wrote!).
+Write the function `getTheCents(n)` which takes a value `n` (which represents a payment in US dollars) and returns the number of cents in the payment. For example, if n is 2.45, the function should return 45. If n is an integer, the function should return 0, as it has 0 cents; if it isn't a number, it should return `NULL`, because a non-number payment make no cents (ha!). If the payment has partial cents (for example, 3.953), it should be rounded up to the nearest cent (in this example, 96 cents).
 
 ---
 
