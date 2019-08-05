@@ -31,8 +31,8 @@ navbar:
           href: L3.1-functions.html
         - text: "4.1 - Conditionals"
           href: L4.1-conditionals.html
-        - text: "4.2 - Testing"
-          href: L4.2-testing.html
+        - text: "4.2 - Testing & Debugging"
+          href: L4.2-testing-debugging.html
         - text: "5.1 - Loops"
           href: L5.1-loops.html
         - text: "6.1 - Strings"
