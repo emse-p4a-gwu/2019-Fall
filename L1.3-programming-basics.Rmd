@@ -249,7 +249,7 @@ typeof(y)
 typeof(z)
 ```
 
-Notice that `x` and `y` are both `double` types - that just means they are not integers (i.e. they have decimals).
+Notice that `x` and `y` are both `double` types - that just means they are not integers. Note that you can have a decimal of `0` (e.g. `7` is the same as `7.0`, but `7L` is explicitly an integer).
 
 ## Character types
 

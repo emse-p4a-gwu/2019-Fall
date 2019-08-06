@@ -68,20 +68,15 @@ Using these variables, calculate:
 Load the following string in R:
 
 ```{r eval=FALSE}
-string <- 'The quick Brown fox Jumped over the Lazy dog'
+sentence <- 'The quick Brown fox Jumped over the Lazy dog'
 ```
 
-Using only the `string` object you just created, the `cat()` function, and the `toupper()` and `tolower()` functions, convert and print out the following variations of the `string` object (hint: you may want to first look up what the `toupper()` and `tolower()` functions do:
+Install and load the `stringr` library, then use the `str_to_lower()`, `str_to_upper()`, and `str_to_title()` functions and the `cat()` function to print out the following variations of the object `sentence` that you just created (hint: you may want to first look up what the `str_to_lower()`, `str_to_upper()`, and `str_to_title()` functions do):
 
 ```{r eval=FALSE}
 "the quick brown fox jumped over the lazy dog"
 "THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG"
-```
-
-Finally, using only the `string` object you created, the `cat()` function, and the `toTitleCase()` function from the `tools` library, convert and print out the following variation of the `string` object:
-
-```{r eval=FALSE}
-"The Quick Brown Fox Jumped over the Lazy Dog"
+"The Quick Brown Fox Jumped Over The Lazy Dog"
 ```
 
 ### 3) Numeric data 1

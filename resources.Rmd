@@ -22,52 +22,52 @@ source("knitr_setup.R")
 ## Data Wrangling
 
 - Wickham, Hadley. "R for Data Science"
-[[free online](https://r4ds.had.co.nz/)],
-[[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
+[[free online](https://r4ds.had.co.nz/){target="_blank"}],
+[[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399){target="_blank"}]
 
 ## Data Visualization
 
 - Healy, Kieran. "Data Visualization: A practical introduction"
-[[free online](http://socviz.co/)],
-[[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
+[[free online](http://socviz.co/){target="_blank"}],
+[[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624){target="_blank"}]
 - Wilke, Claus O. "Fundamentals of Data Visualization"
-[[free online](https://serialmentor.com/dataviz/)],
-[[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
+[[free online](https://serialmentor.com/dataviz/){target="_blank"}],
+[[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089){target="_blank"}]
 - [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plotting themes
 
 ## RStudio [cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
 
-- [RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
-- [Data wrangling with the `dplyr` library](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
-- [Data visualization with the `ggplot2` library](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+- [RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf){target="_blank"}
+- [Data wrangling with the `dplyr` library](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf){target="_blank"}
+- [Data visualization with the `ggplot2` library](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf){target="_blank"}
 
 ## RMarkdown
 
-- [60 second markdown guide](https://commonmark.org/help/)
-- [10 minute markdown tutorial](https://commonmark.org/help/tutorial/)
-- [Markdown It](https://markdown-it.github.io): Quickly demo Markdown code.
-- [Table generator](http://www.tablesgenerator.com/): Create tables and get export code for multiple formats.
-- [CMU RMarkdown guide (detailed)](http://www.stat.cmu.edu/~cshalizi/rmarkdown/)
+- [60 second markdown guide](https://commonmark.org/help/){target="_blank"}
+- [10 minute markdown tutorial](https://commonmark.org/help/tutorial/){target="_blank"}
+- [Markdown It](https://markdown-it.github.io){target="_blank"}: Quickly demo Markdown code.
+- [Table generator](http://www.tablesgenerator.com/){target="_blank"}: Create tables and get export code for multiple formats.
+- [CMU RMarkdown guide (detailed)](http://www.stat.cmu.edu/~cshalizi/rmarkdown/){target="_blank"}
 
 ---
 
 # Datasets
 
-- [Kaggle](https://www.kaggle.com/datasets)
-- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
-- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
-- [More datasets for teaching data science: The expanded `dslabs` package](https://simplystatistics.org/2019/07/19/more-datasets-for-teaching-data-science-the-expanded-dslabs-package/), by Amy Gill
+- [Kaggle](https://www.kaggle.com/datasets){target="_blank"}
+- [Google Dataset Search](https://toolbox.google.com/datasetsearch){target="_blank"}
+- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635){target="_blank"}
+- [More datasets for teaching data science: The expanded `dslabs` package](https://simplystatistics.org/2019/07/19/more-datasets-for-teaching-data-science-the-expanded-dslabs-package/){target="_blank"}, by Amy Gill
 
 ---
 
 # Helpful Tutorials
 
-- [RStudio Primers](https://rstudio.cloud/learn/primers)
-- [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r)
-- [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/)
+- [RStudio Primers](https://rstudio.cloud/learn/primers){target="_blank"}
+- [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r){target="_blank"}
+- [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/){target="_blank"}
 
 ---
 
 # Inspiration
 
-- [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f)
+- [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f){target="_blank"}

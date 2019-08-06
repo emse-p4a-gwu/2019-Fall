@@ -1,5 +1,5 @@
 Sign up for Piazza [HERE](http://piazza.com/gwu/fall2019/emse6574)
 
-- [**Piazza**](http://piazza.com/gwu/fall2019/emse6574): Piazza can be used to ask quick questions and receive quick responses without attending office hours in person. This also enables other students to see answers to common questions. Questions on Piazza should be specific and include all needed information. For example, if your code has an error you don't understand, **include the code and the error message** in your question.
+- [**Piazza**](http://piazza.com/gwu/fall2019/emse6574) can be used to ask quick questions and receive quick responses without attending office hours in person. This also enables other students to see answers to common questions. Questions on Piazza should be specific and include all needed information. For example, if your code has an error you don't understand, **include the code and the error message** in your question.
 - **Office Hours**: Office hours let you ask questions to TAs and professors directly, and can help you understand concepts and debug programs that you're struggling with alone.
 - While the University Library is not a stand in for TAs, you can schedule a consultation for general help with Coding, Programming, Data, Statistical, and GIS. See more at https://academiccommons.gwu.edu/writing-research-help

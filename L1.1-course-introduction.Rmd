@@ -12,7 +12,7 @@ source("knitr_setup.R")
 
 # Teaching Team
 
-## Who am I?
+## Meet your instructor!
 
 ![](images/helveston.jpeg){ width=250 }
 
@@ -20,7 +20,7 @@ Dr. John Helveston
 Department of Engineering Management & Systems Engineering
 GWU
 
-My Background:
+Background:
 
 - 2016 PhD in Engineering & Public Policy at Carnegie Mellon Universtiy
 - 2015 MS in Engineering & Public Policy at Carnegie Mellon Universtiy
