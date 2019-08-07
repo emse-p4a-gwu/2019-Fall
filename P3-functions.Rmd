@@ -3,7 +3,6 @@ title: "Practice 3 - Functions"
 output:
   html_document:
     number_sections: false
-    toc: no
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
@@ -11,9 +10,7 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-Read these instructions first!
-
-You may not use loops or conditionals (which we haven't covered yet).
+**Hint**: Read the [Getting Started Tips](L1.2-getting-started.html#tips), [Programming Basics Tips](L1.3-programming-basics.html#tips), and [Functions Tips](L3.1-functions.html#tips) - these could come in handy!
 
 # Mystery Functions
 
@@ -22,8 +19,8 @@ In just a few words of plain English, what does each of the following functions 
 ```
 f <- function(x, y) {
     epsilon = 0.0000001
-    d1 = abs(x)**2
-    d2 = abs(y)**0.5
+    d1 = abs(x)^2
+    d2 = abs(y)^0.5
     return(abs(d1 - d2) < epsilon)
 }
 
@@ -32,7 +29,7 @@ g <- function(x) {
 }
 
 h <- function(x) {
-    return(is.integer(x) & (x >= 0) & ((as.integer(round(x**0.5)))^2 == x))
+    return(is.integer(x) & (x >= 0) & ((as.integer(round(x^0.5)))^2 == x))
 }
 ```
 

@@ -374,6 +374,73 @@ I can also run any line in the script by typing "Command + Enter" (Mac) or "Cont
 
 ---
 
+# Tips
+
+## The mod operator (`%%`)
+
+The mod operator (`%%`) is useful for "chopping" a number in two and returning everything to the **right** of the "cut point".
+
+For example, `x %% 1` will return all digits to the right of the **ones place**:
+
+```{r}
+2.2 %% 1
+3.1415 %% 1
+```
+
+Likewise, `x %% 10` will return all digits to the right of the **tens place**:
+
+```{r}
+42.7 %% 10
+348.123 %% 10
+2.2 %% 10
+```
+
+In general, you can "mod" by factors of 10 to get different results:
+
+```{r}
+123.456 %% 1
+123.456 %% 10
+123.456 %% 100
+123.456 %% 1000
+```
+
+## Integer division (`%/%`)
+
+You can use integer division to do the opposite of what we just showed with the mod operator. Integer division is useful for "chopping" a number in two and returning everything to the **left** of the "cut point".
+
+For example, `x %/% 1` will return all digits to the left of the **decimal point**:
+
+```{r}
+123.456 %/% 1
+3 %/% 1
+3.1415 %/% 1
+```
+
+Likewise, `x %/% 10` will return all digits to the left of the **ones place**:
+
+```{r}
+123.456 %/% 10
+42 %/% 10
+525600 %/% 10
+```
+
+Note that if the "cut point" is further to the left than the farthest-left digit, you'll get `0` back (because there's no digits beyond the cut point):
+
+```{r}
+3.1415 %/% 10
+```
+
+In general, you can integer divide by factors of 10 to get different results:
+
+```{r}
+123456 %/% 1
+123456 %/% 10
+123456 %/% 100
+123456 %/% 1000
+```
+
+---
+
 **Page sources**:
 
 Some content on this page has been modified from other courses, including:

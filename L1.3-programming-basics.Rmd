@@ -207,49 +207,39 @@ To assess the type of any variable, R has two different functions:
 
 We'll use these to explore each data type.
 
-## Numeric & integer types
+## Numeric types
 
-Numbers in R are of the `numeric` data type, and it is the default computational type. If we assign a decimal value to a variable `x`, it will be of `numeric` type:
+Numbers in R are of the `numeric` data type, and it is the default computational type. There are two types of numeric data types: **integers** and **floats**. The difference is floats have decimals and integers don't. At the lower level, floats have the type "`double`" while integers have the type "`integer`".
 
-```{r}
-x <- 3.14
-class(x)
-```
-
-Even if we assign an integer to a variable `y`, it will still be of `numeric` type:
+By default, R assumes all numbers are **floats**, even if it _looks_ like an integer:
 
 ```{r}
-y <- 7
-class(y)
+class(3.14)
+class(3)
+typeof(3.14)
+typeof(3)
 ```
 
-The fact that `y` is not an integer can be confirmed with the `is.integer()`function:
+The fact that `3` is not an integer can be confirmed with the `is.integer()`function:
 
 ```{r}
-is.integer(y)
+is.integer(3)
 ```
 
-To make a number an integer, you can either add an `L` to the end, or use the `as.integer()` function to coerce it into an integer type:
+To make a number an integer, you have to either add an `L` to the end, or use the `as.integer()` function to coerce it into an integer type:
 
 ```{r}
-z <- 7L
-is.integer(z)
-```
-```{r}
-z <- as.integer(y)
-class(z)
-is.integer(z)
+typeof(3L)
+typeof(as.integer(3))
 ```
 
-Now that we have some non-integer and integer variables stored, we can use the `typeof()` function to distinguish between them in more detail:
+Note that you can have a decimal of `0` but the data types can be different:
 
 ```{r}
-typeof(x)
-typeof(y)
-typeof(z)
+typeof(7)
+typeof(7.0)
+typeof(7L)
 ```
-
-Notice that `x` and `y` are both `double` types - that just means they are not integers. Note that you can have a decimal of `0` (e.g. `7` is the same as `7.0`, but `7L` is explicitly an integer).
 
 ## Character types
 
@@ -364,6 +354,37 @@ wiki_didyouknow()
 ```
 
 In case you're wondering, the only thing this package does is generate messages containing random facts from [Wikipedia](https://www.wikipedia.org/){target="_blank"}.
+
+---
+
+# Tips
+
+**Coercing value types**
+
+In general, you can force a value into a different type using `as.something()`, replacing "`something`" with a data type:
+
+```{r}
+as.numeric(3.1415)
+as.integer(3.1415)
+as.character(3.1415)
+as.logical(3.1415)
+```
+
+Note that `as.logical()` returns `TRUE` for any numeric value other than `0`, for which it returns `FALSE`.
+
+If you try to coerce a string into a number, R will return `NA`:
+
+```{r}
+as.numeric('foo')
+```
+
+If you want to force a float number (i.e. one with decimals) into an integer value but you don't want to change the actual _type_ to an integer type, use `round()`, `ceiling()`, or `floor()`. Note that these functions produce different outcomes but all return float types (even though they look like integers):
+
+```{r}
+round(3.1415)   # Typical rounding
+ceiling(3.1415) # Rounds up to nearest integer
+floor(3.1415)   # Rounds down to nearest integer
+```
 
 ---
 

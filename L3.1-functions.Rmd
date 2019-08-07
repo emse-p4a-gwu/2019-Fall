@@ -237,6 +237,48 @@ printN()
 
 ---
 
+# Tips
+
+One particularly useful function is `almostEqual()`:
+
+```{r}
+almostEqual <- function(d1, d2) {
+    epsilon = 0.00001
+    return(abs(d1-d2) <= epsilon)
+}
+```
+
+This is useful when comparing numbers that are stored as floats and have lots of trailing zeros. For example, let's do some simple addition:
+
+```{r}
+x <- 0.1 + 0.2
+x
+```
+
+If we compared `x` to `0.3`, we would expect the result to be `TRUE`, right?
+
+```{r}
+x == 0.3
+```
+
+What went wrong here? Well, what looks like a value of 0.3 is actually a float with a lot of zeros:
+
+```{r}
+print(x, digits = 20)
+```
+
+By default, R doesn't print out all these zeros, but they are the result of many small rounding errors that occur when computers do calculations.
+
+This is where `almostEqual()` comes in handy:
+
+```{r}
+almostEqual(x, 0.3)
+```
+
+It only compares numbers out to a predefined decimal place, after which it ignores everything else. This will come in handy in your homework problems where you might get unexpected results.
+
+---
+
 **Page sources**:
 
 Some content on this page has been modified from other courses, including:

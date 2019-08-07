@@ -15,24 +15,30 @@ output:
 
 **Instructions**:
 
-1) Open RStudio and create a new project called "hw2-lastName", replacing "lastName" with your last name.
+1) Before beginning this assignment, be sure to have read the [Getting Started](L1.2-getting-started.html), [Programming Basics](L1.3-programming-basics.html), and [Functions](L3.1-functions.html) lessons.
 
-2) Download the [hw2.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw/hw2-template.R){target="_blank"} and place it in RStudio project folder you just created.
+2) Open RStudio and create a new project called "hw2-lastName", replacing "lastName" with your last name.
 
-3) Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the "hw2.R" file.
+3) Download the [hw2.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw/hw2-template.R){target="_blank"} and place it in RStudio project folder you just created.
 
-4) Type all of your answers to the questions below in the "hw2.R" script.
+4) Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the "hw2.R" file.
 
-5) After completing the questions, create a zip file of all files in your R project folder for this assignment.
+5) Type all of your answers to the questions below in the "hw2.R" script.
 
-6) Submit the zip file on Blackboard by the due deadline.
+6) After completing the questions, create a zip file of all files in your R project folder for this assignment.
+
+7) Submit the zip file on Blackboard by the due deadline.
 
 ---
 
-**Write solutions to the following functions in your "hw2.R" script.** Rules:
+**Write solutions to the following functions in your "hw2.R" script.**
+
+Rules:
 
 - For functions 1-7, you may **NOT** use loops or conditionals
 - For functions 8-9, you may use conditionals, but you may **NOT** use loops.
+
+**Hint**: Read the [Getting Started Tips](L1.2-getting-started.html#tips), [Programming Basics Tips](L1.3-programming-basics.html#tips), and [Functions Tips](L3.1-functions.html#tips) - these could come in handy!
 
 ### 1) `integerSquareRoot(x)`
 

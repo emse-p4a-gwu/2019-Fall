@@ -14,16 +14,17 @@ output:
 - You may not split up the work -- everyone must work on every problem. And you may not simply copy any code but rather truly work together.
 - Even though you work collaboratively, you still must submit your own solutions.
 
-
 ---
 
 **Assignment**:
 
-1) Open RStudio and create a new project called "hw1-lastName", replacing "lastName" with your last name.
+1) Before going forward, read the [Getting Started](L1.2-getting-started.html) and [Programming Basics](L1.3-programming-basics.html) lessons.
 
-2) Create a new R script and save it as "hw1.R" in the R project folder you just created.
+2) Open RStudio and create a new project called "hw1-lastName", replacing "lastName" with your last name.
 
-3) Copy the following code to the top of this script, and fill out your name, GW Net ID, and the names of anyone you worked with:
+3) Create a new R script and save it as "hw1.R" in the R project folder you just created.
+
+4) Copy the following code to the top of this script, and fill out your name, GW Net ID, and the names of anyone you worked with:
 
 ```{r eval=FALSE}
 # hw1.R
@@ -36,11 +37,11 @@ output:
 # 2) Name: Last, First
 ```
 
-4) Type all of your answers to the following questions in the "hw1.R" script.
+5) Type all of your answers to the following questions in the "hw1.R" script.
 
-5) After completing the questions, create a zip file of all files in your R project folder for this assignment.
+6) After completing the questions, create a zip file of all files in your R project folder for this assignment.
 
-6) Submit the zip file on Blackboard by the due deadline.
+7) Submit the zip file on Blackboard by the due deadline.
 
 ---
 
