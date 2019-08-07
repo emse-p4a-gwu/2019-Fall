@@ -8,6 +8,14 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+Try answering some of these questions **before** running any code - reason through the commands, then run the code and see if you were correct:
+
+- What do you think this will return: `3.1415 %% 1`
+- What do you think this will return: `3.1415 %/% 1`
+- What do you think this will return: `123456 %% 100`
+- What do you think this will return: `123456 %/% 100`
+- What do you think this will return: `! (TRUE | FALSE) & (FALSE | TRUE)`
+
 ---
 
 **Page sources**:
