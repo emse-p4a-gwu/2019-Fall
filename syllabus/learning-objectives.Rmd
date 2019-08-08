@@ -1,7 +1,14 @@
 Having successfully completed this course, students will be able to:
 
-- Read, write, test, and debug code using top-down design.
-- Use computational thinking to solve problems.
-- Explain the efficiency of algorithms by predicting the Big-O run time of code.
-- Design and write an `R` package and deploy it on [Github](https://github.com/).
-- Design and write an `R` shiny application and deploy it on [Github](https://github.com/).
+- Write clear, robust, and reasonably efficient code in R using:
+    - Sequential, conditional, and loop statements.
+    - Numeric, string, vector, matrix, and data frame objects.
+    - Visualizations of data.
+
+- Develop simple programs to effectively solve medium-sized tasks by:
+    - Employing modular, top-down design in program construction.
+    - Demonstrating an effective programming style based on established standards, practices, and guidelines.
+    - Proactively creating and writing test cases to test and debug code.
+    - Applying computational problem-solving skills to new problems.
+
+- Import, manipulate, visualize, and export data in R.
