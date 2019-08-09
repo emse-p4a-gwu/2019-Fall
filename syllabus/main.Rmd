@@ -59,20 +59,8 @@ Go to the course ["Getting Started"](L1.2-getting-started.html) page for install
 
 ## Other Useful Resources
 
-You will inevitably run into problems while learning R. The best starting point for troubleshooting is Google. In addition, these resources can also be helpful:
-
-- Data Wrangling in R:
-    - Wickham, Hadley. "R for Data Science"
-    [[free online](https://r4ds.had.co.nz/)],
-    [[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
-- Data Visualization:
-    - Healy, Kieran. "Data Visualization: A practical introduction"
-    [[free online](http://socviz.co/)],
-    [[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
-    - Wilke, Claus O. "Fundamentals of Data Visualization"
-    [[free online](https://serialmentor.com/dataviz/)],
-    [[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
-- Handy R ["cheatsheets"](https://www.rstudio.com/resources/cheatsheets/)
+```{r child = 'texts.Rmd'}
+```
 
 ---
 
@@ -288,11 +276,6 @@ No student is permitted to record or tape any classroom activity without the con
 ## Inappropriate Use of Course Materials
 
 All solutions to homeworks, quizzes, and exams are proprietary. Students are prohibited from posting or selling any such course materials without the express written permission of the professor teaching this course. All other course materials available on the course website are developed open source. You are welcome to post and share them following the licensing guidelines listed in the [license](LICENSE.html) page.
-
-## Getting Help
-
-```{r child = 'getting-help.Rmd'}
-```
 
 ## What To Do if the Instructor Does Not Arrive
 

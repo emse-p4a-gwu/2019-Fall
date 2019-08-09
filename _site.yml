@@ -77,8 +77,9 @@ navbar:
         - text: License
           icon: fa-gavel
           href: LICENSE.html
-    - text: "Piazza"
-      href: https://piazza.com/gwu/fall2019/emse6574
+    - text: Slack
+      icon: fa-slack
+      href: https://6574-s11-f19.slack.com/
   right:
   - icon: fa-bars
     menu:

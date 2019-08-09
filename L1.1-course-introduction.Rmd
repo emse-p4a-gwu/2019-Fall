@@ -48,7 +48,7 @@ Afterwards: let's here from a few of you - tell us something you learned!
 
 # The syllabus
 
-Let's go over the [syllabus](https://emse6574-gwu.github.io/2019-Fall/) and the course assignments.
+Let's go over the [syllabus](syllabus.html) and the course assignments.
 
 ---
 
@@ -69,7 +69,7 @@ rmarkdown::render('L1.1-course-introduction.Rmd')
 
 ---
 
-# Getting Help
+# Communication & Help
 
-```{r child = here::here('syllabus', 'getting-help.Rmd')}
+```{r child = here::here('syllabus', 'communication-help.Rmd')}
 ```
