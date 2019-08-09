@@ -3,6 +3,7 @@ title: "Practice 3 - Functions"
 output:
   html_document:
     number_sections: false
+    toc: no
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
