@@ -10,7 +10,8 @@ output:
 
 **Rules**:
 
-- This entire homework is **COLLABORATIVE**. You may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work -- everyone must work on every problem. And you may not simply copy any code but rather truly work together.
+- Problems marked **SOLO** may not be worked on with other classmates, though you may consult instructors for help.
+- For problems marked **COLLABORATIVE**, you may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work -- everyone must work on every problem. And you may not simply copy any code but rather truly work together.
 - Even though you work collaboratively, you still must submit your own solutions.
 
 **Instructions**:
@@ -40,43 +41,43 @@ Rules:
 
 **Hint**: Read the [Getting Started Tips](L1.2-getting-started.html#tips), [Programming Basics Tips](L1.3-programming-basics.html#tips), and [Functions Tips](L3.1-functions.html#tips) - these could come in handy!
 
-### 1) `integerSquareRoot(x)`
+### 1) `integerSquareRoot(x)` [SOLO, 10 pts]
 
 Given a non-negative integer `n`, return the integer value that is closest to its square root. For example, `integerSquareRoot(10)` returns `3`.
 
-### 2) `fabricYards(inches)`
+### 2) `fabricYards(inches)` [SOLO, 10 pts]
 
 Fabric must be purchased in whole yards. Write a function that takes a non-negative number of inches of fabric desired, and returns the smallest number of whole yards of fabric that must be purchased.  Thus, `fabricYards(1)` is `1` (you need a full yard if you buy one inch) and `fabricYards(36)` is also `1`, but `fabricYards(37)` is `2`.
 
-### 3) `fabricExcess(inches)`
+### 3) `fabricExcess(inches)` [SOLO, 10 pts]
 
 Write a function that takes a non-negative number of inches of fabric desired and returns the number of inches of excess fabric that must be purchased (as purchases must be in whole yards). Thus, since you need a whole yard when you buy 1 inch, `fabricExcess(1)` is `35`. Similarly, `fabricExcess(36)` is `0`, and `fabricExcess(37)` is `35`.
 
 Hint: there are (at least) two good ways to write this. One way involves a simple expression using one of the math operators we have learned. The other way uses `fabricYards(inches)` (which you just wrote!).
 
-### 4) `distance(x1, y1, x2, y2)`
+### 4) `distance(x1, y1, x2, y2)` [SOLO, 10 pts]
 
 Given four numeric values representing the points `(x1, y1)` and `(x2, y2)`, write the function `distance(x1, y1, x2, y2)` returns the Euclidean distance between those points.
 
-### 5) `isRightTriangle(x1, y1, x2, y2, x3, y3)`
+### 5) `isRightTriangle(x1, y1, x2, y2, x3, y3)` [SOLO, 10 pts]
 
 Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return `TRUE` if the triangle formed by connecting the 3 points is a right triangle, and `FALSE` otherwise. You may wish to use the `distance(x1, y1, x2, y2)` function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Herod's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula).
 
-### 6) `numberOfPoolBalls(rows)`
+### 6) `numberOfPoolBalls(rows)` [COLLABORATIVE, 10 pts]
 
 ![](images/poolballs.jpg){ width=150 }
 
 Pool balls are arranged in rows where the first row contains 1 pool ball and each row contains 1 more pool ball than the previous row. Thus, if there are 3 rows, then we'd have 6 total pool balls (1+2+3). Write a function that takes an integer value (the number of rows) and returns another integer value (the number of pool balls in that number of rows). For example, `numberOfPoolBalls(3)` returns `6`. Do not use loops.
 
-### 7) `numberOfPoolBallRows(balls)`
+### 7) `numberOfPoolBallRows(balls)` [COLLABORATIVE, 10 pts]
 
 This problem is the inverse of the previous problem. In this case, return the number of rows required for the given number of pool balls. Thus, `numberOfPoolBallRows(6)` returns `3`. Note that if any balls must be in a row, then you count that row, and so `numberOfPoolBallRows(7)` returns `4` (since the 4th row must have a single ball in it).
 
-### 8) `isEvenPositiveInt(x)`
+### 8) `isEvenPositiveInt(x)` [COLLABORATIVE, 15 pts]
 
 Given an arbitrary value `x`, return `TRUE` if it is an integer, and it is positive, and it is even (all 3 must be true), or `FALSE` otherwise. Do not crash if the value is not an integer. So, `isEvenPositiveInt("yikes!")` returns `FALSE` (rather than crashing), and `isEvenPositiveInt(123456)` returns `TRUE`.
 
-### 9) `getTheCents(n)`
+### 9) `getTheCents(n)` [COLLABORATIVE, 15 pts]
 
 Write the function `getTheCents(n)` which takes a value `n` (which represents a payment in US dollars) and returns the number of cents in the payment. For example, if n is 2.45, the function should return 45. If n is an integer, the function should return 0, as it has 0 cents; if it isn't a number, it should return `NULL`, because a non-number payment make no cents (ha!). If the payment has partial cents (for example, 3.953), it should be rounded up to the nearest cent (in this example, 96 cents).
 

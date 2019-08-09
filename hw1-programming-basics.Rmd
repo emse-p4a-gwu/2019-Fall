@@ -10,8 +10,8 @@ output:
 
 **Rules**:
 
-- This entire homework is **COLLABORATIVE**. You may work in groups of up to 3 students total who are in this course this semester (and then with nobody else except the course instructors).
-- You may not split up the work -- everyone must work on every problem. And you may not simply copy any code but rather truly work together.
+- Problems marked **SOLO** may not be worked on with other classmates, though you may consult instructors for help.
+- For problems marked **COLLABORATIVE**, you may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work -- everyone must work on every problem. And you may not simply copy any code but rather truly work together.
 - Even though you work collaboratively, you still must submit your own solutions.
 
 ---
@@ -47,7 +47,25 @@ output:
 
 ## Questions to answer in "hw1.R" script
 
-### 1) Objects
+### 1) Reasoning over code [SOLO, 10 pts]
+
+Consider the following objects:
+
+```{r}
+w <- TRUE
+x <- FALSE
+y <- FALSE
+z <- TRUE
+```
+
+Write code to answer the following questions:
+
+a) Write a logical statement that compares the objects `x`, `y`, and `z` and returns `TRUE`
+b) Write a logical statement that compares the objects `x`, `y`, and `z` and returns `FALSE`
+c) Fill in the correct relational operators to make this statement return `TRUE`: `! (x __ y) & ! (z __ y)`
+d) Fill in the correct relational operators to make this statement return `FALSE`: `! (w __ y) | (z __ y)`
+
+### 2) Objects [SOLO, 10 pts]
 
 Create variables to store each of the following values. Use variable names that make sense and are easy to understand:
 
@@ -56,15 +74,15 @@ Create variables to store each of the following values. Use variable names that 
 - The number of hours in a day
 - The number of days in a typical year (not a leap year)
 
-Using these variables, calculate:
+Using **only** the variables you created, calculate:
 
-- The number of seconds in a day
-- The number of seconds in a year
-- The number of minutes in a day
-- The number of minutes in a year
-- The number of hours in a year
+a) The number of seconds in a day
+b) The number of seconds in a year
+c) The number of minutes in a day
+d) The number of minutes in a year
+e) The number of hours in a year
 
-### 2) Character data
+### 3) Character data [SOLO, 10 pts]
 
 Load the following string in R:
 
@@ -80,15 +98,15 @@ Install and load the `stringr` library, then use the `str_to_lower()`, `str_to_u
 "The Quick Brown Fox Jumped Over The Lazy Dog"
 ```
 
-### 3) Numeric data 1
+### 4) Numeric data 1 [COLLABORATIVE, 20 pts]
 
 Max is looking to purchase a car and is deciding between a Toyota Prius and a Toyota Camry. He knows that based on his driving patterns, he can get an average fuel economy of 55 miles per gallon (mpg) of gasoline with the Prius, which sells for $27,600. He is also considering the cheaper Toyota Camry, which costs $24,000 but only gets 32 mpg on average. He knows he typically drives 15,000 miles each year. For the following questions, assume the price of gas will remain constant at $3.00 / gallon forever.
 
 a) Create variables for the price and fuel economy of each vehicle. Use variable names that make sense and are easy to understand.
 b) Using the variables you created (and only these variables - no other numbers!), compute how many years Max would need to drive the Prius such that the money he saves in lower fuel costs overcomes the higher upfront price compared to the Camry. Ignore inflation and discount rates.
-c) What would the price of gasoline need to be such that the answer to part b) is just 2 years?
+c) What would the price of gasoline need to be such that the answer to part b) is just 2 years? You may use the number `2` once in your solution, otherwise you may only use variables you defined in part a.
 
-### 4) Numeric data 2
+### 5) Numeric data 2 [COLLABORATIVE, 20 pts]
 
 Load the following variables into R, then answer the questions below:
 
@@ -106,7 +124,7 @@ b) Compute the Euclidean distance between the points (x2, y2) and (x3, y3) and s
 c) Compute the Euclidean distance between the points (x1, y1) and (x3, y3) and store this variable as `d3`.
 d) Is the triangle formed by the points (x1, y1), (x2, y2), and (x3, y3) a [right triangle](https://en.wikipedia.org/wiki/Right_triangle){target="_blank"}? If so, prove it using the variables `d1`, `d2`, and `d3`.
 
-### 5) Logical data
+### 6) Logical data [COLLABORATIVE, 20 pts]
 
 Suppose we fielded a survey that asked respondents to specify their marital status. The responses are stored in a variable called `marital_status` as one of the following:
 
@@ -122,7 +140,7 @@ a) `is_single`: Is `TRUE` if the participant is single and `FALSE` otherwise.
 b) `has_spouse`: Is `TRUE` if the participant is married or in a de facto relationship and `FALSE` otherwise.
 c) `not_single_or_missing`: Is `TRUE` if the participant did respond to the question, but is not single.
 
-### 6) Packages
+### 7) Packages [SOLO, 10 pts]
 
 Install the package `TurtleGraphics`
 

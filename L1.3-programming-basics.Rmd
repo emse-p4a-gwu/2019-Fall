@@ -29,6 +29,8 @@ However, we could also compute this using R's built-in square root function `sqr
 sqrt(225)
 ```
 
+Not sure what a particular function does? You can ask R for help by typing `?` and then the function name, and R will return documentation on the function. For example, `?sqrt()` will return information about the `sqrt()` function.
+
 ## Some common functions
 
 Function   | Description       | Example
