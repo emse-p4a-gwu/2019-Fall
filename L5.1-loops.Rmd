@@ -183,13 +183,18 @@ turtle_forward(distance = 10)
 
 That seems simple enough, but what if I want my turtle to draw a more complicated shape? Let's say I want her to draw a hexagon. There are six sides to the hexagon, so the most natural way to write code for this is to write a `for` loop that loops over the sides! At each iteration within the loop, I'll have the turtle walk forwards, and then turn 60 degrees to the left. Here's what happens:
 
-```{r, fig.show='animate', interval=0.1, cache=TRUE, message=FALSE}
+<!-- ```{r, fig.show='animate', interval=0.05, cache=TRUE, message=FALSE} -->
+<!-- Having trouble with Travis CI and ffmpeg, so sticking video in -->
+```{r eval=FALSE}
 turtle_init()
 for (side in 1:6) {
     turtle_forward(distance = 10)
     turtle_left(angle = 60)
 }
 ```
+<video width="456" controls="" loop="">
+<source src="L5.1-loops_files/figure-html/unnamed-chunk-13.webm">
+</video>
 
 ---
 
