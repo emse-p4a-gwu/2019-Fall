@@ -87,7 +87,7 @@ for (row in seq(10)) {
 }
 ```
 
-This will come in handy when working with 2-dimensional objects, like [matrices](L10.1-matrices.html) and [data frames](L11.1-data-frames.html).
+This will come in handy when working with 2-dimensional objects, like [matrices](L10-matrices.html) and [data frames](L11-data-frames.html).
 
 ---
 
@@ -175,16 +175,17 @@ Here's the idea. You have a turtle, and she lives in a nice warm terrarium:
 turtle_init()
 ```
 
-Your job is to *program* her to undertake certain actions. So for example, you can use the `turtle_forward()` command to get her to walk forwards, the `turtle_left()` command to get her to rotate to the left, and so on. For example, if I used this command my turtle would walk forward 10 steps and leave a trail behind her showing the path she took.
+Your job is to *program* her to undertake certain actions. So for example, you can use the `turtle_forward()` command to get her to walk forwards, the `turtle_left()` command to get her to rotate to the left, and so on. For example, if I used this command my turtle would walk forward 10 steps and leave a trail behind her showing the path she took:
 
 ```{r eval=FALSE}
 turtle_forward(distance = 10)
 ```
+![](images/turtle_forward.png){ width=456 }
 
 That seems simple enough, but what if I want my turtle to draw a more complicated shape? Let's say I want her to draw a hexagon. There are six sides to the hexagon, so the most natural way to write code for this is to write a `for` loop that loops over the sides! At each iteration within the loop, I'll have the turtle walk forwards, and then turn 60 degrees to the left. Here's what happens:
 
 <!-- ```{r, fig.show='animate', interval=0.05, cache=TRUE, message=FALSE} -->
-<!-- Having trouble with Travis CI and ffmpeg, so sticking video in -->
+<!-- Having trouble with Travis CI and ffmpeg, so manually sticking video in -->
 ```{r eval=FALSE}
 turtle_init()
 for (side in 1:6) {
@@ -193,7 +194,7 @@ for (side in 1:6) {
 }
 ```
 <video width="456" controls="" loop="">
-<source src="L5.1-loops_files/figure-html/unnamed-chunk-13.webm">
+<source src="L5-loops_files/figure-html/unnamed-chunk-12.webm">
 </video>
 
 ---
