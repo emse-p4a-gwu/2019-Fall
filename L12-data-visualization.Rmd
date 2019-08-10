@@ -1,5 +1,5 @@
 ---
-title: "Data Visualizations"
+title: "Data Visualization"
 output: html_document
 ---
 
