@@ -1,5 +1,5 @@
 ---
-title: "Strings"
+title: "Vectors"
 output: html_document
 ---
 

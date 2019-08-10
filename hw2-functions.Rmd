@@ -16,7 +16,7 @@ output:
 
 **Instructions**:
 
-1) Before beginning this assignment, be sure to have read the [Getting Started](L1.2-getting-started.html), [Programming Basics](L1.3-programming-basics.html), and [Functions](L3.1-functions.html) lessons.
+1) Before beginning this assignment, be sure to have read the [Getting Started](L1.2-getting-started.html), [Programming Basics](L2-programming-basics.html), and [Functions](L3-functions.html) lessons.
 
 2) Open RStudio and create a new project called "hw2-lastName", replacing "lastName" with your last name.
 
@@ -39,7 +39,7 @@ Rules:
 - For functions 1-7, you may **NOT** use loops or conditionals
 - For functions 8-9, you may use conditionals, but you may **NOT** use loops.
 
-**Hint**: Read the [Getting Started Tips](L1.2-getting-started.html#tips), [Programming Basics Tips](L1.3-programming-basics.html#tips), and [Functions Tips](L3.1-functions.html#tips) - these could come in handy!
+**Hint**: Read the [Getting Started Tips](L1.2-getting-started.html#tips), [Programming Basics Tips](L2-programming-basics.html#tips), and [Functions Tips](L3-functions.html#tips) - these could come in handy!
 
 ### 1) `integerSquareRoot(x)` [SOLO, 10 pts]
 

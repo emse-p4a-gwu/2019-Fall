@@ -18,7 +18,7 @@ output:
 
 **Assignment**:
 
-1) Before going forward, read the [Getting Started](L1.2-getting-started.html) and [Programming Basics](L1.3-programming-basics.html) lessons.
+1) Before going forward, read the [Getting Started](L1.2-getting-started.html) and [Programming Basics](L2-programming-basics.html) lessons.
 
 2) Open RStudio and create a new project called "hw1-lastName", replacing "lastName" with your last name.
 

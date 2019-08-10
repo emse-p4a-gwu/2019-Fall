@@ -1,5 +1,5 @@
 ---
-title: "Sorting"
+title: "Practice 6 - Vectors"
 output: html_document
 ---
 
@@ -7,8 +7,6 @@ output: html_document
 rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
-
----
 
 ---
 
