@@ -8,7 +8,305 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+So far we've only dealt with objects that contain one value (e.g. `x <- 1`), but R actually stores those values in a _vector_ of length one:
+
+```{r}
+x <- 1
+length(x)
+is.vector(x)
+```
+
+A _vector_ is a basic data structure in R. All elements in a vector must have the same type.
+
+> [Watch this 1-minute video for a quick summary of **vectors**](https://vimeo.com/220490316){target="_blank"}
+
 ---
+
+# Vector basics
+
+## Creating vectors
+
+The most basic way of creating a vector is to use the `c()` function ("c" is for "concatenate"):
+
+```{r}
+x <- c(1, 2, 3)
+length(x)
+```
+
+You can also create a vector by using the `rep()` function, which replicates the same value `n` times:
+
+```{r}
+y <- rep(5, 10) # The number 5 ten times
+z <- rep(10, 5) # The number 10 five times
+```
+```{r}
+y
+z
+```
+
+You can see how long a vector is using the `length()` function:
+
+```{r}
+length(y)
+length(z)
+```
+
+Vectors can be of different types, but each element in the vector must have the _same_ type. If you mix types in a vector, R will coerce all the elements to either a numeric or character type:
+
+```{r}
+c(1, 2, "3") # Turns everything into a character
+c(1, 2, TRUE, FALSE) # Turns everything into a number
+c(TRUE, FALSE, "TRUE") # Turns everything into a character
+```
+
+## Deleting vectors
+
+You can delete a vector by assigning `NULL` to it:
+
+```{r}
+x <- seq(1, 10)
+x
+x <- NULL
+x
+```
+
+## Numeric vectors
+
+As we saw in the [loops](5-loops.html) lesson, you can create a vector of integers using the `:` operator or the `seq()` function:
+
+```{r}
+x <- 1:10
+y <- seq(1, 10)
+```
+```{r}
+x
+x == y
+```
+
+Numeric vectors don't all have to be integers though - they can be any numbers:
+
+```{r}
+v <- c(pi, 7, 42, 365)
+v
+typeof(v)
+```
+
+There are many functions that are designed to work on numeric vectors. Here are some common ones:
+
+Function   |       Description           | Example
+---------- | ----------------------------|------------------------------
+`mean(x)` | Mean of values in `x` | `mean(c(1,2,3,4,5))` returns ``r mean(c(1,2,3,4,5))``
+`median(x)` | Median of values in `x` | `median(c(1,2,2,4,5))` returns ``r median(c(1,2,2,4,5))``
+`max(x)`  | Max element in `x` | `max(c(1,2,3,4,5))` returns ``r max(c(1,2,3,4,5))``
+`min(x)`      | Min element in `x` | `min(c(1,2,3,4,5))` returns ``r min(c(1,2,3,4,5))``
+`sum(x)`      | Sums the elements in `x` | `sum(c(1,2,3,4,5))` returns ``r sum(c(1,2,3,4,5))``
+`prod(x)`     | Product of the elements in `x` | `prod(c(1,2,3,4,5))` returns ``r prod(c(1,2,3,4,5))``
+
+## Character vectors
+
+Character vectors are vectors where each element is a string:
+
+```{r}
+stringVector <- c('oh', 'what', 'a', 'beautiful', 'morning')
+stringVector
+typeof(stringVector)
+```
+
+As we'll see in the next lesson on [strings](L7-strings.html), you can "collapse" a character vector into a single string using the `str_c()` function from the `stringr` library:
+
+```{r}
+library(stringr)
+str_c(stringVector, collapse = ' ')
+```
+
+## Logical vectors
+
+Logical vectors contain only `TRUE` or `FALSE` elements:
+
+```{r}
+logicalVector <- c(rep(TRUE, 3), rep(FALSE, 3))
+logicalVector
+```
+
+If you add a numeric type to a logical vector, the logical elements will be converted to either a `1` for `TRUE` or `0` for `FALSE`:
+
+```{r}
+c(logicalVector, 42)
+```
+
+**Warning**: If you add a character type to a logical vector, the logical elements will be converted to strings of `"TRUE"` and `"FALSE"`. So even though they may still _look_ like logical types, they aren't:
+
+```{r}
+y <- c(logicalVector, 'string')
+y
+typeof(y)
+```
+
+# Accessing elements in a vector
+
+You can access elements from a vector using brackets `[]` and indices inside the brackets. You can use integer indices (probably the most common way), character indices (by naming each element), and logical indices.
+
+## Using integer indices
+
+Vector indices start from 1 (this is important - [most programming languages start from 0](https://en.wikipedia.org/wiki/Zero-based_numbering){target="_blank"}):
+
+```{r}
+x <- seq(1, 10)
+x[1] # Returns the first element
+x[3] # Returns the third element
+```
+
+You can access multiple elements by using a vector of indices inside the brackets:
+
+```{r}
+x[c(1:3)]  # Returns the first three elements
+x[c(2, 7)] # Returns the 2nd and 7th elements
+```
+
+You can also use negative integers to _remove_ elements, which returns all elements except that those specified:
+
+```{r}
+x[-1] # Returns everything except the first element
+x[-c(2, 7)] # Returns everything except the 2nd and 7th elements
+```
+
+But you cannot mix positive and negative integers while indexing:
+
+```{r error=TRUE}
+x[c(-2, 7)]
+```
+
+If you try to use a float as an index, it gets rounded **down** to the nearest integer:
+
+```{r error=TRUE}
+x[3.1415] # Returns the 3rd element
+x[3.9999] # Still returns the 3rd element
+```
+
+## Using characters indices
+
+You can name the elements in a vector and then use those names to access elements. To create a named vector, use the `names()` function:
+
+```{r error=TRUE}
+names(x) <- c('one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten')
+x
+```
+
+You can also create a named vector by putting the names directly in the `c()` function:
+
+```{r error=TRUE}
+x <- c('one' = 1, 'two' = 2, 'three' = 3)
+x
+```
+
+Once your vector has names, you can then use those names as indices:
+
+```{r error=TRUE}
+x['one'] # Returns the first element
+x[c('two', 'three')] # Returns the 2nd and 3rd elements
+```
+
+## Using logical indices
+
+When using a logical vector for indexing, the position where the logical vector is `TRUE` is returned. This is helpful for filtering vectors based on conditions:
+
+```{r}
+x <- seq(1, 10)
+logicalVector <- x > 5
+logicalVector
+
+# Return all elements that are TRUE in logicalVector:
+x[logicalVector]
+
+# Or more directly, you can just put the condition in the brackets:
+x[x > 5]
+```
+
+# Vectorized operations
+
+Most base functions in R are "vectorized", meaning that when you give them a vector, they perform the operation on each element in the vector.
+
+## Arithmetic operations
+
+When you perform arithmetic operations on vectors, they are executed on an element-by-element basis:
+
+```{r}
+x1 <- c(1, 2, 3)
+x2 <- c(4, 5, 6)
+```
+```{r}
+# Addition
+x1 + x2 # Returns (1+4, 2+5, 3+6)
+
+# Subtraction
+x1 - x2 # Returns (1-4, 2-5, 3-6)
+
+# Multiplicattion
+x1 * x2 # Returns (1*4, 2*5, 3*6)
+
+# Addition
+x1 / x2 # Returns (1/4, 2/5, 3/6)
+```
+
+When performing vectorized operations, the vectors need to have the same dimensions, or one of the vectors needs to be a single-value vector:
+
+```{r error=TRUE}
+# Careful! Mis-matched dimensions will only give you a warning, but will still return a value:
+x1 <- c(1, 2, 3)
+x2 <- c(4, 5)
+x1 + x2
+```
+
+```{r}
+# A single-value vector will still work:
+x1 <- c(1, 2, 3)
+x2 <- c(4)
+x1 + x2
+```
+
+## Sorting
+
+You can reorder the arrangement of elements in a vector by using the `sort()` function:
+
+```{r}
+a = c(2, 4, 6, 3, 1, 5)
+sort(a)
+sort(a, decreasing = TRUE)
+```
+
+To get the index values of the sorted order, use the `order()` function:
+
+```{r}
+order(a)
+```
+
+These indices tell us that the first value in the sorted arrangement of vector `a` is element number 5 (which is a `1`), the second value is element number `1` (which is a `2`), and so on. If you use `order()` as the indices to the vector, you'll get the sorted vector:
+
+```{r}
+a[order(a)] # Same as sort(a)
+```
+
+# Tips
+
+**Use vector operations instead of a loop**:
+
+As we saw in the [loops](5-loops.html) lesson, you can use a loop to perform an operation on each element in a vector. For example, the following loop prints out the decimal values for each element in a vector of floats:
+
+```{r}
+x <- c(3.1415, 1.618, 2.718)
+for (i in 1:length(x)) {
+    remainder <- x[i] %% 1
+    print(remainder)
+}
+```
+
+You could achieve the same thing by just performing the operation inside the loop (`x[i] %% 1`) on the whole vector:
+
+```{r}
+x %% 1
+```
+
+In many cases, using a vector can save you a whole lot of code by avoiding loops entirely!
 
 ---
 
@@ -18,3 +316,4 @@ Some content on this page has been modified from other courses, including:
 
 - CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/), by [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)
 - Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)
+- [RStudio primers](https://rstudio.cloud/learn/primers/1.2)
