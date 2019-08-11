@@ -16,7 +16,7 @@ The main two types of loops are `for` and `while` loops.
 
 # The `for` loop
 
-The basic format of a `for` loop goes like this:
+Use `for` loops when there is a known number of iterations. The basic format of a `for` loop goes like this:
 
 ```
 for (VALUE in SEQUENCE) {
@@ -79,8 +79,8 @@ for (i in x) {
 You can have loops inside loops!
 
 ```{r}
-for (row in seq(10)) {
-    for (col in seq(row + 1)) {
+for (row in seq(6)) {
+    for (col in seq(row)) {
         cat("*")
     }
     cat('\n') # Print a new line
@@ -93,7 +93,7 @@ This will come in handy when working with 2-dimensional objects, like [matrices]
 
 # The `while` loop
 
-The basic format of the loop looks like this:
+Use while loops when there is an indeterminate number of iterations. The basic format of the loop looks like this:
 
 ```
 while (CONDITION) {
