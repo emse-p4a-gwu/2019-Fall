@@ -38,18 +38,15 @@ h <- function(x) {
 
 Here are a bunch of functions you should be able to write. Any of these may appear (directly or modified) on a quiz or exam!
 
-### 1) `nthFibonacciNumber(n)`
+### `celsiusToFahrenheit(celsius)`
 
-Write the function `nthFibonacciNumber(n)` that takes a positive integer `n` and (without using loops) returns the nth [Fibonacci number](https://en.wikipedia.org/wiki/Fibonacci_number). So:
+Given a temperature in Celsius, return the same temperature in Fahrenheit.  So `celsiusToFahrenheit(0)` returns `32`, and `celsiusToFahrenheit(100)` returns `212`.
 
-- `nthFibonacciNumber(1)` returns `1`
-- `nthFibonacciNumber(2)` returns `1`
-- `nthFibonacciNumber(3)` returns `2`
-- `nthFibonacciNumber(4)` returns `3`
-- `nthFibonacciNumber(5)` returns `5`
-- `nthFibonacciNumber(6)` returns `8`
+### `isPerfectCube(x)`
 
-### 2) `kthDigit(x, k)`
+Given an integer value `x`, returns `TRUE` if it is a perfect cube and `FALSE` otherwise. That is, return `TRUE` if there is another integer `y` such that `x = y^3`. Thus, `isPerfectCube(27)` returns `TRUE`, but `isPerfectCube(16)` returns `FALSE`.
+
+### `kthDigit(x, k)`
 
 Given two integers, `x` and `k`, return the kth digit of `x`, counting from the right. So:
 
@@ -60,28 +57,30 @@ Given two integers, `x` and `k`, return the kth digit of `x`, counting from the 
 
 Negative numbers should work, too, so `kthDigit(-789, 0)` returns `9`.
 
-### 3) `celsiusToFahrenheit(degrees)`
+### `nthFibonacciNumber(n)`
 
-Given a temperature in Celsius, return the same temperature in Fahrenheit.  So `celsiusToFahrenheit(0)` returns `32`, and `celsiusToFahrenheit(100)` returns `212`.
+Write the function `nthFibonacciNumber(n)` that takes a positive integer `n` and (without using loops) returns the nth [Fibonacci number](https://en.wikipedia.org/wiki/Fibonacci_number){target="_blank"}. So:
 
-### 4) `isPerfectCube(x)`
+- `nthFibonacciNumber(1)` returns `1`
+- `nthFibonacciNumber(2)` returns `1`
+- `nthFibonacciNumber(3)` returns `2`
+- `nthFibonacciNumber(4)` returns `3`
+- `nthFibonacciNumber(5)` returns `5`
+- `nthFibonacciNumber(6)` returns `8`
 
-Given an integer value `x`, returns `TRUE` if it is a perfect cube and `FALSE` otherwise. That is, return `TRUE` if there is another integer `y` such that `x = y^3`. Thus, `isPerfectCube(27)` returns `TRUE`, but `isPerfectCube(16)` returns `FALSE`.
+### `triangleArea(x1, y1, x2, y2, x3, y3)`
 
-### 5) `isTriangularNumber(n)`
+Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return the area of the triangle formed by connecting the 3 points. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Heron's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula){target="_blank"}.
 
-A number is triangular if it equals 1+2+3+...+N for some integer N. Given an integer value `n`, return `TRUE` if it is triangular, and `FALSE` otherwise. Note that this relates to the pool ball problems. This is related to the pool ball problems in the homework.
+### `isTriangularNumber(n)`
 
-For this problem and the next, you should research [Triangular Numbers](https://en.wikipedia.org/wiki/Triangular_number){target="_blank"}.
+A number is triangular if it equals `1+2+3+...+N` for some integer `N`. Given an integer value `n`, return `TRUE` if it is triangular, and `FALSE` otherwise. Note that this relates to the pool ball problems. Hint: For this problem you should research [Triangular Numbers](https://en.wikipedia.org/wiki/Triangular_number){target="_blank"}.
 
-### 6) `triangleArea(x1, y1, x2, y2, x3, y3)`
+### `dcHour(londonHour)`
 
-Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return the area of the triangle formed by connecting the 3 points. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Herod's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula){target="_blank"}.
-
-### 7) `dcHour(londonHour)`
 This function takes an integer, the current hour in London, and returns the current hour in Washington DC (which is 5 hours behind London). However, London time is given in 24-hour time (so `londonHour` is between 0 and 23, inclusive), but Washington DC time must be returned in 12-hour time (so the result must be between 1 and 12, inclusive, where "am" and "pm" are ignored). Here are some examples:
 
-<div class="tableMedium">
+<div class="tableSmall">
 `londonHour` | `dcHour(londonHour)`
 -------------| -------------------
 0 (midnight) | 7 (7pm)
