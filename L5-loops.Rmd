@@ -52,10 +52,9 @@ for (i in seq(1, 10, by=2)) {
 
 ## Looping over other things
 
-R will loop over any vector you create. For example, you can loop over a sequence of characters:
+R will loop over any sequence you create. For example, you can loop over a vector of characters (The `c()` function creates a "vector"...we'll get to those [next lesson](L6-vectors.html)):
 
 ```{r}
-# The c() function creates a vector...we'll get to those later
 x <- c('If', 'you', 'want', 'to', 'view', 'paradise,', 'simply', 'look',
        'around', 'and', 'view', 'it.')
 for (i in x) {
@@ -76,18 +75,19 @@ for (i in x) {
 
 ## Nested `for` loops
 
-You can have loops inside loops!
+You can have loops inside loops! This is useful when working on things that have more than one dimension. For example, let's print out a 5 x 5 rectangle out of asterisks (`*`) by looping over rows and columns:
 
 ```{r}
-for (row in seq(6)) {
-    for (col in seq(row)) {
+n <- 5
+for (row in seq(n)) {
+    for (col in seq(n)) {
         cat("*")
     }
     cat('\n') # Print a new line
 }
 ```
 
-This will come in handy when working with 2-dimensional objects, like [matrices](L10-matrices.html) and [data frames](L11-data-frames.html).
+This will come in handy when working with 2-dimensional objects like [matrices](L10-matrices.html) and [data frames](L11-data-frames.html).
 
 ---
 
@@ -194,7 +194,7 @@ for (side in 1:6) {
 }
 ```
 <video width="456" controls="" loop="">
-<source src="L5-loops_files/figure-html/unnamed-chunk-12.webm">
+<source src="images/turtle_hexagon.webm">
 </video>
 
 ---
