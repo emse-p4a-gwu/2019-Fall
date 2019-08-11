@@ -227,11 +227,17 @@ y
 
 _"Global"_ variables are those in the global environment. These will show up in the "Environment" pane in RStudio. You can call these inside functions, but this is **BAD** practice. Here's an example (**Don't do this!**):
 
-```{r}
+```{r include=FALSE}
+n <- NULL
+```
+```{r error=TRUE}
 printN <- function() {
     cat(n)  # n is not local -- so it is global (bad idea!!!)
 }
-n = 5
+printN() # Nothing happens because n isn't defined
+```
+```{r}
+n = 5 # Define n in the global environment
 printN()
 ```
 
