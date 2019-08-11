@@ -140,7 +140,7 @@ a) `is_single`: Is `TRUE` if the participant is single and `FALSE` otherwise.
 b) `has_spouse`: Is `TRUE` if the participant is married or in a de facto relationship and `FALSE` otherwise.
 c) `not_single_or_missing`: Is `TRUE` if the participant did respond to the question, but is not single.
 
-### 7) Packages [SOLO, 10 pts]
+### 7) Packages [COLLABORATIVE, 10 pts]
 
 Install the package `TurtleGraphics`
 
@@ -174,3 +174,7 @@ turtle_reset()
 ```
 
 Now run the above commands - what happened?
+
+Using what you've learned about how the `TurtleGraphics` package works, write code to produce the following image:
+
+![](images/turtle_hw1.png){ width=456}
