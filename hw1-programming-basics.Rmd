@@ -166,4 +166,4 @@ turtle_reset()
 f) Now run the above commands - what happened?
 g) Using what you've learned about how the `TurtleGraphics` package works, write code to produce the following image:
 
-![](images/turtle_hw1.png){ width=456}
+![](images/turtle_hw1.png){ width=456 }
