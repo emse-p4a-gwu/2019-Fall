@@ -161,44 +161,6 @@ In the above example, we use the `next` statement inside an `if` statement to ch
 
 ---
 
-# For the love of turtles
-
-Turtle graphics is a classic teaching tool in computer science, originally invented in the 1960s and reimplemented over and over again in different programming languages. Let's load that package.
-
-```{r, message=FALSE}
-library(TurtleGraphics)
-```
-
-Here's the idea. You have a turtle, and she lives in a nice warm terrarium:
-
-```{r}
-turtle_init()
-```
-
-Your job is to *program* her to undertake certain actions. So for example, you can use the `turtle_forward()` command to get her to walk forwards, the `turtle_left()` command to get her to rotate to the left, and so on. For example, if I used this command my turtle would walk forward 10 steps and leave a trail behind her showing the path she took:
-
-```{r eval=FALSE}
-turtle_forward(distance = 10)
-```
-![](images/turtle_forward.png){ width=456 }
-
-That seems simple enough, but what if I want my turtle to draw a more complicated shape? Let's say I want her to draw a hexagon. There are six sides to the hexagon, so the most natural way to write code for this is to write a `for` loop that loops over the sides! At each iteration within the loop, I'll have the turtle walk forwards, and then turn 60 degrees to the left. Here's what happens:
-
-<!-- ```{r, fig.show='animate', interval=0.05, cache=TRUE, message=FALSE} -->
-<!-- Having trouble with Travis CI and ffmpeg, so manually sticking video in -->
-```{r eval=FALSE}
-turtle_init()
-for (side in 1:6) {
-    turtle_forward(distance = 10)
-    turtle_left(angle = 60)
-}
-```
-<video width="456" controls="" loop="">
-<source src="images/turtle_hexagon.webm">
-</video>
-
----
-
 **Page sources**:
 
 Some content on this page has been modified from other courses, including:
