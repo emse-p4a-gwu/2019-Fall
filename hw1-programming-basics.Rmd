@@ -82,7 +82,7 @@ c) The number of minutes in a day
 d) The number of minutes in a year
 e) The number of hours in a year
 
-### 3) Character data [SOLO, 10 pts]
+### 3) Character data [SOLO, 5 pts]
 
 Load the following string in R:
 
@@ -140,19 +140,20 @@ a) `is_single`: Is `TRUE` if the participant is single and `FALSE` otherwise.
 b) `has_spouse`: Is `TRUE` if the participant is married or in a de facto relationship and `FALSE` otherwise.
 c) `not_single_or_missing`: Is `TRUE` if the participant did respond to the question, but is not single.
 
-### 7) Packages [COLLABORATIVE, 10 pts]
+### 7) Packages [COLLABORATIVE, 15 pts]
 
-a) Install the package `TurtleGraphics`
-b) Load the `TurtleGraphics` library then use the following command: `turtle_init()`. What happens?
-c) Read the help information about the `TurtleGraphics` package:
+a) Read about the `TurtleGraphics` package [HERE](TurtleGraphics.html)
+b) Install the package `TurtleGraphics`
+c) Load the `TurtleGraphics` library, then use the following command: `turtle_init()`. What happens?
+d) Read the help information about the `TurtleGraphics` package:
 ```{r eval=FALSE}
 help(package='TurtleGraphics')
 ```
-d) Now read the help information about the `turtle_move()` function in the `TurtleGraphics` package:
+e) Now read the help information about the `turtle_move()` function in the `TurtleGraphics` package:
 ```{r eval=FALSE}
 ?turtle_move()
 ```
-e) Read through the following commands - write down what do you think is going to happen.
+f) Read through the following commands - write down what do you think is going to happen.
 ```{r eval=FALSE}
 turtle_init()
 turtle_move(distance = 10, direction = "forward")
@@ -163,7 +164,7 @@ turtle_move(distance = 10, direction = "forward")
 turtle_move(distance = 20, direction = "backward")
 turtle_reset()
 ```
-f) Now run the above commands - what happened?
-g) Using what you've learned about how the `TurtleGraphics` package works, write code to produce the following image:
+g) Now run the above commands - what happened?
+h) Using what you've learned about how the `TurtleGraphics` package works, write code to produce the following image:
 
 ![](images/turtle_hw1.png){ width=456 }
