@@ -49,6 +49,8 @@ navbar:
           href: L14-monte-carlo-methods.html
         - text: "Week 15 - RMarkdown"
           href: L15-rmarkdown.html
+        - text: "Turtle Graphics"
+          href: TurtleGraphics.html
     - text: "Assignments"
       menu:
         - text: "HW 1 - Programming Basics"
