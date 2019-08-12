@@ -142,26 +142,17 @@ c) `not_single_or_missing`: Is `TRUE` if the participant did respond to the ques
 
 ### 7) Packages [COLLABORATIVE, 10 pts]
 
-Install the package `TurtleGraphics`
-
-Load the `TurtleGraphics` then use the following command: `turtle_init()`.
-
-What happens?
-
-Read the help information about the `TurtleGraphics` package:
-
+a) Install the package `TurtleGraphics`
+b) Load the `TurtleGraphics` library then use the following command: `turtle_init()`. What happens?
+c) Read the help information about the `TurtleGraphics` package:
 ```{r eval=FALSE}
 help(package='TurtleGraphics')
 ```
-
-Then read the help information about the `turtle_move()` function in the `TurtleGraphics` package:
-
+d) Now read the help information about the `turtle_move()` function in the `TurtleGraphics` package:
 ```{r eval=FALSE}
 ?turtle_move()
 ```
-
-Read through the following commands - what do you think is going to happen?
-
+e) Read through the following commands - write down what do you think is going to happen.
 ```{r eval=FALSE}
 turtle_init()
 turtle_move(distance = 10, direction = "forward")
@@ -172,9 +163,7 @@ turtle_move(distance = 10, direction = "forward")
 turtle_move(distance = 20, direction = "backward")
 turtle_reset()
 ```
-
-Now run the above commands - what happened?
-
-Using what you've learned about how the `TurtleGraphics` package works, write code to produce the following image:
+f) Now run the above commands - what happened?
+g) Using what you've learned about how the `TurtleGraphics` package works, write code to produce the following image:
 
 ![](images/turtle_hw1.png){ width=456}
