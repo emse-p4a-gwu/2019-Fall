@@ -31,11 +31,11 @@ isRightTriangle <- function(x1, y1, x2, y2, x3, y3) {
     return(42)
 }
 
-numberOfPoolBalls <- function(rows) {
+triangleArea <- function(x1, y1, x2, y2, x3, y3) {
     return(42)
 }
 
-numberOfPoolBallRows <- function(balls) {
+numberOfPoolBalls <- function(rows) {
     return(42)
 }
 
@@ -47,13 +47,45 @@ getTheCents <- function(n) {
     return(42)
 }
 
+# Turtle Graphics - no test functions for these, just run them and view the
+# output to make sure it's producing the correct graphic
 
+turtleSquare <- function(s) {
+    return(42)
+}
 
+# Run to test the output
+library(TurtleGraphics)
+turtle_init()
+turtle_do({
+    turtleSquare(50)
+})
 
+# Bonus Credit - Optional
+
+# numberOfPoolBallRows <- function(n) {
+#     return(42)
+# }
+
+# turtleTriangle <- function(s) {
+#     return(42)
+# }
+
+# # Run to test the output
+# library(TurtleGraphics)
+# turtle_init()
+# turtle_do({
+#     turtleTriangle(50)
+# })
 
 ######################################################################
 # ignore_rest: The autograder will ignore all code below here
 ######################################################################
+
+almostEqual <- function(d1, d2) {
+    epsilon = 0.00001
+    return(abs(d1-d2) <= epsilon)
+}
 
 testIntegerSquareRoot <- function() {
     cat("Testing integerSquareRoot()...")
@@ -76,11 +108,6 @@ testFabricYards <- function() {
     stopifnot(fabricYards(108) == 3)
     stopifnot(fabricYards(109) == 4)
     cat("Passed!\n")
-}
-
-almostEqual <- function(d1, d2) {
-    epsilon = 0.00001
-    return(abs(d1-d2) <= epsilon)
 }
 
 testFabricExcess <- function() {
@@ -118,6 +145,15 @@ testIsRightTriangle <- function() {
     cat("Passed!\n")
 }
 
+testTriangleArea <- function() {
+    cat("Testing triangleArea()...")
+    # Use almostEqual() when comparing floats
+    stopifnot(almostEqual(triangleArea(0, 0, 0, 2, 2, 0), 2))
+    stopifnot(almostEqual(triangleArea(0, 0, 4, 0, 2, 6), 12))
+    stopifnot(almostEqual(triangleArea(0, 0, -4, 0, -2, -6), 12))
+    cat("Passed!\n")
+}
+
 testNumberOfPoolBalls <- function() {
     cat("Testing numberOfPoolBalls()...")
     stopifnot(numberOfPoolBalls(0) == 0)
@@ -125,23 +161,6 @@ testNumberOfPoolBalls <- function() {
     stopifnot(numberOfPoolBalls(2) == 1+2)
     stopifnot(numberOfPoolBalls(3) == 1+2+3)
     stopifnot(numberOfPoolBalls(10) == 55)
-    cat("Passed!\n")
-}
-
-testNumberOfPoolBallRows <- function() {
-    cat("Testing numberOfPoolBallRows()...")
-    stopifnot(numberOfPoolBallRows(0) == 0)
-    stopifnot(numberOfPoolBallRows(1) == 1)
-    stopifnot(numberOfPoolBallRows(2) == 2)
-    stopifnot(numberOfPoolBallRows(3) == 2)
-    stopifnot(numberOfPoolBallRows(4) == 3)
-    stopifnot(numberOfPoolBallRows(6) == 3)
-    stopifnot(numberOfPoolBallRows(7) == 4)
-    stopifnot(numberOfPoolBallRows(10) == 4)
-    stopifnot(numberOfPoolBallRows(11) == 5)
-    stopifnot(numberOfPoolBallRows(54) == 10)
-    stopifnot(numberOfPoolBallRows(55) == 10)
-    stopifnot(numberOfPoolBallRows(56) == 11)
     cat("Passed!\n")
 }
 
@@ -170,16 +189,37 @@ testGetTheCents <- function() {
     cat("Passed!\n")
 }
 
+testNumberOfPoolBallRows <- function() {
+    cat("Testing numberOfPoolBallRows()...")
+    stopifnot(numberOfPoolBallRows(0) == 0)
+    stopifnot(numberOfPoolBallRows(1) == 1)
+    stopifnot(numberOfPoolBallRows(2) == 2)
+    stopifnot(numberOfPoolBallRows(3) == 2)
+    stopifnot(numberOfPoolBallRows(4) == 3)
+    stopifnot(numberOfPoolBallRows(6) == 3)
+    stopifnot(numberOfPoolBallRows(7) == 4)
+    stopifnot(numberOfPoolBallRows(10) == 4)
+    stopifnot(numberOfPoolBallRows(11) == 5)
+    stopifnot(numberOfPoolBallRows(54) == 10)
+    stopifnot(numberOfPoolBallRows(55) == 10)
+    stopifnot(numberOfPoolBallRows(56) == 11)
+    cat("Passed!\n")
+}
+
 testAll <- function() {
     testIntegerSquareRoot()
     testFabricYards()
     testFabricExcess()
     testDistance()
     testIsRightTriangle()
+    testTriangleArea()
     testNumberOfPoolBalls()
-    testNumberOfPoolBallRows()
     testIsEvenPositiveInt()
     testGetTheCents()
+    if ('numberOfPoolBallRows' %in% ls()) {
+        # Only test this if attempted
+        testNumberOfPoolBallRows()
+    }
 }
 
 testAll()
