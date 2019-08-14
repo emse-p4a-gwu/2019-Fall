@@ -1,6 +1,9 @@
 ---
 title: "Practice 7 - Strings"
-output: html_document
+output:
+  html_document:
+    number_sections: false
+    toc: no
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}

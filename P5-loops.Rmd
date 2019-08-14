@@ -1,12 +1,100 @@
 ---
 title: "Practice 5 - Loops"
-output: html_document
+output:
+  html_document:
+    number_sections: false
+    toc: no
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
+
+## `for` loops
+
+### Sum from `m` to `n`
+
+There are many ways to sum the integers between two bounds, `m` and `n`.
+
+#### a) `loopSumFromMToN(m, n)`
+
+Use a `for` loop to sum the total of the integers between `m` and `n`.
+
+#### b) `vectorSumFromMToN(m, n)`
+
+Use a vector (no loops!) to sum the total of the integers between `m` and `n`.
+
+#### c) `formulaSumFromMtoN(m, n)`
+
+Use a closed formula (no vectors or loops!) to sum the total of the integers between `m` and `n`. Hint: [Wikipedia](https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%E2%8B%AF){target="_blank"} is helpful :)
+
+#### d) `sumEveryKthFromMToN(m, n, k)`
+
+Use a `for` loop to sum every kth integer between `m` and `n`.
+
+#### e) `sumOfOddsFromMToN(m, n)`
+
+Use a `for` loop to sum every odd integer between `m` and `n`.
+
+## `while` loops
+
+### `nthMultipleOf4Or7(n)`
+
+Find the nth positive integer that is a multiple of either 4 or 7. Hint: you should write a helper function called `isMultipleOf4Or7(n)` that returns `TRUE` if `n` is a multiple of 4 or 7 and `FALSE` otherwise.
+
+### Prime Numbers
+
+**Background**: Read up on the Wikipedia page on [prime numbers](https://en.wikipedia.org/wiki/Prime_number){target="_blank"}. We want to write the function `nthPrime(n)`. However, to write that function, we'll first need to write `isPrime(n)`, which determines whether a number is prime or not.
+
+#### a) `isPrime(n)`
+
+Write the function `isPrime(n)` which takes a non-negative integer, `n`, and returns `TRUE` if it is a prime number and `FALSE` otherwise.
+
+#### b) `nthPrime(n)`
+
+Write the function `nthPrime(n)` which takes a non-negative integer, `n`, and returns the nth prime number, where `nthPrime(1)` returns the first prime number (2).
+
+## Turtle loops!
+
+### `turtleCircleInSquare(s)`
+
+Write the function `turtleCircleInSquare(s)` that uses the `TurtleGraphics` library to draw a circle inscribed inside a square with side `s < 100`. The square and circle should be centered in the turtle's terrarium. Hint: You may want to use `turtleSquare(s)` and `turtleCircle(r)` as helper functions! The following code should produce a circle inscribed inside a square with a side length of 50:
+
+```{r, eval=FALSE}
+library(TurtleGraphics)
+turtle_init()
+turtle_do({
+    turtleCircleInSquare(50)
+})
+```
+![](images/turtle_circleInSquare.png){ width=456 }
+
+### `concentricTurtleCircles(spacing = 5)`
+
+Write the function `concentricTurtleCircles(spacing)` that uses the `TurtleGraphics` library to draw concentric circles from the center of the terrarium and outward. The `spacing` argument determines the spacing between each circle, and the default value should be `spacing = 5`. Also, `spacing >= 1`, and your function must not allow the turtle to escape the terrarium. Hint: you may want to use `turtleCircle(r)` as a helper function. The following code should produce concentric circles with a spacing of 5:
+
+```{r, eval=FALSE}
+library(TurtleGraphics)
+turtle_init()
+turtle_do({
+    concentricTurtleCircles()
+})
+```
+![](images/turtle_concentricCircles.png){ width=456 }
+
+### `concentricTurtleCircleInSquares(spacing = 5)`
+
+Write the function `concentricTurtleCircleInSquares(spacing)` that uses the `TurtleGraphics` library to draw concentric circles inscribed in squares from the center of the terrarium and outward. The `spacing` argument determines the spacing between each circle, and the default value should be `spacing = 5`. Also, `spacing >= 1`, and your function must not allow the turtle to escape the terrarium. Hint: you may want to use `turtleCircleInSquare(r)` as a helper function. The following code should produce concentric circles inscribed in squares with a spacing of 5:
+
+```{r, eval=FALSE}
+library(TurtleGraphics)
+turtle_init()
+turtle_do({
+    concentricTurtleCircleInSquares()
+})
+```
+![](images/turtle_concentricCirclesInSquares.png){ width=456 }
 
 ---
 
