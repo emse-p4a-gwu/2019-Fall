@@ -183,7 +183,40 @@ rbind(a, c(4, 5, 6)) # Add a row
 
 ---
 
-# Linear algebra
+# Matrix math
+
+## Basic arithmetic operations
+
+Just like with [vectorized operations](L6-vectors.html#3_vectorized_operations), matrices also perform most arithmetic operations on each element in the matrix.
+
+```{r}
+a <- matrix(1:9, nrow = 3, ncol = 3)
+b <- matrix(1:9, nrow = 3, ncol = 3)
+# Addition
+a + b
+# Subtraction
+a - b
+# Multiplication
+a * b
+# Division
+a / b
+```
+
+When performing operations on matrices, the dimensions need to match:
+
+```{r, error=TRUE}
+c <- matrix(1:6, nrow = 2, ncol = 3)
+a + c
+```
+
+You can also use single values to scale or shift all the elements in a matrix:
+
+```{r, error=TRUE}
+2 * a # Scale by factor of 2
+2 + a # Shift by value of 2
+```
+
+## Linear algebra
 
 One of the more powerful things you can do with matrices is [linear algebra](https://en.wikipedia.org/wiki/Linear_algebra){target="_blank"}. For example, you can compute a sum-product (aka "[dot product](https://en.wikipedia.org/wiki/Dot_product){target="_blank"}") operation with a single matrix multiplication command using the `%*%` operator:
 
