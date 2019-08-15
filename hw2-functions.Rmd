@@ -41,7 +41,7 @@ Rules:
 
 **Hint**: Read the [Getting Started Tips](L1.2-getting-started.html#tips), [Programming Basics Tips](L2-programming-basics.html#tips), and [Functions Tips](L3-functions.html#tips) - these could come in handy!
 
-### 1) `integerSquareRoot(x)` [SOLO, 5 pts]
+### 1) `integerSquareRoot(n)` [SOLO, 5 pts]
 
 Given a non-negative integer `n`, return the integer value that is closest to its square root. For example, `integerSquareRoot(10)` returns `3`.
 
