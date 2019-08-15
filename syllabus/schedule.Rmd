@@ -20,3 +20,4 @@ schedule <- schedule[c('Week', 'Date', 'Event/Topics', 'Quizzes/Practice', 'Assi
 # Render the schedule as markdown
 kable(schedule, format='markdown')
 ```
+NOTE: In accordance with university policy, the final exam will be given during the final exam period and not the last week of the semester.

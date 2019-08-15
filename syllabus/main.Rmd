@@ -6,7 +6,7 @@
 --------------------|--------------------------------------------------
 Name:&emsp;         | EMSE 6574: Programming for Analytics, Section 10
 Semester:&emsp;     | Fall 2019
-Meeting Time:&emsp; | 6:10pm - 8:40pm
+Meeting Time:&emsp; | Mondays, 6:10pm - 8:40pm
 Location:&emsp;     | Phillips Hall 108
 
 # Instructor Information
