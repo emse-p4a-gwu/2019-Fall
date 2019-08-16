@@ -1,5 +1,5 @@
 ---
-title: "Data Analysis 2"
+title: "Data Analysis 1 - Data Frames"
 output: html_document
 ---
 
@@ -9,3 +9,4 @@ source("knitr_setup.R")
 ```
 
 ---
+
