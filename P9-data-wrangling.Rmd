@@ -1,5 +1,5 @@
 ---
-title: "Practice 9 - Data Frames"
+title: "Practice 9 - Data Wrangling"
 output:
   html_document:
     number_sections: false

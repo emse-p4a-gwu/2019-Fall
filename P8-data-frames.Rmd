@@ -1,5 +1,5 @@
 ---
-title: "Practice 8 - Matrices"
+title: "Practice 8 - Data Frames"
 output:
   html_document:
     number_sections: false

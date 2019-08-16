@@ -1,5 +1,5 @@
 ---
-title: "Homework 7 - Monte Carlo Methods"
+title: "Homework 6 - Monte Carlo Methods"
 output:
   html_document:
     number_sections: false
