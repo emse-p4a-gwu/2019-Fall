@@ -41,10 +41,10 @@ navbar:
           href: L7-strings.html
         - text: "Week 10 - Matrices"
           href: L10-matrices.html
-        - text: "Week 11 - Data Frames"
-          href: L11-data-frames.html
-        - text: "Week 12 - Data Visualization"
-          href: L12-data-visualization.html
+        - text: "Week 11 - Data Analysis 1"
+          href: L11-data-analysis-1.html
+        - text: "Week 12 - Data Analysis 2"
+          href: L12-data-analysis-2.html
         - text: "Week 14 - Monte Carlo Methods"
           href: L14-monte-carlo-methods.html
         - text: "Week 15 - RMarkdown"
