@@ -20,11 +20,11 @@ output:
 
 1) Before going forward, read the [Getting Started](L1.2-getting-started.html) and [Programming Basics](L2-programming-basics.html) lessons.
 
-2) Open RStudio and create a new project called "hw1-lastName", replacing "lastName" with your last name.
+2) Open RStudio and create a new project called "hw1-lastName", replacing "lastName" with your last name. [2 pts]
 
-3) Create a new R script and save it as "hw1.R" in the R project folder you just created.
+3) Create a new R script and save it as "hw1.R" in the R project folder you just created. [2 pts]
 
-4) Copy the following code to the top of this script, and fill out your name, GW Net ID, and the names of anyone you worked with:
+4) Copy the following code to the top of this script, and fill out your name, GW Net ID, and the names of anyone you worked with [2 pts]:
 
 ```{r eval=FALSE}
 # hw1.R
@@ -37,11 +37,11 @@ output:
 # 2) Name: Last, First
 ```
 
-5) Type all of your answers to the following questions in the "hw1.R" script.
+5) Type all of your answers to the following questions in the "hw1.R" script. [point breakdown is listed by each problem]
 
-6) After completing the questions, create a zip file of all files in your R project folder for this assignment.
+6) After completing the questions, create a zip file of all files in your R project folder for this assignment. [2 pts]
 
-7) Submit the zip file on Blackboard by the due deadline.
+7) Submit the zip file on Blackboard by the due deadline. [2 pts]
 
 ---
 
@@ -98,7 +98,7 @@ Install and load the `stringr` library, then use the `str_to_lower()`, `str_to_u
 "The Quick Brown Fox Jumped Over The Lazy Dog"
 ```
 
-### 4) Numeric data 1 [COLLABORATIVE, 20 pts]
+### 4) Numeric data 1 [COLLABORATIVE, 15 pts]
 
 Max is looking to purchase a car and is deciding between a Toyota Prius and a Toyota Camry. He knows that based on his driving patterns, he can get an average fuel economy of 55 miles per gallon (mpg) of gasoline with the Prius, which sells for $27,600. He is also considering the cheaper Toyota Camry, which costs $24,000 but only gets 32 mpg on average. He knows he typically drives 15,000 miles each year. For the following questions, assume the price of gas will remain constant at $3.00 / gallon forever.
 
@@ -106,7 +106,7 @@ a) Create variables for the price and fuel economy of each vehicle. Use variable
 b) Using the variables you created (and only these variables - no other numbers!), compute how many years Max would need to drive the Prius such that the money he saves in lower fuel costs overcomes the higher upfront price compared to the Camry. Ignore inflation and discount rates.
 c) What would the price of gasoline need to be such that the answer to part b) is just 2 years? You may use the number `2` once in your solution, otherwise you may only use variables you defined in part a.
 
-### 5) Numeric data 2 [COLLABORATIVE, 20 pts]
+### 5) Numeric data 2 [COLLABORATIVE, 15 pts]
 
 Load the following variables into R, then answer the questions below:
 
@@ -124,7 +124,7 @@ b) Compute the Euclidean distance between the points (x2, y2) and (x3, y3) and s
 c) Compute the Euclidean distance between the points (x1, y1) and (x3, y3) and store this variable as `d3`.
 d) Is the triangle formed by the points (x1, y1), (x2, y2), and (x3, y3) a [right triangle](https://en.wikipedia.org/wiki/Right_triangle){target="_blank"}? If so, prove it using the variables `d1`, `d2`, and `d3`.
 
-### 6) Logical data [COLLABORATIVE, 20 pts]
+### 6) Logical data [COLLABORATIVE, 15 pts]
 
 Suppose we fielded a survey that asked respondents to specify their marital status. The responses are stored in a variable called `marital_status` as one of the following:
 
@@ -140,7 +140,7 @@ a) `is_single`: Is `TRUE` if the participant is single and `FALSE` otherwise.
 b) `has_spouse`: Is `TRUE` if the participant is married or in a de facto relationship and `FALSE` otherwise.
 c) `not_single_or_missing`: Is `TRUE` if the participant did respond to the question, but is not single.
 
-### 7) Packages [COLLABORATIVE, 15 pts]
+### 7) Packages [COLLABORATIVE, 20 pts]
 
 a) Read about the `TurtleGraphics` package [HERE](TurtleGraphics.html)
 b) Install the package `TurtleGraphics`

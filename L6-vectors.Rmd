@@ -212,14 +212,15 @@ When using a logical vector for indexing, the position where the logical vector 
 
 ```{r}
 x <- seq(1, 10)
-logicalVector <- x > 5
-logicalVector
+x > 5 # Create logical vector
+x[x > 5] # Put logical vector in brackets to filter out the TRUE elements
+```
 
-# Return all elements that are TRUE in logicalVector:
-x[logicalVector]
+You can also use the `which()` operator to find the numeric indices for which a condition is `TRUE`, and then use those indices to select elements:
 
-# Or more directly, you can just put the condition in the brackets:
-x[x > 5]
+```{r}
+which(x < 5) # Returns indices of TRUE elements
+x[which(x < 5)] # Use which to select elements based on a condition
 ```
 
 # Vectorized operations

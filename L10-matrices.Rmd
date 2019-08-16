@@ -8,7 +8,7 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-![](images/neo_R.jpg){ width=300 }
+![](images/neo_R.jpg){ width=400 }
 
 ---
 
@@ -70,9 +70,9 @@ f
 You can check the dimensions of any matrix by using the `nrow()` and `ncol()` functions (which give the number of rows and columns, respectively), or the `dim()` function, which returns a vector containing the number of rows and columns:
 
 ```{r}
-nrow(b)
-ncol(b)
-dim(b)
+nrow(b) # Returns the number of rows
+ncol(b) # Returns the number of columns
+dim(b) # Returns a vector of the number rows and columns (in that order)
 ```
 
 You can also create a matrix from a vector by setting its dimension using the `dim()` function (though I almost never do this):
