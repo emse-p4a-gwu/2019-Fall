@@ -20,4 +20,5 @@ Imports:
     here,
     kableExtra,
     wikifacts,
-    TurtleGraphics
+    TurtleGraphics,
+    DAAG
