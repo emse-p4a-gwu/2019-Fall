@@ -26,10 +26,11 @@ source("knitr_setup.R")
 
 # Datasets
 
+- The [`dslabs` R package](https://github.com/rafalab/dslabs){target="_blank"} - check out [this blog post](https://simplystatistics.org/2018/01/22/the-dslabs-package-provides-datasets-for-teaching-data-science/){target="_blank"} to view a summary of some of the datasets in the package.
+
 - [Kaggle](https://www.kaggle.com/datasets){target="_blank"}
 - [Google Dataset Search](https://toolbox.google.com/datasetsearch){target="_blank"}
 - [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635){target="_blank"}
-- [More datasets for teaching data science: The expanded `dslabs` package](https://simplystatistics.org/2019/07/19/more-datasets-for-teaching-data-science-the-expanded-dslabs-package/){target="_blank"}, by Amy Gill
 
 ---
 
