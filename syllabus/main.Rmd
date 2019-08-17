@@ -105,13 +105,13 @@ High     | Attends on time and prepared | Takes notes; attentive; regularly cont
 Final grades will be calculated as follows:
 
 <div class="tableMedium">
-Course Component | Weight | Notes
------------------|-----|-------------------------------
-Homeworks        | 30% | Lowest homework grade is dropped
-Quizzes          | 15% | Lowest quiz grade is dropped
-Midterm Exams    | 30% | Lowest midterm grade is half-weighted
-Final Exam       | 20% | Notes
-Attendance & Participation | 5% | Notes
+Course Component  | Weight | Notes
+------------------|-----|-----------------------------------
+Homeworks (6)     | 30% | Lowest homework grade is dropped
+Quizzes (5)       | 15% | Lowest quiz grade is dropped
+Midterm Exams (2) | 30% | Lowest midterm grade is half-weighted
+Final Exam        | 20% |
+Attendance & Participation | 5% |
 </div>
 
 ### AMD Grading
@@ -123,10 +123,10 @@ In addition to the normal grading scale, we will separately compute your grade u
 To compute your AMG score, first use the following to compute your raw score. If the resulting score is higher than a C, set it back to a C.
 
 <div class="tableSmall">
-Course Component | Weight
+Course Component   | Weight
 -------------------|----
-Best 5 Homeworks  | 20%
-Best 5 Quizzes     | 15%
+Best 5 Homeworks   | 20%
+Best 4 Quizzes     | 15%
 Best Midterm Exam  | 20%
 Final Exam         | 40%
 Attendance & Participation | 5%
