@@ -39,13 +39,13 @@ navbar:
           href: L6-vectors.html
         - text: "Week 7: Strings"
           href: L7-strings.html
-        - text: "Week 11: Data Analysis 1 - Data Frames"
+        - text: "Week 10: Data Analysis 1 - Data Frames"
           href: L10-data-analysis-1-data-frames.html
         - text: "Week 11: Data Analysis 2 - Data Wrangling"
           href: L11-data-analysis-2-data-wrangling.html
         - text: "Week 12: Data Analysis 3 - Data Visualization"
           href: L12-data-analysis-2-data-visualization.html
-        - text: "Week 14: Monte Carlo Methods"
+        - text: "Week 13: Monte Carlo Methods"
           href: L13-monte-carlo-methods.html
         - text: "Week 15: RMarkdown"
           href: L15-rmarkdown.html
