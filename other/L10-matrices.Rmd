@@ -97,7 +97,7 @@ The most common way is to use integer indices, but you can also use character in
 
 ## Using integer indices
 
-To index with integers, we specify the row numbers and column numbers as vectors.
+To index with integers, specify the row numbers and column numbers as vectors.
 
 ```{r}
 a
