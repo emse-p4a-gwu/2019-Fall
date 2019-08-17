@@ -8,6 +8,17 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+> ### Learning Objectives
+>
+> * Understand how to use `if` and `else` statements to handle conditional programming.
+>
+> ### Suggested Readings
+>
+> * [Chapters 9.2 - 9.3](https://rstudio-education.github.io/hopr/programs.html#if-statements){target="_blank"} of "Hands-On Programming with R", by Garrett Grolemund
+
+
+---
+
 Like most programming languages, R can evaluate **conditional statements**. A conditional statement is a switch - it tells the code which command to execute depending on a _condition_ that is specified by the programmer.
 
 The most prominent examples of a conditional statement is the `if` statement, and the accompanying `else` statement.

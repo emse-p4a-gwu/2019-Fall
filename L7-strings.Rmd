@@ -9,11 +9,18 @@ source("knitr_setup.R")
 library(stringr)
 ```
 
-Suggested readings:
-
-- [Chapter 14](https://r4ds.had.co.nz/strings.html#stringi){target="_blank"} of "R for Data Science"
-- [Introduction to `stringr` vignette](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html){target="_blank"}
-- The [`stringr` package documentation](https://stringr.tidyverse.org/){target="_blank"}
+> ### Learning Objectives
+>
+> * Understand basic functions in the `stringr` library for working with character data.
+> * Understand how to deal with whitespace.
+> * Understand how to split strings.
+> * Understand how to match strings.
+>
+> ### Suggested readings
+>
+> * [Chapter 14](https://r4ds.had.co.nz/strings.html){target="_blank"} of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [Introduction to `stringr` vignette](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html){target="_blank"}
+> * The [`stringr` package documentation](https://stringr.tidyverse.org/){target="_blank"}
 
 ---
 

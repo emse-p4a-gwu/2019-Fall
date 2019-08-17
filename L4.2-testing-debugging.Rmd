@@ -8,6 +8,20 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+> ### Learning Objectives
+>
+> * Understand how to write a basic test function.
+> * Understand how to write custom error messages in a function.
+> * Understand multiple ways to debug your code.
+>
+> ### Suggested Readings
+>
+> * [Chapter 11](https://whattheyforgot.org/debugging-r-code.html){target="_blank"} in Jenny Bryan and Jim Hester's fantastic book, ["What They Forgot to Teach You About R"](https://whattheyforgot.org/){target="_blank"}.
+
+Here are some other great resources:
+> * [Debugging techniques in RStudio](https://resources.rstudio.com/wistia-rstudio-conf-2018-2/debugging-techniques-in-rstudio-amanda-gadrow-4){target="_blank"} - Amanda Gadrow's talk at rstudio::conf 2018.
+> * [Debugging in RStudio article](https://support.rstudio.com/hc/en-us/articles/200713843){target="_blank"}
+
 ---
 
 # Writing test cases
@@ -234,15 +248,6 @@ RStudio enter the debugger when it occurs. You can control the error behavior wi
 The RStudio debugging console has a few buttons to make debugging a little
 nicer, From left to right they are, next (equivalent to `n`), step info (`s`),
 continue (`c`) and Stop (`Q`).
-
-### Other Resources
-
-Much of the content on debugging came from the much more detailed [chapter on debugging](https://whattheyforgot.org/debugging-r-code.html){target="_blank"} in Jenny Bryan and Jim Hester's fantastic book, ["What They Forgot to Teach You About R"](https://whattheyforgot.org/){target="_blank"}.
-
-Here are some other great resources:
-
-- [Debugging techniques in RStudio - Amanda Gadrow's talk at rstudio::conf 2018](https://resources.rstudio.com/wistia-rstudio-conf-2018-2/debugging-techniques-in-rstudio-amanda-gadrow-4){target="_blank"}
-- [Debugging in RStudio article](https://support.rstudio.com/hc/en-us/articles/200713843){target="_blank"}
 
 ---
 

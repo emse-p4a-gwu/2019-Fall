@@ -8,6 +8,20 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+> ### Learning Objectives
+>
+> * Describe what a vector is.
+> * Create vectors of different data types.
+> * Use indexing to subset and modify specific portions of vectors.
+> * Understand how to use vectorized functions to avoid loop operations.
+>
+> ### Suggested readings
+>
+> * [Chapter 20](https://r4ds.had.co.nz/vectors.html){target="_blank"} of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [Chapter 5.1](https://rstudio-education.github.io/hopr/r-objects.html#atomic-vectors){target="_blank"} of "Hands-On Programming with R", by Garrett Grolemund
+
+---
+
 So far we've only dealt with objects that contain one value (e.g. `x <- 1`), but R actually stores those values in a _vector_ of length one:
 
 ```{r}

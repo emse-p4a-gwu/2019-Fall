@@ -8,11 +8,23 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+> ### Learning Objectives
+>
+> * Describe what loops are.
+> * Understand the differences and different uses of `for` loops and `while` loops.
+> * Understand how to use `break` and `next` statements inside loops.
+>
+> ### Suggested Readings
+>
+> * [Chapter 21](https://r4ds.had.co.nz/iteration.html){target="_blank"} of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [Chapters 11](https://rstudio-education.github.io/hopr/loops.html){target="_blank"} of "Hands-On Programming with R", by Garrett Grolemund
+
+
+---
+
 Similar to conditionals (remember those [if / else statements](L4.1-conditionals.html)?), loops are another kind of "flow control" - that is, code that alters the otherwise linear flow of operations from the top of a script straight through to the end. The idea is simple: a loop is a block of code (i.e., a sequence of commands) that R will execute over and over again until some *termination criterion* is met.
 
 The main two types of loops are `for` and `while` loops.
-
----
 
 # The `for` loop
 
@@ -26,7 +38,7 @@ for (VALUE in SEQUENCE) {
 }
 ```
 
-In a `for` loop, R runs a fixed number of iterations determined by the `SEQUENCE` statement, which is a sequence of values. In each iteration, the variable `VALUE` will take the next value in `SEQUENCE`. Once we’ve exhausted all of the values in `SEQUENCE`, the loop terminates and the flow of the program continues down the script. This schematic illustrates the idea:
+In a `for` loop, R runs a fixed number of iterations determined by the `SEQUENCE` statement, which is a sequence of values. In each iteration, the variable `VALUE` will take the next value in `SEQUENCE`. Once we've exhausted all of the values in `SEQUENCE`, the loop terminates and the flow of the program continues down the script. This schematic illustrates the idea:
 
 ![](images/loop_for.png){ width=350 }
 
@@ -92,6 +104,10 @@ This will come in handy when working with 2-dimensional objects like [matrices](
 ---
 
 # The `while` loop
+
+> A man calls his programmer spouse and says, "while you're out, buy some milk"...she never returned home.
+>
+> ![](images/laugh_emoji.png){ width=100 }
 
 Use while loops when there is an indeterminate number of iterations. The basic format of the loop looks like this:
 

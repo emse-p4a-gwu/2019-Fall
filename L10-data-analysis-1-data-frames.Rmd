@@ -11,15 +11,16 @@ source("knitr_setup.R")
 > ### Learning Objectives
 >
 > * Describe what a data frame is.
-> * Create data frames
+> * Create data frames.
 > * Use indexing to subset and modify specific portions of data frames.
 > * Load external data from a .csv file into a data frame.
 > * Summarize the contents of a data frame.
-> * Describe what a factor is.
-> * Convert between strings and factors.
-> * Reorder and rename factors.
-> * Change how character strings are handled in a data frame.
-> * Format dates.
+>
+> ### Suggested Readings
+>
+> * ["Introduction to Data frames in R"](https://www.datacamp.com/community/tutorials/intro-data-frame-r){target="_blank"} Data Camp article, by Ryan Sheehy
+> * [Chapter 10](https://r4ds.had.co.nz/tibbles.html){target="_blank"} of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [Chapters 5.8 - 5.11](https://rstudio-education.github.io/hopr/r-objects.html#data-frames){target="_blank"} of "Hands-On Programming with R", by Garrett Grolemund
 
 ---
 

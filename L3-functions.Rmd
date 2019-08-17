@@ -8,9 +8,23 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-We already know how to use built-in functions like `sum()`, `round()`, `sqrt()`, etc. And we can access other functions by installing external packages. But many times there just isn't a function out there to do what you need. Fortunately, you can write your own!
+> ### Learning Objectives
+>
+> * Know the basic syntax of custom functions in R.
+> * Understand how function arguments work in R.
+> * Understand the different types of return statements in R.
+> * Create your own custom functions.
+> * Understand the concept of helper functions.
+> * Understand the distinction between local and global variables.
+>
+> ### Suggested Readings
+>
+> * [Chapter 19](https://r4ds.had.co.nz/functions.html){target="_blank"} of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [Chapters 2.4 - 2.7](https://rstudio-education.github.io/hopr/basics.html#write-functions){target="_blank"} of "Hands-On Programming with R", by Garrett Grolemund
 
 ---
+
+We already know how to use built-in functions like `sum()`, `round()`, `sqrt()`, etc. And we can access other functions by installing external packages. But many times there just isn't a function out there to do what you need. Fortunately, you can write your own!
 
 # Basic syntax
 
