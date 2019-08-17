@@ -27,7 +27,7 @@ Use a vector (no loops!) to sum the total of the integers between `m` and `n`.
 
 ### c) `formulaSumFromMtoN(m, n)`
 
-Use a closed formula (no vectors or loops!) to sum the total of the integers between `m` and `n`. Hint: [Wikipedia](https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%E2%8B%AF){target="_blank"} is helpful :)
+Use a closed formula (no vectors or loops!) to sum the total of the integers between `m` and `n`. Hint: [Wikipedia](https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%E2%8B%AF) is helpful :)
 
 ### d) `sumEveryKthFromMToN(m, n, k)`
 
@@ -45,7 +45,7 @@ Find the nth positive integer that is a multiple of either 4 or 7. Hint: you sho
 
 ## Prime Numbers
 
-**Background**: Read up on the Wikipedia page on [prime numbers](https://en.wikipedia.org/wiki/Prime_number){target="_blank"}. We want to write the function `nthPrime(n)`. However, to write that function, we'll first need to write `isPrime(n)`, which determines whether a number is prime or not.
+**Background**: Read up on the Wikipedia page on [prime numbers](https://en.wikipedia.org/wiki/Prime_number). We want to write the function `nthPrime(n)`. However, to write that function, we'll first need to write `isPrime(n)`, which determines whether a number is prime or not.
 
 ### a) `isPrime(n)`
 

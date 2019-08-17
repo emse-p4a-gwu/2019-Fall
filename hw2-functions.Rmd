@@ -20,7 +20,7 @@ output:
 
 2) Open RStudio and create a new project called "hw2-lastName", replacing "lastName" with your last name.
 
-3) Download the [hw2.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw/hw2-template.R){target="_blank"} and place it in RStudio project folder you just created.
+3) Download the [hw2.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw/hw2-template.R) and place it in RStudio project folder you just created.
 
 4) Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the "hw2.R" file.
 
@@ -61,17 +61,17 @@ Given four numeric values representing the points `(x1, y1)` and `(x2, y2)`, wri
 
 ### 5) `isRightTriangle(x1, y1, x2, y2, x3, y3)` [COLLABORATIVE, 10 pts]
 
-Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return `TRUE` if the triangle formed by connecting the 3 points is a right triangle, and `FALSE` otherwise. You may wish to use the `distance(x1, y1, x2, y2)` function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Heron's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula){target="_blank"}.
+Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return `TRUE` if the triangle formed by connecting the 3 points is a right triangle, and `FALSE` otherwise. You may wish to use the `distance(x1, y1, x2, y2)` function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Heron's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula).
 
 ### 6) `triangleArea(x1, y1, x2, y2, x3, y3)` [COLLABORATIVE, 10 pts]
 
-Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return the area of the triangle formed by connecting the 3 points. You may wish to use the `distance(x1, y1, x2, y2)` function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Heron's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula){target="_blank"}.
+Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return the area of the triangle formed by connecting the 3 points. You may wish to use the `distance(x1, y1, x2, y2)` function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Heron's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula).
 
 ### 7) `numberOfPoolBalls(rows)` [COLLABORATIVE, 10 pts]
 
 ![](images/poolballs.jpg){ width=150 }
 
-Pool balls are arranged in rows where the first row contains 1 pool ball and each row contains 1 more pool ball than the previous row. Thus, for example, 3 rows contain 6 total pool balls (1+2+3). With this in mind, write the function numberOfPoolBalls(rows) that takes a non-negative integer value, the number of rows, and returns another int value, the number of pool balls in that number of full rows. For example, `numberOfPoolBalls(3)` returns `6`. We will not limit our analysis to a "rack" of 15 balls; rather, our pool table can contain an unlimited number of rows. Do not use loops. Hint: For this problem you should research [Triangular Numbers](https://en.wikipedia.org/wiki/Triangular_number){target="_blank"}.
+Pool balls are arranged in rows where the first row contains 1 pool ball and each row contains 1 more pool ball than the previous row. Thus, for example, 3 rows contain 6 total pool balls (1+2+3). With this in mind, write the function numberOfPoolBalls(rows) that takes a non-negative integer value, the number of rows, and returns another int value, the number of pool balls in that number of full rows. For example, `numberOfPoolBalls(3)` returns `6`. We will not limit our analysis to a "rack" of 15 balls; rather, our pool table can contain an unlimited number of rows. Do not use loops. Hint: For this problem you should research [Triangular Numbers](https://en.wikipedia.org/wiki/Triangular_number).
 
 ### 8) `isEvenPositiveInt(x)` [COLLABORATIVE, 15 pts]
 
@@ -102,7 +102,7 @@ This problem is the inverse of the `numberOfPoolBalls(rows)` problem. In this ca
 
 ### Bonus Credit 2) `turtleTriangle(s)` [SOLO, 5 pts]
 
-Write the function `turtleTriangle(s)` which uses the `TurtleGraphics` library to draw an equilateral triangle with side length `s < 100`. The triangle should be centered in the turtle's terrarium. Hint: Getting the triangle centered is the tricky part - you may want to read more about [equilateral triangles](https://en.wikipedia.org/wiki/Equilateral_triangle){target="_blank"} and [apothems](https://en.wikipedia.org/wiki/Apothem){target="_blank"}. The code below produces a triangle with side length of 50:
+Write the function `turtleTriangle(s)` which uses the `TurtleGraphics` library to draw an equilateral triangle with side length `s < 100`. The triangle should be centered in the turtle's terrarium. Hint: Getting the triangle centered is the tricky part - you may want to read more about [equilateral triangles](https://en.wikipedia.org/wiki/Equilateral_triangle) and [apothems](https://en.wikipedia.org/wiki/Apothem). The code below produces a triangle with side length of 50:
 
 ```{r, eval=FALSE}
 library(TurtleGraphics)

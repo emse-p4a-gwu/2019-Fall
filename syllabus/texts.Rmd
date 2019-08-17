@@ -1,42 +1,42 @@
-You will inevitably run into problems while learning R. The best starting point for troubleshooting is Google and [Stackoverflow](https://stackoverflow.com/){target="_blank"}. In addition, these resources can also be helpful:
+You will inevitably run into problems while learning R. The best starting point for troubleshooting is Google and [Stackoverflow](https://stackoverflow.com/). In addition, these resources can also be helpful:
 
 **Programming in R**:
 
 - Grolemund, Garrett. "Hands-On Programming with R"
-[[free online](https://rstudio-education.github.io/hopr/){target="_blank"}],
-[[buy on amazon](https://www.amazon.com/gp/product/1449359019/){target="_blank"}]
+[[free online](https://rstudio-education.github.io/hopr/)],
+[[buy on amazon](https://www.amazon.com/gp/product/1449359019/)]
 - Peng, Roger D. "R Programming for Data Science"
-[[online - pay what you want](https://leanpub.com/rprogramming){target="_blank"}]
+[[online - pay what you want](https://leanpub.com/rprogramming)]
 
 **Data Analysis in R**:
 
 - Wickham, Hadley. "R for Data Science"
-[[free online](https://r4ds.had.co.nz/){target="_blank"}],
-[[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399){target="_blank"}]
+[[free online](https://r4ds.had.co.nz/)],
+[[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
 - Peng, Roger D. "Exploratory Data Analysis with R"
-[[online - pay what you want](https://leanpub.com/exdata){target="_blank"}]
+[[online - pay what you want](https://leanpub.com/exdata)]
 
 **Data Visualization**:
 
 - Healy, Kieran. "Data Visualization: A practical introduction"
-[[free online](http://socviz.co/){target="_blank"}],
-[[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624){target="_blank"}]
+[[free online](http://socviz.co/)],
+[[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
 - Wilke, Claus O. "Fundamentals of Data Visualization"
-[[free online](https://serialmentor.com/dataviz/){target="_blank"}],
-[[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089){target="_blank"}]
+[[free online](https://serialmentor.com/dataviz/)],
+[[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
 
 
 **RStudio Cheatsheets**:
 
-- [All cheatsheets](https://www.rstudio.com/resources/cheatsheets/){target="_blank"}
-- [Data wrangling with the `dplyr` library](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf){target="_blank"}
-- [Data visualization with the `ggplot2` library](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf){target="_blank"}
-- [RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf){target="_blank"}
+- [All cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+- [Data wrangling with the `dplyr` library](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
+- [Data visualization with the `ggplot2` library](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+- [RMarkdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
 
 **RMarkdown**:
 
-- [60 second markdown guide](https://commonmark.org/help/){target="_blank"}
-- [10 minute markdown tutorial](https://commonmark.org/help/tutorial/){target="_blank"}
-- [Markdown It](https://markdown-it.github.io){target="_blank"}: Quickly demo Markdown code.
-- [Table generator](http://www.tablesgenerator.com/){target="_blank"}: Create tables and get export code for multiple formats.
-- [CMU RMarkdown guide (detailed)](http://www.stat.cmu.edu/~cshalizi/rmarkdown/){target="_blank"}
+- [60 second markdown guide](https://commonmark.org/help/)
+- [10 minute markdown tutorial](https://commonmark.org/help/tutorial/)
+- [Markdown It](https://markdown-it.github.io): Quickly demo Markdown code.
+- [Table generator](http://www.tablesgenerator.com/): Create tables and get export code for multiple formats.
+- [CMU RMarkdown guide (detailed)](http://www.stat.cmu.edu/~cshalizi/rmarkdown/)

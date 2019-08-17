@@ -17,8 +17,8 @@ source("knitr_setup.R")
 >
 > ### Suggested readings
 >
-> * [Chapter 20](https://r4ds.had.co.nz/vectors.html){target="_blank"} of "R for Data Science", by Garrett Grolemund and Hadley Wickham
-> * [Chapter 5.1](https://rstudio-education.github.io/hopr/r-objects.html#atomic-vectors){target="_blank"} of "Hands-On Programming with R", by Garrett Grolemund
+> * [Chapter 20](https://r4ds.had.co.nz/vectors.html) of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [Chapter 5.1](https://rstudio-education.github.io/hopr/r-objects.html#atomic-vectors) of "Hands-On Programming with R", by Garrett Grolemund
 
 ---
 
@@ -32,7 +32,7 @@ is.vector(x)
 
 A _vector_ is a basic data structure in R. All elements in a vector must have the same type.
 
-> [Watch this 1-minute video for a quick summary of **vectors**](https://vimeo.com/220490316){target="_blank"}
+> [Watch this 1-minute video for a quick summary of **vectors**](https://vimeo.com/220490316)
 
 ---
 
@@ -162,7 +162,7 @@ You can access elements from a vector using brackets `[]` and indices inside the
 
 ## Using integer indices
 
-Vector indices start from 1 (this is important - [most programming languages start from 0](https://en.wikipedia.org/wiki/Zero-based_numbering){target="_blank"}):
+Vector indices start from 1 (this is important - [most programming languages start from 0](https://en.wikipedia.org/wiki/Zero-based_numbering)):
 
 ```{r}
 x <- seq(1, 10)

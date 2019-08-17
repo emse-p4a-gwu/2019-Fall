@@ -18,13 +18,13 @@ library(stringr)
 >
 > ### Suggested readings
 >
-> * [Chapter 14](https://r4ds.had.co.nz/strings.html){target="_blank"} of "R for Data Science", by Garrett Grolemund and Hadley Wickham
-> * [Introduction to `stringr` vignette](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html){target="_blank"}
-> * The [`stringr` package documentation](https://stringr.tidyverse.org/){target="_blank"}
+> * [Chapter 14](https://r4ds.had.co.nz/strings.html) of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [Introduction to `stringr` vignette](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html)
+> * The [`stringr` package documentation](https://stringr.tidyverse.org/)
 
 ---
 
-A "string" is the generic word for character type variables. Base R has many built-in functions for working with strings, but they are often difficult to remember and unintuitive to use. Fortunately, the wonderful folks over at the [tidyverse](https://www.tidyverse.org/){target="_blank"} developed a lovely package called [`"stringr"`](https://stringr.tidyverse.org/){target="_blank"}, which makes working with strings a lot nicer.
+A "string" is the generic word for character type variables. Base R has many built-in functions for working with strings, but they are often difficult to remember and unintuitive to use. Fortunately, the wonderful folks over at the [tidyverse](https://www.tidyverse.org/) developed a lovely package called [`"stringr"`](https://stringr.tidyverse.org/), which makes working with strings a lot nicer.
 
 Before going any further, make sure you install the `stringr` package and load it before trying to use any of the functions in this lesson:
 
@@ -423,6 +423,6 @@ str_replace_all(x, "a", "-")
 
 Some content on this page has been modified from other courses, including:
 
-- [R for Data Science](https://r4ds.had.co.nz/strings.html){target="_blank"}, by Garrett Grolemund & Hadley Wickham
-- [Handling Strings with R](https://www.gastonsanchez.com/r4strings/){target="_blank"}, by Gaston Sanchez
-- [Introduction to `stringr` vignette](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html){target="_blank"}
+- [R for Data Science](https://r4ds.had.co.nz/strings.html), by Garrett Grolemund & Hadley Wickham
+- [Handling Strings with R](https://www.gastonsanchez.com/r4strings/), by Gaston Sanchez
+- [Introduction to `stringr` vignette](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html)

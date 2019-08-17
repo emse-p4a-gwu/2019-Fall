@@ -26,22 +26,21 @@ source("knitr_setup.R")
 
 # Datasets
 
-- The [`dslabs` R package](https://github.com/rafalab/dslabs){target="_blank"} - check out [this blog post](https://simplystatistics.org/2018/01/22/the-dslabs-package-provides-datasets-for-teaching-data-science/){target="_blank"} to view a summary of some of the datasets in the package.
-
-- [Kaggle](https://www.kaggle.com/datasets){target="_blank"}
-- [Google Dataset Search](https://toolbox.google.com/datasetsearch){target="_blank"}
-- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635){target="_blank"}
+- The [`dslabs` R package](https://github.com/rafalab/dslabs) - check out [this blog post](https://simplystatistics.org/2018/01/22/the-dslabs-package-provides-datasets-for-teaching-data-science/) to view a summary of some of the datasets in the package.
+- [Kaggle](https://www.kaggle.com/datasets)
+- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
+- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
 
 ---
 
 # Helpful Tutorials
 
-- [RStudio Primers](https://rstudio.cloud/learn/primers){target="_blank"}
-- [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r){target="_blank"}
-- [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/){target="_blank"}
+- [RStudio Primers](https://rstudio.cloud/learn/primers)
+- [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r)
+- [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/)
 
 ---
 
 # Inspiration
 
-- [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f){target="_blank"}
+- [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f)

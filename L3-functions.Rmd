@@ -19,8 +19,8 @@ source("knitr_setup.R")
 >
 > ### Suggested Readings
 >
-> * [Chapter 19](https://r4ds.had.co.nz/functions.html){target="_blank"} of "R for Data Science", by Garrett Grolemund and Hadley Wickham
-> * [Chapters 2.4 - 2.7](https://rstudio-education.github.io/hopr/basics.html#write-functions){target="_blank"} of "Hands-On Programming with R", by Garrett Grolemund
+> * [Chapter 19](https://r4ds.had.co.nz/functions.html) of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [Chapters 2.4 - 2.7](https://rstudio-education.github.io/hopr/basics.html#write-functions) of "Hands-On Programming with R", by Garrett Grolemund
 
 ---
 

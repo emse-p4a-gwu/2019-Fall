@@ -119,10 +119,10 @@ x3 <- 5
 y3 <- 4
 ```
 
-a) Compute the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance){target="_blank"} between the points (x1, y1) and (x2, y2) and store this variable as `d1`.
+a) Compute the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) between the points (x1, y1) and (x2, y2) and store this variable as `d1`.
 b) Compute the Euclidean distance between the points (x2, y2) and (x3, y3) and store this variable as `d2`.
 c) Compute the Euclidean distance between the points (x1, y1) and (x3, y3) and store this variable as `d3`.
-d) Is the triangle formed by the points (x1, y1), (x2, y2), and (x3, y3) a [right triangle](https://en.wikipedia.org/wiki/Right_triangle){target="_blank"}? If so, prove it using the variables `d1`, `d2`, and `d3`.
+d) Is the triangle formed by the points (x1, y1), (x2, y2), and (x3, y3) a [right triangle](https://en.wikipedia.org/wiki/Right_triangle)? If so, prove it using the variables `d1`, `d2`, and `d3`.
 
 ### 6) Logical data [COLLABORATIVE, 15 pts]
 

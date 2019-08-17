@@ -34,7 +34,7 @@ Background:
 
 ## Meet your classmates!
 
-Get to know your neighbour! Choose someone to go first. In [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI){target="_blank"}, share:
+Get to know your neighbour! Choose someone to go first. In [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI), share:
 
 - Your name
 - Your program
@@ -59,7 +59,7 @@ Here are some philosophies that will get you far in data analytic work. We will 
 - Embrace plain text (as opposed to rich text).
 - Everything you do should be reproducible.
 
-**Example**: RMarkdown -> HTML. This webpage was generated from [this markdown source file](https://raw.githubusercontent.com/emse6574-gwu/2019-Fall/master/L1.1-course-introduction.Rmd){target="_blank"} on GitHub.
+**Example**: RMarkdown -> HTML. This webpage was generated from [this markdown source file](https://raw.githubusercontent.com/emse6574-gwu/2019-Fall/master/L1.1-course-introduction.Rmd) on GitHub.
 
 If you want to generate the HTML page, download the `.Rmd` file and run the following code in R:
 

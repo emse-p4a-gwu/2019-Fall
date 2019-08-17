@@ -20,7 +20,7 @@ output:
 
 2) Open RStudio and create a new project called "hw3-lastName", replacing "lastName" with your last name.
 
-3) Download the [hw3.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw/hw3-template.R){target="_blank"} and place it in RStudio project folder you just created.
+3) Download the [hw3.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw/hw3-template.R) and place it in RStudio project folder you just created.
 
 4) Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the "hw3.R" file.
 
@@ -67,7 +67,7 @@ Write the function `numDigits(n)` that takes a _possibly-negative_ integer and r
 
 ## 6) Happy Numbers  [COLLABORATIVE]
 
-**Background**: Read the first paragraph from the [Wikipedia page](https://en.wikipedia.org/wiki/Happy_number){target="_blank"} on happy numbers. After some thought, we see that no matter what number we start with, when we keep replacing the number by the sum of the squares of its digits, we'll always either arrive at 4 (unhappy) or at 1 (happy). With that in mind, we want to write the function `nthHappyNumber(n)`. However, to write that function, we'll first need to write `isHappyNumber(n)`, which determines whether a number is "happy" or not. And to right that function, we'll first need to write `sumOfSquaresOfDigits(n)`. And that's top-down design! Here we go...
+**Background**: Read the first paragraph from the [Wikipedia page](https://en.wikipedia.org/wiki/Happy_number) on happy numbers. After some thought, we see that no matter what number we start with, when we keep replacing the number by the sum of the squares of its digits, we'll always either arrive at 4 (unhappy) or at 1 (happy). With that in mind, we want to write the function `nthHappyNumber(n)`. However, to write that function, we'll first need to write `isHappyNumber(n)`, which determines whether a number is "happy" or not. And to right that function, we'll first need to write `sumOfSquaresOfDigits(n)`. And that's top-down design! Here we go...
 
 ### a) `sumOfSquaresOfDigits(n)` [10 pts]
 

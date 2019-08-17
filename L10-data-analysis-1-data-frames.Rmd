@@ -32,9 +32,9 @@ Once you have read through the case study, continue reading here to start gettin
 >
 > ### Suggested Readings
 >
-> * ["Introduction to Data frames in R"](https://www.datacamp.com/community/tutorials/intro-data-frame-r){target="_blank"} Data Camp article, by Ryan Sheehy
-> * [Chapter 10](https://r4ds.had.co.nz/tibbles.html){target="_blank"} of "R for Data Science", by Garrett Grolemund and Hadley Wickham
-> * [Chapters 5.8 - 5.11](https://rstudio-education.github.io/hopr/r-objects.html#data-frames){target="_blank"} of "Hands-On Programming with R", by Garrett Grolemund
+> * ["Introduction to Data frames in R"](https://www.datacamp.com/community/tutorials/intro-data-frame-r) Data Camp article, by Ryan Sheehy
+> * [Chapter 10](https://r4ds.had.co.nz/tibbles.html) of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [Chapters 5.8 - 5.11](https://rstudio-education.github.io/hopr/r-objects.html#data-frames) of "Hands-On Programming with R", by Garrett Grolemund
 
 ---
 
@@ -193,7 +193,7 @@ df
 
 Now that we know what a data frame is, let's start working with actual data!
 
-We are going to use the `msleep` data set, which contains data on sleep times and weights of different mammals. The data are taken from [V. M. Savage and G. B. West. "A quantitative, theoretical framework for understanding mammalian sleep." _Proceedings of the National Academy of Sciences_, 104 (3):1051-1056, 2007.](https://www.pnas.org/content/104/3/1051.long){target="_blank"}.
+We are going to use the `msleep` data set, which contains data on sleep times and weights of different mammals. The data are taken from [V. M. Savage and G. B. West. "A quantitative, theoretical framework for understanding mammalian sleep." _Proceedings of the National Academy of Sciences_, 104 (3):1051-1056, 2007.](https://www.pnas.org/content/104/3/1051.long).
 
 The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:
 
@@ -313,7 +313,7 @@ objects besides `data.frame`.
 
 ## Tibbles are data frames
 
-You'll notice that in the above examples, R told us that the `df` object was a "`tibble`", not a "`data.frame`". What's that about? Well, [tibbles](https://r4ds.had.co.nz/tibbles.html){target="_blank"} are another data structure that are an improved version of the Base R data frame, and when you use the `readr` library to read in data, it creates a tibble.
+You'll notice that in the above examples, R told us that the `df` object was a "`tibble`", not a "`data.frame`". What's that about? Well, [tibbles](https://r4ds.had.co.nz/tibbles.html) are another data structure that are an improved version of the Base R data frame, and when you use the `readr` library to read in data, it creates a tibble.
 
 Under the hood, tibbles are essentially the same thing as data frames and are designed to behave the same way. In fact, if we use the `class()` function to see what R thinks `df` really is...
 
@@ -335,7 +335,7 @@ With this in mind, I'll often use the term "data frame" to refer to both tibbles
 
 # Finding data
 
-For your [next homework assignment](hw5-data-analysis.html), you'll need to find a dataset to explore. One excellent source is the [`dslabs` R package](https://github.com/rafalab/dslabs){target="_blank"}. Check out [this blog post](https://simplystatistics.org/2018/01/22/the-dslabs-package-provides-datasets-for-teaching-data-science/){target="_blank"} to view a summary of some of the datasets in the package.
+For your [next homework assignment](hw5-data-analysis.html), you'll need to find a dataset to explore. One excellent source is the [`dslabs` R package](https://github.com/rafalab/dslabs). Check out [this blog post](https://simplystatistics.org/2018/01/22/the-dslabs-package-provides-datasets-for-teaching-data-science/) to view a summary of some of the datasets in the package.
 
 ```{r, eval=FALSE}
 install.packages("dslabs")
@@ -343,9 +343,9 @@ install.packages("dslabs")
 
 Here are some other good sources:
 
-- [Kaggle](https://www.kaggle.com/datasets){target="_blank"}
-- [Google Dataset Search](https://toolbox.google.com/datasetsearch){target="_blank"}
-- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635){target="_blank"}
+- [Kaggle](https://www.kaggle.com/datasets)
+- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
+- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
 
 ---
 

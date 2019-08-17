@@ -37,7 +37,7 @@ plot <- ggplot(orings, aes(x=Temperature, y=Total)) +
 plot
 ```
 
-The graph above shows O-ring damage on the y-axis and temperature on the x-axis. We can easily see that no prior launches that were below 66 degrees F were damage-free, and it appears that at even lower temperatures (such as 55 degrees) the damage was even more severe.
+The graph above shows O-ring damage on the y-axis and temperature on the x-axis. We can easily see that no prior launches below 66 degrees F were damage-free, and it appears that at lower temperatures (such as 55 degrees) the damage was even more severe.
 
 Now, what temperature was forecasted for the day of the Challenger launch? **26 to 29 degrees**. Let's add that context to our plot:
 
@@ -56,13 +56,12 @@ plot +
 
 Now we have _information_. The transformation of the raw data into a visualization makes it obvious that the temperature forecasted for the day of the Challenger launch should raise red flags. It falls far below the temperature range of prior launches, and those prior launches suggest that O-ring damage may be correlated with decreasing temperature.
 
-To their credit, the engineers working on the Challenger were worried about the potential for O-ring failure. But the critical step in making the link to temperature though was not thoroughly communicated. Instead, they presented the _raw data_ in tabular form along with a diagram of how erosion in the primary O-ring interacted with the secondary O-ring:
+To their credit, the engineers working on the Challenger were worried about the potential for O-ring failure. But the critical step in making the link to temperature was not thoroughly communicated. Instead, the _raw data_ was presented in tabular form along with diagrams like these, which show how erosion in the primary O-ring interacted with the secondary O-ring:
 
 ![](images/rockets_chart.png){ width=600 }
+[Image source](https://www.edwardtufte.com/tufte/books_visex)
 
-Image source: Tufte, Edward R. (1997) ["Visual Explanations: Images and Quantities, Evidence and Narrative"](https://www.edwardtufte.com/tufte/books_visex), Graphics Press, Cheshire, Connecticut.
-
-In contrast to the above image, the scatter plot makes the relationship clear and reveals the critical **information** that was overlooked:
+In contrast to the above image, the scatter plot reveals the critical **information** that was overlooked:
 
 > _Lower temperatures are correlated with increased O-ring failure, and the extremely low temperature forecasted for the Challenger launch day suggests a higher risk of failure_.
 

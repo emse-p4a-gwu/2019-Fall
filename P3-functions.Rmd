@@ -59,7 +59,7 @@ Negative numbers should work, too, so `kthDigit(-789, 0)` returns `9`.
 
 ### `nthFibonacciNumber(n)`
 
-Write the function `nthFibonacciNumber(n)` that takes a positive integer `n` and (without using loops) returns the nth [Fibonacci number](https://en.wikipedia.org/wiki/Fibonacci_number){target="_blank"}. So:
+Write the function `nthFibonacciNumber(n)` that takes a positive integer `n` and (without using loops) returns the nth [Fibonacci number](https://en.wikipedia.org/wiki/Fibonacci_number). So:
 
 - `nthFibonacciNumber(1)` returns `1`
 - `nthFibonacciNumber(2)` returns `1`
@@ -70,7 +70,7 @@ Write the function `nthFibonacciNumber(n)` that takes a positive integer `n` and
 
 ### `isTriangularNumber(n)`
 
-A number is triangular if it equals `1+2+3+...+N` for some integer `N`. Given an integer value `n`, return `TRUE` if it is triangular, and `FALSE` otherwise. Note that this relates to the pool ball problems. Hint: For this problem you should research [Triangular Numbers](https://en.wikipedia.org/wiki/Triangular_number){target="_blank"}. Hint 2: This is directly related to the `numberOfPoolBalls(rows)` homework problem!
+A number is triangular if it equals `1+2+3+...+N` for some integer `N`. Given an integer value `n`, return `TRUE` if it is triangular, and `FALSE` otherwise. Note that this relates to the pool ball problems. Hint: For this problem you should research [Triangular Numbers](https://en.wikipedia.org/wiki/Triangular_number). Hint 2: This is directly related to the `numberOfPoolBalls(rows)` homework problem!
 
 ### `dcHour(londonHour)`
 

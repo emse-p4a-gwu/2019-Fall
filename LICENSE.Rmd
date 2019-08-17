@@ -26,4 +26,3 @@ R for Psychological Science | Danielle Navarro | [course](https://psyr.org/index
 What They Forgot to Teach You About R | Jennifer Bryan & Jim Hester | [course](https://whattheyforgot.org/); [github](https://github.com/jennybc/what-they-forgot)
 Software Carpentry | [software-carpentry.org](https://software-carpentry.org/) | [lessons](https://software-carpentry.org/lessons/)
 CMU 15-112: Fundamentals of Programming | [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)| [Spring 2017 Course](http://www.kosbie.net/cmu/spring-17/15-112/)
-Data Analysis and Visualization in R for Ecologists | François Michonneau & Auriel Fournier | [course](https://datacarpentry.org/R-ecology-lesson/); [github](https://github.com/datacarpentry/R-ecology-lesson)

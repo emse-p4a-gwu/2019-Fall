@@ -16,11 +16,11 @@ source("knitr_setup.R")
 >
 > ### Suggested Readings
 >
-> * [Chapter 11](https://whattheyforgot.org/debugging-r-code.html){target="_blank"} in Jenny Bryan and Jim Hester's fantastic book, ["What They Forgot to Teach You About R"](https://whattheyforgot.org/){target="_blank"}.
+> * [Chapter 11](https://whattheyforgot.org/debugging-r-code.html) in Jenny Bryan and Jim Hester's fantastic book, ["What They Forgot to Teach You About R"](https://whattheyforgot.org/).
 
 Here are some other great resources:
-> * [Debugging techniques in RStudio](https://resources.rstudio.com/wistia-rstudio-conf-2018-2/debugging-techniques-in-rstudio-amanda-gadrow-4){target="_blank"} - Amanda Gadrow's talk at rstudio::conf 2018.
-> * [Debugging in RStudio article](https://support.rstudio.com/hc/en-us/articles/200713843){target="_blank"}
+> * [Debugging techniques in RStudio](https://resources.rstudio.com/wistia-rstudio-conf-2018-2/debugging-techniques-in-rstudio-amanda-gadrow-4) - Amanda Gadrow's talk at rstudio::conf 2018.
+> * [Debugging in RStudio article](https://support.rstudio.com/hc/en-us/articles/200713843)
 
 ---
 
@@ -179,7 +179,7 @@ traceback()
 ```
 
 Or by using `traceback()` as an error handler, which will call it immediately
-on any error. (You could even put this in your [`.Rprofile`](https://stackoverflow.com/questions/46819684/how-to-access-and-edit-rprofile){target="_blank"})
+on any error. (You could even put this in your [`.Rprofile`](https://stackoverflow.com/questions/46819684/how-to-access-and-edit-rprofile))
 
 ```{r, eval = FALSE}
 options(error = traceback)
@@ -255,5 +255,5 @@ continue (`c`) and Stop (`Q`).
 
 Some content on this page has been modified from other courses, including:
 
-- CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/){target="_blank"}, by [David Kosbie](http://www.kosbie.net/cmu/){target="_blank"} & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers){target="_blank"}
-- Jennifer Bryan & Jim Hester's ["What They Forgot to Teach You About R"](https://whattheyforgot.org/debugging-r-code.html){target="_blank"}
+- CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/), by [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)
+- Jennifer Bryan & Jim Hester's ["What They Forgot to Teach You About R"](https://whattheyforgot.org/debugging-r-code.html)

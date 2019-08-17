@@ -31,8 +31,8 @@ Your car needs an engine (R) to run, but having a speedometer and rear view mirr
 
 You will first need to download and install both R and RStudio (Desktop version) on your computer.
 
-1. [Download and install R](https://cloud.r-project.org){target="_blank"}.
-2. [Download and install RStudio](https://www.rstudio.com/products/rstudio/download/preview/){target="_blank"}.
+1. [Download and install R](https://cloud.r-project.org).
+2. [Download and install RStudio](https://www.rstudio.com/products/rstudio/download/preview/).
 
 ## Using R via RStudio
 
@@ -54,7 +54,7 @@ Notice the default panes:
   * Environment/History (tabbed in upper right)
   * Files/Plots/Packages/Help (tabbed in lower right)
 
-FYI: you can change the default location of the panes, among many other things: [Customizing RStudio](https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio){target="_blank"}.
+FYI: you can change the default location of the panes, among many other things: [Customizing RStudio](https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio).
 
 Go into the Console on the left with the `>` (that's the *command prompt*), and let's get started!
 
@@ -236,7 +236,7 @@ What is really going on here is R first evaluates whether 3 is equal to 5 (`3 ==
 
 ## Order of operations
 
-R follows the typical BEDMAS order of operations. That is, you first calculate things inside **B**rackets, then calculate **E**xponents, then **D**ivision and **M**ultiplication, then **A**ddition and **S**ubtraction. For a more precise statement, see the [operator precedence](http://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html){target="_blank"} for R. For example, if I type:
+R follows the typical BEDMAS order of operations. That is, you first calculate things inside **B**rackets, then calculate **E**xponents, then **D**ivision and **M**ultiplication, then **A**ddition and **S**ubtraction. For a more precise statement, see the [operator precedence](http://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html) for R. For example, if I type:
 
 ```{r}
 1 + 2 * 4
@@ -322,7 +322,7 @@ But there's a better way. A way that also puts you on the path to managing your 
 
 Keeping all the files associated with a project organized together -- input data, R scripts, analytical results, figures -- is such a wise and common practice that RStudio has built-in support for this via its _projects_.
 
-[Using Projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects){target="_blank"}
+[Using Projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
 
 Let's make one for practice. Do this:
 
