@@ -191,9 +191,7 @@ df
 
 # Dealing with actual data
 
-Now that we know what a data frame is, let's start working with actual data!
-
-We are going to use the `msleep` data set, which contains data on sleep times and weights of different mammals. The data are taken from [V. M. Savage and G. B. West. "A quantitative, theoretical framework for understanding mammalian sleep." _Proceedings of the National Academy of Sciences_, 104 (3):1051-1056, 2007.](https://www.pnas.org/content/104/3/1051.long).
+Now that we know what a data frame is, let's start working with actual data! We are going to use the `msleep` data set, which contains data on sleep times and weights of different mammals. The data are taken from [V. M. Savage and G. B. West. "A quantitative, theoretical framework for understanding mammalian sleep." _Proceedings of the National Academy of Sciences_, 104 (3):1051-1056, 2007.](https://www.pnas.org/content/104/3/1051.long).
 
 The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:
 
@@ -327,25 +325,57 @@ class(df)
 is.data.frame(df)
 ```
 
-That being said, there are a few differences between tibbles and pure data frames. For now, we can safely ignore those differences (we'll get to them eventually), but for the most part, my impression has been that whenever they differ, the behavior of tibbles tends to be a bit more intuitive.
+That being said, there are a few differences between tibbles and pure data frames:
+
+1) In addition to displaying the data type of each column under its name (which data tables don't do), a tibble will only print the first few rows of data when you enter the object name. In contrast, data frames will try to print _the entire data frame_...which is super annoying.
+2) Columns of class `character` are never converted into factors (don't worry about this for now...just know that keeping strings as a `character` class generally makes life easier).
+
+For now, we can safely ignore these differences (there are a few others...we'll get to them eventually). For the most part, my impression has been that whenever tibbles and data frames differ, the behavior of tibble tends to be a bit more intuitive.
 
 With this in mind, I'll often use the term "data frame" to refer to both tibbles and data frames, since they are essentially the same things.
 
 ---
 
-# Finding data
+# Now what?
 
-For your [next homework assignment](hw5-data-analysis.html), you'll need to find a dataset to explore. One excellent source is the [`dslabs` R package](https://github.com/rafalab/dslabs). Check out [this blog post](https://simplystatistics.org/2018/01/22/the-dslabs-package-provides-datasets-for-teaching-data-science/) to view a summary of some of the datasets in the package.
+Now that you've got some data into R and are up to speed with what a data frame / tibble is, you may be asking, "so what now?" Well, over the next two lessons we will learn more about how to manipulate data frames and explore the underlying information with visualizations.
 
-```{r, eval=FALSE}
-install.packages("dslabs")
+But just to give you an idea of where we're going, here are a few pieces of information from the `msleep` dataset:
+
+1) It appears that mammalian brain and body weight are logarithmically correlated - cool!
+
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
+library(ggplot2)
+ggplot(msleep, aes(x=brainwt, y=bodywt)) +
+    geom_point(alpha=0.6) +
+    stat_smooth(method='lm', col='red', se=F, size=0.7) +
+    scale_x_log10() +
+    scale_y_log10() +
+    labs(x='log(brain weight) in g', y='log(body weight) in kg') +
+    theme_minimal()
 ```
 
-Here are some other good sources:
+2) It appears there may also be a negative, logarithmic relationship (albeit weaker) between the size of mammalian brains and how much they sleep - cool!
 
-- [Kaggle](https://www.kaggle.com/datasets)
-- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
-- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
+ggplot(msleep, aes(x=brainwt, y=sleep_total)) +
+    geom_point(alpha=0.6) +
+    scale_x_log10() +
+    scale_y_log10() +
+    stat_smooth(method='lm', col='red', se=F, size=0.7) +
+    labs(x='log(brain weight) in g', y='log(total sleep time) in hours') +
+    theme_minimal()
+```
+
+3) Wow, there's a lot of variation in how much different mammals sleep - cool!
+
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
+ggplot(msleep, aes(x=sleep_total)) +
+    geom_histogram() +
+    labs(x     = 'Total sleep time in hours',
+         title = 'Histogram of total sleep time') +
+    theme_minimal()
+```
 
 ---
 
