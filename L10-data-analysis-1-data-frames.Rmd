@@ -213,11 +213,9 @@ bodywt             | Body weight in kilograms
 
 Before we dig into the data, let's prepare our analysis environment by following these steps:
 
-1) Create a new R Project called "msleep" and save the folder somewhere on your computer (see the ["RStudio projects"](L1.2-getting-started.html#33_rstudio_projects.html) section from waaaaay back on week 1).
-2) Create a new `.R` file (File > New File > R Script), and save it as "`analysis.R`" inside your "msleep" R Project folder.
-3) Create another folder in your R Project folder called "data" (we'll put data in this folder real soon).
-
-From here on, we'll type all our code inside this `analysis.R` file.
+1) Create a new R Project called "data-analysis-tutorial" and save the folder somewhere on your computer (see the ["RStudio projects"](L1.2-getting-started.html#33_rstudio_projects.html) section from waaaaay back on week 1).
+2) Create a new `.R` file (File > New File > R Script), and save it as "`msleep.R`" inside your "data-analysis-tutorial" R Project folder. From here on, we'll type all code for this lesson inside this `msleep.R` file.
+3) Create another folder in your R Project folder called "data" - we'll put data in this folder real soon.
 
 ## Getting the data
 
@@ -383,7 +381,4 @@ ggplot(msleep, aes(x=sleep_total)) +
 
 Some content on this page has been modified from other courses, including:
 
-- [Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/){target="blank_"}, by François Michonneau & Auriel Fournier. Zenodo: http://doi.org/10.5281/zenodo.3264888
-- Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)
-
-
+- [Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/), by François Michonneau & Auriel Fournier. Zenodo: http://doi.org/10.5281/zenodo.3264888
