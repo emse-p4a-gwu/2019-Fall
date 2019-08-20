@@ -22,11 +22,11 @@ GWU
 
 Background:
 
-- 2016 PhD in Engineering & Public Policy at Carnegie Mellon Universtiy
-- 2015 MS in Engineering & Public Policy at Carnegie Mellon Universtiy
-- 2010 BS in Engineering Science & Mechasnics at Virginia Tech
+- 2016 PhD in Engineering & Public Policy at Carnegie Mellon University
+- 2015 MS in Engineering & Public Policy at Carnegie Mellon University
+- 2010 BS in Engineering Science & Mechanics at Virginia Tech
 
-## Meet your TA!
+## Meet your TAs!
 
 **Name Missing**
 
@@ -34,7 +34,7 @@ Background:
 
 ## Meet your classmates!
 
-Get to know your neighbour! Choose someone to go first. In [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI), share:
+Get to know your neighbor! Choose someone to go first. In [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI), share:
 
 - Your name
 - Your program
@@ -71,5 +71,23 @@ rmarkdown::render('L1.1-course-introduction.Rmd')
 
 # Communication & Help
 
-```{r child = here::here('syllabus', 'communication-help.Rmd')}
-```
+All course communication will be managed through [Slack](https://6574-s11-f19.slack.com/) - Sign up [**HERE**](https://join.slack.com/t/6574-s11-f19/shared_invite/enQtNzIxNzQ2OTU1MjAwLWZiYjFlOTlhMjAxNDEwMjQ0MDcwYmMxOTAyZGVhNWM4YzFhY2U2ZDIyYzMxZGQwYjMxNDBiYzMzNWRmZmQxMDY)
+
+**Please don't email the instructors** - just use Slack.
+
+> [Watch this 2-minute video for a quick summary of Slack](https://youtu.be/9RJZMSsH7-g)
+
+**You can use Slack to**:
+
+- Ask questions.
+- Ask for help with an assignment.
+- Send direct, private messages to each other or the instructors (just like email...but better!)
+
+**Asking for help on Slack**:
+
+Slack can be used to ask quick questions and receive quick responses without attending office hours in person. This also enables other students to see answers to common questions. Questions should be specific and include all needed information. For example, if your code has an error you don't understand, **include the code and the error message** in your question.
+
+**Other Help Resources**:
+
+- **Office Hours**: Office hours let you ask questions to TAs and professors directly, and can help you understand concepts and debug programs that you're struggling with alone.
+- **Library Services**: While the University Library is not a stand in for TAs, you can schedule a consultation for general help with Coding, Programming, Data, Statistical, and GIS. See more at https://academiccommons.gwu.edu/writing-research-help
