@@ -6,6 +6,302 @@ output: html_document
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
+library(ggplot2)
+```
+
+> ### Learning Objectives
+>
+> * Create simple scatterplots, histograms, and boxplots in R.
+> * Compare the plotting features of base R and the ggplot2 package.
+> * Customize the aesthetics of an existing plot.
+> * Create plots from data in a data frame.
+> * Export plots from RStudio to standard graphical file formats.
+>
+> ### Suggested Readings
+>
+> * The "Introduction" chapter of Rick Scavetta's ["Data Visualization with ggplot2 (Part 1)"](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1) lesson on DataCamp (it's free!).
+> * [Chapter 3](https://r4ds.had.co.nz/data-visualisation.html) of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [Data Visualization: A practical introduction](http://socviz.co/), by Kieran Healy
+> * [The parks where you're most likely to be killed by a bear](https://www.vox.com/2016/10/6/13170344/bear-attacks-national-state-parks) (we'll be using a dataset on bear attacks in N. America for this lesson).
+
+---
+
+> "The purpose of computing is insight, not numbers"
+>
+> \- [Richard Hamming](https://en.wikipedia.org/wiki/Richard_Hamming)
+
+...and one of the best ways to develop insights from data is to visualize the data. The best starting point I recommend is to go through the "Introduction" chapter of Rick Scavetta's ["Data Visualization with ggplot2 (Part 1)"](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1) lesson on DataCamp. The introduction section is free and contains three 5-minute summary videos along with some practice exercises.
+
+Data visualization will be the primary focus of a follow-on course to this one called "Exploratory Data Analysis". For now, we will explore a few features of R's plotting packages.
+
+# R Setup
+
+Before we get started, let's set up our analysis environment like before:
+
+1) Open up your "data-analysis-tutorial" R Project that you created in the first data analysis lesson - if you didn't do this, [go back and do it now](L10-data-analysis-1-data-frames.html#41_r_setup).
+2) Create a new `.R` file (File > New File > R Script), and save it as "`data_viz.R`" inside your "data-analysis-tutorial" R Project folder.
+3) Use the `download.file()` function to download the `north_america_bear_killings.csv` dataset, and save it in the `data` folder in your R Project:
+
+```{r, eval=FALSE}
+download.file(
+    url = "https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/north_america_bear_killings.csv",
+    destfile = file.path('data', 'north_america_bear_killings.csv')
+)
+```
+
+For this lesson, we are going to use the [North American Bear Killings](https://data.world/ajsanne/north-america-bear-killings) dataset, which was compiled by [Ali Sanne](https://data.world/ajsanne) from the [Wikipedia page](https://en.wikipedia.org/wiki/List_of_fatal_bear_attacks_in_North_America) on fatal bear attacks in North America. The dataset contains recorded killings by black, brown, or polar bears from 1900 to 2019 in North America. Each row in the dataset holds information for a single incident with the following columns:
+
+Variable      |Class      |Description
+--------------|-----------|----------------------------------------
+name          | character | Name of victim.
+age           | double    | Age of victim.
+gender        | character | Gender of victim.
+date          | character | Date of incident.
+month         | double    | Month of incident.
+year          | double    | Year of incident.
+wildOrCaptive | character | "Wild" or "Captive" bear.
+location      | character | Location of incident.
+description   | character | Short description of incident.
+bearType      | character | "Black", "Brown", or "Polar"
+hunter        | double    | 1 if victim was a hunter, 0 otherwise.
+grizzly       | double    | 1 if bear is a Grizzly, 0 otherwise.
+hiker         | double    | 1 if victim was a hiker, 0 otherwise.
+onlyOneKilled | double    | 1 if only one victim was killed, 0 otherwise.
+
+**Side node**: One thing I learned looking at this data is, kind of like squares and rectangles, all grizzly bears are brown bears, but [not all brown bears are grizzly bears](https://www.nps.gov/katm/learn/photosmultimedia/brown-bear-frequently-asked-questions.htm#2).
+
+To get started, let's load our libraries and check out the data:
+
+```{r, message=FALSE}
+library(readr)
+library(dplyr)
+df <- read_csv(file.path('data', 'north_america_bear_killings.csv'))
+glimpse(df)
+```
+
+# Basic plots in R
+
+R has a number of built-in tools for basic graph types such as scatterplots, histograms, boxplots, and more. We'll test a few of these out here.
+
+## Scatterplots with `plot()`
+
+Let's start with a **scatterplot**. A scatter plot provides a graphical view of the relationship between two variables. Typically these are used for "continuous" variables, like _time_, _age_, _money_, etc. (as opposed to "discrete" variables, like _nationality_, _gender_, etc.). Here's a scatterplot of the age of the victims over time:
+
+```{r fig.height=5, fig.width=6, message=FALSE, warning=FALSE}
+plot(x = df$year, y = df$age)
+```
+
+The basic inputs to the `plot()` function are `x` and `y`, which must be vectors of the same length. You can customize many features (fonts, colors, axes, shape, titles, etc.) through [graphic options](http://www.statmethods.net/advgraphs/parameters.html). Here's the same plot with a few customizations:
+
+```{r fig.height=5, fig.width=6, message=FALSE, warning=FALSE}
+plot(x    = df$year,
+     y    = df$age,
+     col  = 'darkblue', # "col" changes the point color
+     pch  = 19, # "pch" changes the point shape
+     main = "Age of bear killing victims over time",
+     xlab = "Year",
+     ylab = "Age")
+```
+
+Looks like bear killings are becoming more frequent over time, though pretty evenly-distributed across age.
+
+## Histograms with `hist()`
+
+The [histogram](https://en.wikipedia.org/wiki/Histogram) is one of the most common ways to visualize the _distribution_ of a variable. The `hist()` function takes just one variable, `x`. Here's a histogram of the `month` variable:
+
+```{r fig.height=5, fig.width=6, message=FALSE, warning=FALSE}
+hist(x = df$month)
+```
+
+As you might expect, most bear attacks occur during the summer months when parks get more visitors. As with the `plot()` function, you can customize a lot of the histogram. One common customization is to modify the number of "bins" in the histogram by changing the `breaks` argument:
+
+```{r fig.height=5, fig.width=6, message=FALSE, warning=FALSE}
+hist(x      = df$month,
+     breaks = 12,
+     col    = 'darkred',
+     main   = "Distribution of bear killings by month",
+     xlab   = "Month",
+     ylab   = "Count")
+```
+
+## Boxplots with `boxplot()`
+
+Boxplots are another convenient way to visualize how variables are distributed by providing a graphical view of the median, quartiles, maximum, and minimum of a variable. Unlike histograms, boxplots are better at plotting multiple distributions at once. For example, here is how the victim age is distributed by gender:
+
+```{r fig.height=5, fig.width=4, message=FALSE, warning=FALSE}
+boxplot(age ~ gender, data = df)
+```
+
+And here's the same plot but dressed up with additional customizations:
+
+```{r fig.height=5, fig.width=4, message=FALSE, warning=FALSE}
+boxplot(age ~ gender,
+        data = df,
+        col  = c('lightyellow', 'lightblue'),
+        main = "Age distribution of male and female bear killing victims",
+        xlab = 'Gender',
+        ylab = 'Age')
+```
+
+# Make better figures with `ggplot2`
+
+While Base R plot functions are useful for simple plots, many R users have adopted the [`ggplot2`](http://docs.ggplot2.org/) package as their primary tool for visualizing data.
+
+## The Grammar of Graphics
+
+The `ggplot2` library is built on the ["Grammar of Graphics"](https://www.springer.com/in/book/9780387245447) concept developed by Leland Wilkinson. A "grammar of graphics" (that's what the "gg" in "ggplot2" stands for) is a framework that uses layers to describe and construct visualizations or graphics in a structured manner. Here's a visual summary:
+
+![](images/ggPyramid.png){ width=700 }
+
+We will start using `ggplot2` by re-creating some of the above plots, but using ggplot functions to get a feel for the syntax. But first, install and load the library:
+
+```{r, eval=FALSE}
+install.packages("ggplot2")
+library(ggplot2)
+```
+
+## A blank slate
+
+The `ggplot()` function is used to initialize the basic graph structure, and then we add layers to it. The basic idea is that you specify different parts of the plot, and add them together using the `+` operator. We will start with a blank plot and will add layers as we go along:
+
+```{r fig.height=3.5, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(data = df)
+```
+
+## Geoms and aesthetics
+
+Geometric objects (called "geoms") are the actual marks we put on a plot. Examples include:
+
+- `geom_point()` for scatter plots, dot plots, etc.
+- `geom_line()` for time series, trend lines, etc.
+- `geom_bar()` for bar charts and histograms
+- `geom_boxplot()` for boxplots
+
+You can have an unlimited number of layers, but at a minimum a plot **must have at least one geom**. Each type of geom usually has a **required set of aesthetics** to be set, and usually accepts only a subset of all aesthetics. Aesthetic mappings are set with the `aes()` function. Examples include:
+
+- position (i.e., on the x and y axes)
+- color ("outside" color)
+- fill ("inside" color) shape (of points)
+- linetype
+- size
+
+## Scatterplots with `geom_point()`
+
+Now that we know what geoms and aesthetics are, let's put them to practice by making a scatterplot. To start, we will add the `geom_point()` geom and we'll set the position for the x- and y-axis inside the `aes()` function:
+
+```{r fig.height=3.5, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(data = df) +
+    geom_point(aes(x = year, y = age))
+```
+
+Notice how we've "added" the `geom_point()` layer to the previous blank slate. To improve and further customize the plot, simply add more layers:
+
+```{r fig.height=3.5, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(data = df) +
+    geom_point(aes(x = year, y = age)) +
+    labs(x = "Year",
+         y = "Age",
+         title = "Age of bear killing victims over time") +
+    theme_minimal()
+```
+
+In the above plot, the `theme_minimal()` layer changes some global aspects of the plot, such as the background color, grid lines, legend appearance, etc. There are [many themes to choose from](https://ggplot2.tidyverse.org/reference/ggtheme.html).
+
+## Histograms with `geom_histogram()`
+
+To make a histogram, we use the `geom_histogram()` layer:
+
+```{r fig.height=4, fig.width=4}
+ggplot(data = df) +
+    geom_histogram(aes(x = month))
+```
+
+Notice that by default `geom_histogram()` uses 30 bins, which is way too many for the month variable. Logically, we'd like to use 12 bins, so here's an improved plot:
+
+```{r fig.height=4, fig.width=4, message=FALSE, warning=FALSE}
+ggplot(data = df) +
+    geom_histogram(aes(x = month), bins = 12, fill = "darkred",
+                   color = "white") +
+    labs(x = "Month",
+         y = "Count",
+         title = "Distribution of bear killings by month") +
+    theme_minimal()
+```
+
+In the above plot, the color of the _bars_ is set by the `fill` argument, and the color of the _line_ around the bars is set by the `color` argument.
+
+## Boxplots with `geom_boxplot()`
+
+To re-create the boxplot example, use the `geom_boxplot()` layer:
+
+```{r fig.height=5, fig.width=4, message=FALSE, warning=FALSE}
+ggplot(data = df %>%
+    filter(!is.na(gender))) + # Removing NAs from gender variable
+    geom_boxplot(aes(x = gender, y = age),
+                 fill = c('lightyellow', 'lightblue')) +
+    labs(x = "Gender",
+         y = "Age",
+         title = "Age distribution of male and female bear killing victims") +
+    theme_minimal()
+```
+
+## Barplots with `geom_bar()`
+
+Bar charts are great for comparing different values of a numerical variable. By default, the `geom_bar()` layer works just like a histogram in that is plots a count of the variable provided. For example, here is the same histogram as before - the count of the bear attacks for each month in the dataset:
+
+```{r fig.height=4, fig.width=4, message=FALSE, warning=FALSE}
+ggplot(data = df) +
+    geom_bar(aes(x = month))
+```
+
+To make it a bit more interesting, we can "fill" the bars by the type of bear:
+
+```{r fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(data = df) +
+    geom_bar(aes(x = month, fill = bearType))
+```
+
+It seems like brown bears are the most frequent killers, but what about if they are Grizzlies or not. Let's use another bar chart to check that:
+
+```{r fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(data = df) +
+    geom_bar(aes(x = bearType, fill = as.factor(grizzly))) +
+    theme_minimal() +
+    labs(x     = "Bear type",
+         y     = 'Count',
+         fill  = 'Is grizzly?',
+         title = "Number of deadly bear attacks by bear type") +
+    scale_fill_manual(values = c('brown', 'black')) # Manually change the colors
+```
+
+Yup, brown bears are the biggest killers, and it looks like about 1/3 are grizzlies.
+
+# Saving figures
+
+The first (and easiest) is to export directly from the RStudio 'Plots' panel, by clicking on `Export` when the image is plotted. This will give you the option of `.png` or `.pdf` and selecting the directory to which you wish to save it to. I strongly recommend you save images as `.pdf` types as these won't pixelate when you change the image size.
+
+Another easy way to save a ggplot figure is to use the `ggsave()` function. First, create your plot and save it as an object:
+
+```{r, eval=FALSE}
+scatterPlot <- ggplot(data = df) +
+    geom_point(aes(x = year, y = age))
+```
+
+Then save the plot using `ggsave()` (make sure you create a folder called "plots" in which to save your plot):
+
+```{r, eval=FALSE}
+ggsave(filename = file.path('data', 'scatterPlot.pdf'),
+       plot   = scatterPlot,
+       width  = 6,
+       height = 4)
 ```
 
 ---
+
+**Page sources**:
+
+Some content on this page has been modified from other courses, including:
+
+- [Data Analysis and Visualization in R _alpha_](https://datacarpentry.org/R-genomics/index.html), by Data Carpentry contributors.
+
+
