@@ -303,7 +303,7 @@ a[order(a)] # Same as sort(a)
 
 # Tips
 
-**Use vector operations instead of a loop**:
+## Use vectors instead of a loop
 
 As we saw in the [loops](5-loops.html) lesson, you can use a loop to perform an operation on each element in a vector. For example, the following loop prints out the decimal values for each element in a vector of floats:
 
@@ -322,6 +322,40 @@ x %% 1
 ```
 
 In many cases, using a vector can save you a whole lot of code by avoiding loops entirely!
+
+## Comparing vectors
+
+If you want to check if two vectors are identical (in that they contain all the same elements), you can't use the typical `==` operator by itself. The reason is because the `==` operator is performed element-wise, so it will return a logical vector:
+
+```{r}
+x <- c(1,2,3)
+y <- c(1,2,3)
+x == y
+```
+
+Instead of getting one `TRUE`, you get a vector of `TRUE`s, because the individual elements are indeed equal.
+
+To compare the _entire vector_, you should surround the `==` comparison within the `all()` function:
+
+```{r}
+all(x == y)
+```
+
+The `all()` function works on any types of vectors:
+
+```{r}
+x = c('one', 'two', 'three')
+y = c('one', 'two', 'three')
+all(x == y)
+```
+
+If any one element across the two vectors are different, `all()` will return `FALSE`:
+
+```{r}
+x <- c(1,2,3)
+y <- c(1,2,4)
+all(x == y)
+```
 
 ---
 
