@@ -198,9 +198,9 @@ The dataset is stored as a comma separated value (CSV) file. Each row holds info
 | Column Name      | Description                        |
 |------------------|------------------------------------|
 name               | Common name
-genus              | The genus of animal
+genus              | The taxonomic genus of animal
 vore               | Carnivore, omnivore or herbivore?
-order              | The order of animal
+order              | The taxonomic order of animal
 conservation       | The conservation status of the animal
 sleep_total        | Total amount of sleep, in hours
 sleep_rem          | REM sleep, in hours
@@ -214,7 +214,7 @@ bodywt             | Body weight in kilograms
 Before we dig into the data, let's prepare our analysis environment by following these steps:
 
 1) Create a new R Project called "data-analysis-tutorial" and save the folder somewhere on your computer (see the ["RStudio projects"](L1.2-getting-started.html#33_rstudio_projects.html) section from waaaaay back on week 1).
-2) Create a new `.R` file (File > New File > R Script), and save it as "`msleep.R`" inside your "data-analysis-tutorial" R Project folder. From here on, we'll type all code for this lesson inside this `msleep.R` file.
+2) Create a new `.R` file (File > New File > R Script), and save it as "`data_frames.R`" inside your "data-analysis-tutorial" R Project folder. From here on, we'll type all code for this lesson inside this `data_frames.R` file.
 3) Create another folder in your R Project folder called "data" - we'll put data in this folder real soon.
 
 ## Getting the data

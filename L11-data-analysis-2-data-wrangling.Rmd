@@ -26,39 +26,12 @@ source("knitr_setup.R")
 
 ---
 
-"Data Wrangling" refers to the art of getting your data into R in a useful form for visualization and modeling. Wrangling is the first step in the general data science process:
+# R Setup
 
-![](images/data-wrangle.png)
-
-# Data wrangling with `dplyr`
-
-## What is `dplyr`
-
-As we saw in the last section, we can use brackets (`[]`) to access elements of a data frame. While this is handy, it can be cumbersome and difficult to read, especially for complicated operations.
-
-> Enter `dplyr`
-
-The `dplyr` package was designed to make tabular data wrangling easier to perform and read. It pairs nicely with other libraries, such as **`ggplot2`** for visualizing data (which we'll cover next week). Together, `dplyr`, `ggplot2`, and a handful of other packages make up what is known as the ["Tidyverse"](https://www.tidyverse.org/) - an opinionated collection of R packages designed for data science. You can load all of the tidyverse packages at once using the `library(tidyverse)` command, but for now we're just going to install and use each package one at a time - starting with `dplyr`:
-
-```{r, eval=FALSE}
-install.packages("dplyr")
-```
-
-In this lesson, we are going to learn some of the most common `dplyr` functions:
-
-- `select()`: subset columns
-- `filter()`: subset rows on conditions
-- `mutate()`: create new columns by using information from other columns
-- `arrange()`: sort results
-- `group_by()` and `summarize()`: create summary statistics on grouped data
-- `count()`: count discrete values
-
-## R Setup
-
-Before we get started, let's set up our analysis environment by following these steps:
+Before we get started, let's set up our analysis environment:
 
 1) Open up your "data-analysis-tutorial" R Project that you created in the last lesson - if you didn't do this, [go back and do it now](L10-data-analysis-1-data-frames.html#41_r_setup).
-2) Create a new `.R` file (File > New File > R Script), and save it as "`analysis.R`" inside your "data-analysis-tutorial" R Project folder.
+2) Create a new `.R` file (File > New File > R Script), and save it as "`data_wrangling.R`" inside your "data-analysis-tutorial" R Project folder.
 3) Use the `download.file()` function to download the `wildlife_impacts.csv` dataset, and save it in the `data` folder in your R Project:
 
 ```{r, eval=FALSE}
@@ -94,9 +67,7 @@ sky                   |character | Sky condition
 precip                |character | Precipitation
 cost_repairs_infl_adj |double    | Cost of repairs adjusted for inflation
 
-## Preview the data
-
-To get started, let's load our libraries and read in the data:
+Let's load our libraries and read in the data:
 
 ```{r, message=FALSE}
 library(readr)
@@ -118,6 +89,34 @@ nrow(df) / (2019 - 1990) / 365
 
 ...over 5 strikes per day!
 
+# Data wrangling with `dplyr`
+
+"Data Wrangling" refers to the art of getting your data into R in a useful form for visualization and modeling. Wrangling is the first step in the general data science process:
+
+![](images/data-wrangle.png)
+
+## What is `dplyr`
+
+As we saw in the last section, we can use brackets (`[]`) to access elements of a data frame. While this is handy, it can be cumbersome and difficult to read, especially for complicated operations.
+
+**Enter `dplyr`**
+
+The `dplyr` package was designed to make tabular data wrangling easier to perform and read. It pairs nicely with other libraries, such as **`ggplot2`** for visualizing data (which we'll cover next week). Together, `dplyr`, `ggplot2`, and a handful of other packages make up what is known as the ["Tidyverse"](https://www.tidyverse.org/) - an opinionated collection of R packages designed for data science. You can load all of the tidyverse packages at once using the `library(tidyverse)` command, but for now we're just going to install and use each package one at a time - starting with `dplyr`:
+
+```{r, eval=FALSE}
+install.packages("dplyr")
+```
+
+In this lesson, we are going to learn some of the most common `dplyr` functions:
+
+- `select()`: subset columns
+- `filter()`: subset rows on conditions
+- `mutate()`: create new columns by using information from other columns
+- `arrange()`: sort results
+- `group_by()`: group data to perform grouped operations
+- `summarize()`: create summary statistics (usually on grouped data)
+- `count()`: count discrete rows
+
 ## Select columns with `select()`
 
 To select specific columns, use `select()`. The first argument
@@ -136,14 +135,24 @@ the variable to exclude it:
 select(df, -state, -damage, -time_of_day)
 ```
 
-## Filter rows with `filter()`
+Some additional options to select columns based on a specific criteria include:
 
-To choose rows based on a specific criteria, use `filter()`:
+1) `ends_with()` = Select columns that end with a character string
+2) `contains()` = Select columns that contain a character string
+3) `matches()` = Select columns that match a regular expression
+4) `one_of()` = Select column names that are from a group of names
+
+## Select rows with `filter()`
+
+Filter the rows for wildlife impacts that occurred in DC:
 
 ```{r}
-# Filter to view all strikes that occurred in DC
 filter(df, state == 'DC')
-# Filter to view all strikes that cost more than $1 million to repair
+```
+
+Filter the rows for wildlife impacts that cost more than $1 million in damages:
+
+```{r}
 filter(df, cost_repairs_infl_adj > 10^6)
 ```
 
@@ -190,6 +199,24 @@ dc_impacts <- df %>%
 head(dc_impacts)
 ```
 
+## Sort rows with `arrange()`
+
+Use the `arrange()` function to sort a data frame by a column. For example, if you wanted to view the least expensive accidents, you could arrange the data frame by the variable `cost_repairs_infl_adj`:
+
+```{r}
+# Arrange by least expensive accident
+df %>%
+    arrange(cost_repairs_infl_adj)
+```
+
+To sort in descending order, add the `desc()` function inside the `arrange()` function. For example, here are the _most_ expensive accidents:
+
+```{r}
+# Arrange by most expensive accident
+df %>%
+    arrange(desc(cost_repairs_infl_adj))
+```
+
 ## Create new variables with `mutate()`
 
 You will often need to create new columns based on the values in existing
@@ -221,24 +248,6 @@ df %>%
 
 `is.na()` is a function that determines whether something is an `NA`. The `!`
 symbol negates the result, so we're asking for every row where weight *is not* an `NA`.
-
-## Sort with `arrange()`
-
-Use the `arrange()` function to sort a data frame by a column. For example, if you wanted to view the least expensive accidents, you could arrange the data frame by the variable `cost_repairs_infl_adj`:
-
-```{r}
-# Arrange by least expensive accident
-df %>%
-    arrange(cost_repairs_infl_adj)
-```
-
-To sort in descending order, add the `desc()` function inside the `arrange()` function. For example, here are the _most_ expensive accidents:
-
-```{r}
-# Arrange by most expensive accident
-df %>%
-    arrange(desc(cost_repairs_infl_adj))
-```
 
 # Split-apply-combine
 
