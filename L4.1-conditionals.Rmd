@@ -39,7 +39,9 @@ if ( CONDITION ) {
 
 If the condition is `TRUE`, then R will execute the statements contained in the curly braces, otherwise it will skip it. This schematic illustrates the idea:
 
+<center>
 ![](images/condition_if.png){ width=400 }
+</center>
 
 ## Example 1
 
@@ -93,7 +95,9 @@ if ( CONDITION ) {
 
 The interpretation of this version is similar. If the condition is `TRUE`, then the contents of the first block of code are executed; but if it is `FALSE`, then the contents of the second block of code are executed instead. The schematic illustration of an if-else construction looks like this:
 
+<center>
 ![](images/condition_if_else.png){ width=500 }
+</center>
 
 ## Example
 

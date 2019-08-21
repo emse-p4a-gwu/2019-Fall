@@ -40,7 +40,9 @@ for (VALUE in SEQUENCE) {
 
 In a `for` loop, R runs a fixed number of iterations determined by the `SEQUENCE` statement, which is a sequence of values. In each iteration, the variable `VALUE` will take the next value in `SEQUENCE`. Once we've exhausted all of the values in `SEQUENCE`, the loop terminates and the flow of the program continues down the script. This schematic illustrates the idea:
 
+<center>
 ![](images/loop_for.png){ width=350 }
+</center>
 
 ## Looping over numbers
 
@@ -121,7 +123,9 @@ while (CONDITION) {
 
 The code corresponding to `CONDITION` needs to produce a logical value, either `TRUE` or `FALSE`. Whenever R encounters a while statement, it checks to see if the condition is `TRUE`. If it is, R goes on to execute all of the commands inside the curly brackets. R will then continue to repeat this process until the condition is `FALSE`. Once that happens, R jumps to the bottom of the loop (i.e., to the `}` character), and then continues on with whatever commands appear next in the script. This schematic illustrates the idea:
 
+<center>
 ![](images/loop_while.png){ width=350 }
+</center>
 
 **Example**:
 

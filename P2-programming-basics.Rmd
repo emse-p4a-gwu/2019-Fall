@@ -11,7 +11,7 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-# Functions
+# Basic functions
 
 Try out a few common, basic functions to learn what they do and how they work:
 
@@ -25,7 +25,7 @@ Try out a few common, basic functions to learn what they do and how they work:
 Here's a couple more to foreshadow where we'll be going:
 
 - Type `rep("hello!", 100)` and take a look at the output. What does `rep()` do?
-- Type `hist(x=rnorm(300))` and see what happens. What do you think the `hist()` function does?
+- Type `hist(x=rnorm(300))` and see what happens. What do you think the `hist()` function does? What about the `rnorm()` function? How could you find out more about each function?
 
 # Objects
 
@@ -50,7 +50,11 @@ Try answering some of these questions **before** running any code - reason throu
 
 - What happens when you try to do math with a string: `"3" / 4`
 - What do you think R will return if we divide infinity by a really big number: `Inf / 10^20`
-- Why doesn't this return `TRUE` (Hint: [read ahead](L3.1-functions.html#7_tips) to find out): `(0.1 + 0.2) == 0.3`
+- Why doesn't the following code return `TRUE` (Hint: [read ahead](L3-functions.html#7_tips) to find out):
+
+```{r}
+(0.1 + 0.2) == 0.3
+```
 
 ---
 

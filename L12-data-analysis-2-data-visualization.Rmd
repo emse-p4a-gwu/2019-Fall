@@ -138,12 +138,12 @@ And here's the same plot but dressed up with additional customizations:
 boxplot(age ~ gender,
         data = df,
         col  = c('lightyellow', 'lightblue'),
-        main = "Age distribution of male and female bear killing victims",
+        main = "Age distribution of male and\nfemale bear killing victims",
         xlab = 'Gender',
         ylab = 'Age')
 ```
 
-# Make better figures with `ggplot2`
+# Advanced figures with `ggplot2`
 
 While Base R plot functions are useful for simple plots, many R users have adopted the [`ggplot2`](http://docs.ggplot2.org/) package as their primary tool for visualizing data.
 
@@ -151,7 +151,9 @@ While Base R plot functions are useful for simple plots, many R users have adopt
 
 The `ggplot2` library is built on the ["Grammar of Graphics"](https://www.springer.com/in/book/9780387245447) concept developed by Leland Wilkinson. A "grammar of graphics" (that's what the "gg" in "ggplot2" stands for) is a framework that uses layers to describe and construct visualizations or graphics in a structured manner. Here's a visual summary:
 
+<center>
 ![](images/ggPyramid.png){ width=700 }
+</center>
 
 We will start using `ggplot2` by re-creating some of the above plots, but using ggplot functions to get a feel for the syntax. But first, install and load the library:
 
@@ -209,19 +211,19 @@ In the above plot, the `theme_minimal()` layer changes some global aspects of th
 
 ## Histograms with `geom_histogram()`
 
-To make a histogram, we use the `geom_histogram()` layer:
+To make a histogram, use the `geom_histogram()` layer:
 
 ```{r fig.height=4, fig.width=4}
 ggplot(data = df) +
     geom_histogram(aes(x = month))
 ```
 
-Notice that by default `geom_histogram()` uses 30 bins, which is way too many for the month variable. Logically, we'd like to use 12 bins, so here's an improved plot:
+Notice that by default `geom_histogram()` uses 30 bins, which is way too many. Since we're plotting the `month` variable, logically you would want 12 bins:
 
 ```{r fig.height=4, fig.width=4, message=FALSE, warning=FALSE}
 ggplot(data = df) +
-    geom_histogram(aes(x = month), bins = 12, fill = "darkred",
-                   color = "white") +
+    geom_histogram(aes(x = month), bins = 12,
+                   fill = "darkred", color = "white") +
     labs(x = "Month",
          y = "Count",
          title = "Distribution of bear killings by month") +
@@ -241,13 +243,13 @@ ggplot(data = df %>%
                  fill = c('lightyellow', 'lightblue')) +
     labs(x = "Gender",
          y = "Age",
-         title = "Age distribution of male and female bear killing victims") +
+         title = "Age distribution of male and\nfemale bear killing victims") +
     theme_minimal()
 ```
 
 ## Barplots with `geom_bar()`
 
-Bar charts are great for comparing different values of a numerical variable. By default, the `geom_bar()` layer works just like a histogram in that is plots a count of the variable provided. For example, here is the same histogram as before - the count of the bear attacks for each month in the dataset:
+Bar charts are great for comparing different values of a numerical variable. By default, the `geom_bar()` layer works just like a histogram in that it plots a count of the variable provided. For example, here is the same histogram as before - the count of the bear attacks for each month in the dataset:
 
 ```{r fig.height=4, fig.width=4, message=FALSE, warning=FALSE}
 ggplot(data = df) +
@@ -261,7 +263,7 @@ ggplot(data = df) +
     geom_bar(aes(x = month, fill = bearType))
 ```
 
-It seems like brown bears are the most frequent killers, but what about if they are Grizzlies or not. Let's use another bar chart to check that:
+It seems like brown bears are the most frequent killers, but what about if they are Grizzlies or not? Let's use another bar chart to check that:
 
 ```{r fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 ggplot(data = df) +
@@ -274,7 +276,7 @@ ggplot(data = df) +
     scale_fill_manual(values = c('brown', 'black')) # Manually change the colors
 ```
 
-Yup, brown bears are the biggest killers, and it looks like about 1/3 are grizzlies.
+Yup, brown bears are the biggest killers, and it looks like about 1/3 of them are grizzlies.
 
 # Saving figures
 

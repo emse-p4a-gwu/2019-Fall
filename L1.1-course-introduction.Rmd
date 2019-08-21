@@ -14,7 +14,9 @@ source("knitr_setup.R")
 
 ## Meet your instructor!
 
-![](images/helveston.jpeg){ width=250 }
+<center>
+![](images/helveston.jpg){ width=250 }
+</center>
 
 Dr. John Helveston
 Department of Engineering Management & Systems Engineering
@@ -30,7 +32,9 @@ Background:
 
 **Name Missing**
 
+<center>
 **Photo Missing**
+<center>
 
 ## Meet your classmates!
 

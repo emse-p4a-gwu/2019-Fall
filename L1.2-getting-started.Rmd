@@ -286,7 +286,9 @@ R keeps track of your “command history”. If you hit the up key, the R consol
 
 The second way to get access to your command history is to look at the history panel in Rstudio. On the upper right hand side of the Rstudio window you'll see a tab labelled “History”. Click on that, and you'll see a list of all your recent commands displayed in that panel. It should look something like this:
 
+<center>
 ![](images/rstudio_history.png){ width=400 }
+</center>
 
 If you double click on one of the commands, it will be copied to the R console.
 
@@ -330,7 +332,9 @@ Let's make one for practice. Do this:
 
 You should see the following pane:
 
+<center>
 ![](images/rstudio_new_project.png){ width=400 }
+</center>
 
 Choose "New Directory". The directory name you choose here will be the project name. Call it whatever you want. RStudio will create a folder with that name to put all your project files.
 

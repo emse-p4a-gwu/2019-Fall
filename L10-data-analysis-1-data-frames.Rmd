@@ -48,7 +48,9 @@ A data frame is the representation of data in the format of a table where the
 columns are vectors that all have the same length. Because columns are
 vectors, each column must contain a single type of data (e.g., numeric, character, integer, logical). For example, here is a figure depicting a data frame comprising a numeric, a character, and a logical vector:
 
+<center>
 ![](./images/data-frame.png)
+</center>
 
 ## The `data.frame()` function
 

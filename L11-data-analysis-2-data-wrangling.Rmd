@@ -93,7 +93,9 @@ nrow(df) / (2019 - 1990) / 365
 
 "Data Wrangling" refers to the art of getting your data into R in a useful form for visualization and modeling. Wrangling is the first step in the general data science process:
 
+<center>
 ![](images/data-wrangle.png)
+</center>
 
 ## What is `dplyr`
 
@@ -158,7 +160,9 @@ filter(df, cost_repairs_infl_adj > 10^6)
 
 ## Sequence operations with pipes (`%>%`)
 
+<center>
 ![](images/magrittr.png){ width=200 }
+</center>
 
 What if you want to select and filter at the same time? Well, one way to do this is to use intermediate steps. To do this, you first create a temporary data frame and then use that as input to the next function, like this:
 
