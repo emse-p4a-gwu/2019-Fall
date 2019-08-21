@@ -24,7 +24,7 @@ You will inevitably run into problems while learning R. The best starting point 
 - Wilke, Claus O. "Fundamentals of Data Visualization"
 [[free online](https://serialmentor.com/dataviz/)],
 [[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
-
+- Check out this awesome collection of [past "Tidy Tuesday" challenges](https://nsgrantham.shinyapps.io/tidytuesdayrocks/)
 
 **RStudio Cheatsheets**:
 
