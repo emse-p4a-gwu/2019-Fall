@@ -419,6 +419,25 @@ str_replace_all(x, "a", "-")
 
 ---
 
+# Tips
+
+Often times you'll want to break a string into it's individual letter components. To do that, use `str_split()` with the empty string `""` as the delimiter:
+
+```{r}
+s <- 'aLongStringWithLotsOfLetters'
+str_split(s, "")[[1]]
+```
+
+If you want to count the unique occurence of component letters in a string, you can use the `table()` function on the vector of letters that come from splitting the string:
+
+```{r}
+letters <- str_split(s, "")[[1]]
+letterCounts <- table(letters)
+sort(letterCounts, decreasing = TRUE)
+```
+
+---
+
 **Page sources**:
 
 Some content on this page has been modified from other courses, including:
