@@ -357,13 +357,14 @@ y <- c(1,2,4)
 identical(x, y)
 ```
 
-One final distinction is that `identical()` also compares the _names_ of the vector elements. If you have two vectors with the same elements but different names, `identical()` will return `FALSE`:
+One final distinction is that `identical()` also compares the _names_ of the vector elements. If you have two vectors with the same elements but different names, `identical()` will return `FALSE`. If you only care about the elements themselves (and not the names), use `all()` with a comparison:
 
 ```{r}
 x <- c(one = 1, two = 2, three = 3)
 y <- c(one = 1, two = 2, four = 3)
 x == y
 identical(x, y)
+all(x == y)
 ```
 
 ---
