@@ -15,3 +15,5 @@ source("knitr_setup.R")
 **Page sources**:
 
 Some content on this page has been modified from other courses, including:
+
+- Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)

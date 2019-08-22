@@ -1,15 +1,16 @@
 ---
-title: "Practice 11 - Monte Carlo Methods"
-output:
-  html_document:
-    number_sections: false
-    toc: no
+title: "Monte Carlo Methods"
+output: html_document
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
+
+---
+
+https://www.cs.cmu.edu/~rdriley/112/notes/notes-monte-carlo.html
 
 ---
 
