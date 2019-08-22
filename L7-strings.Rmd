@@ -425,15 +425,21 @@ Often times you'll want to break a string into it's individual letter components
 
 ```{r}
 s <- 'aLongStringWithLotsOfLetters'
-str_split(s, "")[[1]]
+chrs <- str_split(s, "")[[1]]
+chrs
 ```
 
-If you want to count the unique occurence of component letters in a string, you can use the `table()` function on the vector of letters that come from splitting the string:
+Once you've got all the individual characters as a vector, you can do all sorts of things:
 
 ```{r}
-letters <- str_split(s, "")[[1]]
-letterCounts <- table(letters)
-sort(letterCounts, decreasing = TRUE)
+str_sort(chrs) # Alphabetically sort the vector
+str_detect(chrs, 't') # Find where the letter "t" exists
+```
+
+If you want to count the unique occurrence of each character, you can use the `table()` function:
+
+```{r}
+table(chrs)
 ```
 
 ---
