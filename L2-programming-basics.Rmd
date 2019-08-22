@@ -360,7 +360,7 @@ In case you're wondering, the only thing this package does is generate messages 
 
 # Tips
 
-**Coercing value types**
+## Coercing value types
 
 In general, you can force a value into a different type using `as.something()`, replacing "`something`" with a data type:
 
@@ -379,13 +379,29 @@ If you try to coerce a string into a number, R will return `NA`:
 as.numeric('foo')
 ```
 
-If you want to force a float number (i.e. one with decimals) into an integer value but you don't want to change the actual _type_ to an integer type, use `round()`, `ceiling()`, or `floor()`. Note that these functions produce different outcomes but all return float types (even though they look like integers):
+If you want to force a float number (i.e. one with decimals) into an integer value, but you don't want to change the actual _type_ to an integer type, use `round()`, `ceiling()`, or `floor()`. This will turn the number into an integer in _value_, but will still technically be float types. Note that these functions produce different outcomes.
 
 ```{r}
 round(3.1415)   # Typical rounding
-ceiling(3.1415) # Rounds up to nearest integer
-floor(3.1415)   # Rounds down to nearest integer
+ceiling(3.1415) # Rounds *up* to nearest integer
+floor(3.1415)   # Rounds *down* to nearest integer
 ```
+
+## Check if a number is an integer
+
+If you use the `is.integer()` function to check if a number that **looks** like an integer, you might get a surprising result:
+
+```{r}
+is.integer(7)
+```
+
+This is because the default numeric type is a _float_. The safer way to check if a number is an integer in value is to compare it against itself as an integer:
+
+```{r}
+7 == as.integer(7)
+```
+
+**In your assignments, use this method to check if something is an integer!**
 
 ---
 

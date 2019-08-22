@@ -380,67 +380,56 @@ I can also run any line in the script by typing "Command + Enter" (Mac) or "Cont
 
 # Tips
 
-## The mod operator (`%%`)
+## "Chopping" numbers with `%%` and `%/%`
 
-The mod operator (`%%`) is useful for "chopping" a number in two and returning everything to the **right** of the "cut point".
-
-For example, `x %% 1` will return all digits to the right of the **ones place**:
+When you use the mod operator (`%%`) on a positive number **with factors of 10**, it "chops" a number at a particular digit and returns everything to the _right_. For example:
 
 ```{r}
-2.2 %% 1
+123456 %% 1 # "Chops" on the right of the ones digit
+123456 %% 10 # "Chops" on the right of the tens digit
+123456 %% 100 # "Chops" on the right of the hundreds digit
+```
+
+You can get the opposite by using integer division operator (`%/%`) - in this case, everything to the _left_ of the "chop" point is returned. For example:
+
+```{r}
+123456 %/% 1 # "Chops" on the right of the ones digit
+123456 %/% 10 # "Chops" on the right of the tens digit
+123456 %/% 100 # "Chops" on the right of the hundreds digit
+```
+
+This works with non-integers too:
+
+```{r}
 3.1415 %% 1
-```
-
-Likewise, `x %% 10` will return all digits to the right of the **tens place**:
-
-```{r}
-42.7 %% 10
-348.123 %% 10
-2.2 %% 10
-```
-
-In general, you can "mod" by factors of 10 to get different results:
-
-```{r}
-123.456 %% 1
-123.456 %% 10
-123.456 %% 100
-123.456 %% 1000
-```
-
-## Integer division (`%/%`)
-
-You can use integer division to do the opposite of what we just showed with the mod operator. Integer division is useful for "chopping" a number in two and returning everything to the **left** of the "cut point".
-
-For example, `x %/% 1` will return all digits to the left of the **decimal point**:
-
-```{r}
-123.456 %/% 1
-3 %/% 1
 3.1415 %/% 1
 ```
 
-Likewise, `x %/% 10` will return all digits to the left of the **ones place**:
+But **be careful** - this "trick" only works with _positive_ numbers:
 
 ```{r}
-123.456 %/% 10
-42 %/% 10
-525600 %/% 10
+-123.456 %% 10
+-123.456 %/% 10
 ```
 
-Note that if the "cut point" is further to the left than the farthest-left digit, you'll get `0` back (because there's no digits beyond the cut point):
+Here's some mental notes to remember how this works:
+
+- The "chop" point is always just to the _right_ of the chopping digit:
+    - `123456 %% 1` -> chop to the _right_ of the `1`'s place: `123456 <chop>`
+    - `123456 %% 10` -> chop to the _right_ of the `10`'s place: `12345 <chop> 6`
+    - `123456 %% 100` -> chop to the _right_ of the `100`'s place: `1234 <chop> 56`
+- `%%` returns everything on the _right_ (`<chop> ->`)
+- `%/%` returns everything on the _left_ (`<- <chop>`)
+
+## Odds and evens with `%%`
+
+You can tell if an integer is even or odd by using mod `2`. If you get `0`, it's even; if you `1`, it's odd:
 
 ```{r}
-3.1415 %/% 10
-```
-
-In general, you can integer divide by factors of 10 to get different results:
-
-```{r}
-123456 %/% 1
-123456 %/% 10
-123456 %/% 100
-123456 %/% 1000
+10 %% 2 # Even
+11 %% 2 # Odd
+12 %% 2 # Even
+13 %% 2 # Odd
 ```
 
 ---

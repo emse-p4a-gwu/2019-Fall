@@ -15,7 +15,7 @@ source("knitr_setup.R")
 
 # Mystery Functions
 
-In just a few words of plain English, what does each of the following functions do? Provide some explanation for your answer.
+In just a few words of plain English, what does each of the following functions do? Provide some explanation for your answer. Try to answer this first without copying the functions into R, then go ahead and copy them in and explore what they do.
 
 ```{r, eval=FALSE}
 f <- function(x, y) {
@@ -26,51 +26,102 @@ f <- function(x, y) {
 }
 
 g <- function(x) {
-    return(is.integer(x) & (x %/% 10 == x %% 10))
+    return((x == as.integer(x)) & (x %/% 10 == x %% 10))
 }
 
 h <- function(x) {
-    return(is.integer(x) & (x >= 0) & ((as.integer(round(x^0.5)))^2 == x))
+    return((x == as.integer(x)) & (x >= 0) &
+          ((as.integer(round(x^0.5)))^2 == x))
 }
 ```
 
 # Write functions
 
-Here are a bunch of functions you should be able to write. Any of these may appear (directly or modified) on a quiz or exam!
+Here are a bunch of functions you should be able to write. Any of these may appear (directly or modified) on a quiz or exam! Your function should be able to pass the test functions provided.
 
 ### `celsiusToFahrenheit(celsius)`
 
 Given a temperature in Celsius, return the same temperature in Fahrenheit.  So `celsiusToFahrenheit(0)` returns `32`, and `celsiusToFahrenheit(100)` returns `212`.
 
+```{r, eval=FALSE}
+testCelsiusToFahrenheit <- function() {
+    cat("Testing celsiusToFahrenheit()...")
+    stopifnot(celsiusToFahrenheit(0) == 32)
+    stopifnot(celsiusToFahrenheit(100) == 212)
+    cat("Passed!\n")
+}
+```
+
 ### `isPerfectCube(x)`
 
 Given an integer value `x`, returns `TRUE` if it is a perfect cube and `FALSE` otherwise. That is, return `TRUE` if there is another integer `y` such that `x = y^3`. Thus, `isPerfectCube(27)` returns `TRUE`, but `isPerfectCube(16)` returns `FALSE`.
 
+```{r, eval=FALSE}
+testIsPerfectCube <- function() {
+    cat("Testing isPerfectCube()...")
+    stopifnot(isPerfectCube(0) == TRUE)
+    stopifnot(isPerfectCube(125) == TRUE)
+    stopifnot(isPerfectCube(-125) == TRUE)
+    stopifnot(isPerfectCube(8) == TRUE)
+    stopifnot(isPerfectCube(-8) == TRUE)
+    stopifnot(isPerfectCube(27) == TRUE)
+    stopifnot(isPerfectCube(-27) == TRUE)
+    stopifnot(isPerfectCube(64) == TRUE)
+    stopifnot(isPerfectCube(63) == FALSE)
+    cat("Passed!\n")
+}
+```
+
 ### `kthDigit(x, k)`
 
-Given two integers, `x` and `k`, return the kth digit of `x`, counting from the right. So:
+Given two integers, `x` and `k`, return the kth digit of `x`, counting from the right. Negative numbers should work too.
 
-- `kthDigit(789, 0)` returns `9`
-- `kthDigit(789, 1)` returns `8`
-- `kthDigit(789, 2)` returns `7`
-- `kthDigit(789, 3)` returns `0`
-
-Negative numbers should work, too, so `kthDigit(-789, 0)` returns `9`.
+```{r, eval=FALSE}
+testKthDigit <- function() {
+    cat("Testing kthDigit()...")
+    stopifnot(kthDigit(789, 1) == 9)
+    stopifnot(kthDigit(789, 2) == 8)
+    stopifnot(kthDigit(789, 3) == 7)
+    stopifnot(kthDigit(789, 4) == 0)
+    stopifnot(kthDigit(-789, 1) == 9)
+    cat("Passed!\n")
+}
+```
 
 ### `nthFibonacciNumber(n)`
 
 Write the function `nthFibonacciNumber(n)` that takes a positive integer `n` and (without using loops) returns the nth [Fibonacci number](https://en.wikipedia.org/wiki/Fibonacci_number). So:
 
-- `nthFibonacciNumber(1)` returns `1`
-- `nthFibonacciNumber(2)` returns `1`
-- `nthFibonacciNumber(3)` returns `2`
-- `nthFibonacciNumber(4)` returns `3`
-- `nthFibonacciNumber(5)` returns `5`
-- `nthFibonacciNumber(6)` returns `8`
+```{r, eval=FALSE}
+testNthFibonacciNumber <- function() {
+    cat("Testing nthFibonacciNumber()...")
+    stopifnot(nthFibonacciNumber(1) == 1)
+    stopifnot(nthFibonacciNumber(2) == 1)
+    stopifnot(nthFibonacciNumber(3) == 2)
+    stopifnot(nthFibonacciNumber(4) == 3)
+    stopifnot(nthFibonacciNumber(5) == 5)
+    stopifnot(nthFibonacciNumber(6) == 8)
+    cat("Passed!\n")
+}
+```
 
 ### `isTriangularNumber(n)`
 
 A number is triangular if it equals `1+2+3+...+N` for some integer `N`. Given an integer value `n`, return `TRUE` if it is triangular, and `FALSE` otherwise. Note that this relates to the pool ball problems. Hint: For this problem you should research [Triangular Numbers](https://en.wikipedia.org/wiki/Triangular_number). Hint 2: This is directly related to the `numberOfPoolBalls(rows)` homework problem!
+
+```{r, eval=FALSE}
+testIsTriangularNumber <- function() {
+    cat("Testing isTriangularNumber()...")
+    stopifnot(isTriangularNumber(0) == TRUE)
+    stopifnot(isTriangularNumber(1) == TRUE)
+    stopifnot(isTriangularNumber(4) == FALSE)
+    stopifnot(isTriangularNumber(6) == TRUE)
+    stopifnot(isTriangularNumber(54) == FALSE)
+    stopifnot(isTriangularNumber(55) == TRUE)
+    stopifnot(isTriangularNumber(56) == FALSE)
+    cat("Passed!\n")
+}
+```
 
 ### `dcHour(londonHour)`
 
@@ -87,6 +138,18 @@ This function takes an integer, the current hour in London, and returns the curr
 </div>
 
 Note: the hardest part is when it is 12 o'clock in DC.
+
+```{r, eval=FALSE}
+testDcHour <- function() {
+    cat("Testing testDcHour()...")
+    stopifnot(dcHour(0) == 7)
+    stopifnot(dcHour(10) == 5)
+    stopifnot(dcHour(12) == 7)
+    stopifnot(dcHour(17) == 12)
+    stopifnot(dcHour(18) == 1)
+    cat("Passed!\n")
+}
+```
 
 ---
 
