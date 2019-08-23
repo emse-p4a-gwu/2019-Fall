@@ -45,10 +45,10 @@ navbar:
           href: L11-data-analysis-2-data-wrangling.html
         - text: "Week 12: Data Analysis 3 - Data Visualization"
           href: L12-data-analysis-2-data-visualization.html
-        - text: "Week 13: Monte Carlo Methods"
-          href: L13-monte-carlo-methods.html
-        - text: "Week 15: RMarkdown"
-          href: L15-rmarkdown.html
+        - text: "Week 13: RMarkdown"
+          href: L13-rmarkdown.html
+        - text: "Week 15: Monte Carlo Methods"
+          href: L15-monte-carlo-methods.html
         - text: "Turtle Graphics"
           href: TurtleGraphics.html
     - text: "Assignments"
