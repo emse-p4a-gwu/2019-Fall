@@ -1,4 +1,10 @@
-You will inevitably run into problems while learning R. The best starting point for troubleshooting is Google and [Stackoverflow](https://stackoverflow.com/). In addition, these resources can also be helpful:
+You will inevitably run into problems. Things won't work the way you expect, and you'll get lots of confusing error messages. When this happens, many people turn to the following problem-solving approaches:
+
+![](images/oreilly_googling.jpg){ width=250 }
+![](images/oreilly_trying_stuff.jpeg){ width=250 }
+![](images/oreilly_changing_stuff.jpg){ width=250 }
+
+While these can be useful, there are also lots of excellent and **free** resources available - here are a few:
 
 **Programming in R**:
 
@@ -40,3 +46,5 @@ You will inevitably run into problems while learning R. The best starting point 
 - [Markdown It](https://markdown-it.github.io): Quickly demo Markdown code.
 - [Table generator](http://www.tablesgenerator.com/): Create tables and get export code for multiple formats.
 - [CMU RMarkdown guide (detailed)](http://www.stat.cmu.edu/~cshalizi/rmarkdown/)
+
+

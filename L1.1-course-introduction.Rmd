@@ -14,13 +14,9 @@ source("knitr_setup.R")
 
 ## Meet your instructor!
 
-<center>
-![](images/helveston.jpg){ width=250 }
-</center>
+Dr. John Helveston, Assistant Professor in Engineering Management & Systems Engineering
 
-Dr. John Helveston
-Department of Engineering Management & Systems Engineering
-GWU
+![](images/helveston.jpg){ width=250 }
 
 Background:
 
@@ -28,13 +24,15 @@ Background:
 - 2015 MS in Engineering & Public Policy at Carnegie Mellon University
 - 2010 BS in Engineering Science & Mechanics at Virginia Tech
 
-## Meet your TAs!
+## Meet your tutors!
 
-**Name Missing**
+Yanjie He, Masters student in Data Analytics
 
-<center>
-**Photo Missing**
-<center>
+![](images/yanjie.jpg){ width=250 }
+
+Lingmei Zhao, Masters student in Statistics
+
+![](images/lingmei.jpg){ width=250 }
 
 ## Meet your classmates!
 
