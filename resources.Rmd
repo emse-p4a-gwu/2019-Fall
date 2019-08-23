@@ -19,6 +19,14 @@ source("knitr_setup.R")
 
 # Doing stuff in `R`
 
+You will inevitably run into problems; things won't work the way you expect, and you'll get lots of confusing error messages. When this happens, many people turn to the following problem-solving approaches:
+
+![](images/oreilly_googling.jpg){ width=250 }
+![](images/oreilly_trying_stuff.jpeg){ width=250 }
+![](images/oreilly_changing_stuff.jpg){ width=250 }
+
+While these can be useful, there are also lots of excellent and **free** resources available - here are a few:
+
 ```{r child = here::here('syllabus', 'texts.Rmd')}
 ```
 
