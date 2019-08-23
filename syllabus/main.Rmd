@@ -72,7 +72,7 @@ Homework assignments contain a mix of coding exercises (reading, debugging, and 
 
 Read the [Collaboration Policy](#collaboration-policy) about collaborating with fellow students on homeworks. While most problems must be worked on individually, some will be marked as collaborative; on these problems (and _only_ these problems), you may work on code with other students.
 
-Assignments will be graded based on style (modularity, readability, commenting, etc.) and functionality (correctness on all possible test inputs). Your code should be properly annotated with comments that are well-placed, concise, and informative. Your assignments will be graded by your TA, by automated graders, and at times by your instructor.
+Assignments will be graded based on style (modularity, readability, commenting, etc.) and functionality (correctness on all possible test inputs). Your code should be properly annotated with comments that are well-placed, concise, and informative. Your assignments will be graded by your tutors, by automated graders, and at times by your instructor.
 
 ## Assessments
 
@@ -251,9 +251,9 @@ Penalties may also be accompanied by a letter to the Dean of Student Affairs, ag
 
 ### Plagiarism Detection
 
-Programs are naturally structured, which makes them much easier to compare than hand-written work, and easier to compare than typed essays. We run an automated plagiarism detection system on all assignments to detect copied code. Even if you make many changes to a copied code, it is _excessively_ easy to detect copied code.
+Programs are naturally structured, which makes them much easier to compare than hand-written work, and easier to compare than typed essays. We run an automated plagiarism detection system on all assignments to detect copied code. Even if you make many changes to a copied code, it is _excessively_ easy to detect copied code. [Here is a video showing plagiarism detection software in action using Python code)](http://www.kosbie.net/cmu/spring-13/15-112/automated-plagiarism-detector-demo.mp4)
 
-**In short, if you copy code, we will be able to tell - don't copy code!**
+**In short, if you copy code, we will find out - don't copy code!**
 
 ### Grace Period
 
@@ -267,7 +267,7 @@ Sometimes, students panic and copy code right before the deadline, then regret w
 
 ## Late Policy
 
-Each students is allowed **three** late homework submission days throughout the course. You may use them however you wish. No more than two days can be applied toward a single assignment, as homework solutions will be posted two days after the submission deadline. Late days are meant to cover illness, family emergencies, and religious holidays.
+Each students is allowed **three** late homework submission days throughout the course with zero penalty. You may use them however you wish. No more than **two days** can be applied toward a single assignment. Late days are meant to cover illness, family emergencies, and religious holidays. Assignments submitted more than two days after the due date will not be graded. In extreme circumstances, contact the instructor.
 
 ## Policy on Recording
 

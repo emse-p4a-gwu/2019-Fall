@@ -2,7 +2,8 @@ Having successfully completed this course, students will be able to:
 
 - Write clear, robust, and reasonably efficient code in R using:
     - Sequential, conditional, and loop statements.
-    - Numeric, string, vector, matrix, and data frame objects.
+    - Multiple data types, including numeric, string, and logical data.
+    - Data structures, including vectors and data frames.
     - Visualizations of data.
 
 - Develop simple programs to effectively solve medium-sized tasks by:

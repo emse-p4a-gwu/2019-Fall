@@ -32,7 +32,7 @@ Your car needs an engine (R) to run, but having a speedometer and rear view mirr
 You will first need to download and install both R and RStudio (Desktop version) on your computer.
 
 1. [Download and install R](https://cloud.r-project.org).
-2. [Download and install RStudio](https://www.rstudio.com/products/rstudio/download/preview/).
+2. [Download and install RStudio (Desktop version)](https://www.rstudio.com/products/rstudio/download/preview/).
 
 ## Using R via RStudio
 
@@ -111,7 +111,7 @@ With integer division, 3 can only go into 4 once, so `4 %/% 3` returns `1`.
 
 **Modulus operator**:
 
-The **modulus** (aka "mod" operator) simply returns the remainder after doing regular division. For example:
+The **modulus** (aka "mod" operator) returns the remainder after doing integer division. For example:
 
 ```{r}
 17 %% 3
@@ -192,14 +192,10 @@ R assesses logical statements using the following logical operators:
 A logical expression `x & y` is `TRUE` only if *both* `x` and `y` are `TRUE`.
 
 ```{r}
-x <- (2 == 2)
-y <- (2 == 3)
-x & y
+(2 == 2) & (2 == 3)
 ```
 ```{r}
-x <- (2 == 2)
-y <- (2 == 2)
-x & y
+(2 == 2) & (3 == 3)
 ```
 
 **Or**:
@@ -207,9 +203,7 @@ x & y
 A logical expression `x | y` is `TRUE` if *either* `x` or `y` are `TRUE`.
 
 ```{r}
-x <- (2 == 2)
-y <- (2 == 3)
-x | y
+(2 == 2) | (2 == 3)
 ```
 
 **Not**:
