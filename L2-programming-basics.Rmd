@@ -311,6 +311,32 @@ In addition to the four main data types mentioned, there are a few additional "s
 
 **No value**: `NULL` asserts that the variable genuinely has no value whatsoever, or does not even exist.
 
+## Coercing value types
+
+In general, you can force a value into a different type using `as.something()`, replacing "`something`" with a data type:
+
+```{r}
+as.numeric(3.1415)
+as.integer(3.1415)
+as.character(3.1415)
+as.logical(3.1415)
+```
+
+Note that `as.logical()` returns `TRUE` for any numeric value other than `0`, for which it returns `FALSE`.
+
+If you try to coerce a string into a number, R will return `NA`:
+
+```{r}
+as.numeric('foo')
+```
+
+If you want to force a float number (i.e. one with decimals) into an integer value, but you don't want to change the actual _type_ to an integer type, use `round()`, `ceiling()`, or `floor()`. This will turn the number into an integer in _value_, but will still technically be float types. Note that these functions produce different outcomes.
+
+```{r}
+round(3.1415)   # Typical rounding
+ceiling(3.1415) # Rounds *up* to nearest integer
+floor(3.1415)   # Rounds *down* to nearest integer
+```
 
 ---
 
@@ -359,33 +385,6 @@ In case you're wondering, the only thing this package does is generate messages 
 ---
 
 # Tips
-
-## Coercing value types
-
-In general, you can force a value into a different type using `as.something()`, replacing "`something`" with a data type:
-
-```{r}
-as.numeric(3.1415)
-as.integer(3.1415)
-as.character(3.1415)
-as.logical(3.1415)
-```
-
-Note that `as.logical()` returns `TRUE` for any numeric value other than `0`, for which it returns `FALSE`.
-
-If you try to coerce a string into a number, R will return `NA`:
-
-```{r}
-as.numeric('foo')
-```
-
-If you want to force a float number (i.e. one with decimals) into an integer value, but you don't want to change the actual _type_ to an integer type, use `round()`, `ceiling()`, or `floor()`. This will turn the number into an integer in _value_, but will still technically be float types. Note that these functions produce different outcomes.
-
-```{r}
-round(3.1415)   # Typical rounding
-ceiling(3.1415) # Rounds *up* to nearest integer
-floor(3.1415)   # Rounds *down* to nearest integer
-```
 
 ## Check if a number is an integer
 
