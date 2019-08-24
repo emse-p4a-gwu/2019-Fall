@@ -11,9 +11,9 @@ library(ggplot2)
 
 > ### Learning Objectives
 >
-> * Create simple scatterplots, histograms, and boxplots in R.
-> * Compare the plotting features of base R and the ggplot2 package.
-> * Customize the aesthetics of an existing plot.
+> * Create simple scatterplots and histograms with Base R graphics.
+> * Learn the basic plotting features of the ggplot2 package.
+> * Customize the aesthetics of an existing ggplot figure.
 > * Create plots from data in a data frame.
 > * Export plots from RStudio to standard graphical file formats.
 >
@@ -30,7 +30,7 @@ library(ggplot2)
 >
 > \- [Richard Hamming](https://en.wikipedia.org/wiki/Richard_Hamming)
 
-...and one of the best ways to develop insights from data is to visualize the data. The best starting point I recommend is to go through the "Introduction" chapter of Rick Scavetta's ["Data Visualization with ggplot2 (Part 1)"](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1) lesson on DataCamp. The introduction section is free and contains three 5-minute summary videos along with some practice exercises.
+...and one of the best ways to develop insights from data is to _visualize_ the data. The best starting point I recommend is to go through the "Introduction" chapter of Rick Scavetta's ["Data Visualization with ggplot2 (Part 1)"](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1) lesson on DataCamp. The introduction section is free and contains three 5-minute summary videos along with some practice exercises.
 
 Data visualization will be the primary focus of a follow-on course to this one called "Exploratory Data Analysis". For now, we will explore a few features of R's plotting packages.
 
@@ -68,7 +68,7 @@ grizzly       | double    | 1 if bear is a Grizzly, 0 otherwise.
 hiker         | double    | 1 if victim was a hiker, 0 otherwise.
 onlyOneKilled | double    | 1 if only one victim was killed, 0 otherwise.
 
-**Side node**: One thing I learned looking at this data is, kind of like squares and rectangles, all grizzly bears are brown bears, but [not all brown bears are grizzly bears](https://www.nps.gov/katm/learn/photosmultimedia/brown-bear-frequently-asked-questions.htm#2).
+**Side node**: One thing I learned looking at this data is (kind of like squares and rectangles), all grizzly bears are brown bears, but [not all brown bears are grizzly bears](https://www.nps.gov/katm/learn/photosmultimedia/brown-bear-frequently-asked-questions.htm#2).
 
 To get started, let's load our libraries and check out the data:
 
@@ -81,11 +81,11 @@ glimpse(df)
 
 # Basic plots in R
 
-R has a number of built-in tools for basic graph types such as scatterplots, histograms, boxplots, and more. We'll test a few of these out here.
+R has a number of built-in tools for basic graph types. We will only cover two here because they are so common and convenient: scatterplots and histograms.
 
 ## Scatterplots with `plot()`
 
-Let's start with a **scatterplot**. A scatter plot provides a graphical view of the relationship between two variables. Typically these are used for "continuous" variables, like _time_, _age_, _money_, etc. (as opposed to "discrete" variables, like _nationality_, _gender_, etc.). Here's a scatterplot of the age of the victims over time:
+A scatter plot provides a graphical view of the relationship between two variables. Typically these are used for "continuous" variables, like _time_, _age_, _money_, etc...things that are not categorical in nature (as opposed to "discrete" variables, like _nationality_). Here's a scatterplot of the age of the bear killing victims over time:
 
 ```{r fig.height=5, fig.width=6, message=FALSE, warning=FALSE}
 plot(x = df$year, y = df$age)
@@ -103,17 +103,17 @@ plot(x    = df$year,
      ylab = "Age")
 ```
 
-Looks like bear killings are becoming more frequent over time, though pretty evenly-distributed across age.
+Looks like bear killings are becoming more frequent over time (hmm, why might that be?), though pretty evenly-distributed across age.
 
 ## Histograms with `hist()`
 
-The [histogram](https://en.wikipedia.org/wiki/Histogram) is one of the most common ways to visualize the _distribution_ of a variable. The `hist()` function takes just one variable, `x`. Here's a histogram of the `month` variable:
+The [histogram](https://en.wikipedia.org/wiki/Histogram) is one of the most common ways to visualize the _distribution_ of a variable. The `hist()` function takes just one variable: `x`. Here's a histogram of the `month` variable:
 
 ```{r fig.height=5, fig.width=6, message=FALSE, warning=FALSE}
 hist(x = df$month)
 ```
 
-As you might expect, most bear attacks occur during the summer months when parks get more visitors. As with the `plot()` function, you can customize a lot of the histogram. One common customization is to modify the number of "bins" in the histogram by changing the `breaks` argument:
+As you might expect, most bear attacks occur during the summer months, when parks get more visitors. As with the `plot()` function, you can customize a lot of the histogram features. One common customization is to modify the number of "bins" in the histogram by changing the `breaks` argument. Here we'll fix the number of bins to `12` - one for each month:
 
 ```{r fig.height=5, fig.width=6, message=FALSE, warning=FALSE}
 hist(x      = df$month,
@@ -124,32 +124,13 @@ hist(x      = df$month,
      ylab   = "Count")
 ```
 
-## Boxplots with `boxplot()`
-
-Boxplots are another convenient way to visualize how variables are distributed by providing a graphical view of the median, quartiles, maximum, and minimum of a variable. Unlike histograms, boxplots are better at plotting multiple distributions at once. For example, here is how the victim age is distributed by gender:
-
-```{r fig.height=5, fig.width=4, message=FALSE, warning=FALSE}
-boxplot(age ~ gender, data = df)
-```
-
-And here's the same plot but dressed up with additional customizations:
-
-```{r fig.height=5, fig.width=4, message=FALSE, warning=FALSE}
-boxplot(age ~ gender,
-        data = df,
-        col  = c('lightyellow', 'lightblue'),
-        main = "Age distribution of male and\nfemale bear killing victims",
-        xlab = 'Gender',
-        ylab = 'Age')
-```
-
 # Advanced figures with `ggplot2`
 
-While Base R plot functions are useful for simple plots, many R users have adopted the [`ggplot2`](http://docs.ggplot2.org/) package as their primary tool for visualizing data.
+While Base R plot functions are useful for making simple, quick plots, many R users have adopted the [`ggplot2`](http://docs.ggplot2.org/) package as their primary tool for visualizing data.
 
 ## The Grammar of Graphics
 
-The `ggplot2` library is built on the ["Grammar of Graphics"](https://www.springer.com/in/book/9780387245447) concept developed by Leland Wilkinson. A "grammar of graphics" (that's what the "gg" in "ggplot2" stands for) is a framework that uses layers to describe and construct visualizations or graphics in a structured manner. Here's a visual summary:
+The `ggplot2` library is built on the ["Grammar of Graphics"](https://www.springer.com/in/book/9780387245447) concept developed by Leland Wilkinson. A "grammar of graphics" (that's what the "gg" in "ggplot2" stands for) is a framework that uses _layers_ to describe and construct visualizations or graphics in a structured manner. Here's a visual summary of the concept:
 
 <center>
 ![](images/ggPyramid.png){ width=700 }
@@ -166,117 +147,122 @@ library(ggplot2)
 
 The `ggplot()` function is used to initialize the basic graph structure, and then we add layers to it. The basic idea is that you specify different parts of the plot, and add them together using the `+` operator. We will start with a blank plot and will add layers as we go along:
 
-```{r fig.height=3.5, fig.width=5, message=FALSE, warning=FALSE}
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
 ggplot(data = df)
 ```
 
 ## Geoms and aesthetics
 
-Geometric objects (called "geoms") are the actual marks we put on a plot. Examples include:
+Geometric objects (called "geoms") are the actual marks we put on a plot. You can have an unlimited number of layers, but at a minimum a plot **must have at least one geom**. Examples include:
 
-- `geom_point()` for scatter plots, dot plots, etc.
-- `geom_line()` for time series, trend lines, etc.
-- `geom_bar()` for bar charts and histograms
-- `geom_boxplot()` for boxplots
+- `geom_point()` makes a scatter plot by adding a layer of points.
+- `geom_line()` adds a layer of lines connecting data points.
+- `geom_bar()` adds bars for bar charts and histograms.
+- `geom_boxplot()` adds boxes for boxplots.
 
-You can have an unlimited number of layers, but at a minimum a plot **must have at least one geom**. Each type of geom usually has a **required set of aesthetics** to be set, and usually accepts only a subset of all aesthetics. Aesthetic mappings are set with the `aes()` function. Examples include:
+Each type of geom usually has a **required set of aesthetics** to be set, and usually accepts only a subset of all aesthetics. Aesthetic mappings are set with the `aes()` function. Examples include:
 
 - position (i.e., on the x and y axes)
 - color ("outside" color)
-- fill ("inside" color) shape (of points)
-- linetype
-- size
+- fill ("inside" color)
+- shape (of points)
+- linetype (solid, dashed, dotted etc.)
+- size (of geoms)
 
 ## Scatterplots with `geom_point()`
 
 Now that we know what geoms and aesthetics are, let's put them to practice by making a scatterplot. To start, we will add the `geom_point()` geom and we'll set the position for the x- and y-axis inside the `aes()` function:
 
-```{r fig.height=3.5, fig.width=5, message=FALSE, warning=FALSE}
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
 ggplot(data = df) +
     geom_point(aes(x = year, y = age))
 ```
 
-Notice how we've "added" the `geom_point()` layer to the previous blank slate. To improve and further customize the plot, simply add more layers:
+Notice how we've "added" the `geom_point()` layer to the previous blank slate. Also note that the names we used to define the `x` and `y` axes are column names in the data frame, `df`. These must be placed _inside_ the `aes()` function, which tells ggplot to look in `df` for those columns.
 
-```{r fig.height=3.5, fig.width=5, message=FALSE, warning=FALSE}
+Let's further customize the plot with a few more layers:
+
+```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
 ggplot(data = df) +
     geom_point(aes(x = year, y = age)) +
+    # Adjust the plot labels and add a title
     labs(x = "Year",
          y = "Age",
          title = "Age of bear killing victims over time") +
+    # Change some of the overall plot looks
     theme_minimal()
 ```
 
-In the above plot, the `theme_minimal()` layer changes some global aspects of the plot, such as the background color, grid lines, legend appearance, etc. There are [many themes to choose from](https://ggplot2.tidyverse.org/reference/ggtheme.html).
+In the above plot, the `labs()` layer enables you to modify the plot labels and title. The `theme_minimal()` layer changes some global aspects of the plot, such as the background color, grid lines, legend appearance, etc. There are [many themes to choose from](https://ggplot2.tidyverse.org/reference/ggtheme.html), but keeping things simple with `theme_minimal()` often improves the plot from the default theme settings.
 
-## Histograms with `geom_histogram()`
-
-To make a histogram, use the `geom_histogram()` layer:
-
-```{r fig.height=4, fig.width=4}
-ggplot(data = df) +
-    geom_histogram(aes(x = month))
-```
-
-Notice that by default `geom_histogram()` uses 30 bins, which is way too many. Since we're plotting the `month` variable, logically you would want 12 bins:
-
-```{r fig.height=4, fig.width=4, message=FALSE, warning=FALSE}
-ggplot(data = df) +
-    geom_histogram(aes(x = month), bins = 12,
-                   fill = "darkred", color = "white") +
-    labs(x = "Month",
-         y = "Count",
-         title = "Distribution of bear killings by month") +
-    theme_minimal()
-```
-
-In the above plot, the color of the _bars_ is set by the `fill` argument, and the color of the _line_ around the bars is set by the `color` argument.
-
-## Boxplots with `geom_boxplot()`
-
-To re-create the boxplot example, use the `geom_boxplot()` layer:
-
-```{r fig.height=5, fig.width=4, message=FALSE, warning=FALSE}
-ggplot(data = df %>%
-    filter(!is.na(gender))) + # Removing NAs from gender variable
-    geom_boxplot(aes(x = gender, y = age),
-                 fill = c('lightyellow', 'lightblue')) +
-    labs(x = "Gender",
-         y = "Age",
-         title = "Age distribution of male and\nfemale bear killing victims") +
-    theme_minimal()
-```
-
-## Barplots with `geom_bar()`
+## Histograms with `geom_bar()`
 
 Bar charts are great for comparing different values of a numerical variable. By default, the `geom_bar()` layer works just like a histogram in that it plots a count of the variable provided. For example, here is the same histogram as before - the count of the bear attacks for each month in the dataset:
 
-```{r fig.height=4, fig.width=4, message=FALSE, warning=FALSE}
+```{r fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
 ggplot(data = df) +
     geom_bar(aes(x = month))
 ```
 
-To make it a bit more interesting, we can "fill" the bars by the type of bear:
+One useful feature of bar plots is to "fill" the color of the bars by another variable in the data. To do this, add the `fill=` argument in the `aes()` call. For example, here's the same histogram with the bar colors representing the type of bear. I'll also adjust the x-axis so that it labels the 12 months, and I'll adjust the theme and labels:
 
-```{r fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+```{r fig.height=5, fig.width=6, message=FALSE, warning=FALSE}
 ggplot(data = df) +
-    geom_bar(aes(x = month, fill = bearType))
+    geom_bar(aes(x = month, fill = bearType)) +
+    # Customize the x-axis scale
+    scale_x_continuous(breaks=seq(12)) +
+    # Adjust the plot labels and add a title
+    labs(x = "Month",
+         y = "Count",
+         fill = 'Bear Type',
+         title = "Distribution of bear killings by month") +
+    # Change some of the overall plot looks
+    theme_minimal()
 ```
 
-It seems like brown bears are the most frequent killers, but what about if they are Grizzlies or not? Let's use another bar chart to check that:
+Hmm, looks like brown bears are the most frequent killers, though black bears are a close second.
 
-```{r fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
-ggplot(data = df) +
-    geom_bar(aes(x = bearType, fill = as.factor(grizzly))) +
-    theme_minimal() +
-    labs(x     = "Bear type",
-         y     = 'Count',
-         fill  = 'Is grizzly?',
-         title = "Number of deadly bear attacks by bear type") +
-    scale_fill_manual(values = c('brown', 'black')) # Manually change the colors
+## Bar charts with `geom_bar()`
+
+You can also use `geom_bar()` to create a bar chart (as opposed to a histogram). Whereas histograms report the _count_ of one variable (`x`), bar charts also have a `y` variable that determine the height of bars. To make a bar chart, you have to tell `geom_bar()` to use the actual `y` values in the `aes()` call by adding the `stat="identity"` argument in `geom_bar()`, otherwise it will use the default statistic (which is `stat="count"` to make a histogram).
+
+For example, here is a bar chart of the number of bear killings in each year - notice how we first create a new summary data framed called `annualKillings` from the original `df`:
+
+```{r fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+annualKillings <- df %>% count(year)
+ggplot(data = annualKillings) +
+    # Notice the addition of the "stat = 'identity'" argument in geom_bar()
+    geom_bar(aes(x = year, y = n), stat = 'identity') +
+    labs(x     = "Year",
+         y     = 'Number of killings',
+         title = "Annual number of deadly bear attacks over time") +
+    theme_minimal()
 ```
 
-Yup, brown bears are the biggest killers, and it looks like about 1/3 of them are grizzlies.
+Just like with histograms, you can "fill" the color of the bars with another variable. Let's see how the number of incidents vary by the gender of the victim. Notice again how we first use the `count()` function to compute the number of killings by gender:
+
+```{r fig.height=4, fig.width=8, message=FALSE, warning=FALSE}
+annualKillingsByGender <- df %>%
+    filter(! is.na(gender)) %>%
+    count(year, gender)
+ggplot(data = annualKillingsByGender) +
+    # Notice the addition of the "fill = gender" argument in aes()
+    geom_bar(aes(x = year, y = n, fill = gender), stat = 'identity') +
+    labs(x     = "Year",
+         y     = 'Number of killings',
+         fill = "Victim gender",
+         title = "Annual deadly bear attacks over time and victim gender") +
+    theme_minimal()
+```
+
+# Customizing your ggplot
+
+While the `ggplot2` library offers a wide variety of options for customizing your plots, remembering exactly how to do specific tasks (like changing the color of a line, or changing the position of a legend) can be difficult. Fortunately, there are wonderful resources for looking up all the tricks to make the perfect ggplot. Here are a few:
+
+- [RStudio `ggplot2` Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [Tidyverse `ggplot2` reference guide](https://ggplot2.tidyverse.org/reference/)
+- [R Cookbook for `ggplot2`](http://www.cookbook-r.com/Graphs/)
+- [Top 50 `ggplot2` visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
 
 # Saving figures
 

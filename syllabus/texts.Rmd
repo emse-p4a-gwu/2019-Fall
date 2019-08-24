@@ -24,6 +24,12 @@
 [[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
 - Check out this awesome collection of [past "Tidy Tuesday" challenges](https://nsgrantham.shinyapps.io/tidytuesdayrocks/)
 
+**Customizing `ggplot2`**:
+- [RStudio `ggplot2` Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [Tidyverse `ggplot2` reference guide](https://ggplot2.tidyverse.org/reference/)
+- [R Cookbook for `ggplot2`](http://www.cookbook-r.com/Graphs/)
+- [Top 50 `ggplot2` visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
+
 **RStudio Cheatsheets**:
 
 - [All cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
