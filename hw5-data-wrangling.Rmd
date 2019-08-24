@@ -6,4 +6,4 @@ output:
     toc: no
 ---
 
-**Due**: Sunday, 17-Nov. at 8pm
+**Due**: Sunday, 10-Nov. at 8pm
