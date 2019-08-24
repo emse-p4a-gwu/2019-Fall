@@ -156,6 +156,41 @@ y
 typeof(y)
 ```
 
+## Comparing vectors
+
+If you want to check if two vectors are identical (in that they contain all the same elements), you can't use the typical `==` operator by itself. The reason is because the `==` operator is performed element-wise, so it will return a logical vector:
+
+```{r}
+x <- c(1,2,3)
+y <- c(1,2,3)
+x == y
+```
+
+Instead of getting one `TRUE`, you get a vector of `TRUE`s, because the individual elements are indeed equal. To compare if _all_ the elements in the two vectors are identical, wrap the comparison inside the `all()` function:
+
+```{r}
+all(x == y)
+```
+
+You can use the `all()` function to compare if other types of conditions are `TRUE` for all elements in two vectors:
+
+```{r}
+a <- c(1,2,3)
+b <- -1*c(1,2,3)
+all(a > b)
+```
+
+For most situations, the `all()` function works just fine, but it only compares the _elements_ in the vectors, not their _attributes_. In some situations, you might also want to check if the attributes of vector, such as their _names_ and _data types_, are also the same. In this case, you should use the `identical()` function.
+
+```{r}
+names(x) <- c('a', 'b', 'c')
+names(y) <- c('one', 'two', 'three')
+all(x == y) # Only compares the elements
+identical(x, y) # Also compares the **names** of the elements
+```
+
+Notice that for the `identical()` function, you don't need to add a conditional statement - you just provide it the two vectors you want to compare. This is because `identical()` by definition is comparing if two things are the same.
+
 # Accessing elements in a vector
 
 You can access elements from a vector using brackets `[]` and indices inside the brackets. You can use integer indices (probably the most common way), character indices (by naming each element), and logical indices.
@@ -322,50 +357,6 @@ x %% 1
 ```
 
 In many cases, using a vector can save you a whole lot of code by avoiding loops entirely!
-
-## Comparing vectors
-
-If you want to check if two vectors are identical (in that they contain all the same elements), you can't use the typical `==` operator by itself. The reason is because the `==` operator is performed element-wise, so it will return a logical vector:
-
-```{r}
-x <- c(1,2,3)
-y <- c(1,2,3)
-x == y
-```
-
-Instead of getting one `TRUE`, you get a vector of `TRUE`s, because the individual elements are indeed equal.
-
-To compare the _entire vector_, you should use the `identical()` function:
-
-```{r}
-identical(x, y)
-```
-
-The `identical()` function works on any types of vectors:
-
-```{r}
-x = c('one', 'two', 'three')
-y = c('one', 'two', 'three')
-identical(x, y)
-```
-
-If any one element across the two vectors are different, `identical()` will return `FALSE`:
-
-```{r}
-x <- c(1,2,3)
-y <- c(1,2,4)
-identical(x, y)
-```
-
-One final distinction is that `identical()` also compares the _names_ of the vector elements. If you have two vectors with the same elements but different names, `identical()` will return `FALSE`. If you only care about the elements themselves (and not the names), use `all()` with a comparison:
-
-```{r}
-x <- c(one = 1, two = 2, three = 3)
-y <- c(one = 1, two = 2, four = 3)
-x == y
-identical(x, y)
-all(x == y)
-```
 
 ---
 
