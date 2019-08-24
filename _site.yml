@@ -39,14 +39,18 @@ navbar:
           href: L6-vectors.html
         - text: "Week 7: Strings"
           href: L7-strings.html
+        - text: "Data Analysis Prelude"
+          href: dataAnalysisPrelude.html
+        - text: "Case Study on Challenger Explosion"
+          href: challengerExplosion.html
         - text: "Week 10: Data Analysis 1 - Data Frames"
-          href: L10-data-analysis-1-data-frames.html
+          href: L10-da1-data-frames.html
         - text: "Week 11: Data Analysis 2 - Data Wrangling"
-          href: L11-data-analysis-2-data-wrangling.html
+          href: L11-da2-data-wrangling.html
         - text: "Week 12: Data Analysis 3 - Data Visualization"
-          href: L12-data-analysis-2-data-visualization.html
-        - text: "Week 13: RMarkdown"
-          href: L13-rmarkdown.html
+          href: L12-da3-data-visualization.html
+        - text: "Week 13: Data Analysis 4 - Communicating Information"
+          href: L13-da4-communicating-information.html
         - text: "Week 15: Monte Carlo Methods"
           href: L15-monte-carlo-methods.html
         - text: "Turtle Graphics"
