@@ -8,6 +8,8 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+This is the first lesson in a sequence on data analysis in R. Before reading this lesson, check out the ["Prelude to Data Analysis"](dataAnalysisPrelude.html).
+
 > ### Learning Objectives
 >
 > * Describe what a data frame is.

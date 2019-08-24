@@ -1,0 +1,22 @@
+---
+title: "Prelude to Data Analysis"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+> "Data science is not just about AI or machine learning. It is the discipline of turning raw data into understanding."
+>
+> \- [Julia Silge](https://juliasilge.com/), useR Conference 2019
+
+Over the next few lessons, we'll begin to learn how to transform data into information and understanding. While the technical details of achieving this goal will require practice to master, the goal should always be kept in mind first and foremost.
+
+To get a sense for what it means to "transform data into information", take a look at this short [**case study**](challengerExplosion.html) on the [1986 Space Shuttle Challenger explosion](https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster).
+
+Once you have read through the case study, continue reading the "Data Analysis" lessons sequence to start getting into the details of working with data in R.
