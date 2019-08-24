@@ -1,9 +1,6 @@
 ---
 title: "Practice 4 - Conditionals & Testing"
-output:
-  html_document:
-    number_sections: false
-    toc: no
+output: html_document
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
@@ -11,10 +8,55 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
----
+# Code tracing
 
-**Page sources**:
+### 1)
+After running this code, what is the value of `a` and `b`?
 
-Some content on this page has been modified from other courses, including:
+```{r, eval = FALSE}
+f <- function(x) {
+    x = x + 1
+    if ((x %% 2) == 0) {
+        x = x - 1
+    }
+    x = 2*x
+}
 
-- CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/), by [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)
+a <- f(7)
+b <- f(12)
+```
+
+### 2)
+Write the output of this code by hand:
+
+```{r, eval = FALSE}
+f <- function(x) {
+    if ((x %% 3) == 0) {
+        cat('woo!')
+        return(x %/% 3)
+    }
+    return(x %% 2)
+}
+
+cat(f(9))
+cat(f(11))
+```
+
+### 3)
+Write the output of this code by hand:
+
+```{r, eval = FALSE}
+f <- function(x) {
+    if (x > 0) {
+        cat('abc')
+        x = 2*x
+    } else if (x <= 0) {
+        x = abs(x)
+        cat('cba')
+    }
+    cat(x)
+}
+
+cat(f(-9))
+cat(f(15))
+```

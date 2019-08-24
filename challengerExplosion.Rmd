@@ -54,16 +54,14 @@ plot +
              label = "Forecast \n temperature \n 26 to 29")
 ```
 
-Now we have _information_. The transformation of the raw data into a visualization makes it obvious that the temperature forecasted for the day of the Challenger launch should raise red flags. It falls far below the temperature range of prior launches, and those prior launches suggest that O-ring damage may be correlated with decreasing temperature.
+Now we have some _information_. The transformation of the raw data into a visualization makes it obvious that the temperature forecasted for the day of the Challenger launch should raise red flags. It falls far below the temperature range of prior launches, and those prior launches suggest that O-ring damage may be correlated with decreasing temperature.
 
-To their credit, the engineers working on the Challenger were worried about the potential for O-ring failure. But the critical step in making the link to temperature was not thoroughly communicated. Instead, the _raw data_ was presented in tabular form along with diagrams like these, which show how erosion in the primary O-ring interacted with the secondary O-ring:
+To their credit, the engineers working on the Challenger were worried about the potential for O-ring failure. But the critical step in making the link to temperature was not thoroughly communicated. Instead, the _raw data_ was presented in tabular form along with diagrams like the one below, which show how erosion in the primary O-ring interacted with the secondary O-ring:
 
 ![](images/rockets_chart.png){ width=600 }
-[Image source](https://www.edwardtufte.com/tufte/books_visex)
+[[Image source](https://www.edwardtufte.com/tufte/books_visex)]
 
-In contrast to the above image, the scatter plot reveals the critical **information** that was overlooked:
-
-> _Lower temperatures are correlated with increased O-ring failure, and the extremely low temperature forecasted for the Challenger launch day suggests a higher risk of failure_.
+While the above diagram contains a lot of _data_, the critical **information** about the relationship between launch temperature and O-ring damage is not obvious. In contrast, the scatterplot achieves this without putting much cognitive load on the viewer. Just about anyone can look at that plot and understand that the forecasted temperature on January 28, 1986 might be a risk for O-ring failure.
 
 ---
 
