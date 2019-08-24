@@ -160,9 +160,7 @@ filter(df, cost_repairs_infl_adj > 10^6)
 
 ## Sequence operations with pipes (`%>%`)
 
-<center>
-![](images/magrittr.png){ width=200 }
-</center>
+![](images/magrittr.png){ width=200 } (logo is a reference to [The Treachery of Images](https://en.wikipedia.org/wiki/The_Treachery_of_Images))
 
 What if you want to select and filter at the same time? Well, one way to do this is to use intermediate steps. To do this, you first create a temporary data frame and then use that as input to the next function, like this:
 

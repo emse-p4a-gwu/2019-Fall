@@ -1,5 +1,5 @@
 ---
-title: "RMarkdown"
+title: "Data Analysis 4 - Communicating Information"
 output: html_document
 ---
 

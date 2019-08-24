@@ -15,7 +15,7 @@ In addition to my own developed material, I have also modified material from
 other courses and workshops, including:
 
 Name | Author | Links
---------- | --- | ---
+--------- | --------- | ---
 STAT 545 | U. of British Columbia | [course](http://stat545.com/); [github](https://github.com/STAT545-UBC)
 R for Data Science | Garrett Grolemund & Hadley Wickham | [book](https://r4ds.had.co.nz/); [github](https://github.com/hadley/r4ds)
 Handling Strings with R | Gaston Sanchez | [book](https://www.gastonsanchez.com/r4strings/); [github](https://github.com/gastonstat/r4strings)

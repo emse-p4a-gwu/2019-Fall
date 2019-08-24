@@ -8,20 +8,6 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-# Prelude
-
-> "Data science is not just about AI or machine learning. It is the discipline of turning raw data into understanding."
->
-> \- [Julia Silge](https://juliasilge.com/)
-
-Over the next three lessons, we'll begin to learn how to transform data into information and understanding. While the technical details of achieving this goal can be complicated, the goal should always be kept in mind first and foremost. To get a feel for what I mean by "transforming data into information":
-
-> Take a look at this short [case study](challengerExplosion.html) on the [1986 Space Shuttle Challenger explosion](https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster).
-
-Once you have read through the case study, continue reading here to start getting into the details of working with data in R.
-
----
-
 > ### Learning Objectives
 >
 > * Describe what a data frame is.
@@ -48,9 +34,7 @@ A data frame is the representation of data in the format of a table where the
 columns are vectors that all have the same length. Because columns are
 vectors, each column must contain a single type of data (e.g., numeric, character, integer, logical). For example, here is a figure depicting a data frame comprising a numeric, a character, and a logical vector:
 
-<center>
 ![](./images/data-frame.png)
-</center>
 
 ## The `data.frame()` function
 
