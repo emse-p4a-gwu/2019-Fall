@@ -22,7 +22,7 @@ source("knitr_setup.R")
 
 **Description**:
 
-```{r child = here::here('syllabus', 'description-unofficial.Rmd')}
+```{r child = here::here('syllabus', 'description.Rmd')}
 ```
 
 **Learning Objectives**:
