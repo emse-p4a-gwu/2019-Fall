@@ -23,6 +23,7 @@ source("knitr_setup.R")
 > ### Suggested Readings
 >
 > * [Chapter 5](https://r4ds.had.co.nz/transform.html) of "R for Data Science", by Garrett Grolemund and Hadley Wickham
+> * [`dplyr` cheatsheet](https://resources.rstudio.com/the-essentials-of-data-science/data-transformation)
 
 ---
 
