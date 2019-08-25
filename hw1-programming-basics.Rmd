@@ -18,13 +18,13 @@ output:
 
 **Assignment**:
 
-1) Before going forward, read the [Getting Started](L1.2-getting-started.html) and [Programming Basics](L2-programming-basics.html) lessons.
+1) Before going forward, read the [Course Syllabus](#syllabus.html) as well as the [Getting Started](L1.2-getting-started.html) and [Programming Basics](L2-programming-basics.html) lessons. [5 pts]
 
-2) Open RStudio and create a new project called "hw1-lastName", replacing "lastName" with your last name. [2 pts]
+2) Open RStudio and create a new project called "hw1-lastName", replacing "lastName" with your last name.
 
-3) Create a new R script and save it as "hw1.R" in the R project folder you just created. [2 pts]
+3) Create a new R script and save it as "hw1.R" in the R project folder you just created.
 
-4) Copy the following code to the top of this script, and fill out your name, GW Net ID, and the names of anyone you worked with [2 pts]:
+4) Copy the following code to the top of this script, and fill out your name, GW Net ID, and the names of anyone you worked with:
 
 ```{r eval=FALSE}
 # hw1.R
@@ -39,9 +39,7 @@ output:
 
 5) Type all of your answers to the following questions in the "hw1.R" script. [point breakdown is listed by each problem]
 
-6) After completing the questions, create a zip file of all files in your R project folder for this assignment. [2 pts]
-
-7) Submit the zip file on Blackboard by the due deadline. [2 pts]
+6) After completing the questions, create a zip file of all files in your R project folder for this assignment and submit the zip file on Blackboard by the due deadline (note: to receive full credit, your submission must follow the above format of using a correctly-named R Project and `.R` script). [5 pts]
 
 ---
 

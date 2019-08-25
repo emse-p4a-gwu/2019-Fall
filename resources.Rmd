@@ -10,9 +10,9 @@ source("knitr_setup.R")
 
 ---
 
-# Communication & Help
+# Getting Help
 
-```{r child = here::here('syllabus', 'communication-help.Rmd')}
+```{r child = here::here('syllabus', 'getting-help.Rmd')}
 ```
 
 ---

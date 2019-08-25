@@ -1,23 +1,12 @@
-<!-- Much of the content and policies in this syllabus were inspired by the course 15-112 at Carnegie Mellon University -->
-
 # Course Information
 
- | |
---------------------|--------------------------------------------------
-Name:&emsp;         | EMSE 6574: Programming for Analytics, Section 10
-Semester:&emsp;     | Fall 2019
-Meeting Time:&emsp; | Mondays, 6:10pm - 8:40pm
-Location:&emsp;     | Phillips Hall 108
-
-# Instructor Information
-
- | |
-----------------------|-----------------------------------------|
-Name:&emsp;           | John Paul Helveston
-Campus Address:&emsp; | Science & Engineering Hall, Office 2830
-Campus Phone:&emsp;   | +1 (202) 994-7173
-Email:&emsp;          | jph@gwu.edu
-Office Hours:&emsp;   | TBD
+Instructor | Course
+---|---
+<i class="fas fa-user"></i> John Paul Helveston | <i class="far fa-calendar"> Mondays
+<i class="fas fa-university"></i> Science & Engineering Hall, Office 2830 | <i class="fas fa-university"></i> Phillips Hall 108
+<i class="fas fa-phone"></i> +1 (202) 994-7173 | <i class="far fa-calendar-alt"></i> August 26 - December 9, 2019
+<i class="fas fa-envelope"></i> [jpg@gwu.edu](mailto:jph@gwu.edu) | <i class="far fa-clock"></i> 6:10 - 8:40 PM
+<i class="fab fa-twitter"></i> [\@JohnHelveston](https://twitter.com/JohnHelveston) | <i class="fab fa-slack"></i> [Slack](https://6574-s11-f19.slack.com/)
 
 ---
 
@@ -37,6 +26,8 @@ Office Hours:&emsp;   | TBD
 
 There are no prerequisites, and no prior programming experience is necessary to succeed in this class.
 
+---
+
 # Learning Objectives
 
 ```{r child = 'learning-objectives.Rmd'}
@@ -44,9 +35,21 @@ There are no prerequisites, and no prior programming experience is necessary to 
 
 ---
 
-# Required Texts & Materials
+<!-- This section was modified from https://evalf19.classes.andrewheiss.com/syllabus/#pep-talk -->
 
-This course does not require any textbooks. All learning materials and resources will be made freely available on the course [resources webpage](https://emse6574-gwu.github.io/2019-Fall/resources.html).
+# Pep Talk!
+
+Learning R can be challenging - it's like learning a new language. Hadley Wickham - the chief data scientist at RStudio and the author of some amazing R packages you'll be using like `ggplot2` - [made this wise observation](https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/):
+
+> It's easy when you start out programming to get really frustrated and think, "Oh it's me, I'm really stupid," or, "I'm not made out to program." But, that is absolutely not the case. Everyone gets frustrated. I still get frustrated occasionally when writing R code. It's just a natural part of programming. So, it happens to everyone and gets less and less over time. Don't blame yourself. Just take a break, do something fun, and then come back and try again later.
+
+If you're finding yourself taking way too long hitting your head against a wall and not understanding, take a break, talk to classmates, ask questions in Slack, e-mail me, etc.
+
+I promise you can do this.
+
+---
+
+# Required Texts & Materials
 
 ## Software
 
@@ -57,40 +60,37 @@ All required software for this course is freely available on the web. This inclu
 
 Go to the course ["Getting Started"](L1.2-getting-started.html) page for installation instructions.
 
-## Other Useful Resources
+## Texts / Other Useful Resources
 
-```{r child = 'texts.Rmd'}
-```
+This course does not require any textbooks. All learning materials and resources are freely available on the web. See the course [resources page](https://emse6574-gwu.github.io/2019-Fall/resources.html) for a list of useful resources.
 
 ---
 
-# Assignments and Grades
+# Assignments
 
-## Homework Assignments
+**Homework Assignments**:
 
-Homework assignments contain a mix of coding exercises (reading, debugging, and writing code) and written exercises. They generally assess the material taught the week they are assigned, and should take several hours to complete. You are **strongly** encouraged to start the homeworks early (Tuesday is best, and Thursday at the latest!) and come to office hours for help when needed.
+Homework assignments contain a mix of coding exercises and written exercises. They generally assess the material taught the weeks they are assigned, and should take several hours to complete. **Start homeworks early** (Tuesday is best, Thursday at the latest!), and come to office hours & tutoring hours for help.
 
-Read the [Collaboration Policy](#collaboration-policy) about collaborating with fellow students on homeworks. While most problems must be worked on individually, some will be marked as collaborative; on these problems (and _only_ these problems), you may work on code with other students.
+Read the [Collaboration Policy](#collaboration-policy) about collaborating with fellow students on homeworks. While most problems must be worked on individually, some will be marked as "collaborative"; on these problems (and _only_ these problems), you may work on code with other students.
 
-Assignments will be graded based on style (modularity, readability, commenting, etc.) and functionality (correctness on all possible test inputs). Your code should be properly annotated with comments that are well-placed, concise, and informative. Your assignments will be graded by your tutors, by automated graders, and at times by your instructor.
-
-## Assessments
+Homeworks will be graded based on style (modularity, readability, commenting, etc.) and functionality (correctness on all possible test inputs). Your code should be properly annotated with comments that are well-placed, concise, and informative. Your assignments will be graded by your tutors, by automated graders, and at times by your instructor.
 
 **Quizzes**:
 
-Quizzes will be given about once every two weeks immediately at the beginning of class. Quizzes cover material from the previous week and the previous homework assignment. Quizzes are designed to be time-intensive, to test for fluency, and to demonstrate where additional study is needed.
+There will be five quizzes given about once every two weeks immediately at the beginning of class. Quizzes cover material from the previous weeks and the previous homework assignments. Quizzes are designed to be time-intensive, to test for fluency, and to demonstrate where additional study is needed.
 
 **Midterm Exams**:
 
-There will be two midterm exams given in class, as noted in the course schedule. Each exam will cover only material presented in the preceding weeks.
+There will be two midterm exams given in class, as noted in the course schedule. Each exam will cover only material presented in the preceding weeks (as noted in the [schedule](#schedule.html).
 
 **Final Exam**:
 
 There will be a standard final exam during the final exam period at the end of the semester. This exam will cover material from the entire semester. The final exam is built to allow enough time to attempt all problems.
 
-## Class Participation
+**Class Participation**:
 
-Regular class attendance is essential. Much of the class time will be spent doing exercises and coding. Multiple absences, inappropriate or unprofessional behavior during class (such as monopolizing discussions or being rude or disruptive), not participating in classroom exercises, and not being prepared for class will result in a lower grade for the class participation component. As a rule of thumb, the participation grade will be assigned according to the following rubric:
+Regular class attendance is **essential**. Much of the class time will be spent doing exercises and coding. Multiple absences, inappropriate or unprofessional behavior during class (such as monopolizing discussions or being rude or disruptive), not participating in classroom exercises, and not being prepared for class will result in a lower grade for the class participation component. As a rule of thumb, the participation grade will be assigned according to the following rubric:
 
 Score | Attendance | Classroom
 ----|---------------|-------------------------------
@@ -98,9 +98,11 @@ Low      | Frequently absent | Rude; disruptive; distracting; monopolizes discus
 Moderate | Attended most classes, but often arrived late or left early | Takes notes; attentive; occasionally contributes in class discussion / exercises
 High     | Attends on time and prepared | Takes notes; attentive; regularly contributes in class discussion / exercises; does not dominate conversation; listens and responds thoughtfully to comments made by others
 
-## Grading Policy
+---
 
-### Standard Grading
+# Grading
+
+## Standard Grading
 
 Final grades will be calculated as follows:
 
@@ -114,13 +116,11 @@ Final Exam        | 20% |
 Attendance & Participation | 5% |
 </div>
 
-### AMD Grading
+## AMD Grading
 
-This Alternative Minimum Grading (AMG) policy is available to everybody, but is designed specifically for those students who struggle in the first part of the course, and then through sustained hard work and dedication manage to elevate their performance in the latter part of the course to a level that merits passing with a C, even if their Standard Grade might be lower than that.
+This Alternative Minimum Grading (AMG) policy is available to everybody, but is designed specifically for students who struggle in the first part of the course, and then through sustained hard work and dedication manage to elevate their performance in the latter part of the course to a level that merits passing with a C (even if their Standard Grade might be lower than that).
 
-In addition to the normal grading scale, we will separately compute your grade using the following scale. Students do not sign up for AMG grading. Every student will be considered both for Standard Grading and AMG, and their semester grade will be the higher of the two (where the highest grade via AMG is a C).
-
-To compute your AMG score, first use the following to compute your raw score. If the resulting score is higher than a C, set it back to a C.
+You can't "sign up" for AMG grading. Every student will be considered both for Standard Grading and AMG, and the instructor can choose to assign the AMG grade if a student's effort merits it. To compute your AMG score, first use the following to compute your raw score. If the resulting score is higher than a C, set it back to a C.
 
 <div class="tableSmall">
 Course Component   | Weight
@@ -138,87 +138,73 @@ Unlike the Standard Grade, effort is heavily factored into your AMG score. To qu
 - You cannot miss multiple assignments or quizzes
 - You cannot violate the Collaboration Policy
 
-### Grading Scale
+## Grading Scale
 
-Mid-semester and Final grades will be assigned using the following standard scale:
-
-<div class="tableSmall">
-Letter Grade | From | To
---- | --- | ---
-A+ | 97 | 100
-A  | 93 | 96.99
-A- | 90 | 92.99
-B+ | 87 | 89.99
-B  | 83 | 86.99
-B- | 80 | 82.99
-C+ | 77 | 79.99
-C  | 73 | 76.99
-C- | 70 | 72.99
-D+ | 67 | 69.99
-D  | 63 | 66.99
-D- | 60 | 62.99
-F  | 0  | 59.99
+<div class="tableMedium">
+Grade  | Range       | Grade | Range
+-------|-------------|-------|------------
+A      | 93 - 100%   | C     | 73 - 76.99%
+A-     | 90 - 92.99% | C-    | 70 - 72.99%
+B+     | 87 - 89.99% | D+    | 67 - 69.99%
+B      | 83 - 86.99% | D     | 63 - 66.99%
+B-     | 80 - 82.99% | D-    | 60 - 62.99%
+C+     | 77 - 79.99% | F     | < 60%
 </div>
 
 The course instructors may choose to change the scales at their discretion. You are guaranteed that your letter grade will never become worse as a result of changing scales.
+
+---
+
+# Getting Help
+
+```{r child = here::here('syllabus', 'getting-help.Rmd')}
+```
+
+---
+
+# Course Policies
+
+## [tl;dr](https://whatis.techtarget.com/definition/tldr-TLDR)
+
+- **BE NICE. BE HONEST. DON'T CHEAT.**
+- Write your own code - don't look at others' code & don't let others look at your code.
+- You get **5** late days - use them however you want, no strings attached.
+- You can't use more than **2** late days on any one assignment.
 
 ## Collaboration Policy
 
 <!-- This policy is mostly copied from the course 15-112 at Carnegie Mellon University -->
 
-Learning how to program is like learning how to ride a bicycle - to get better, you must practice writing code yourself. Therefore, we have a set of strict rules regarding what kind of collaboration is allowed, what counts as over-collaboration, and what counts as cheating.
-
-**This section is long, but you should read all of it thoroughly, as we take collaboration and cheating very seriously in this course. To begin, here's a summary**:
-
-- Write your own code.
-- Don't look at other people's code.
-- Don't let other students look at your code.
+Learning how to program is like learning how to ride a bicycle - to get better, you must practice writing code **yourself**. Therefore, we have a set of strict rules regarding what kind of collaboration is allowed, what counts as over-collaboration, and what counts as cheating.
 
 ### Good Collaboration
 
-For all homework assignments, students are encouraged to talk to each other about high-level concepts regarding the problems. This includes:
-
-- Going through existing test cases and discussing why an input results in a certain output.
+- Going through test cases and discussing why an input results in a certain output.
 - Figuring out new input/output pairs for the problems.
 - Discussing which general concepts might be useful in solving a problem (conditionals, loops, etc.).
-
-For homework assignments, students may also receive lower-level help from the instructors. This includes everything mentioned above, and also:
-
 - Asking questions about how to build an algorithm for the problem.
 - Asking for debugging help with code.
-
-Certain parts of homework assignments may be labeled **Collaborative**. For these parts (and _only_ these parts), students may also:
-
 - Sketch out algorithms on a whiteboard together.
 - To avoid copying the code, you should write up the solution together, discuss it, then erase the solution, wait a few minutes, and write up solutions individually.
 - Help each other debug specific parts of assignment code.
-- NOTE: do not 'debug' by telling a friend to try your approach instead! Help them figure out what is actually going wrong.)
-
-Outside of the homework assignments and course assessments, students may also help each other learn to a greater degree. This can include:
-
 - General discussion of course concepts.
 - Detailed explanations of example code on the course website.
 - Collaboratively solving a practice problem, with any level of co-writing code and co-debugging.
 
 ### Over-collaboration
 
-Certain actions on homework assignments are considered over-collaboration; this means that a student might have attempted to collaborate with good intentions, but ended up collaborating at a level that became unhelpful for learning. Over-collaboration on homework assignments can include:
+Over-collaboration results in a warning on the first offense, and a penalty on later offenses. Examples include:
 
-- Building 'psuedocode' algorithms together on a whiteboard that are essentially full programs.
+- Building ['psuedocode'](https://en.wikipedia.org/wiki/Pseudocode) algorithms together on a whiteboard that are essentially full programs.
 - Explaining to a friend how to solve a problem in high-level terms by going through your own program line-by-line.
 - Helping a friend debug on a non-collaborative problem.
-- NOTE: It is fine to give a friend suggestions if they describe what error is being thrown or which input/output pair is failing, but you may not look at their code/have them read their code out loud.
 - Helping a friend debug on a collaborative problem by suggesting they use your own approach to the problem.
 - Collaborating with a student on a collaborative problem and then not including their name as a collaborator in the assignment writeup.
 - In the case that you have taken this course before, copying your own code from the previous time you took the course.
 
-**Over-collaboration results in a warning on the first offense, and a penalty on later offenses.**
-
 ### Cheating
 
-Certain actions within the course are considered cheating - that is, presenting work not completed by yourself as if you wrote it, providing work to others, or receiving unauthorized help.
-
-Cheating on homework assignments can include:
+Cheating results in a penalty on the first offense, and failing the course on the second offense. Cheating on homework assignments can include:
 
 - Copying or stealing any amount of code from someone currently in the class or someone who has taken the class before.
 - NOTE: Copying is never okay, whether the code is provided electronically, visually, audibly, or on paper.
@@ -236,8 +222,6 @@ Cheating on quizzes, midterms, or the final can include:
 - Copying part of an answer off of another student's paper, even if it is very small.
 - Using solutions provided by students who previously took the course.
 
-**Cheating results in a penalty on the first offense, and failing the course on the second offense.**
-
 ### Penalties
 
 Penalties are decided by the course instructors, and can vary based on the severity of the offense. Possible penalties include:
@@ -251,9 +235,9 @@ Penalties may also be accompanied by a letter to the Dean of Student Affairs, ag
 
 ### Plagiarism Detection
 
-Programs are naturally structured, which makes them much easier to compare than hand-written work, and easier to compare than typed essays. We run an automated plagiarism detection system on all assignments to detect copied code. Even if you make many changes to a copied code, it is _excessively_ easy to detect copied code. [Here is a video showing plagiarism detection software in action using Python code)](http://www.kosbie.net/cmu/spring-13/15-112/automated-plagiarism-detector-demo.mp4)
+Programs are naturally structured, which makes them **very easy** to compare for plagiarism. Automated plagiarism detection systems make this process even easier. [Watch this video](http://www.kosbie.net/cmu/spring-13/15-112/automated-plagiarism-detector-demo.mp4) showing plagiarism detection software in action (this example is using Python code, but this also works for R code).
 
-**In short, if you copy code, we will find out - don't copy code!**
+**In short, if you copy code, we will know - don't copy code!**
 
 ### Grace Period
 
@@ -261,25 +245,19 @@ Your first year of college is a time when you do a lot of learning. Sometimes, y
 
 Sometimes, students panic and copy code right before the deadline, then regret what they did afterwards. Therefore, you may rescind any homework submission for up to 24 hours after the deadline with no questions asked. Simply email the course instructors asking to delete the submission in question, and we will do so. Deleted submissions will not be considered during plagiarism detection, though of course they will also not be graded. However, it will always be better to get a 0 (or partial credit) on an assignment than to get a cheating violation!
 
----
-
-# Course Policies
-
 ## Late Policy
 
-Each students is allowed **three** late homework submission days throughout the course with zero penalty. You may use them however you wish. No more than **two days** can be applied toward a single assignment. Late days are meant to cover illness, family emergencies, and religious holidays. Assignments submitted more than two days after the due date will not be graded. In extreme circumstances, contact the instructor.
+Each students is allowed **5** late homework submission days - use them however you want, no questions asked. No more than **2 days** can be applied toward a single assignment. Late days are meant to cover illness, family emergencies, and religious holidays. Assignments submitted more than 2 days after the due date will not be graded. In extreme circumstances, contact the instructor.
 
-## Policy on Recording
+## Use of Course Materials
 
-No student is permitted to record or tape any classroom activity without the consent of the instructor. If a student is disabled and needs to record or tape classroom activities, he/she should contact the Disability Support Services (DSS) to request an appropriate accommodation.
+All **solutions** to homeworks, quizzes, and exams are proprietary. Don't post them online or try to sell them - this is a violation of the [student code of conduct](https://studentconduct.gwu.edu/code-student-conduct).
 
-## Inappropriate Use of Course Materials
-
-All solutions to homeworks, quizzes, and exams are proprietary. Students are prohibited from posting or selling any such course materials without the express written permission of the professor teaching this course. All other course materials available on the course website are developed open source. You are welcome to post and share them following the licensing guidelines listed in the [license](LICENSE.html) page.
+All other course materials available on the course website are developed open source - you are welcome to post and share them following the licensing guidelines listed in the [license](LICENSE.html) page.
 
 ## What To Do if the Instructor Does Not Arrive
 
-If the Instructor does not arrive for the class at the designated starting time and has not notified the class of a late starting time or the cancellation of the class, students should wait in the classroom for at least **20 minutes** before departing. One member of the class should be selected to notify the EMSE Department of the Instructor’s absence by calling the EMSE Department 202-994-4892 on next business day.
+Wait **20 minutes**, after that you're free to leave. One member of the class should be selected to notify the EMSE Department of the Instructor's absence by calling the EMSE Department 202-994-4892 on next business day.
 
 ---
 
@@ -299,10 +277,20 @@ In accordance with University Policy, students should notify faculty during the 
 Any student who may need an accommodation based on the potential impact of a disability should contact the Disability Support Services office at 202-994-8250 in the Rome Hall, Suite 102, to establish eligibility and to coordinate reasonable accommodations. For additional information please refer to: https://disabilitysupport.gwu.edu/
 
 **Mental Health Services (202-994-5300)**:
-The University’s Mental Health Services offers 24/7 assistance and referral to address students’ personal, social, career, and study skills problems. Services for students include: crisis and emergency mental health consultations confidential assessment, counseling services (individual and small group), and referrals. https://healthcenter.gwu.edu/counseling-and-psychological-services
+The University's Mental Health Services offers 24/7 assistance and referral to address students' personal, social, career, and study skills problems. Services for students include: crisis and emergency mental health consultations confidential assessment, counseling services (individual and small group), and referrals. https://healthcenter.gwu.edu/counseling-and-psychological-services
 
 ## Academic Integrity Code
 
-Academic dishonesty is defined as cheating of any kind, including misrepresenting one’s own work, taking credit for the work of others without crediting them and without appropriate authorization, and the fabrication of information. For the remainder of the code, see: https://studentconduct.gwu.edu/code-academic-integrity
+Academic dishonesty is defined as cheating of any kind, including misrepresenting one's own work, taking credit for the work of others without crediting them and without appropriate authorization, and the fabrication of information. For the remainder of the code, see: https://studentconduct.gwu.edu/code-academic-integrity
 
 In addition to the formal code of academic integrity, the instructor expects that students will treat this course with the level of professionalism required in the workplace. Remember that real firms are sponsoring student projects throughout the semester; in a workplace setting, these firms would be paying clients for the analyses being conducted. This course prepares students to succeed in the workplace, and maintaining a high degree of professionalism is expected.
+
+---
+
+<!-- Also took this idea (so brilliant) from https://evalf19.classes.andrewheiss.com/syllabus/#cute-animals -->
+
+# Cute Animals
+
+![](images/cute_hedgehog.gif)
+
+Once you have read this entire syllabus and the [course schedule](#schedule.html), please [click here](mailto:jph@gwu.edu) and e-mail me a picture of a cute non-feline, non-canine animal. For real. Brownie points if it's animated.
