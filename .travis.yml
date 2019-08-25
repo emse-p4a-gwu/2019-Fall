@@ -3,7 +3,6 @@ sudo: false
 cache: packages
 script:
 - R -e "rmarkdown::render_site('.')"
-- R -e "rmarkdown::render('syllabus_emse6574.Rmd', output_format = 'pdf_document')"
 - touch _site/.nojekyll
 deploy:
   provider: pages
