@@ -14,7 +14,7 @@ source("knitr_setup.R")
 
 Instructor | Course
 ---|---
-<i class="fas fa-user"></i> John Paul Helveston | <i class="far fa-calendar"> Mondays
+<i class="fas fa-user"></i> John Paul Helveston | <i class="far fa-calendar"></i> Mondays
 <i class="fas fa-university"></i> Science & Engineering Hall, Office 2830 | <i class="fas fa-university"></i> Phillips Hall 108
 <i class="fas fa-phone"></i> +1 (202) 994-7173 | <i class="far fa-calendar-alt"></i> August 26 - December 9, 2019
 <i class="fas fa-envelope"></i> [jpg@gwu.edu](mailto:jph@gwu.edu) | <i class="far fa-clock"></i> 6:10 - 8:40 PM
@@ -302,6 +302,6 @@ In addition to the formal code of academic integrity, the instructor expects tha
 
 # Cute Animals
 
-![](images/cute_hedgehog.gif)
-
 Once you have read this entire syllabus and the [course schedule](#schedule.html), please [click here](mailto:jph@gwu.edu) and e-mail me a picture of a cute non-feline, non-canine animal. For real. Brownie points if it's animated.
+
+![](images/cute_hedgehog.gif){ width=250 }

@@ -28,6 +28,4 @@ Software Carpentry | [software-carpentry.org](https://software-carpentry.org/) |
 Data Analysis and Visualization in R for Ecologists | François Michonneau & Auriel Fournier | [course](https://datacarpentry.org/R-ecology-lesson/); [github](https://github.com/datacarpentry/R-ecology-lesson)
 Data Analysis and Visualization in R _alpha_ | Data Carpentry contributors | [course](https://datacarpentry.org/R-genomics/index.html); [github](https://github.com/datacarpentry/R-genomics)
 CMU 15-112: Fundamentals of Programming | [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)| [Spring 2017 Course](http://www.kosbie.net/cmu/spring-17/15-112/)
-
-
-
+R for Reproducible Research | Anna Krystalli | [course](https://annakrystalli.me/rrresearch/); [github](https://github.com/annakrystalli/rrresearch)
