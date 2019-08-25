@@ -1,1 +1,0 @@
-Introduction to programming using the [R programming language](https://www.r-project.org/); topics include functions, conditionals, loops, strings, file input/output, plotting, coding style, Monte Carlo methods, and packages.

@@ -11,7 +11,29 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-Below is the week-by-week schedule for the course.
+Here's your roadmap for the semester!
 
-```{r child = here::here('syllabus', 'schedule.Rmd')}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(here)
+library(readr)
+options(knitr.kable.NA = '')
+schedule <- read_csv('schedule.csv')
+# Define the first and last of class and finals start date
+start  <- as.Date("2019/08/26")
+end    <- as.Date("2019/12/09")
+makeup <- as.Date("2019/12/11")
+finals <- as.Date("2019/12/12")
+# Format the dates
+dates <- format(seq(start, end, by = "week"), format="%m/%d")
+dates <- c(dates, format(c(makeup, finals), format="%m/%d"))
+# Make the schedule data frame
+schedule$Date <- dates
+# Define the week
+schedule$Week <- c(seq(1:(length(dates)-1)), (length(dates)-1))
+schedule <- schedule[c('Week', 'Date', 'Event/Topics', 'Quizzes/Practice', 'Assignments')]
+# Render the schedule as markdown
+kable(schedule, format='markdown')
 ```
+NOTE: In accordance with university policy, the final exam will be given during the final exam period and not the last week of the semester.
+

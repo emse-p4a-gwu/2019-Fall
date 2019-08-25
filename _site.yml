@@ -9,14 +9,9 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Syllabus"
-      menu:
-        - text: View
-          icon: fa-map-o
-          href: syllabus.html
-        - text: Download PDF
-          icon: fa-download
-          href: https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/syllabus_emse6574.pdf
+    - text: Syllabus
+      icon: fa-map-ok
+      href: syllabus.html
     - text: "Schedule"
       href: schedule.html
     - text: "Lessons"
