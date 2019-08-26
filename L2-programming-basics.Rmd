@@ -311,9 +311,9 @@ In addition to the four main data types mentioned, there are a few additional "s
 
 **No value**: `NULL` asserts that the variable genuinely has no value whatsoever, or does not even exist.
 
-## Coercing value types
+## Coercing data types
 
-In general, you can force a value into a different type using `as.something()`, replacing "`something`" with a data type:
+In general, you can force an object into a different type using `as.something()`, replacing "`something`" with a data type:
 
 ```{r}
 as.numeric(3.1415)
