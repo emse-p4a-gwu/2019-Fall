@@ -7,15 +7,3 @@ output: html_document
 rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
-
----
-
-https://www.cs.cmu.edu/~rdriley/112/notes/notes-monte-carlo.html
-
----
-
-**Page sources**:
-
-Some content on this page has been modified from other courses, including:
-
-- CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/), by [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)

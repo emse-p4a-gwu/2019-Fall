@@ -434,3 +434,4 @@ Some content on this page has been modified from other courses, including:
 
 - Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)
 - Jenny Bryan's [STAT 545 Course](http://stat545.com/)
+- [Modern Dive](https://moderndive.netlify.com/), by Chester Ismay & Albert Y. Kim

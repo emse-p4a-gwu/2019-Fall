@@ -112,14 +112,3 @@ turtle_do({
 })
 ```
 ![](images/turtle_triangle.png){ width=456 }
-
----
-
-**Page sources**:
-
-Some content on this page has been modified from other courses, including:
-
-- CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-13/15-112/handouts/hw1.html)
-
-
-

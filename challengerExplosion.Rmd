@@ -1,6 +1,5 @@
 ---
-title: "The Space Shuttle Challenger Explosion"
-subtitle: "A case study on turning data into information"
+title: "A case study on turning data into information"
 output:
   html_document:
     number_sections: false

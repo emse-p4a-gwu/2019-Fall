@@ -159,6 +159,6 @@ cat(" 22 -->", getLetterGrade(22))
 
 Some content on this page has been modified from other courses, including:
 
-- Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)
 - CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/notes/notes-conditionals.html), by [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)
+- Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)
 
