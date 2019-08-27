@@ -111,13 +111,17 @@ With integer division, 3 can only go into 4 once, so `4 %/% 3` returns `1`.
 
 **Modulus operator**:
 
-The **modulus** (aka "mod" operator) returns the remainder after doing integer division. For example:
+The **modulus** (aka "mod" operator) returns the remainder after doing regular division. For example:
 
 ```{r}
 17 %% 3
 ```
 
-returns `2` because because 17 / 3 is equal to 5 with a remainder of 2.
+returns `2` because because 17 / 3 is equal to 5 with a remainder of 2. It works with decimals numbers too:
+
+```{r}
+3.1415 %% 3
+```
 
 ## Relational operators
 
@@ -352,6 +356,7 @@ Copy-paste all of the code we've typed so far into this file:
 4 / 3 # Regular division
 4 %/% 3 # Integer division
 17 %% 3
+3.1415 %% 3
 1 + 2 * 4
 (1 + 2) * 4
 10        + 20
@@ -374,22 +379,22 @@ I can also run any line in the script by typing "Command + Enter" (Mac) or "Cont
 
 # Tips
 
-## "Chopping" numbers with `%%` and `%/%`
+## "Chopping" up numbers with `%%` and `%/%`
 
 When you use the mod operator (`%%`) on a positive number **with factors of 10**, it "chops" a number at a particular digit and returns everything to the _right_. For example:
-
 ```{r}
-123456 %% 1 # "Chops" on the right of the ones digit
-123456 %% 10 # "Chops" on the right of the tens digit
-123456 %% 100 # "Chops" on the right of the hundreds digit
+
+123456 %% 1 # Chops to the right of the ones digit
+123456 %% 10 # Chops to the right of the tens digit
+123456 %% 100 # Chops to the right of the hundreds digit
 ```
 
-You can get the opposite by using integer division operator (`%/%`) - in this case, everything to the _left_ of the "chop" point is returned. For example:
+Integer division (`%/%`) does the opposite - it returns everything to the _left_ of the "chop" point. For example:
 
 ```{r}
-123456 %/% 1 # "Chops" on the right of the ones digit
-123456 %/% 10 # "Chops" on the right of the tens digit
-123456 %/% 100 # "Chops" on the right of the hundreds digit
+123456 %/% 1 # "Chops to the right of the ones digit
+123456 %/% 10 # "Chops to the right of the tens digit
+123456 %/% 100 # "Chops to the right of the hundreds digit
 ```
 
 This works with non-integers too:
@@ -408,12 +413,19 @@ But **be careful** - this "trick" only works with _positive_ numbers:
 
 Here's some mental notes to remember how this works:
 
+- `%%` returns everything to the _right_ (`<chop> ->`)
+- `%/%` returns everything to the _left_ (`<- <chop>`)
 - The "chop" point is always just to the _right_ of the chopping digit:
-    - `123456 %% 1` -> chop to the _right_ of the `1`'s place: `123456 <chop>`
-    - `123456 %% 10` -> chop to the _right_ of the `10`'s place: `12345 <chop> 6`
-    - `123456 %% 100` -> chop to the _right_ of the `100`'s place: `1234 <chop> 56`
-- `%%` returns everything on the _right_ (`<chop> ->`)
-- `%/%` returns everything on the _left_ (`<- <chop>`)
+
+<div class="tableMedium">
+Example         | "Chop" point | "Chop" point description
+----------------|--------------|----------------------------
+`1234 %% 1`     | `1234 | `    | Right of the `1`'s digit
+`1234 %% 10`    | `123 | 4`    | Right of the `10`'s digit
+`1234 %% 100`   | `12 | 34`    | Right of the `100`'s digit
+`1234 %% 1000`  | `1 | 234`    | Right of the `1,000`'s digit
+`1234 %% 10000` | ` | 1234`    | Right of the `10,000`'s digit
+</div>
 
 ## Odds and evens with `%%`
 
