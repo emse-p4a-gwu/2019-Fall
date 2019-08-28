@@ -100,7 +100,7 @@ Install and load the `stringr` library, then use the `str_to_lower()`, `str_to_u
 
 Max is looking to purchase a car and is deciding between a Toyota Prius and a Toyota Camry. He knows that based on his driving patterns, he can get an average fuel economy of 55 miles per gallon (mpg) of gasoline with the Prius, which sells for $27,600. He is also considering the cheaper Toyota Camry, which costs $24,000 but only gets 32 mpg on average. He knows he typically drives 15,000 miles each year. For the following questions, assume the price of gas will remain constant at $3.00 / gallon forever.
 
-a) Create variables for the price and fuel economy of each vehicle. Use variable names that make sense and are easy to understand.
+a) Create variables for the price and fuel economy of each vehicle as well as for the total miles Max drives each year and the price of gasoline. Use variable names that make sense and are easy to understand.
 b) Using the variables you created (and only these variables - no other numbers!), compute how many years Max would need to drive the Prius such that the money he saves in lower fuel costs overcomes the higher upfront price compared to the Camry. Ignore inflation and discount rates.
 c) What would the price of gasoline need to be such that the answer to part b) is just 2 years? You may use the number `2` once in your solution, otherwise you may only use variables you defined in part a.
 
