@@ -12,7 +12,7 @@ source("knitr_setup.R")
 >
 > * Be able to manage computational projects for reproducibility, reuse, and collaboration.
 > * Use R tools and conventions to document code and analyses and produce reproducible reports.
-> * Be able to publish, share materials and collaborate through the web.
+> * Be able to publish, share materials, and collaborate through the web.
 > * Understand why this all matters!
 >
 > ### Suggested Readings
@@ -28,11 +28,9 @@ Literate programming is a paradigm first introduced by [Donald E. Knuth](https:/
 
 > Treat programs as a literature understandable to **human beings**
 
-The goal is to integrate data analysis (executable code) with textual documentation, linking data, code, and text together in one document.
+The goal is to integrate data analysis (executable code) with textual documentation, linking data, code, and text together in one document. Literate programming can be directly linked to the concept of [**reproducibility**](https://en.wikipedia.org/wiki/Reproducibility). Basically, for someone to make a legitimate scientific claim, they should at minimum be able to fully reproduce their results from their raw data (and preferrably others should be able to reproduce them as well).
 
-Literate programming can be directly linked to the concept of [**reproducibility**](https://en.wikipedia.org/wiki/Reproducibility). Basically, for someone to make a legitimate scientific claim, they should at minimum be able to fully reproduce their results from their raw data (and preferrably others should be able to reproduce them as well).
-
-This leads to the idea of having a **reproducible workflow** from raw data to published results.
+This leads to the idea of having a **reproducible workflow** - from raw data to published results.
 
 > Enter RMarkdown
 
@@ -61,13 +59,13 @@ Markdown is a simple, plain text language for converting raw text to HTML for th
 
 - It has a very small syntax (html links, tables, images, headers, italic / bold font, and a few other things).
 - It is both easy-to-read and easy-to-write.
-- I is clean and legible across multiple platforms (even mobile).
+- It is clean and legible across multiple platforms (including mobile phones).
 - All formatting is handled automatically through a browser.
 - Supports raw html as well.
 
-## Code (e.g. `R`)
+## Code
 
-Code "chunks" are defined through special notation and are executed in sequence throughout the document (just like an `.R` script). You can mix code directly in with markdown (e.g. "Here's some simple math in R: `2 + 2 = 4`") or in separate segments ("chunks") before or after markdown text. This enables you to write English language text in markdown to explain something, and then immediately follow it up with code to illustrate or demonstrate something.
+Code "chunks" are defined through special notation and are executed in sequence throughout the document (just like an `.R` script). You can mix code directly in with markdown (e.g. "Here's some simple math in R: `2 + 2` produces `r 2 + 2`") or in separate chunks before or after markdown text. This enables you to write English language text in markdown to explain something, and then immediately follow it up with code to illustrate or demonstrate it.
 
 RMarkdown currently supports a number of different [Language Engines](https://rmarkdown.rstudio.com/authoring_knitr_engines.html) through the `knitr` package, including:
 
@@ -82,7 +80,7 @@ RMarkdown currently supports a number of different [Language Engines](https://rm
 
 ## Outputs
 
-The `knitr` package enables you to "knit" together the markdown text and R code into a variety of output formats. The default format is an html document for reading through an internet browser and sharing results across the web. For example, check out the [RMarkdown Gallery](https://rmarkdown.rstudio.com/gallery.html). Other formats include:
+The `knitr` package enables you to "knit" together the markdown text and R code into a variety of output formats. The default format is an html document for reading through an internet browser and sharing results across the web. Check out the [RMarkdown Gallery](https://rmarkdown.rstudio.com/gallery.html) for some examples. Other formats include:
 
 ![](images/RMarkdownOutputFormats.png){ width=400 }
 
@@ -90,7 +88,9 @@ The `knitr` package enables you to "knit" together the markdown text and R code 
 
 Once you've written up your RMarkdown document, you can publish it to the web for free using RPubs: http://rpubs.com/
 
-![](images/rpubs_ui.jpg){ width=400 }
+Watch this quick demo of how to publish your markdown file to the web using RPubs:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GJ36zamYVLg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ---
 
@@ -110,7 +110,7 @@ It is contained between these separators at the top of the file.
 
 Markdown was originally designed for HTML output, so it may not be surprising that the HTML format has the richest features among all output formats. To create an HTML document from R Markdown, you specify the `html_document` output format in the YAML metadata of your document:
 
-![](images/yaml_description.png){ width=500 }
+![](images/yaml_description.png){ width=600 }
 
 At a bare minimum, your yaml should include a title and output format. Here I've also included my name as the author, and the date:
 
@@ -165,26 +165,26 @@ For **headers**, use the `#` symbol:
 To make a **bullet list**, use the `-` symbol:
 
 ```{r, eval=FALSE}
-- first item in the list
-- second item in list
-- third item in list
+- first item
+- second item
+- third item
 ```
 
-- first item in the list
-- second item in list
-- third item in list
+- first item
+- second item
+- third item
 
 To make a **numbered list**, use numbers with a period:
 
 ```{r, eval=FALSE}
-1. first item in the list
-2. second item in list
-3. third item in list
+1. first item
+2. second item
+3. third item
 ```
 
-1. first item in the list
-2. second item in list
-3. third item in list
+1. first item
+2. second item
+3. third item
 
 To make a **url link** to another site, use brackets with parentheses:
 
@@ -193,7 +193,7 @@ To make a **url link** to another site, use brackets with parentheses:
 ```
 [Download R](http://www.r-project.org/)
 
-To make a **basic table**, use the `|` symbol to break up columns. Create a header row by adding `--------` underneath the header row:
+To make a **basic table**, use the `|` symbol to break up columns, and make a header row by adding `--------` underneath the header row:
 
 ```{r, eval=FALSE}
 Table Header  | Second Header
@@ -230,26 +230,26 @@ Wow - that's pretty cool!
 
 Code chunks are blocks of R code that are executed when you compile the `.Rmd` document. The output of the code is inserted into the RMarkdown document. Chunks can be used as a means to render R output into documents or to simply display code for illustration (e.g. with option `eval=FALSE`).
 
-Here's an example of some markdown with a code chunk on the left and the rendered output on the right:
+Here's an example of a `.Rmd` file with a code chunk on the left and the rendered output on the right:
 
 ![](images/markdownChunk.png){ width=700 }
 
 You can quickly insert an [R code chunk](https://bookdown.org/yihui/rmarkdown/r-code.html) with:
 
 - The keyboard shortcut **`Ctrl + Alt + I`** (**OS X: `Cmd + Option + I`**)
-- The Add Chunk ![](https://d33wubrfki0l68.cloudfront.net/b8b19518e688e3ca1390e0a1588916f04908d33f/8a4dc/images/notebook-insert-chunk.png) command in the RStudio toolbar
-- By typing the chunk delimiters ` ```{r} and ``` `.
+- The Add Chunk ![](images/notebook-insert-chunk.png) command in the RStudio toolbar
+- By typing the chunk delimiters ` ```{r} ` and ` ``` `.
 
 ### Chunk notation
 
-In between the chunk delimiters ` ```{r} and ``` `, you can write R code:
+In between the chunk delimiters ` ```{r} ` and ` ``` `, you can write R code:
 
     `r ''````{r chunk-name}
     print('hello world!')
     ```
 The above R chunk renders as:
 
-```{r chunk-name}
+```{r, echo=FALSE}
 print('hello world!')
 ```
 
@@ -271,11 +271,12 @@ Here's a list of other options (for more details see <http://yihui.name/knitr/>)
 
 By default, figures produced by R code will be placed immediately after the code chunk they were generated from. Here's an example using `ggplot2` to plot the relationship between a couple of variables:
 
-```{r, message=FALSE}
+```{r, message=FALSE, fig.height=4, fig.width=6}
 library(ggplot2)
 library(gapminder)
 ggplot(gapminder) +
-    geom_point(aes(x = gdpPercap, y = lifeExp, color = continent))
+    geom_point(aes(x = gdpPercap, y = lifeExp, color = continent), size=0.8) +
+    theme_minimal()
 ```
 
 ---
