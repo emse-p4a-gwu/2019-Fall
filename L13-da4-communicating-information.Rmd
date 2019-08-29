@@ -271,6 +271,14 @@ Here's a list of other options (for more details see <http://yihui.name/knitr/>)
 
 By default, figures produced by R code will be placed immediately after the code chunk they were generated from. Here's an example using `ggplot2` to plot the relationship between a couple of variables:
 
+    `r ''````{r, message=FALSE, fig.height=4, fig.width=6}
+    library(ggplot2)
+    library(gapminder)
+    ggplot(gapminder) +
+        geom_point(aes(x = gdpPercap, y = lifeExp, color = continent), size=0.8) +
+        theme_minimal()
+    ```
+
 ```{r, message=FALSE, fig.height=4, fig.width=6}
 library(ggplot2)
 library(gapminder)
