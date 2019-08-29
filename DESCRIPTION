@@ -22,4 +22,5 @@ Imports:
     wikifacts,
     TurtleGraphics,
     DAAG,
-    dslabs
+    dslabs,
+    gapminder
