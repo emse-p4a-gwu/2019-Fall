@@ -8,7 +8,291 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+> ### Learning Objectives
+>
+> * Be able to manage computational projects for reproducibility, reuse, and collaboration.
+> * Use R tools and conventions to document code and analyses and produce reproducible reports.
+> * Be able to publish, share materials and collaborate through the web.
+> * Understand why this all matters!
+>
+> ### Suggested Readings
+>
+> * [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/), by Yihui Xie, J. J. Allaire, and Garrett Grolemund
+> * [RMarkdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+
 ---
+
+# Literate programming
+
+Literate programming is a paradigm first introduced by [Donald E. Knuth](https://en.wikipedia.org/wiki/Donald_Knuth). The idea is simple:
+
+> Treat programs as a literature understandable to **human beings**
+
+The goal is to integrate data analysis (executable code) with textual documentation, linking data, code, and text together in one document.
+
+Literate programming can be directly linked to the concept of [**reproducibility**](https://en.wikipedia.org/wiki/Reproducibility). Basically, for someone to make a legitimate scientific claim, they should at minimum be able to fully reproduce their results from their raw data (and preferrably others should be able to reproduce them as well).
+
+This leads to the idea of having a **reproducible workflow** from raw data to published results.
+
+> Enter RMarkdown
+
+[RMarkdown](https://rmarkdown.rstudio.com/) integrates a **documentantion** language ([markdown](https://en.wikipedia.org/wiki/Markdown)) with a **programming** language (`R`). This enables authors to craft interactive documents of data, analysis, and results that are easily shareable, particularly through the web.
+
+---
+
+# Rmarkdown overview
+
+Watch this 1-min video to get a quick sense of what RMarkdown is:
+
+<iframe src="https://player.vimeo.com/video/178485416?color=428bca&title=0&byline=0&portrait=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/178485416">What is R Markdown?</a> from <a href="https://vimeo.com/rstudioinc">RStudio, Inc.</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+...and watch this 1.5 min video to witness the horrors of not using a reproducible workflow:
+
+<iframe width="640" height="400" src="https://www.youtube.com/embed/s3JldKoA0zw" frameborder="0" allowfullscreen></iframe>
+
+---
+
+# Elements of RMarkdown
+
+## Markdown
+
+Markdown is a simple, plain text language for converting raw text to HTML for the web (and other outputs, like pdfs). Some of its attributes include:
+
+- It has a very small syntax (html links, tables, images, headers, italic / bold font, and a few other things).
+- It is both easy-to-read and easy-to-write.
+- I is clean and legible across multiple platforms (even mobile).
+- All formatting is handled automatically through a browser.
+- Supports raw html as well.
+
+## Code (e.g. `R`)
+
+Code "chunks" are defined through special notation and are executed in sequence throughout the document (just like an `.R` script). You can mix code directly in with markdown (e.g. "Here's some simple math in R: `2 + 2 = 4`") or in separate segments ("chunks") before or after markdown text. This enables you to write English language text in markdown to explain something, and then immediately follow it up with code to illustrate or demonstrate something.
+
+RMarkdown currently supports a number of different [Language Engines](https://rmarkdown.rstudio.com/authoring_knitr_engines.html) through the `knitr` package, including:
+
+- **R** (default)
+- Python
+- SQL
+- Bash
+- Rcpp
+- Stan
+- JavaScript
+- CSS
+
+## Outputs
+
+The `knitr` package enables you to "knit" together the markdown text and R code into a variety of output formats. The default format is an html document for reading through an internet browser and sharing results across the web. For example, check out the [RMarkdown Gallery](https://rmarkdown.rstudio.com/gallery.html). Other formats include:
+
+![](images/RMarkdownOutputFormats.png){ width=400 }
+
+## Publish to the web
+
+Once you've written up your RMarkdown document, you can publish it to the web for free using RPubs: http://rpubs.com/
+
+![](images/rpubs_ui.jpg){ width=400 }
+
+---
+
+# Elements of a `.Rmd` document
+
+## The YAML header
+
+The yaml header contains metadata about the document - most importantly the output. Different settings can be set within different outputs. Here we'll be focusing on on the [`html_document` output](https://bookdown.org/yihui/rmarkdown/html-document.html#table-of-contents).
+
+It is contained between these separators at the top of the file.
+
+```{r, eval=FALSE}
+---
+
+---
+```
+
+Markdown was originally designed for HTML output, so it may not be surprising that the HTML format has the richest features among all output formats. To create an HTML document from R Markdown, you specify the `html_document` output format in the YAML metadata of your document:
+
+![](images/yaml_description.png){ width=500 }
+
+At a bare minimum, your yaml should include a title and output format. Here I've also included my name as the author, and the date:
+
+```{r, eval=FALSE}
+---
+title: "This is a demo"
+author: "John Helveston"
+date: "11/18/2019"
+output: html_document
+---
+```
+
+This will produce an html page that looks like this:
+
+![](images/rmarkdown_blank.png){ width=650 }
+
+## Markdown basics
+
+The text in an R Markdown document is written with the [Markdown syntax](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html).
+
+> Check out this [**60-second** markdown reference guide](https://commonmark.org/help/) to get the basics
+
+If you're not sure how to make something in markdown, you can try it out first with this handy [**markdown demo site**](https://markdown-it.github.io/).
+
+Here's some of the most-used markdown syntax:
+
+<div class="tableMedium">
+Type this...             | ...to get this
+-------------------------|------------------------------------
+`normal text`            | normal text
+`*italic text*`          | *italic text*
+`**bold text**`          |**bold text**
+`***bold italic text***` | ***bold italic text***
+`superscript^2^`         | superscript^2^
+`~~strikethrough~~`      | ~~strikethrough~~
+`` `code text` ``        | `code text`
+</div>
+
+For **headers**, use the `#` symbol:
+
+```{r, eval=FALSE}
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+```
+
+![](images/headers.png){ width=700 }
+
+To make a **bullet list**, use the `-` symbol:
+
+```{r, eval=FALSE}
+- first item in the list
+- second item in list
+- third item in list
+```
+
+- first item in the list
+- second item in list
+- third item in list
+
+To make a **numbered list**, use numbers with a period:
+
+```{r, eval=FALSE}
+1. first item in the list
+2. second item in list
+3. third item in list
+```
+
+1. first item in the list
+2. second item in list
+3. third item in list
+
+To make a **url link** to another site, use brackets with parentheses:
+
+```{r, eval=FALSE}
+[Download R](http://www.r-project.org/)
+```
+[Download R](http://www.r-project.org/)
+
+To make a **basic table**, use the `|` symbol to break up columns. Create a header row by adding `--------` underneath the header row:
+
+```{r, eval=FALSE}
+Table Header  | Second Header
+------------- | -------------
+Cell 1, 1     | Cell 2, 1
+Cell 1, 2     | Cell 2, 2
+```
+
+Table Header  | Second Header
+------------- | -------------
+Cell 1, 1     | Cell 2, 1
+Cell 1, 2     | Cell 2, 2
+
+Check out this handy [**online table converter**](http://www.tablesgenerator.com/markdown_tables)
+
+## Inline R code
+
+You can embed R code directly in a markdown sentence. For example, if you had already created an object `x`...
+
+```{r}
+x <- 10
+```
+...you could use `x` in a sentence by typing a `` ` `` followed by `r` then any R code you want:
+
+```{r, eval=FALSE}
+The value of parameter `x` is `r x`, and `2*x` is `r 2*x`
+```
+
+The value of parameter `x` is `r x`, and `2*x` is `r 2*x`
+
+Wow - that's pretty cool!
+
+## R Code chunks
+
+Code chunks are blocks of R code that are executed when you compile the `.Rmd` document. The output of the code is inserted into the RMarkdown document. Chunks can be used as a means to render R output into documents or to simply display code for illustration (e.g. with option `eval=FALSE`).
+
+Here's an example of some markdown with a code chunk on the left and the rendered output on the right:
+
+![](images/markdownChunk.png){ width=700 }
+
+You can quickly insert an [R code chunk](https://bookdown.org/yihui/rmarkdown/r-code.html) with:
+
+- The keyboard shortcut **`Ctrl + Alt + I`** (**OS X: `Cmd + Option + I`**)
+- The Add Chunk ![](https://d33wubrfki0l68.cloudfront.net/b8b19518e688e3ca1390e0a1588916f04908d33f/8a4dc/images/notebook-insert-chunk.png) command in the RStudio toolbar
+- By typing the chunk delimiters ` ```{r} and ``` `.
+
+### Chunk notation
+
+In between the chunk delimiters ` ```{r} and ``` `, you can write R code:
+
+    `r ''````{r chunk-name}
+    print('hello world!')
+    ```
+The above R chunk renders as:
+
+```{r chunk-name}
+print('hello world!')
+```
+
+You don't have to name the chunks, but it's a good practice (like commenting your code). In the above chunk, the name of the chunk is "chunk-name".
+
+### Chunk options
+
+There are lots of options for customizing how markdown chunks appear. You insert option immediately after the `r` in the header ` ```{r} ` and separate them with commas. For example, if you just want to display the code but don't want it to actually run, you can add `eval=FALSE`:
+
+    `r ''````{r, eval=FALSE}
+    print('hello world!')
+    ```
+
+Here's a list of other options (for more details see <http://yihui.name/knitr/>):
+
+![](images/chunks_options.png){ width=600 }
+
+## Plots
+
+By default, figures produced by R code will be placed immediately after the code chunk they were generated from. Here's an example using `ggplot2` to plot the relationship between a couple of variables:
+
+```{r, message=FALSE}
+library(ggplot2)
+library(gapminder)
+ggplot(gapminder) +
+    geom_point(aes(x = gdpPercap, y = lifeExp, color = continent))
+```
+
+---
+
+# Additional Resources
+
+- [R Markdown: The Definitive guide](https://bookdown.org/yihui/rmarkdown/)
+
+- [Rmarkdown documentation](http://rmarkdown.rstudio.com/)
+
+- [Rmarkdown `html_document` format documentation](https://rmarkdown.rstudio.com/html_document_format.html)
+
+- [Rstudio Rmarkdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+
+- [Reproducible Research](https://www.coursera.org/learn/reproducible-research) coursera MOOC
+
+- [Producing html documents from `.R` scripts using `knitr::spin`](http://deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/)
 
 ---
 
@@ -16,4 +300,4 @@ source("knitr_setup.R")
 
 Some content on this page has been modified from other courses, including:
 
-- Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)
+- [R for Reproducible Research](https://annakrystalli.me/rrresearch/), by [Anna Krystalli](https://annakrystalli.me)
