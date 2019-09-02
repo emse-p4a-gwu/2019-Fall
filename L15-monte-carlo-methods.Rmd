@@ -33,7 +33,7 @@ Monte Carlo simulation uses (pseudo)random numbers to solve (not-so-random) prob
 - Run a series of trials.
 - In each trial, simulate an event (e.g. a coin toss, a dice roll, etc.).
 - Count the number of successful trials.
-- Guess that the Expected Odds $\simeq$ Observed Odds = $\frac{\text{\# Successful Trials}}{\text{\# Total Trials}}$
+- Guess that the Expected Odds $\simeq$ Observed Odds = $\frac{\text{# Successful Trials}}{\text{# Total Trials}}$
 
 For many applications, Monte Carlo simulations result in a sufficiently accurate result with a reasonable amount of trials (~ 100,000). You can always improve your accuracy with more trials, but that comes at the expense of increased run time. To summarize:
 
@@ -111,9 +111,9 @@ areaUnderCurve <- ratioBelowCurve * totalArea
 areaUnderCurve
 ```
 
-So, using Monte Carlo simulation with 100,000 points, we estimate that the area under the curve is `r areaUnderCurve`. How'd we do? Well, if you're familiar with calculus, the integral of $f(x) = x^2$ has a closed-form solution ($\frac{x^3}{3}$), so we can check our estimate against the pure-math solution:
+So, using Monte Carlo simulation with 100,000 points, we estimate that the area under the curve is `r areaUnderCurve`. How'd we do? Well, if you're familiar with calculus, the integral of $f(x) = x^2$ has a closed-form solution ($\frac{x^3}{3} + C$), so we can check our estimate against the pure-math solution:
 
-$\int_{x=3}^{x=7} f(x)dx = \frac{7^3}{3} - \frac{3^3}{3} = 105.33\bar{3}$
+$$\int_{3}^{7} x^2 \mathrm{dx} = \left ( \frac{x^3}{3} \right ) \Big|_3^7 = \frac{7^3}{3} - \frac{3^3}{3} = 105.33\bar{3}$$
 
 ```{r, echo=FALSE}
 error <- (7^3 / 3) - (3^3 / 3) - areaUnderCurve
@@ -155,7 +155,7 @@ So to compute $\pi$, all we need to do is multiply 4 times the ratio of the area
 
 **Let's write the code!**
 
-First, generate lots of random points on an x and y plane between `x = (-0.5, 0.5)` and `y = (-0.5, 0.5)` (a square with side length of 1 and centered at zero):
+First, generate lots of random points in a square. For this example, we'll use a square with side length of 1 and centered at `(x, y) = (0, 0)`, so we need to draw random points between `x = (-0.5, 0.5)` and `y = (-0.5, 0.5)`:
 
 ```{r}
 numTrials <- 1000
@@ -164,7 +164,7 @@ points <- data.frame(
     y = runif(numTrials, -0.5, 0.5))
 ```
 
-Now compute the radius to each point (the distance from zero), and then compute which points fall inside the circle, which has a radius of 0.5:
+For this example, we're putting the points in a data frame to make it easier to work with. Now that we have random x-y points, let's compute the radius to each point (the distance from zero), and then compute which points fall inside the circle, which has a radius of 0.5:
 
 ```{r, message=FALSE}
 library(dplyr)
