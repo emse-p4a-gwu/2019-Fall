@@ -20,7 +20,7 @@ But when I hear Monte Carlo, I envision this:
 
 ![](images/monte_carlo_pi.gif){ width=300 }
 
-No, that's not some grainy image coming into focus - that's a Monte Carlo simulation to estimate the value of $\pi$ (`r pi`...).
+No, that's not some grainy image coming into focus - that's a Monte Carlo simulation approximating the value of $\pi$ (`r pi`...).
 
 ---
 
@@ -33,7 +33,7 @@ Monte Carlo simulation uses (pseudo)random numbers to solve (not-so-random) prob
 - Run a series of trials.
 - In each trial, simulate an event (e.g. a coin toss, a dice roll, etc.).
 - Count the number of successful trials.
-- Guess that the Expected Odds $\tilde =$ Observed Odds = $\frac{\# Successful trials}{# Total trials}$
+- Guess that the Expected Odds $\simeq$ Observed Odds = $\frac{\text{\# Successful Trials}}{\text{\# Total Trials}}$
 
 For many applications, Monte Carlo simulations result in a sufficiently accurate result with a reasonable amount of trials (~ 100,000). You can always improve your accuracy with more trials, but that comes at the expense of increased run time. To summarize:
 
@@ -99,7 +99,7 @@ x <- runif(numTrials, min = 3, max = 7) # Values of x between 3 and 7
 y <- runif(numTrials, min = 0, max = 7^2) # Values of y between 0 and 7^2
 ```
 
-The ratio of points below the curve to the total number of points will be proportional to the ratio of the area under $f(x)$ to the total area of the rectangle. We know the total area of the rectangle is its length times its height, or $(7 - 3) = 4$ times $7^2$, which is 196. So the area under the curve should be 196 times the ratio of points under the curve to the total number of points. Let's write the code!
+The ratio of points below the curve to the total number of points will be proportional to the ratio of the area under $f(x)$ to the total area of the rectangle. We know the total area of the rectangle is its length ($(7 - 3) = 4$) times its height ($7^2$), which is $4 * 49 = 196$. So the area under the curve should be 196 times the ratio of points under the curve to the total number of points. Let's write the code!
 
 ```{r}
 # Compute if the random y value is less than or equal to f(x), which is x^2:
@@ -111,11 +111,9 @@ areaUnderCurve <- ratioBelowCurve * totalArea
 areaUnderCurve
 ```
 
-So, using Monte Carlo simulation with 100,000 points, we estimate that the area under the curve is `r areaUnderCurve`. How'd we do?
+So, using Monte Carlo simulation with 100,000 points, we estimate that the area under the curve is `r areaUnderCurve`. How'd we do? Well, if you're familiar with calculus, the integral of $f(x) = x^2$ has a closed-form solution ($\frac{x^3}{3}$), so we can check our estimate against the pure-math solution:
 
-Well, if you're familiar with calculus, the integral of $f(x) = x^2$ has a closed-form solution, so we can check our estimate against the pure-math solution:
-
-$x^2 = \frac{x^3}{3} = \frac{7^3}{3} - \frac{3^3}{3} = 105.3333$
+$\int_{x=3}^{x=7} f(x)dx = \frac{7^3}{3} - \frac{3^3}{3} = 105.33\bar{3}$
 
 ```{r, echo=FALSE}
 error <- (7^3 / 3) - (3^3 / 3) - areaUnderCurve
@@ -131,7 +129,7 @@ That's an error of just `r errorPer` % - not bad!
 
 Now let's look at something a bit trickier - approximating $\pi$!
 
-Watch this quick video to see a preview of how this works (...I hope you like lounge music)
+Watch this quick video to see a summary of how this works (...I hope you like lounge music)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ELetCV_wX_c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -153,11 +151,11 @@ Knowing these two equations for the areas of a circle and square, we can compute
 
 $R = \dfrac{\pi r^2}{4r^2} = \dfrac{\pi}{4}$
 
-So to compute $\pi$, all we need to do is multiply 4 times the ratio of the area of the circle to that of the square. Just like with integration, we can approximate that ratio by simulating lots of points and then simply counting the number that fall inside the circle.
+So to compute $\pi$, all we need to do is multiply 4 times the ratio of the area of the circle to that of the square. Just like with integration, we can approximate that ratio by simulating lots of points in the square and then simply counting the number that fall inside the circle.
 
 **Let's write the code!**
 
-First, generate lots of random points on an x and y plane between `x = (-0.5, 0.5)` and `y = (-0.5, 0.5)` - a square with side length of 1 and centered at zero:
+First, generate lots of random points on an x and y plane between `x = (-0.5, 0.5)` and `y = (-0.5, 0.5)` (a square with side length of 1 and centered at zero):
 
 ```{r}
 numTrials <- 1000
@@ -179,11 +177,13 @@ points <- points %>%
 Just to make sure we correctly labeled the points, let's plot them, coloring them based on the `pointInCircle` variable we just created:
 
 ```{r, fig.width = 6, fig.height = 4.5}
+library(ggplot2)
 ggplot(points) +
-    geom_point(aes(x = x, y = y, color = pointInCircle), size = 0.4)
+    geom_point(aes(x = x, y = y, color = pointInCircle), size = 0.7) +
+    theme_minimal()
 ```
 
-Looks like we correctly labeled the points! Now we have everything we need to compute $\pi$!
+Looks like we correctly labeled the points! Now we have everything we need to estimate $\pi$!
 
 ```{r}
 ratio <- sum(points$pointInCircle) / nrow(points)
@@ -196,7 +196,7 @@ error <- piApprox - pi
 errorPer <- round(100*abs(error / pi), 2)
 ```
 
-So our estimate error is: `pi - ` ``r piApprox`` `=` ``r error``.
+So our estimate error is: `3.1415 - ` ``r piApprox`` `=` ``r error``.
 
 That's an error of just `r errorPer` % - not bad for only 1000 points!
 
@@ -212,9 +212,12 @@ points <- data.frame(
         pointInCircle = ifelse(radius < 0.5, TRUE, FALSE))
 ratio <- sum(points$pointInCircle) / nrow(points)
 piApprox <- 4 * ratio
-percentError <- round(100*abs(piApprox - pi / pi), 2)
+error <- piApprox - pi
+percentError <- round(100*abs(error / pi), 2)
 percentError
 ```
+
+As expected, by increasing N, our error decreased!
 
 ---
 
