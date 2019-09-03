@@ -212,6 +212,8 @@ points <- data.frame(
         pointInCircle = ifelse(radius < 0.5, TRUE, FALSE))
 ratio <- sum(points$pointInCircle) / nrow(points)
 piApprox <- 4 * ratio
+piApprox
+# Compute error:
 error <- piApprox - pi
 percentError <- round(100*abs(error / pi), 2)
 percentError
