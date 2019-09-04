@@ -246,7 +246,7 @@ R tells us that we've successfully read in some data and a quick summary of the 
 You can view the entire dataset in a tabular format (similar to how Excel looks) by using the `View()` function, which opens up another tab to view the data. Note that you cannot modify the data this way - you can just look at it:
 
 ```{r, eval = FALSE}
-View(surveys)
+View(df)
 ```
 
 In addition to viewing the whole dataset with `View()`, you can quickly view summaries of the data frame with a few convenient functions. For example, you can look at the first 6 rows by using the `head()` function:
@@ -332,7 +332,7 @@ But just to give you an idea of where we're going, here are a few pieces of info
 
 ```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
 library(ggplot2)
-ggplot(msleep, aes(x=brainwt, y=bodywt)) +
+ggplot(df, aes(x=brainwt, y=bodywt)) +
     geom_point(alpha=0.6) +
     stat_smooth(method='lm', col='red', se=F, size=0.7) +
     scale_x_log10() +
@@ -344,7 +344,7 @@ ggplot(msleep, aes(x=brainwt, y=bodywt)) +
 2) It appears there may also be a negative, logarithmic relationship (albeit weaker) between the size of mammalian brains and how much they sleep - cool!
 
 ```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
-ggplot(msleep, aes(x=brainwt, y=sleep_total)) +
+ggplot(df, aes(x=brainwt, y=sleep_total)) +
     geom_point(alpha=0.6) +
     scale_x_log10() +
     scale_y_log10() +
@@ -356,7 +356,7 @@ ggplot(msleep, aes(x=brainwt, y=sleep_total)) +
 3) Wow, there's a lot of variation in how much different mammals sleep - cool!
 
 ```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
-ggplot(msleep, aes(x=sleep_total)) +
+ggplot(df, aes(x=sleep_total)) +
     geom_histogram() +
     labs(x     = 'Total sleep time in hours',
          title = 'Histogram of total sleep time') +
