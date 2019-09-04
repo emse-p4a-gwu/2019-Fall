@@ -6,6 +6,7 @@ output: html_document
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
+set.seed(12345)
 ```
 
 When you hear the words "Monte Carlo", most people envision this:
@@ -20,7 +21,7 @@ But when I hear Monte Carlo, I envision this:
 
 ![](images/monte_carlo_pi.gif){ width=300 }
 
-No, that's not some grainy image coming into focus - that's a Monte Carlo simulation approximating the value of $\pi$ (`r pi`...).
+No, that's not some grainy image coming into focus - that's a [Monte Carlo simulation]() approximating the value of $\pi$ (`r pi`...).
 
 ---
 
@@ -42,7 +43,7 @@ For many applications, Monte Carlo simulations result in a sufficiently accurate
 
 ## Why the name "Monte Carlo"?
 
-The name "Monte Carlo" comes from the (pseudo)random nature of the simulation process. Running a series of trials is similar to how many gambling games work in casinos, and Monte Carlo is known first and foremost for gambling. Of course, in the casinos, the odds are always slightly in the favor of the house, so after millions of trials, the odds are that the house will win more money than the gamblers.
+The name "Monte Carlo" comes from the (pseudo)random nature of the simulation process. Running a series of trials is similar to how many gambling games work in casinos, and [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo) is famous for gambling. Of course, in the casinos the odds are always slightly in the favor of the house, so after millions of trials the odds are that the house will win more money than the gamblers.
 
 ## Why even do this?
 
@@ -56,9 +57,9 @@ R comes with many tools for running (pseudo)random simulations, which is one rea
 
 Integration is ultimately about computing the area below the curve of a function. Let's take a simple example - suppose we want to find the integral from 3 to 7 of the following function:
 
-$f(x) = x^2$
+$$f(x) = x^2$$
 
-We want to compute the integral of $f(x)$ between $3 < x < 7$. Here's what that looks like:
+That is, we want to compute the area under the curve of $x^2$ between $3 < x < 7$. Here's what that looks like:
 
 <!-- ```{r} -->
 <!-- x1 <- seq(1, 10, by = 0.1) -->
@@ -72,16 +73,17 @@ We want to compute the integral of $f(x)$ between $3 < x < 7$. Here's what that 
 ```{r, echo=FALSE, message=FALSE, fig.width=6, fig.height=4}
 library(dplyr)
 library(ggplot2)
-x  <- seq(1, 10, by = 0.01)
+x  <- seq(0, 10, by = 0.01)
 df <- data.frame(x = x, y = x^2)
 p <- ggplot(data = df) +
     geom_line(aes(x = x, y = y)) +
     geom_area(data = df %>% filter(x > 3 & x < 7),
-              aes(x = x, y = y), alpha = 0.2, fill = 'red')
+              aes(x = x, y = y), alpha = 0.2, fill = 'red') +
+    scale_x_continuous(breaks = seq(0, 10, 2), limits = c(0, 10))
 p
 ```
 
-One way to estimate the shaded area is to "throw darts" at a rectangle in the x-y plane that contains the shaded area and then count how many fall below the function line. So we're going to randomly throw darts inside this box:
+One way to estimate the shaded area is to draw a bunch of random points inside a rectangle in the x-y plane that contains the shaded area and then count how many fall below the function line. So we're going to randomly draw points inside this box:
 
 ```{r, echo=FALSE, message=FALSE, fig.width=6, fig.height=4}
 pBox <- p +
@@ -99,15 +101,19 @@ x <- runif(numTrials, min = 3, max = 7) # Values of x between 3 and 7
 y <- runif(numTrials, min = 0, max = 7^2) # Values of y between 0 and 7^2
 ```
 
-The ratio of points below the curve to the total number of points will be proportional to the ratio of the area under $f(x)$ to the total area of the rectangle. We know the total area of the rectangle is its length ($(7 - 3) = 4$) times its height ($7^2$), which is $4 * 49 = 196$. So the area under the curve should be 196 times the ratio of points under the curve to the total number of points. Let's write the code!
+Now that we have our points, we can use them to estimate the area under the curve. The logic here is that the ratio of points below the curve to the total number of points will be equal to the ratio of the area under $f(x)$ to the total area of the rectangle. That is:
+
+$$\frac{\text{# Points Under Curve}}{\text{# Total Points}} = \frac{\text{Area Under Curve}}{\text{Area of Rectangle}}$$
+
+So, to get the area under the curve, we need to compute the area of the rectangle and multiply it by $(\text{# Points Under Curve}) / (\text{# Total Points})$. We know the total area of the rectangle is its length ($(7 - 3) = 4$) times its height ($7^2$), which is $4 * 49 = 196$. So the area under the curve should be 196 times the ratio of points under the curve to the total number of points. Let's write the code!
 
 ```{r}
-# Compute if the random y value is less than or equal to f(x), which is x^2:
-belowCurve <- y <= x^2
+# Determine which y points are less than or equal to x^2:
+belowCurve <- y <= x^2 # This will create a vector of TRUE and FALSE values
 # Compute the ratio of points below the curve:
-ratioBelowCurve <- sum(belowCurve) / numTrials
-totalArea <- (7 - 3) * 7^2
-areaUnderCurve <- ratioBelowCurve * totalArea
+ratio <- sum(belowCurve) / numTrials
+totalArea <- (7 - 3) * 7^2 # Rectangle length x height = 196
+areaUnderCurve <- ratio * totalArea
 areaUnderCurve
 ```
 
@@ -155,23 +161,24 @@ So to compute $\pi$, all we need to do is multiply 4 times the ratio of the area
 
 **Let's write the code!**
 
-First, generate lots of random points in a square. For this example, we'll use a square with side length of 1 and centered at `(x, y) = (0, 0)`, so we need to draw random points between `x = (-0.5, 0.5)` and `y = (-0.5, 0.5)`:
+First, generate lots of random points in a square. For this example, we'll use a square with side length of 1 centered at `(x, y) = (0, 0)`, so we need to draw random points between `x = (-0.5, 0.5)` and `y = (-0.5, 0.5)`:
 
 ```{r}
 numTrials <- 1000
 points <- data.frame(
     x = runif(numTrials, -0.5, 0.5),
     y = runif(numTrials, -0.5, 0.5))
+head(points)
 ```
 
-For this example, we're putting the points in a data frame to make it easier to work with. Now that we have random x-y points, let's compute the radius to each point (the distance from zero), and then compute which points fall inside the circle, which has a radius of 0.5:
+For this example, we're putting the points in a data frame to make it easier to work with. Now that we have random x and y points, let's compute the radius to each point (the distance from `(x, y) = (0, 0)`) so we can determine which points fall inside the circle (which has a radius of 0.5):
 
 ```{r, message=FALSE}
 library(dplyr)
 points <- points %>%
     mutate(
         radius = sqrt(x^2 + y^2),
-        pointInCircle = ifelse(radius < 0.5, TRUE, FALSE))
+        pointInCircle = ifelse(radius <= 0.5, TRUE, FALSE))
 ```
 
 Just to make sure we correctly labeled the points, let's plot them, coloring them based on the `pointInCircle` variable we just created:
@@ -198,9 +205,9 @@ errorPer <- round(100*abs(error / pi), 2)
 
 So our estimate error is: `3.1415 - ` ``r piApprox`` `=` ``r error``.
 
-That's an error of just `r errorPer` % - not bad for only 1000 points!
+That's an error of just `r errorPer` % - not bad for only 1,000 points!
 
-To get an even better estimate of $\pi$, increase N - here's the error with 100,000 trials:
+To get an even better estimate of $\pi$, we can increase N. Let's see what we get with 100,000 trials:
 
 ```{r}
 numTrials <- 100000
@@ -209,7 +216,7 @@ points <- data.frame(
     y = runif(numTrials, -0.5, 0.5)) %>%
     mutate(
         radius = sqrt(x^2 + y^2),
-        pointInCircle = ifelse(radius < 0.5, TRUE, FALSE))
+        pointInCircle = ifelse(radius <= 0.5, TRUE, FALSE))
 ratio <- sum(points$pointInCircle) / nrow(points)
 piApprox <- 4 * ratio
 piApprox
@@ -219,7 +226,7 @@ percentError <- round(100*abs(error / pi), 2)
 percentError
 ```
 
-As expected, by increasing N, our error decreased!
+By increasing the number of trials from 1,000 to 100,000, we improved our estimate error from `r errorPer` % to `r percentError` %!
 
 ---
 
