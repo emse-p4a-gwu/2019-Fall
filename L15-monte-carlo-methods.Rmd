@@ -131,7 +131,7 @@ Now let's look at something a bit trickier - approximating $\pi$!
 
 Watch this quick video to see a summary of how this works (...I hope you like lounge music)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ELetCV_wX_c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="640" height="400" src="https://www.youtube.com/embed/ELetCV_wX_c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Now let's approximate $\pi$ ourselves! Let's start with some basic geometry.
 

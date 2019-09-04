@@ -121,7 +121,7 @@ The **modulus** (aka "mod" operator) returns the remainder after doing integer d
 17 %% 3
 ```
 
-returns `2` because because 17 / 3 is equal to 5 with a remainder of 2. The modulus returns any remainder, including decimals:
+This returns `2` because because 17 / 3 is equal to 5 with a remainder of 2. The modulus returns any remainder, including decimals:
 
 ```{r}
 3.1415 %% 3
