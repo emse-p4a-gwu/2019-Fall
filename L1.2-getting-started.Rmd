@@ -97,7 +97,7 @@ Powers (i.e. $x^n$) are represented using the `^` symbol. For example, to calcul
 
 **Integer division**:
 
-Integer division is division in which the fractional part (remainder) is discarded. Note the difference between regular (`/`) and integer (`%/%`) division:
+Integer division is division in which the remainder is discarded. Note the difference between regular (`/`) and integer (`%/%`) division:
 
 ```{r}
 4 / 3 # Regular division
@@ -107,20 +107,36 @@ Integer division is division in which the fractional part (remainder) is discard
 4 %/% 3 # Integer division
 ```
 
-With integer division, 3 can only go into 4 once, so `4 %/% 3` returns `1`.
+With integer division, 3 can only go into 4 once, so `4 %/% 3` returns `1`. If you try to integer divide a number by a larger number, you'll get `0`:
+
+```{r}
+4 %/% 5 # Will return 0
+```
 
 **Modulus operator**:
 
-The **modulus** (aka "mod" operator) returns the remainder after doing regular division. For example:
+The **modulus** (aka "mod" operator) returns the remainder after doing integer division. For example:
 
 ```{r}
 17 %% 3
 ```
 
-returns `2` because because 17 / 3 is equal to 5 with a remainder of 2. It works with decimals numbers too:
+returns `2` because because 17 / 3 is equal to 5 with a remainder of 2. The modulus returns any remainder, including decimals:
 
 ```{r}
 3.1415 %% 3
+```
+
+If you mod a number by itself, you'll get `0` (because there's no remainder):
+
+```{r}
+17 %% 17 # Will return 0
+```
+
+Finally, if you mod a number by a larger number, you'll get the smaller number back since it's the remainder:
+
+```{r}
+17 %% 20 # Will return 17
 ```
 
 ## Relational operators
@@ -379,7 +395,7 @@ I can also run any line in the script by typing "Command + Enter" (Mac) or "Cont
 
 # Tips
 
-## "Chopping" up numbers with `%%` and `%/%`
+## "Chopping" up numbers with `%%` and `%/%` of 10s
 
 When you use the mod operator (`%%`) on a positive number **with factors of 10**, it "chops" a number at a particular digit and returns everything to the _right_. For example:
 ```{r}
