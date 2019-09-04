@@ -1,0 +1,6 @@
+R is a calculator: +, -, *, /
+Other operators: ^, %/%, and %%
+Asking r questions (logical)
+Staying organized
+Programming basics
+Hw1 preview

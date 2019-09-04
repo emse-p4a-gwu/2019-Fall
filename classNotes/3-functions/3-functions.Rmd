@@ -1,0 +1,308 @@
+---
+title: "Week 3: Functions"
+subtitle: "EMSE 6574, Section 11 "
+author: "John Helveston"
+date: September 09, 2019
+output:
+  xaringan::moon_reader:
+    css: classNotes.css
+---
+
+# Quiz 1 
+
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
+
+- ### No calculators
+- ### No notes
+- ### No books
+- ### No computers
+- ### No phones
+- ### No strings or loops
+
+---
+# Basic function syntax
+
+<br>
+
+```{r eval=FALSE}
+FNAME <- function(ARG1, ARG2, ETC) {
+  STATEMENT1
+  STATEMENT2
+  return(VALUE)
+}
+```
+
+---
+# The `return()` statement
+
+### `isPositive(n)`
+
+Write a function that returns `TRUE` if a number, `n`, is positive (`n > 0`) and `FALSE` otherwise.
+
+--
+
+<br>
+
+```{r}
+isPositive <- function(n) {
+    return(n > 0)
+}
+```
+
+---
+# The `cat()` statement
+
+Short for "concatenating", the `cat()` statement prints whatever arguments it is given to the console:
+
+--
+
+```{r}
+printX <- function(x) {
+  cat("The value of x provided is", x)
+}
+```
+
+--
+
+```{r}
+printX(7)
+printX(42)
+```
+
+---
+# Practice: What will these functions do?
+
+.pull-left[
+
+```{r}
+f1 <- function(x) {
+    return(x^3)
+}
+f2 <- function(x) {
+    cat(x^3)
+}
+f3 <- function(x) {
+    cat(x^3)
+    return(x^4)
+}
+f4 <- function(x) {
+    return(x^3)
+    cat(x^4)
+}
+```
+
+]
+
+---
+# Practice: What will  these functions do?
+
+.pull-left[
+
+```{r}
+f1 <- function(x) {
+    return(x^3)
+}
+f2 <- function(x) {
+    cat(x^3)
+}
+f3 <- function(x) {
+    cat(x^3)
+    return(x^4)
+}
+f4 <- function(x) {
+    return(x^3)
+    cat(x^4)
+}
+```
+
+]
+
+.pull-right[
+
+```{r}
+f1(2)
+f2(2)
+f3(2)
+f4(2)
+```
+
+]
+
+---
+# Helper functions
+
+Helper functions break down more complicated problems into smaller chunks.
+
+**Example**:
+
+We want to write a function to compute the hypotenuse of a triangle:
+
+<img src="images/right-triangle-hypotenuse.png" width="250">
+
+--
+
+The formula to compute the hypotenuse is:
+
+$c = \sqrt{a^2 + b^2}$
+
+We can write a helper function to compute the part under square root:
+
+$a^2 + b^2$
+
+---
+# Helper functions
+
+<img src="images/right-triangle-hypotenuse.png" width="200">
+
+Hypotenuse: $c = \sqrt{a^2 + b^2}$
+
+```{r eval=FALSE}
+sumOfSquares <- function(a, b) {
+
+}
+
+hypotenuse <- function(a, b) {
+
+}
+```
+
+---
+# Helper functions
+
+<img src="images/right-triangle-hypotenuse.png" width="200">
+
+Hypotenuse: $c = \sqrt{a^2 + b^2}$
+
+```{r}
+sumOfSquares <- function(a, b) {
+    return(a^2 + b^2)
+}
+
+hypotenuse <- function(a, b) {
+   return(sqrt(sumOfSquares(a, b)))
+}
+```
+
+--
+
+```{r}
+hypotenuse(3, 4)
+```
+
+---
+# Local variables
+
+All variables inside are **local** to that function.
+
+If you try to call a local variable in the global environment, you'll get an error:
+
+```{r error=TRUE}
+squareOfX <- function(x) {
+  y <- x^2
+  return(y)
+}
+y
+```
+
+---
+# Global variables
+
+**Global** variables are those in the global environment. These will show up in the "Environment" pane in RStudio.
+
+**NEVER, NEVER, NEVER** call global variables inside functions.
+
+Here's an example:
+
+```{r include=FALSE}
+n <- NULL
+```
+```{r error=TRUE}
+printN <- function() {
+    cat(n)  # n is not local -- so it is global (bad idea!!!)
+}
+printN() # Nothing happens because n isn't defined
+```
+```{r}
+n = 5 # Define n in the global environment
+printN()
+```
+
+---
+# Group Practice
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+1) `onesDigit(x)`: Write a function that takes an integer and returns its ones digit.
+
+- onesDigit(123) == 3
+- onesDigit(7890) == 0
+- onesDigit(6) == 6
+- onesDigit(-54) == 4
+
+--
+
+2) `tensDigit(x)`: Write a function that takes an integer and returns its tens digit. (Hint: you may want to use the `onesDigit(x)` function you just wrote!)
+
+- tensDigit(456) == 5
+- tensDigit(23) == 2
+- tensDigit(1) == 0
+- tensDigit(-7890) == 9
+- tensDigit(-11) == 1
+
+---
+# Hints
+
+.pull-left[
+
+The mod operator (`%%`) "chops" a number and returns everything to the _right_
+
+```{r}
+123456 %% 1
+123456 %% 10
+123456 %% 100
+```
+
+]
+
+.pull-right[
+
+The integer divide operator (`%/%`) "chops" a number and returns everything to the _left_
+
+```{r}
+123456 %/% 1
+123456 %/% 10
+123456 %/% 100
+```
+
+]
+
+---
+# Group Practice
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+.pull-left[ 
+
+1) `eggCartons(eggs)`: Write a program that reads in a non-negative number of eggs and prints the number of egg cartons required to hold that many eggs (given that each egg carton holds one dozen eggs, and you cannot buy fractional egg cartons). Be sure your program works for multiples of 12, including 0.
+
+- eggCartons(0) == 0
+- eggCartons(1) == 1
+- eggCartons(12) == 1
+- eggCartons(13) == 2
+- eggCartons(24) == 2
+- eggCartons(25) == 3
+
+]
+
+.pull-right[
+
+2) `militaryTimeToStandardTime()`: Write a program that takes an integer between 0 and 23 (representing the hour in military time), and returns the same hour in standard time. For example, 17 in military time is 5 o'clock in standard time.
+
+- militaryTimeToStandardTime(0) == 12
+- militaryTimeToStandardTime(1) == 1
+- militaryTimeToStandardTime(11) == 11
+- militaryTimeToStandardTime(12) == 12
+- militaryTimeToStandardTime(13) == 1
+- militaryTimeToStandardTime(23) == 11
+
+]

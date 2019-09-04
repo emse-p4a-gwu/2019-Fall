@@ -1,0 +1,10 @@
+---
+title: "Week #: Topic"
+subtitle: "EMSE 6574, Section 11 "
+author: "John Helveston"
+date: Month 16, 2019
+output:
+  xaringan::moon_reader:
+    css: classNotes.css
+---
+

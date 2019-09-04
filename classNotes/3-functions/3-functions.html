@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 3: Functions</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Helveston" />
+    <meta name="date" content="2019-09-09" />
+    <link rel="stylesheet" href="classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Week 3: Functions
+## EMSE 6574, Section 11
+### John Helveston
+### September 09, 2019
+
+---
+
+
+# Quiz 1 
+
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
+
+- ### No calculators
+- ### No notes
+- ### No books
+- ### No computers
+- ### No phones
+- ### No strings or loops
+
+---
+# Basic function syntax
+
+&lt;br&gt;
+
+
+```r
+FNAME &lt;- function(ARG1, ARG2, ETC) {
+  STATEMENT1
+  STATEMENT2
+  return(VALUE)
+}
+```
+
+---
+# The `return()` statement
+
+### `isPositive(n)`
+
+Write a function that returns `TRUE` if a number, `n`, is positive (`n &gt; 0`) and `FALSE` otherwise.
+
+--
+
+&lt;br&gt;
+
+
+```r
+isPositive &lt;- function(n) {
+    return(n &gt; 0)
+}
+```
+
+---
+# The `cat()` statement
+
+Short for "concatenating", the `cat()` statement prints whatever arguments it is given to the console:
+
+--
+
+
+```r
+printX &lt;- function(x) {
+  cat("The value of x provided is", x)
+}
+```
+
+--
+
+
+```r
+printX(7)
+```
+
+```
+## The value of x provided is 7
+```
+
+```r
+printX(42)
+```
+
+```
+## The value of x provided is 42
+```
+
+---
+# Practice: What will these functions do?
+
+.pull-left[
+
+
+```r
+f1 &lt;- function(x) {
+    return(x^3)
+}
+f2 &lt;- function(x) {
+    cat(x^3)
+}
+f3 &lt;- function(x) {
+    cat(x^3)
+    return(x^4)
+}
+f4 &lt;- function(x) {
+    return(x^3)
+    cat(x^4)
+}
+```
+
+]
+
+---
+# Practice: What will  these functions do?
+
+.pull-left[
+
+
+```r
+f1 &lt;- function(x) {
+    return(x^3)
+}
+f2 &lt;- function(x) {
+    cat(x^3)
+}
+f3 &lt;- function(x) {
+    cat(x^3)
+    return(x^4)
+}
+f4 &lt;- function(x) {
+    return(x^3)
+    cat(x^4)
+}
+```
+
+]
+
+.pull-right[
+
+
+```r
+f1(2)
+```
+
+```
+## [1] 8
+```
+
+```r
+f2(2)
+```
+
+```
+## 8
+```
+
+```r
+f3(2)
+```
+
+```
+## 8
+```
+
+```
+## [1] 16
+```
+
+```r
+f4(2)
+```
+
+```
+## [1] 8
+```
+
+]
+
+---
+# Helper functions
+
+Helper functions break down more complicated problems into smaller chunks.
+
+**Example**:
+
+We want to write a function to compute the hypotenuse of a triangle:
+
+&lt;img src="images/right-triangle-hypotenuse.png" width="250"&gt;
+
+--
+
+The formula to compute the hypotenuse is:
+
+`\(c = \sqrt{a^2 + b^2}\)`
+
+We can write a helper function to compute the part under square root:
+
+`\(a^2 + b^2\)`
+
+---
+# Helper functions
+
+&lt;img src="images/right-triangle-hypotenuse.png" width="200"&gt;
+
+Hypotenuse: `\(c = \sqrt{a^2 + b^2}\)`
+
+
+```r
+sumOfSquares &lt;- function(a, b) {
+
+}
+
+hypotenuse &lt;- function(a, b) {
+
+}
+```
+
+---
+# Helper functions
+
+&lt;img src="images/right-triangle-hypotenuse.png" width="200"&gt;
+
+Hypotenuse: `\(c = \sqrt{a^2 + b^2}\)`
+
+
+```r
+sumOfSquares &lt;- function(a, b) {
+    return(a^2 + b^2)
+}
+
+hypotenuse &lt;- function(a, b) {
+   return(sqrt(sumOfSquares(a, b)))
+}
+```
+
+--
+
+
+```r
+hypotenuse(3, 4)
+```
+
+```
+## [1] 5
+```
+
+---
+# Local variables
+
+All variables inside are **local** to that function.
+
+If you try to call a local variable in the global environment, you'll get an error:
+
+
+```r
+squareOfX &lt;- function(x) {
+  y &lt;- x^2
+  return(y)
+}
+y
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'y' not found
+```
+
+---
+# Global variables
+
+**Global** variables are those in the global environment. These will show up in the "Environment" pane in RStudio.
+
+**NEVER, NEVER, NEVER** call global variables inside functions.
+
+Here's an example:
+
+
+
+```r
+printN &lt;- function() {
+    cat(n)  # n is not local -- so it is global (bad idea!!!)
+}
+printN() # Nothing happens because n isn't defined
+```
+
+```r
+n = 5 # Define n in the global environment
+printN()
+```
+
+```
+## 5
+```
+
+---
+# Group Practice
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+1) `onesDigit(x)`: Write a function that takes an integer and returns its ones digit.
+
+- onesDigit(123) == 3
+- onesDigit(7890) == 0
+- onesDigit(6) == 6
+- onesDigit(-54) == 4
+
+--
+
+2) `tensDigit(x)`: Write a function that takes an integer and returns its tens digit. (Hint: you may want to use the `onesDigit(x)` function you just wrote!)
+
+- tensDigit(456) == 5
+- tensDigit(23) == 2
+- tensDigit(1) == 0
+- tensDigit(-7890) == 9
+- tensDigit(-11) == 1
+
+---
+# Hints
+
+.pull-left[
+
+The mod operator (`%%`) "chops" a number and returns everything to the _right_
+
+
+```r
+123456 %% 1
+```
+
+```
+## [1] 0
+```
+
+```r
+123456 %% 10
+```
+
+```
+## [1] 6
+```
+
+```r
+123456 %% 100
+```
+
+```
+## [1] 56
+```
+
+]
+
+.pull-right[
+
+The integer divide operator (`%/%`) "chops" a number and returns everything to the _left_
+
+
+```r
+123456 %/% 1
+```
+
+```
+## [1] 123456
+```
+
+```r
+123456 %/% 10
+```
+
+```
+## [1] 12345
+```
+
+```r
+123456 %/% 100
+```
+
+```
+## [1] 1234
+```
+
+]
+
+---
+# Group Practice
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+.pull-left[ 
+
+1) `eggCartons(eggs)`: Write a program that reads in a non-negative number of eggs and prints the number of egg cartons required to hold that many eggs (given that each egg carton holds one dozen eggs, and you cannot buy fractional egg cartons). Be sure your program works for multiples of 12, including 0.
+
+- eggCartons(0) == 0
+- eggCartons(1) == 1
+- eggCartons(12) == 1
+- eggCartons(13) == 2
+- eggCartons(24) == 2
+- eggCartons(25) == 3
+
+]
+
+.pull-right[
+
+2) `militaryTimeToStandardTime()`: Write a program that takes an integer between 0 and 23 (representing the hour in military time), and returns the same hour in standard time. For example, 17 in military time is 5 o'clock in standard time.
+
+- militaryTimeToStandardTime(0) == 12
+- militaryTimeToStandardTime(1) == 1
+- militaryTimeToStandardTime(11) == 11
+- militaryTimeToStandardTime(12) == 12
+- militaryTimeToStandardTime(13) == 1
+- militaryTimeToStandardTime(23) == 11
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

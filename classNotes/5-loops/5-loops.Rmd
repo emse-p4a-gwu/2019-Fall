@@ -1,0 +1,10 @@
+---
+title: "Week 5: Loops"
+subtitle: "EMSE 6574, Section 11 "
+author: "John Helveston"
+date: September 23, 2019
+output:
+  xaringan::moon_reader:
+    css: classNotes.css
+---
+

@@ -1,0 +1,87 @@
+---
+title: "Week 4: Conditionals & Testing"
+subtitle: "EMSE 6574, Section 11 "
+author: "John Helveston"
+date: September 16, 2019
+output:
+  xaringan::moon_reader:
+    css: classNotes.css
+---
+
+# "Flow Control"
+
+### Flow control is code that alters the otherwise linear flow of operations in a program.
+ 
+--
+### Types:
+
+- `if` statements 
+- `else` statements 
+- `for` loops
+- `while` loops
+- `break` statements 
+- `next` statements 
+
+---
+# The `if` statement
+
+### Basic format:
+
+```
+if ( CONDITION ) {
+    STATEMENT1
+    STATEMENT2
+    ETC
+}
+```
+
+Here's the general idea:
+
+<img src="images/condition_if.png" width="400">
+
+---
+# Example: What will this return?
+
+```{r, eval=FALSE}
+f <- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    }
+    cat("D")
+}
+f(0)
+f(1)
+```
+--
+```{r, echo=FALSE}
+f <- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    }
+    cat("D")
+}
+```
+```{r}
+f(0)
+f(1)
+```
+
+---
+# Example 2 - Absolute value
+
+The first thing an "absolute value" function should do is check if a number is negative:
+
+```{r}
+absValue <- function(x) {
+    if (x < 0) {x = -1*x}
+    return(x)
+}
+```
+```{r}
+absValue(7)  # Returns 7
+absValue(-7) # Also returns 7
+```

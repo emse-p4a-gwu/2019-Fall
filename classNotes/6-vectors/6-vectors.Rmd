@@ -1,0 +1,10 @@
+---
+title: "Week 6: Vectors"
+subtitle: "EMSE 6574, Section 11 "
+author: "John Helveston"
+date: September 30, 2019
+output:
+  xaringan::moon_reader:
+    css: classNotes.css
+---
+
