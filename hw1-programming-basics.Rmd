@@ -124,7 +124,7 @@ d) Is the triangle formed by the points (x1, y1), (x2, y2), and (x3, y3) a [righ
 
 ### 6) Logical data [COLLABORATIVE, 15 pts]
 
-Suppose we fielded a survey that asked respondents to specify their marital status. The responses are stored in a variable called `marital_status` as one of the following:
+Suppose we fielded a survey that asked respondents to specify their marital status. The responses were recorded as one of the following:
 
 - `"single"`
 - `"widowed"`
@@ -132,7 +132,9 @@ Suppose we fielded a survey that asked respondents to specify their marital stat
 - `"de facto"`
 - `"missing"`
 
-where the `"missing"` variable means the respondent left the question blank. For each of the following, write a single line of code that uses the `marital_status` variable to create the new variable (note that you do not need to run your code in R):
+where `"missing"` means the respondent left the question blank.
+
+Assume there is an object in your R environment called `marital_status` that contains one of the above responses stored as a character. For each of the following, write a single line of code that uses the `marital_status` object to create the desired new object (note that if you actually run your code in R for this exercise, you'll get an error, because the `marital_status` object doesn't actually exist in your R environment):
 
 a) `is_single`: Is `TRUE` if the participant is single and `FALSE` otherwise.
 b) `has_spouse`: Is `TRUE` if the participant is married or in a de facto relationship and `FALSE` otherwise.
