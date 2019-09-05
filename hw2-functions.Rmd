@@ -75,7 +75,7 @@ Pool balls are arranged in rows where the first row contains 1 pool ball and eac
 
 ### 8) `isEvenPositiveInt(x)` [COLLABORATIVE, 15 pts]
 
-Given an arbitrary value `x`, return `TRUE` if it is an integer, and it is positive, and it is even (all 3 must be true), or `FALSE` otherwise. Do not crash if the value is not an integer. So, `isEvenPositiveInt("yikes!")` returns `FALSE` (rather than crashing), and `isEvenPositiveInt(123456)` returns `TRUE`.
+Given an arbitrary value `x`, return `TRUE` if it is an integer, and it is positive, and it is even (all 3 must be true), or `FALSE` otherwise. Do not crash if the value is not an integer. So, `isEvenPositiveInt("yikes!")` returns `FALSE` (rather than crashing), and `isEvenPositiveInt(123456)` returns `TRUE`. For this problem, consider integer _values_ to be "integers". So, both `3` and `3L` are to be considered integers, even though R will return `FALSE` if you type `is.integer(3)` since `3` is technically a double.
 
 ### 9) `getTheCents(n)` [COLLABORATIVE, 15 pts]
 
