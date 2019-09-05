@@ -19,6 +19,156 @@ class: center, middle, inverse, title-slide
 ---
 
 
+# Updates
+
+---
+# Why write test functions?
+
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/test_cases_fry.png" width="400"&gt;
+&lt;/center&gt;
+
+--
+- ### They help you understand the problem
+- ### They verify that a function is working as expected
+
+---
+# Test function "syntax"
+
+--
+### Basic format:
+
+
+```r
+functionName &lt;- function(ARG1, ARG2,...) {
+    STATEMENTS 
+    return(VALUE)
+}
+
+testFunctionName &lt;- function() {
+    cat("Testing functionName()...")
+    &lt;insert test cases&gt;
+    cat("Passed!\n")
+}
+```
+
+---
+# Test case types
+
+--
+- **Normal Cases**: Typical inputs.
+
+--
+- **Large Cases**: Typical input, larger than usual. 
+
+--
+- **Edge Cases**: Pairs of inputs that bound important points, e.g., if a condition checks whether `n &lt; 2`, two edge cases are when `n = 1.99`, `n = 2`.
+
+--
+- **Special Cases**: Negative numbers, `0` and `1` for integers, the empty string (`""`), and different type inputs, e.g. `"2"` instead of `2`.
+
+--
+- **Varying Results**: Cover multiple possible results, e.g. both `TRUE` and `FALSE` outcomes. 
+
+---
+# Testing with `stopifnot()`
+
+`stopifnot()` stops the function if whatever is inside the `()` is not `TRUE`.
+
+--
+Example:
+
+```r
+isEvenNumber &lt;- function(n) {
+    return((n %% 2) == 0)
+}
+```
+
+--
+Test cases:
+- `isEvenNumber(42)` should be `TRUE`
+- `isEvenNumber(43)` should be `FALSE`
+&lt;br&gt;
+
+--
+
+
+```r
+testIsEvenNumber &lt;- function() {
+    cat("Testing isEvenNumber()... ")
+    stopifnot(isEvenNumber(42) == TRUE)
+    stopifnot(isEvenNumber(43) == FALSE)
+    cat("Passed!\n")
+}
+```
+
+
+```r
+testIsEvenNumber()
+```
+
+```
+## Testing isEvenNumber()... Passed!
+```
+
+---
+# Testing function inputs
+
+--
+What if we gave `isEvenNumber()` the wrong input type?
+
+```r
+isEvenNumber('42')
+```
+
+```
+## Error in n%%2: non-numeric argument to binary operator
+```
+
+--
+An improved function that checks inputs:
+
+
+```r
+isEvenNumber &lt;- function(n) {
+    if (! is.numeric(n)) { return(FALSE) }
+    return((n %% 2) == 0)
+}
+```
+
+--
+Better test cases:
+
+
+```r
+testIsEvenNumber &lt;- function() {
+    cat("Testing isEvenNumber()... ")
+    stopifnot(isEvenNumber(42) == TRUE)
+    stopifnot(isEvenNumber(43) == FALSE)
+    stopifnot(isEvenNumber('not_a_number') == FALSE)
+    cat("Passed!\n")
+}
+testIsEvenNumber()
+```
+
+```
+## Testing isEvenNumber()... Passed!
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
 # "Flow Control"
 
 ### Flow control is code that alters the otherwise linear flow of operations in a program.
@@ -36,6 +186,7 @@ class: center, middle, inverse, title-slide
 ---
 # The `if` statement
 
+--
 ### Basic format:
 
 ```
@@ -46,6 +197,7 @@ if ( CONDITION ) {
 }
 ```
 
+--
 Here's the general idea:
 
 &lt;img src="images/condition_if.png" width="400"&gt;
@@ -66,6 +218,7 @@ f &lt;- function(x) {
 f(0)
 f(1)
 ```
+
 --
 
 
@@ -90,6 +243,7 @@ f(1)
 
 The first thing an "absolute value" function should do is check if a number is negative:
 
+--
 
 ```r
 absValue &lt;- function(x) {
@@ -113,6 +267,224 @@ absValue(-7) # Also returns 7
 ```
 ## [1] 7
 ```
+
+---
+# Adding an `else` to an `if`
+
+--
+### Basic format:
+
+```
+if ( CONDITION ) {
+  STATEMENT1
+  STATEMENT2
+  ETC
+} else {
+  STATEMENT3
+  STATEMENT4
+  ETC
+}
+```
+
+--
+Here's the general idea:
+
+&lt;img src="images/condition_if_else.png" width="500"&gt;
+
+---
+# Example: What will this return?
+
+
+```r
+f &lt;- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    }
+    else {
+        cat("D")
+        if (x == 1) {
+            cat("E")
+        } else {
+            cat("F")
+        }
+    }
+    cat("G")
+}
+f(0)
+f(1)
+f(2)
+```
+
+--
+
+
+```r
+f(0)
+```
+
+```
+## ABCG
+```
+--
+
+```r
+f(1)
+```
+
+```
+## ADEG
+```
+--
+
+```r
+f(2)
+```
+
+```
+## ADFG
+```
+
+---
+# `else if` chains
+
+Often times you'll need to check for more than one condition. 
+"Bracketing" problems (like setting grades) are a good example. 
+
+--
+
+```r
+getLetterGrade &lt;- function(score) {
+    if (score &gt;= 90) {
+        grade = "A"
+    } else if (score &gt;= 80) {
+        grade = "B"
+    } else if (score &gt;= 70) {
+        grade = "C"
+    } else if (score &gt;= 60) {
+        grade = "D"
+    } else {
+        grade = "F"
+    }
+    return(grade)
+}
+```
+--
+
+```r
+cat(" 99 --&gt;", getLetterGrade(99))
+```
+
+```
+##  99 --&gt; A
+```
+
+```r
+cat(" 88 --&gt;", getLetterGrade(88))
+```
+
+```
+##  88 --&gt; B
+```
+
+```r
+cat(" 70 --&gt;", getLetterGrade(70))
+```
+
+```
+##  70 --&gt; C
+```
+
+```r
+cat(" 61 --&gt;", getLetterGrade(61))
+```
+
+```
+##  61 --&gt; D
+```
+
+```r
+cat(" 22 --&gt;", getLetterGrade(22))
+```
+
+```
+##  22 --&gt; F
+```
+
+---
+# Group Practice
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+### 1)
+After running this code, what is the value of `a` and `b`?
+
+
+```r
+f &lt;- function(x) {
+    x = x + 1
+    if ((x %% 2) == 0) {
+        x = x - 1
+    }
+    x = 2*x
+}
+
+a &lt;- f(7)
+b &lt;- f(12)
+```
+
+### 2)
+Write the output of this code by hand:
+
+
+```r
+f &lt;- function(x) {
+    if ((x %% 3) == 0) {
+        cat('woo!')
+        return(x %/% 3)
+    }
+    return(x %% 2)
+}
+
+cat(f(9))
+cat(f(11))
+```
+
+### 3)
+Write the output of this code by hand:
+
+
+```r
+f &lt;- function(x) {
+    if (x &gt; 0) {
+        cat('abc')
+        x = 2*x
+    } else if (x &lt;= 0) {
+        x = abs(x)
+        cat('cba')
+    }
+    cat(x)
+}
+
+cat(f(-9))
+cat(f(15))
+```
+
+
+
+--- 
+# Group Practice
+
+## `isPositiveMultipleOf4Or7(n)`
+
+### a)
+
+Write the function `isPositiveMultipleOf4Or7(n)` that returns `TRUE` if `n` is a positive multiple of 4 or 7 and `FALSE` otherwise. Note than `n` could be any data type.
+
+### b)
+
+Write the test function `testIsPositiveMultipleOf4Or7()` that tests the function `isPositiveMultipleOf4Or7(n)` for a variety of values of `n`. Consider cases that you might not expect, such as cases where `n` is not a number.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

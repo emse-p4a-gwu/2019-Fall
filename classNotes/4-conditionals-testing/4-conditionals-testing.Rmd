@@ -8,7 +8,134 @@ output:
     css: classNotes.css
 ---
 
-# Test functions 
+# Updates
+
+---
+# Why write test functions?
+
+<br>
+<center>
+<img src="images/test_cases_fry.png" width="400">
+</center>
+
+--
+- ### They help you understand the problem
+- ### They verify that a function is working as expected
+
+---
+# Test function "syntax"
+
+--
+### Basic format:
+
+```{r, eval=FALSE}
+functionName <- function(ARG1, ARG2,...) {
+    STATEMENTS 
+    return(VALUE)
+}
+
+testFunctionName <- function() {
+    cat("Testing functionName()...")
+    <insert test cases>
+    cat("Passed!\n")
+}
+```
+
+---
+# Test case types
+
+--
+- **Normal Cases**: Typical inputs.
+
+--
+- **Large Cases**: Typical input, larger than usual. 
+
+--
+- **Edge Cases**: Pairs of inputs that bound important points, e.g., if a condition checks whether `n < 2`, two edge cases are when `n = 1.99`, `n = 2`.
+
+--
+- **Special Cases**: Negative numbers, `0` and `1` for integers, the empty string (`""`), and different type inputs, e.g. `"2"` instead of `2`.
+
+--
+- **Varying Results**: Cover multiple possible results, e.g. both `TRUE` and `FALSE` outcomes. 
+
+---
+# Testing with `stopifnot()`
+
+`stopifnot()` stops the function if whatever is inside the `()` is not `TRUE`.
+
+--
+Example:
+```{r}
+isEvenNumber <- function(n) {
+    return((n %% 2) == 0)
+}
+```
+
+--
+Test cases:
+- `isEvenNumber(42)` should be `TRUE`
+- `isEvenNumber(43)` should be `FALSE`
+<br>
+
+--
+
+```{r}
+testIsEvenNumber <- function() {
+    cat("Testing isEvenNumber()... ")
+    stopifnot(isEvenNumber(42) == TRUE)
+    stopifnot(isEvenNumber(43) == FALSE)
+    cat("Passed!\n")
+}
+```
+
+```{r}
+testIsEvenNumber()
+```
+
+---
+# Testing function inputs
+
+--
+What if we gave `isEvenNumber()` the wrong input type?
+```{r error=TRUE}
+isEvenNumber('42')
+```
+
+--
+An improved function that checks inputs:
+
+```{r}
+isEvenNumber <- function(n) {
+    if (! is.numeric(n)) { return(FALSE) }
+    return((n %% 2) == 0)
+}
+```
+
+--
+Better test cases:
+
+```{r}
+testIsEvenNumber <- function() {
+    cat("Testing isEvenNumber()... ")
+    stopifnot(isEvenNumber(42) == TRUE)
+    stopifnot(isEvenNumber(43) == FALSE)
+    stopifnot(isEvenNumber('not_a_number') == FALSE)
+    cat("Passed!\n")
+}
+testIsEvenNumber()
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
