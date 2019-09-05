@@ -60,3 +60,17 @@ f <- function(x) {
 cat(f(-9))
 cat(f(15))
 ```
+
+# Write functions
+
+Here are some functions you should be able to write. Any of these may appear (directly or modified) on a quiz or exam! Your function should be able to pass the test functions provided.
+
+## `isPositiveMultipleOf4Or7(n)`
+
+### a)
+
+Write the function `isPositiveMultipleOf4Or7(n)` that returns `TRUE` if `n` is a positive multiple of 4 or 7 and `FALSE` otherwise. Note than `n` could be any data type.
+
+### b)
+
+Write the test function `testIsPositiveMultipleOf4Or7()` that tests the function `isPositiveMultipleOf4Or7(n)` for a variety of values of `n`. Consider cases that you might not expect, such as cases where `n` is not a number.

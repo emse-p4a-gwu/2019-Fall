@@ -8,6 +8,10 @@ output:
     css: classNotes.css
 ---
 
+# Test functions 
+
+
+---
 # "Flow Control"
 
 ### Flow control is code that alters the otherwise linear flow of operations in a program.
@@ -25,6 +29,7 @@ output:
 ---
 # The `if` statement
 
+--
 ### Basic format:
 
 ```
@@ -35,6 +40,7 @@ if ( CONDITION ) {
 }
 ```
 
+--
 Here's the general idea:
 
 <img src="images/condition_if.png" width="400">
@@ -54,6 +60,7 @@ f <- function(x) {
 f(0)
 f(1)
 ```
+
 --
 ```{r, echo=FALSE}
 f <- function(x) {
@@ -75,6 +82,7 @@ f(1)
 
 The first thing an "absolute value" function should do is check if a number is negative:
 
+--
 ```{r}
 absValue <- function(x) {
     if (x < 0) {x = -1*x}
@@ -85,3 +93,185 @@ absValue <- function(x) {
 absValue(7)  # Returns 7
 absValue(-7) # Also returns 7
 ```
+
+---
+# Adding an `else` to an `if`
+
+--
+### Basic format:
+
+```
+if ( CONDITION ) {
+  STATEMENT1
+  STATEMENT2
+  ETC
+} else {
+  STATEMENT3
+  STATEMENT4
+  ETC
+}
+```
+
+--
+Here's the general idea:
+
+<img src="images/condition_if_else.png" width="500">
+
+---
+# Example: What will this return?
+
+```{r, eval=FALSE}
+f <- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    }
+    else {
+        cat("D")
+        if (x == 1) {
+            cat("E")
+        } else {
+            cat("F")
+        }
+    }
+    cat("G")
+}
+f(0)
+f(1)
+f(2)
+```
+
+--
+```{r, echo=FALSE}
+f <- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    }
+    else {
+        cat("D")
+        if (x == 1) {
+            cat("E")
+        } else {
+            cat("F")
+        }
+    }
+    cat("G")
+}
+```
+```{r}
+f(0)
+```
+--
+```{r}
+f(1)
+```
+--
+```{r}
+f(2)
+```
+
+---
+# `else if` chains
+
+Often times you'll need to check for more than one condition. 
+"Bracketing" problems (like setting grades) are a good example. 
+
+--
+```{r}
+getLetterGrade <- function(score) {
+    if (score >= 90) {
+        grade = "A"
+    } else if (score >= 80) {
+        grade = "B"
+    } else if (score >= 70) {
+        grade = "C"
+    } else if (score >= 60) {
+        grade = "D"
+    } else {
+        grade = "F"
+    }
+    return(grade)
+}
+```
+--
+```{r}
+cat(" 99 -->", getLetterGrade(99))
+cat(" 88 -->", getLetterGrade(88))
+cat(" 70 -->", getLetterGrade(70))
+cat(" 61 -->", getLetterGrade(61))
+cat(" 22 -->", getLetterGrade(22))
+```
+
+---
+# Group Practice
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+### 1)
+After running this code, what is the value of `a` and `b`?
+
+```{r, eval = FALSE}
+f <- function(x) {
+    x = x + 1
+    if ((x %% 2) == 0) {
+        x = x - 1
+    }
+    x = 2*x
+}
+
+a <- f(7)
+b <- f(12)
+```
+
+### 2)
+Write the output of this code by hand:
+
+```{r, eval = FALSE}
+f <- function(x) {
+    if ((x %% 3) == 0) {
+        cat('woo!')
+        return(x %/% 3)
+    }
+    return(x %% 2)
+}
+
+cat(f(9))
+cat(f(11))
+```
+
+### 3)
+Write the output of this code by hand:
+
+```{r, eval = FALSE}
+f <- function(x) {
+    if (x > 0) {
+        cat('abc')
+        x = 2*x
+    } else if (x <= 0) {
+        x = abs(x)
+        cat('cba')
+    }
+    cat(x)
+}
+
+cat(f(-9))
+cat(f(15))
+```
+
+
+
+--- 
+# Group Practice
+
+## `isPositiveMultipleOf4Or7(n)`
+
+### a)
+
+Write the function `isPositiveMultipleOf4Or7(n)` that returns `TRUE` if `n` is a positive multiple of 4 or 7 and `FALSE` otherwise. Note than `n` could be any data type.
+
+### b)
+
+Write the test function `testIsPositiveMultipleOf4Or7()` that tests the function `isPositiveMultipleOf4Or7(n)` for a variety of values of `n`. Consider cases that you might not expect, such as cases where `n` is not a number.
