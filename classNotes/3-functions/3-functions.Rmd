@@ -8,12 +8,15 @@ output:
     css: classNotes.css
 ---
 
-# Updates
+# Announcements
 
 ### 1. Download slack app 
 
 --
-### 2. Thanks for the animals Kaitlin, Jenny, Gabriel, and Emily!
+### 2. HW1 solutions will be posted Tues. @ 8:01pm.
+
+--
+### 3. Thanks for the animals Kaitlin, Jenny, Gabriel, William, and Emily!
 
 | | |
 |-|-|
@@ -35,8 +38,6 @@ output:
 ---
 # Basic function syntax
 
-<br>
-
 ```{r eval=FALSE}
 FNAME <- function(ARG1, ARG2, ETC) {
   STATEMENT1
@@ -46,19 +47,20 @@ FNAME <- function(ARG1, ARG2, ETC) {
 ```
 
 --
-### Example:
+How I remember this:
 
-Write a function that returns the square root of `x`.
-
---
+<img src="images/function_sytax_memory.png" width="700">
 <br>
 
+--
+**Example**: Write a function that returns the square root of `x`. Don't just call `sqrt()`.
+<br>
+--
 ```{r}
 mySqrt <- function(x) {
     return(x^0.5)
 }
 ```
-
 --
 ```{r}
 mySqrt(64)
@@ -69,7 +71,6 @@ mySqrt(64)
 
 --
 .pull-left[
-Write a function that _returns_ `TRUE` if a number, `n`, is positive and `FALSE` otherwise.
 <br>
 
 ```{r}
@@ -84,7 +85,7 @@ x
 ]
 --
 .pull-right[
-Write a function that _prints_ `TRUE` if a number, `n`, is positive and `FALSE` otherwise.
+
 <br>
 
 ```{r}
