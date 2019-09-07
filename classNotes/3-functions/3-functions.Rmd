@@ -16,12 +16,12 @@ output:
 ### 2. HW1 solutions will be posted Tues. @ 8:01pm.
 
 --
-### 3. Thanks for the animals Kaitlin, Jenny, Gabriel, William, and Emily!
+### 3. Thanks for the animals Kaitlin, Jenny, Gabriel, William, Emily & Olivia!
 
-| | |
-|-|-|
-|<img src="images/Kaitlin_Fagan_Panda.gif" width="250"> | <img src="images/Jenny_Kim_Hampster.gif" width="250">|
-|<img src="images/Gabriel_Bahia_de_Sousa_Otter.gif" width="250"> | <img src="images/Emily_Aprigliano_Koala.gif" width="250">|
+| | | |
+|-|-|-|
+|<img src="images/Kaitlin_Fagan_Panda.gif" width="250"> | <img src="images/Jenny_Kim_Hampster.gif" width="250"> |  <img src="images/Olivia_O_Hearn_Penguin.gif" width="250"> |
+|<img src="images/Gabriel_Bahia_de_Sousa_Otter.gif" width="250"> | <img src="images/Emily_Aprigliano_Koala.gif" width="250">| |
 
 ---
 # Quiz 1
@@ -101,7 +101,10 @@ x
 ---
 # Why use `cat()`?
 
-Short for "concatenating", the `cat()` statement prints whatever arguments it is given to the console:
+### Short for "concatenating"
+
+### `cat()` prints arguments to the console:
+<br>
 
 --
 ```{r}
@@ -121,7 +124,6 @@ printX(42)
 
 [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI)
 
---
 .pull-left[
 ```{r}
 f1 <- function(x) {
@@ -139,6 +141,8 @@ f4 <- function(x) {
     cat(x^4)
 }
 ```
+]
+.pull-right[
 ```{r, eval=FALSE}
 f1(2)
 f2(2)
@@ -147,43 +151,90 @@ f4(2)
 ```
 ]
 
---
-.pull-right[
-```{r}
+---
+# Practice: What will these functions do? 
+
+```{r, eval=FALSE}
+f1 <- function(x) {
+    return(x^3)
+}
 f1(2)
+```
+
+--
+```{r, echo=FALSE}
+f1(2)
+```
+
+--
+```{r, eval=FALSE}
+f2 <- function(x) {
+    cat(x^3)
+}
 f2(2)
+```
+
+--
+```{r, echo=FALSE}
+f2(2)
+```
+
+--
+```{r, eval=FALSE}
+f3 <- function(x) {
+    cat(x^3)
+    return(x^4)
+}
 f3(2)
+```
+
+--
+```{r, echo=FALSE}
+f3(2)
+```
+
+---
+# Practice: What will these functions do? 
+
+```{r, eval=FALSE}
+f4 <- function(x) {
+    return(x^3)
+    cat(x^4)
+}
 f4(2)
 ```
-]
+
+--
+```{r, echo=FALSE}
+f4(2)
+```
 
 ---
 # Helper functions
 
-Helper functions break down more complicated problems into smaller chunks.
+### Helper functions break complicated problems into smaller chunks.
 
-**Example**:
-
-We want to write a function to compute the hypotenuse of a triangle:
+### **Example**: Write a function to compute the hypotenuse of a triangle:
 
 <img src="images/right-triangle-hypotenuse.png" width="250">
 
 --
 
-The formula to compute the hypotenuse is:
+### The formula to compute the hypotenuse is:
 
-$c = \sqrt{a^2 + b^2}$
+### $c = \sqrt{a^2 + b^2}$
 
-We can write a helper function to compute the part under square root:
+### Helper function - compute the part under square root:
 
-$a^2 + b^2$
+### $a^2 + b^2$
 
 ---
 # Helper functions
 
-<img src="images/right-triangle-hypotenuse.png" width="200">
+<img src="images/right-triangle-hypotenuse.png" width="250">
 
-Hypotenuse: $c = \sqrt{a^2 + b^2}$
+### Hypotenuse: $c = \sqrt{a^2 + b^2}$
+<br>
 
 ```{r eval=FALSE}
 sumOfSquares <- function(a, b) {
@@ -198,9 +249,10 @@ hypotenuse <- function(a, b) {
 ---
 # Helper functions
 
-<img src="images/right-triangle-hypotenuse.png" width="200">
+<img src="images/right-triangle-hypotenuse.png" width="250">
 
-Hypotenuse: $c = \sqrt{a^2 + b^2}$
+### Hypotenuse: $c = \sqrt{a^2 + b^2}$
+<br>
 
 ```{r}
 sumOfSquares <- function(a, b) {
@@ -219,11 +271,11 @@ hypotenuse(3, 4)
 ```
 
 ---
-# Local variables
+# Local objects
 
-All variables inside are **local** to that function.
+### All objects inside function are **local**.
 
-If you try to call a local variable in the global environment, you'll get an error:
+### If you call a local object in the global environment, you'll get an error:
 
 ```{r error=TRUE}
 squareOfX <- function(x) {
@@ -234,14 +286,14 @@ y
 ```
 
 ---
-# Global variables
+# Global objects
 
-**Global** variables are those in the global environment. These will show up in the "Environment" pane in RStudio.
+### **Global** objects are those in the global environment (see "Environment" pane in RStudio).
 
-**NEVER, NEVER, NEVER** call global variables inside functions.
+### **NEVER, NEVER, NEVER** call global objects inside functions.
 
 --
-Here's an example:
+### Here's an example:
 
 ```{r include=FALSE}
 n <- NULL
@@ -250,37 +302,85 @@ n <- NULL
 printN <- function() {
     cat(n)  # n is not local -- so it is global (bad idea!!!)
 }
+```
+--
+```{r}
 printN() # Nothing happens because n isn't defined
 ```
+--
 ```{r}
-n = 5 # Define n in the global environment
+n = 5 # Define n in the *global* environment
 printN()
 ```
 
 ---
-# Group Practice
+# Global objects
 
-[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+### It is okay to call other functions inside functions 
+
+--
+### Example:
+
+```{r}
+sumOfSquares <- function(a, b) {
+    return(a^2 + b^2)
+}
+
+hypotenuse <- function(a, b) {
+   return(sqrt(sumOfSquares(a, b)))
+}
+```
+
+--
+
+```{r}
+hypotenuse(3, 4)
+```
+
+---
+# Group Practice - Write some functions!
+
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+<br>
 
 1) `onesDigit(x)`: Write a function that takes an integer and returns its ones digit.
+<br>
+<br>
+
+--
+2) `tensDigit(x)`: Write a function that takes an integer and returns its tens digit. 
+<br>
+<br>
+
+--
+.pull-left[
+`onesDigit(x)` tests:
 
 - onesDigit(123) == 3
 - onesDigit(7890) == 0
 - onesDigit(6) == 6
 - onesDigit(-54) == 4
+]
 
 --
-
-2) `tensDigit(x)`: Write a function that takes an integer and returns its tens digit. (Hint: you may want to use the `onesDigit(x)` function you just wrote!)
+.pull-right[
+`tensDigit(x)` tests:
 
 - tensDigit(456) == 5
 - tensDigit(23) == 2
 - tensDigit(1) == 0
 - tensDigit(-7890) == 9
 - tensDigit(-11) == 1
+]
 
 ---
 # Hints
+
+### Hint #1:
+
+For `tensDigit(x)`, you may want to use `onesDigit(x)` as a helper function!
+
+### Hint #2:
 
 .pull-left[
 
@@ -307,7 +407,7 @@ The integer divide operator (`%/%`) "chops" a number and returns everything to t
 ]
 
 ---
-# Group Practice
+# Group Practice - Write more functions!
 
 [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
 
