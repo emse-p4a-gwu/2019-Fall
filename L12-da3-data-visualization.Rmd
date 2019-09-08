@@ -40,13 +40,12 @@ Before we get started, let's set up our analysis environment like before:
 
 1) Open up your "data-analysis-tutorial" R Project that you created in the first data analysis lesson - if you didn't do this, [go back and do it now](L10-data-analysis-1-data-frames.html#41_r_setup).
 2) Create a new `.R` file (File > New File > R Script), and save it as "`data_viz.R`" inside your "data-analysis-tutorial" R Project folder.
-3) Use the `download.file()` function to download the `north_america_bear_killings.csv` dataset, and save it in the `data` folder in your R Project:
+3) This time, instead of downloading the data file and saving it in our `data` folder, let's just read it in directly from the web!
 
-```{r, eval=FALSE}
-download.file(
-    url = "https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/north_america_bear_killings.csv",
-    destfile = file.path('data', 'north_america_bear_killings.csv')
-)
+```{r, message=FALSE}
+library(readr)
+library(dplyr)
+df <- read_csv("https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/north_america_bear_killings.csv")
 ```
 
 For this lesson, we are going to use the [North American Bear Killings](https://data.world/ajsanne/north-america-bear-killings) dataset, which was compiled by [Ali Sanne](https://data.world/ajsanne) from the [Wikipedia page](https://en.wikipedia.org/wiki/List_of_fatal_bear_attacks_in_North_America) on fatal bear attacks in North America. The dataset contains recorded killings by black, brown, or polar bears from 1900 to 2019 in North America. Each row in the dataset holds information for a single incident with the following columns:
@@ -70,14 +69,13 @@ onlyOneKilled | double    | 1 if only one victim was killed, 0 otherwise.
 
 **Side node**: One thing I learned looking at this data is (kind of like squares and rectangles), all grizzly bears are brown bears, but [not all brown bears are grizzly bears](https://www.nps.gov/katm/learn/photosmultimedia/brown-bear-frequently-asked-questions.htm#2).
 
-To get started, let's load our libraries and check out the data:
+To confirm that we've correctly loaded the data frame, let's preview the data:
 
 ```{r, message=FALSE}
-library(readr)
-library(dplyr)
-df <- read_csv(file.path('data', 'north_america_bear_killings.csv'))
 glimpse(df)
 ```
+
+Look's good - let's start making some plots!
 
 # Basic plots in R
 

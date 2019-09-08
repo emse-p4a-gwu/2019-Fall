@@ -40,6 +40,12 @@ FNAME <- function(ARG1, ARG2, ETC) {
 
 What this does is create a function with the name `FNAME`, which has arguments `ARG1`, `ARG2`, etc. Whenever the function is called, R executes the statements within the curly braces `{}`, and then returns the `VALUE` inside the `return()` statement.
 
+There's a lot of different pieces to making a function. The way I like to remember how they all go together is to read the following English sentence:
+
+![](images/function_sytax_memory.png){ width=700 }
+
+All the commands your function will execute go in the `{}`.
+
 ---
 
 # Arguments
