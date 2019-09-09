@@ -26,13 +26,16 @@ class: center, middle, inverse, title-slide
 --
 ### 2. HW1 solutions will be posted Tues. @ 8:01pm.
 
---
-### 3. Thanks for the animals Kaitlin, Jenny, Gabriel, William, Emily &amp; Olivia!
+---
+# Announcements
+
+### 3. Thanks for the animals Kaitlin, Jenny, Gabriel, William, Emily, Bruna, Alp, &amp; Olivia!
 
 | | | |
 |-|-|-|
-|&lt;img src="images/Kaitlin_Fagan_Panda.gif" width="250"&gt; | &lt;img src="images/Jenny_Kim_Hampster.gif" width="250"&gt; |  &lt;img src="images/Olivia_O_Hearn_Penguin.gif" width="250"&gt; |
-|&lt;img src="images/Gabriel_Bahia_de_Sousa_Otter.gif" width="250"&gt; | &lt;img src="images/Emily_Aprigliano_Koala.gif" width="250"&gt;| |
+|&lt;img src="images/Kaitlin_Fagan_Panda.gif" height="150"&gt; | &lt;img src="images/Jenny_Kim_Hampster.gif" height="150"&gt; |  &lt;img src="images/Olivia_O_Hearn_Penguin.gif" height="150"&gt; |
+|&lt;img src="images/Gabriel_Bahia_de_Sousa_Otter.gif" height="150"&gt; | &lt;img src="images/Emily_Aprigliano_Koala.gif" height="150"&gt;| &lt;img src="images/Bruna_Stamer_Janikian_Panda.jpg" height="150"&gt;|
+|&lt;img src="images/Alp_Can_Eryorulmaz_Chick.gif" height="150"&gt; | | |
 
 ---
 # Quiz 1
@@ -45,6 +48,20 @@ class: center, middle, inverse, title-slide
 - ### No computers
 - ### No phones
 - ### No strings or loops
+
+---
+# Make a class notes project
+
+### File &gt; New Project...
+
+--
+### Save your project, e.g. `"week_3.RProj"`
+
+--
+### File &gt; New File &gt; R Script
+
+--
+### Save your script, e.g. `"class_notes.R"`
 
 ---
 # Basic function syntax
@@ -63,26 +80,11 @@ How I remember this:
 
 &lt;img src="images/function_sytax_memory.png" width="700"&gt;
 &lt;br&gt;
+&lt;br&gt;
 
 --
 **Example**: Write a function that returns the square root of `x`. Don't just call `sqrt()`.
 &lt;br&gt;
---
-
-```r
-mySqrt &lt;- function(x) {
-    return(x^0.5)
-}
-```
---
-
-```r
-mySqrt(64)
-```
-
-```
-## [1] 8
-```
 
 ---
 # `return()` and `cat()` statements
@@ -97,15 +99,6 @@ isPositive &lt;- function(n) {
     return(n &gt; 0)
 }
 ```
-
-```r
-x &lt;- isPositive(7)
-x
-```
-
-```
-## [1] TRUE
-```
 ]
 --
 .pull-right[
@@ -118,23 +111,40 @@ isPositive &lt;- function(n) {
     cat(n &gt; 0)
 }
 ```
-
-```r
-x &lt;- isPositive(7)
-```
-
-```
-## TRUE
-```
-
-```r
-x
-```
-
-```
-## NULL
-```
 ]
+
+---
+# `return()` and `cat()` statements
+
+.pull-left[
+&lt;br&gt;
+
+
+```r
+isPositive &lt;- function(n) {
+    return(n &gt; 0)
+}
+```
+&lt;br&gt;
+
+- `return()` _returns_ back a value
+
+]
+.pull-right[
+
+&lt;br&gt;
+
+
+```r
+isPositive &lt;- function(n) {
+    cat(n &gt; 0)
+}
+```
+&lt;br&gt;
+
+- `cat()` _prints_ a value as a string
+]
+
 ---
 # Why use `cat()`?
 
@@ -147,10 +157,9 @@ x
 
 ```r
 printX &lt;- function(x) {
-  cat("The value of x provided is", x)
+  cat("The value of x is", x)
 }
 ```
-
 --
 
 ```r
@@ -158,21 +167,30 @@ printX(7)
 ```
 
 ```
-## The value of x provided is 7
+## The value of x is 7
 ```
+--
 
 ```r
-printX(42)
+printXSquared &lt;- function(x) {
+  cat("The value of x^2 is", x^2)
+}
+```
+--
+
+```r
+printXSquared(7)
 ```
 
 ```
-## The value of x provided is 42
+## The value of x^2 is 49
 ```
 
 ---
 # Practice: What will these functions do? 
 
-[2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI)
+### [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI) - no typing!
+&lt;br&gt;
 
 .pull-left[
 
@@ -286,60 +304,29 @@ f4(2)
 
 ### The formula to compute the hypotenuse is:
 
+--
 ### `\(c = \sqrt{a^2 + b^2}\)`
 
+--
 ### Helper function - compute the part under square root:
 
+--
 ### `\(a^2 + b^2\)`
 
 ---
-# Helper functions
+# "Top Down" design
 
 &lt;img src="images/right-triangle-hypotenuse.png" width="250"&gt;
 
 ### Hypotenuse: `\(c = \sqrt{a^2 + b^2}\)`
 &lt;br&gt;
-
-
-```r
-sumOfSquares &lt;- function(a, b) {
-
-}
-
-hypotenuse &lt;- function(a, b) {
-
-}
-```
-
----
-# Helper functions
-
-&lt;img src="images/right-triangle-hypotenuse.png" width="250"&gt;
-
-### Hypotenuse: `\(c = \sqrt{a^2 + b^2}\)`
-&lt;br&gt;
-
-
-```r
-sumOfSquares &lt;- function(a, b) {
-    return(a^2 + b^2)
-}
-
-hypotenuse &lt;- function(a, b) {
-   return(sqrt(sumOfSquares(a, b)))
-}
-```
 
 --
+### Step 1: Define the function `hypotenuse(a, b)`
+&lt;br&gt;
 
-
-```r
-hypotenuse(3, 4)
-```
-
-```
-## [1] 5
-```
+--
+### Step 2: Define the function `sumOfSquares(a, b)`
 
 ---
 # Local objects

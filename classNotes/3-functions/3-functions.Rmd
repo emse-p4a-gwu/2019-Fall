@@ -15,13 +15,16 @@ output:
 --
 ### 2. HW1 solutions will be posted Tues. @ 8:01pm.
 
---
-### 3. Thanks for the animals Kaitlin, Jenny, Gabriel, William, Emily & Olivia!
+---
+# Announcements
+
+### 3. Thanks for the animals Kaitlin, Jenny, Gabriel, William, Emily, Bruna, Alp, & Olivia!
 
 | | | |
 |-|-|-|
-|<img src="images/Kaitlin_Fagan_Panda.gif" width="250"> | <img src="images/Jenny_Kim_Hampster.gif" width="250"> |  <img src="images/Olivia_O_Hearn_Penguin.gif" width="250"> |
-|<img src="images/Gabriel_Bahia_de_Sousa_Otter.gif" width="250"> | <img src="images/Emily_Aprigliano_Koala.gif" width="250">| |
+|<img src="images/Kaitlin_Fagan_Panda.gif" height="150"> | <img src="images/Jenny_Kim_Hampster.gif" height="150"> |  <img src="images/Olivia_O_Hearn_Penguin.gif" height="150"> |
+|<img src="images/Gabriel_Bahia_de_Sousa_Otter.gif" height="150"> | <img src="images/Emily_Aprigliano_Koala.gif" height="150">| <img src="images/Bruna_Stamer_Janikian_Panda.jpg" height="150">|
+|<img src="images/Alp_Can_Eryorulmaz_Chick.gif" height="150"> | | |
 
 ---
 # Quiz 1
@@ -34,6 +37,20 @@ output:
 - ### No computers
 - ### No phones
 - ### No strings or loops
+
+---
+# Make a class notes project
+
+### File > New Project...
+
+--
+### Save your project, e.g. `"week_3.RProj"`
+
+--
+### File > New File > R Script
+
+--
+### Save your script, e.g. `"class_notes.R"`
 
 ---
 # Basic function syntax
@@ -51,20 +68,11 @@ How I remember this:
 
 <img src="images/function_sytax_memory.png" width="700">
 <br>
+<br>
 
 --
 **Example**: Write a function that returns the square root of `x`. Don't just call `sqrt()`.
 <br>
---
-```{r}
-mySqrt <- function(x) {
-    return(x^0.5)
-}
-```
---
-```{r}
-mySqrt(64)
-```
 
 ---
 # `return()` and `cat()` statements
@@ -78,10 +86,6 @@ isPositive <- function(n) {
     return(n > 0)
 }
 ```
-```{r}
-x <- isPositive(7)
-x
-```
 ]
 --
 .pull-right[
@@ -93,11 +97,38 @@ isPositive <- function(n) {
     cat(n > 0)
 }
 ```
-```{r}
-x <- isPositive(7)
-x
-```
 ]
+
+---
+# `return()` and `cat()` statements
+
+.pull-left[
+<br>
+
+```{r}
+isPositive <- function(n) {
+    return(n > 0)
+}
+```
+<br>
+
+- `return()` _returns_ back a value
+
+]
+.pull-right[
+
+<br>
+
+```{r}
+isPositive <- function(n) {
+    cat(n > 0)
+}
+```
+<br>
+
+- `cat()` _prints_ a value as a string
+]
+
 ---
 # Why use `cat()`?
 
@@ -109,20 +140,29 @@ x
 --
 ```{r}
 printX <- function(x) {
-  cat("The value of x provided is", x)
+  cat("The value of x is", x)
 }
 ```
-
 --
 ```{r}
 printX(7)
-printX(42)
+```
+--
+```{r}
+printXSquared <- function(x) {
+  cat("The value of x^2 is", x^2)
+}
+```
+--
+```{r}
+printXSquared(7)
 ```
 
 ---
 # Practice: What will these functions do? 
 
-[2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI)
+### [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI) - no typing!
+<br>
 
 .pull-left[
 ```{r}
@@ -222,53 +262,29 @@ f4(2)
 
 ### The formula to compute the hypotenuse is:
 
+--
 ### $c = \sqrt{a^2 + b^2}$
 
+--
 ### Helper function - compute the part under square root:
 
+--
 ### $a^2 + b^2$
 
 ---
-# Helper functions
+# "Top Down" design
 
 <img src="images/right-triangle-hypotenuse.png" width="250">
 
 ### Hypotenuse: $c = \sqrt{a^2 + b^2}$
 <br>
-
-```{r eval=FALSE}
-sumOfSquares <- function(a, b) {
-
-}
-
-hypotenuse <- function(a, b) {
-
-}
-```
-
----
-# Helper functions
-
-<img src="images/right-triangle-hypotenuse.png" width="250">
-
-### Hypotenuse: $c = \sqrt{a^2 + b^2}$
-<br>
-
-```{r}
-sumOfSquares <- function(a, b) {
-    return(a^2 + b^2)
-}
-
-hypotenuse <- function(a, b) {
-   return(sqrt(sumOfSquares(a, b)))
-}
-```
 
 --
+### Step 1: Define the function `hypotenuse(a, b)`
+<br>
 
-```{r}
-hypotenuse(3, 4)
-```
+--
+### Step 2: Define the function `sumOfSquares(a, b)`
 
 ---
 # Local objects
