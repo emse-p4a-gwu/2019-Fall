@@ -47,7 +47,7 @@ Given a non-negative integer `n`, return the integer value that is closest to it
 
 ### 2) `fabricYards(inches)` [SOLO, 5 pts]
 
-Fabric must be purchased in whole yards. Write a function that takes a non-negative number of inches of fabric desired, and returns the smallest number of whole yards of fabric that must be purchased.  Thus, `fabricYards(1)` is `1` (you need a full yard if you buy one inch) and `fabricYards(36)` is also `1`, but `fabricYards(37)` is `2`.
+Fabric must be purchased in whole yards. Write a function that takes a non-negative number of inches of fabric desired, and returns the smallest number of whole yards of fabric that must be purchased.  Thus, `fabricYards(1)` is `1` (you need a full yard if you buy one inch) and `fabricYards(36)` is also `1`, but `fabricYards(37)` is `2`. Hint: There are 36 inches in a yard!
 
 ### 3) `fabricExcess(inches)` [SOLO, 5 pts]
 
