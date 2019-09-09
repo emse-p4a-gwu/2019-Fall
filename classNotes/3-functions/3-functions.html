@@ -19,25 +19,6 @@ class: center, middle, inverse, title-slide
 ---
 
 
-# Announcements
-
-### 1. Download slack app 
-
---
-### 2. HW1 solutions will be posted Tues. @ 8:01pm.
-
----
-# Announcements
-
-### 3. Thanks for the animals Kaitlin, Jenny, Gabriel, William, Emily, Bruna, Alp, &amp; Olivia!
-
-| | | |
-|-|-|-|
-|&lt;img src="images/Kaitlin_Fagan_Panda.gif" height="150"&gt; | &lt;img src="images/Jenny_Kim_Hampster.gif" height="150"&gt; |  &lt;img src="images/Olivia_O_Hearn_Penguin.gif" height="150"&gt; |
-|&lt;img src="images/Gabriel_Bahia_de_Sousa_Otter.gif" height="150"&gt; | &lt;img src="images/Emily_Aprigliano_Koala.gif" height="150"&gt;| &lt;img src="images/Bruna_Stamer_Janikian_Panda.jpg" height="150"&gt;|
-|&lt;img src="images/Alp_Can_Eryorulmaz_Chick.gif" height="150"&gt; | | |
-
----
 # Quiz 1
 
 ### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
@@ -48,6 +29,25 @@ class: center, middle, inverse, title-slide
 - ### No computers
 - ### No phones
 - ### No strings or loops
+
+---
+# Announcements
+
+### 1. If you haven't already, download the slack app 
+
+--
+### 2. HW1 solutions will be posted Tues. @ 8:01pm.
+
+---
+# Announcements
+
+### 3. Thanks for the animals Kaitlin, Jenny, Gabriel, William, Emily, Bruna, Alp, Alexa R., &amp; Olivia!
+
+| | | |
+|-|-|-|
+|&lt;img src="images/Kaitlin_Fagan_Panda.gif" height="150"&gt; | &lt;img src="images/Jenny_Kim_Hampster.gif" height="150"&gt; |  &lt;img src="images/Olivia_O_Hearn_Penguin.gif" height="150"&gt; |
+|&lt;img src="images/Gabriel_Bahia_de_Sousa_Otter.gif" height="150"&gt; | &lt;img src="images/Emily_Aprigliano_Koala.gif" height="150"&gt;| &lt;img src="images/Bruna_Stamer_Janikian_Panda.jpg" height="150"&gt;|
+|&lt;img src="images/Alp_Can_Eryorulmaz_Chick.gif" height="150"&gt; | &lt;img src="images/Alexa_Rosdahl_Otter.png" height="150"&gt; | |
 
 ---
 # Make a class notes project
@@ -173,7 +173,8 @@ printX(7)
 
 ```r
 printXSquared &lt;- function(x) {
-  cat("The value of x^2 is", x^2)
+  y &lt;- x^2
+  cat("The value of x^2 is", y)
 }
 ```
 --
@@ -333,7 +334,10 @@ f4(2)
 
 ### All objects inside function are **local**.
 
-### If you call a local object in the global environment, you'll get an error:
+### If you call a local object in the global environment, you'll get an error.
+
+--
+### Example:
 
 
 ```r
@@ -341,6 +345,21 @@ squareOfX &lt;- function(x) {
   y &lt;- x^2
   return(y)
 }
+```
+
+--
+
+```r
+squareOfX(3)
+```
+
+```
+## [1] 9
+```
+
+--
+
+```r
 y
 ```
 
@@ -444,7 +463,6 @@ hypotenuse(3, 4)
 - tensDigit(23) == 2
 - tensDigit(1) == 0
 - tensDigit(-7890) == 9
-- tensDigit(-11) == 1
 ]
 
 ---
