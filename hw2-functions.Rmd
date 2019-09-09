@@ -79,7 +79,7 @@ Given an arbitrary value `x`, return `TRUE` if it is an integer, and it is posit
 
 ### 9) `getTheCents(n)` [COLLABORATIVE, 15 pts]
 
-Write the function `getTheCents(n)` which takes a value `n` (which represents a payment in US dollars) and returns the number of cents in the payment. For example, if n is 2.45, the function should return 45. If n is an integer, the function should return 0, as it has 0 cents; if it isn't a number, it should return `NULL`, because a non-number payment make no cents (ha!). If the payment has partial cents (for example, 3.953), it should be rounded up to the nearest cent (in this example, 96 cents).
+Write the function `getTheCents(n)` which takes a value `n` (which represents a payment in US dollars) and returns the number of cents in the payment. For example, if n is 2.45, the function should return 45. If n is an integer, the function should return 0, as it has 0 cents; if it isn't a number, it should return `NULL`, because a non-number payment make no cents (ha!). If the payment has partial cents (for example, 3.953), it should be rounded to the nearest cent (in this example, 95 cents).
 
 ### 10) `turtleSquare(s)` [COLLABORATIVE, 15 pts]
 
