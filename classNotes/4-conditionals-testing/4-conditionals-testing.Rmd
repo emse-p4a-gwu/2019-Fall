@@ -8,7 +8,9 @@ output:
     css: classNotes.css
 ---
 
-# Updates
+# Announcements
+
+### 1) You can change the way RStudio looks
 
 ---
 # "Flow Control"
@@ -54,6 +56,8 @@ Here's the general idea:
 ]
 ---
 # Practice: What will this return?
+
+[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
 
 ```{r, eval=FALSE}
 f <- function(x) {
@@ -131,11 +135,10 @@ Here's the general idea:
 ]
 
 ---
-# Example: What will this return?
+# Practice: What will this return?
 
 [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI) - no typing!
 
---
 .pull-left[
 ```{r, eval=FALSE}
 f <- function(x) {
@@ -223,7 +226,9 @@ cat(" 22 -->", getLetterGrade(22))
 ]
 
 ---
-# Practice - No typing! [10 minutes]() 
+# Practice - Write the output by hand
+
+[3 minutes](https://www.youtube.com/watch?v=iHdviZkM7S4) - no typing!
 
 .pull-left[
 ```{r, eval = FALSE}
@@ -247,7 +252,7 @@ f2 <- function(x) {
 .pull-right[
 
 ```{r, eval = FALSE}
-f <- function(x) {
+f3 <- function(x) {
     if (x > 0) {
         cat('cat')
         x = 2*x
@@ -367,7 +372,7 @@ isEvenNumber('42')
 --
 An improved function that checks inputs:
 
-```{r}
+```{r, eval=FALSE}
 isEvenNumber <- function(n) {
     if (! is.numeric(n)) { return(FALSE) }
     return((n %% 2) == 0)
@@ -377,9 +382,9 @@ isEvenNumber <- function(n) {
 --
 Now add more test cases:
 
-```{r}
+```{r, eval=FALSE}
 testIsEvenNumber <- function() {
-    cat("Testing isEvenNumber()... ")
+    cat("Testing isEvenNumber()...")
     stopifnot(isEvenNumber(42) == TRUE)
     stopifnot(isEvenNumber(43) == FALSE)
     stopifnot(isEvenNumber('not_a_number') == FALSE)
@@ -387,30 +392,32 @@ testIsEvenNumber <- function() {
 }
 ```
 
+---
+# Group Practice 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---- 
-# Group Practice
-
-## `isPositiveMultipleOf4Or7(n)`
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
 
 ### a)
 
-Write the function `isPositiveMultipleOf4Or7(n)` that returns `TRUE` if `n` is a positive multiple of 4 or 7 and `FALSE` otherwise. Note than `n` could be any data type.
+Write the test function `testIsPositiveMultipleOf4Or7()` that tests the function `isPositiveMultipleOf4Or7(n)` for a variety of values of `n`. Consider cases that you might not expect, such as cases where `n` is not a number.
 
 ### b)
 
-Write the test function `testIsPositiveMultipleOf4Or7()` that tests the function `isPositiveMultipleOf4Or7(n)` for a variety of values of `n`. Consider cases that you might not expect, such as cases where `n` is not a number.
+Write the function `isPositiveMultipleOf4Or7(n)` that returns `TRUE` if `n` is a positive multiple of 4 or 7 and `FALSE` otherwise. Allow for cases where `n` is any data type.
+
+---
+# Group Practice 
+
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+a) Write the test function `testGetInRange()` that tests the function `getInRange(x, bound1, bound2)` for a variety of values of `x`, `bound1`, `bound2`. 
+<br>
+
+b) Write the function `getInRange(x, bound1, bound2)` which takes 3 numeric values: `x`, `bound1`, and `bound2`, where `bound1` is not necessarily less than `bound2`. If `x` is between the two bounds, just return it unmodified. Otherwise, if `x` is less than the lower bound, return the lower bound, or if `x` is greater than the upper bound, return the upper bound. 
+
+For example:
+
+- `getInRange(1, 3, 5)` returns `3` (the lower bound, since 1 lies to the left of the range [3,5])
+- `getInRange(4, 3, 5)` returns `4` (the original value, since 4 is in the range [3,5])
+- `getInRange(6, 3, 5)` returns `5` (the upper bound, since 6 lies to the right of the range [3,5])
+- `getInRange(6, 5, 3)` also returns `5` (the upper bound, since 6 lies to the right of the range [3,5])
