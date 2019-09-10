@@ -11,6 +11,83 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+# Code tracing
+
+### 1)
+Write the output of this code by hand:
+
+```{r, eval=FALSE}
+f <- function(x) {
+    m = x
+    l = x + 4
+    m = m + 5
+    return(c(m, l))
+}
+
+x = c(1, 2, 3)
+f(x)
+```
+
+### 2)
+Write the output of this function by hand:
+
+```{r, eval=FALSE}
+f <- function(x) {
+    for (i in seq(length(x))) {
+        x[i] <- x[i] + sum(x) + max(x)
+    }
+    return(sort(x))
+}
+x = c(2, 1, 0)
+f(x)
+```
+
+# Practice with vectors
+
+Let's say you fielded a survey and got just 5 responses (...you probably should work on your survey fielding techniques). You collected information about each respondent's age and gender.
+
+- Use the combine function `c` to create a numeric vector called `age` that lists the ages of the five respondents: 19, 34, 7, 18, 67
+- Use the square brackets `[]` to print out the `age` of the second person.
+- Use the square brackets `[]` to print out the `age` of the second person and third person.
+- Use the combine function `c` to create a character vector called `gender` that lists the gender of the five respondents: `'male'`, `'female'`, `'female'`, `'male'`, `'male'`
+- Create a logical vector `adult` that indicates whether each participant was 18 or older. Instead of using `c`, use a logical operator like `>` or `>=` to automatically create `adult` from `age`
+- Test your logical indexing skills - print out the `gender` of all the `adult` participants.
+
+# Write functions
+
+Here are some functions you should be able to write. Any of these may appear (directly or modified) on a quiz or exam! Your function should be able to pass the test functions provided.
+
+### `reverseVector(x)`
+
+Write a function that returns the vector in reverse order. So if `x` equals `c(2,3,4)`, then `reverse(x)` should equal `c(4,3,2)`. You cannot use the `rev()` function (which does exactly this). You may not use loops.
+
+### `dotProduct(a, b)`
+
+**Background**: the "dot product" of two vectors is the sum of the products of the corresponding terms. So the dot product of the vectors `c(1,2,3)` and `c(4,5,6)` is `(1*4) + (2*5) + (3*6)`, or `4 + 10 + 18 = 32`.  With this in mind, write the function `dotProduct(a, b)`. This function takes two vectors and returns the dot product of those vectors. If the vectors are not equal length, ignore the extra elements in the longer vector. You may not use loops.
+
+### `alternatingSum(a)`
+
+Write the function `alternatingSum(a)` that takes a vector of numbers `a` and returns the alternating sum, where the sign alternates from positive to negative or vice versa. For example, `alternatingSum(c(5,3,8,4))` returns 6, because `5 - 3 + 8 - 4 = 6`.
+
+### `median(a)`
+
+Write the function `median(a)` that takes a vector of numbers `a` and returns the median value in the vector, which is the value of the middle element (or the average of the two middle elements).
+
+### `isNumericLooking(n)`
+
+Write a function that returns `TRUE` if the value `n` is "numeric looking", meaning that it is either of a numeric type or a character type of a number (e.g. "2"). All other data types and special values (e.g. `NA`, `NaN`, `Inf`, `NULL`, `TRUE`, `FALSE`, etc.) should return `FALSE`.
+
+### `numericLookingSummary(x)`
+
+Write the function `numericLookingSummary(x)` that takes a vector, `x`, of either character or numeric values and returns a vector that contains the minimum value, mean value, maximum value, sum, and product of the numeric "looking" elements. The function should convert strings of numbers to actual numbers (e.g. `"2"` should be `2`). All other data types and special values (e.g. `NA`, `NaN`, `Inf`, `NULL`, `TRUE`, `FALSE`, etc.) should be ignored. The returned vector should also be named with the following names: `min`, `mean`, `max`, `sum`, and `prod`. (Hint: you may want to make a helper function first called `isNumericLooking(n)` which returns `TRUE` if a value is "numeric looking").
+
+For example, `numericLookingSummary(c(1, "2", 3, 4, NA, 5, NaN, Inf))` should return the following:
+
+```{r echo=FALSE}
+x = seq(5)
+c(min = min(x), mean=mean(x), max=max(x), sum=sum(x), prod=prod(x))
+```
+
 ---
 
 **Page sources**:
