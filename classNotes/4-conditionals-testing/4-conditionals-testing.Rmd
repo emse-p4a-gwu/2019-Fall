@@ -12,6 +12,9 @@ output:
 
 ### 1) You can change the way RStudio looks
 
+--
+### 2) Review of HW1
+
 ---
 # "Flow Control"
 
@@ -396,28 +399,32 @@ testIsEvenNumber <- function() {
 # Group Practice 
 
 ### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+<br>
 
-### a)
+For each of the following functions, start by writing a test function, e.g. `testIfFactor()`, that tests the function for a variety of values of inputs. Consider cases that you might not expect.
 
-Write the test function `testIsPositiveMultipleOf4Or7()` that tests the function `isPositiveMultipleOf4Or7(n)` for a variety of values of `n`. Consider cases that you might not expect, such as cases where `n` is not a number.
+1. Write the function `isFactor(f, n)` that takes two int values `f` and `n`, and returns `TRUE` if `f` is a factor of `n`, and `FALSE` otherwise. Note that every integer is a factor of `0`. Assume `f` and `n` will only be numeric values.
+<br>
 
-### b)
+2. Write the function `isMultiple(m, n)` that takes two integer values `m` and `n` and returns `TRUE` if `m` is a multiple of `n` and `FALSE` otherwise. Note that `0` is a multiple of every integer other than itself. Also, you should make constructive use of the `isFactor(f, n)` function you just wrote above. Assume `m` and `n` will only be numeric values.
+<br>
 
-Write the function `isPositiveMultipleOf4Or7(n)` that returns `TRUE` if `n` is a positive multiple of 4 or 7 and `FALSE` otherwise. Allow for cases where `n` is any data type.
+3. Write the function `isPositiveMultipleOf4Or7(n)` that returns `TRUE` if `n` is a positive multiple of 4 or 7 and `FALSE` otherwise. Allow for cases where `n` is any data type.
 
 ---
 # Group Practice 
 
 ### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
-
-a) Write the test function `testGetInRange()` that tests the function `getInRange(x, bound1, bound2)` for a variety of values of `x`, `bound1`, `bound2`. 
 <br>
 
-b) Write the function `getInRange(x, bound1, bound2)` which takes 3 numeric values: `x`, `bound1`, and `bound2`, where `bound1` is not necessarily less than `bound2`. If `x` is between the two bounds, just return it unmodified. Otherwise, if `x` is less than the lower bound, return the lower bound, or if `x` is greater than the upper bound, return the upper bound. 
+1. Write the test function `testGetInRange()` that tests the function `getInRange(x, bound1, bound2)` for a variety of values of `x`, `bound1`, `bound2`. 
+<br>
 
-For example:
+2. Write the function `getInRange(x, bound1, bound2)` which takes 3 numeric values: `x`, `bound1`, and `bound2`, where `bound1` is not necessarily less than `bound2`. If `x` is between the two bounds, just return it unmodified. Otherwise, if `x` is less than the lower bound, return the lower bound, or if `x` is greater than the upper bound, return the upper bound. For example:
 
-- `getInRange(1, 3, 5)` returns `3` (the lower bound, since 1 lies to the left of the range [3,5])
-- `getInRange(4, 3, 5)` returns `4` (the original value, since 4 is in the range [3,5])
-- `getInRange(6, 3, 5)` returns `5` (the upper bound, since 6 lies to the right of the range [3,5])
-- `getInRange(6, 5, 3)` also returns `5` (the upper bound, since 6 lies to the right of the range [3,5])
+- `getInRange(1, 3, 5)` returns `3` (the lower bound, since 1 is below the range [3,5])
+- `getInRange(4, 3, 5)` returns `4` (the original value, since 4 is below the range [3,5])
+- `getInRange(6, 3, 5)` returns `5` (the upper bound, since 6 is above the range [3,5])
+- `getInRange(6, 5, 3)` returns `5` (the upper bound, since 6 is above the range [3,5])
+
+**Bonus**: Re-write `getInRange(x, bound1, bound2)` without using conditionals

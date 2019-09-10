@@ -1,3 +1,0 @@
-Why write test functions?
-- They help you understand the problem
-- They verify that a function is working as expected
