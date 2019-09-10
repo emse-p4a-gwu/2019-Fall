@@ -454,7 +454,7 @@ The integer divide operator (`%/%`) "chops" a number and returns everything to t
 
 .pull-right[
 
-2) `militaryTimeToStandardTime()`: Write a program that takes an integer between 0 and 23 (representing the hour in military time), and returns the same hour in standard time. For example, 17 in military time is 5 o'clock in standard time.
+2) `militaryTimeToStandardTime(n)`: Write a program that takes an integer between 0 and 23 (representing the hour in military time), and returns the same hour in standard time. For example, 17 in military time is 5 o'clock in standard time.
 
 - militaryTimeToStandardTime(0) == 12
 - militaryTimeToStandardTime(1) == 1

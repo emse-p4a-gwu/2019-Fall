@@ -22,6 +22,327 @@ class: center, middle, inverse, title-slide
 # Updates
 
 ---
+# "Flow Control"
+
+### Flow control is code that alters the otherwise linear flow of operations in a program.
+ 
+--
+### This week:
+
+- `if` statements 
+- `else` statements 
+&lt;br&gt;
+
+--
+
+### Next week:
+
+- `for` loops
+- `while` loops
+- `break` statements 
+- `next` statements 
+
+---
+# The `if` statement
+
+--
+### Basic format:
+&lt;br&gt;
+.pull-left[
+
+```r
+if ( CONDITION ) {
+    STATEMENT1
+    STATEMENT2
+    ETC
+}
+```
+]
+--
+.pull-right[
+Here's the general idea:
+
+&lt;img src="images/condition_if.png" width="400"&gt;
+]
+---
+# Practice: What will this return?
+
+
+```r
+f &lt;- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    }
+    cat("D")
+}
+f(1)
+f(0)
+```
+
+--
+
+
+```r
+f(1)
+```
+
+```
+## AD
+```
+
+```r
+f(0)
+```
+
+```
+## ABCD
+```
+
+---
+# Example: Absolute value
+
+### Write the function `absValue()` that returns the absolute value of a number.
+&lt;br&gt;
+
+--
+
+```r
+absValue &lt;- function(x) {
+    if (x &lt; 0) {x = -1*x}
+    return(x)
+}
+```
+
+```r
+absValue(7)  # Returns 7
+```
+
+```
+## [1] 7
+```
+
+```r
+absValue(-7) # Also returns 7
+```
+
+```
+## [1] 7
+```
+
+---
+# Adding an `else` to an `if`
+
+--
+### Basic format:
+&lt;br&gt;
+.pull-left[
+
+
+```r
+if ( CONDITION ) {
+  STATEMENT1
+  STATEMENT2
+  ETC
+} else {
+  STATEMENT3
+  STATEMENT4
+  ETC
+}
+```
+]
+
+--
+.pull-right[
+Here's the general idea:
+
+&lt;img src="images/condition_if_else.png" width="400"&gt;
+]
+
+---
+# Example: What will this return?
+
+[2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI) - no typing!
+
+--
+.pull-left[
+
+```r
+f &lt;- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    } else {
+        cat("D")
+        if (x == 1) {
+            cat("E")
+        } else {
+            cat("F")
+        }
+    }
+    cat("G")
+}
+f(0)
+f(1)
+f(2)
+```
+]
+
+--
+.pull-right[
+
+
+```r
+f(0)
+```
+
+```
+## ABCG
+```
+
+```r
+f(1)
+```
+
+```
+## ADEG
+```
+
+```r
+f(2)
+```
+
+```
+## ADFG
+```
+]
+---
+# `else if` chains
+
+Often times you'll need to check for more than one condition. 
+
+"Bracketing" problems (like setting grades) are a good example. 
+
+--
+.pull-left[
+
+```r
+getLetterGrade &lt;- function(score) {
+    if (score &gt;= 90) {
+        grade = "A"
+    } else if (score &gt;= 80) {
+        grade = "B"
+    } else if (score &gt;= 70) {
+        grade = "C"
+    } else if (score &gt;= 60) {
+        grade = "D"
+    } else {
+        grade = "F"
+    }
+    return(grade)
+}
+```
+]
+
+--
+.pull-right[
+
+```r
+cat(" 99 --&gt;", getLetterGrade(99))
+```
+
+```
+##  99 --&gt; A
+```
+
+```r
+cat(" 88 --&gt;", getLetterGrade(88))
+```
+
+```
+##  88 --&gt; B
+```
+
+```r
+cat(" 70 --&gt;", getLetterGrade(70))
+```
+
+```
+##  70 --&gt; C
+```
+
+```r
+cat(" 61 --&gt;", getLetterGrade(61))
+```
+
+```
+##  61 --&gt; D
+```
+
+```r
+cat(" 22 --&gt;", getLetterGrade(22))
+```
+
+```
+##  22 --&gt; F
+```
+]
+
+---
+# Practice - No typing! [10 minutes]() 
+
+.pull-left[
+
+```r
+f1 &lt;- function(x) {
+    x = x + 1
+    if ((x %% 2) == 0) {
+        x = x - 1
+    }
+    y = 2*x
+    cat(y, '\n')
+}
+f2 &lt;- function(x) {
+    if ((x %% 3) == 0) {
+        cat('woo!\n')
+        cat(x %/% 3)
+    }
+    cat(x %% 2, '\n')
+}
+```
+]
+.pull-right[
+
+
+```r
+f &lt;- function(x) {
+    if (x &gt; 0) {
+        cat('cat')
+        x = 2*x
+    } else if (x &lt;= 0) {
+        x = abs(x)
+        cat('tac')
+    }
+    cat(x , '\n')
+}
+```
+
+Write the output of this code by hand:
+
+
+```r
+cat(f1(7))
+cat(f1(12))
+cat(f2(9))
+cat(f2(11))
+cat(f3(-9))
+cat(f3(15))
+```
+]
+
+---
 # Why write test functions?
 
 &lt;br&gt;
@@ -63,7 +384,7 @@ testFunctionName &lt;- function() {
 - **Large Cases**: Typical input, larger than usual. 
 
 --
-- **Edge Cases**: Pairs of inputs that bound important points, e.g., if a condition checks whether `n &lt; 2`, two edge cases are when `n = 1.99`, `n = 2`.
+- **Edge Cases**: Pairs of inputs that bound important points, e.g., if checking whether `n &lt; 2`, two edge cases are when `n = 1.99`, `n = 2`.
 
 --
 - **Special Cases**: Negative numbers, `0` and `1` for integers, the empty string (`""`), and different type inputs, e.g. `"2"` instead of `2`.
@@ -103,6 +424,7 @@ testIsEvenNumber &lt;- function() {
 }
 ```
 
+--
 
 ```r
 testIsEvenNumber()
@@ -138,7 +460,7 @@ isEvenNumber &lt;- function(n) {
 ```
 
 --
-Better test cases:
+Now add more test cases:
 
 
 ```r
@@ -149,11 +471,6 @@ testIsEvenNumber &lt;- function() {
     stopifnot(isEvenNumber('not_a_number') == FALSE)
     cat("Passed!\n")
 }
-testIsEvenNumber()
-```
-
-```
-## Testing isEvenNumber()... Passed!
 ```
 
 
@@ -168,308 +485,6 @@ testIsEvenNumber()
 
 
 
----
-# "Flow Control"
-
-### Flow control is code that alters the otherwise linear flow of operations in a program.
- 
---
-### Types:
-
-- `if` statements 
-- `else` statements 
-- `for` loops
-- `while` loops
-- `break` statements 
-- `next` statements 
-
----
-# The `if` statement
-
---
-### Basic format:
-
-```
-if ( CONDITION ) {
-    STATEMENT1
-    STATEMENT2
-    ETC
-}
-```
-
---
-Here's the general idea:
-
-&lt;img src="images/condition_if.png" width="400"&gt;
-
----
-# Example: What will this return?
-
-
-```r
-f &lt;- function(x) {
-    cat("A")
-    if (x == 0) {
-        cat("B")
-        cat("C")
-    }
-    cat("D")
-}
-f(0)
-f(1)
-```
-
---
-
-
-```r
-f(0)
-```
-
-```
-## ABCD
-```
-
-```r
-f(1)
-```
-
-```
-## AD
-```
-
----
-# Example 2 - Absolute value
-
-The first thing an "absolute value" function should do is check if a number is negative:
-
---
-
-```r
-absValue &lt;- function(x) {
-    if (x &lt; 0) {x = -1*x}
-    return(x)
-}
-```
-
-```r
-absValue(7)  # Returns 7
-```
-
-```
-## [1] 7
-```
-
-```r
-absValue(-7) # Also returns 7
-```
-
-```
-## [1] 7
-```
-
----
-# Adding an `else` to an `if`
-
---
-### Basic format:
-
-```
-if ( CONDITION ) {
-  STATEMENT1
-  STATEMENT2
-  ETC
-} else {
-  STATEMENT3
-  STATEMENT4
-  ETC
-}
-```
-
---
-Here's the general idea:
-
-&lt;img src="images/condition_if_else.png" width="500"&gt;
-
----
-# Example: What will this return?
-
-
-```r
-f &lt;- function(x) {
-    cat("A")
-    if (x == 0) {
-        cat("B")
-        cat("C")
-    }
-    else {
-        cat("D")
-        if (x == 1) {
-            cat("E")
-        } else {
-            cat("F")
-        }
-    }
-    cat("G")
-}
-f(0)
-f(1)
-f(2)
-```
-
---
-
-
-```r
-f(0)
-```
-
-```
-## ABCG
-```
---
-
-```r
-f(1)
-```
-
-```
-## ADEG
-```
---
-
-```r
-f(2)
-```
-
-```
-## ADFG
-```
-
----
-# `else if` chains
-
-Often times you'll need to check for more than one condition. 
-"Bracketing" problems (like setting grades) are a good example. 
-
---
-
-```r
-getLetterGrade &lt;- function(score) {
-    if (score &gt;= 90) {
-        grade = "A"
-    } else if (score &gt;= 80) {
-        grade = "B"
-    } else if (score &gt;= 70) {
-        grade = "C"
-    } else if (score &gt;= 60) {
-        grade = "D"
-    } else {
-        grade = "F"
-    }
-    return(grade)
-}
-```
---
-
-```r
-cat(" 99 --&gt;", getLetterGrade(99))
-```
-
-```
-##  99 --&gt; A
-```
-
-```r
-cat(" 88 --&gt;", getLetterGrade(88))
-```
-
-```
-##  88 --&gt; B
-```
-
-```r
-cat(" 70 --&gt;", getLetterGrade(70))
-```
-
-```
-##  70 --&gt; C
-```
-
-```r
-cat(" 61 --&gt;", getLetterGrade(61))
-```
-
-```
-##  61 --&gt; D
-```
-
-```r
-cat(" 22 --&gt;", getLetterGrade(22))
-```
-
-```
-##  22 --&gt; F
-```
-
----
-# Group Practice
-
-[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
-
-### 1)
-After running this code, what is the value of `a` and `b`?
-
-
-```r
-f &lt;- function(x) {
-    x = x + 1
-    if ((x %% 2) == 0) {
-        x = x - 1
-    }
-    x = 2*x
-}
-
-a &lt;- f(7)
-b &lt;- f(12)
-```
-
-### 2)
-Write the output of this code by hand:
-
-
-```r
-f &lt;- function(x) {
-    if ((x %% 3) == 0) {
-        cat('woo!')
-        return(x %/% 3)
-    }
-    return(x %% 2)
-}
-
-cat(f(9))
-cat(f(11))
-```
-
-### 3)
-Write the output of this code by hand:
-
-
-```r
-f &lt;- function(x) {
-    if (x &gt; 0) {
-        cat('abc')
-        x = 2*x
-    } else if (x &lt;= 0) {
-        x = abs(x)
-        cat('cba')
-    }
-    cat(x)
-}
-
-cat(f(-9))
-cat(f(15))
-```
 
 
 

@@ -11,6 +11,267 @@ output:
 # Updates
 
 ---
+# "Flow Control"
+
+### Flow control is code that alters the otherwise linear flow of operations in a program.
+ 
+--
+### This week:
+
+- `if` statements 
+- `else` statements 
+<br>
+
+--
+
+### Next week:
+
+- `for` loops
+- `while` loops
+- `break` statements 
+- `next` statements 
+
+---
+# The `if` statement
+
+--
+### Basic format:
+<br>
+.pull-left[
+```{r, eval=FALSE}
+if ( CONDITION ) {
+    STATEMENT1
+    STATEMENT2
+    ETC
+}
+```
+]
+--
+.pull-right[
+Here's the general idea:
+
+<img src="images/condition_if.png" width="400">
+]
+---
+# Practice: What will this return?
+
+```{r, eval=FALSE}
+f <- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    }
+    cat("D")
+}
+f(1)
+f(0)
+```
+
+--
+```{r, echo=FALSE}
+f <- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    }
+    cat("D")
+}
+```
+```{r}
+f(1)
+f(0)
+```
+
+---
+# Example: Absolute value
+
+### Write the function `absValue()` that returns the absolute value of a number.
+<br>
+
+--
+```{r}
+absValue <- function(x) {
+    if (x < 0) {x = -1*x}
+    return(x)
+}
+```
+```{r}
+absValue(7)  # Returns 7
+absValue(-7) # Also returns 7
+```
+
+---
+# Adding an `else` to an `if`
+
+--
+### Basic format:
+<br>
+.pull-left[
+
+```{r, eval=FALSE}
+if ( CONDITION ) {
+  STATEMENT1
+  STATEMENT2
+  ETC
+} else {
+  STATEMENT3
+  STATEMENT4
+  ETC
+}
+```
+]
+
+--
+.pull-right[
+Here's the general idea:
+
+<img src="images/condition_if_else.png" width="400">
+]
+
+---
+# Example: What will this return?
+
+[2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI) - no typing!
+
+--
+.pull-left[
+```{r, eval=FALSE}
+f <- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    } else {
+        cat("D")
+        if (x == 1) {
+            cat("E")
+        } else {
+            cat("F")
+        }
+    }
+    cat("G")
+}
+f(0)
+f(1)
+f(2)
+```
+]
+
+--
+.pull-right[
+```{r, echo=FALSE}
+f <- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    } else {
+        cat("D")
+        if (x == 1) {
+            cat("E")
+        } else {
+            cat("F")
+        }
+    }
+    cat("G")
+}
+```
+```{r}
+f(0)
+f(1)
+f(2)
+```
+]
+---
+# `else if` chains
+
+Often times you'll need to check for more than one condition. 
+
+"Bracketing" problems (like setting grades) are a good example. 
+
+--
+.pull-left[
+```{r}
+getLetterGrade <- function(score) {
+    if (score >= 90) {
+        grade = "A"
+    } else if (score >= 80) {
+        grade = "B"
+    } else if (score >= 70) {
+        grade = "C"
+    } else if (score >= 60) {
+        grade = "D"
+    } else {
+        grade = "F"
+    }
+    return(grade)
+}
+```
+]
+
+--
+.pull-right[
+```{r}
+cat(" 99 -->", getLetterGrade(99))
+cat(" 88 -->", getLetterGrade(88))
+cat(" 70 -->", getLetterGrade(70))
+cat(" 61 -->", getLetterGrade(61))
+cat(" 22 -->", getLetterGrade(22))
+```
+]
+
+---
+# Practice - No typing! [10 minutes]() 
+
+.pull-left[
+```{r, eval = FALSE}
+f1 <- function(x) {
+    x = x + 1
+    if ((x %% 2) == 0) {
+        x = x - 1
+    }
+    y = 2*x
+    cat(y, '\n')
+}
+f2 <- function(x) {
+    if ((x %% 3) == 0) {
+        cat('woo!\n')
+        cat(x %/% 3)
+    }
+    cat(x %% 2, '\n')
+}
+```
+]
+.pull-right[
+
+```{r, eval = FALSE}
+f <- function(x) {
+    if (x > 0) {
+        cat('cat')
+        x = 2*x
+    } else if (x <= 0) {
+        x = abs(x)
+        cat('tac')
+    }
+    cat(x , '\n')
+}
+```
+
+Write the output of this code by hand:
+
+```{r, eval = FALSE}
+cat(f1(7))
+cat(f1(12))
+cat(f2(9))
+cat(f2(11))
+cat(f3(-9))
+cat(f3(15))
+```
+]
+
+---
 # Why write test functions?
 
 <br>
@@ -51,7 +312,7 @@ testFunctionName <- function() {
 - **Large Cases**: Typical input, larger than usual. 
 
 --
-- **Edge Cases**: Pairs of inputs that bound important points, e.g., if a condition checks whether `n < 2`, two edge cases are when `n = 1.99`, `n = 2`.
+- **Edge Cases**: Pairs of inputs that bound important points, e.g., if checking whether `n < 2`, two edge cases are when `n = 1.99`, `n = 2`.
 
 --
 - **Special Cases**: Negative numbers, `0` and `1` for integers, the empty string (`""`), and different type inputs, e.g. `"2"` instead of `2`.
@@ -89,6 +350,7 @@ testIsEvenNumber <- function() {
 }
 ```
 
+--
 ```{r}
 testIsEvenNumber()
 ```
@@ -113,7 +375,7 @@ isEvenNumber <- function(n) {
 ```
 
 --
-Better test cases:
+Now add more test cases:
 
 ```{r}
 testIsEvenNumber <- function() {
@@ -123,7 +385,6 @@ testIsEvenNumber <- function() {
     stopifnot(isEvenNumber('not_a_number') == FALSE)
     cat("Passed!\n")
 }
-testIsEvenNumber()
 ```
 
 
@@ -138,255 +399,6 @@ testIsEvenNumber()
 
 
 
----
-# "Flow Control"
-
-### Flow control is code that alters the otherwise linear flow of operations in a program.
- 
---
-### Types:
-
-- `if` statements 
-- `else` statements 
-- `for` loops
-- `while` loops
-- `break` statements 
-- `next` statements 
-
----
-# The `if` statement
-
---
-### Basic format:
-
-```
-if ( CONDITION ) {
-    STATEMENT1
-    STATEMENT2
-    ETC
-}
-```
-
---
-Here's the general idea:
-
-<img src="images/condition_if.png" width="400">
-
----
-# Example: What will this return?
-
-```{r, eval=FALSE}
-f <- function(x) {
-    cat("A")
-    if (x == 0) {
-        cat("B")
-        cat("C")
-    }
-    cat("D")
-}
-f(0)
-f(1)
-```
-
---
-```{r, echo=FALSE}
-f <- function(x) {
-    cat("A")
-    if (x == 0) {
-        cat("B")
-        cat("C")
-    }
-    cat("D")
-}
-```
-```{r}
-f(0)
-f(1)
-```
-
----
-# Example 2 - Absolute value
-
-The first thing an "absolute value" function should do is check if a number is negative:
-
---
-```{r}
-absValue <- function(x) {
-    if (x < 0) {x = -1*x}
-    return(x)
-}
-```
-```{r}
-absValue(7)  # Returns 7
-absValue(-7) # Also returns 7
-```
-
----
-# Adding an `else` to an `if`
-
---
-### Basic format:
-
-```
-if ( CONDITION ) {
-  STATEMENT1
-  STATEMENT2
-  ETC
-} else {
-  STATEMENT3
-  STATEMENT4
-  ETC
-}
-```
-
---
-Here's the general idea:
-
-<img src="images/condition_if_else.png" width="500">
-
----
-# Example: What will this return?
-
-```{r, eval=FALSE}
-f <- function(x) {
-    cat("A")
-    if (x == 0) {
-        cat("B")
-        cat("C")
-    }
-    else {
-        cat("D")
-        if (x == 1) {
-            cat("E")
-        } else {
-            cat("F")
-        }
-    }
-    cat("G")
-}
-f(0)
-f(1)
-f(2)
-```
-
---
-```{r, echo=FALSE}
-f <- function(x) {
-    cat("A")
-    if (x == 0) {
-        cat("B")
-        cat("C")
-    }
-    else {
-        cat("D")
-        if (x == 1) {
-            cat("E")
-        } else {
-            cat("F")
-        }
-    }
-    cat("G")
-}
-```
-```{r}
-f(0)
-```
---
-```{r}
-f(1)
-```
---
-```{r}
-f(2)
-```
-
----
-# `else if` chains
-
-Often times you'll need to check for more than one condition. 
-"Bracketing" problems (like setting grades) are a good example. 
-
---
-```{r}
-getLetterGrade <- function(score) {
-    if (score >= 90) {
-        grade = "A"
-    } else if (score >= 80) {
-        grade = "B"
-    } else if (score >= 70) {
-        grade = "C"
-    } else if (score >= 60) {
-        grade = "D"
-    } else {
-        grade = "F"
-    }
-    return(grade)
-}
-```
---
-```{r}
-cat(" 99 -->", getLetterGrade(99))
-cat(" 88 -->", getLetterGrade(88))
-cat(" 70 -->", getLetterGrade(70))
-cat(" 61 -->", getLetterGrade(61))
-cat(" 22 -->", getLetterGrade(22))
-```
-
----
-# Group Practice
-
-[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
-
-### 1)
-After running this code, what is the value of `a` and `b`?
-
-```{r, eval = FALSE}
-f <- function(x) {
-    x = x + 1
-    if ((x %% 2) == 0) {
-        x = x - 1
-    }
-    x = 2*x
-}
-
-a <- f(7)
-b <- f(12)
-```
-
-### 2)
-Write the output of this code by hand:
-
-```{r, eval = FALSE}
-f <- function(x) {
-    if ((x %% 3) == 0) {
-        cat('woo!')
-        return(x %/% 3)
-    }
-    return(x %% 2)
-}
-
-cat(f(9))
-cat(f(11))
-```
-
-### 3)
-Write the output of this code by hand:
-
-```{r, eval = FALSE}
-f <- function(x) {
-    if (x > 0) {
-        cat('abc')
-        x = 2*x
-    } else if (x <= 0) {
-        x = abs(x)
-        cat('cba')
-    }
-    cat(x)
-}
-
-cat(f(-9))
-cat(f(15))
-```
 
 
 
