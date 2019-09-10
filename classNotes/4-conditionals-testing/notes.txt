@@ -1,0 +1,58 @@
+
+############ Slide 42
+
+isFactor <- function(f, n) {
+    if (n == 0) { return(TRUE) }
+    if (f == 0) { return(FALSE) }
+    return((n %% f) == 0)
+}
+
+isMultiple <- function(m, n) {
+    return(isFactor(n, m))
+}
+
+isPositiveMultipleOf4Or7 <- function(n) {
+    if (is.numeric(n) == FALSE) { return(FALSE) }
+    if ((n <= 0) | (n != as.integer(n))) { return(FALSE) }
+    return(((n %% 4) == 0) | ((n %% 7) == 0))
+}
+
+
+############ Slide 43
+# Version 1
+getInRange <- function(x, bound1, bound2) {
+    if (bound2 < bound1) {
+        temp   <- bound1
+        bound1 <- bound2
+        bound2 <- temp
+    }
+    if (x <= bound1) {
+        return(bound1)
+    } else if (x >= bound2) {
+        return(bound2)
+    } else {
+        return(x)
+    }
+}
+
+# Version 2
+getInRange <- function(x, bound1, bound2) {
+    lower <- min(bound1, bound2)
+    upper <- max(bound1, bound2)
+    if (x < lower) { x <- lower }
+    if (x > upper) { x <- upper }
+    return(x)
+}
+
+# Version 3
+getInRange <- function(x, bound1, bound2) {
+    lower <- min(bound1, bound2)
+    upper <- max(bound1, bound2)
+    return(min(max(x, lower), upper))
+}
+
+
+
+
+
+
