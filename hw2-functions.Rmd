@@ -20,7 +20,7 @@ output:
 
 2) Open RStudio and create a new project called "hw2-lastName", replacing "lastName" with your last name.
 
-3) Download the [hw2.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw/hw2-template.R) and place it in RStudio project folder you just created.
+3) Download the [hw2.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw2.R) and place it in RStudio project folder you just created.
 
 4) Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the "hw2.R" file.
 
