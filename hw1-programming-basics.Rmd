@@ -65,14 +65,14 @@ d) Fill in the correct relational operators to make this statement return `FALSE
 
 ### 2) Objects [SOLO, 10 pts]
 
-Create variables to store each of the following values. Use variable names that make sense and are easy to understand:
+Create objects to store each of the following values. Use names that make sense and are easy to understand:
 
 - The number of seconds in a minute
 - The number of minutes in an hour
 - The number of hours in a day
 - The number of days in a typical year (not a leap year)
 
-Using **only** the variables you created, calculate:
+Use the objects you created to calculate the following (you may create other, intermediate objects, but you may not use numbers in your solution):
 
 a) The number of seconds in a day
 b) The number of seconds in a year
@@ -100,13 +100,13 @@ Install and load the `stringr` library, then use the `str_to_lower()`, `str_to_u
 
 Max is looking to purchase a car and is deciding between a Toyota Prius and a Toyota Camry. He knows that based on his driving patterns, he can get an average fuel economy of 55 miles per gallon (mpg) of gasoline with the Prius, which sells for $27,600. He is also considering the cheaper Toyota Camry, which costs $24,000 but only gets 32 mpg on average. He knows he typically drives 15,000 miles each year. For the following questions, assume the price of gas will remain constant at $3.00 / gallon forever.
 
-a) Create variables for the price and fuel economy of each vehicle as well as for the total miles Max drives each year and the price of gasoline. Use variable names that make sense and are easy to understand.
-b) Using the variables you created (and no other numbers...you may create other variables though), compute how many years Max would need to drive the Prius such that the money he saves in lower fuel costs overcomes the higher upfront price compared to the Camry. Ignore inflation and discount rates.
-c) What would the price of gasoline need to be such that the answer to part b) is just 2 years? You may use the number `2` once in your solution, otherwise you may only use variables you defined in part a.
+a) Create objects for the price and fuel economy of each vehicle as well as for the total miles Max drives each year and the price of gasoline. Use names that make sense and are easy to understand.
+b) Use the objects you created to compute how many years Max would need to drive the Prius such that the money he would save in lower fuel costs overcomes the Prius's higher upfront price. You may create other, intermediate objects in solving this, but you may not use any numbers. Ignore inflation and discount rates.
+c) What would the price of gasoline need to be such that the answer to part b) is just 2 years? You may use the number `2` once in your solution, otherwise you may only use the objects you defined in parts a) and b).
 
 ### 5) Numeric data 2 [COLLABORATIVE, 15 pts]
 
-Load the following variables into R, then answer the questions below:
+Load the following objects into R, then answer the questions below:
 
 ```{r eval=FALSE}
 x1 <- 1
@@ -117,10 +117,10 @@ x3 <- 5
 y3 <- 4
 ```
 
-a) Compute the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) between the points (x1, y1) and (x2, y2) and store this variable as `d1`.
-b) Compute the Euclidean distance between the points (x2, y2) and (x3, y3) and store this variable as `d2`.
-c) Compute the Euclidean distance between the points (x1, y1) and (x3, y3) and store this variable as `d3`.
-d) Is the triangle formed by the points (x1, y1), (x2, y2), and (x3, y3) a [right triangle](https://en.wikipedia.org/wiki/Right_triangle)? If so, prove it using the variables `d1`, `d2`, and `d3`.
+a) Compute the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) between the points (x1, y1) and (x2, y2) and store this object as `d1`.
+b) Compute the Euclidean distance between the points (x2, y2) and (x3, y3) and store this object as `d2`.
+c) Compute the Euclidean distance between the points (x1, y1) and (x3, y3) and store this object as `d3`.
+d) Is the triangle formed by the points (x1, y1), (x2, y2), and (x3, y3) a [right triangle](https://en.wikipedia.org/wiki/Right_triangle)? If so, prove it using the objects `d1`, `d2`, and `d3`.
 
 ### 6) Logical data [COLLABORATIVE, 15 pts]
 
