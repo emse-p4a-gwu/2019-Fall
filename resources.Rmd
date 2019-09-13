@@ -34,12 +34,13 @@ While these can be useful, there are also lots of excellent and **free** resourc
 
 # Datasets
 
-- The [`dslabs` R package](https://github.com/rafalab/dslabs) - check out [this blog post](https://simplystatistics.org/2018/01/22/the-dslabs-package-provides-datasets-for-teaching-data-science/) to view a summary of some of the datasets in the package.
+- The [`dslabs` R package](https://github.com/rafalab/dslabs) contains many excellent datasets.
 - [Past "Tidy Tuesday" challenges](https://github.com/rfordatascience/tidytuesday)
 - [Past "Makeover Monday" challenges](http://www.makeovermonday.co.uk/data/)
 - [Kaggle](https://www.kaggle.com/datasets)
 - [Google Dataset Search](https://toolbox.google.com/datasetsearch)
 - [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
+- [The "data is beautiful" reddit feed](https://www.reddit.com/r/dataisbeautiful/)
 
 ---
 

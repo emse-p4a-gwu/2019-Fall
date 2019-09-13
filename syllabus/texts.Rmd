@@ -30,6 +30,7 @@
 - [Tidyverse `ggplot2` reference guide](https://ggplot2.tidyverse.org/reference/)
 - [R Cookbook for `ggplot2`](http://www.cookbook-r.com/Graphs/)
 - [Top 50 `ggplot2` visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
+- [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plot themes and layout
 
 **RStudio Cheatsheets**:
 
