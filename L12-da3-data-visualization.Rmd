@@ -262,6 +262,18 @@ While the `ggplot2` library offers a wide variety of options for customizing you
 - [R Cookbook for `ggplot2`](http://www.cookbook-r.com/Graphs/)
 - [Top 50 `ggplot2` visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
 
+One particularly useful tool is the [**ggThemeAssist**](https://github.com/calligross/ggthemeassist) package, which is an RStudio plug in that creates a graphic interface for editing ggplots. You can install it from CRAN:
+
+```{r, eval=FALSE}
+install.packages("ggThemeAssist")
+```
+
+After installing, the tool is available in the "Addins" menu within RStudio. To edit your ggplot, just highlight a ggplot object in your current script and run the "Addin" from the Addins menu. Use the input widgets to get your ideas into shape. After terminating **ggThemeAssist**, a character string containing your desired changes in standard `ggplot2` notation is inserted in your script. Re-running your script now produces the plot you just configured using **ggThemeAssist**!
+
+[Click to enlarge](images/ggThemeAssist2.gif){ target="_blank"}
+
+![](images/ggThemeAssist2.gif)
+
 # Saving figures
 
 The first (and easiest) is to export directly from the RStudio 'Plots' panel, by clicking on `Export` when the image is plotted. This will give you the option of `.png` or `.pdf` and selecting the directory to which you wish to save it to. I strongly recommend you save images as `.pdf` types as these won't pixelate when you change the image size.
