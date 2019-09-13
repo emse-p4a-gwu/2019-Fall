@@ -60,10 +60,10 @@ navbar:
           href: hw3-loops-vectors.html
         - text: "HW 4 - Strings"
           href: hw4-strings.html
-        - text: "HW 5 - Data Analysis"
-          href: hw5-data-analysis.html
-        - text: "HW 6 - Monte Carlo Methods"
-          href: hw6-monte-carlo-methods.html
+        - text: "HW 5 - Data Wrangling"
+          href: hw5-data-wrangling.html
+        - text: "HW 6 - Data Visualization"
+          href: hw6-data-visualization.html
     - text: "Resources"
       href: resources.html
     - text: "About"
