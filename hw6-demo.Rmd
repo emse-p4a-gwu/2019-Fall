@@ -1,0 +1,134 @@
+---
+title: "Homework 6 - Data Visualization & Communication"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+**Due**: Sunday, 01-Dec. at 8pm
+
+**Rules**: This entire assignment is **SOLO**. You may not work with other classmates, though you may consult instructors for help.
+
+**Overview**: For this assignment, you will need to find a dataset of your choosing and create a short report that contains a description of the dataset as well as a few key insights about the data, including at least two visualizations. You will publish your report online at http://rpubs.com/. Before beginning the assignment, be sure to have reviewed the lessons on
+[Data Frames](L10-da1-data-frames.html), [Data Wrangling](L11-da2-data-wrangling.html), [Data Visualization](L12-da3-data-visualization.Rmd) and [Communicating Information](L13-da4-communicating-information.Rmd).
+
+---
+
+# Mini data analysis project
+
+### 1) Find a dataset [15 pts]
+
+Search online for a dataset for your project. The dataset can be on just about any topic of your choosing - find something you find interesting. To keep things manageable, your dataset must be either:
+
+1. Included in an existing R package that you can install (recommended), or
+2. Available to download from the web as a `.csv` file.
+
+Data in other formats (such as Excel `.xlsx` files) may be used so long as they can be converted into `.csv` files. We won't provide support for doing this conversion, so if you really want to use a particular dataset, you'll have to do the conversion yourself (Google will probably be your best resource in this case).
+
+There are many resources online for finding datasets. A good starting point is the [course resources](resources.html#3_datasets) page. In addition, many R packages come with excellent datasets built in. For example, consider installing the [**dslabs** R package](https://github.com/rafalab/dslabs). Here is a preview of all of the datasets in this package:
+
+```{r, message=TRUE, eval=FALSE}
+# Install the package
+install.packages("dslabs")
+
+# View a summary of each dataset in the dslabs library:
+library(dslabs)
+data(package = "dslabs")
+
+Data sets in package 'dslabs':
+
+admissions              Gender bias among graduate school admissions to
+                        UC Berkeley.
+brca                    Breast Cancer Wisconsin Diagnostic Dataset from
+                        UCI Machine Learning Repository
+brexit_polls            Brexit Poll Data
+death_prob              2015 US Period Life Table
+divorce_margarine       Divorce rate and margarine consumption data
+gapminder               Gapminder Data
+greenhouse_gases        Greenhouse gas concentrations over 2000 years
+heights                 Self-Reported Heights
+historic_co2            Atmospheric carbon dioxide concentration over
+                        800,000 years
+mnist_27                Useful example for illustrating machine
+                        learning algorithms based on MNIST data
+movielens               Movie ratings
+murders                 US gun murders by state for 2010
+na_example              Count data with some missing values
+nyc_regents_scores      NYC Regents exams scores 2010
+oecd (gapminder)        Gapminder Data
+olive                   Italian olive
+opec (gapminder)        Gapminder Data
+outlier_example         Adult male heights in feet with outliers
+polls_2008              Poll data for popular vote in 2008 presidential
+                        election
+polls_us_election_2016
+                        Fivethirtyeight 2016 Poll Data
+raw_data_research_funding_rates
+                        Gender bias in research funding in the
+                        Netherlands
+reported_heights        Self-reported Heights
+research_funding_rates
+                        Gender bias in research funding in the
+                        Netherlands
+results_us_election_2016 (polls_us_election_2016)
+                        Fivethirtyeight 2016 Poll Data
+stars                   Physical Properties of Stars
+temp_carbon             Global temperature anomaly and carbon
+                        emissions, 1751-2018
+tissue_gene_expression
+                        Gene expression profiles for 189 biological
+                        samples taken from seven different tissue
+                        types.
+trump_tweets            Trump Tweets from 2009 to 2017
+us_contagious_diseases
+                        Contagious disease data for US states
+```
+
+### 2) Setup your analysis environment [10 pts]
+
+Once you've chosen a dataset, start setting up your analysis environment by following these steps:
+
+1. Open RStudio and create a new project called "hw6-lastName", replacing "lastName" with your last name.
+2. Download the [hw6.Rmd template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw6.Rmd) and place it in RStudio project folder you just created.
+3. In the "yaml header" at the top of this file, fill out your name, and give your project a title. Choose a title that summarizes your dataset and/or analysis (you may want to adjust this later once you've completed your analysis).
+4. Create a `.R` file and save it in your project folder as `explore.R` - we'll use this file to explore your dataset later.
+5. If your data is stored in a `.csv` file, create a folder called "data" and put your data file in that folder - we'll access it there later.
+
+### 3) Explore your data [15 pts]
+
+Now that your environment is set up, open up your `explore.R` file and begin exploring your dataset. If the data are in a `.csv` file, read it into R using the `read_csv()` function from the `readr` library. If the data are in a library, install and load that library.
+
+Start writing code to preview and summarize the data using some of the methods we've seen in class and in the lessons on [data frames](L10-da1-data-frames.html) and [data wrangling](L11-da2-data-wrangling.html). Inspect specific variables to understand their data type and other characteristics, such as whether any variables have missing observations (`NA` values).
+
+### 4) Document and summarize your dataset [15 pts]
+
+Open up your "hw6.Rmd" file and write a paragraph in the section labeled `# Data description` describing of your dataset. Include the following:
+
+1. A brief overview of the subject matter of the dataset. What's this data about?
+2. A description of the data _source_. Include a direct link to where you downloaded the data. Also include as much information as possible about how the data were collected (when, where, by whom, etc.) and whether the data have already been pre-processed or not.
+3. A summary table of each variable in the dataset. Each row should be a variable, and the columns should be the variable name and a short description of the variable (the "hw6.Rmd" template already has this table started for you).
+
+### 5) Make plots [20 pts (10 per plot)]
+
+Now that you have a basic understanding of the dataset, make some plots to explore the variables in the data and their potential relationships. You may use base R plotting functions or the **ggplot2** library to make your figures, but you must make at least two figures, including:
+
+1. A scatterplot of two variables.
+2. A histogram or barplot of one or more variables.
+
+You can choose to plot whichever variables you wish, but you must be able to interpret the results of your plot. I recommend that you first make your plots in your `explore.R` file to iterate on your code until the plots are in their final form. Then copy the code for your final plots over to the appropriate code chunks in your "hw6.Rmd" file. Be sure to first load your data in the provided code chunk in your "hw6.Rmd" file, otherwise your plotting code won't work.
+
+Below each figure, write a description and interpretation of your plot. Make sure you address at least the following questions:
+
+1. Describe what variables you are plotting and why.
+2. Describe the primary relationship / trend / information you hope the reader will gain from your visualization.
+
+### 6) Publish your writeup [15 pts]
+
+Once you have completed your analysis, compile the "hw6.Rmd" file by opening it in RStudio and clicking the "knit" button. In the upper-right of the window that opens showing your compiled hw6.html file, click on the "publish" button and publish your file to http://rpubs.com/. You should create an account with rpubs if you have not already. Once published, you can update it by making edits to your "hw6.Rmd" file, clicking the "knit" button again, and then clicking the "Republish" button in the upper-right of the RStudio preview window.
+
+For a visual overview of the publishing process, refer to the instructions in the [youtube video](https://emse6574-gwu.github.io/2019-Fall/L13-da4-communicating-information.html#34_publish_to_the_web) in the lesson on Communicating Information.
+
+### 7) Submit your files on Blackboard [10 pts]
+
+After publishing your "hw6.Rmd" file, create a zip file of all files in your R project folder for this assignment and submit the zip file on Blackboard by the due deadline. **Include a link to your published report on rpubs in your Blackboard submission**
