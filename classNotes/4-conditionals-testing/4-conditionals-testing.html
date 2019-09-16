@@ -24,7 +24,10 @@ class: center, middle, inverse, title-slide
 ### 1) You can change the way RStudio looks
 
 --
-### 2) Review of HW1
+### 2) Quiz 1 (getting back at end of class)
+
+--
+### 3) HW1 update
 
 ---
 # "Flow Control"
@@ -299,7 +302,7 @@ cat(" 22 --&gt;", getLetterGrade(22))
 ---
 # Practice - Write the output by hand
 
-[3 minutes](https://www.youtube.com/watch?v=iHdviZkM7S4) - no typing!
+[5 minutes](https://www.youtube.com/watch?v=_W0bSen8Qjg) - no typing!
 
 .pull-left[
 
@@ -476,9 +479,46 @@ testIsEvenNumber &lt;- function() {
     cat("Testing isEvenNumber()...")
     stopifnot(isEvenNumber(42) == TRUE)
     stopifnot(isEvenNumber(43) == FALSE)
-    stopifnot(isEvenNumber('not_a_number') == FALSE)
+    stopifnot(isEvenNumber('not a number') == FALSE)
     cat("Passed!\n")
 }
+```
+
+---
+# Debugging your code
+
+Use `traceback()` to find the steps that led to an error. 
+
+--
+Example: 
+
+
+```r
+f &lt;- function(x) {
+    return(x + 1)
+}
+g &lt;- function(x) {
+    return(f(x) - 1)
+}
+```
+--
+
+```r
+g('a')
+```
+
+```
+## Error in x + 1: non-numeric argument to binary operator
+```
+--
+
+```r
+traceback()
+```
+--
+```
+2: f(x) at #2
+1: g("a")
 ```
 
 ---
@@ -514,6 +554,12 @@ Write the function `getInRange(x, bound1, bound2)` which takes 3 numeric values:
 &lt;br&gt;
 
 **Bonus**: Re-write `getInRange(x, bound1, bound2)` without using conditionals
+
+---
+# HW 2 
+
+### - Start now!
+### - Don't modify the test functions!
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

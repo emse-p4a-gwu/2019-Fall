@@ -13,7 +13,10 @@ output:
 ### 1) You can change the way RStudio looks
 
 --
-### 2) Review of HW1
+### 2) Quiz 1 (getting back at end of class)
+
+--
+### 3) HW1 update
 
 ---
 # "Flow Control"
@@ -231,7 +234,7 @@ cat(" 22 -->", getLetterGrade(22))
 ---
 # Practice - Write the output by hand
 
-[3 minutes](https://www.youtube.com/watch?v=iHdviZkM7S4) - no typing!
+[5 minutes](https://www.youtube.com/watch?v=_W0bSen8Qjg) - no typing!
 
 .pull-left[
 ```{r, eval = FALSE}
@@ -390,9 +393,39 @@ testIsEvenNumber <- function() {
     cat("Testing isEvenNumber()...")
     stopifnot(isEvenNumber(42) == TRUE)
     stopifnot(isEvenNumber(43) == FALSE)
-    stopifnot(isEvenNumber('not_a_number') == FALSE)
+    stopifnot(isEvenNumber('not a number') == FALSE)
     cat("Passed!\n")
 }
+```
+
+---
+# Debugging your code
+
+Use `traceback()` to find the steps that led to an error. 
+
+--
+Example: 
+
+```{r}
+f <- function(x) {
+    return(x + 1)
+}
+g <- function(x) {
+    return(f(x) - 1)
+}
+```
+--
+```{r, error=TRUE}
+g('a')
+```
+--
+```{r, eval=FALSE}
+traceback()
+```
+--
+```
+2: f(x) at #2
+1: g("a")
 ```
 
 ---
@@ -428,3 +461,9 @@ Write the function `getInRange(x, bound1, bound2)` which takes 3 numeric values:
 <br>
 
 **Bonus**: Re-write `getInRange(x, bound1, bound2)` without using conditionals
+
+---
+# HW 2 
+
+### - Start now!
+### - Don't modify the test functions!

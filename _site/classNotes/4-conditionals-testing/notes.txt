@@ -1,4 +1,4 @@
-HW1 Problem 4
+############ HW1 Problem 4
 
 pricePrius   <- 27600
 priceCamry   <- 24000
@@ -32,8 +32,27 @@ annualFuelSavings <- priceDiff / 2
 annualFuelSavings / annualGallonsDiff
 
 
+############ Slide 13
+absValue <- function(x) {
+    if (x < 0) {x = -1*x}
+    return(x)
+}
 
 
+############ Slide 22
+> cat(f1(7))
+14 
+> cat(f1(12))
+26 
+> cat(f2(9))
+woo!
+31 
+> cat(f2(11))
+1 
+> cat(f3(-9))
+tac9 
+> cat(f3(15))
+cat30 
 
 ############ Slide 42
 

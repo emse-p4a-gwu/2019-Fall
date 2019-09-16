@@ -165,8 +165,12 @@ immediately after the error has occurred.
 <!-- knitr messes with the tracebacks, so we just do this manually :| -->
 
 ```{r, eval = FALSE}
-f <- function(x) x + 1
-g <- function(x) f(x)
+f <- function(x) {
+    return(x + 1)
+}
+g <- function(x) {
+    return(f(x) - 1)
+}
 g("a")
 ```
 ```
