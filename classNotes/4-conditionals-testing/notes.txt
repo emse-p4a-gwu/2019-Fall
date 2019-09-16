@@ -1,3 +1,39 @@
+HW1 Problem 4
+
+pricePrius   <- 27600
+priceCamry   <- 24000
+mpgPrius     <- 55
+mpgCamry     <- 32
+milesPerYear <- 15000
+fuelPrice    <- 3
+
+# First compute the difference in price ($):
+priceDiff <- pricePrius - priceCamry
+priceDiff
+
+# Now compute the difference in annual fuel consumed (gallons):
+annualGallonsPrius <- milesPerYear / mpgPrius
+annualGallonsCamry <- milesPerYear / mpgCamry
+annualGallonsDiff  <- annualGallonsCamry - annualGallonsPrius
+
+# Now compute the annual fuel savings ($):
+annualFuelSavings <- fuelPrice*annualGallonsDiff
+annualFuelSavings
+
+# Finally, compute the number of years until payback (years):
+priceDiff / annualFuelSavings
+
+# c) What would the price of gasoline need to be such that the answer to part b) is just 2 years?
+
+# Computed the necessary annual savings ($):
+annualFuelSavings <- priceDiff / 2
+
+# Now divide the savings by the annual difference in gallons of gas consumed:
+annualFuelSavings / annualGallonsDiff
+
+
+
+
 
 ############ Slide 42
 
