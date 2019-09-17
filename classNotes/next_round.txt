@@ -1,0 +1,2 @@
+Functions lesson:
+- Include the `almostEqual()` function in the classNotes
