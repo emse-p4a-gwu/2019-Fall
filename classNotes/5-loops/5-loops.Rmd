@@ -181,7 +181,7 @@ for (i in seq(n)) {
 
 [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
 
-1) `sumFromMToN(m, n)`: Write a function that sums the total of the integers between `m` and `n`. **Bonus**: You can solve this without a loop (Google it).
+1) `sumFromMToN(m, n)`: Write a function that sums the total of the integers between `m` and `n`. **Bonus**: Try solving this without a loop (it's possible - Google it!).
 
 - sumFromMToN(5, 10) == (5+6+7+8+9+10)
 - sumFromMToN(1, 1) == 1
@@ -200,8 +200,10 @@ for (i in seq(n)) {
 ---
 # The `while` loop
 
-> A friend calls her programmer roommate and says, "while you're out, buy some milk"...her roommate never returned home.
->
+A friend calls her programmer roommate and says, "while you're out, buy some milk"...
+
+...her roommate never returned home.
+
 <img src="images/laugh_emoji.png" width="100">
 
 ---
@@ -240,3 +242,95 @@ Here's the general idea:
 
 [60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
 
+.pull-left[
+```{r}
+f <- function(x) {
+    n = 1
+    while (n < x) {
+        cat(n, '\n')
+        n = 2*n
+    }
+}
+```
+```{r, eval=FALSE}
+f(5)
+f(10)
+f(50)
+```
+]
+
+--
+.pull-right[
+```{r}
+f(5)
+f(10)
+f(50)
+```
+]
+
+
+
+### `nthMultipleOf4Or7(n)`
+
+Find the nth positive integer that is a multiple of either 4 or 7. Hint: you should write a helper function called `isMultipleOf4Or7(n)` that returns `TRUE` if `n` is a multiple of 4 or 7 and `FALSE` otherwise.
+
+```{r, eval=FALSE}
+testNthMultipleOf4Or7 <- function() {
+    cat("Testing nthMultipleOf4Or7()...")
+    stopifnot(nthMultipleOf4Or7(1) == 4)
+    stopifnot(nthMultipleOf4Or7(2) == 7)
+    stopifnot(nthMultipleOf4Or7(3) == 8)
+    stopifnot(nthMultipleOf4Or7(4) == 12)
+    stopifnot(nthMultipleOf4Or7(5) == 14)
+    stopifnot(nthMultipleOf4Or7(6) == 16)
+    stopifnot(nthMultipleOf4Or7(10) == 28)
+    cat("Passed!\n")
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Prime Numbers
+
+**Background**: Read up on the Wikipedia page on [prime numbers](https://en.wikipedia.org/wiki/Prime_number). We want to write the function `nthPrime(n)`. However, to write that function, we'll first need to write `isPrime(n)`, which determines whether a number is prime or not.
+
+### a) `isPrime(n)`
+
+Write the function `isPrime(n)` which takes a non-negative integer, `n`, and returns `TRUE` if it is a prime number and `FALSE` otherwise.
+
+```{r, eval=FALSE}
+testIsPrime <- function() {
+    cat("Testing isPrime()...")
+    stopifnot(isPrime(1) == FALSE)
+    stopifnot(isPrime(2) == TRUE)
+    stopifnot(isPrime(7) == TRUE)
+    stopifnot(isPrime(13) == TRUE)
+    stopifnot(isPrime(14) == FALSE)
+    cat("Passed!\n")
+}
+```
+
+### b) `nthPrime(n)`
+
+Write the function `nthPrime(n)` which takes a non-negative integer, `n`, and returns the nth prime number, where `nthPrime(1)` returns the first prime number (2).
+
+```{r, eval=FALSE}
+testNthPrime <- function() {
+    cat("Testing nthPrime()...")
+    stopifnot(nthPrime(1) == 2)
+    stopifnot(nthPrime(2) == 3)
+    stopifnot(nthPrime(3) == 5)
+    stopifnot(nthPrime(4) == 7)
+    stopifnot(nthPrime(7) == 17)
+    cat("Passed!\n")
+}
+```
