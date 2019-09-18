@@ -10,6 +10,9 @@ output:
 
 # Announcements
 
+--
+###What's with this `+` sign in the console?
+
 ---
 # "Flow Control"
 
@@ -57,7 +60,7 @@ Here's the general idea:
 # Making a sequence
 
 --
-### (Side note: we're creating vectors here...that's next week - read ahead!)
+### (Side note: these are vectors...that's next week - read ahead!)
 
 --
 ### Two ways to make a sequence:
@@ -103,11 +106,20 @@ seq(1.2, 6, 0.4)
 
 --
 You can also loop over a vector of strings (more on vectors next week!)
-```{r, eval=FALSE}
+```{r}
 x <- rep('oh hai!', 3)
+x
+```
+--
+```{r, eval=FALSE}
 for (i in x) {
-    print(i)
+    cat(i, '\n')
 }
+```
+```
+oh hai! 
+oh hai! 
+oh hai! 
 ```
 
 ---
@@ -126,8 +138,9 @@ for (i in 1:5) {
 }
 ```
 <br>
+
 --
-```{r, eval=FALSE}
+```
 1 
 --2 
 ----3 
@@ -152,8 +165,9 @@ for (i in seq(n)) {
 ```
 
 <br>
+
 --
-```{r, eval=FALSE}
+```
 --***-- 
 --***-- 
 --***-- 
@@ -165,43 +179,23 @@ for (i in seq(n)) {
 ---
 # Group practice: sum from `m` to `n`
 
-### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
 
 1) `sumFromMToN(m, n)`: Write a function that sums the total of the integers between `m` and `n`. **Bonus**: You can solve this without a loop (Google it).
 
-```{r, eval=FALSE}
-testSumFromMToN <- function() {
-    cat("Testing sumFromMToN()...")
-    stopifnot(sumFromMToN(5, 10) == (5+6+7+8+9+10))
-    stopifnot(sumFromMToN(1, 1) == 1)
-    stopifnot(sumFromMToN(0, 0) == 0)
-    stopifnot(sumFromMToN(0, 7) == (1+2+3+4+5+6+7))
-    cat("Passed!\n")
-}
-```
+- sumFromMToN(5, 10) == (5+6+7+8+9+10)
+- sumFromMToN(1, 1) == 1
 
 2) `sumOfOddsFromMToN(m, n)`: Write a function that sums every _odd_ integer between `m` and `n`.
 
-```{r, eval=FALSE}
-testSumOfOddsFromMToN1 <- function() {
-    cat("Testing sumOfOddsFromMToN1()...")
-    stopifnot(sumOfOddsFromMToN1(4, 10) == (5 + 7 + 9))
-    stopifnot(sumOfOddsFromMToN1(5, 9) == (5 + 7 + 9))
-    cat("Passed!\n")
-}
-```
-
+- sumOfOddsFromMToN(4, 10) == (5 + 7 + 9)
+- sumOfOddsFromMToN(5, 9) == (5 + 7 + 9)
+    
 3) `sumEveryKthFromMToN(m, n, k)`: Write a function to sum every kth integer between `m` and `n`.
 
-```{r, eval=FALSE}
-testSumEveryKthFromMToN <- function() {
-    cat("Testing sumEveryKthFromMToN()...")
-    stopifnot(sumEveryKthFromMToN(5, 20, 7) == (5 + 12 + 19))
-    stopifnot(sumEveryKthFromMToN(1, 10, 2) == (1 + 3 + 5 + 7 + 9))
-    stopifnot(sumEveryKthFromMToN(0, 0, 1) == 0)
-    cat("Passed!\n")
-}
-```
+- sumEveryKthFromMToN(5, 20, 7) == (5 + 12 + 19)
+- sumEveryKthFromMToN(1, 10, 2) == (1 + 3 + 5 + 7 + 9)
+- sumEveryKthFromMToN(0, 0, 1) == 0
 
 ---
 # The `while` loop
