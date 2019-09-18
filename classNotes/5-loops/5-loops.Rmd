@@ -183,19 +183,28 @@ for (i in seq(n)) {
 
 1) `sumFromMToN(m, n)`: Write a function that sums the total of the integers between `m` and `n`. **Bonus**: Try solving this without a loop (it's possible - Google it!).
 
-- sumFromMToN(5, 10) == (5+6+7+8+9+10)
-- sumFromMToN(1, 1) == 1
+- `sumFromMToN(5, 10) == (5+6+7+8+9+10)`
+- `sumFromMToN(1, 1) == 1`
 
 2) `sumOfOddsFromMToN(m, n)`: Write a function that sums every _odd_ integer between `m` and `n`.
 
-- sumOfOddsFromMToN(4, 10) == (5 + 7 + 9)
-- sumOfOddsFromMToN(5, 9) == (5 + 7 + 9)
+- `sumOfOddsFromMToN(4, 10) == (5 + 7 + 9)`
+- `sumOfOddsFromMToN(5, 9) == (5 + 7 + 9)`
     
 3) `sumEveryKthFromMToN(m, n, k)`: Write a function to sum every kth integer between `m` and `n`.
 
-- sumEveryKthFromMToN(5, 20, 7) == (5 + 12 + 19)
-- sumEveryKthFromMToN(1, 10, 2) == (1 + 3 + 5 + 7 + 9)
-- sumEveryKthFromMToN(0, 0, 1) == 0
+- `sumEveryKthFromMToN(5, 20, 7) == (5 + 12 + 19)`
+- `sumEveryKthFromMToN(1, 10, 2) == (1 + 3 + 5 + 7 + 9)`
+- `sumEveryKthFromMToN(0, 0, 1) == 0`
+
+
+
+---
+# `break` and `next`
+
+
+
+
 
 ---
 # The `while` loop
@@ -268,44 +277,50 @@ f(50)
 ```
 ]
 
+---
+# Group practice
 
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
 
-### `nthMultipleOf4Or7(n)`
+.pull-left[
+1) `isMultipleOf4Or7(n)`
 
-Find the nth positive integer that is a multiple of either 4 or 7. Hint: you should write a helper function called `isMultipleOf4Or7(n)` that returns `TRUE` if `n` is a multiple of 4 or 7 and `FALSE` otherwise.
+Write a function that returns `TRUE` if `n` is a multiple of 4 or 7 and `FALSE` otherwise. Here's some test cases:
 
-```{r, eval=FALSE}
-testNthMultipleOf4Or7 <- function() {
-    cat("Testing nthMultipleOf4Or7()...")
-    stopifnot(nthMultipleOf4Or7(1) == 4)
-    stopifnot(nthMultipleOf4Or7(2) == 7)
-    stopifnot(nthMultipleOf4Or7(3) == 8)
-    stopifnot(nthMultipleOf4Or7(4) == 12)
-    stopifnot(nthMultipleOf4Or7(5) == 14)
-    stopifnot(nthMultipleOf4Or7(6) == 16)
-    stopifnot(nthMultipleOf4Or7(10) == 28)
-    cat("Passed!\n")
-}
-```
+- `isMultipleOf4Or7(0) == FALSE`
+- `isMultipleOf4Or7(1) == FALSE`
+- `isMultipleOf4Or7(-7) == FALSE`
+- `isMultipleOf4Or7(4) == TRUE`
+- `isMultipleOf4Or7(7) == TRUE`
+- `isMultipleOf4Or7(28) == TRUE`
+- `isMultipleOf4Or7('notANumer') == FALSE`
 
+]
 
+.pull-right[
 
+2) `nthMultipleOf4Or7(n)`
 
+Write a function that returns the nth positive integer that is a multiple of either 4 or 7. Here's some test cases:
 
+- `nthMultipleOf4Or7(1) == 4`
+- `nthMultipleOf4Or7(2) == 7`
+- `nthMultipleOf4Or7(3) == 8`
+- `nthMultipleOf4Or7(4) == 12`
+- `nthMultipleOf4Or7(5) == 14`
+- `nthMultipleOf4Or7(6) == 16`
+- `nthMultipleOf4Or7(10) == 28`
+]
 
+---
+# Group practice - Prime Numbers
 
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
 
+.pull-left[
+1) `isPrime(n)`
 
-
-
-
-## Prime Numbers
-
-**Background**: Read up on the Wikipedia page on [prime numbers](https://en.wikipedia.org/wiki/Prime_number). We want to write the function `nthPrime(n)`. However, to write that function, we'll first need to write `isPrime(n)`, which determines whether a number is prime or not.
-
-### a) `isPrime(n)`
-
-Write the function `isPrime(n)` which takes a non-negative integer, `n`, and returns `TRUE` if it is a prime number and `FALSE` otherwise.
+Write a function that takes a non-negative integer, `n`, and returns `TRUE` if it is a prime number and `FALSE` otherwise. Here's a test function:
 
 ```{r, eval=FALSE}
 testIsPrime <- function() {
@@ -318,10 +333,12 @@ testIsPrime <- function() {
     cat("Passed!\n")
 }
 ```
+]
 
-### b) `nthPrime(n)`
+.pull-right[
+2) `nthPrime(n)`
 
-Write the function `nthPrime(n)` which takes a non-negative integer, `n`, and returns the nth prime number, where `nthPrime(1)` returns the first prime number (2).
+Write a function that takes a non-negative integer, `n`, and returns the nth prime number, where `nthPrime(1)` returns the first prime number (2). Here's a test function:
 
 ```{r, eval=FALSE}
 testNthPrime <- function() {
@@ -334,3 +351,4 @@ testNthPrime <- function() {
     cat("Passed!\n")
 }
 ```
+]
