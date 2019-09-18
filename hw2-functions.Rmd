@@ -61,7 +61,7 @@ Given four numeric values representing the points `(x1, y1)` and `(x2, y2)`, wri
 
 ### 5) `isRightTriangle(x1, y1, x2, y2, x3, y3)` [COLLABORATIVE, 10 pts]
 
-Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return `TRUE` if the triangle formed by connecting the 3 points is a right triangle, and `FALSE` otherwise. You may wish to use the `distance(x1, y1, x2, y2)` function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Heron's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula).
+Given six numeric values representing the points `(x1, y1)`, `(x2, y2)`, and `(x3, y3)`, return `TRUE` if the triangle formed by connecting the 3 points is a right triangle, and `FALSE` otherwise. You may wish to use the `distance(x1, y1, x2, y2)` function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: [Pythagorean theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem).
 
 ### 6) `triangleArea(x1, y1, x2, y2, x3, y3)` [COLLABORATIVE, 10 pts]
 
