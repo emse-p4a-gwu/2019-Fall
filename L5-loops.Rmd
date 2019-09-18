@@ -19,7 +19,6 @@ source("knitr_setup.R")
 > * [Chapter 21](https://r4ds.had.co.nz/iteration.html) of "R for Data Science", by Garrett Grolemund and Hadley Wickham
 > * [Chapters 11](https://rstudio-education.github.io/hopr/loops.html) of "Hands-On Programming with R", by Garrett Grolemund
 
-
 ---
 
 Similar to conditionals (remember those [if / else statements](L4.1-conditionals.html)?), loops are another kind of "flow control" - that is, code that alters the otherwise linear flow of operations from the top of a script straight through to the end. The idea is simple: a loop is a block of code (i.e., a sequence of commands) that R will execute over and over again until some *termination criterion* is met.
@@ -101,13 +100,13 @@ for (row in seq(n)) {
 }
 ```
 
-This will come in handy when working with 2-dimensional objects like [matrices](L10-matrices.html) and [data frames](L11-data-frames.html).
+This will come in handy when working with 2-dimensional objects like [data frames](L10-da1-data-frames.html).
 
 ---
 
 # The `while` loop
 
-> A man calls his programmer spouse and says, "while you're out, buy some milk"...she never returned home.
+> A friend calls her programmer roommate and says, "while you're out, buy some milk"...her roommate never returned home.
 >
 > ![](images/laugh_emoji.png){ width=100 }
 

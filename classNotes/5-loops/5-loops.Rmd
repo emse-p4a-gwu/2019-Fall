@@ -57,20 +57,16 @@ Here's the general idea:
 # Making a sequence
 
 --
-### (Side note: we're creating vectors here...that's next week!)
+### (Side note: we're creating vectors here...that's next week - read ahead!)
 
 --
 ### Two ways to make a sequence:
 
 --
-### 1. Use the `:` operator
-### 2. Use the `seq()` function
-<br>
+### 1. Use the `seq()` function
+### 2. Use the `:` operator 
 
---
-```{r}
-1:10
-```
+<br>
 
 --
 ```{r}
@@ -80,6 +76,38 @@ seq(1, 10)
 --
 ```{r}
 seq(1, 10, 2)
+```
+
+--
+```{r}
+1:10
+```
+---
+# Sequences don't have to be integers 
+
+--
+```{r, eval=FALSE}
+1.5:5.5
+```
+```{r, echo=FALSE}
+1.5:5.5
+```
+
+--
+```{r, eval=FALSE}
+seq(1.2, 6, 0.4)
+```
+```{r, echo=FALSE}
+seq(1.2, 6, 0.4)
+```
+
+--
+You can also loop over a vector of strings (more on vectors next week!)
+```{r, eval=FALSE}
+x <- rep('oh hai!', 3)
+for (i in x) {
+    print(i)
+}
 ```
 
 ---
@@ -97,9 +125,9 @@ for (i in 1:5) {
     cat(i, '\n')
 }
 ```
-
+<br>
 --
-```
+```{r, eval=FALSE}
 1 
 --2 
 ----3 
@@ -110,21 +138,22 @@ for (i in 1:5) {
 ---
 # Practice: What will this return?
 
-[2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI) - no typing!
+[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
 
 ```{r, eval=FALSE}
 n <- 6
 for (i in seq(n)) {
-    cat('--')
+    cat('|')
     for (j in seq(1, n, 2)) {
         cat('*')
     }
-    cat('--', '\n')
+    cat('|', '\n')
 }
 ```
 
+<br>
 --
-```
+```{r, eval=FALSE}
 --***-- 
 --***-- 
 --***-- 
@@ -132,3 +161,84 @@ for (i in seq(n)) {
 --***-- 
 --***-- 
 ```
+
+---
+# Group practice: sum from `m` to `n`
+
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+1) `sumFromMToN(m, n)`: Write a function that sums the total of the integers between `m` and `n`. **Bonus**: You can solve this without a loop (Google it).
+
+```{r, eval=FALSE}
+testSumFromMToN <- function() {
+    cat("Testing sumFromMToN()...")
+    stopifnot(sumFromMToN(5, 10) == (5+6+7+8+9+10))
+    stopifnot(sumFromMToN(1, 1) == 1)
+    stopifnot(sumFromMToN(0, 0) == 0)
+    stopifnot(sumFromMToN(0, 7) == (1+2+3+4+5+6+7))
+    cat("Passed!\n")
+}
+```
+
+2) `sumOfOddsFromMToN(m, n)`: Write a function that sums every _odd_ integer between `m` and `n`.
+
+```{r, eval=FALSE}
+testSumOfOddsFromMToN1 <- function() {
+    cat("Testing sumOfOddsFromMToN1()...")
+    stopifnot(sumOfOddsFromMToN1(4, 10) == (5 + 7 + 9))
+    stopifnot(sumOfOddsFromMToN1(5, 9) == (5 + 7 + 9))
+    cat("Passed!\n")
+}
+```
+
+3) `sumEveryKthFromMToN(m, n, k)`: Write a function to sum every kth integer between `m` and `n`.
+
+```{r, eval=FALSE}
+testSumEveryKthFromMToN <- function() {
+    cat("Testing sumEveryKthFromMToN()...")
+    stopifnot(sumEveryKthFromMToN(5, 20, 7) == (5 + 12 + 19))
+    stopifnot(sumEveryKthFromMToN(1, 10, 2) == (1 + 3 + 5 + 7 + 9))
+    stopifnot(sumEveryKthFromMToN(0, 0, 1) == 0)
+    cat("Passed!\n")
+}
+```
+
+---
+# The `while` loop
+
+> A friend calls her programmer roommate and says, "while you're out, buy some milk"...her roommate never returned home.
+>
+> ![](images/laugh_emoji.png){ width=100 }
+
+---
+# The `while` loop
+
+--
+<br>
+.pull-left[
+### Basic format:
+```{r, eval=FALSE}
+while (CONDITION) {
+  STATEMENT1
+  STATEMENT2
+  ETC
+}
+```
+]
+--
+.pull-right[
+Here's the general idea:
+
+<img src="images/loop_while.png" width="350">
+]
+
+---
+# `for` vs. `while`
+
+- ### Use `for` loops when there is a _known_ number of iterations. 
+- ### Use `while` loops when there is an _unknown_ number of iterations.
+
+---
+# Practice: What will this return?
+
+[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
