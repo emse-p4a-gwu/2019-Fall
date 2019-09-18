@@ -8,3 +8,127 @@ output:
     css: classNotes.css
 ---
 
+# Announcements
+
+---
+# "Flow Control"
+
+### Flow control is code that alters the otherwise linear flow of operations in a program.
+ 
+--
+### Last week:
+
+- `if` statements 
+- `else` statements 
+<br>
+
+--
+
+### This week:
+
+- `for` loops
+- `while` loops
+- `break` statements 
+- `next` statements 
+
+---
+# The `for` loop
+
+--
+<br>
+.pull-left[
+### Basic format:
+```{r, eval=FALSE}
+for (VALUE in SEQUENCE) {
+  STATEMENT1
+  STATEMENT2
+  ETC
+}
+```
+]
+--
+.pull-right[
+Here's the general idea:
+
+<img src="images/loop_for.png" width="350">
+]
+
+---
+# Making a sequence
+
+--
+### (Side note: we're creating vectors here...that's next week!)
+
+--
+### Two ways to make a sequence:
+
+--
+### 1. Use the `:` operator
+### 2. Use the `seq()` function
+<br>
+
+--
+```{r}
+1:10
+```
+
+--
+```{r}
+seq(1, 10)
+```
+
+--
+```{r}
+seq(1, 10, 2)
+```
+
+---
+# Practice: What will this return?
+
+[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
+
+```{r, eval=FALSE}
+for (i in 1:5) {
+    if ((i %% 2) == 0) {
+        cat('--')
+    } else if ((i %% 3) == 0) {
+        cat('----')
+    }
+    cat(i, '\n')
+}
+```
+
+--
+```
+1 
+--2 
+----3 
+--4 
+5 
+```
+
+---
+# Practice: What will this return?
+
+[2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI) - no typing!
+
+```{r, eval=FALSE}
+n <- 6
+for (i in seq(n)) {
+    cat('--')
+    for (j in seq(1, n, 2)) {
+        cat('*')
+    }
+    cat('--', '\n')
+}
+```
+
+--
+```
+--***-- 
+--***-- 
+--***-- 
+--***-- 
+--***-- 
+--***-- 
+```
