@@ -200,18 +200,19 @@ for (i in seq(n)) {
 ---
 # 5 minute break - stand up, move around, stretch!
 
-[5 minutes]()
+### [5 minutes](https://www.youtube.com/watch?v=_W0bSen8Qjg)
 
 ---
 # `break` and `next`
 
+### `break`
+
 --
 .pull-left[
-### `break`
 
 Forces a loop to stop and "break" out of the loop.
 
-```{r}
+```{r, eval=FALSE}
 for (val in 1:5) {
     if (val == 3) {
         break
@@ -220,9 +221,18 @@ for (val in 1:5) {
 }
 ```
 
+```
+1 
+2
+```
+]
+
+--
+.pull-right[
+
 In a nested loop:
 
-```{r}
+```{r, eval=FALSE}
 for (i in 1:3) {
   cat('*')
     for (j in 1:3) {
@@ -233,35 +243,69 @@ for (i in 1:3) {
     }
 }
 ```
+
+```
+*1 
+2 
+*1 
+2 
+*1 
+2
+```
 ]
 
---
-.pull-right[
+---
+# `break` and `next`
+
 ### `next`
+
+--
+.pull-left[
 
 Skips to the _next_ iteration of a loop
 
-```{r}
+```{r, eval=FALSE}
 for (val in 1:5) {
     if (val == 3) {
         next
     }
-    print(val)
+    cat(val, '\n')
 }
 ```
 
+```
+1
+2
+4
+5
+```
+
+]
+
+--
+.pull-right[
+
 In a nested loop:
 
-```{r}
+```{r, eval=FALSE}
 for (i in 1:3) {
   cat('*')
     for (j in 1:3) {
-        if (j == 3) {
+        if (j == 2) {
             next
         }
         cat(j, '\n')
     }
 }
+```
+
+```
+*1 
+3 
+*1 
+3 
+*1 
+3 
 ```
 ]
 
