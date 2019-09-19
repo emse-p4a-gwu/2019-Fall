@@ -23,4 +23,5 @@ Imports:
     TurtleGraphics,
     DAAG,
     dslabs,
-    gapminder
+    gapminder,
+    gsheet

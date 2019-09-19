@@ -16,9 +16,9 @@ Here's your roadmap for the semester!
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
 library(here)
-library(readr)
+library(gsheet)
 options(knitr.kable.NA = '')
-schedule <- read_csv('schedule.csv')
+schedule <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1Rkc8vT75sqgYalZfbb1yS5N2-p1NSXw0-94A0PLzLl4/edit?usp=sharing')
 # Define the first and last of class and finals start date
 start  <- as.Date("2019/08/26")
 end    <- as.Date("2019/12/09")
