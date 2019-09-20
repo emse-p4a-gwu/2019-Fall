@@ -59,7 +59,7 @@ Here are some functions you should be able to write. Any of these may appear (di
 
 ### `reverseVector(x)`
 
-Write a function that returns the vector in reverse order. So if `x` equals `c(2,3,4)`, then `reverse(x)` should equal `c(4,3,2)`. You cannot use the `rev()` function (which does exactly this). You may not use loops.
+Write a function that returns the vector in reverse order. So if `x` equals `c(2,3,4)`, then `reverseVector(x)` should equal `c(4,3,2)`. You cannot use the `rev()` function (which does exactly this). You may not use loops.
 
 ### `dotProduct(a, b)`
 
