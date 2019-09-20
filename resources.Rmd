@@ -55,3 +55,16 @@ While these can be useful, there are also lots of excellent and **free** resourc
 # Inspiration
 
 - [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f)
+
+---
+
+# Music
+
+I find having some background music helpful for coding. My favorite channel for coding is [Chillhop Lofi Hip Hop](https://chillhop.com/live/lofihiphop/)
+
+---
+
+# Other
+
+- I **highly** recommend watching [this video](https://youtu.be/fSgEeI2Xpdc) on how humans see data, by John Rauser. It's one of the best overviews I've seen on how to exploit the psychology of how our brains interpret images to make effective visualizations.
+- You'll all have to give talks one day - make sure you start it right: ["How to start a speech"](https://www.youtube.com/watch?v=w82a1FT5o88)
