@@ -8,7 +8,7 @@
 
 **Data Analysis in R**:
 
-- Wickham, Hadley. "R for Data Science"
+- Grolemund, Garrett and Wickham, Hadley. "R for Data Science"
 [[free online](https://r4ds.had.co.nz/)],
 [[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
 - Peng, Roger D. "Exploratory Data Analysis with R"
