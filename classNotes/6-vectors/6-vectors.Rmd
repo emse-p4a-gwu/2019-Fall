@@ -8,3 +8,69 @@ output:
     css: classNotes.css
 ---
 
+# Announcements
+
+---
+# We've been dealing with vectors all along!
+
+```{r}
+x <- 1
+x
+```
+
+--
+```{r}
+is.vector(x)
+```
+
+---
+# Making a vector 
+
+1) The "sequence" function: `seq()`
+
+--
+```{r}
+seq(1, 5)
+```
+--
+```{r}
+1:5
+```
+<br>
+
+--
+2) The "repeat" function: `rep()`
+
+--
+```{r}
+rep(5, 10) 
+```
+--
+```{r}
+rep("yo", 5) 
+```
+
+---
+# The "concatenate" function
+
+The universal vector generator: `c()` 
+
+--
+```{r}
+x <- c(1, 2, 3)
+x
+```
+--
+```{r}
+y <- c('one', 'two', 'three')
+y
+```
+
+---
+# Elements in vectors must be the same type
+
+```{r}
+c(1, 2, "3") # Turns everything into a character
+c(1, 2, TRUE, FALSE) # Turns everything into a number
+c(TRUE, FALSE, "TRUE") # Turns everything into a character
+```

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 6: Vectors</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Helveston" />
+    <meta name="date" content="2019-09-30" />
+    <link rel="stylesheet" href="classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Week 6: Vectors
+## EMSE 6574, Section 11
+### John Helveston
+### September 30, 2019
+
+---
+
+
+# Announcements
+
+---
+# We've been dealing with vectors all along!
+
+
+```r
+x &lt;- 1
+x
+```
+
+```
+## [1] 1
+```
+
+--
+
+```r
+is.vector(x)
+```
+
+```
+## [1] TRUE
+```
+
+---
+# Making a vector 
+
+1) The "sequence" function: `seq()`
+
+--
+
+```r
+seq(1, 5)
+```
+
+```
+## [1] 1 2 3 4 5
+```
+--
+
+```r
+1:5
+```
+
+```
+## [1] 1 2 3 4 5
+```
+&lt;br&gt;
+
+--
+2) The "repeat" function: `rep()`
+
+--
+
+```r
+rep(5, 10) 
+```
+
+```
+##  [1] 5 5 5 5 5 5 5 5 5 5
+```
+--
+
+```r
+rep("yo", 5) 
+```
+
+```
+## [1] "yo" "yo" "yo" "yo" "yo"
+```
+
+---
+# The "concatenate" function
+
+The universal vector generator: `c()` 
+
+--
+
+```r
+x &lt;- c(1, 2, 3)
+x
+```
+
+```
+## [1] 1 2 3
+```
+--
+
+```r
+y &lt;- c('one', 'two', 'three')
+y
+```
+
+```
+## [1] "one"   "two"   "three"
+```
+
+---
+# Elements in vectors must be the same type
+
+
+```r
+c(1, 2, "3") # Turns everything into a character
+```
+
+```
+## [1] "1" "2" "3"
+```
+
+```r
+c(1, 2, TRUE, FALSE) # Turns everything into a number
+```
+
+```
+## [1] 1 2 1 0
+```
+
+```r
+c(TRUE, FALSE, "TRUE") # Turns everything into a character
+```
+
+```
+## [1] "TRUE"  "FALSE" "TRUE"
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
