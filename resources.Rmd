@@ -27,12 +27,67 @@ You will inevitably run into problems; things won't work the way you expect, and
 
 While these can be useful, there are also lots of excellent and **free** resources available - here are a few:
 
-```{r child = here::here('syllabus', 'texts.Rmd')}
-```
+## Programming in R
+
+- Grolemund, Garrett. "Hands-On Programming with R"
+[[free online](https://rstudio-education.github.io/hopr/)],
+[[buy on amazon](https://www.amazon.com/gp/product/1449359019/)]
+- Peng, Roger D. "R Programming for Data Science"
+[[online - pay what you want](https://leanpub.com/rprogramming)]
+
+## Data Analysis in R
+
+- Grolemund, Garrett and Wickham, Hadley. "R for Data Science"
+[[free online](https://r4ds.had.co.nz/)],
+[[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
+- Peng, Roger D. "Exploratory Data Analysis with R"
+[[online - pay what you want](https://leanpub.com/exdata)]
+
+## Data Visualization
+
+- Healy, Kieran. "Data Visualization: A practical introduction"
+[[free online](http://socviz.co/)],
+[[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
+- Wilke, Claus O. "Fundamentals of Data Visualization"
+[[free online](https://serialmentor.com/dataviz/)],
+[[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
+- Check out this awesome collection of [past "Tidy Tuesday" challenges](https://nsgrantham.shinyapps.io/tidytuesdayrocks/)
+- I **highly** recommend watching [this video](https://youtu.be/fSgEeI2Xpdc) on how humans see data, by John Rauser. It's one of the best overviews I've seen on how to exploit the psychology of how our brains interpret images to make effective visualizations.
+
+## Data Visualization Guides
+
+- https://www.data-to-viz.com/
+- https://gramener.github.io/visual-vocabulary-vega/#
+- http://r-graph-gallery.com/
+
+## Plotting guides with `ggplot2`
+
+- [RStudio `ggplot2` Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [Tidyverse `ggplot2` reference guide](https://ggplot2.tidyverse.org/reference/)
+- [R Cookbook for `ggplot2`](http://www.cookbook-r.com/Graphs/)
+- [Top 50 `ggplot2` visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
+- [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plot themes and layout
+
+## RStudio Cheatsheets
+
+- [All cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+- [Data wrangling with the `dplyr` library](https://resources.rstudio.com/the-essentials-of-data-science/data-transformation)
+- [Data visualization with the `ggplot2` library](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [RMarkdown](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+
+## RMarkdown
+
+- [60 second markdown guide](https://commonmark.org/help/)
+- [10 minute markdown tutorial](https://commonmark.org/help/tutorial/)
+- [Markdown It](https://markdown-it.github.io): Quickly demo Markdown code.
+- [Table generator](http://www.tablesgenerator.com/): Create tables and get export code for multiple formats.
+- [CMU RMarkdown guide (detailed)](http://www.stat.cmu.edu/~cshalizi/rmarkdown/)
 
 ---
 
-# Datasets
+# Other
+
+## Datasets
 
 - The [`dslabs` R package](https://github.com/rafalab/dslabs) contains many excellent datasets.
 - [Past "Tidy Tuesday" challenges](https://github.com/rfordatascience/tidytuesday)
@@ -42,29 +97,21 @@ While these can be useful, there are also lots of excellent and **free** resourc
 - [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
 - [The "data is beautiful" reddit feed](https://www.reddit.com/r/dataisbeautiful/)
 
----
-
-# Helpful Tutorials
+## Helpful Tutorials
 
 - [RStudio Primers](https://rstudio.cloud/learn/primers)
 - [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r)
 - [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/)
 
----
+## Inspiration
 
-# Inspiration
-
+- [An Incomplete List of Females in Data Visualization](https://stephanieevergreen.com/females-in-dataviz/), by Stephanie Evergreen
 - [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f)
 
----
-
-# Music
+## Music
 
 I find having some background music helpful for coding. My favorite channel for coding is [Chillhop Lofi Hip Hop](https://chillhop.com/live/lofihiphop/)
 
----
+## Other other
 
-# Other
-
-- I **highly** recommend watching [this video](https://youtu.be/fSgEeI2Xpdc) on how humans see data, by John Rauser. It's one of the best overviews I've seen on how to exploit the psychology of how our brains interpret images to make effective visualizations.
 - You'll all have to give talks one day - make sure you start it right: ["How to start a speech"](https://www.youtube.com/watch?v=w82a1FT5o88)
