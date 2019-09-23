@@ -124,6 +124,9 @@ hist(x      = df$month,
 
 # Advanced figures with `ggplot2`
 
+![](images/horst_monsters_ggplot2.png){ width=500 }
+[[Art by Allison Horst]](https://github.com/allisonhorst)
+
 While Base R plot functions are useful for making simple, quick plots, many R users have adopted the [`ggplot2`](http://docs.ggplot2.org/) package as their primary tool for visualizing data.
 
 ## The Grammar of Graphics

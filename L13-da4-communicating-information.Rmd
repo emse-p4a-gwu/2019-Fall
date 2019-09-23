@@ -53,6 +53,9 @@ Watch this 1-min video to get a quick sense of what RMarkdown is:
 
 # Elements of RMarkdown
 
+![](images/horst_monsters_rmarkdown.png){ width=500 }
+[[Art by Allison Horst]](https://github.com/allisonhorst)
+
 ## Markdown
 
 Markdown is a simple, plain text language for converting raw text to HTML for the web (and other outputs, like pdfs). Some of its attributes include:

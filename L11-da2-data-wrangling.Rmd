@@ -92,6 +92,9 @@ nrow(df) / (2019 - 1990) / 365
 
 # Data wrangling with `dplyr`
 
+![](images/horst_monsters_data_wrangling.png){ width=500 }
+[[Art by Allison Horst]](https://github.com/allisonhorst)
+
 "Data Wrangling" refers to the art of getting your data into R in a useful form for visualization and modeling. Wrangling is the first step in the general data science process:
 
 <center>
@@ -189,11 +192,27 @@ In the above code, we use the pipe to send the `df` data frame first through
 
 Since `%>%` takes the object on its left and passes it as the first argument to the function on its right, we don't need to explicitly include the data frame as an argument to the `filter()` and `select()` functions.
 
-> Hint: One way to read the `%>%` operator is to say the words "...and then..."
+Consider reading the `%>%` operator as the words "...and then...". For instance, in the above example I would read the code as "First, filter to only data from DC, **and then** select the columns `operator`, `time`, and `time_of_day`, **and then** show the first 6 rows."
 
-For instance, in the above example I would "read" the code as "First, filter to only data from DC, **and then** select the columns `operator`, `time`, and `time_of_day`."
+Here's another analogy:
 
-If you want to create a new object with this modified dataset, you can assign it a new name:
+**Without Pipes**:
+```{r, eval=FALSE}
+leave_house(get_dressed(get_out_of_bed(wake_up(me))))
+```
+
+**With Pipes**:
+```{r, eval=FALSE}
+me %>%
+    wake_up %>%
+    get_out_of_bed %>%
+    get_dressed %>%
+    leave_house
+```
+
+In the above example, adding pipes makes the flow of operations easier to read from left to right, with the `%>%` operator reading as "...and then..."
+
+If you want to create a new object with the output of a "pipeline", you just put the object name at the start of the first pipe:
 
 ```{r}
 dc_impacts <- df %>%
@@ -221,6 +240,9 @@ df %>%
 ```
 
 ## Create new variables with `mutate()`
+
+![](images/horst_monsters_mutate.png){ width=500 }
+[[Art by Allison Horst]](https://github.com/allisonhorst)
 
 You will often need to create new columns based on the values in existing
 columns. For this use `mutate()`. For example, let's create a new variable converting the `height` variable from feet to miles:
@@ -379,3 +401,4 @@ write_csv(heightSummary, path = file.path('data_output', 'heightSummary.csv')
 Some content on this page has been modified from other courses, including:
 
 - [Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/), by François Michonneau & Auriel Fournier. Zenodo: http://doi.org/10.5281/zenodo.3264888
+- The amazing illustrations by [Allison Horst](https://github.com/allisonhorst)
