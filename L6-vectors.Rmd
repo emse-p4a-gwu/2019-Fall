@@ -172,7 +172,9 @@ Instead of getting one `TRUE`, you get a vector of `TRUE`s, because the individu
 all(x == y)
 ```
 
-You can use the `all()` function to compare if other types of conditions are `TRUE` for all elements in two vectors:
+Keep in mind that there are really two steps going on here: 1) `x == y` creates a logical vectors of `TRUE`'s and `FALSE`'s based on element-wise comparisons, and 2) the `all()` function compares whether all of the values in the logical vector are `TRUE`. 
+
+You can also use the `all()` function to compare if other types of conditions are all `TRUE` for all elements in two vectors:
 
 ```{r}
 a <- c(1,2,3)
@@ -180,7 +182,16 @@ b <- -1*c(1,2,3)
 all(a > b)
 ```
 
-For most situations, the `all()` function works just fine, but it only compares the _elements_ in the vectors, not their _attributes_. In some situations, you might also want to check if the attributes of vector, such as their _names_ and _data types_, are also the same. In this case, you should use the `identical()` function.
+In contrast to the `all()` function, the `any()` function will return `TRUE` if _any_ of the elements in a vector are `TRUE`:
+
+```{r}
+a <- c(1,2,3)
+b <- c(-1,2,-3)
+a == b
+any(a == b)
+```
+
+For most situations, the `all()` function works just fine for comparing vectors, but it only compares the _elements_ in the vectors, not their _attributes_. In some situations, you might also want to check if the attributes of vector, such as their _names_ and _data types_, are also the same. In this case, you should use the `identical()` function.
 
 ```{r}
 names(x) <- c('a', 'b', 'c')
