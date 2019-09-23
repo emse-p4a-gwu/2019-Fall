@@ -1,0 +1,10 @@
+---
+title: "Week 15: Monte Carlo Methods"
+subtitle: "EMSE 6574, Section 11 "
+author: "John Helveston"
+date: October 07, 2019
+output:
+  xaringan::moon_reader:
+    css: classNotes.css
+---
+

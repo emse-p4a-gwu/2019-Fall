@@ -1,0 +1,10 @@
+---
+title: "Week 12: Data Analysis 3 - Data Visualization"
+subtitle: "EMSE 6574, Section 11 "
+author: "John Helveston"
+date: October 07, 2019
+output:
+  xaringan::moon_reader:
+    css: classNotes.css
+---
+

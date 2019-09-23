@@ -1,0 +1,10 @@
+---
+title: "Week 13: Data Analysis 4 - Communicating Information"
+subtitle: "EMSE 6574, Section 11 "
+author: "John Helveston"
+date: October 07, 2019
+output:
+  xaringan::moon_reader:
+    css: classNotes.css
+---
+
