@@ -8,6 +8,23 @@ output:
     css: classNotes.css
 ---
 
+# Quiz 2
+
+.pull-left[
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
+<br>
+
+<img src="images/quiz_doge.png" width="350">
+]
+.pull-right[
+- ### No calculators
+- ### No notes
+- ### No books
+- ### No computers
+- ### No phones
+]
+
+---
 # Announcements
 
 --
@@ -70,7 +87,7 @@ Here's the general idea:
 ### (Side note: these are vectors...that's next week - read ahead!)
 
 --
-### Two ways to make a sequence:
+### Two ways to make a sequence (there are more):
 
 --
 ### 1. Use the `seq()` function
@@ -113,13 +130,9 @@ seq(1.2, 6, 0.4)
 
 --
 You can also loop over a vector of strings (more on vectors next week!)
-```{r}
-x <- rep('oh hai!', 3)
-x
-```
---
+
 ```{r, eval=FALSE}
-for (i in x) {
+for (i in rep('oh hai!', 3)) {
     cat(i, '\n')
 }
 ```
@@ -175,12 +188,12 @@ for (i in seq(n)) {
 
 --
 ```
---***--
---***--
---***--
---***--
---***--
---***--
+|***|
+|***|
+|***|
+|***|
+|***|
+|***|
 ```
 
 ---
@@ -188,21 +201,21 @@ for (i in seq(n)) {
 
 [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
 
-1) `sumFromMToN(m, n)`: Write a function that sums the total of the integers between `m` and `n`. **Bonus**: Try solving this without a loop (it's possible - Google it!).
+1) `sumFromMToN(m, n)`: Write a function that sums the total of the integers between `m` and `n`. **Challenge**: Try solving this without a loop (it's possible - Google it!).
 
 - `sumFromMToN(5, 10) == (5+6+7+8+9+10)`
 - `sumFromMToN(1, 1) == 1`
 
-2) `sumOfOddsFromMToN(m, n)`: Write a function that sums every _odd_ integer between `m` and `n`. **Bonus**: Try solving this without a loop (Hint: use a vector operation...we'll cover this next week!).
-
-- `sumOfOddsFromMToN(4, 10) == (5 + 7 + 9)`
-- `sumOfOddsFromMToN(5, 9) == (5 + 7 + 9)`
-
-3) `sumEveryKthFromMToN(m, n, k)`: Write a function to sum every kth integer between `m` and `n`.
+2) `sumEveryKthFromMToN(m, n, k)`: Write a function to sum every kth integer from `m` to `n`.
 
 - `sumEveryKthFromMToN(5, 20, 7) == (5 + 12 + 19)`
 - `sumEveryKthFromMToN(1, 10, 2) == (1 + 3 + 5 + 7 + 9)`
 - `sumEveryKthFromMToN(0, 0, 1) == 0`
+
+3) `sumOfOddsFromMToN(m, n)`: Write a function that sums every _odd_ integer between `m` and `n`. **Challenge**: Try solving this without a loop (Hint: use a vector operation...we'll cover this next week!).
+
+- `sumOfOddsFromMToN(4, 10) == (5 + 7 + 9)`
+- `sumOfOddsFromMToN(5, 9) == (5 + 7 + 9)`
 
 ---
 # 5 minute break - stand up, move around, stretch!
@@ -317,7 +330,7 @@ for (i in 1:3) {
 ]
 
 ---
-# The `while` loop
+# Lame joke time - the `while` loop
 
 A friend calls her programmer roommate and says, "while you're out, buy some milk"...
 
