@@ -89,15 +89,11 @@ x
 As we saw in the [loops](5-loops.html) lesson, you can create a vector of integers using the `:` operator or the `seq()` function:
 
 ```{r}
-x <- 1:10
-y <- seq(1, 10)
-```
-```{r}
-x
-x == y
+1:10
+seq(1, 10)
 ```
 
-Numeric vectors don't all have to be integers though - they can be any numbers:
+Numeric vectors don't all have to be integers though - they can be any number:
 
 ```{r}
 v <- c(pi, 7, 42, 365)
@@ -172,7 +168,7 @@ Instead of getting one `TRUE`, you get a vector of `TRUE`s, because the individu
 all(x == y)
 ```
 
-Keep in mind that there are really two steps going on here: 1) `x == y` creates a logical vectors of `TRUE`'s and `FALSE`'s based on element-wise comparisons, and 2) the `all()` function compares whether all of the values in the logical vector are `TRUE`. 
+Keep in mind that there are really two steps going on here: 1) `x == y` creates a logical vectors of `TRUE`'s and `FALSE`'s based on element-wise comparisons, and 2) the `all()` function compares whether all of the values in the logical vector are `TRUE`.
 
 You can also use the `all()` function to compare if other types of conditions are all `TRUE` for all elements in two vectors:
 
