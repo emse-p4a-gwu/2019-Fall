@@ -272,7 +272,7 @@ x > 5 # Create logical vector
 x[x > 5] # Put logical vector in brackets to filter out the TRUE elements
 ```
 
-You can also use the `which()` operator to find the numeric indices for which a condition is `TRUE`, and then use those indices to select elements:
+You can also use the `which()` function to find the numeric indices for which a condition is `TRUE`, and then use those indices to select elements:
 
 ```{r}
 which(x < 5) # Returns indices of TRUE elements

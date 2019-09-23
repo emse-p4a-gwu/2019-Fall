@@ -124,7 +124,7 @@ turtle_do({
 
 ---
 
-### Bonus Credit 1) `turtleSquareRotated(s, degrees)` [SOLO, 5 pts]
+### Bonus Credit 1) `turtleSquareRotated(s, degrees)` [SOLO, 2.5 pts]
 
 Write the function `turtleSquareRotated(s, degrees)` that uses the `TurtleGraphics` library to draw a square with side length `s < 100` and rotated by `degrees <= 180` counterclockwise from the horizontal plane. The rotated square should be centered in the turtle's terrarium. Hint: you're going to need to use the cosine (`cos()`) and sine (`sin()`) functions; in R, these functions take angles in **radians** (not degrees), so remember to convert your angles (180 degrees = $\pi$). The following code should produce a square with a side length of 30 and rotated by 30 degrees:
 
@@ -137,7 +137,7 @@ turtle_do({
 ```
 ![](images/turtle_squareRotated.png){ width=456 }
 
-### Bonus Credit 2) `turtleSquareStar(s, degreeSpacing = 20)` [SOLO, 5 pts]
+### Bonus Credit 2) `turtleSquareStar(s, degreeSpacing = 20)` [SOLO, 2.5 pts]
 
 Write the function `turtleSquareStar(s, degreeSpacing)` that uses the `turtleSquareRotated(s, degrees)` as a helper function to draw a sequence of overlapping rotated squares with side length `s < 70` to form a star. The `degreeSpacing` argument determines the spacing in degrees between each rotated square, and the default value should be `degreeSpacing = 20`. Also, `1 <= degreeSpacing <= 60`, and your function must not allow the turtle to escape the terrarium. The following code should produce the star of rotated squares with a side length of 50 and 20 degree spacings between each square:
 
