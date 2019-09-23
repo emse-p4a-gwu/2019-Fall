@@ -181,11 +181,11 @@ testIsEvenPositiveInt <- function() {
 
 testGetTheCents <- function() {
     cat("Testing getTheCents()...")
-    stopifnot(getTheCents(2.45) == 45)
-    stopifnot(getTheCents(2.00) == 0)
-    stopifnot(getTheCents(42) == 0)
-    stopifnot(getTheCents('notANumer') == NULL)
-    stopifnot(getTheCents(3.953) == 95)
+    stopifnot(almostEqual(getTheCents(2.45), 45))
+    stopifnot(almostEqual(getTheCents(2.00), 0))
+    stopifnot(almostEqual(getTheCents(42), 0))
+    stopifnot(almostEqual(getTheCents('notANumer'), NULL))
+    stopifnot(almostEqual(getTheCents(3.953), 95))
     cat("Passed!\n")
 }
 
