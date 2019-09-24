@@ -11,6 +11,7 @@ Depends: R (>= 3.4.0)
 License: CC-BY
 Encoding: UTF-8
 Imports:
+    curl,
     rmarkdown,
     knitr,
     tidyverse,
@@ -25,3 +26,4 @@ Imports:
     dslabs,
     gapminder,
     gsheet
+
