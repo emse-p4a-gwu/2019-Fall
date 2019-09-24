@@ -1,2 +1,9 @@
-Functions lesson:
+General:
+- Add early discussion of Polya problem solving
+- Solve problem before coding - come up with a plan, then execute the code
+
+3-Functions:
 - Include the `almostEqual()` function in the classNotes
+
+5-Loops:
+- Greater discussion of iteration in each loop type, esp. with while loops
