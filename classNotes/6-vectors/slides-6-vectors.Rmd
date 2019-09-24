@@ -8,6 +8,9 @@ output:
     css: classNotes.css
 ---
 
+# Announcements 
+
+---
 # We've been dealing with vectors all along!
 
 ```{r}
@@ -27,12 +30,20 @@ The universal vector generator: `c()`
 
 --
 ```{r}
+# Numeric vectors
 x <- c(1, 2, 3)
 x
 ```
 --
 ```{r}
+# Character vectors
 y <- c('one', 'two', 'three')
+y
+```
+--
+```{r}
+# Logical vectors
+y <- c(TRUE, FALSE, TRUE)
 y
 ```
 
@@ -67,42 +78,29 @@ rep("snarf", 5)
 # Elements in vectors must be the same type
 
 --
-If a vector has a single character element, R makes everything a **character**:
+If a vector has a _single_ character element, R makes everything a **character**:
+--
 ```{r}
 c(1, 2, "3")
+```
+--
+```{r}
 c(TRUE, FALSE, "TRUE")
 ```
+<br>
 
 --
 If a vector has numeric and logical elements, R makes everything a **number**:
+--
 ```{r}
 c(1, 2, TRUE, FALSE)
 ```
+<br>
 
 --
 If a vector has integers and floats, R makes everything a **float**:
 ```{r}
 c(1L, 2, pi)
-```
-
----
-# Practice: What will this return?
-
-[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
-
-
-```{r, eval=FALSE}
-f <- function(x) {
-    m = x
-    l = x + 4
-    m = m + 5
-    return(c(m, l))
-}
-
-x <- c(1, 2, 3)
-y <- c(3, 4, 5)
-f(x)
-f(y)
 ```
 
 ---
@@ -114,29 +112,54 @@ x
 ```
 
 --
-Sum all the elements:
+```{r}
+x + 5
+```
 
+--
+```{r}
+x / 2
+```
+
+--
+```{r}
+x + x
+```
+
+--
+```{r}
+x - x
+```
+---
+# Summing numeric vectors
+
+--
 Using a loop:
 ```{r}
-# Using a loop:
 total <- 0
 for (i in x) {
     total <- total + x[i]
 }
 total
 ```
+<br>
 
 --
-Using a vector:
+Using the `sum()` function:
 ```{r}
-# Using a vector operation:
 sum(x)
 ```
 
--- 
-Other useful vector functions:
+---
+# Other useful vector functions
+
 ```{r}
-prod(x) # Product of all the elements
+x <- 1:10
+x
+```
+
+```{r}
+prod(x) 
 mean(x)
 median(x)
 max(x)
@@ -144,49 +167,68 @@ min(x)
 ```
 
 ---
-# Non-numeric vectors
+# Practice: What will this return?
 
---
-Character vectors:
+[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
+
 
 ```{r}
-stringVector <- c('oh', 'what', 'a', 'beautiful', 'morning')
-stringVector
-typeof(stringVector)
+f <- function(x) {
+    m = x
+    l = x + 4
+    m = m + 5
+    return(c(m, l))
+}
+x <- c(1, 2, 3)
+y <- c(3, 4, 5)
 ```
-
---
-Logical vectors
-
-```{r}
-logicalVector <- c(rep(TRUE, 3), rep(FALSE, 3))
-logicalVector
+```{r, eval=FALSE}
+f(x)
+f(y)
 ```
-
 --
-Sometimes looks can be deceiving:
-
 ```{r}
-y <- c(TRUE, FALSE, 'a_string')
-y
-typeof(y)
+f(x)
+f(y)
 ```
 
 ---
-# Vector slicing
+# Vector slicing with brackets `[]` and indices
 
-1. Use brackets `[]` and indices:
 ```{r}
 x <- seq(1, 10)
+x
+```
+--
+```{r}
 x[1] # Returns the first element
+```
+--
+```{r}
 x[3] # Returns the third element
+```
+--
+```{r}
 x[1:3]  # Returns the first three elements
+```
+--
+```{r}
 x[c(2, 7)] # Returns the 2nd and 7th elements
 ```
 
-2. Use negative integers to _remove_ elements
+---
+# Use negative integers to _remove_ elements
+
+```{r}
+x <- seq(1, 10)
+x
+```
+--
 ```{r}
 x[-1] # Returns everything except the first element
+```
+--
+```{r}
 x[-c(2, 7)] # Returns everything except the 2nd and 7th elements
 ```
 

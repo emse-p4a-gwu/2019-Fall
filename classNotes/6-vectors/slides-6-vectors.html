@@ -19,6 +19,9 @@ class: center, middle, inverse, title-slide
 ---
 
 
+# Announcements 
+
+---
 # We've been dealing with vectors all along!
 
 
@@ -49,6 +52,7 @@ The universal vector generator: `c()`
 --
 
 ```r
+# Numeric vectors
 x &lt;- c(1, 2, 3)
 x
 ```
@@ -59,12 +63,24 @@ x
 --
 
 ```r
+# Character vectors
 y &lt;- c('one', 'two', 'three')
 y
 ```
 
 ```
 ## [1] "one"   "two"   "three"
+```
+--
+
+```r
+# Logical vectors
+y &lt;- c(TRUE, FALSE, TRUE)
+y
+```
+
+```
+## [1]  TRUE FALSE  TRUE
 ```
 
 ---
@@ -118,7 +134,8 @@ rep("snarf", 5)
 # Elements in vectors must be the same type
 
 --
-If a vector has a single character element, R makes everything a **character**:
+If a vector has a _single_ character element, R makes everything a **character**:
+--
 
 ```r
 c(1, 2, "3")
@@ -127,6 +144,7 @@ c(1, 2, "3")
 ```
 ## [1] "1" "2" "3"
 ```
+--
 
 ```r
 c(TRUE, FALSE, "TRUE")
@@ -135,9 +153,11 @@ c(TRUE, FALSE, "TRUE")
 ```
 ## [1] "TRUE"  "FALSE" "TRUE"
 ```
+&lt;br&gt;
 
 --
 If a vector has numeric and logical elements, R makes everything a **number**:
+--
 
 ```r
 c(1, 2, TRUE, FALSE)
@@ -146,6 +166,7 @@ c(1, 2, TRUE, FALSE)
 ```
 ## [1] 1 2 1 0
 ```
+&lt;br&gt;
 
 --
 If a vector has integers and floats, R makes everything a **float**:
@@ -156,27 +177,6 @@ c(1L, 2, pi)
 
 ```
 ## [1] 1.000000 2.000000 3.141593
-```
-
----
-# Practice: What will this return?
-
-[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
-
-
-
-```r
-f &lt;- function(x) {
-    m = x
-    l = x + 4
-    m = m + 5
-    return(c(m, l))
-}
-
-x &lt;- c(1, 2, 3)
-y &lt;- c(3, 4, 5)
-f(x)
-f(y)
 ```
 
 ---
@@ -193,12 +193,51 @@ x
 ```
 
 --
-Sum all the elements:
 
+```r
+x + 5
+```
+
+```
+##  [1]  6  7  8  9 10 11 12 13 14 15
+```
+
+--
+
+```r
+x / 2
+```
+
+```
+##  [1] 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0
+```
+
+--
+
+```r
+x + x
+```
+
+```
+##  [1]  2  4  6  8 10 12 14 16 18 20
+```
+
+--
+
+```r
+x - x
+```
+
+```
+##  [1] 0 0 0 0 0 0 0 0 0 0
+```
+---
+# Summing numeric vectors
+
+--
 Using a loop:
 
 ```r
-# Using a loop:
 total &lt;- 0
 for (i in x) {
     total &lt;- total + x[i]
@@ -209,12 +248,12 @@ total
 ```
 ## [1] 55
 ```
+&lt;br&gt;
 
 --
-Using a vector:
+Using the `sum()` function:
 
 ```r
-# Using a vector operation:
 sum(x)
 ```
 
@@ -222,11 +261,22 @@ sum(x)
 ## [1] 55
 ```
 
--- 
-Other useful vector functions:
+---
+# Other useful vector functions
+
 
 ```r
-prod(x) # Product of all the elements
+x &lt;- 1:10
+x
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+
+```r
+prod(x) 
 ```
 
 ```
@@ -266,76 +316,67 @@ min(x)
 ```
 
 ---
-# Non-numeric vectors
+# Practice: What will this return?
 
+[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
+
+
+
+```r
+f &lt;- function(x) {
+    m = x
+    l = x + 4
+    m = m + 5
+    return(c(m, l))
+}
+x &lt;- c(1, 2, 3)
+y &lt;- c(3, 4, 5)
+```
+
+```r
+f(x)
+f(y)
+```
 --
-Character vectors:
-
 
 ```r
-stringVector &lt;- c('oh', 'what', 'a', 'beautiful', 'morning')
-stringVector
+f(x)
 ```
 
 ```
-## [1] "oh"        "what"      "a"         "beautiful" "morning"
+## [1] 6 7 8 5 6 7
 ```
 
 ```r
-typeof(stringVector)
+f(y)
 ```
 
 ```
-## [1] "character"
-```
-
---
-Logical vectors
-
-
-```r
-logicalVector &lt;- c(rep(TRUE, 3), rep(FALSE, 3))
-logicalVector
-```
-
-```
-## [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE
-```
-
---
-Sometimes looks can be deceiving:
-
-
-```r
-y &lt;- c(TRUE, FALSE, 'a_string')
-y
-```
-
-```
-## [1] "TRUE"     "FALSE"    "a_string"
-```
-
-```r
-typeof(y)
-```
-
-```
-## [1] "character"
+## [1]  8  9 10  7  8  9
 ```
 
 ---
-# Vector slicing
+# Vector slicing with brackets `[]` and indices
 
-1. Use brackets `[]` and indices:
 
 ```r
 x &lt;- seq(1, 10)
+x
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+--
+
+```r
 x[1] # Returns the first element
 ```
 
 ```
 ## [1] 1
 ```
+--
 
 ```r
 x[3] # Returns the third element
@@ -344,6 +385,7 @@ x[3] # Returns the third element
 ```
 ## [1] 3
 ```
+--
 
 ```r
 x[1:3]  # Returns the first three elements
@@ -352,6 +394,7 @@ x[1:3]  # Returns the first three elements
 ```
 ## [1] 1 2 3
 ```
+--
 
 ```r
 x[c(2, 7)] # Returns the 2nd and 7th elements
@@ -361,7 +404,19 @@ x[c(2, 7)] # Returns the 2nd and 7th elements
 ## [1] 2 7
 ```
 
-2. Use negative integers to _remove_ elements
+---
+# Use negative integers to _remove_ elements
+
+
+```r
+x &lt;- seq(1, 10)
+x
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+--
 
 ```r
 x[-1] # Returns everything except the first element
@@ -370,6 +425,7 @@ x[-1] # Returns everything except the first element
 ```
 ## [1]  2  3  4  5  6  7  8  9 10
 ```
+--
 
 ```r
 x[-c(2, 7)] # Returns everything except the 2nd and 7th elements
