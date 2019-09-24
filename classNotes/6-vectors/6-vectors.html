@@ -19,9 +19,6 @@ class: center, middle, inverse, title-slide
 ---
 
 
-# Announcements
-
----
 # We've been dealing with vectors all along!
 
 
@@ -45,56 +42,9 @@ is.vector(x)
 ```
 
 ---
-# Making a vector 
-
-1) The "sequence" function: `seq()`
-
---
-
-```r
-seq(1, 5)
-```
-
-```
-## [1] 1 2 3 4 5
-```
---
-
-```r
-1:5
-```
-
-```
-## [1] 1 2 3 4 5
-```
-&lt;br&gt;
-
---
-2) The "repeat" function: `rep()`
-
---
-
-```r
-rep(5, 10) 
-```
-
-```
-##  [1] 5 5 5 5 5 5 5 5 5 5
-```
---
-
-```r
-rep("yo", 5) 
-```
-
-```
-## [1] "yo" "yo" "yo" "yo" "yo"
-```
-
----
 # The "concatenate" function
 
-The universal vector generator: `c()` 
+The universal vector generator: `c()`
 
 --
 
@@ -118,11 +68,60 @@ y
 ```
 
 ---
-# Elements in vectors must be the same type
+# Other ways to make a vector
 
+1) Sequences (we saw these last week):
+
+--
 
 ```r
-c(1, 2, "3") # Turns everything into a character
+seq(1, 5)
+```
+
+```
+## [1] 1 2 3 4 5
+```
+--
+
+```r
+1:5
+```
+
+```
+## [1] 1 2 3 4 5
+```
+&lt;br&gt;
+
+--
+2) Repeating a value:
+
+--
+
+```r
+rep(5, 10)
+```
+
+```
+##  [1] 5 5 5 5 5 5 5 5 5 5
+```
+--
+
+```r
+rep("snarf", 5)
+```
+
+```
+## [1] "snarf" "snarf" "snarf" "snarf" "snarf"
+```
+
+---
+# Elements in vectors must be the same type
+
+--
+If a vector has a single character element, R makes everything a **character**:
+
+```r
+c(1, 2, "3")
 ```
 
 ```
@@ -130,20 +129,673 @@ c(1, 2, "3") # Turns everything into a character
 ```
 
 ```r
-c(1, 2, TRUE, FALSE) # Turns everything into a number
+c(TRUE, FALSE, "TRUE")
+```
+
+```
+## [1] "TRUE"  "FALSE" "TRUE"
+```
+
+--
+If a vector has numeric and logical elements, R makes everything a **number**:
+
+```r
+c(1, 2, TRUE, FALSE)
 ```
 
 ```
 ## [1] 1 2 1 0
 ```
 
+--
+If a vector has integers and floats, R makes everything a **float**:
+
 ```r
-c(TRUE, FALSE, "TRUE") # Turns everything into a character
+c(1L, 2, pi)
 ```
 
 ```
-## [1] "TRUE"  "FALSE" "TRUE"
+## [1] 1.000000 2.000000 3.141593
 ```
+
+---
+# Practice: What will this return?
+
+[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
+
+
+
+```r
+f &lt;- function(x) {
+    m = x
+    l = x + 4
+    m = m + 5
+    return(c(m, l))
+}
+
+x &lt;- c(1, 2, 3)
+y &lt;- c(3, 4, 5)
+f(x)
+f(y)
+```
+
+---
+# Doing math on numeric vectors
+
+
+```r
+x &lt;- 1:10
+x
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+--
+Sum all the elements:
+
+Using a loop:
+
+```r
+# Using a loop:
+total &lt;- 0
+for (i in x) {
+    total &lt;- total + x[i]
+}
+total
+```
+
+```
+## [1] 55
+```
+
+--
+Using a vector:
+
+```r
+# Using a vector operation:
+sum(x)
+```
+
+```
+## [1] 55
+```
+
+-- 
+Other useful vector functions:
+
+```r
+prod(x) # Product of all the elements
+```
+
+```
+## [1] 3628800
+```
+
+```r
+mean(x)
+```
+
+```
+## [1] 5.5
+```
+
+```r
+median(x)
+```
+
+```
+## [1] 5.5
+```
+
+```r
+max(x)
+```
+
+```
+## [1] 10
+```
+
+```r
+min(x)
+```
+
+```
+## [1] 1
+```
+
+---
+# Non-numeric vectors
+
+--
+Character vectors:
+
+
+```r
+stringVector &lt;- c('oh', 'what', 'a', 'beautiful', 'morning')
+stringVector
+```
+
+```
+## [1] "oh"        "what"      "a"         "beautiful" "morning"
+```
+
+```r
+typeof(stringVector)
+```
+
+```
+## [1] "character"
+```
+
+--
+Logical vectors
+
+
+```r
+logicalVector &lt;- c(rep(TRUE, 3), rep(FALSE, 3))
+logicalVector
+```
+
+```
+## [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE
+```
+
+--
+Sometimes looks can be deceiving:
+
+
+```r
+y &lt;- c(TRUE, FALSE, 'a_string')
+y
+```
+
+```
+## [1] "TRUE"     "FALSE"    "a_string"
+```
+
+```r
+typeof(y)
+```
+
+```
+## [1] "character"
+```
+
+---
+# Vector slicing
+
+1. Use brackets `[]` and indices:
+
+```r
+x &lt;- seq(1, 10)
+x[1] # Returns the first element
+```
+
+```
+## [1] 1
+```
+
+```r
+x[3] # Returns the third element
+```
+
+```
+## [1] 3
+```
+
+```r
+x[1:3]  # Returns the first three elements
+```
+
+```
+## [1] 1 2 3
+```
+
+```r
+x[c(2, 7)] # Returns the 2nd and 7th elements
+```
+
+```
+## [1] 2 7
+```
+
+2. Use negative integers to _remove_ elements
+
+```r
+x[-1] # Returns everything except the first element
+```
+
+```
+## [1]  2  3  4  5  6  7  8  9 10
+```
+
+```r
+x[-c(2, 7)] # Returns everything except the 2nd and 7th elements
+```
+
+```
+## [1]  1  3  4  5  6  8  9 10
+```
+
+---
+# Characters indices
+
+You can name vector elements by
+
+--
+1. Using the `names()` function:
+
+```r
+x &lt;- seq(1, 10)
+names(x) &lt;- c('one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten')
+x
+```
+
+```
+##   one   two three  four  five   six seven eight  nine   ten 
+##     1     2     3     4     5     6     7     8     9    10
+```
+
+--
+2. Using the `c()` function:
+
+```r
+y &lt;- c('one' = 1, 'two' = 2, 'three' = 3)
+y
+```
+
+```
+##   one   two three 
+##     1     2     3
+```
+
+--
+You can use names to slice vectors:
+
+```r
+x['one'] 
+```
+
+```
+## one 
+##   1
+```
+
+```r
+y[c('two', 'three')] 
+```
+
+```
+##   two three 
+##     2     3
+```
+
+---
+# Logical indices
+
+--
+
+```r
+x &lt;- seq(10)
+x
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+--
+
+```r
+x &gt; 5 # Create logical vector
+```
+
+```
+##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+```
+
+--
+
+```r
+x[x &gt; 5] # Put logical vector in brackets to filter out the TRUE elements
+```
+
+```
+## [1]  6  7  8  9 10
+```
+
+--
+Another way - use the `which()` function:
+
+```r
+which(x &lt; 5) # Returns indices of TRUE elements
+```
+
+```
+## [1] 1 2 3 4
+```
+
+```r
+x[which(x &lt; 5)] # Use which to select elements based on a condition
+```
+
+```
+## [1] 1 2 3 4
+```
+
+---
+# Practice: What will this return?
+
+[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
+
+
+```r
+f &lt;- function(x) {
+    for (i in seq(length(x))) {
+        x[i] &lt;- x[i] + sum(x) + max(x)
+    }
+    return(x)
+}
+x &lt;- c(2, 1, 0)
+y &lt;- c(1, 4, 7)
+f(x)
+f(y)
+```
+
+---
+# Comparing vectors
+
+Check if 2 vectors are the same:
+
+
+```r
+x &lt;- c(1, 2, 3)
+y &lt;- c(1, 2, 3)
+x == y
+```
+
+```
+## [1] TRUE TRUE TRUE
+```
+
+--
+To check if the _whole_ vectors are the same, use `all()`:
+
+```r
+all(x == y)
+```
+
+```
+## [1] TRUE
+```
+
+--
+To check if any elements are the same, use `any()`:
+
+```r
+a &lt;- c(1, 2, 3)
+b &lt;- c(-1, 2,-3)
+a == b
+```
+
+```
+## [1] FALSE  TRUE FALSE
+```
+
+```r
+any(a == b)
+```
+
+```
+## [1] TRUE
+```
+
+---
+# `all()` vs. `identical()`
+
+--
+`all()` only compares the _elements_ in vectors - it's looking for `TRUE` and `FALSE` values
+
+--
+`identical()` compares vector elements and _attributes_, like names:
+
+
+```r
+names(x) &lt;- c('a', 'b', 'c')
+names(y) &lt;- c('one', 'two', 'three')
+all(x == y) # Only compares the elements
+```
+
+```
+## [1] TRUE
+```
+
+```r
+identical(x, y) # Also compares the **names** of the elements
+```
+
+```
+## [1] FALSE
+```
+
+---
+# Vectorized operations
+
+
+```r
+x1 &lt;- c(1, 2, 3)
+x2 &lt;- c(4, 5, 6)
+```
+
+```r
+# Addition
+x1 + x2 # Returns (1+4, 2+5, 3+6)
+```
+
+```
+## [1] 5 7 9
+```
+
+```r
+# Subtraction
+x1 - x2 # Returns (1-4, 2-5, 3-6)
+```
+
+```
+## [1] -3 -3 -3
+```
+
+```r
+# Multiplicattion
+x1 * x2 # Returns (1*4, 2*5, 3*6)
+```
+
+```
+## [1]  4 10 18
+```
+
+```r
+# Addition
+x1 / x2 # Returns (1/4, 2/5, 3/6)
+```
+
+```
+## [1] 0.25 0.40 0.50
+```
+
+---
+# Vectorized operations
+
+### Be careful - dimensions much match!
+
+
+```r
+# Mis-matched dimensions only give a warning!
+x1 &lt;- c(1, 2, 3)
+x2 &lt;- c(4, 5)
+x1 + x2
+```
+
+```
+## Warning in x1 + x2: longer object length is not a multiple of shorter
+## object length
+```
+
+```
+## [1] 5 7 7
+```
+
+--
+Single-value vector operations
+
+```r
+# A :
+x1 &lt;- c(1, 2, 3)
+x2 &lt;- c(4)
+x1 + x2
+```
+
+```
+## [1] 5 6 7
+```
+
+---
+# Sorting
+
+
+```r
+a = c(2, 4, 6, 3, 1, 5)
+sort(a)
+```
+
+```
+## [1] 1 2 3 4 5 6
+```
+
+```r
+sort(a, decreasing = TRUE)
+```
+
+```
+## [1] 6 5 4 3 2 1
+```
+
+--
+Use `order()` to get the index values of the sorted order:
+
+```r
+order(a)
+```
+
+```
+## [1] 5 1 4 2 6 3
+```
+
+--
+This does the same thing as `sort(a)`:
+
+```r
+a[order(a)] 
+```
+
+```
+## [1] 1 2 3 4 5 6
+```
+
+---
+# Using vectors instead of a loop
+
+Example: Get the remainder for each value in a vector:
+
+--
+Using a loop:
+
+```r
+x &lt;- c(3.1415, 1.618, 2.718)
+for (i in 1:length(x)) {
+    remainder &lt;- x[i] %% 1
+    print(remainder)
+}
+```
+
+```
+## [1] 0.1415
+## [1] 0.618
+## [1] 0.718
+```
+
+--
+Using a vector:
+
+```r
+x %% 1
+```
+
+```
+## [1] 0.1415 0.6180 0.7180
+```
+
+---
+# Group practice 
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+.pull-left[
+1) `reverseVector(x)`
+
+Write a function that returns the vector in reverse order. So if `x` equals `c(2,3,4)`, then `reverseVector(x)` should equal `c(4,3,2)`. You cannot use the `rev()` function (which does exactly this). **No loops!** Here's some test cases:
+
+- `reverseVector(c(5, 1, 3)) == c(3, 1, 5)`
+- `reverseVector(c(FALSE, TRUE, TRUE)) == c(TRUE, TRUE, FALSE)`
+- `reverseVector(seq(10)) == seq(10, 1, -1)`
+
+]
+
+.pull-right[
+2) `dotProduct(a, b)`
+
+**Background**: the "dot product" of two vectors is the sum of the products of the corresponding terms. So the dot product of the vectors `c(1,2,3)` and `c(4,5,6)` is `(1*4) + (2*5) + (3*6)`, or `4 + 10 + 18 = 32`.  
+
+With this in mind, write a function that takes two vectors and returns the dot product of those vectors. If the vectors are not equal length, ignore the extra elements in the longer vector. **No loops!** Here's some test cases:
+
+- `dotProduct(c(1,2,3), c(4,5,6)) == 32`
+- `dotProduct(c(1,2), c(4,5,6)) == 14`
+- `dotProduct(c(2,3,4), c(-7,1,9)) == 25`
+- `dotProduct(c(0,0,0), c(-7,1,9)) == 0`
+
+]
+
+---
+# Group practice 
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+.pull-left[
+1) `alternatingSum(a)`
+
+Write a function that takes a vector of numbers `a` and returns the alternating sum, where the sign alternates from positive to negative or vice versa. **No loops!** Here's some test cases:
+
+- `alternatingSum(c(5,3,8,4)) == (5 - 3 + 8 - 4)`
+- `alternatingSum(c(1,2,3)) == (1 - 2 + 3)`
+- `alternatingSum(c(0,0,0)) == 0`
+- `alternatingSum(c(-7,5,3)) == (-7 - 5 + 3)`
+
+]
+
+.pull-right[
+2) `median(a)`
+
+Write a function that takes a vector of numbers `a` and returns the median value in the vector, which is the value of the middle element (or the average of the two middle elements). **No loops!** Here's some test cases:
+
+- `median(c(5,3,8,4)) == mean(c(3,8))`
+- `median(c(0,0,0)) == 0`
+- `median(c(1,2,3)) == 2`
+- `median(c(4,5,6,7,8)) == 6`
+- `median(c(4,5,6,7)) == mean(c(5,6))`
+
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
