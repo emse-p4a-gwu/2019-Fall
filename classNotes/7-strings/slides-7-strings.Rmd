@@ -8,3 +8,60 @@ output:
     css: classNotes.css
 ---
 
+---
+# Group practice
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+.pull-left[
+1) `reverseString(s)`
+
+Write a function that returns the string in reverse order. So if `s` equals `"abcde"`,  `reverseString(s)` should equal `"edcba"`. You may assume that `s` only contains upper and/or lower case letters, but your solution must correctly return capital letters in their appropriate order. Here's some test cases:
+
+- `reverseString("aWordWithCaps") == "spaChtiWdroWa"`
+- `reverseString("abcde") == "edcba"`
+- `reverseString("") == ""`
+- `reverseString("aa") == "aa"`
+]
+
+.pull-right[
+2) `isPalindrome(s)`
+
+Write a function that returns `TRUE` if the string `s` is a [Palindrome](https://en.wikipedia.org/wiki/Palindrome) and `FALSE` otherwise. The string `s` can contains any letter, number, or symbol, but it will be a character data type. Here's some test cases:
+
+- `isPalindrome("abcba") == TRUE`
+- `isPalindrome("abcb") == FALSE`
+- `isPalindrome("321123") == TRUE`
+
+]
+
+---
+# Group practice
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+.pull-left[
+1) `sortString(s)`
+
+Write the function `sortString(s)` that takes a string `s` and returns back an alphabetically sorted string. So `sortString("cba")` should return `"abc"`. You may assume that `s` only contains upper and/or lower case letters. Here's some test cases:
+
+- `sortString("cba") == "abc"`
+- `sortString("abedhg") == "abdegh"`
+- `sortString("AbacBc") == "aAbBcc"`
+
+]
+
+.pull-right[
+2) `areAnagrams(s1, s2)`
+
+**Background**: An [anagram](https://en.wikipedia.org/wiki/Anagram) is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once. With that in mind, write the function `areAnagrams(s1, s2)` that takes two strings, `s1` and `s2` (that you may assume contain only upper and/or lower case letters), and returns `TRUE` if the strings are anagrams, and `FALSE` otherwise. Treat `"a"` and `"A"` as the same letters (so `"Aba"` and `"BAA"` are anagrams). Hint: you can use either `sortString(s)` or `letterCount(s)` as a helper function - each are helpful for different approaches to solving this. Here's some test cases:
+
+- `areAnagrams("", "") == TRUE`
+- `areAnagrams("abCdabCd", "abcdabcd") == TRUE`
+- `areAnagrams("abcdaBcD", "AAbbcddc") == TRUE`
+- `areAnagrams("abcdaabcd", "aabbcddcb") == FALSE`
+
+]
+
+
+
