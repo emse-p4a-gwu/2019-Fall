@@ -7,3 +7,4 @@ General:
 
 5-Loops:
 - Greater discussion of iteration in each loop type, esp. with while loops
+- Use the walkThroughDigits(n) function first before going on to isPrime
