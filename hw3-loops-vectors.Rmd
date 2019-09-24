@@ -36,7 +36,7 @@ output:
 
 Rules:
 
-- You may **NOT** use strings for any of these functions.
+- You may only use strings for problem #3 (which requires printing a string to the screen). On all other problems you may **NOT** use strings.
 
 ### 1) `loopFactorial(n)` [SOLO, 5 pts]
 
