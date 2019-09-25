@@ -179,7 +179,7 @@ df
 
 # Dealing with actual data
 
-Now that we know what a data frame is, let's start working with actual data! We are going to use the `msleep` data set, which contains data on sleep times and weights of different mammals. The data are taken from [V. M. Savage and G. B. West. "A quantitative, theoretical framework for understanding mammalian sleep." _Proceedings of the National Academy of Sciences_, 104 (3):1051-1056, 2007.](https://www.pnas.org/content/104/3/1051.long).
+Now that we know what a data frame is, let's start working with actual data! We are going to use the `msleep` dataset, which contains data on sleep times and weights of different mammals. The data are taken from [V. M. Savage and G. B. West. "A quantitative, theoretical framework for understanding mammalian sleep." _Proceedings of the National Academy of Sciences_, 104 (3):1051-1056, 2007.](https://www.pnas.org/content/104/3/1051.long).
 
 The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:
 
@@ -207,7 +207,48 @@ Before we dig into the data, let's prepare our analysis environment by following
 
 ## Getting the data
 
-Use the `download.file()` function to download the comma separated value (CSV) file of the `msleep` data. The first argument is a character string with the source URL to the data file ("https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/msleep.csv"). The second argument is the destination where you want to locally save the file on your computer.
+### Method 1: Loading data from a package
+
+Many R packages come with pre-loaded datasets. For example, the **ggplot2** library (which we'll [use soon](L12-da3-data-visualization.html) to make plots in R) comes with the `msleep` dataset already loaded. To see this, install **ggplot2** and load the library:
+
+```{r, eval=FALSE, message=FALSE}
+install.packages("ggplot2")
+library(ggplot2)
+head(msleep) # Preview just the first 6 rows of the data frame
+```
+```{r, echo=FALSE, message=FALSE}
+library(ggplot2)
+head(msleep)
+```
+
+If you want to see all of the different datasets that any particular package contains, you can call the `data()` function after loading a library. For example, here are all the dataset that are contained in the **ggplot2** library:
+
+```{r, eval=FALSE}
+data(package = "ggplot2")
+```
+```
+Data sets in package 'ggplot2':
+
+diamonds                Prices of 50,000 round cut diamonds
+economics               US economic time series
+economics_long          US economic time series
+faithfuld               2d density estimate of Old Faithful data
+luv_colours             'colors()' in Luv space
+midwest                 Midwest demographics
+mpg                     Fuel economy data from 1999 and 2008 for 38
+                        popular models of car
+msleep                  An updated and expanded version of the mammals
+                        sleep dataset
+presidential            Terms of 11 presidents from Eisenhower to Obama
+seals                   Vector field of seal movements
+txhousing               Housing sales in TX
+```
+
+### Method 2: Importing data
+
+What do you do when a dataset isn't available from a package? Well, you can "read" the data into R from an external file. One of the most common format for storing tabular data (i.e. data that is stored as rows and columns) is the comma separated value (CSV) file.
+
+To load the same `msleep` data from an external csv file, first use the `download.file()` function to download the file. The first argument in this function is a character string with the source URL to the data file ("https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/msleep.csv"). The second argument is the destination where you want to locally save the file on your computer.
 
 ```{r, eval=FALSE}
 download.file(
@@ -216,15 +257,13 @@ download.file(
 )
 ```
 
-**Note on making file paths**: Notice the use of the `file.path()` function to generate the path to the "data" folder on your computer. This function will automatically use the correct "`/`" symbols to create the file path. This is important because the specific file path syntax is different depending on your computer operating system (e.g. mac is "`/`" and windows is "`\`"). In the above example, the destination file path used was:
+> **Note on making file paths**: Notice the use of the `file.path()` function to generate the path to the "data" folder on your computer. This function will automatically use the correct "`/`" symbols to create the file path. This is important because the specific file path syntax is different depending on your computer operating system (e.g. mac is "`/`" and windows is "`\`"). In the above example, the destination file path used was:
 
 ```{r}
 file.path('data', 'msleep.csv')
 ```
 
-## Loading the data
-
-You are now ready to load the data! The Base R function for reading in a csv file is called `read.csv()`, but it has some quirky aspects in how it formats the data (in particular, character variables). So instead we are going to use an improved function, `read_csv()`, from the `readr` package.
+Now you are now ready to load the downloaded data! The Base R function for reading in a csv file is called `read.csv()`, but it has some quirky aspects in how it formats the data (in particular, character variables). So instead we are going to use an improved function, `read_csv()`, from the `readr` package.
 
 First, install the readr package if you haven't already:
 
