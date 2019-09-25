@@ -8,3 +8,91 @@ output:
 
 **Due**: Sunday, 20-Oct. at 8pm
 
+**Rules**:
+
+- This entire homework is **COLLABORATIVE**, which means you may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work -- everyone must work on every problem. And you may not simply copy any code but rather truly work together.
+- Even though you work collaboratively, you still must submit your own solutions.
+
+**Instructions**:
+
+1) Before beginning this assignment, be sure to have read the [Strings](L7-strings.html) and [Vectors](L6-vectors.html) lessons.
+
+2) Open RStudio and create a new project called "hw4-lastName", replacing "lastName" with your last name.
+
+3) Download the [hw4.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw4.R) and place it in RStudio project folder you just created.
+
+4) Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the "hw4.R" file.
+
+5) Type all of your answers to the questions below in the "hw4.R" script.
+
+6) After completing the questions, create a zip file of all files in your R project folder for this assignment.
+
+7) Submit the zip file on Blackboard by the due deadline.
+
+---
+
+**Write solutions to the following functions in your "hw4.R" script.**
+
+### 1) `vowelCount(s)` [10 pts]
+
+Write the function `vowelCount(s)` that takes a string `s`, and returns the number of vowels in `s`, ignoring case (so `"A"` and `"a"` are both vowels). The vowels are `"a"`, `"e"`, `"i"`, `"o"`, and `"u"`. So, for example, `vowelCount("Abc def!!! a? yzyzyz!")` returns `3` (two `"a"`'s and one `"e"`).
+
+### 2) `strToLower(s)` [10 pts]
+
+Write a function that does exactly what `str_to_lower()` does (i.e. returns the same string but with all letters in lower case) without using `str_to_lower()` or the Base R `tolower()` function. Hint: check out the `str_replace_all()` function!
+
+### 3) `getMiddleCharacter(s)` [10 pts]
+
+Write a function that takes a single string, `s`, and returns the middle character of the string. If the string has an even number of characters, then return the two middle characters. So `getMiddleCharacter("one")` should return `"n"`, and `getMiddleCharacter("feet")` should return `"ee"`.
+
+### 4) `rotateStringLeft(s, k)` [10 pts]
+
+Write the function `rotateStringLeft(s, k)` that takes a string `s` and a non-negative integer `k`, and returns the string `s` rotated `k` places to the left. So, if `s = "iknowkungfu"` and `k = 2`, then the result should be `"nowkungfuik"`. If `k` is larger than the length of `s`, the function should continue to rotate the string beyond its starting point. So, if `s = "iknowkungfu"` and `k = 11`, then the result should be `"iknowkungfu"`, but if `k = 12`, the result should be `"knowkungfui"`.
+
+### 5) `vectorToEnglishList(v)` [10 pts]
+
+Write a function that takes a vector, `v`, and returns a single string that contains the elements of `v` using proper English grammar for describing a list of items, i.e. the items are separated by commas, and the word "and" is inserted before the last item. Your function should use the [Oxford comma](https://en.wikipedia.org/wiki/Serial_comma) for the last list item. For example, if `v <- c("a", "b", "c")`, then `vectorToEnglishList(v)` would return the string `"a, b, and c"`. Think carefully about what it should do if given a vector of length 0, 1, or 2.
+
+### 6) `isDigit(s)` [10 pts]
+
+Write the function `isDigit(s)` that takes a string `s` and returns `TRUE` if all characters in the string are numeric integers and `FALSE` otherwise. So `isDigit("123")` should return `TRUE`, `isDigit("123N")` should return `FALSE`, and `isDigit("")` should return `FALSE`.
+
+### 7) `getTheGerunds(sentence)` [10 pts]
+
+Write a function that takes a single string, `sentence`, and returns a vector of all the gerunds in it (i.e. all the words that end in `"ing"`). So `getTheGerunds("I like hiking and swimming")` should return `c("hiking", "swimming")`. If there are no gerunds in `sentence`, the function should return `NULL`. Hint: first solve how you might separate a single-string sentence into a vector of words.
+
+### 8) `interleave(s1, s2)` [15 pts]
+
+Write the function `interleave(s1, s2)` that takes two strings, `s1` and `s2`, and interleaves their characters starting with the first character in `s1`. For example, `interleave('pto', 'yhn')` would return the string `"python"`. If one string is longer than the other, concatenate the rest of the remaining string onto the end of the new string. For example (`'a#'`, `'cD!f2'`) would return the string `"ac#D!f2"`. Assume that both `s1` and `s2` will always be strings.
+
+### 9) `sameChars(s1, s2)` [15 pts]
+
+Write the function `sameChars(s1, s2)` that takes two strings and returns `TRUE` if the two strings are composed of the same characters (though perhaps in different numbers and in different orders); that is, if every character that is in the first string is in the second (and vice versa), and `FALSE` otherwise. This test is case-sensitive, so `"ABC"` and `"abc"` do not contain the same characters. The function returns `FALSE` if either parameter is not a string, but returns `TRUE` if both strings are empty.
+
+
+---
+
+### Bonus Credit 1) `hasBalancedParentheses(s)` [SOLO, 2.5 pts]
+
+Write the function `hasBalancedParentheses(s)`, which takes a string `s` and returns `TRUE` if the parentheses in `s` are balanced and `FALSE` otherwise (ignoring all non-parentheses in the string). We say that parentheses are "balanced" if each right parenthesis closes (matches) an open (unmatched) left parenthesis, and no left parentheses are left unclosed (unmatched) at the end of the text. So, for example, `"( ( ( ) ( ) ) ( ) )"` is balanced, but `"( ) )"` is not balanced, and `"( ) ) ("` is also not balanced. Hint: keep track of how many right parentheses remain unmatched as you iterate over the string.
+
+### Bonus Credit 2) `largestNumberInText(text)` [SOLO, 2.5 pts]
+
+Write the function `largestNumberInText(text)` that takes a string of text and returns the largest integer value that occurs within that text, or `NULL` if no such value occurs. You may assume that the only numbers in the text are non-negative integers and that numbers are always composed of consecutive digits (without commas, for example). For example:
+
+```{r, eval=FALSE}
+largestNumberInText("I saw 3 dogs, 17 cats, and 14 cows!")
+17 # The numeric value 17, not the string "17"
+largestNumberInText("One person ate two hot dogs!")
+NULL # Value NULL, not the string "NULL"
+```
+
+Hint: You may want to use `isDigit()` as a helper function!
+
+---
+
+**Page sources**:
+
+Some content on this page has been modified from other courses, including:
+
+- CMU [15-112: Fundamentals of Programming](http://www.kosbie.net/cmu/spring-17/15-112/), by [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)

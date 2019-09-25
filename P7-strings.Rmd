@@ -11,6 +11,70 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+# Mystery Functions
+
+In just a few words of plain English, what does the following function do? Don't immediately run the code! Try to provide some explanation for your answer first, then run the code to check your answer.
+
+```{r, eval=FALSE}
+library(stringr)
+f <- function(n) {
+    for (i in seq(n)) {
+        a = str_c(rep("*", i), collapse = '')
+        cat(a, '\n')
+    }
+}
+```
+
+# Exercises - Practice with **stringr** function concepts
+
+1.  In your own words, describe the difference between the `sep` and `collapse`
+    arguments to `str_c()`.
+
+1.  What does `str_trim()` do? What's the opposite function of `str_trim()`?
+
+1.  What does splitting a string with an empty string (`""`) do? For example,
+    what would `str_split('hello world', '')` return?
+
+# Write functions
+
+Here are a bunch of functions you should be able to write. Any of these may appear (directly or modified) on a quiz or exam!
+
+### `reverseString(s)`
+
+Write a function that returns the string `s` in reverse order. So if `s` equals `"abcde"`,  `reverseString(s)` should equal `"edcba"`. You may assume that `s` only contains upper and/or lower case letters, but your solution must correctly return capital letters in their appropriate order. For example, `reverseString("aWordWithCaps")` should return `"spaChtiWdroWa"`.
+
+### `isPalindrome(s)`
+
+Write a function that returns `TRUE` if the string `s` is a [Palindrome](https://en.wikipedia.org/wiki/Palindrome) and `FALSE` otherwise. The string `s` can contains any letter, number, or symbol, but it will be a character data type.
+
+### `sortString(s)`
+
+Write the function `sortString(s)` that takes a string `s` and returns back an alphabetically sorted string. So `sortString("cba")` should return `"abc"`. You may assume that `s` only contains upper and/or lower case letters.
+
+### `letterCount(s)`
+
+Write the function `letterCount(s)` that takes a string `s` and returns a named vector with the count of each letter in `s`, spanning the alphabet. If a letter does not appear in `s`, it should have a value of `0`. You may assume that `s` only contains upper and/or lower case letters. You should ignore cases, so `"a"` and `"A"` should be both treated as `"a"`.
+
+For example, `letterCount("aaaaabbbc")` should return:
+
+```{r, eval=FALSE}
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+5 3 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+```
+
+And `letterCount("someString")` should return:
+
+```{r, eval=FALSE}
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+0 0 0 0 1 0 1 0 1 0 0 0 1 1 2 0 0 1 2 1 0 0 0 0 0 0
+```
+
+### `areAnagrams(s1, s2)`
+
+**Background**: An [anagram](https://en.wikipedia.org/wiki/Anagram) is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+With that in mind, write the function `areAnagrams(s1, s2)` that takes two strings, `s1` and `s2` (that you may assume contain only upper and/or lower case letters), and returns `TRUE` if the strings are anagrams, and `FALSE` otherwise. Treat `"a"` and `"A"` as the same letters (so `"Aba"` and `"BAA"` are anagrams). Hint: you may want to use either `letterCount(s)` or `sortString(s)` as helper functions - each are helpful for different approaches.
+
 ---
 
 **Page sources**:
