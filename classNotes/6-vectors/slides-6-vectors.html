@@ -231,48 +231,9 @@ x - x
 ```
 ##  [1] 0 0 0 0 0 0 0 0 0 0
 ```
----
-# Summing numeric vectors
-
-
-```r
-x &lt;- 1:10
-x
-```
-
-```
-##  [1]  1  2  3  4  5  6  7  8  9 10
-```
-
---
-Using a loop:
-
-```r
-total &lt;- 0
-for (item in x) {
-    total &lt;- total + item
-}
-total
-```
-
-```
-## [1] 55
-```
-&lt;br&gt;
-
---
-Using the `sum()` function:
-
-```r
-sum(x)
-```
-
-```
-## [1] 55
-```
 
 ---
-# Other useful vector functions
+# Other useful math functions
 
 
 ```r
@@ -366,6 +327,80 @@ f(y)
 
 ```
 ## [1]  8  9 10  7  8  9
+```
+
+---
+# Using vectors instead of a loop - sum
+
+
+```r
+x &lt;- 1:10
+x
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+--
+Using a loop:
+
+```r
+total &lt;- 0
+for (item in x) {
+    total &lt;- total + item
+}
+total
+```
+
+```
+## [1] 55
+```
+&lt;br&gt;
+
+--
+Using the `sum()` function:
+
+```r
+sum(x)
+```
+
+```
+## [1] 55
+```
+
+---
+# Using vectors instead of a loop 
+
+Example: Get the remainder for each value in a vector:
+&lt;br&gt;
+
+--
+Using a loop:
+
+```r
+x &lt;- c(3.1415, 1.618, 2.718)
+for (i in 1:length(x)) {
+    remainder &lt;- x[i] %% 1
+    print(remainder)
+}
+```
+
+```
+## [1] 0.1415
+## [1] 0.618
+## [1] 0.718
+```
+
+--
+Using a vector:
+
+```r
+x %% 1
+```
+
+```
+## [1] 0.1415 0.6180 0.7180
 ```
 
 ---
@@ -538,7 +573,6 @@ x[c('two', 'three')]
 ##     2     3
 ```
 
-
 ---
 # Logical indices
 
@@ -597,7 +631,7 @@ x[which(x &gt; 5)] # Use which to select elements based on a condition
 ---
 # Practice: What will this return?
 
-[2 minutes](https://www.youtube.com/watch?v=4xG2aJa6UyY) - no typing!
+[4 minutes](https://www.youtube.com/watch?v=zVHWhLme2NQ) - no typing!
 
 
 ```r
@@ -676,20 +710,43 @@ any(a == b)
 
 --
 `all()` only compares the _elements_ in vectors - it's looking for `TRUE` and `FALSE` values
+&lt;br&gt;
+&lt;br&gt;
 
 --
 `identical()` compares vector elements and _attributes_, like names:
 
+--
 
 ```r
-names(x) &lt;- c('a', 'b', 'c')
-names(y) &lt;- c('one', 'two', 'three')
+x &lt;- c('a' = 1, 'b' = 2, 'c' = 3)
+y &lt;- c('one' = 1, 'two' = 2, 'three' = 3)
+x 
+```
+
+```
+## a b c 
+## 1 2 3
+```
+
+```r
+y 
+```
+
+```
+##   one   two three 
+##     1     2     3
+```
+--
+
+```r
 all(x == y) # Only compares the elements
 ```
 
 ```
 ## [1] TRUE
 ```
+--
 
 ```r
 identical(x, y) # Also compares the **names** of the elements
@@ -700,13 +757,48 @@ identical(x, y) # Also compares the **names** of the elements
 ```
 
 ---
+# Practice
+
+.pull-left[
+[10 minutes](https://www.youtube.com/watch?v=4ASKMcdCc3g)
+
+Re-write `isPrime(n)` from last week, but **without loops!**
+
+Remember, `isPrime(n)` takes a non-negative integer, `n`, and returns `TRUE` if it is a prime number and `FALSE` otherwise. Here's some test cases:
+
+- `isPrime(1) == FALSE`
+- `isPrime(2) == TRUE`
+- `isPrime(7) == TRUE`
+- `isPrime(13) == TRUE`
+- `isPrime(14) == FALSE`
+]
+.pull-right[
+Loop solution:
+
+
+```r
+isPrime &lt;- function(n) {
+    if (n == 2) { return(TRUE) }
+    for (i in seq(2, n-1)) {
+        if (n %% i == 0) {
+            return(FALSE)
+        }
+    }
+    return(TRUE)
+}
+```
+]
+
+---
 # Vectorized operations
 
+--
 
 ```r
 x1 &lt;- c(1, 2, 3)
 x2 &lt;- c(4, 5, 6)
 ```
+--
 
 ```r
 # Addition
@@ -716,6 +808,7 @@ x1 + x2 # Returns (1+4, 2+5, 3+6)
 ```
 ## [1] 5 7 9
 ```
+--
 
 ```r
 # Subtraction
@@ -725,6 +818,7 @@ x1 - x2 # Returns (1-4, 2-5, 3-6)
 ```
 ## [1] -3 -3 -3
 ```
+--
 
 ```r
 # Multiplicattion
@@ -734,9 +828,10 @@ x1 * x2 # Returns (1*4, 2*5, 3*6)
 ```
 ## [1]  4 10 18
 ```
+--
 
 ```r
-# Addition
+# Division
 x1 / x2 # Returns (1/4, 2/5, 3/6)
 ```
 
@@ -749,11 +844,16 @@ x1 / x2 # Returns (1/4, 2/5, 3/6)
 
 ### Be careful - dimensions much match!
 
+--
 
 ```r
 # Mis-matched dimensions only give a warning!
 x1 &lt;- c(1, 2, 3)
 x2 &lt;- c(4, 5)
+```
+--
+
+```r
 x1 + x2
 ```
 
@@ -770,9 +870,12 @@ x1 + x2
 Single-value vector operations
 
 ```r
-# A :
 x1 &lt;- c(1, 2, 3)
 x2 &lt;- c(4)
+```
+--
+
+```r
 x1 + x2
 ```
 
@@ -782,16 +885,26 @@ x1 + x2
 
 ---
 # Sorting
-
+--
 
 ```r
 a = c(2, 4, 6, 3, 1, 5)
+a
+```
+
+```
+## [1] 2 4 6 3 1 5
+```
+--
+
+```r
 sort(a)
 ```
 
 ```
 ## [1] 1 2 3 4 5 6
 ```
+--
 
 ```r
 sort(a, decreasing = TRUE)
@@ -800,7 +913,6 @@ sort(a, decreasing = TRUE)
 ```
 ## [1] 6 5 4 3 2 1
 ```
-
 --
 Use `order()` to get the index values of the sorted order:
 
@@ -821,39 +933,6 @@ a[order(a)]
 
 ```
 ## [1] 1 2 3 4 5 6
-```
-
----
-# Using vectors instead of a loop
-
-Example: Get the remainder for each value in a vector:
-
---
-Using a loop:
-
-```r
-x &lt;- c(3.1415, 1.618, 2.718)
-for (i in 1:length(x)) {
-    remainder &lt;- x[i] %% 1
-    print(remainder)
-}
-```
-
-```
-## [1] 0.1415
-## [1] 0.618
-## [1] 0.718
-```
-
---
-Using a vector:
-
-```r
-x %% 1
-```
-
-```
-## [1] 0.1415 0.6180 0.7180
 ```
 
 ---

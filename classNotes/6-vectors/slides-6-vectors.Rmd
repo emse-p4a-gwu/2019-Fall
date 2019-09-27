@@ -130,33 +130,9 @@ x + x
 ```{r}
 x - x
 ```
----
-# Summing numeric vectors
-
-```{r}
-x <- 1:10
-x
-```
-
---
-Using a loop:
-```{r}
-total <- 0
-for (item in x) {
-    total <- total + item
-}
-total
-```
-<br>
-
---
-Using the `sum()` function:
-```{r}
-sum(x)
-```
 
 ---
-# Other useful vector functions
+# Other useful math functions
 
 ```{r}
 x <- 1:10
@@ -206,6 +182,53 @@ f(y)
 ```{r}
 f(x)
 f(y)
+```
+
+---
+# Using vectors instead of a loop - sum
+
+```{r}
+x <- 1:10
+x
+```
+
+--
+Using a loop:
+```{r}
+total <- 0
+for (item in x) {
+    total <- total + item
+}
+total
+```
+<br>
+
+--
+Using the `sum()` function:
+```{r}
+sum(x)
+```
+
+---
+# Using vectors instead of a loop 
+
+Example: Get the remainder for each value in a vector:
+<br>
+
+--
+Using a loop:
+```{r}
+x <- c(3.1415, 1.618, 2.718)
+for (i in 1:length(x)) {
+    remainder <- x[i] %% 1
+    print(remainder)
+}
+```
+
+--
+Using a vector:
+```{r}
+x %% 1
 ```
 
 ---
@@ -293,7 +316,6 @@ x['one']
 x[c('two', 'three')]
 ```
 
-
 ---
 # Logical indices
 
@@ -325,7 +347,7 @@ x[which(x > 5)] # Use which to select elements based on a condition
 ---
 # Practice: What will this return?
 
-[2 minutes](https://www.youtube.com/watch?v=4xG2aJa6UyY) - no typing!
+[4 minutes](https://www.youtube.com/watch?v=zVHWhLme2NQ) - no typing!
 
 ```{r}
 f <- function(x) {
@@ -375,35 +397,86 @@ any(a == b)
 
 --
 `all()` only compares the _elements_ in vectors - it's looking for `TRUE` and `FALSE` values
+<br>
+<br>
 
 --
 `identical()` compares vector elements and _attributes_, like names:
 
+--
 ```{r}
-names(x) <- c('a', 'b', 'c')
-names(y) <- c('one', 'two', 'three')
+x <- c('a' = 1, 'b' = 2, 'c' = 3)
+y <- c('one' = 1, 'two' = 2, 'three' = 3)
+x 
+y 
+```
+--
+```{r}
 all(x == y) # Only compares the elements
+```
+--
+```{r}
 identical(x, y) # Also compares the **names** of the elements
 ```
 
 ---
+# Practice
+
+.pull-left[
+[10 minutes](https://www.youtube.com/watch?v=4ASKMcdCc3g)
+
+Re-write `isPrime(n)` from last week, but **without loops!**
+
+Remember, `isPrime(n)` takes a non-negative integer, `n`, and returns `TRUE` if it is a prime number and `FALSE` otherwise. Here's some test cases:
+
+- `isPrime(1) == FALSE`
+- `isPrime(2) == TRUE`
+- `isPrime(7) == TRUE`
+- `isPrime(13) == TRUE`
+- `isPrime(14) == FALSE`
+]
+.pull-right[
+Loop solution:
+
+```{r, eval=FALSE}
+isPrime <- function(n) {
+    if (n == 2) { return(TRUE) }
+    for (i in seq(2, n-1)) {
+        if (n %% i == 0) {
+            return(FALSE)
+        }
+    }
+    return(TRUE)
+}
+```
+]
+
+---
 # Vectorized operations
 
+--
 ```{r}
 x1 <- c(1, 2, 3)
 x2 <- c(4, 5, 6)
 ```
+--
 ```{r}
 # Addition
 x1 + x2 # Returns (1+4, 2+5, 3+6)
-
+```
+--
+```{r}
 # Subtraction
 x1 - x2 # Returns (1-4, 2-5, 3-6)
-
+```
+--
+```{r}
 # Multiplicattion
 x1 * x2 # Returns (1*4, 2*5, 3*6)
-
-# Addition
+```
+--
+```{r}
+# Division
 x1 / x2 # Returns (1/4, 2/5, 3/6)
 ```
 
@@ -412,31 +485,43 @@ x1 / x2 # Returns (1/4, 2/5, 3/6)
 
 ### Be careful - dimensions much match!
 
-```{r, error=TRUE}
+--
+```{r}
 # Mis-matched dimensions only give a warning!
 x1 <- c(1, 2, 3)
 x2 <- c(4, 5)
+```
+--
+```{r, error=TRUE}
 x1 + x2
 ```
 
 --
 Single-value vector operations
 ```{r}
-# A :
 x1 <- c(1, 2, 3)
 x2 <- c(4)
+```
+--
+```{r}
 x1 + x2
 ```
 
 ---
 # Sorting
-
+--
 ```{r}
 a = c(2, 4, 6, 3, 1, 5)
+a
+```
+--
+```{r}
 sort(a)
+```
+--
+```{r}
 sort(a, decreasing = TRUE)
 ```
-
 --
 Use `order()` to get the index values of the sorted order:
 ```{r}
@@ -447,27 +532,6 @@ order(a)
 This does the same thing as `sort(a)`:
 ```{r}
 a[order(a)]
-```
-
----
-# Using vectors instead of a loop
-
-Example: Get the remainder for each value in a vector:
-
---
-Using a loop:
-```{r}
-x <- c(3.1415, 1.618, 2.718)
-for (i in 1:length(x)) {
-    remainder <- x[i] %% 1
-    print(remainder)
-}
-```
-
---
-Using a vector:
-```{r}
-x %% 1
 ```
 
 ---
