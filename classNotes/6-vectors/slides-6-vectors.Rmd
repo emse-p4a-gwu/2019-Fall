@@ -11,7 +11,13 @@ output:
 # Announcements
 
 --
-### Quiz 3 next week, Midterm 1 week after that
+### 2nd tutor session on Sat. this week (not Fri.)
+
+--
+### Quiz 3 next week, Exam 1 week after that
+
+--
+### Quiz 2 review
 
 ---
 # Iteration review: loop over a sequence
@@ -242,9 +248,9 @@ x - x
 ```{r}
 f1 <- function(x) {
     m = x
-    l = x + 4
+    n = x + 4
     m = m + 5
-    return(c(m, l))
+    return(c(m, n))
 }
 ```
 ]

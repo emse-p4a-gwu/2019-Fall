@@ -21,6 +21,15 @@ class: center, middle, inverse, title-slide
 
 # Announcements
 
+--
+### 2nd tutor session on Sat. this week (not Fri.)
+
+--
+### Quiz 3 next week, Exam 1 week after that
+
+--
+### Quiz 2 review
+
 ---
 # Iteration review: loop over a sequence
 
@@ -35,7 +44,7 @@ seq(5)
 --
 .pull-left[
 ### `for` loop
-&lt;br&gt; 
+&lt;br&gt;
 
 
 ```r
@@ -55,7 +64,7 @@ for (i in seq(5)) {
 --
 .pull-right[
 ### `while` loop
-&lt;br&gt; 
+&lt;br&gt;
 
 
 ```r
@@ -92,7 +101,7 @@ seq(5)
 --
 .pull-left[
 ### `for` loop
-&lt;br&gt; 
+&lt;br&gt;
 
 
 ```r
@@ -112,7 +121,7 @@ count
 --
 .pull-right[
 ### `while` loop
-&lt;br&gt; 
+&lt;br&gt;
 
 
 ```r
@@ -408,9 +417,9 @@ x - x
 ```r
 f1 &lt;- function(x) {
     m = x
-    l = x + 4
+    n = x + 4
     m = m + 5
-    return(c(m, l))
+    return(c(m, n))
 }
 ```
 ]
@@ -947,7 +956,7 @@ identical(x, y) # Also compares the **names** of the elements
 
 ```r
 names(y) &lt;- c('a', 'b', 'c')
-identical(x, y) 
+identical(x, y)
 ```
 
 ```
