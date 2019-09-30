@@ -11,6 +11,67 @@ output:
 # Announcements
 
 ---
+# Iteration review
+```{r}
+x <- seq(10)
+x
+```
+Iterate over `x`:
+
+--
+.pull-left[
+### `for` loop
+```{r}
+for (i in 1:length(x)) {
+    cat(i, '\n')
+}
+```
+]
+--
+.pull-right[
+### `while` loops
+i <- 1
+while (i <= length(x)) {
+    cat(i, '\n')
+    i <- i + 1
+}
+]
+
+---
+# Search for something in a sequence
+```{r}
+x <- seq(10)
+x
+```
+Search for **even** numbers:
+
+--
+.pull-left[
+### `for` loop
+```{r}
+count <- 0
+for (i in 1:length(x)) {
+    if (i %% 2 == 0) {
+        count <- count + 1
+    }
+}
+count
+```
+]
+--
+.pull-right[
+### `while` loops
+count <- 0
+i <- 1
+while (i <= length(x)) {
+    if (i %% 2 == 0) {
+        count <- count + 1
+    }
+    i <- i + 1
+}
+]
+
+---
 # We've been dealing with vectors all along!
 
 ```{r}
@@ -160,32 +221,47 @@ min(x)
 ```
 
 ---
-# Practice: What will this return?
+# Practice: Think-Pair-Share
 
-[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
+[3 minutes](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
 
+### What will this return?
+
+.pull-left[
 ```{r}
-f <- function(x) {
+f1 <- function(x) {
     m = x
     l = x + 4
     m = m + 5
     return(c(m, l))
 }
+```
+]
+.pull-right[
+```{r}
+f2 <- function(x) {
+    return(c(x, x / 2))
+}
+```
+]
+```{r, echo=FALSE}
 x <- c(1, 2, 3)
-y <- c(3, 4, 5)
+y <- c(1, TRUE, FALSE, 7)
 ```
 ```{r, eval=FALSE}
-f(x)
-f(y)
+x <- c(1, 2, 3)
+y <- c(TRUE, FALSE, 7)
+f1(x)
+f2(y)
 ```
 --
 ```{r}
-f(x)
-f(y)
+f1(x)
+f2(y)
 ```
 
 ---
-# Using vectors instead of a loop - sum
+# Using vectors instead of a loop: Summation
 
 ```{r}
 x <- 1:10
@@ -235,7 +311,7 @@ remainder
 ```
 
 ---
-# Vector slicing with brackets `[]` and indices
+# Get elements in a vector: Use brackets `[]`
 
 ```{r}
 x <- seq(1, 10)
@@ -283,7 +359,7 @@ x[-length(x)] # Returns everything except the last elements
 ```
 
 ---
-# You can give names to vector elements
+# You can name vector elements
 
 ```{r}
 x <- seq(5)
@@ -305,7 +381,7 @@ y
 ```
 
 ---
-# You can use names to slice vectors
+# You can use names to extract elements in a vector
 
 ```{r}
 x
@@ -348,9 +424,11 @@ x[which(x > 5)] # Use which to select elements based on a condition
 ```
 
 ---
-# Practice: What will this return?
+# Practice: Think-Pair-Share
 
 [4 minutes](https://www.youtube.com/watch?v=zVHWhLme2NQ) - no typing!
+
+### What will this return?
 
 ```{r}
 f <- function(x) {
@@ -377,17 +455,22 @@ Check if 2 vectors are the same:
 ```{r}
 x <- c(1, 2, 3)
 y <- c(1, 2, 3)
+```
+```{r, eval=FALSE}
 x == y
 ```
-
 --
-To check if the _whole_ vectors are the same, use `all()`:
+```{r, echo=FALSE}
+x == y
+```
+--
+To check if _all_ elements are the same, use `all()`:
 ```{r}
 all(x == y)
 ```
 
 --
-To check if any elements are the same, use `any()`:
+To check if _any_ elements are the same, use `any()`:
 ```{r}
 a <- c(1, 2, 3)
 b <- c(-1, 2,-3)
@@ -423,10 +506,11 @@ identical(x, y) # Also compares the **names** of the elements
 ```
 
 ---
-# Practice
+# Practice: Think-Pair-Share
+
+[10 minutes](https://www.youtube.com/watch?v=4ASKMcdCc3g)
 
 .pull-left[
-[10 minutes](https://www.youtube.com/watch?v=4ASKMcdCc3g)
 
 Re-write `isPrime(n)` from last week, but **without loops!**
 
@@ -453,6 +537,11 @@ isPrime <- function(n) {
 }
 ```
 ]
+
+---
+# 5 minute break - stand up, move around, stretch!
+
+### [5 minutes](https://www.youtube.com/watch?v=_W0bSen8Qjg)
 
 ---
 # Vectorized operations
@@ -554,37 +643,6 @@ Write a function that returns the vector in reverse order. So if `x` equals `c(2
 ]
 
 .pull-right[
-2) `dotProduct(a, b)`
-
-**Background**: the "dot product" of two vectors is the sum of the products of the corresponding terms. So the dot product of the vectors `c(1,2,3)` and `c(4,5,6)` is `(1*4) + (2*5) + (3*6)`, or `4 + 10 + 18 = 32`.
-
-With this in mind, write a function that takes two vectors and returns the dot product of those vectors. If the vectors are not equal length, ignore the extra elements in the longer vector. **No loops!** Here's some test cases:
-
-- `dotProduct(c(1,2,3), c(4,5,6)) == 32`
-- `dotProduct(c(1,2), c(4,5,6)) == 14`
-- `dotProduct(c(2,3,4), c(-7,1,9)) == 25`
-- `dotProduct(c(0,0,0), c(-7,1,9)) == 0`
-
-]
-
----
-# Group practice
-
-[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
-
-.pull-left[
-1) `alternatingSum(a)`
-
-Write a function that takes a vector of numbers `a` and returns the alternating sum, where the sign alternates from positive to negative or vice versa. **No loops!** Here's some test cases:
-
-- `alternatingSum(c(5,3,8,4)) == (5 - 3 + 8 - 4)`
-- `alternatingSum(c(1,2,3)) == (1 - 2 + 3)`
-- `alternatingSum(c(0,0,0)) == 0`
-- `alternatingSum(c(-7,5,3)) == (-7 - 5 + 3)`
-
-]
-
-.pull-right[
 2) `median(a)`
 
 Write a function that takes a vector of numbers `a` and returns the median value in the vector, which is the value of the middle element (or the average of the two middle elements). **No loops!** Here's some test cases:
@@ -595,4 +653,33 @@ Write a function that takes a vector of numbers `a` and returns the median value
 - `median(c(4,5,6,7,8)) == 6`
 - `median(c(4,5,6,7)) == mean(c(5,6))`
 
+]
+
+---
+# Group practice
+
+[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+
+.pull-left[
+2) `dotProduct(a, b)`
+
+**Background**: the "dot product" of two vectors is the sum of the products of the corresponding terms. So the dot product of the vectors `c(1,2,3)` and `c(4,5,6)` is `(1*4) + (2*5) + (3*6)`, or `4 + 10 + 18 = 32`.
+
+With this in mind, write a function that takes two vectors and returns the dot product of those vectors. If the vectors are not equal length, ignore the extra elements in the longer vector. **No loops!** Here's some test cases:
+
+- `dotProduct(c(1,2,3), c(4,5,6)) == 32`
+- `dotProduct(c(1,2), c(4,5,6)) == 14`
+- `dotProduct(c(2,3,4), c(-7,1,9)) == 25`
+- `dotProduct(c(0,0,0), c(-7,1,9)) == 0`
+]
+
+.pull-right[
+1) `alternatingSum(a)`
+
+Write a function that takes a vector of numbers `a` and returns the alternating sum, where the sign alternates from positive to negative or vice versa. **No loops!** Here's some test cases:
+
+- `alternatingSum(c(5,3,8,4)) == (5 - 3 + 8 - 4)`
+- `alternatingSum(c(1,2,3)) == (1 - 2 + 3)`
+- `alternatingSum(c(0,0,0)) == 0`
+- `alternatingSum(c(-7,5,3)) == (-7 - 5 + 3)`
 ]
