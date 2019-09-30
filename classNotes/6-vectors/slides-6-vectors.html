@@ -22,24 +22,24 @@ class: center, middle, inverse, title-slide
 # Announcements
 
 ---
-# Iteration review
+# Iteration review: loop over a sequence
 
 ```r
-x &lt;- seq(10)
-x
+seq(5)
 ```
 
 ```
-##  [1]  1  2  3  4  5  6  7  8  9 10
+## [1] 1 2 3 4 5
 ```
-Iterate over `x`:
 
 --
 .pull-left[
 ### `for` loop
+&lt;br&gt; 
+
 
 ```r
-for (i in 1:length(x)) {
+for (i in seq(5)) {
     cat(i, '\n')
 }
 ```
@@ -49,44 +49,55 @@ for (i in 1:length(x)) {
 ## 2 
 ## 3 
 ## 4 
-## 5 
-## 6 
-## 7 
-## 8 
-## 9 
-## 10
+## 5
 ```
 ]
 --
 .pull-right[
-### `while` loops
+### `while` loop
+&lt;br&gt; 
+
+
+```r
 i &lt;- 1
-while (i &lt;= length(x)) {
+while (i &lt;= 5) {
     cat(i, '\n')
     i &lt;- i + 1
 }
+```
+
+```
+## 1 
+## 2 
+## 3 
+## 4 
+## 5
+```
 ]
 
 ---
 # Search for something in a sequence
 
+
 ```r
-x &lt;- seq(10)
-x
+seq(5)
 ```
 
 ```
-##  [1]  1  2  3  4  5  6  7  8  9 10
+## [1] 1 2 3 4 5
 ```
-Search for **even** numbers:
+
+### Count of **even** numbers in sequence:
 
 --
 .pull-left[
 ### `for` loop
+&lt;br&gt; 
+
 
 ```r
 count &lt;- 0
-for (i in 1:length(x)) {
+for (i in seq(5)) {
     if (i %% 2 == 0) {
         count &lt;- count + 1
     }
@@ -95,24 +106,36 @@ count
 ```
 
 ```
-## [1] 5
+## [1] 2
 ```
 ]
 --
 .pull-right[
-### `while` loops
+### `while` loop
+&lt;br&gt; 
+
+
+```r
 count &lt;- 0
 i &lt;- 1
-while (i &lt;= length(x)) {
+while (i &lt;= 5) {
     if (i %% 2 == 0) {
         count &lt;- count + 1
     }
     i &lt;- i + 1
 }
+count
+```
+
+```
+## [1] 2
+```
 ]
 
 ---
-# We've been dealing with vectors all along!
+# This week: Vectors!
+
+### Note: We've been dealing with vectors all along!
 
 
 ```r
@@ -132,6 +155,16 @@ is.vector(x)
 
 ```
 ## [1] TRUE
+```
+
+--
+
+```r
+length(x)
+```
+
+```
+## [1] 1
 ```
 
 ---
@@ -218,6 +251,49 @@ rep("snarf", 5)
 
 ```
 ## [1] "snarf" "snarf" "snarf" "snarf" "snarf"
+```
+
+---
+# Repeating a vector
+
+--
+
+```r
+x &lt;- rep(c("foo", "snarf"), 3)
+x
+```
+
+```
+## [1] "foo"   "snarf" "foo"   "snarf" "foo"   "snarf"
+```
+
+```r
+length(x)
+```
+
+```
+## [1] 6
+```
+&lt;br&gt;
+
+--
+Note the difference when adding the `each` argument:
+
+```r
+x &lt;- rep(c("foo", "snarf"), each = 3)
+x
+```
+
+```
+## [1] "foo"   "foo"   "foo"   "snarf" "snarf" "snarf"
+```
+
+```r
+length(x)
+```
+
+```
+## [1] 6
 ```
 
 ---
@@ -323,7 +399,60 @@ x - x
 ```
 
 ---
-# Other useful math functions
+# Practice: Think-Pair-Share
+
+[3 minutes](https://www.youtube.com/watch?v=iHdviZkM7S4) - no typing!
+
+.pull-left[
+
+```r
+f1 &lt;- function(x) {
+    m = x
+    l = x + 4
+    m = m + 5
+    return(c(m, l))
+}
+```
+]
+.pull-right[
+
+```r
+f2 &lt;- function(x) {
+    return(c(x, x / 2))
+}
+```
+]
+&lt;br&gt;
+
+What will this return?
+
+
+```r
+x &lt;- c(1, 2, 3)
+y &lt;- c(TRUE, FALSE, 7)
+f1(x)
+f2(y)
+```
+--
+
+```r
+f1(x)
+```
+
+```
+## [1] 6 7 8 5 6 7
+```
+
+```r
+f2(y)
+```
+
+```
+## [1] 1.0 1.0 0.0 7.0 0.5 0.5 0.0 3.5
+```
+
+---
+# Using vectors instead of a loop: Summation
 
 
 ```r
@@ -333,6 +462,55 @@ x
 
 ```
 ##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+--
+**Using a loop**:
+
+```r
+total &lt;- 0
+for (item in x) {
+    total &lt;- total + item
+}
+total
+```
+
+```
+## [1] 55
+```
+&lt;br&gt;
+
+--
+**Using the `sum()` function**:
+
+```r
+sum(x)
+```
+
+```
+## [1] 55
+```
+
+---
+# Other useful "summary" functions
+
+--
+
+```r
+x
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+--
+
+```r
+length(x)
+```
+
+```
+## [1] 10
 ```
 --
 
@@ -381,98 +559,6 @@ min(x)
 ```
 
 ---
-# Practice: Think-Pair-Share
-
-[3 minutes](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
-
-### What will this return?
-
-.pull-left[
-
-```r
-f1 &lt;- function(x) {
-    m = x
-    l = x + 4
-    m = m + 5
-    return(c(m, l))
-}
-```
-]
-.pull-right[
-
-```r
-f2 &lt;- function(x) {
-    return(c(x, x / 2))
-}
-```
-]
-
-
-```r
-x &lt;- c(1, 2, 3)
-y &lt;- c(TRUE, FALSE, 7)
-f1(x)
-f2(y)
-```
---
-
-```r
-f1(x)
-```
-
-```
-## [1] 6 7 8 5 6 7
-```
-
-```r
-f2(y)
-```
-
-```
-## [1] 1.0 1.0 0.0 7.0 0.5 0.5 0.0 3.5
-```
-
----
-# Using vectors instead of a loop: Summation
-
-
-```r
-x &lt;- 1:10
-x
-```
-
-```
-##  [1]  1  2  3  4  5  6  7  8  9 10
-```
-
---
-Using a loop:
-
-```r
-total &lt;- 0
-for (item in x) {
-    total &lt;- total + item
-}
-total
-```
-
-```
-## [1] 55
-```
-&lt;br&gt;
-
---
-Using the `sum()` function:
-
-```r
-sum(x)
-```
-
-```
-## [1] 55
-```
-
----
 # Using vectors instead of a loop
 
 Example: Get the remainder for each value in a vector:
@@ -487,21 +573,22 @@ x
 ## [1] 3.1415 1.6180 2.7180
 ```
 --
-Using a loop:
+**Using a loop**:
 
 ```r
-for (i in 1:length(x)) {
-    remainder &lt;- x[i] %% 1
+remainder &lt;- c()
+for (i in x) {
+    remainder &lt;- c(remainder, i %% 1)
 }
 remainder
 ```
 
 ```
-## [1] 0.718
+## [1] 0.1415 0.6180 0.7180
 ```
 
 --
-Using a vector:
+**Using a vector**:
 
 ```r
 remainder &lt;- x %% 1
@@ -594,6 +681,15 @@ x[-1] # Returns everything except the first element
 --
 
 ```r
+x[-1:-3]  # Returns everything except the first three elements
+```
+
+```
+## [1]  4  5  6  7  8  9 10
+```
+--
+
+```r
 x[-c(2, 7)] # Returns everything except the 2nd and 7th elements
 ```
 
@@ -627,26 +723,26 @@ x
 1) Use the `names()` function:
 
 ```r
-names(x) &lt;- c('one', 'two', 'three', 'four', 'five')
+names(x) &lt;- c('a', 'b', 'c', 'd', 'e')
 x
 ```
 
 ```
-##   one   two three  four  five 
-##     1     2     3     4     5
+## a b c d e 
+## 1 2 3 4 5
 ```
 
 --
 2) Use the `c()` function:
 
 ```r
-y &lt;- c('one' = 1, 'two' = 2, 'three' = 3, 'four' = 4, 'five' = 5)
+y &lt;- c('a' = 1, 'b' = 2, 'c' = 3, 'd' = 4, 'e' = 5)
 y
 ```
 
 ```
-##   one   two three  four  five 
-##     1     2     3     4     5
+## a b c d e 
+## 1 2 3 4 5
 ```
 
 ---
@@ -658,28 +754,28 @@ x
 ```
 
 ```
-##   one   two three  four  five 
-##     1     2     3     4     5
+## a b c d e 
+## 1 2 3 4 5
 ```
 --
 
 ```r
-x['one']
+x['a']
 ```
 
 ```
-## one 
-##   1
+## a 
+## 1
 ```
 --
 
 ```r
-x[c('two', 'three')]
+x[c('a', 'c')]
 ```
 
 ```
-##   two three 
-##     2     3
+## a c 
+## 1 3
 ```
 
 ---
@@ -718,31 +814,10 @@ x[x &gt; 5]
 ## [1] 10  9  8  7  6
 ```
 
---
-Another way - use the `which()` function:
-
-```r
-which(x &gt; 5) # Returns indices of TRUE elements
-```
-
-```
-## [1] 1 2 3 4 5
-```
-
-```r
-x[which(x &gt; 5)] # Use which to select elements based on a condition
-```
-
-```
-## [1] 10  9  8  7  6
-```
-
 ---
 # Practice: Think-Pair-Share
 
 [4 minutes](https://www.youtube.com/watch?v=zVHWhLme2NQ) - no typing!
-
-### What will this return?
 
 
 ```r
@@ -755,14 +830,12 @@ f &lt;- function(x) {
 x &lt;- c(1, 2, 3)
 ```
 
-```r
-f(x)
-```
---
+What will this return?
 
 ```r
 f(x)
 ```
+--
 
 ```
 ## [1] 10 27 70
@@ -787,6 +860,8 @@ x == y
 ```
 ## [1] TRUE TRUE TRUE
 ```
+&lt;br&gt;
+
 --
 To check if _all_ elements are the same, use `all()`:
 
@@ -798,8 +873,12 @@ all(x == y)
 ## [1] TRUE
 ```
 
---
+---
+# Comparing vectors
+
 To check if _any_ elements are the same, use `any()`:
+
+--
 
 ```r
 a &lt;- c(1, 2, 3)
@@ -810,6 +889,16 @@ a == b
 ```
 ## [1] FALSE  TRUE FALSE
 ```
+--
+
+```r
+all(a == b)
+```
+
+```
+## [1] FALSE
+```
+--
 
 ```r
 any(a == b)
@@ -823,34 +912,15 @@ any(a == b)
 # `all()` vs. `identical()`
 
 --
-`all()` only compares the _elements_ in vectors - it's looking for `TRUE` and `FALSE` values
-&lt;br&gt;
-&lt;br&gt;
-
---
-`identical()` compares vector elements and _attributes_, like names:
-
---
 
 ```r
-x &lt;- c('a' = 1, 'b' = 2, 'c' = 3)
-y &lt;- c('one' = 1, 'two' = 2, 'three' = 3)
-x
+x &lt;- c(1, 2, 3)
+y &lt;- c(1, 2, 3)
+names(x) &lt;- c('a', 'b', 'c')
+names(y) &lt;- c('one', 'two', 'three')
 ```
+&lt;br&gt;
 
-```
-## a b c 
-## 1 2 3
-```
-
-```r
-y
-```
-
-```
-##   one   two three 
-##     1     2     3
-```
 --
 
 ```r
@@ -860,6 +930,8 @@ all(x == y) # Only compares the elements
 ```
 ## [1] TRUE
 ```
+&lt;br&gt;
+
 --
 
 ```r
@@ -869,6 +941,19 @@ identical(x, y) # Also compares the **names** of the elements
 ```
 ## [1] FALSE
 ```
+&lt;br&gt;
+
+--
+
+```r
+names(y) &lt;- c('a', 'b', 'c')
+identical(x, y) 
+```
+
+```
+## [1] TRUE
+```
+
 
 ---
 # Practice: Think-Pair-Share
@@ -893,6 +978,7 @@ Loop solution:
 
 ```r
 isPrime &lt;- function(n) {
+    if (n &lt;= 1) { return(FALSE) }
     if (n == 2) { return(TRUE) }
     for (i in seq(2, n-1)) {
         if (n %% i == 0) {
@@ -962,28 +1048,22 @@ x1 / x2 # Returns (1/4, 2/5, 3/6)
 ---
 # Vectorized operations
 
-### Be careful - dimensions much match!
+### Be careful to match dimensions!
 
 --
 
 ```r
-# Mis-matched dimensions only give a warning!
-x1 &lt;- c(1, 2, 3)
+x1 &lt;- c(1, 2, 3, 4)
 x2 &lt;- c(4, 5)
 ```
---
 
 ```r
 x1 + x2
 ```
+--
 
 ```
-## Warning in x1 + x2: longer object length is not a multiple of shorter
-## object length
-```
-
-```
-## [1] 5 7 7
+## [1] 5 7 7 9
 ```
 
 --
@@ -993,11 +1073,11 @@ Single-value vector operations
 x1 &lt;- c(1, 2, 3)
 x2 &lt;- c(4)
 ```
---
 
 ```r
 x1 + x2
 ```
+--
 
 ```
 ## [1] 5 6 7
@@ -1056,62 +1136,47 @@ a[order(a)]
 ```
 
 ---
-# Group practice
+# Group practice - no loops! [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
 
-[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+1) `reverse(x)`
 
-.pull-left[
-1) `reverseVector(x)`
+Write a function that returns the vector in reverse order. You cannot use the `rev()` function. Test cases:
 
-Write a function that returns the vector in reverse order. So if `x` equals `c(2,3,4)`, then `reverseVector(x)` should equal `c(4,3,2)`. You cannot use the `rev()` function (which does exactly this). **No loops!** Here's some test cases:
+- `reverse(c(5, 1, 3)) == c(3, 1, 5)`
+- `reverse(c('a', 'b', 'c')) == c('c', 'b', 'a')`
+- `reverse(c(FALSE, TRUE, TRUE)) == c(TRUE, TRUE, FALSE)`
+- `reverse(seq(10)) == seq(10, 1, -1)`
 
-- `reverseVector(c(5, 1, 3)) == c(3, 1, 5)`
-- `reverseVector(c(FALSE, TRUE, TRUE)) == c(TRUE, TRUE, FALSE)`
-- `reverseVector(seq(10)) == seq(10, 1, -1)`
-
-]
-
-.pull-right[
 2) `median(a)`
 
-Write a function that takes a vector of numbers `a` and returns the median value in the vector, which is the value of the middle element (or the average of the two middle elements). **No loops!** Here's some test cases:
+Write a function that takes a vector of numbers `a` and returns the median value in the vector, which is the value of the middle element (or the average of the two middle elements). Test cases:
 
-- `median(c(5,3,8,4)) == mean(c(3,8))`
 - `median(c(0,0,0)) == 0`
 - `median(c(1,2,3)) == 2`
 - `median(c(4,5,6,7,8)) == 6`
+- `median(c(5,3,8,4)) == mean(c(3,8))`
 - `median(c(4,5,6,7)) == mean(c(5,6))`
 
-]
-
 ---
-# Group practice
+# Group practice - no loops! [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
 
-[20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+1) `dotProduct(a, b)`
 
-.pull-left[
-2) `dotProduct(a, b)`
-
-**Background**: the "dot product" of two vectors is the sum of the products of the corresponding terms. So the dot product of the vectors `c(1,2,3)` and `c(4,5,6)` is `(1*4) + (2*5) + (3*6)`, or `4 + 10 + 18 = 32`.
-
-With this in mind, write a function that takes two vectors and returns the dot product of those vectors. If the vectors are not equal length, ignore the extra elements in the longer vector. **No loops!** Here's some test cases:
+The "dot product" of two vectors is the sum of the products of the corresponding terms. So the dot product of the vectors `c(1,2,3)` and `c(4,5,6)` is `(1*4) + (2*5) + (3*6)`, or `4 + 10 + 18 = 32`. Write a function that takes two vectors and returns the dot product of those vectors. If the vectors are not equal length, ignore the extra elements in the longer vector. Test cases:
 
 - `dotProduct(c(1,2,3), c(4,5,6)) == 32`
 - `dotProduct(c(1,2), c(4,5,6)) == 14`
 - `dotProduct(c(2,3,4), c(-7,1,9)) == 25`
 - `dotProduct(c(0,0,0), c(-7,1,9)) == 0`
-]
 
-.pull-right[
-1) `alternatingSum(a)`
+2) `alternatingSum(a)`
 
-Write a function that takes a vector of numbers `a` and returns the alternating sum, where the sign alternates from positive to negative or vice versa. **No loops!** Here's some test cases:
+Write a function that takes a vector of numbers `a` and returns the alternating sum, where the sign alternates from positive to negative or vice versa. Test cases:
 
 - `alternatingSum(c(5,3,8,4)) == (5 - 3 + 8 - 4)`
 - `alternatingSum(c(1,2,3)) == (1 - 2 + 3)`
 - `alternatingSum(c(0,0,0)) == 0`
 - `alternatingSum(c(-7,5,3)) == (-7 - 5 + 3)`
-]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
