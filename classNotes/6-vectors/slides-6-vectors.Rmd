@@ -10,6 +10,9 @@ output:
 
 # Announcements
 
+--
+### Quiz 3 next week, Midterm 1 week after that
+
 ---
 # Iteration review: loop over a sequence
 ```{r}
@@ -19,7 +22,7 @@ seq(5)
 --
 .pull-left[
 ### `for` loop
-<br> 
+<br>
 
 ```{r}
 for (i in seq(5)) {
@@ -30,7 +33,7 @@ for (i in seq(5)) {
 --
 .pull-right[
 ### `while` loop
-<br> 
+<br>
 
 ```{r}
 i <- 1
@@ -53,7 +56,7 @@ seq(5)
 --
 .pull-left[
 ### `for` loop
-<br> 
+<br>
 
 ```{r}
 count <- 0
@@ -68,7 +71,7 @@ count
 --
 .pull-right[
 ### `while` loop
-<br> 
+<br>
 
 ```{r}
 count <- 0
@@ -559,7 +562,7 @@ identical(x, y) # Also compares the **names** of the elements
 --
 ```{r}
 names(y) <- c('a', 'b', 'c')
-identical(x, y) 
+identical(x, y)
 ```
 
 
