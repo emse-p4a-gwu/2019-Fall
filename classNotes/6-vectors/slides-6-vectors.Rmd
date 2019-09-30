@@ -210,25 +210,28 @@ sum(x)
 ```
 
 ---
-# Using vectors instead of a loop 
+# Using vectors instead of a loop
 
 Example: Get the remainder for each value in a vector:
-<br>
 
+```{r}
+x <- c(3.1415, 1.618, 2.718)
+x
+```
 --
 Using a loop:
 ```{r}
-x <- c(3.1415, 1.618, 2.718)
 for (i in 1:length(x)) {
     remainder <- x[i] %% 1
-    print(remainder)
 }
+remainder
 ```
 
 --
 Using a vector:
 ```{r}
-x %% 1
+remainder <- x %% 1
+remainder
 ```
 
 ---
@@ -407,8 +410,8 @@ any(a == b)
 ```{r}
 x <- c('a' = 1, 'b' = 2, 'c' = 3)
 y <- c('one' = 1, 'two' = 2, 'three' = 3)
-x 
-y 
+x
+y
 ```
 --
 ```{r}
