@@ -47,6 +47,13 @@ x <- c(1, 2, 3)
 length(x)
 ```
 
+As we saw in the [loops](L5-loops.html) lesson, you can also create vectors of sequences using the `:` operator or the `seq()` function:
+
+```{r}
+seq(1, 10)
+1:5
+```
+
 You can also create a vector by using the `rep()` function, which replicates the same value `n` times:
 
 ```{r}
@@ -58,6 +65,18 @@ y
 z
 ```
 
+In fact, you can use the `rep()` function to create longer vectors made up of repeated vectors:
+
+```{r}
+rep(c(1, 2), 3) # Repeat the vector c(1, 2) three times
+```
+
+If you add the `each` argument, `rep()` will repeat each element in the vector:
+
+```{r}
+rep(c(1, 2), each = 3) # Repeat each element of the vector c(1, 2) three times
+```
+
 You can see how long a vector is using the `length()` function:
 
 ```{r}
@@ -65,12 +84,25 @@ length(y)
 length(z)
 ```
 
-Vectors can be of different types, but each element in the vector must have the _same_ type. If you mix types in a vector, R will coerce all the elements to either a numeric or character type:
+## Vector coercion
 
+Each element in a vector must have the **same type**. If you mix types in a vector, R will _coerce_ all the elements to either a numeric or character type.
+
+If a vector has a _single_ character element, R makes everything a **character**:
 ```{r}
-c(1, 2, "3") # Turns everything into a character
-c(1, 2, TRUE, FALSE) # Turns everything into a number
-c(TRUE, FALSE, "TRUE") # Turns everything into a character
+c(1, 2, "3")
+c(TRUE, FALSE, "TRUE")
+```
+
+If a vector has numeric and logical elements, R makes everything a **number**:
+```{r}
+c(1, 2, TRUE, FALSE)
+```
+
+If a vector has integers and floats, R makes everything a **float**:
+```{r}
+c(1L, 2, pi)
+```
 ```
 
 ## Deleting vectors
@@ -101,7 +133,7 @@ v
 typeof(v)
 ```
 
-There are many functions that are designed to work on numeric vectors. Here are some common ones:
+R has many built-in functions that are designed to give _summary_ information about numeric vectors. Note that these functions take a vectors of numbers and return _single values_. Here are some common ones:
 
 Function   |       Description           | Example
 ---------- | ----------------------------|------------------------------
@@ -210,6 +242,7 @@ Vector indices start from 1 (this is important - [most programming languages sta
 x <- seq(1, 10)
 x[1] # Returns the first element
 x[3] # Returns the third element
+x[length(x)] # Returns the last element
 ```
 
 You can access multiple elements by using a vector of indices inside the brackets:
@@ -244,22 +277,23 @@ x[3.9999] # Still returns the 3rd element
 You can name the elements in a vector and then use those names to access elements. To create a named vector, use the `names()` function:
 
 ```{r error=TRUE}
-names(x) <- c('one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten')
+x <- seq(5)
+names(x) <- c('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j')
 x
 ```
 
 You can also create a named vector by putting the names directly in the `c()` function:
 
 ```{r error=TRUE}
-x <- c('one' = 1, 'two' = 2, 'three' = 3)
+x <- c('a' = 1, 'b' = 2, 'c' = 3, 'd' = 4, 'e' = 5)
 x
 ```
 
 Once your vector has names, you can then use those names as indices:
 
 ```{r error=TRUE}
-x['one'] # Returns the first element
-x[c('two', 'three')] # Returns the 2nd and 3rd elements
+x['a'] # Returns the first element
+x[c('a', 'c')] # Returns the 1st and 3rd elements
 ```
 
 ## Using logical indices
@@ -314,8 +348,10 @@ x2 <- c(4, 5)
 x1 + x2
 ```
 
+What R does in these cases is _repeat_ the shorter vector, so in the above case the last value is `3 + 4`.
+
+If you have a single value vector, R will add it element-wise:
 ```{r}
-# A single-value vector will still work:
 x1 <- c(1, 2, 3)
 x2 <- c(4)
 x1 + x2
@@ -351,16 +387,18 @@ As we saw in the [loops](5-loops.html) lesson, you can use a loop to perform an 
 
 ```{r}
 x <- c(3.1415, 1.618, 2.718)
-for (i in 1:length(x)) {
-    remainder <- x[i] %% 1
-    print(remainder)
+remainder <- c()
+for (i in x) {
+    remainder <- c(remainder, i %% 1)
 }
+remainder
 ```
 
-You could achieve the same thing by just performing the operation inside the loop (`x[i] %% 1`) on the whole vector:
+You could achieve the same thing by just performing the operation inside the loop (the `i %% 1` bit) on the whole vector:
 
 ```{r}
-x %% 1
+remainder <- x %% 1
+remainder
 ```
 
 In many cases, using a vector can save you a whole lot of code by avoiding loops entirely!
