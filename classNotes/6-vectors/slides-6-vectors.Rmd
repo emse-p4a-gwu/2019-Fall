@@ -266,7 +266,7 @@ f2 <- function(x) {
 What will this return?
 ```{r, echo=FALSE}
 x <- c(1, 2, 3)
-y <- c(1, TRUE, FALSE, 7)
+y <- c(TRUE, FALSE, 7)
 ```
 ```{r, eval=FALSE}
 x <- c(1, 2, 3)
@@ -711,15 +711,15 @@ Write a function that returns the vector in reverse order. You cannot use the `r
 - `reverse(c(FALSE, TRUE, TRUE)) == c(TRUE, TRUE, FALSE)`
 - `reverse(seq(10)) == seq(10, 1, -1)`
 
-2) `median(a)`
+2) `middleValue(a)`
 
-Write a function that takes a vector of numbers `a` and returns the median value in the vector, which is the value of the middle element (or the average of the two middle elements). Test cases:
+Write a function that takes a vector of numbers `a` and returns the value of the middle element (or the average of the two middle elements). Test cases:
 
-- `median(c(0,0,0)) == 0`
-- `median(c(1,2,3)) == 2`
-- `median(c(4,5,6,7,8)) == 6`
-- `median(c(5,3,8,4)) == mean(c(3,8))`
-- `median(c(4,5,6,7)) == mean(c(5,6))`
+- `middleValue(c(0,0,0)) == 0`
+- `middleValue(c(1,2,3)) == 2`
+- `middleValue(c(4,5,6,7,8)) == 6`
+- `middleValue(c(5,3,8,4)) == mean(c(3,8))`
+- `middleValue(c(4,5,6,7)) == mean(c(5,6))`
 
 ---
 # Group practice - no loops! [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
