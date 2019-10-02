@@ -8,8 +8,9 @@ output:
     css: classNotes.css
 ---
 
+# Announcments
 
-Before going any further, make sure you install the `stringr` package and load it before trying to use any of the functions in this lesson:
+If you haven't already, install the **stringr** library:
 
 ```{r eval=FALSE}
 install.packages("stringr")
@@ -17,41 +18,50 @@ library(stringr)
 ```
 
 ---
+# Making a string
 
-# String basics
-
-## Making a string
-
-You can create strings with either single quotes (`''`) or double quotes (`""`). There is no difference in behavior. I often use single quotes, which is especially useful for creating a string that contains a double quote:
+Single or double quotes - they both work:
 
 ```{r eval=FALSE}
-string1 <- "This is a string"
-string2 <- 'I can use single quotes to include a "quote" inside a string'
+s1 <- "This is a string"
+s1
+s2 <- 'I can use single quotes to include a "quote" inside a string'
+s2
 ```
 
-## String literals and "escaping"
+---
+# String literals and "escaping"
 
-To include a literal symbol in a string, you need to use the `\` symbol to "escape" it. For example, to include a single or double quote in a string, I put a `\` before the `'` or `"` symbol:
+Use the `\` symbol to "escape" a literal symbol:
 
+--
 ```{r}
-cat('Double quote:', '\"')
-cat('Single quote:', '\'')
+cat('\"') # Double quote
 ```
-
-Other literal symbols that require escaping include backslash, new line, and tab space:
-
+--
 ```{r}
-cat('Backslash:', 'This\\that')
-cat('New line:', 'This\nthat')
-cat('Tab space:', 'This\tthat')
+cat('\'') # Single quote
+```
+--
+```{r}
+cat('This\\that') # Backslash
+```
+--
+```{r}
+cat('This\nthat') # New line
+```
+--
+```{r}
+cat('This\tthat') #Tab space
 ```
 
-Beware that the printed representation of a string in the R console is not the same as string itself, because the printed representation shows the escapes. To see the raw contents of the string, use `cat()` or `writeLines()`.
+---
+# String constants
 
-## String constants
+R has a few built-in string constants
 
-R has a small number of built-in string constants: `LETTERS`, `letters`, `month.abb`, and `month.name`. These are common values stored in variables with convenient names:
-
+--
+**Small in size**:
 ```{r}
 LETTERS
 letters
@@ -59,16 +69,9 @@ month.abb
 month.name
 ```
 
-If you assign-over one of these constants, you can always retrieve the constant by putting the `base::` prefix in front:
+--
+**Big in size** (from the **stringr** library):
 
-```{r}
-letters <- 7
-letters
-letters <- base::letters
-letters
-```
-
-In addition to the Base R constants, the `stringr` library also comes with three constants: `words`, `sentences`, and `fruit`. These are much longer, so let's use the `head()` function to just preview the first 6 elements in each:
 
 ```{r}
 head(words)
@@ -76,6 +79,7 @@ head(sentences)
 head(fruit)
 ```
 
+---
 # Basic `"stringr"` Operations
 
 Most `stringr` functions start with `str_`, which makes it particularly easy to remember. The following table contains the main `stringr` functions we'll cover:
