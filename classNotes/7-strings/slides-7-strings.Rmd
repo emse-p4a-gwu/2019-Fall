@@ -8,6 +8,442 @@ output:
     css: classNotes.css
 ---
 
+
+Before going any further, make sure you install the `stringr` package and load it before trying to use any of the functions in this lesson:
+
+```{r eval=FALSE}
+install.packages("stringr")
+library(stringr)
+```
+
+---
+
+# String basics
+
+## Making a string
+
+You can create strings with either single quotes (`''`) or double quotes (`""`). There is no difference in behavior. I often use single quotes, which is especially useful for creating a string that contains a double quote:
+
+```{r eval=FALSE}
+string1 <- "This is a string"
+string2 <- 'I can use single quotes to include a "quote" inside a string'
+```
+
+## String literals and "escaping"
+
+To include a literal symbol in a string, you need to use the `\` symbol to "escape" it. For example, to include a single or double quote in a string, I put a `\` before the `'` or `"` symbol:
+
+```{r}
+cat('Double quote:', '\"')
+cat('Single quote:', '\'')
+```
+
+Other literal symbols that require escaping include backslash, new line, and tab space:
+
+```{r}
+cat('Backslash:', 'This\\that')
+cat('New line:', 'This\nthat')
+cat('Tab space:', 'This\tthat')
+```
+
+Beware that the printed representation of a string in the R console is not the same as string itself, because the printed representation shows the escapes. To see the raw contents of the string, use `cat()` or `writeLines()`.
+
+## String constants
+
+R has a small number of built-in string constants: `LETTERS`, `letters`, `month.abb`, and `month.name`. These are common values stored in variables with convenient names:
+
+```{r}
+LETTERS
+letters
+month.abb
+month.name
+```
+
+If you assign-over one of these constants, you can always retrieve the constant by putting the `base::` prefix in front:
+
+```{r}
+letters <- 7
+letters
+letters <- base::letters
+letters
+```
+
+In addition to the Base R constants, the `stringr` library also comes with three constants: `words`, `sentences`, and `fruit`. These are much longer, so let's use the `head()` function to just preview the first 6 elements in each:
+
+```{r}
+head(words)
+head(sentences)
+head(fruit)
+```
+
+# Basic `"stringr"` Operations
+
+Most `stringr` functions start with `str_`, which makes it particularly easy to remember. The following table contains the main `stringr` functions we'll cover:
+
+Function       | Description                            | Base R equivalent
+---------------|-----------------------------------------|--------------
+`str_length()` | number of characters                    | `nchar()`
+`str_c()`      | string concatenation                    | `paste()`
+`str_sub()`    | extracts substrings                     | `substring()`
+`str_dup()`    | duplicates characters                   | _none_
+`str_pad()`    | pads a string                           | _none_
+`str_trim()`   | removes leading and trailing whitespace | _none_
+
+The common `str_` prefix is particularly useful in RStudio, because typing `str_` will trigger autocomplete, allowing you to see all `stringr` functions:
+
+![](images/stringr-autocomplete.png){ width=600 }
+
+## Individual string characters
+
+You can get the number of characters in as string with `str_length()`:
+
+```{r}
+str_length("The quick brown fox jumped over the lazy dog")
+```
+
+You can access individual character using `str_sub()`. It takes three arguments: a string (or character vector), a `start` position, and an `end` position. Either position can either be a positive integer, which counts from the left, or a negative integer which counts from the right. The positions are inclusive, and if longer than the string, will be silently truncated.
+
+```{r}
+x <- "Apple"
+str_sub(x, 1, 3)
+# Negative numbers count backwards from the end
+str_sub(x, -3, -1)
+```
+
+Note that `str_sub()` won't fail if the string is too short: it will just return as much as possible:
+
+```{r}
+str_sub("App", 1, 5)
+```
+
+You can also use the assignment form of `str_sub()` to modify specific elements in strings:
+
+```{r}
+x <- 'abcdefghijklmnopqrstuvwxyz'
+str_sub(x, 5, 5) <- 'E'
+x
+```
+To duplicate strings, use `str_dup()`:
+
+```{r}
+str_dup("hola", 3)
+```
+
+Most `stringr` functions also work on string vectors:
+
+```{r}
+x <- c("abcdef", "ghifjk")
+```
+```{r}
+# Get the 3rd letter in each string in the vector
+str_sub(x, 3, 3)
+```
+```{r}
+# Duplicate each string twice
+str_dup(x, 2)
+```
+
+## Concatenating with `str_c()`
+
+To combine two or more strings, use `str_c()`:
+
+```{r}
+str_c('x', 'y', 'z')
+```
+
+Use the `sep` argument to control how they're separated:
+
+```{r}
+str_c('x', 'y', 'z', sep = "-")
+```
+
+You can also concatenate a _vector_ of strings by adding the `collapse` argument to the `str_c()` function:
+
+```{r}
+str_c(letters)
+str_c(letters, collapse = '')
+str_c(letters, collapse = '-')
+```
+
+Objects of length `0` are silently dropped. This is particularly useful in conjunction with `if` statements:
+
+```{r}
+printGreeting <- function(name, timeOfDay, isBirthday) {
+    greeting <- str_c(
+        "Good ", timeOfDay, " ", name,
+            if (isBirthday) {
+                ", and HAPPY BIRTHDAY!"
+            } else {
+                '.'
+            }
+        )
+    cat(greeting)
+}
+```
+```{r}
+printGreeting('John', 'morning', isBirthday = FALSE)
+printGreeting('John', 'morning', isBirthday = TRUE)
+```
+
+## Whitespace
+
+Three functions add, remove, or modify whitespace.
+
+### `str_pad()`
+
+`str_pad()` pads a string to a fixed length by adding extra whitespace on
+the left, right, or both sides.
+
+```{r}
+x <- c("abc", "defghi")
+str_pad(x, 10) # default pads on left
+str_pad(x, 10, side="both")
+```
+
+You can pad with other characters by using the `pad` argument:
+
+```{r}
+str_pad(x, 10, side="both", pad='-')
+```
+
+`str_pad()` will never make a string shorter:
+
+```{r}
+str_pad(x, 4)
+```
+
+### `str_trim()`
+
+The opposite of `str_pad()` is `str_trim()`, which removes leading and
+trailing whitespace:
+
+```{r}
+x <- c("  a   ", "b   ",  "   c")
+str_trim(x)
+str_trim(x, "left")
+```
+
+### `str_wrap()`
+
+You can use `str_wrap()` to modify existing whitespace in order to wrap
+a paragraph of text, such that the length of each line is as similar as
+possible.
+
+```{r}
+jabberwocky <- str_c(
+"`Twas brillig, and the slithy toves ",
+"did gyre and gimble in the wabe: ",
+"All mimsy were the borogoves, ",
+"and the mome raths outgrabe. "
+)
+cat(str_wrap(jabberwocky, width = 40))
+```
+
+## Case conversion
+
+You can convert whole strings to lower-case, upper-case, and title-case using some conveniently-named functions:
+
+```{r}
+x <- "Want to hear a joke about paper? Never mind, it's tearable."
+```
+```{r}
+str_to_lower(x)
+str_to_upper(x)
+str_to_title(x)
+```
+
+## String ordering and sorting
+
+You can sort a vector of strings alphabetically using `str_sort()` and `str_order()`:
+
+```{r}
+x <- c('Y', 'M', 'C', 'A')
+```
+```{r}
+str_sort(x)
+str_sort(x, decreasing = TRUE)
+str_order(x)
+x[str_order(x)]
+```
+
+# Splitting strings
+
+## Splitting with `str_split()`
+
+Use `str_split()` to split a string up into pieces along a particular delimiter.
+
+```{r}
+string <- 'This string has spaces-and-dashes'
+```
+```{r}
+str_split(string, " ") # Split on the spaces
+```
+```{r}
+str_split(string, "-") # Split on the dashes
+```
+
+By default, `str_split()` returns a `list` (another R data structure) of vectors. Each item in the list is a vector of strings. In the above cases, we gave `str_split()` a single string, so there is only one item in the returned list. In these cases, the easiest way to access the resulting vector of split strings is to use the double bracket `[[]]` operator to access the first list item:
+
+```{r}
+str_split(string, " ")[[1]] # Returns a vector
+```
+
+If you give `str_split()` a vector of strings, it will return a list of length equal to the number of elements in the vector:
+
+```{r}
+stringVector <- c(string, string, string)
+str_split(stringVector, "-") # Returns a list with three elements
+```
+
+If you want to split a string up into its individual characters, use the empty string `""` as the delimiter:
+
+```{r}
+str_split(string, "")[[1]]
+```
+
+## Word extraction with `word()`
+
+The `word()` function that another way to split up a longer string. It is designed to extract words from a sentence. You use `word()` by by passing it a `string` together with a `start` position of the first word to extract and an `end` position of the last word to extract. By default, the separator `sep` used between words is a single space. Here's some examples:
+
+```{r}
+sentence <- c("Be the change you want to be")
+```
+```{r}
+# Extract first word
+word(sentence, 1)
+
+# Extract second word
+word(sentence, 2)
+
+# Extract last word
+word(sentence, -1)
+
+# Extract all but the first word
+word(sentence, 2, -1)
+```
+
+# Matching strings
+
+## Detecting string matches
+
+To determine if a character vector matches a pattern, use `str_detect()`. It returns a logical vector the same length as the input:
+
+```{r}
+someFruit <- fruit[1:10]
+someFruit
+str_detect(someFruit, "a")
+```
+
+Remember that when you use a logical vector in a numeric context, `FALSE` becomes `0` and `TRUE` becomes `1`. That makes `sum()` and `mean()` useful if you want to answer questions about matches across a vector:
+
+```{r}
+# How many words in the stringr "words" vector contain the letter "a"?
+sum(str_detect(words, "a"))
+# What proportion contain the letter "a"?
+mean(str_detect(words, "a"))
+```
+
+## Anchors
+
+By default, `str_detect()` will match any part of a string. But it's often useful to _anchor_ the matching condition so that it matches from the start or end of the string. You can use:
+
+- `^` to match the _start_ of the string.
+- `$` to match the _end_ of the string.
+
+```{r}
+# Which fruit start with "a"?
+str_detect(someFruit, "^a")
+# Which fruit end with "y"?
+str_detect(someFruit, "y$")
+```
+
+To remember which is which, try this mnemonic:
+
+> If you _start_ with power (`^`), you'll _end_ up with money (`$`).
+
+To force a match to a complete string, anchor it with both `^` and `$`:
+
+```{r}
+x <- c("apple pie", "apple", "apple cake")
+```
+```{r}
+str_detect(x, "apple")
+str_detect(x, "^apple$")
+```
+
+In the second example above, 1 & 3 are `FALSE` because there's a space after `apple`.
+
+## Counting matches
+
+A variation on `str_detect()` is `str_count()`: rather than a simple yes or no, it tells you how many matches there are in a string:
+
+```{r}
+x <- c("apple", "banana", "pear")
+str_count(x, "a")
+```
+
+Note that matches never overlap. For example, in `"abababa"`, how many times will the pattern `"aba"` match?
+
+```{r}
+str_count("abababa", "aba")
+```
+
+## Replacing matches
+
+`str_replace()` and `str_replace_all()` allow you to replace matches with new strings. The simplest use is to replace a pattern with a fixed string:
+
+```{r}
+x <- c("apple", "pear", "banana")
+```
+```{r}
+str_replace(x, "a", "-")
+str_replace_all(x, "a", "-")
+```
+
+---
+
+# Tips
+
+Often times you'll want to break a string into it's individual letter components. To do that, use `str_split()` with the empty string `""` as the delimiter:
+
+```{r}
+s <- 'aLongStringWithLotsOfLetters'
+chrs <- str_split(s, "")[[1]]
+chrs
+```
+
+Once you've got all the individual characters as a vector, you can do all sorts of things:
+
+```{r}
+str_sort(chrs) # Alphabetically sort the vector
+str_detect(chrs, 't') # Find where the letter "t" exists
+```
+
+If you want to count the unique occurrence of each character, you can use the `table()` function:
+
+```{r}
+table(chrs)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 # Group practice
 
