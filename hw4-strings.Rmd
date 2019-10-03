@@ -6,7 +6,7 @@ output:
     toc: no
 ---
 
-**Due**: Sunday, 20-Oct. at 8pm
+**Due**: Sunday, 27-Oct. at 8pm
 
 **Rules**:
 
