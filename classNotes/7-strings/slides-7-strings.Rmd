@@ -11,7 +11,6 @@ output:
 # Announcments
 
 If you haven't already, install the **stringr** library:
-
 ```{r eval=FALSE}
 install.packages("stringr")
 library(stringr)
@@ -29,13 +28,20 @@ s2 <- 'I can use single quotes to include a "quote" inside a string'
 s2
 ```
 
+--
+Use them where it makes sense, e.g.:
+```{r, eval=FALSE}
+cat("It's a boy!")
+cat('I said, "Hi!"')
+```
+
 ---
 # String literals and "escaping"
 
 Use the `\` symbol to "escape" a literal symbol:
-
+              
 --
-```{r}
+```{r}      
 cat('\"') # Double quote
 ```
 --
@@ -58,10 +64,8 @@ cat('This\tthat') #Tab space
 ---
 # String constants
 
-R has a few built-in string constants
-
+R has a few built-in string constants:
 --
-**Small in size**:
 ```{r}
 LETTERS
 letters
@@ -70,9 +74,7 @@ month.name
 ```
 
 --
-**Big in size** (from the **stringr** library):
-
-
+The **stringr** library has some longer string constants:
 ```{r}
 head(words)
 head(sentences)
@@ -80,30 +82,30 @@ head(fruit)
 ```
 
 ---
-# Basic `"stringr"` Operations
+# Main **stringr** functions
 
-Most `stringr` functions start with `str_`, which makes it particularly easy to remember. The following table contains the main `stringr` functions we'll cover:
+Most start with "`str_`":
 
-Function       | Description                            | Base R equivalent
----------------|-----------------------------------------|--------------
-`str_length()` | number of characters                    | `nchar()`
-`str_c()`      | string concatenation                    | `paste()`
-`str_sub()`    | extracts substrings                     | `substring()`
-`str_dup()`    | duplicates characters                   | _none_
-`str_pad()`    | pads a string                           | _none_
-`str_trim()`   | removes leading and trailing whitespace | _none_
+Function       | Description                            
+---------------|-----------------------------------------
+`str_length()` | number of characters                    
+`str_c()`      | string concatenation                    
+`str_sub()`    | extracts substrings                     
+`str_dup()`    | duplicates characters                   
+`str_pad()`    | pads a string                           
+`str_trim()`   | removes leading and trailing whitespace 
 
-The common `str_` prefix is particularly useful in RStudio, because typing `str_` will trigger autocomplete, allowing you to see all `stringr` functions:
-
-![](images/stringr-autocomplete.png){ width=600 }
-
-## Individual string characters
-
-You can get the number of characters in as string with `str_length()`:
+---
+# `str_length()`Get the number of characters: 
 
 ```{r}
 str_length("The quick brown fox jumped over the lazy dog")
 ```
+
+
+
+
+
 
 You can access individual character using `str_sub()`. It takes three arguments: a string (or character vector), a `start` position, and an `end` position. Either position can either be a positive integer, which counts from the left, or a negative integer which counts from the right. The positions are inclusive, and if longer than the string, will be silently truncated.
 
