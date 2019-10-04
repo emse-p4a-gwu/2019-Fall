@@ -8,7 +8,7 @@ output:
     css: classNotes.css
 ---
 
-# Announcments
+# Announcements
 
 If you haven't already, install the **stringr** library:
 ```{r eval=FALSE}
@@ -97,7 +97,6 @@ Function        | Description
 `str_c()`       | string concatenation
 `str_trim()`    | removes leading and trailing whitespace
 `str_pad()`     | pads a string
-`str_()`        | pads a string
 `str_sort()`    | sort a string alphabetically
 `str_order()`   | get the order of a sorted string
 `str_split()`   | split a string into a vector
@@ -172,6 +171,12 @@ str_dup(x, 2)
 ```
 
 ---
+# Quick practice: Think-Pair-Share
+
+
+
+
+---
 # `str_c()`: Combine strings into one string
 
 --
@@ -198,7 +203,7 @@ str_c(x, collapse = '')
 ```
 
 ---
-# Practice: Think-Pair-Share
+# Quick practice: Think-Pair-Share
 
 [60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
 
@@ -306,6 +311,11 @@ x[str_order(x)]
 ```
 
 ---
+# Quick practice: Think-Pair-Share
+
+
+
+---
 # `str_split()`: Split a string into multiple strings
 
 --
@@ -353,6 +363,31 @@ Break a sentence into individual words:
 ```{r}
 x <- "If you want to view paradise, simply look around and view it"
 str_split(x, " ")[[1]]
+```
+
+---
+# Practice: Think-Pair-Share
+
+`getUniqueChars(s)`
+
+Write a function that takes a single string, `s`, and returns a _sorted_ vector of the unique characters the string below. All letters should be lowercase (so `"A"` should be treated the same as `"a"`).
+
+Example:
+`s <- 'babbleScrabbleApple'`
+`getUniqueChars(s) == c("a","b","c","e","l","p","r","s")`
+
+Hints:
+
+- Use `str_split()` to break a string into characters
+- Check out the `unique()` function
+
+--
+```{r, eval=FALSE}
+getUniqueChars <- function(s) {
+    s <- str_to_lower(s)
+    chars <- str_split(s, "")[[1]] # Split the string into characters
+    return(str_sort(unique(chars)))
+}
 ```
 
 ---
@@ -431,53 +466,8 @@ str_replace_all(x, "a", "-")
 ```
 
 
-
-
-
-
-
-
-
-
-
 ---
-
-# Practice
-
-`getUniqueChars(s)`
-
-Write a function that takes a single string, `s`, and returns a _sorted_ vector of the unique characters the string below. All letters should be lowercase (so `"A"` should be treated the same as `"a"`).
-
-Example:
-`s <- 'babbleScrabbleApple'`
-`getUniqueChars(s) == c("a","b","c","e","l","p","r","s")`
-
-Hints:
-
-- Use `str_split()` to break a string into characters
-- Check out the `unique()` function
-
---
-```{r}
-s <- 'babbleScrabbleApple'
-s <- str_to_lower(s)
-chars <- str_split(s, "")[[1]] # Split the string into characters
-uniqueChars <- unique(chars)
-str_sort(uniqueChars)
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Practice: Think-Pair-Share
 
 
 ---
@@ -534,6 +524,3 @@ Write the function `sortString(s)` that takes a string `s` and returns back an a
 - `areAnagrams("abcdaabcd", "aabbcddcb") == FALSE`
 
 ]
-
-
-
