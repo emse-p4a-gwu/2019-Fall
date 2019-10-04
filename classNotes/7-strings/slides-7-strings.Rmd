@@ -42,9 +42,9 @@ cat('I said, "Hi!"')
 # String literals and "escaping"
 
 Use the `\` symbol to "escape" a literal symbol:
-              
+
 --
-```{r}      
+```{r}
 cat('\"') # Double quote
 ```
 --
@@ -89,19 +89,19 @@ head(fruit)
 
 Most start with "`str_`":
 
-Function        | Description                            
+Function        | Description
 ----------------|-----------------------------------------
-`str_length()`  | number of characters                    
+`str_length()`  | number of characters
 `str_sub()`     | extracts substrings
 `str_dup()`     | duplicates characters
-`str_c()`       | string concatenation   
-`str_trim()`    | removes leading and trailing whitespace 
+`str_c()`       | string concatenation
+`str_trim()`    | removes leading and trailing whitespace
 `str_pad()`     | pads a string
 `str_()`        | pads a string
 `str_sort()`    | sort a string alphabetically
-`str_order()`   | get the order of a sorted string 
+`str_order()`   | get the order of a sorted string
 `str_split()`   | split a string into a vector
-`str_detect()`  | match a string in another string 
+`str_detect()`  | match a string in another string
 `str_replace()` | replace a string in another string
 
 ---
@@ -234,7 +234,7 @@ x
 ```
 --
 ```{r}
-str_trim(x) # Default trims both sides 
+str_trim(x) # Default trims both sides
 ```
 --
 ```{r}
@@ -276,7 +276,7 @@ x <- "Want to hear a joke about paper? Never mind, it's tearable."
 x
 ```
 ```{r}
-str_to_lower(x) 
+str_to_lower(x)
 str_to_upper(x)
 str_to_title(x)
 ```
@@ -340,140 +340,131 @@ str_split('hooray', 'oo')[[1]]
 ```
 
 ---
-# Common splits
+# Very common splits (you should memorize these)
 
 --
-Break a string into individual characters:
+Splitting on `""` breaks a string into _characters_:
 ```{r}
 str_split("apples", "")[[1]]
 ```
 --
+Splitting on `" "` breaks a _sentence_ into words:
 Break a sentence into individual words:
 ```{r}
 x <- "If you want to view paradise, simply look around and view it"
 str_split(x, " ")[[1]]
 ```
 
+---
+# `str_detect(string, pattern)`: Is `pattern` in `string`?
 
-
-
-
-
-
-
-
-
-
-
-
-
-# Matching strings
-
-## Detecting string matches
-
-To determine if a character vector matches a pattern, use `str_detect()`. It returns a logical vector the same length as the input:
-
+--
 ```{r}
-someFruit <- fruit[1:10]
-someFruit
-str_detect(someFruit, "a")
+tenFruit <- fruit[1:10]
+tenFruit
+```
+--
+```{r}
+str_detect(tenFruit, "a")
 ```
 
-Remember that when you use a logical vector in a numeric context, `FALSE` becomes `0` and `TRUE` becomes `1`. That makes `sum()` and `mean()` useful if you want to answer questions about matches across a vector:
-
+--
+How many in whole `fruit` vector contain the letters `"berry"`?:
 ```{r}
-# How many words in the stringr "words" vector contain the letter "a"?
-sum(str_detect(words, "a"))
-# What proportion contain the letter "a"?
-mean(str_detect(words, "a"))
+length(fruit)
+sum(str_detect(fruit, "berry")) # Raw count
+sum(str_detect(fruit, "berry")) / length(fruit) # Percentage of total
 ```
 
-## Anchors
+---
+# Detect if string starts / ends with pattern
 
-By default, `str_detect()` will match any part of a string. But it's often useful to _anchor_ the matching condition so that it matches from the start or end of the string. You can use:
+--
+- Insert `^` to match _start_ of string.
+- Insert `$` to match _end_ of string.
 
-- `^` to match the _start_ of the string.
-- `$` to match the _end_ of the string.
-
+--
+Example:
 ```{r}
+tenFruit
 # Which fruit start with "a"?
-str_detect(someFruit, "^a")
+str_detect(tenFruit, "^a")
 # Which fruit end with "y"?
-str_detect(someFruit, "y$")
+str_detect(tenFruit, "y$")
 ```
 
-To remember which is which, try this mnemonic:
+--
+Trick to remember this:
 
-> If you _start_ with power (`^`), you'll _end_ up with money (`$`).
+### If you _start_ with power (`^`), you'll _end_ up with money (`$`).
 
-To force a match to a complete string, anchor it with both `^` and `$`:
+---
+# `str_count()`: Count number of times pattern appears
 
-```{r}
-x <- c("apple pie", "apple", "apple cake")
-```
-```{r}
-str_detect(x, "apple")
-str_detect(x, "^apple$")
-```
-
-In the second example above, 1 & 3 are `FALSE` because there's a space after `apple`.
-
-## Counting matches
-
-A variation on `str_detect()` is `str_count()`: rather than a simple yes or no, it tells you how many matches there are in a string:
-
+--
+Example:
 ```{r}
 x <- c("apple", "banana", "pear")
 str_count(x, "a")
 ```
 
-Note that matches never overlap. For example, in `"abababa"`, how many times will the pattern `"aba"` match?
-
+--
+Note the difference with `str_detect()`:
 ```{r}
-str_count("abababa", "aba")
+str_detect(x, "a")
 ```
+---
+# `str_replace()`: Replace matched strings with new string
 
-## Replacing matches
-
-`str_replace()` and `str_replace_all()` allow you to replace matches with new strings. The simplest use is to replace a pattern with a fixed string:
-
+--
+Example:
 ```{r}
 x <- c("apple", "pear", "banana")
 ```
+--
 ```{r}
 str_replace(x, "a", "-")
+```
+--
+```{r}
 str_replace_all(x, "a", "-")
 ```
 
+
+
+
+
+
+
+
+
+
+
 ---
 
-# Tips
+# Practice
 
-Often times you'll want to break a string into it's individual letter components. To do that, use `str_split()` with the empty string `""` as the delimiter:
+`getUniqueChars(s)`
 
+Write a function that takes a single string, `s`, and returns a _sorted_ vector of the unique characters the string below. All letters should be lowercase (so `"A"` should be treated the same as `"a"`).
+
+Example:
+`s <- 'babbleScrabbleApple'`
+`getUniqueChars(s) == c("a","b","c","e","l","p","r","s")`
+
+Hints:
+
+- Use `str_split()` to break a string into characters
+- Check out the `unique()` function
+
+--
 ```{r}
-s <- 'aLongStringWithLotsOfLetters'
-chrs <- str_split(s, "")[[1]]
-chrs
+s <- 'babbleScrabbleApple'
+s <- str_to_lower(s)
+chars <- str_split(s, "")[[1]] # Split the string into characters
+uniqueChars <- unique(chars)
+str_sort(uniqueChars)
 ```
-
-Once you've got all the individual characters as a vector, you can do all sorts of things:
-
-```{r}
-str_sort(chrs) # Alphabetically sort the vector
-str_detect(chrs, 't') # Find where the letter "t" exists
-```
-
-If you want to count the unique occurrence of each character, you can use the `table()` function:
-
-```{r}
-table(chrs)
-```
-
-
-
-
-
 
 
 
