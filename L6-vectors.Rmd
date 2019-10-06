@@ -383,7 +383,7 @@ a[order(a)] # Same as sort(a)
 
 ## Use vectors instead of a loop
 
-As we saw in the [loops](5-loops.html) lesson, you can use a loop to perform an operation on each element in a vector. For example, the following loop prints out the decimal values for each element in a vector of floats:
+As we saw in the [loops](5-loops.html) lesson, you can use a loop to perform an operation on each element in a vector. For example, the following loop get the decimal values for each element in a vector of floats:
 
 ```{r}
 x <- c(3.1415, 1.618, 2.718)
@@ -401,7 +401,7 @@ remainder <- x %% 1
 remainder
 ```
 
-In many cases, using a vector can save you a whole lot of code by avoiding loops entirely!
+In many cases, using a vector can save you a whole lot of code (and time!) by avoiding loops entirely!
 
 ---
 

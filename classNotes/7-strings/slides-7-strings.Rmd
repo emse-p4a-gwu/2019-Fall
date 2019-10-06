@@ -8,9 +8,21 @@ output:
     css: classNotes.css
 ---
 
+# Quiz 3
+
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
+
+- ### No calculators
+- ### No notes
+- ### No books
+- ### No computers
+- ### No phones
+
+---
 # Announcements
 
-If you haven't already, install the **stringr** library:
+--
+1) If you haven't already, install the **stringr** library:
 ```{r eval=FALSE}
 install.packages("stringr")
 library(stringr)
@@ -18,50 +30,76 @@ library(stringr)
 ```{r echo=FALSE}
 library(stringr)
 ```
+<br>
+
+--
+2) You have **3** weeks for HW 4
+<br>
+<br>
+
+--
+3) **This week**: Instead of office hours, we'll have an exam review
 
 ---
 # Making a string
 
 Single or double quotes - they both work:
 
-```{r eval=FALSE}
-s1 <- "This is a string"
-s1
-s2 <- 'I can use single quotes to include a "quote" inside a string'
-s2
+```{r}
+cat("This is a string")
+cat('This is a string')
 ```
+<br>
 
 --
 Use them where it makes sense, e.g.:
-```{r, eval=FALSE}
+```{r}
 cat("It's a boy!")
 cat('I said, "Hi!"')
 ```
 
 ---
-# String literals and "escaping"
+# Making a string
 
+What if a string has both `'` and `"` symbols?
+<br>
+
+Example: `It's nice to say, "Hi!"`
+
+--
+```{r, error = TRUE}
+cat("It's nice to say, "Hi!"")
+```
+--
+```{r, error = TRUE}
+cat('It's nice to say, "Hi!"'')
+```
+
+---
+# "Escaping" to the rescue!
+
+--
 Use the `\` symbol to "escape" a literal symbol:
-
 --
 ```{r}
-cat('\"') # Double quote
+cat("It's nice to say, \"Hi!\"") # Double quote
 ```
 --
 ```{r}
-cat('\'') # Single quote
+cat('It\'s nice to say, "Hi!"') # Single quote
 ```
---
-```{r}
-cat('This\\that') # Backslash
-```
+<br>
 --
 ```{r}
 cat('This\nthat') # New line
 ```
 --
 ```{r}
-cat('This\tthat') #Tab space
+cat('This\tthat') # Tab space
+```
+--
+```{r}
+cat('This\\that') # Backslash
 ```
 
 ---
@@ -71,113 +109,290 @@ R has a few built-in string constants:
 --
 ```{r}
 LETTERS
+```
+--
+```{r}
 letters
-month.abb
+```
+--
+```{r}
 month.name
 ```
-
 --
+```{r}
+month.abb
+```
+
+---
+# String constants
+
 The **stringr** library has some longer string constants:
+--
 ```{r}
 head(words)
+length(words)
+```
+--
+```{r}
 head(sentences)
+```
+--
+```{r}
 head(fruit)
 ```
 
 ---
 # Main **stringr** functions
 
-Most start with "`str_`":
-
-Function        | Description
-----------------|-----------------------------------------
-`str_length()`  | number of characters
-`str_sub()`     | extracts substrings
-`str_dup()`     | duplicates characters
-`str_c()`       | string concatenation
-`str_trim()`    | removes leading and trailing whitespace
-`str_pad()`     | pads a string
-`str_sort()`    | sort a string alphabetically
-`str_order()`   | get the order of a sorted string
-`str_split()`   | split a string into a vector
-`str_detect()`  | match a string in another string
-`str_replace()` | replace a string in another string
+|Function          |  Description                            |
+|:-----------------|:----------------------------------------|
+|`str_to_lower(x)` | converts string to lower case           |
+|`str_to_upper(x)` | converts string to upper case           |
+|`str_to_title(x)` | converts string to title case           |
+|`str_length()`    | number of characters                    |
+|`str_sub()`       | extracts substrings                     |
+|`str_dup()`       | duplicates characters                   |
+|`str_trim()`      | removes leading and trailing whitespace |
+|`str_pad()`       | pads a string                           |
+|`str_c()`         | string concatenation                    |
+|`str_split()`     | split a string into a vector            |
+|`str_sort()`      | sort a string alphabetically            |
+|`str_order()`     | get the order of a sorted string        |
+|`str_detect()`    | match a string in another string        |
+|`str_replace()`   | replace a string in another string      |
 
 ---
-# `str_length()`: Get the number of characters in a string
+# Case conversion
 
+We saw these in HW 1!
 ```{r}
-str_length(" ")
-str_length("hello world")
-str_length("The quick brown fox jumped over the lazy dog")
+x <- "Want to hear a joke about paper? Never mind, it's tearable."
+```
+--
+```{r}
+str_to_lower(x)
+```
+--
+```{r}
+str_to_upper(x)
+```
+--
+```{r}
+str_to_title(x)
+```
+--
+```{r}
+library(tools)
+toTitleCase(x)
 ```
 
 ---
-# `str_sub()`: Access characters by their index
+# Comparing strings
 
 ```{r}
-x <- "Apple"
-str_sub(x, 1, 3)
-# Negative numbers count backwards from the end
-str_sub(x, -3, -1)
+a <- "Apples"
+b <- "apples"
+a == b
+```
+<br>
+
+--
+Use `str_to_lower()` or `str_to_upper()` to **ignore case**:
+<br>
+<br>
+
+```{r}
+str_to_lower(a) == str_to_lower(b)
+str_to_upper(a) == str_to_upper(b)
+```
+
+---
+# Get the number of characters in a string
+
+`str_length()`
+<br>
+<br>
+
+--
+```{r}
+str_length("hello world")
+```
+--
+```{r}
+str_length("The quick brown fox jumped over the lazy dog")
+```
+--
+```{r}
+str_length(" ")
+```
+--
+```{r}
+str_length("")
+```
+
+---
+# Access characters by their index
+
+`str_sub()`
+<br>
+<br>
+
+--
+```{r}
+str_sub("Apple", 1, 3)
 ```
 
 --
-If string is too short, it won't error:
 ```{r}
-str_sub("App", 1, 5)
+str_sub("Apple", -3, -1) # Negative numbers count backwards from the end
 ```
+
+--
+```{r}
+str_sub("hi", 1, 5) # If string is too short, R won't error
+```
+<br>
 
 --
 Use `str_sub()` to modify a string:
 ```{r}
 x <- 'abcdef'
 str_sub(x, 1, 3) <- 'ABC'
+```
+--
+```{r}
 x
 ```
 
 ---
-# `str_dup()`: Like `rep()` but for strings
+# Repeat a string
+
+`str_dup()`
+<br>
+<br>
 
 --
 ```{r}
 str_dup("hola", 3)
 ```
+<br>
 
 --
-Note the difference with `rep()` (which creates a vector):
+Note the difference with `rep()`:
 ```{r}
 rep("hola", 3)
 ```
 
 ---
-# Most `stringr` functions work on string vectors
+# `stringr` functions work on vectors
 
+--
 ```{r}
 x <- c("apples", "oranges")
 x
 ```
+<br>
 
 --
-Get the 3rd letter in each string in the vector
+Get the first 3 letters in each string:
 ```{r}
-str_sub(x, 3, 3)
+str_sub(x, 1, 3)
 ```
+<br>
 
 --
 Duplicate each string twice
 ```{r}
 str_dup(x, 2)
 ```
+<br>
+
+--
+```{r}
+str_to_upper(x)
+```
 
 ---
 # Quick practice: Think-Pair-Share
 
+1) Create the string `x <- 'thisIsGoodPractice'`
 
+2) Use `stringr` functions to transform `x` into the following strings:
 
+- `'thisIsGood'`
+- `'practice'`
+- `'GOOD'`
+- `'thisIsGoodPracticethisIsGoodPractice'`
+- `'thisthisthis'`
+- `'GOODGOODGOOD'`
+
+**Hint**: You'll need these:
+- `str_to_lower()`
+- `str_to_upper()`
+- `str_sub()`
+- `str_dup()`
 
 ---
-# `str_c()`: Combine strings into one string
+# Remove excess white space
+
+`str_trim()`
+<br>
+<br>
+
+--
+```{r}
+x <- "         aStringWithSpace        "
+x
+```
+<br>
+
+--
+```{r}
+str_trim(x) # Trims both sides by default
+```
+--
+```{r}
+str_trim(x, side = "left") # Only trim left side
+```
+--
+```{r}
+str_trim(x, side = "right") # Only trim right side
+```
+
+---
+# Add white space (or other characters)
+
+`str_pad()`
+<br>
+<br>
+
+--
+```{r}
+x <- "hello"
+x
+```
+<br>
+
+--
+```{r}
+str_pad(x, width = 10) # Inserts pad on left by default
+```
+--
+```{r}
+str_pad(x, width = 10, side = "both") # Pad both sides
+```
+--
+Pad with a different character:
+```{r}
+str_pad(x,  width = 10, side = "both", pad = '*')
+```
+
+---
+# Combine strings into one string
+
+`str_c()`
+<br>
+<br>
 
 --
 ```{r}
@@ -185,7 +400,7 @@ str_c('x', 'y', 'z')
 ```
 
 --
-Use the `sep` argument to control how they're separated:
+Control separation with `sep` argument:
 ```{r}
 str_c('x', 'y', 'z', sep = "-")
 ```
@@ -199,13 +414,11 @@ str_c(x)
 --
 To make a single string from a vector of strings, use `collapse`:
 ```{r}
-str_c(x, collapse = '')
+str_c(x, collapse = "")
 ```
 
 ---
-# Quick practice: Think-Pair-Share
-
-[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
+# `str_c` works with function logic
 
 ```{r}
 printGreeting <- function(name, timeOfDay, isBirthday) {
@@ -220,74 +433,107 @@ printGreeting <- function(name, timeOfDay, isBirthday) {
     cat(greeting)
 }
 ```
-What will this print?
+What do you think this will print?
 ```{r, eval=FALSE}
 printGreeting('John', 'morning', isBirthday = FALSE)
 printGreeting('John', 'morning', isBirthday = TRUE)
 ```
+--
 ```{r, echo=FALSE}
 printGreeting('John', 'morning', isBirthday = FALSE)
 printGreeting('John', 'morning', isBirthday = TRUE)
 ```
 
 ---
-# `str_trim()`: Remove excess white space
+# Split a string into multiple strings
 
+`str_split()`
+<br>
+<br>
+
+--
 ```{r}
-x <- c("  a   ", "b   ",  "   c")
+x <- 'This string has spaces-and-dashes'
 x
 ```
+<br>
+
 --
 ```{r}
-str_trim(x) # Default trims both sides
+str_split(x, " ") # Split on the spaces
 ```
 --
 ```{r}
-str_trim(x, side = "left") # Only trim left side
-```
---
-```{r}
-str_trim(x, side = "right") # Only trim right side
+str_split(x, "-") # Split on the dashes
 ```
 
 ---
-# `str_pad()`: Add white space
+# What's with the `[[1]]` thing?
 
 --
-```{r}
-x <- c("abc", "defghi")
-x
-```
+`str_split()` returns a `list` of vectors
+
 --
+Example:
 ```{r}
-str_pad(x, 10) # Default pads on left
+x <- c('babble', 'scrabblebabble')
+str_split(x, 'bb')
 ```
+<br>
+
 --
+If you're only splitting one string, add `[[1]]` to get the first vector:
 ```{r}
-str_pad(x, 10, side = "both") # Pad both sides
-```
---
-Pad with a different character:
-```{r}
-str_pad(x, 10, side = "both", pad = '*')
+str_split('hooray', 'oo')[[1]]
 ```
 
 ---
-# Case conversion: `str_to_lower()`, `str_to_upper()`, `str_to_title()`
+# Common splits (memorize these)
 
-We saw these in HW 1!
+--
+Splitting on `""` breaks a string into _characters_:
 ```{r}
-x <- "Want to hear a joke about paper? Never mind, it's tearable."
-x
+str_split("apples", "")[[1]]
 ```
+<br>
+
+--
+Splitting on `" "` breaks a _sentence_ into words:
 ```{r}
-str_to_lower(x)
-str_to_upper(x)
-str_to_title(x)
+x <- "If you want to view paradise, simply look around and view it"
+str_split(x, " ")[[1]]
 ```
+
+---
+# Quick practice: Think-Pair-Share
+
+1) Create the following objects:
+
+```{r, eval=FALSE}
+x <- 'this_is_good_practice'
+y <- c('hello', 'world')
+```
+
+2) Use `stringr` functions to transform `x` and `y` into the following:
+
+- `"hello world"`
+- `"***hello world***"`
+- `c("this", "is", "good", "practice")`
+- `"this is good practice"`
+- `"hello world, this is good practice"`
+
+**Hint**: Create intermediate objects! And use these:
+- `str_trim()`
+- `str_pad()`
+- `str_c()`
+- `str_split()`
 
 ---
 # Sort string vectors alphabetically
+
+`str_sort()`
+<br>
+<br>
 
 ```{r}
 x <- c('Y', 'M', 'C', 'A')
@@ -311,130 +557,37 @@ x[str_order(x)]
 ```
 
 ---
-# Quick practice: Think-Pair-Share
+# Detect if pattern is in string
 
-
-
----
-# `str_split()`: Split a string into multiple strings
-
---
-```{r}
-x <- 'This string has spaces-and-dashes'
-x
-```
---
-```{r}
-str_split(x, " ") # Split on the spaces
-```
---
-```{r}
-str_split(x, "-") # Split on the dashes
-```
-
----
-# What's with the `[[1]]` thing?
-
---
-`str_split()` returns a `list` of vectors
---
-Example:
-```{r}
-x <- c('babble', 'scrabble')
-str_split(x, 'bb')
-```
---
-If you're only splitting one string, add `[[1]]` to get the first vector:
-```{r}
-str_split('hooray', 'oo')[[1]]
-```
-
----
-# Very common splits (you should memorize these)
-
---
-Splitting on `""` breaks a string into _characters_:
-```{r}
-str_split("apples", "")[[1]]
-```
---
-Splitting on `" "` breaks a _sentence_ into words:
-Break a sentence into individual words:
-```{r}
-x <- "If you want to view paradise, simply look around and view it"
-str_split(x, " ")[[1]]
-```
-
----
-# Practice: Think-Pair-Share
-
-`getUniqueChars(s)`
-
-Write a function that takes a single string, `s`, and returns a _sorted_ vector of the unique characters the string below. All letters should be lowercase (so `"A"` should be treated the same as `"a"`).
-
-Example:
-`s <- 'babbleScrabbleApple'`
-`getUniqueChars(s) == c("a","b","c","e","l","p","r","s")`
-
-Hints:
-
-- Use `str_split()` to break a string into characters
-- Check out the `unique()` function
-
---
-```{r, eval=FALSE}
-getUniqueChars <- function(s) {
-    s <- str_to_lower(s)
-    chars <- str_split(s, "")[[1]] # Split the string into characters
-    return(str_sort(unique(chars)))
-}
-```
-
----
-# `str_detect(string, pattern)`: Is `pattern` in `string`?
+`str_detect(string, pattern)`
+<br>
+<br>
 
 --
 ```{r}
 tenFruit <- fruit[1:10]
 tenFruit
 ```
---
-```{r}
-str_detect(tenFruit, "a")
-```
+<br>
 
 --
-How many in whole `fruit` vector contain the letters `"berry"`?:
 ```{r}
-length(fruit)
-sum(str_detect(fruit, "berry")) # Raw count
-sum(str_detect(fruit, "berry")) / length(fruit) # Percentage of total
+str_detect(tenFruit, "berry")
+```
+<br>
+
+--
+Count how many have the string `"berry"`:
+```{r}
+sum(str_detect(tenFruit, "berry"))
 ```
 
 ---
-# Detect if string starts / ends with pattern
+# Count number of times pattern appears
 
---
-- Insert `^` to match _start_ of string.
-- Insert `$` to match _end_ of string.
-
---
-Example:
-```{r}
-tenFruit
-# Which fruit start with "a"?
-str_detect(tenFruit, "^a")
-# Which fruit end with "y"?
-str_detect(tenFruit, "y$")
-```
-
---
-Trick to remember this:
-
-### If you _start_ with power (`^`), you'll _end_ up with money (`$`).
-
----
-# `str_count()`: Count number of times pattern appears
+`str_count(string, pattern)`
+<br>
+<br>
 
 --
 Example:
@@ -442,12 +595,104 @@ Example:
 x <- c("apple", "banana", "pear")
 str_count(x, "a")
 ```
+<br>
 
 --
 Note the difference with `str_detect()`:
 ```{r}
 str_detect(x, "a")
 ```
+
+---
+# Detect if string _starts_ with pattern
+
+Example: Which fruit _start_ with "a"?
+
+--
+```{r}
+tenFruit <- fruit[1:10]
+tenFruit
+```
+<br>
+
+--
+```{r}
+str_detect(tenFruit, "a")
+```
+<br>
+
+--
+```{r}
+str_detect(tenFruit, "^a")
+```
+
+---
+# Detect if string _ends_ with pattern
+
+Example: Which fruit _end_ with an "e"?
+
+--
+```{r}
+tenFruit <- fruit[1:10]
+tenFruit
+```
+<br>
+
+--
+```{r}
+str_detect(tenFruit, "e")
+```
+<br>
+
+--
+```{r}
+str_detect(tenFruit, "e$")
+```
+
+---
+# Trick to remember this
+
+### If you _start_ with power (`^`), you'll _end_ up with money (`$`).
+<br>
+<br>
+
+--
+```{r}
+tenFruit
+```
+<br>
+
+```{r}
+str_detect(tenFruit, "^a")
+str_detect(tenFruit, "e$")
+```
+
+---
+# Quick practice: Think-Pair-Share
+
+1) For these questions, we'll use the `fruit` vector:
+
+```{r, eval=FALSE}
+head(fruit)
+```
+
+2) Use `stringr` functions to answer the following questions about the `fruit` vector:
+
+- How many fruit have the string "berry" in it?
+sum(str_detect(fruit, "berry"))
+- Which fruit contain more than one `o` characters?
+fruit[str_count(fruit, "o") > 1]
+
+**Hint**: You'll need these:
+- `str_detect()`
+- `str_count()`
+
+
+
+
+
+
+
 ---
 # `str_replace()`: Replace matched strings with new string
 
@@ -468,6 +713,46 @@ str_replace_all(x, "a", "-")
 
 ---
 # Practice: Think-Pair-Share
+
+
+
+
+
+
+
+
+---
+# Practice: Think-Pair-Share
+
+`getUniqueChars(s)`
+
+Write a function that takes a single string, `s`, and returns a _sorted_ vector of the unique characters the string below. All letters should be lowercase (so `"A"` should be treated the same as `"a"`).
+
+Example:
+```{r, eval=FALSE}
+s <- 'babbleScrabbleApple'
+getUniqueChars(s) == c("a","b","c","e","l","p","r","s")
+```
+
+Hints:
+
+- Use `str_split()` to break a string into characters
+- Check out the `unique()` function
+
+--
+```{r, eval=FALSE}
+getUniqueChars <- function(s) {
+    s <- str_to_lower(s)
+    chars <- str_split(s, "")[[1]] # Split the string into characters
+    return(str_sort(unique(chars)))
+}
+```
+
+
+
+
+
+
 
 
 ---

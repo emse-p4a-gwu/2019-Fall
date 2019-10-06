@@ -421,25 +421,34 @@ str_replace_all(x, "a", "-")
 
 # Tips
 
-Often times you'll want to break a string into it's individual letter components. To do that, use `str_split()` with the empty string `""` as the delimiter:
+## Breaking a string into characters
 
+Often times you'll want to break a string into it's individual character components. To do that, use `str_split()` with the empty string `""` as the delimiter:
 ```{r}
-s <- 'aLongStringWithLotsOfLetters'
-chrs <- str_split(s, "")[[1]]
-chrs
+chars <- str_split("apples", "")[[1]]
+chars
 ```
 
-Once you've got all the individual characters as a vector, you can do all sorts of things:
+## Breaking a sentence into words
 
+Similarly, if you have a single string that contains words separated by spaces, splitting on `" "` will break it into words:
 ```{r}
-str_sort(chrs) # Alphabetically sort the vector
-str_detect(chrs, 't') # Find where the letter "t" exists
+x <- "If you want to view paradise, simply look around and view it"
+str_split(x, " ")[[1]]
 ```
 
-If you want to count the unique occurrence of each character, you can use the `table()` function:
+## Comparing strings
 
+If you want to compare whether two strings are the same, you must also consider their cases. For example:
 ```{r}
-table(chrs)
+a <- "Apples"
+b <- "apples"
+a == b
+```
+
+The above returns `FALSE` because the cases are different on the `"a"` characters. If you want to ignore case, then a common strategy is to first convert the strings to a common case before comparing. For example:
+```{r}
+str_to_lower(a) == str_to_lower(b)
 ```
 
 ---
