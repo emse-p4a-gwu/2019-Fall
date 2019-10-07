@@ -162,6 +162,7 @@ testLargestNumberInText <- function() {
     stopifnot(largestNumberInText("I saw 3 dogs, 17 cats, and 14 cows!") == 17)
     stopifnot(is.null(largestNumberInText("One person ate two hot dogs!")))
     stopifnot(largestNumberInText("I saw 1 dog!") == 1)
+    stopifnot(largestNumberInText("Winning numbers are 7, 42, and 23") == 42)
     cat("Passed!\n")
 }
 
