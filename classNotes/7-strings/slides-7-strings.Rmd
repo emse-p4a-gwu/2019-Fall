@@ -209,11 +209,19 @@ str_to_upper(a) == str_to_upper(b)
 ---
 # Get the number of characters in a string
 
-`str_length()`
-<br>
+--
+What will this return?
+```{r, eval=FALSE}
+length("hello world")
+```
+--
+```{r, echo=FALSE}
+length("hello world")
+```
 <br>
 
 --
+To get the # of characters, use `str_length()`:
 ```{r}
 str_length("hello world")
 ```
@@ -331,6 +339,8 @@ str_to_upper(x)
 - `str_to_upper()`
 - `str_sub()`
 - `str_dup()`
+
+**Hint**: You may want to create intermediate variables
 
 ---
 # Remove excess white space
@@ -529,6 +539,33 @@ y <- c('hello', 'world')
 - `str_split()`
 
 ---
+# Practice: Think-Pair-Share
+
+`getUniqueChars(s)`
+
+Write a function that takes a single string, `s`, and returns an _alphabetically sorted_ vector of the unique characters the string below. All letters should be lowercase (so `"A"` should be treated the same as `"a"`).
+
+Example:
+```{r, eval=FALSE}
+s <- 'babbleScrabbleApple'
+getUniqueChars(s) == c("a","b","c","e","l","p","r","s")
+```
+
+Hints:
+
+- Use `str_split()` to break a string into characters
+- Check out the `unique()` function
+
+--
+```{r, eval=FALSE}
+getUniqueChars <- function(s) {
+    s <- str_to_lower(s)
+    chars <- str_split(s, "")[[1]] # Split the string into characters
+    return(str_sort(unique(chars)))
+}
+```
+
+---
 # 5 minute break - stand up, move around, stretch!
 
 ### [5 minutes](https://www.youtube.com/watch?v=_W0bSen8Qjg)
@@ -621,12 +658,14 @@ tenFruit
 <br>
 
 --
+**Wrong**:
 ```{r}
 str_detect(tenFruit, "a")
 ```
 <br>
 
 --
+**Right**:
 ```{r}
 str_detect(tenFruit, "^a")
 ```
@@ -644,12 +683,14 @@ tenFruit
 <br>
 
 --
+**Wrong**:
 ```{r}
 str_detect(tenFruit, "e")
 ```
 <br>
 
 --
+**Right**:
 ```{r}
 str_detect(tenFruit, "e$")
 ```
@@ -684,7 +725,7 @@ head(fruit)
 
 2) Use `stringr` functions to answer the following questions about the `fruit` vector:
 
-- How many fruit have the string `"berry"` in it?
+- How many fruit have the string `"rr"` in it?
 - Which fruit end with string `"fruit"`?
 - Which fruit contain more than one `"o"` character?
 
@@ -741,33 +782,6 @@ str_c(str_split(x, "_")[[1]], collapse = " ")
 But now we can do this!
 ```{r}
 str_replace_all(x, "_", " ")
-```
-
----
-# Practice: Think-Pair-Share
-
-`getUniqueChars(s)`
-
-Write a function that takes a single string, `s`, and returns an _alphabetically sorted_ vector of the unique characters the string below. All letters should be lowercase (so `"A"` should be treated the same as `"a"`).
-
-Example:
-```{r, eval=FALSE}
-s <- 'babbleScrabbleApple'
-getUniqueChars(s) == c("a","b","c","e","l","p","r","s")
-```
-
-Hints:
-
-- Use `str_split()` to break a string into characters
-- Check out the `unique()` function
-
---
-```{r, eval=FALSE}
-getUniqueChars <- function(s) {
-    s <- str_to_lower(s)
-    chars <- str_split(s, "")[[1]] # Split the string into characters
-    return(str_sort(unique(chars)))
-}
 ```
 
 ---
