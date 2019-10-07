@@ -271,22 +271,22 @@ head(fruit)
 ---
 # Main **stringr** functions
 
-|Function          |  Description                            |
-|:-----------------|:----------------------------------------|
-|`str_to_lower(x)` | converts string to lower case           |
-|`str_to_upper(x)` | converts string to upper case           |
-|`str_to_title(x)` | converts string to title case           |
-|`str_length()`    | number of characters                    |
-|`str_sub()`       | extracts substrings                     |
-|`str_dup()`       | duplicates characters                   |
-|`str_trim()`      | removes leading and trailing whitespace |
-|`str_pad()`       | pads a string                           |
-|`str_c()`         | string concatenation                    |
-|`str_split()`     | split a string into a vector            |
-|`str_sort()`      | sort a string alphabetically            |
-|`str_order()`     | get the order of a sorted string        |
-|`str_detect()`    | match a string in another string        |
-|`str_replace()`   | replace a string in another string      |
+|Function         |  Description                            |
+|:----------------|:----------------------------------------|
+|`str_to_lower()` | converts string to lower case           |
+|`str_to_upper()` | converts string to upper case           |
+|`str_to_title()` | converts string to title case           |
+|`str_length()`   | number of characters                    |
+|`str_sub()`      | extracts substrings                     |
+|`str_dup()`      | duplicates characters                   |
+|`str_trim()`     | removes leading and trailing whitespace |
+|`str_pad()`      | pads a string                           |
+|`str_c()`        | string concatenation                    |
+|`str_split()`    | split a string into a vector            |
+|`str_sort()`     | sort a string alphabetically            |
+|`str_order()`    | get the order of a sorted string        |
+|`str_detect()`   | match a string in another string        |
+|`str_replace()`  | replace a string in another string      |
 
 ---
 # Case conversion
@@ -551,7 +551,7 @@ str_to_upper(x)
 ---
 # Quick practice: Think-Pair-Share
 
-1) Create the string `x &lt;- 'thisIsGoodPractice'`
+1) Create this string object: `x &lt;- 'thisIsGoodPractice'`
 
 2) Use `stringr` functions to transform `x` into the following strings:
 
@@ -877,6 +877,11 @@ y &lt;- c('hello', 'world')
 - `str_split()`
 
 ---
+# 5 minute break - stand up, move around, stretch!
+
+### [5 minutes](https://www.youtube.com/watch?v=_W0bSen8Qjg)
+
+---
 # Sort string vectors alphabetically
 
 `str_sort()`
@@ -1121,7 +1126,37 @@ str_detect(tenFruit, "e$")
 ```
 
 ---
-# `str_replace()`: Replace matched strings with new string
+# Quick practice: Think-Pair-Share
+
+1) For these questions, we'll use the `fruit` vector:
+
+
+```r
+head(fruit)
+```
+
+```
+## [1] "apple"       "apricot"     "avocado"     "banana"      "bell pepper"
+## [6] "bilberry"
+```
+&lt;br&gt;
+
+2) Use `stringr` functions to answer the following questions about the `fruit` vector:
+
+- How many fruit have the string `"berry"` in it?
+- Which fruit end with string `"fruit"`?
+- Which fruit contain more than one `"o"` character?
+
+**Hint**: You'll need these:
+- `str_detect()`
+- `str_count()`
+
+---
+# Replace matched strings with new string
+
+`str_replace(string, pattern, replacement)`
+&lt;br&gt;
+&lt;br&gt;
 
 --
 Example:
@@ -1129,6 +1164,8 @@ Example:
 ```r
 x &lt;- c("apple", "pear", "banana")
 ```
+&lt;br&gt;
+
 --
 
 ```r
@@ -1138,6 +1175,8 @@ str_replace(x, "a", "-")
 ```
 ## [1] "-pple"  "pe-r"   "b-nana"
 ```
+&lt;br&gt;
+
 --
 
 ```r
@@ -1148,27 +1187,56 @@ str_replace_all(x, "a", "-")
 ## [1] "-pple"  "pe-r"   "b-n-n-"
 ```
 
-
 ---
-# Practice: Think-Pair-Share
+# Practice Redux
+
+Remember this task earlier?
 
 
+```r
+x &lt;- 'this_is_good_practice'
+```
 
+Convert `x` into: `"this is good practice"`
+&lt;br&gt;
+&lt;br&gt;
 
+--
+We did this earlier:
 
+```r
+str_c(str_split(x, "_")[[1]], collapse = " ")
+```
 
+```
+## [1] "this is good practice"
+```
+&lt;br&gt;
 
+--
+But now we can do this!
+
+```r
+str_replace_all(x, "_", " ")
+```
+
+```
+## [1] "this is good practice"
+```
 
 ---
 # Practice: Think-Pair-Share
 
 `getUniqueChars(s)`
 
-Write a function that takes a single string, `s`, and returns a _sorted_ vector of the unique characters the string below. All letters should be lowercase (so `"A"` should be treated the same as `"a"`).
+Write a function that takes a single string, `s`, and returns an _alphabetically sorted_ vector of the unique characters the string below. All letters should be lowercase (so `"A"` should be treated the same as `"a"`).
 
 Example:
-`s &lt;- 'babbleScrabbleApple'`
-`getUniqueChars(s) == c("a","b","c","e","l","p","r","s")`
+
+```r
+s &lt;- 'babbleScrabbleApple'
+getUniqueChars(s) == c("a","b","c","e","l","p","r","s")
+```
 
 Hints:
 
@@ -1185,19 +1253,11 @@ getUniqueChars &lt;- function(s) {
 }
 ```
 
-
-
-
-
-
-
-
 ---
 # Group practice
 
 [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
 
-.pull-left[
 1) `reverseString(s)`
 
 Write a function that returns the string in reverse order. So if `s` equals `"abcde"`,  `reverseString(s)` should equal `"edcba"`. You may assume that `s` only contains upper and/or lower case letters, but your solution must correctly return capital letters in their appropriate order. Here's some test cases:
@@ -1205,10 +1265,7 @@ Write a function that returns the string in reverse order. So if `s` equals `"ab
 - `reverseString("aWordWithCaps") == "spaChtiWdroWa"`
 - `reverseString("abcde") == "edcba"`
 - `reverseString("") == ""`
-- `reverseString("aa") == "aa"`
-]
 
-.pull-right[
 2) `isPalindrome(s)`
 
 Write a function that returns `TRUE` if the string `s` is a [Palindrome](https://en.wikipedia.org/wiki/Palindrome) and `FALSE` otherwise. The string `s` can contains any letter, number, or symbol, but it will be a character data type. Here's some test cases:
@@ -1217,35 +1274,26 @@ Write a function that returns `TRUE` if the string `s` is a [Palindrome](https:/
 - `isPalindrome("abcb") == FALSE`
 - `isPalindrome("321123") == TRUE`
 
-]
-
 ---
 # Group practice
 
 [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
 
-.pull-left[
 1) `sortString(s)`
 
-Write the function `sortString(s)` that takes a string `s` and returns back an alphabetically sorted string. So `sortString("cba")` should return `"abc"`. You may assume that `s` only contains upper and/or lower case letters. Here's some test cases:
+Write the function `sortString(s)` that takes a string `s` and returns back an alphabetically sorted string. Assume that `s` only contains upper and/or lower case letters. Here's some test cases:
 
 - `sortString("cba") == "abc"`
 - `sortString("abedhg") == "abdegh"`
 - `sortString("AbacBc") == "aAbBcc"`
 
-]
-
-.pull-right[
 2) `areAnagrams(s1, s2)`
 
-**Background**: An [anagram](https://en.wikipedia.org/wiki/Anagram) is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once. With that in mind, write the function `areAnagrams(s1, s2)` that takes two strings, `s1` and `s2` (that you may assume contain only upper and/or lower case letters), and returns `TRUE` if the strings are anagrams, and `FALSE` otherwise. Treat `"a"` and `"A"` as the same letters (so `"Aba"` and `"BAA"` are anagrams). Hint: you can use either `sortString(s)` or `letterCount(s)` as a helper function - each are helpful for different approaches to solving this. Here's some test cases:
+Write the function `areAnagrams(s1, s2)` that takes two strings, `s1` and `s2`, and returns `TRUE` if the strings are [anagrams](https://en.wikipedia.org/wiki/Anagram), and `FALSE` otherwise. Treat lower and upper case as the same letters. Here's some test cases:
 
 - `areAnagrams("", "") == TRUE`
-- `areAnagrams("abCdabCd", "abcdabcd") == TRUE`
-- `areAnagrams("abcdaBcD", "AAbbcddc") == TRUE`
-- `areAnagrams("abcdaabcd", "aabbcddcb") == FALSE`
-
-]
+- `areAnagrams("TomMarvoloRiddle", "IAmLordVoldemort") == TRUE`
+- `areAnagrams("aabbccdd", "bbccddee") == FALSE`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
