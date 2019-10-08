@@ -6,7 +6,7 @@ x_lower <- str_to_lower(x)
 x_upper <- str_to_upper(x)
 
 # 'thisIsGood'
-str_sub(x, 1, 10) 
+str_sub(x, 1, 10)
 
 # 'practice'
 str_sub(x_lower, 11, str_length(x_lower))
@@ -15,7 +15,7 @@ str_sub(x_lower, 11, str_length(x_lower))
 str_sub(x_upper, 7, 10)
 
 # 'thisIsGoodPracticethisIsGoodPractice'
-str_dup(x, 2) 
+str_dup(x, 2)
 
 # 'GOODGOODGOOD'
 xGOOD <- str_sub(x_upper, 7, 10)
@@ -23,7 +23,7 @@ str_dup(xGOOD, 3)
 
 # 'thisthisthis'
 xthis <- str_sub(x, 1, 4)
-str_dup(xthis, 3 ) 
+str_dup(xthis, 3 )
 
 
 
@@ -34,18 +34,18 @@ x <- 'this_is_good_practice'
 y <- c('hello', 'world')
 
 # "hello world"
-hw <- str_c(y, collapse = " ") 
+hw <- str_c(y, collapse = " ")
 
 # "***hello world***"
-str_pad(hw, pad = "*", side = "both", width = 17) 
+str_pad(hw, pad = "*", side = "both", width = 17)
 
 # c("this", "is", "good", "practice")
 x
-xVector <- str_split(x, "_")[[1]] 
+xVector <- str_split(x, "_")[[1]]
 xVector
 
 # "this is good practice"
-xSentence <- str_c(xVector, collapse = " ") 
+xSentence <- str_c(xVector, collapse = " ")
 xSentence
 
 # "hello world, this is good practice"
@@ -84,7 +84,7 @@ fruit[multiOindices]
 
 
 reverseString <- function(s) {
-    if (s == "") {return(s)}
+    if (s == "") {return(s)} # Special case
     chars <- str_split(s, '')[[1]]
     reversedChars <- rev(chars)
     return(str_c(reversedChars, collapse = ''))
