@@ -159,6 +159,7 @@ head(fruit)
 |`str_to_title()` | converts string to title case           |
 |`str_length()`   | number of characters                    |
 |`str_sub()`      | extracts substrings                     |
+|`str_locate()`   | returns indices of substrings           |
 |`str_dup()`      | duplicates characters                   |
 |`str_trim()`     | removes leading and trailing whitespace |
 |`str_pad()`      | pads a string                           |
