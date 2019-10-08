@@ -65,18 +65,25 @@ class(3.14)
 typeof(3.14)
 ```
 <br>
+<br>
 
-Integers:
+"Integers":
 ```{r}
 class(3)
-class(3L)
-typeof(3L)
+typeof(3)
 ```
 
 ---
-# Numeric Data
+# Actual Integers
+
+```{r}
+class(3L)
+typeof(3L)
+```
+<br>
 
 --
+Check if a number is an "integer" in value:
 ```{r}
 is.integer(3)
 ```
@@ -94,9 +101,51 @@ is.integer(3)
 ---
 # Logical Data
 
+`TRUE` or `FALSE`
+
+--
+```{r}
+x <- 1
+y <- 2
+```
+
+--
+```{r}
+x > y # Is x greater than y?
+```
+
+--
+```{r}
+x == y
+```
+
 ---
 # Character Data
 
+Things in quotes (which we call, "strings")
+
+```{r}
+s <- '3.14'
+class(s)
+```
+<br>
+<br>
+
+--
+What happens if we do this?
+```{r, eval=FALSE}
+s + 7
+```
+--
+```{r, error=TRUE, echo=FALSE}
+s + 7
+```
+
+--
+```{r}
+a_number <- 3.14
+as.character(a_number)
+```
 
 ---
 # Integer division
@@ -118,11 +167,22 @@ What will this return?
 ```{r, echo=FALSE}
 4 %/% 5
 ```
+<br>
+
+--
+What will this return?
+```{r, eval=FALSE}
+4 %/% 4
+```
+--
+```{r, echo=FALSE}
+4 %/% 4
+```
 
 ---
 # Modulus operator
 
-Modulus returns the remainder after doing division
+Modulus returns the remainder after doing integer division
 
 ```{r}
 5 %% 3
@@ -245,6 +305,13 @@ Test cases:
 - `isEvenNumber(42) == TRUE`
 - `isEvenNumber(43) == FALSE`
 - `isEvenNumber('not a number') == FALSE`
+
+--
+```{r, eval=FALSE}
+isEvenNumber <- function(n) {
+    return((n %% 2) == 0)
+}
+```
 
 --
 ```{r, eval=FALSE}

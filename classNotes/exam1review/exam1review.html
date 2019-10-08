@@ -93,8 +93,9 @@ typeof(3.14)
 ## [1] "double"
 ```
 &lt;br&gt;
+&lt;br&gt;
 
-Integers:
+"Integers":
 
 ```r
 class(3)
@@ -103,6 +104,18 @@ class(3)
 ```
 ## [1] "numeric"
 ```
+
+```r
+typeof(3)
+```
+
+```
+## [1] "double"
+```
+
+---
+# Actual Integers
+
 
 ```r
 class(3L)
@@ -119,11 +132,10 @@ typeof(3L)
 ```
 ## [1] "integer"
 ```
-
----
-# Numeric Data
+&lt;br&gt;
 
 --
+Check if a number is an "integer" in value:
 
 ```r
 is.integer(3)
@@ -156,9 +168,74 @@ is.integer(3)
 ---
 # Logical Data
 
+`TRUE` or `FALSE`
+
+--
+
+```r
+x &lt;- 1
+y &lt;- 2
+```
+
+--
+
+```r
+x &gt; y # Is x greater than y?
+```
+
+```
+## [1] FALSE
+```
+
+--
+
+```r
+x == y
+```
+
+```
+## [1] FALSE
+```
+
 ---
 # Character Data
 
+Things in quotes (which we call, "strings")
+
+
+```r
+s &lt;- '3.14'
+class(s)
+```
+
+```
+## [1] "character"
+```
+&lt;br&gt;
+&lt;br&gt;
+
+--
+What happens if we do this?
+
+```r
+s + 7
+```
+--
+
+```
+## Error in s + 7: non-numeric argument to binary operator
+```
+
+--
+
+```r
+a_number &lt;- 3.14
+as.character(a_number)
+```
+
+```
+## [1] "3.14"
+```
 
 ---
 # Integer division
@@ -194,11 +271,24 @@ What will this return?
 ```
 ## [1] 0
 ```
+&lt;br&gt;
+
+--
+What will this return?
+
+```r
+4 %/% 4
+```
+--
+
+```
+## [1] 1
+```
 
 ---
 # Modulus operator
 
-Modulus returns the remainder after doing division
+Modulus returns the remainder after doing integer division
 
 
 ```r
@@ -378,6 +468,14 @@ Test cases:
 - `isEvenNumber(42) == TRUE`
 - `isEvenNumber(43) == FALSE`
 - `isEvenNumber('not a number') == FALSE`
+
+--
+
+```r
+isEvenNumber &lt;- function(n) {
+    return((n %% 2) == 0)
+}
+```
 
 --
 
