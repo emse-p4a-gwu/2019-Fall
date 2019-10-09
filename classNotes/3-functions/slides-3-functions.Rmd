@@ -22,7 +22,7 @@ output:
 ---
 # Announcements
 
-### 1. If you haven't already, download the slack app 
+### 1. If you haven't already, download the slack app
 
 --
 ### 2. HW1 solutions will be posted Tues. @ 8:01pm.
@@ -57,22 +57,44 @@ output:
 
 ```{r eval=FALSE}
 FNAME <- function(ARG1, ARG2, ETC) {
-  STATEMENT1
-  STATEMENT2
-  return(VALUE)
+    STATEMENT1
+    STATEMENT2
+    return(VALUE)
 }
 ```
+<br>
 
 --
 How I remember this:
 
-<img src="images/function_sytax_memory.png" width="700">
-<br>
+|"function name" | is a | function   | of ()               | that does...  |
+|:---------------|:-----|:-----------|:--------------------|:--------------|
+|`FNAME`         | `<-` | `function` | `(ARG1, ARG2, ETC)` | `{}`          |
+
+---
+# Basic function syntax
+
+```{r eval=FALSE}
+FNAME <- function(ARG1, ARG2, ETC) {
+    STATEMENT1
+    STATEMENT2
+    return(VALUE)
+}
+```
 <br>
 
---
-**Example**: Write a function that returns the square root of `x`. Don't just call `sqrt()`.
+How I remember this:
+
+|"function name" | is a | function   | of ()               | that does...  |
+|:---------------|:-----|:-----------|:--------------------|:--------------|
+|`FNAME`         | `<-` | `function` | `(ARG1, ARG2, ETC)` | `{}`          |
+
 <br>
+Example:
+
+|"function name" | is a | function   | of () | that does...              |
+|:---------------|:-----|:-----------|:------|:--------------------------|
+|`mySqrt`        | `<-` | `function` | `(n)` | `{ return(n^0.5) }`       |
 
 ---
 # `return()` and `cat()` statements
@@ -160,7 +182,7 @@ printXSquared(7)
 ```
 
 ---
-# Practice: What will these functions do? 
+# Practice: What will these functions do?
 
 ### [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI) - no typing!
 <br>
@@ -193,7 +215,7 @@ f4(2)
 ]
 
 ---
-# Practice: What will these functions do? 
+# Practice: What will these functions do?
 
 ```{r, eval=FALSE}
 f1 <- function(x) {
@@ -235,7 +257,7 @@ f3(2)
 ```
 
 ---
-# Practice: What will these functions do? 
+# Practice: What will these functions do?
 
 ```{r, eval=FALSE}
 f4 <- function(x) {
@@ -345,7 +367,7 @@ printN()
 ---
 # Global objects
 
-### It is okay to call other functions inside functions 
+### It is okay to call other functions inside functions
 
 --
 ### Example:
@@ -377,7 +399,7 @@ hypotenuse(3, 4)
 <br>
 
 --
-2) `tensDigit(x)`: Write a function that takes an integer and returns its tens digit. 
+2) `tensDigit(x)`: Write a function that takes an integer and returns its tens digit.
 <br>
 <br>
 

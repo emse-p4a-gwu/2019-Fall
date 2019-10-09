@@ -33,7 +33,7 @@ class: center, middle, inverse, title-slide
 ---
 # Announcements
 
-### 1. If you haven't already, download the slack app 
+### 1. If you haven't already, download the slack app
 
 --
 ### 2. HW1 solutions will be posted Tues. @ 8:01pm.
@@ -69,22 +69,45 @@ class: center, middle, inverse, title-slide
 
 ```r
 FNAME &lt;- function(ARG1, ARG2, ETC) {
-  STATEMENT1
-  STATEMENT2
-  return(VALUE)
+    STATEMENT1
+    STATEMENT2
+    return(VALUE)
 }
 ```
+&lt;br&gt;
 
 --
 How I remember this:
 
-&lt;img src="images/function_sytax_memory.png" width="700"&gt;
-&lt;br&gt;
+|"function name" | is a | function   | of ()               | that does...  |
+|:---------------|:-----|:-----------|:--------------------|:--------------|
+|`FNAME`         | `&lt;-` | `function` | `(ARG1, ARG2, ETC)` | `{}`          |
+
+---
+# Basic function syntax
+
+
+```r
+FNAME &lt;- function(ARG1, ARG2, ETC) {
+    STATEMENT1
+    STATEMENT2
+    return(VALUE)
+}
+```
 &lt;br&gt;
 
---
-**Example**: Write a function that returns the square root of `x`. Don't just call `sqrt()`.
+How I remember this:
+
+|"function name" | is a | function   | of ()               | that does...  |
+|:---------------|:-----|:-----------|:--------------------|:--------------|
+|`FNAME`         | `&lt;-` | `function` | `(ARG1, ARG2, ETC)` | `{}`          |
+
 &lt;br&gt;
+Example:
+
+|"function name" | is a | function   | of () | that does...              |
+|:---------------|:-----|:-----------|:------|:--------------------------|
+|`mySqrt`        | `&lt;-` | `function` | `(n)` | `{ return(n^0.5) }`       |
 
 ---
 # `return()` and `cat()` statements
@@ -188,7 +211,7 @@ printXSquared(7)
 ```
 
 ---
-# Practice: What will these functions do? 
+# Practice: What will these functions do?
 
 ### [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI) - no typing!
 &lt;br&gt;
@@ -223,7 +246,7 @@ f4(2)
 ]
 
 ---
-# Practice: What will these functions do? 
+# Practice: What will these functions do?
 
 
 ```r
@@ -275,7 +298,7 @@ f3(2)
 ```
 
 ---
-# Practice: What will these functions do? 
+# Practice: What will these functions do?
 
 
 ```r
@@ -364,7 +387,7 @@ y
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'y' not found
+## [1] 1 2 3
 ```
 
 ---
@@ -403,7 +426,7 @@ printN()
 ---
 # Global objects
 
-### It is okay to call other functions inside functions 
+### It is okay to call other functions inside functions
 
 --
 ### Example:
@@ -441,7 +464,7 @@ hypotenuse(3, 4)
 &lt;br&gt;
 
 --
-2) `tensDigit(x)`: Write a function that takes an integer and returns its tens digit. 
+2) `tensDigit(x)`: Write a function that takes an integer and returns its tens digit.
 &lt;br&gt;
 &lt;br&gt;
 

@@ -42,9 +42,28 @@ What this does is create a function with the name `FNAME`, which has arguments `
 
 There's a lot of different pieces to making a function. The way I like to remember how they all go together is to read the following English sentence:
 
-![](images/function_sytax_memory.png){ width=700 }
+> "function name" is a function of () that does...
+
+Each piece of the above sentence corresponds with a piece of code for writing a function:
+
+|"function name" | is a | function   | of ()               | that does...  |
+|:---------------|:-----|:-----------|:--------------------|:--------------|
+|`FNAME`         | `<-` | `function` | `(ARG1, ARG2, ETC)` | `{}`          |
 
 All the commands your function will execute go in the `{}`.
+
+For example, here's the function `mySqrt(n)`, which returns the square root of `n`:
+
+|"function name" | is a | function   | of () | that does...              |
+|:---------------|:-----|:-----------|:------|:--------------------------|
+|`mySqrt`        | `<-` | `function` | `(n)` | `{ return(n^0.5) }`       |
+
+And here's `mySqrt(n)` written in the typical format:
+```{r, eval=FALSE}
+mySqrt <- function(n) {
+    return(n^0.5)
+}
+```
 
 ---
 

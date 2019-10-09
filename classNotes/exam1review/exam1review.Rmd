@@ -256,9 +256,34 @@ FNAME <- function(ARG1, ARG2, ETC) {
 --
 How I remember this:
 
-<img src="images/function_sytax_memory.png" width="700">
+|"function name" | is a | function   | of ()               | that does...  |
+|:---------------|:-----|:-----------|:--------------------|:--------------|
+|`FNAME`         | `<-` | `function` | `(ARG1, ARG2, ETC)` | `{}`          |
+
+---
+# Functions
+
+```{r eval=FALSE}
+FNAME <- function(ARG1, ARG2, ETC) {
+    STATEMENT1
+    STATEMENT2
+    return(VALUE)
+}
+```
 <br>
+
+How I remember this:
+
+|"function name" | is a | function   | of ()               | that does...  |
+|:---------------|:-----|:-----------|:--------------------|:--------------|
+|`FNAME`         | `<-` | `function` | `(ARG1, ARG2, ETC)` | `{}`          |
+
 <br>
+Example:
+
+|"function name" | is a | function   | of () | that does...              |
+|:---------------|:-----|:-----------|:------|:--------------------------|
+|`mySqrt`        | `<-` | `function` | `(n)` | `{ return(n^0.5) }`       |
 
 ---
 # Test Functions

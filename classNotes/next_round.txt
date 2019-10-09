@@ -1,6 +1,6 @@
 General:
-- Add early discussion of Polya problem solving
-- Solve problem before coding - come up with a plan, then execute the code
+- Add early discussion of Polya problem solving: Solve problem before coding - come up with a plan, then execute the code
+- Change homework assignment instructions to use GWnet ID name in .R file name
 
 3-Functions:
 - Include the `almostEqual()` function in the classNotes
@@ -8,3 +8,4 @@ General:
 5-Loops:
 - Greater discussion of iteration in each loop type, esp. with while loops
 - Use the walkThroughDigits(n) function first before going on to isPrime
+
