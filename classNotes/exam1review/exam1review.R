@@ -54,3 +54,46 @@ reverse(seq(10)) == seq(10, 1, -1)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+almostEqual <- function(d1, d2) {
+  epsilon = 0.00001
+  return(abs(d1-d2) <= epsilon)
+}
+
+
+
+
+
+
+
+
+
+count <- 0
+i <- 1
+while (i <= 5) {
+  
+  if (i %% 2 == 0) {
+    count <- count + 1
+  }
+  i <- i + 1
+}
+
+
+a <- c(1, 2, 3)
+b <- c(-1, 2,-3)
+a == b
