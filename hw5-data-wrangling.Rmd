@@ -6,4 +6,163 @@ output:
     toc: no
 ---
 
+```{r, echo=FALSE, message=FALSE}
+library(nycflights13)
+library(tidyverse)
+```
+
 **Due**: Sunday, 10-Nov. at 8pm
+
+**Rules**:
+
+- Problems marked **SOLO** may not be worked on with other classmates, though you may consult instructors for help.
+- For problems marked **COLLABORATIVE**, you may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work -- everyone must work on every problem. And you may not simply copy any code but rather truly work together.
+- Even though you work collaboratively, you still must submit your own solutions.
+
+**Instructions**:
+
+1) Before beginning this assignment, be sure to have read the [Data Frames](L10-da1-data-frames.html) and [Data Wrangling](L11-da2-data-wrangling.html) lessons.
+
+2) If you haven't installed the **dplyr** library yet, do so now:
+
+```{r, eval=FALSE}
+install.packages("dplyr")
+library(dplyr)
+```
+
+3) Open Rtudio and create a new project called "hw5-lastName", replacing "lastName" with your last name.
+
+4) Download the [hw5.R template script](https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw5.R) and place it in RStudio project folder you just created.
+
+5) Create a new folder called "data" inside your RStudio project folder you just created (you'll put data in this folder later).
+
+6) Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the "hw5.R" file.
+
+7) Type all of your answers to the questions below in the "hw5.R" script.
+
+8) After completing the questions, create a zip file of all files in your R project folder for this assignment.
+
+9) Submit the zip file on Blackboard by the due deadline.
+
+---
+
+### 1) Load the data [SOLO, 5 pts]
+
+For this assignment, we will work with data on [flights](https://github.com/hadley/nycflights13) from New York City airports during 2013. To load the data, install and load the **nycflights13** package.
+
+### 2) Inspect the data [SOLO, 10 pts]
+
+Look at the datasets that are included in this package:
+```{r, eval=FALSE}
+data(package = "nycflights13")
+```
+```
+Data sets in package 'nycflights13':
+
+airlines                Airline names.
+airports                Airport metadata
+flights                 Flights data
+planes                  Plane metadata.
+weather                 Hourly weather data
+```
+
+Write some code to preview and summarize each of these data frames using some of the methods we've seen in class and in the lessons on [data frames](L10-da1-data-frames.html) and [data wrangling](L11-da2-data-wrangling.html). You should be able to quickly get an understanding of what variables are included in each data frame and their nature. For each dataset, consider the following questions in your exploration:
+
+- What type of data is each variable?
+- What is the total size of each data frame?
+- What are the boundaries of each period of observation (e.g. what time period do the observations in these data frames span)?
+- Do any variables have missing values, and if so which ones have more `NA` values than others? Why might that be the case?
+
+## 3) Answer questions about the data
+
+Use the data frames in the **nycflights13** library to answer the following questions. For each question, write R code to find the solution. Leave comments where appropriate to explain what you are doing, and then write your final answer as a comment at the end.
+
+For example, if the question was "how many observations are in the `flights` data frame?", here is an acceptable answer:
+
+```{r}
+# Find the number of rows in the flights data frame
+nrow(flights)
+```
+```{r}
+# Answer: There are 336,776 observations in the flights data frame
+```
+
+You do not have to use the **dplyr** library functions (i.e. `filter()`, `arrange()`, `mutate()`, etc.) to answer these questions, but it is _strongly_ encouraged.
+
+### a) [SOLO, 5 pts]
+
+How many flights out of NYC airports in 2013 had an arrival delay of two or more hours? Hint: use `filter()`
+
+### b) [SOLO, 5 pts]
+
+How many flights out of NYC airports in 2013 departed in fall semester (i.e. the months August - December, inclusive)? Hint: use `filter()`
+
+### c) [SOLO, 5 pts]
+
+How many flights out of NYC airports in 2013 _arrived_ more than two hours late to their destinations, but did not _depart_ an NYC airport late? Hint: use `filter()`
+
+### d) [SOLO, 5 pts]
+
+How many flights out of NYC airports in 2013 were operated by United, American, or Delta airlines? Hint: use `filter()`
+
+### e) [SOLO, 5 pts]
+
+List the top 3 airlines (by name, not carrier code) that had the highest delay time of any one flight leaving a NYC airport in 2013. Hint: use `arrange()`
+
+### f) [SOLO, 5 pts]
+
+How many flights out of NYC airports in 2013 flew to the 3 major DC-area airports: Reagan National, Dulles, or BWI? Hint: use `filter()`
+
+### g) [SOLO, 5 pts]
+
+What is the year manufactured and tail number of the oldest airplane that any one airline used in 2013 to fly out of NYC airports, and which airline operated that plane? Hint: use `arrange()` and `filter()`
+
+### h) [COLLABORATIVE, 10 pts]
+
+Using the `flights` data frame, compute a new variable `speed` (in miles per hour) using the `air_time` and `distance` variables. For the fastest flight in the dataset, what was its speed and what were the origin and destination airport codes? Hint: use `mutate()` and `arrange()`
+
+### i) [COLLABORATIVE, 10 pts]
+
+Using the `flights` data frame, compute a new variable `delta_time` (in minutes) that is equal to the amount of time that was either lost or made up during the flight. "Lost" time is less than 0 and reflects a flight time that was _longer_ than scheduled, while "made up" time is greater than 0 and reflects a flight time that was _faster_ than scheduled. For the flight that made up the most time during its flight, how much time was made up (in minutes) and what were the origin and destination airport codes? Hint: use `mutate()` and `arrange()`
+
+### j) [COLLABORATIVE, 10 pts]
+
+Of all the flights in 2013 departing from NYC airports, list the top 3 destinations (airport names, not airport codes) with the highest mean arrival delay. Hint: Use a "pipeline" of `group_by()`, `summarise()`, and `arrange()`. Don't forget to filter out any `NA` values before summarizing!
+
+### k) [COLLABORATIVE, 10 pts]
+
+Use the `flights` data frame to create a new summary data frame called `dailyDelaySummary` that contains the following variables for each day in 2013:
+
+- `meanDepDelay`: the mean departure delay (in minutes)
+- `numDelayedFlights`: the total number of delayed flights
+
+Save this file in your "data" folder as "dailyDelaySummary.csv"
+Hint: Use a "pipeline" of `group_by()` and `summarise()`. Don't forget to filter out any `NA` values before summarizing!
+
+### l) [COLLABORATIVE, 10 pts]
+
+Using the `dailyDelaySummary` data frame that you created in part k), answer the following two questions:
+
+- Find the day in 2013 with the highest number of delayed flights. On that day, how many flights were delayed, and what was the mean delay time (in minutes)?
+- Find the day in 2013 with the highest mean departure delay (in minutes). On that day, how many flights were delayed and what was the mean delay time (in minutes)?
+
+---
+
+### Bonus Credit 1) [SOLO, 1 pt]
+
+How many flights have a missing departure time? What might these rows represent?
+
+### Bonus Credit 2) [SOLO, 2 pts]
+
+Which flights (i.e. carrier + flight) departed every day of the year, and which airports did they fly to?
+
+### Bonus Credit 3) [SOLO, 3 pts]
+
+Use the flights data frame to find which season has the highest mean flight departure delays. The seasons are defined as the following:
+
+- Spring: March, April, May
+- Summer: June, July, August
+- Fall: September, October, November
+- Winter: December, January, February
+
+What season experiences the largest mean delay, and why might that be? Hint: Use a "pipeline" of `mutate`, `group_by()` and `summarise()`. Don't forget to filter out any `NA` values before summarizing! Also, you may need to use the `ifelse()` function, which we have not covered (Googled it!)
