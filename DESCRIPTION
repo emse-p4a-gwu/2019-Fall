@@ -19,12 +19,11 @@ Imports:
     devtools,
     roxygen2,
     here,
+    nycflights13,
     kableExtra,
     wikifacts,
     TurtleGraphics,
     DAAG,
     dslabs,
     gapminder,
-    gsheet,
-    nycflights13
-
+    gsheet
