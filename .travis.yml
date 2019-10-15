@@ -2,7 +2,6 @@ language: R
 sudo: false
 cache: packages
 cran:
-  https://cloud.r-project.org
   http://lib.stat.cmu.edu/R/CRAN/
 script:
 - R -e "rmarkdown::render_site('.')"
