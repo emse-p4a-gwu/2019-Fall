@@ -27,7 +27,7 @@ rotateStringLeft <- function(s, k) {
     return(42)
 }
 
-vectorToEnglishList <- function(s, k) {
+vectorToEnglishList <- function(v) {
     return(42)
 }
 
