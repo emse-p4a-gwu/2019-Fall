@@ -42,14 +42,14 @@ A data frame is the representation of data in the format of a table where the co
 You can create a data frame using the `data.frame()` function. Here is an example using of members of the Beatles band:
 
 ```{r}
-df <- data.frame(
+beatles <- data.frame(
     firstName   = c("John", "Paul", "Ringo", "George"),
     lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
     instrument  = c("guitar", "bass", "drums", "guitar"),
     yearOfBirth = c(1940, 1942, 1940, 1943),
     deceased    = c(TRUE, FALSE, FALSE, TRUE)
 )
-df
+beatles
 ```
 
 Notice how the data frame is created - you just hand the `data.frame()` function a bunch of vectors! This should hopefully help make it clear that a data frame is indeed a series of same-length vectors structured side-by-side.
@@ -68,14 +68,14 @@ A tibble works just like a data frame, but it has a few small features that make
 Just like with data frames, you can create a tibble using the `tibble()` function. Here's the same example as before with the Beatles band:
 
 ```{r}
-df <- tibble(
+beatles <- tibble(
     firstName   = c("John", "Paul", "Ringo", "George"),
     lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
     instrument  = c("guitar", "bass", "drums", "guitar"),
     yearOfBirth = c(1940, 1942, 1940, 1943),
     deceased    = c(TRUE, FALSE, FALSE, TRUE)
 )
-df
+beatles
 ```
 
 Here we can see a couple of the differences that make tibbles a bit more intuitive to use:
@@ -91,9 +91,9 @@ Now that we have a data frame (tibble) defined, let's see what we can do with it
 You can get the dimensions of a data frame using the `ncol()`, `nrow()`, and `dim()` functions:
 
 ```{r}
-nrow(df) # Returns the number of rows
-ncol(df) # Returns the number of columns
-dim(df) # Returns a vector of the number rows and columns (in that order)
+nrow(beatles) # Returns the number of rows
+ncol(beatles) # Returns the number of columns
+dim(beatles) # Returns a vector of the number rows and columns
 ```
 
 ## Row and column names
@@ -101,9 +101,9 @@ dim(df) # Returns a vector of the number rows and columns (in that order)
 Data frames **must** have column names, but row names are optional (by default, row names are just a sequence of numbers). The `names()` function returns the column names, or you can also be more specific and use the `colnames()` and `rownames()` functions:
 
 ```{r}
-names(df) # Returns a vector of the column names
-colnames(df) # Also returns a vector of the column names
-rownames(df) # Returns a vector of the row names
+names(beatles) # Returns a vector of the column names
+colnames(beatles) # Also returns a vector of the column names
+rownames(beatles) # Returns a vector of the row names
 ```
 
 ## Combining data frames
@@ -112,44 +112,44 @@ You can combine data frames using the `bind_cols()` and `bind_rows()` functions:
 
 ```{r}
 # Combine columns
-df_names <- tibble(
+names <- tibble(
     firstName = c("John", "Paul", "Ringo", "George"),
     lastName  = c("Lennon", "McCartney", "Starr", "Harrison")
 )
-df_instruments <- tibble(
+instruments <- tibble(
     instrument = c("guitar", "bass", "drums", "guitar")
 )
-bind_cols(df_names, df_instruments)
+bind_cols(names, instruments)
 ```
 
 ```{r}
 # Combine rows
-df_members1 <- tibble(
+members1 <- tibble(
     firstName = c("John", "Paul"),
     lastName  = c("Lennon", "McCartney")
 )
-df_members2 <- tibble(
+members2 <- tibble(
     firstName = c("Ringo", "George"),
     lastName  = c("Starr", "Harrison")
 )
-bind_rows(df_members1, df_members2)
+bind_rows(members1, members2)
 ```
 
-Note that to combine rows, the column names must be the same. For example, if we change the second column name in `df_members2` to `"LASTNAME"`, you'll get a data frame with three columns, two of which will have missing values:
+Note that to combine rows, the column names must be the same. For example, if we change the second column name in `members2` to `"LASTNAME"`, you'll get a data frame with three columns, two of which will have missing values:
 
 ```{r}
-colnames(df_members2) <- c("firstName", "LASTNAME")
-bind_rows(df_members1, df_members2)
+colnames(members2) <- c("firstName", "LASTNAME")
+bind_rows(members1, members2)
 ```
 
 # Accessing elements
 
 ## Using the `$` operator
 
-You can extract columns from a data frame by name by using the `$` operator plus the column name. For example, the `instrument` column can be accessed using `df$instrument`:
+You can extract columns from a data frame by name by using the `$` operator plus the column name. For example, the `instrument` column can be accessed using `beatles$instrument`:
 
 ```{r}
-df$instrument
+beatles$instrument
 ```
 
 ## Using integer indices
@@ -163,22 +163,22 @@ DF[ROWS, COLUMNS]
 To index with integers, specify the row numbers and column numbers as vectors.
 
 ```{r}
-df[1, 2] # Select the element in row 1, column 2
-df[c(1, 2), c(2, 3)] # Select the elements in rows 1 & 2 and columns 2 & 3
-df[1:2, 2:3] # Same thing, but using the ":" operator
+beatles[1, 2] # Select the element in row 1, column 2
+beatles[c(1, 2), c(2, 3)] # Select the elements in rows 1 & 2 and columns 2 & 3
+beatles[1:2, 2:3] # Same thing, but using the ":" operator
 ```
 
 If you leave either the row or column index blank, it means "selects all":
 
 ```{r}
-df[c(1, 2),] # Leaving the column index blank will select all columns
-df[,c(1, 2)] # Leaving the row index blank will select all rows
+beatles[c(1, 2),] # Leaving the column index blank will select all columns
+beatles[,c(1, 2)] # Leaving the row index blank will select all rows
 ```
 
 You can also use negative integers to specify rows or columns to be excluded:
 
 ```{r}
-df[-1, ] # Select all rows and except the first
+beatles[-1, ] # Select all rows and except the first
 ```
 
 ## Using character indices
@@ -186,8 +186,8 @@ df[-1, ] # Select all rows and except the first
 You can use the column names to select elements in a data frame. If you do not include a `,` to designate which rows to select, R will return all the rows for the selected columns:
 
 ```{r}
-df[c('firstName', 'lastName')] # Select all rows for the "firstName" and "lastName" columns
-df[1:2, c('firstName', 'lastName')] # Select just the first two rows for the "firstName" and "lastName" columns
+beatles[c('firstName', 'lastName')] # Select all rows for the "firstName" and "lastName" columns
+beatles[1:2, c('firstName', 'lastName')] # Select just the first two rows for the "firstName" and "lastName" columns
 ```
 
 ## Using logical indices
@@ -195,12 +195,12 @@ df[1:2, c('firstName', 'lastName')] # Select just the first two rows for the "fi
 When using a logical vector for indexing, the position where the logical vector is `TRUE` is returned. This is helpful for filtering data frame rows based on conditions. For example, if you wanted to filter out the rows for which Beatles members were still alive, you could first create a logical vector using the `deceased` column:
 
 ```{r}
-df$deceased == FALSE
+beatles$deceased == FALSE
 ```
 
 Then, you could insert this logical vector in the row position of the `[]` brackets to filter only the rows that are `TRUE`:
 ```{r}
-df[df$deceased == FALSE,]
+beatles[beatles$deceased == FALSE,]
 ```
 
 ## Modifying data frames
@@ -210,15 +210,15 @@ You can use any of the above methods for accessing elements in a data frame to a
 For example, let's create the variable `age` by subtracting the `yearOfBirth` variable from the current year:
 
 ```{r}
-df$age <- 2019 - df$yearOfBirth
-df
+beatles$age <- 2019 - beatles$yearOfBirth
+beatles
 ```
 
 You can also make a new column of all the same value by just providing one value:
 
 ```{r}
-df$hometown <- 'Liverpool'
-df
+beatles$hometown <- 'Liverpool'
+beatles
 ```
 
 # Dealing with actual data
@@ -319,7 +319,7 @@ Now load the data:
 
 ```{r}
 library(readr)
-df <- read_csv(file.path('data', 'msleep.csv'))
+msleep <- read_csv(file.path('data', 'msleep.csv'))
 ```
 
 R tells us that we've successfully read in some data and a quick summary of the data type for each column in the dataset.
@@ -329,31 +329,31 @@ R tells us that we've successfully read in some data and a quick summary of the 
 You can view the entire dataset in a tabular format (similar to how Excel looks) by using the `View()` function, which opens up another tab to view the data. Note that you cannot modify the data this way - you can just look at it:
 
 ```{r, eval = FALSE}
-View(df)
+View(msleep)
 ```
 
 In addition to viewing the whole dataset with `View()`, you can quickly view summaries of the data frame with a few convenient functions. For example, you can look at the first 6 rows by using the `head()` function:
 
 ```{r}
-head(df)
+head(msleep)
 ```
 
 Similarly, you can view the _last_ 6 rows by using the `tail()` function:
 
 ```{r}
-tail(df)
+tail(msleep)
 ```
 
 You can also view an overview summary of each column and it's data types by using the `str()` function:
 
 ```{r}
-str(df)
+str(msleep)
 ```
 
 Finally, you can view summary statistics for each column using the `summary()` function:
 
 ```{r}
-summary(df)
+summary(msleep)
 ```
 
 In summary, here is a non-exhaustive list of functions to get a sense of the content/structure of a data frame:
@@ -392,7 +392,7 @@ But just to give you an idea of where we're going, here are a few pieces of info
 
 ```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
 library(ggplot2)
-ggplot(df, aes(x=brainwt, y=bodywt)) +
+ggplot(msleep, aes(x=brainwt, y=bodywt)) +
     geom_point(alpha=0.6) +
     stat_smooth(method='lm', col='red', se=F, size=0.7) +
     scale_x_log10() +
@@ -404,7 +404,7 @@ ggplot(df, aes(x=brainwt, y=bodywt)) +
 2) It appears there may also be a negative, logarithmic relationship (albeit weaker) between the size of mammalian brains and how much they sleep - cool!
 
 ```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
-ggplot(df, aes(x=brainwt, y=sleep_total)) +
+ggplot(msleep, aes(x=brainwt, y=sleep_total)) +
     geom_point(alpha=0.6) +
     scale_x_log10() +
     scale_y_log10() +
@@ -416,7 +416,7 @@ ggplot(df, aes(x=brainwt, y=sleep_total)) +
 3) Wow, there's a lot of variation in how much different mammals sleep - cool!
 
 ```{r fig.height=4, fig.width=6, message=FALSE, warning=FALSE}
-ggplot(df, aes(x=sleep_total)) +
+ggplot(msleep, aes(x=sleep_total)) +
     geom_histogram() +
     labs(x     = 'Total sleep time in hours',
          title = 'Histogram of total sleep time') +
