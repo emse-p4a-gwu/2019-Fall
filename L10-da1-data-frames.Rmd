@@ -344,10 +344,10 @@ Similarly, you can view the _last_ 6 rows by using the `tail()` function:
 tail(msleep)
 ```
 
-You can also view an overview summary of each column and it's data types by using the `str()` function:
+You can also view an overview summary of each column and it's data types by using the `str()` or `glimpse()` functions (these both do the same thing, but I prefer the output of `glimpse()`):
 
 ```{r}
-str(msleep)
+glimpse(msleep)
 ```
 
 Finally, you can view summary statistics for each column using the `summary()` function:
@@ -372,7 +372,7 @@ In summary, here is a non-exhaustive list of functions to get a sense of the con
     * `rownames(df)` - returns the row names.
 
 * Summary:
-    * `str(df)` - structure of the object and information about the class, length and content of  each column.
+    * `glimpse(df)` or `str(df)` - structure of the object and information about the class, length and content of  each column.
     * `summary(df)` - summary statistics for each column.
 
 Note: most of these functions are "generic", they can be used on other types of
