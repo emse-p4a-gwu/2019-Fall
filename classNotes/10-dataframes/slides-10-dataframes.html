@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 10: Data Analysis 1 - Data Frames</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Helveston" />
+    <meta name="date" content="2019-10-28" />
+    <link rel="stylesheet" href="classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Week 10: Data Analysis 1 - Data Frames
+## EMSE 6574, Section 11
+### John Helveston
+### October 28, 2019
+
+---
+
+
+
+
+# Quiz 4 - Strings!
+
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
+
+- ### No calculators
+- ### No notes
+- ### No books
+- ### No computers
+- ### No phones
+
+---
+# Announcements
+
+Make sure you have these packages installed:
+
+
+```r
+install.packages("dplyr")
+install.packages("readr")
+library(dplyr)
+library(readr)
+```
+
+---
+
+### "The purpose of computing is insight, not numbers"
+### - Richard Hamming
+
+---
+# The data frame...in Excel
+
+&lt;img src="images/spreadsheet.png" width="600"&gt;
+
+---
+# The data frame...in R
+
+**R**:
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 Ringo     Starr     drums             1940 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+
+---
+# Data frame columns are **vectors**
+
+The **data frame** is a collection of **vectors** of the same length
+
+```r
+beatles
+```
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 Ringo     Starr     drums             1940 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+&lt;br&gt;
+
+--
+You can access each vector (column) using the `$` symbol:
+--
+
+```r
+beatles$firstName
+```
+
+```
+## [1] "John"   "Paul"   "Ringo"  "George"
+```
+--
+
+```r
+beatles$lastName
+```
+
+```
+## [1] "Lennon"    "McCartney" "Starr"     "Harrison"
+```
+
+---
+# Making a data frame with `tibble()`
+
+
+```r
+library(dplyr)
+```
+
+```r
+beatles &lt;- tibble(
+    firstName   = c("John", "Paul", "Ringo", "George"),
+    lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
+    instrument  = c("guitar", "bass", "drums", "guitar"),
+    yearOfBirth = c(1940, 1942, 1940, 1943),
+    deceased    = c(TRUE, FALSE, FALSE, TRUE)
+)
+```
+&lt;br&gt;
+--
+
+```r
+beatles
+```
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 Ringo     Starr     drums             1940 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+
+---
+# Each vector must have the same length
+
+
+```r
+beatles &lt;- tibble(
+    firstName   = c("John", "Paul", "Ringo", "George", "BOB"),
+    lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
+    instrument  = c("guitar", "bass", "drums", "guitar"),
+    yearOfBirth = c(1940, 1942, 1940, 1943),
+    deceased    = c(TRUE, FALSE, FALSE, TRUE)
+)
+```
+--
+
+```
+## Tibble columns must have consistent lengths, only values of length one are recycled:
+## * Length 4: Columns `lastName`, `instrument`, `yearOfBirth`, `deceased`
+## * Length 5: Column `firstName`
+```
+
+---
+# Data frame rows are **observations**
+
+
+```r
+beatles
+```
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 Ringo     Starr     drums             1940 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+
+---
+# Data frame rows are **observations**
+
+
+```r
+beatles
+```
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 Ringo     Starr     drums             1940 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+&lt;br&gt;
+
+Example: Information about John Lennon is the first **row**
+
+
+```r
+beatles[1,]
+```
+
+```
+## # A tibble: 1 x 5
+##   firstName lastName instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon   guitar            1940 TRUE
+```
+
+---
+# Dimensions
+
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 Ringo     Starr     drums             1940 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+
+
+```r
+nrow(beatles) # Number of rows
+```
+
+```
+## [1] 4
+```
+
+```r
+ncol(beatles) # Number of columns
+```
+
+```
+## [1] 5
+```
+
+```r
+dim(beatles)  # Number of rows and columns
+```
+
+```
+## [1] 4 5
+```
+
+---
+# Row and column names
+
+Get the names of columns:
+
+```r
+names(beatles)
+```
+
+```
+## [1] "firstName"   "lastName"    "instrument"  "yearOfBirth" "deceased"
+```
+
+```r
+colnames(beatles)
+```
+
+```
+## [1] "firstName"   "lastName"    "instrument"  "yearOfBirth" "deceased"
+```
+&lt;br&gt;
+
+--
+Get the names of rows:
+
+```r
+rownames(beatles)
+```
+
+```
+## [1] "1" "2" "3" "4"
+```
+
+---
+# Changing the column names
+
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 Ringo     Starr     drums             1940 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+&lt;br&gt;
+
+--
+Change the column names:
+
+```r
+colnames(beatles) &lt;- c('one', 'two', 'three', 'four', 'five')
+beatles
+```
+
+```
+## # A tibble: 4 x 5
+##   one    two       three   four five 
+##   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt;
+## 1 John   Lennon    guitar  1940 TRUE 
+## 2 Paul   McCartney bass    1942 FALSE
+## 3 Ringo  Starr     drums   1940 FALSE
+## 4 George Harrison  guitar  1943 TRUE
+```
+
+---
+# Changing the column names
+
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 Ringo     Starr     drums             1940 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+&lt;br&gt;
+
+--
+Change the column names:
+
+```r
+library(stringr)
+colnames(beatles) &lt;- str_to_upper(colnames(beatles))
+beatles
+```
+
+```
+## # A tibble: 4 x 5
+##   FIRSTNAME LASTNAME  INSTRUMENT YEAROFBIRTH DECEASED
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 Ringo     Starr     drums             1940 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+
+---
+# Combining data frames
+
+Combine by columns using `bind_cols()`:
+
+
+```r
+names &lt;- tibble(
+    firstName = c("John", "Paul", "Ringo", "George"),
+    lastName  = c("Lennon", "McCartney", "Starr", "Harrison")
+)
+instruments &lt;- tibble(
+    instrument = c("guitar", "bass", "drums", "guitar")
+)
+```
+--
+
+```r
+bind_cols(names, instruments)
+```
+
+```
+## # A tibble: 4 x 3
+##   firstName lastName  instrument
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     
+## 1 John      Lennon    guitar    
+## 2 Paul      McCartney bass      
+## 3 Ringo     Starr     drums     
+## 4 George    Harrison  guitar
+```
+
+---
+# Combining data frames
+
+Combine by rows using `bind_rows()`:
+
+
+```r
+members1 &lt;- tibble(
+    firstName = c("John", "Paul"),
+    lastName  = c("Lennon", "McCartney")
+)
+members2 &lt;- tibble(
+    firstName = c("Ringo", "George"),
+    lastName  = c("Starr", "Harrison")
+)
+```
+--
+
+```r
+bind_rows(members1, members2)
+```
+
+```
+## # A tibble: 4 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 John      Lennon   
+## 2 Paul      McCartney
+## 3 Ringo     Starr    
+## 4 George    Harrison
+```
+
+---
+# Combining data frames
+
+Be careful - `bind_rows()` requires **exact same** columns names:
+
+
+```r
+colnames(members2) &lt;- c("firstName", "LastName")
+bind_rows(members1, members2)
+```
+
+```
+## # A tibble: 4 x 3
+##   firstName lastName  LastName
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;   
+## 1 John      Lennon    &lt;NA&gt;    
+## 2 Paul      McCartney &lt;NA&gt;    
+## 3 Ringo     &lt;NA&gt;      Starr   
+## 4 George    &lt;NA&gt;      Harrison
+```
+
+---
+# Practice - Think, Pair, Share
+
+
+```r
+animals_farm = tibble(
+    name           = c("cow", "horse"),
+    sound          = c("moo", "neigh"),
+    aveWeightLbs   = c(2400, 1500),
+    aveLifeSpanYrs = c(20, 25)
+)
+animals_pet = tibble(
+    name           = c("dog", "cat"),
+    sound          = c("woof", "meow"),
+    aveWeightLbs   = c(40, 8),
+    aveLifeSpanYrs = c(10, 12)
+)
+```
+
+Use R code to find answers to these questions:
+
+1. How many rows are in the `animals_farm` data frame?
+2. How many columns are in the `animals_pet` data frame?
+3. Create a new data frame, `animals`, by combining `animals_farm` and `animals_pet`.
+4. Create a new column in `animals` called `type` and set the values to `"farm"` or `"pet"`.
+5. Change the column names of `animals` to title case.
+
+
+```r
+nrow(animals_farm)
+ncol(animals_pet)
+animals &lt;- bind_rows(animals_farm, animals_pet)
+animals$type &lt;- c('farm', 'farm', 'pet', 'pet')
+library(stringr)
+colnames(animals) &lt;- str_to_title(colnames(animals))
+```
+
+---
+# Accessing elements
+
+General form for indexing elements:
+
+
+```r
+DF[ROWS, COLUMNS]
+```
+
+--
+Select the element in row 1, column 2:
+
+```r
+beatles[1, 2]
+```
+
+```
+## # A tibble: 1 x 1
+##   lastName
+##   &lt;chr&gt;   
+## 1 Lennon
+```
+
+--
+Select the elements in rows 1 &amp; 2 and columns 2 &amp; 3:
+
+```r
+beatles[c(1, 2), c(2, 3)]
+```
+
+```
+## # A tibble: 2 x 2
+##   lastName  instrument
+##   &lt;chr&gt;     &lt;chr&gt;     
+## 1 Lennon    guitar    
+## 2 McCartney bass
+```
+
+---
+# Accessing elements
+
+Leaving row or column index blank means "selects all":
+
+--
+
+```r
+beatles[c(1, 2),]
+```
+
+```
+## # A tibble: 2 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE
+```
+--
+
+```r
+beatles[,c(1, 2)]
+```
+
+```
+## # A tibble: 4 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 John      Lennon   
+## 2 Paul      McCartney
+## 3 Ringo     Starr    
+## 4 George    Harrison
+```
+
+---
+# Negative indices exclude row / column
+
+--
+Select all rows except the first:
+
+```r
+beatles[-1, ]
+```
+
+```
+## # A tibble: 3 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Paul      McCartney bass              1942 FALSE   
+## 2 Ringo     Starr     drums             1940 FALSE   
+## 3 George    Harrison  guitar            1943 TRUE
+```
+&lt;br&gt;
+
+--
+Select all columns except the first:
+
+```r
+beatles[,-1]
+```
+
+```
+## # A tibble: 4 x 4
+##   lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Lennon    guitar            1940 TRUE    
+## 2 McCartney bass              1942 FALSE   
+## 3 Starr     drums             1940 FALSE   
+## 4 Harrison  guitar            1943 TRUE
+```
+
+---
+# Using character indices
+
+--
+You can use a vector of column names to select columns:
+
+```r
+beatles[,c('firstName', 'lastName')]
+```
+
+```
+## # A tibble: 4 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 John      Lennon   
+## 2 Paul      McCartney
+## 3 Ringo     Starr    
+## 4 George    Harrison
+```
+&lt;br&gt;
+
+--
+Same thing, but just the first two rows:
+
+```r
+beatles[1:2, c('firstName', 'lastName')]
+```
+
+```
+## # A tibble: 2 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 John      Lennon   
+## 2 Paul      McCartney
+```
+
+---
+# Use logical indices to filter rows
+
+Example: What if want to filter rows to find which Beatles members were still alive?
+&lt;br&gt;
+&lt;br&gt;
+
+--
+First, create a logical vector using the `deceased` column:
+
+```r
+beatles$deceased == FALSE
+```
+
+```
+## [1] FALSE  TRUE  TRUE FALSE
+```
+&lt;br&gt;
+
+--
+Next, insert this logical vector in the row position of `[,]`:
+
+```r
+beatles[beatles$deceased == FALSE,]
+```
+
+```
+## # A tibble: 2 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Paul      McCartney bass              1942 FALSE   
+## 2 Ringo     Starr     drums             1940 FALSE
+```
+
+---
+# Creating new variables
+
+Use the `$` symbol to create a new column
+&lt;br&gt;
+&lt;br&gt;
+
+--
+Add the hometown of the bandmembers:
+
+```r
+beatles$hometown &lt;- 'Liverpool'
+beatles
+```
+
+```
+## # A tibble: 4 x 6
+##   firstName lastName  instrument yearOfBirth deceased hometown 
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;    
+## 1 John      Lennon    guitar            1940 TRUE     Liverpool
+## 2 Paul      McCartney bass              1942 FALSE    Liverpool
+## 3 Ringo     Starr     drums             1940 FALSE    Liverpool
+## 4 George    Harrison  guitar            1943 TRUE     Liverpool
+```
+
+---
+# Creating new variables
+
+Use the `$` symbol to create a new column
+&lt;br&gt;
+&lt;br&gt;
+
+--
+Compute and add the age of the bandmembers:
+
+```r
+beatles$age &lt;- 2019 - beatles$yearOfBirth
+beatles
+```
+
+```
+## # A tibble: 4 x 7
+##   firstName lastName  instrument yearOfBirth deceased hometown    age
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;     &lt;dbl&gt;
+## 1 John      Lennon    guitar            1940 TRUE     Liverpool    79
+## 2 Paul      McCartney bass              1942 FALSE    Liverpool    77
+## 3 Ringo     Starr     drums             1940 FALSE    Liverpool    79
+## 4 George    Harrison  guitar            1943 TRUE     Liverpool    76
+```
+
+---
+# Practice - Think, Pair, Share
+
+
+```r
+beatles &lt;- tibble(
+    firstName   = c("John", "Paul", "Ringo", "George"),
+    lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
+    instrument  = c("guitar", "bass", "drums", "guitar"),
+    yearOfBirth = c(1940, 1942, 1940, 1943),
+    deceased    = c(TRUE, FALSE, FALSE, TRUE)
+)
+```
+
+Use R code to find answers to these questions:
+
+1. Create a new column, `playsGuitar`, which is `TRUE` if the band member plays the guitar and `FALSE` otherwise.
+2. Select the rows for the band members who have four-letter first names.
+3. Create a new column, `fullName`, which contains the band member's first and last name separated by a space (e.g. `"John Lennon"`)
+
+
+
+---
+# 5 minute break - stand up, move around, stretch!
+
+### [5 minutes](https://www.youtube.com/watch?v=_W0bSen8Qjg)
+
+---
+# Getting the data from an R package
+
+
+```r
+install.packages("ggplot2")
+library(ggplot2)
+```
+--
+
+```r
+data(package = "ggplot2")
+```
+
+Dataset   | Description
+----|----------------------------------------------------------------------
+diamonds       | Prices of 50,000 round cut diamonds
+economics      | US economic time series
+economics_long | US economic time series
+faithfuld      | 2d density estimate of Old Faithful data
+luv_colours    | 'colors()' in Luv space
+midwest        | Midwest demographics
+mpg            | Fuel economy data from 1999 and 2008 for 38
+               | popular models of car
+msleep         | An updated and expanded version of the mammals
+               | sleep dataset
+presidential   | Terms of 11 presidents from Eisenhower to Obama
+seals          | Vector field of seal movements
+txhousing      | Housing sales in TX
+
+---
+# Working with external datasets
+
+Today's example: `msleep`
+
+V. M. Savage and G. B. West. "A quantitative, theoretical framework for understanding mammalian sleep." _Proceedings of the National Academy of Sciences_, 104 (3):1051-1056, 2007.
+
+ Column Name      | Description
+------------------|------------------------------------
+name              | Common name
+genus             | The taxonomic genus of animal
+vore              | Carnivore, omnivore or herbivore?
+order             | The taxonomic order of animal
+conservation      | The conservation status of the animal
+sleep_total       | Total amount of sleep, in hours
+sleep_rem         | REM sleep, in hours
+sleep_cycle       | Length of sleep cycle, in hours
+awake             | Amount of time spent awake, in hours
+brainwt           | Brain weight in kilograms
+bodywt            | Body weight in kilograms
+
+---
+# Importing data from a file
+
+Note the `msleep.csv` file in your `data` folder.
+
+- **DO NOT** double-click it!
+- **DO NOT** open it in Excel!
+&lt;br&gt;
+
+PSA: Excel **breaks** data
+&lt;br&gt;
+&lt;br&gt;
+
+--
+Import the .csv file:
+
+```r
+library(readr)
+pathToData &lt;- file.path('data', 'msleep.csv')
+msleep &lt;- read_csv(pathToData)
+```
+
+---
+# Side note about file paths
+
+--
+When you open a `.Rproj` file, R sets your _working directory_ to the location of that file.
+&lt;br&gt;
+&lt;br&gt;
+
+--
+To view your current _working directory_, use:
+
+```r
+getwd()
+```
+
+```
+## [1] "/Users/jhelvy/sync/00_teaching/EMSE 6574/00_site_new/10-dataframes"
+```
+&lt;br&gt;
+
+--
+The `file.path()` function creates a **local** path **from your working directory**
+
+```r
+pathToData &lt;- file.path('data', 'msleep.csv')
+pathToData
+```
+
+```
+## [1] "data/msleep.csv"
+```
+&lt;br&gt;
+
+--
+Avoid using **hard-coded** file paths, like this:
+
+```r
+pathToData &lt;- 'data/msleep.csv'
+```
+
+---
+# Previewing data frames: Dimensions
+
+
+```r
+nrow(msleep) # Number of rows
+```
+
+```
+## [1] 83
+```
+
+```r
+ncol(msleep) # Number of columns
+```
+
+```
+## [1] 11
+```
+
+```r
+dim(msleep)  # Number of rows and columns
+```
+
+```
+## [1] 83 11
+```
+
+---
+# Previewing data frames: Content
+
+--
+Look at the data in a "spreadsheet"-like way:
+
+```r
+View(msleep)
+```
+&lt;br&gt;
+
+--
+View the **first** 6 rows with `head()`, or **last** 6 rows with `tail()`:
+
+```r
+head(msleep)
+```
+
+```
+## # A tibble: 6 x 11
+##   name  genus vore  order conservation sleep_total sleep_rem sleep_cycle
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Chee~ Acin~ carni Carn~ lc                  12.1      NA        NA    
+## 2 Owl ~ Aotus omni  Prim~ &lt;NA&gt;                17         1.8      NA    
+## 3 Moun~ Aplo~ herbi Rode~ nt                  14.4       2.4      NA    
+## 4 Grea~ Blar~ omni  Sori~ lc                  14.9       2.3       0.133
+## 5 Cow   Bos   herbi Arti~ domesticated         4         0.7       0.667
+## 6 Thre~ Brad~ herbi Pilo~ &lt;NA&gt;                14.4       2.2       0.767
+## # ... with 3 more variables: awake &lt;dbl&gt;, brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;
+```
+
+---
+# Quick data summaries
+
+Preview each variable with `str()` or `glimpse()`:
+
+
+```r
+glimpse(msleep)
+```
+
+```
+## Observations: 83
+## Variables: 11
+## $ name         &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Grea...
+## $ genus        &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bo...
+## $ vore         &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi...
+## $ order        &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorph...
+## $ conservation &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", N...
+## $ sleep_total  &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1...
+## $ sleep_rem    &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0....
+## $ sleep_cycle  &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.38...
+## $ awake        &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9,...
+## $ brainwt      &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0....
+## $ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.4...
+```
+
+---
+# Practice - Think, Pair, Share
+
+First, read in the `wildlife_impacts.csv` file that is in the `data` folder.
+
+Call the data frame `df`.
+&lt;br&gt;
+&lt;br&gt;
+
+Then, use the `df` object to answer the following questions:
+
+- How many rows and columns are in the data frame?
+- What type of data is each column?
+- Preview the different columns - what do you think this data is about? What might one row represent?
+
+---
+# Next week: better data wrangling with **dplyr**
+
+&lt;center&gt;
+&lt;img src="images/horst_monsters_data_wrangling.png" width="650"&gt;
+&lt;/center&gt;
+
+---
+# Next next week: plotting with **ggplot2**
+
+Translating _data_ into _insight_:
+
+
+```r
+library(ggplot2)
+ggplot(msleep, aes(x=brainwt, y=bodywt)) +
+    geom_point(alpha=0.6) +
+    stat_smooth(method='lm', col='red', se=F, size=0.7) +
+    scale_x_log10() +
+    scale_y_log10() +
+    labs(x='log(brain weight) in g', y='log(body weight) in kg') +
+    theme_minimal()
+```
+
+![](slides-10-dataframes_files/figure-html/unnamed-chunk-57-1.png)&lt;!-- --&gt;
+
+---
+# A note about HW5
+
+- You have what you need to start now.
+- It will be _much_ easier if you use the **dplyr** functions (i.e. read ahead).
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
