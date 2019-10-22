@@ -34,14 +34,19 @@ class: center, middle, inverse, title-slide
 ---
 # Announcements
 
-Make sure you have these packages installed:
+--
+1) Download the `week10notes.zip` file for class today (link in `slack/classroom`).
+&lt;br&gt;
+&lt;br&gt;
 
+--
+2) Make sure you have these packages installed:
 
 ```r
+install.packages("stringr")
 install.packages("dplyr")
+install.packages("ggplot2")
 install.packages("readr")
-library(dplyr)
-library(readr)
 ```
 
 ---
@@ -807,7 +812,7 @@ msleep &lt;- read_csv(pathToData)
 ```
 
 ---
-# Side note about file paths
+# A note about file paths
 
 --
 When you open a `.Rproj` file, R sets your _working directory_ to the location of that file.
@@ -822,7 +827,7 @@ getwd()
 ```
 
 ```
-## [1] "/Users/jhelvy/sync/00_teaching/EMSE 6574/00_site_new/10-dataframes"
+## [1] "/Users/jhelvy/gh/2019-Fall/classNotes/10-dataframes"
 ```
 &lt;br&gt;
 
@@ -896,13 +901,13 @@ head(msleep)
 ## # A tibble: 6 x 11
 ##   name  genus vore  order conservation sleep_total sleep_rem sleep_cycle
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
-## 1 Chee~ Acin~ carni Carn~ lc                  12.1      NA        NA    
-## 2 Owl ~ Aotus omni  Prim~ &lt;NA&gt;                17         1.8      NA    
-## 3 Moun~ Aplo~ herbi Rode~ nt                  14.4       2.4      NA    
-## 4 Grea~ Blar~ omni  Sori~ lc                  14.9       2.3       0.133
-## 5 Cow   Bos   herbi Arti~ domesticated         4         0.7       0.667
-## 6 Thre~ Brad~ herbi Pilo~ &lt;NA&gt;                14.4       2.2       0.767
-## # ... with 3 more variables: awake &lt;dbl&gt;, brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;
+## 1 Chee… Acin… carni Carn… lc                  12.1      NA        NA    
+## 2 Owl … Aotus omni  Prim… &lt;NA&gt;                17         1.8      NA    
+## 3 Moun… Aplo… herbi Rode… nt                  14.4       2.4      NA    
+## 4 Grea… Blar… omni  Sori… lc                  14.9       2.3       0.133
+## 5 Cow   Bos   herbi Arti… domesticated         4         0.7       0.667
+## 6 Thre… Brad… herbi Pilo… &lt;NA&gt;                14.4       2.2       0.767
+## # … with 3 more variables: awake &lt;dbl&gt;, brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;
 ```
 
 ---
@@ -918,33 +923,34 @@ glimpse(msleep)
 ```
 ## Observations: 83
 ## Variables: 11
-## $ name         &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Grea...
-## $ genus        &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bo...
-## $ vore         &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi...
-## $ order        &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorph...
-## $ conservation &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", N...
-## $ sleep_total  &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1...
-## $ sleep_rem    &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0....
-## $ sleep_cycle  &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.38...
-## $ awake        &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9,...
-## $ brainwt      &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0....
-## $ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.4...
+## $ name         &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Greate…
+## $ genus        &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bos"…
+## $ vore         &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi",…
+## $ order        &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorpha"…
+## $ conservation &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", NA,…
+## $ sleep_total  &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, …
+## $ sleep_rem    &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6,…
+## $ sleep_cycle  &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833…
+## $ awake        &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9, 2…
+## $ brainwt      &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07…
+## $ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490…
 ```
 
 ---
-# Practice - Think, Pair, Share
+# Group Practice
 
-First, read in the `wildlife_impacts.csv` file that is in the `data` folder.
-
-Call the data frame `df`.
+1) Read in the `wildlife_impacts.csv` file that is in the `data` folder. Name the data frame object `df`.
 &lt;br&gt;
 &lt;br&gt;
 
-Then, use the `df` object to answer the following questions:
+2) Use the `df` object to answer the following questions:
 
 - How many rows and columns are in the data frame?
 - What type of data is each column?
 - Preview the different columns - what do you think this data is about? What might one row represent?
+- How many unique airports are in the data frame?
+- What is the earliest and latest observation in the data frame?
+- What is the lowest and highest cost of any one repair in the data frame?
 
 ---
 # Next week: better data wrangling with **dplyr**

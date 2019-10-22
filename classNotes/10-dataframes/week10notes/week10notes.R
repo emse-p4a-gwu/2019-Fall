@@ -1,7 +1,7 @@
-
-# install.packages(dplyr)
-# install.packages(ggplot2)
-# install.packages(readr)
+# install.packages("stringr")
+# install.packages("dplyr")
+# install.packages("ggplot2")
+# install.packages("readr")
 library(dplyr)
 library(stringr)
 library(ggplot2)

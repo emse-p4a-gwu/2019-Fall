@@ -9,9 +9,7 @@ output:
 ---
 
 ```{r, echo=FALSE, message=FALSE}
-library(dplyr)
-library(stringr)
-library(ggplot2)
+library(tidyverse)
 ```
 
 # Quiz 4 - Strings!
@@ -28,17 +26,18 @@ library(ggplot2)
 # Announcements
 
 --
-1) Make sure you have these packages installed:
-
-```{r, eval=FALSE}
-install.packages("dplyr")
-install.packages("readr")
-library(dplyr)
-library(readr)
-```
+1) Download the `week10notes.zip` file for class today (link in `slack/classroom`).
+<br>
+<br>
 
 --
-2) Download the `week10notes.zip` file for class today (link in `slack/classroom`).
+2) Make sure you have these packages installed:
+```{r, eval=FALSE}
+install.packages("stringr")
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("readr")
+```
 
 ---
 
@@ -521,7 +520,7 @@ msleep <- read_csv(pathToData)
 ```
 
 ---
-# Side note about file paths
+# A note about file paths
 
 --
 When you open a `.Rproj` file, R sets your _working directory_ to the location of that file.
@@ -584,19 +583,20 @@ glimpse(msleep)
 ```
 
 ---
-# Practice - Think, Pair, Share
+# Group Practice
 
-First, read in the `wildlife_impacts.csv` file that is in the `data` folder.
-
-Call the data frame `df`.
+1) Read in the `wildlife_impacts.csv` file that is in the `data` folder. Name the data frame object `df`.
 <br>
 <br>
 
-Then, use the `df` object to answer the following questions:
+2) Use the `df` object to answer the following questions:
 
 - How many rows and columns are in the data frame?
 - What type of data is each column?
 - Preview the different columns - what do you think this data is about? What might one row represent?
+- How many unique airports are in the data frame?
+- What is the earliest and latest observation in the data frame?
+- What is the lowest and highest cost of any one repair in the data frame?
 
 ---
 # Next week: better data wrangling with **dplyr**
