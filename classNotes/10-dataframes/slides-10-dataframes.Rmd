@@ -27,7 +27,8 @@ library(ggplot2)
 ---
 # Announcements
 
-Make sure you have these packages installed:
+--
+1) Make sure you have these packages installed:
 
 ```{r, eval=FALSE}
 install.packages("dplyr")
@@ -35,6 +36,9 @@ install.packages("readr")
 library(dplyr)
 library(readr)
 ```
+
+--
+2) Download the `week10notes.zip` file for class today (link in `slack/classroom`).
 
 ---
 
