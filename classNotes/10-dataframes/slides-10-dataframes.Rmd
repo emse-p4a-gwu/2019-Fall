@@ -585,7 +585,7 @@ glimpse(msleep)
 ---
 # Group Practice
 
-1) Read in the `wildlife_impacts.csv` file that is in the `data` folder. Name the data frame object `df`.
+1) Use `read_csv()` and `file.path()` to load the `wildlife_impacts.csv` file that is in the `data` folder. Name the data frame object `df`.
 <br>
 <br>
 
