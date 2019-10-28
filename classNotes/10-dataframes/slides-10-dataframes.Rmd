@@ -31,7 +31,7 @@ library(tidyverse)
 <br>
 
 --
-2) Make sure you have these packages installed:
+2) Make sure you have these packages installed and loaded:
 ```{r, eval=FALSE}
 install.packages("stringr")
 install.packages("dplyr")
@@ -606,7 +606,38 @@ glimpse(msleep)
 </center>
 
 ---
-# Next next week: plotting with **ggplot2**
+# Select rows with `filter()`
+
+Example: Filter rows to find which Beatles members are still alive?
+<br>
+<br>
+
+--
+Base R:
+```{r, eval=FALSE}
+beatles[beatles$deceased == FALSE,]
+```
+
+---
+# Select rows with `filter()`
+
+Example: Filter rows to find which Beatles members are still alive?
+<br>
+<br>
+
+Base R:
+```{r, eval=FALSE}
+beatles[beatles$deceased == FALSE,]
+```
+<br>
+
+dplyr:
+```{r, eval=FALSE}
+filter(beatles, deceased == FALSE)
+```
+
+---
+# In 2 weeks: plotting with **ggplot2**
 
 Translating _data_ into _insight_:
 

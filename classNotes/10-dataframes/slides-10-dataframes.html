@@ -40,7 +40,7 @@ class: center, middle, inverse, title-slide
 &lt;br&gt;
 
 --
-2) Make sure you have these packages installed:
+2) Make sure you have these packages installed and loaded:
 
 ```r
 install.packages("stringr")
@@ -939,7 +939,7 @@ glimpse(msleep)
 ---
 # Group Practice
 
-1) Read in the `wildlife_impacts.csv` file that is in the `data` folder. Name the data frame object `df`.
+1) Use `read_csv()` and `file.path()` to load the `wildlife_impacts.csv` file that is in the `data` folder. Name the data frame object `df`.
 &lt;br&gt;
 &lt;br&gt;
 
@@ -960,6 +960,40 @@ glimpse(msleep)
 &lt;/center&gt;
 
 ---
+# Select rows with `filter()`
+
+Example: Filter rows to find which Beatles members are still alive?
+&lt;br&gt;
+&lt;br&gt;
+
+--
+Base R:
+
+```r
+beatles[beatles$deceased == FALSE,]
+```
+
+---
+# Select rows with `filter()`
+
+Example: Filter rows to find which Beatles members are still alive?
+&lt;br&gt;
+&lt;br&gt;
+
+Base R:
+
+```r
+beatles[beatles$deceased == FALSE,]
+```
+&lt;br&gt;
+
+dplyr:
+
+```r
+filter(beatles, deceased == FALSE)
+```
+
+---
 # Next next week: plotting with **ggplot2**
 
 Translating _data_ into _insight_:
@@ -976,7 +1010,7 @@ ggplot(msleep, aes(x=brainwt, y=bodywt)) +
     theme_minimal()
 ```
 
-![](slides-10-dataframes_files/figure-html/unnamed-chunk-57-1.png)&lt;!-- --&gt;
+![](slides-10-dataframes_files/figure-html/unnamed-chunk-60-1.png)&lt;!-- --&gt;
 
 ---
 # A note about HW5
