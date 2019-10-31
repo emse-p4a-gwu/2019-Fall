@@ -659,23 +659,25 @@ spicegirls %&gt;%
 
 To create a new variable based on a condition, use `ifelse()`
 &lt;br&gt;
-
+`ifelse(&lt;condition&gt;, &lt;if TRUE&gt;, &lt;else&gt;)`
+&lt;br&gt;
+--
 
 ```r
 spicegirls %&gt;%
     mutate(
-        nameIsMel = ifelse(firstName == 'Melanie', TRUE, FALSE))
+        bornEvenOrOdd = ifelse(yearOfBirth %% 2 == 0, 'even', 'odd'))
 ```
 
 ```
 ## # A tibble: 5 x 6
-##   firstName lastName  spice  yearOfBirth deceased nameIsMel
-##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;    &lt;lgl&gt;    
-## 1 Melanie   Brown     Scary         1975 FALSE    TRUE     
-## 2 Melanie   Chisholm  Sporty        1974 FALSE    TRUE     
-## 3 Emma      Bunton    Baby          1976 FALSE    FALSE    
-## 4 Geri      Halliwell Ginger        1972 FALSE    FALSE    
-## 5 Victoria  Beckham   Posh          1974 FALSE    FALSE
+##   firstName lastName  spice  yearOfBirth deceased bornEvenOrOdd
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;        
+## 1 Melanie   Brown     Scary         1975 FALSE    odd          
+## 2 Melanie   Chisholm  Sporty        1974 FALSE    even         
+## 3 Emma      Bunton    Baby          1976 FALSE    even         
+## 4 Geri      Halliwell Ginger        1972 FALSE    even         
+## 5 Victoria  Beckham   Posh          1974 FALSE    even
 ```
 
 ---

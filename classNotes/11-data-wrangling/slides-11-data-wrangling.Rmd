@@ -445,11 +445,13 @@ spicegirls %>%
 
 To create a new variable based on a condition, use `ifelse()`
 <br>
-
+`ifelse(<condition>, <if TRUE>, <else>)`
+<br>
+--
 ```{r}
 spicegirls %>%
     mutate(
-        nameIsMel = ifelse(firstName == 'Melanie', TRUE, FALSE))
+        bornEvenOrOdd = ifelse(yearOfBirth %% 2 == 0, 'even', 'odd'))
 ```
 
 ---

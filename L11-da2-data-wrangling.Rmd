@@ -396,6 +396,24 @@ write_csv(heightSummary, path = file.path('data_output', 'heightSummary.csv')
 
 ---
 
+# Tips
+
+You will often need to create new variables based on a condition. For example, perhaps you want to identify which of the observations in the wildlife impacts data cost more than $10,000 in damages. Well
+
+# if/else statements with `ifelse()`
+
+To create a new variable based on a condition, use `ifelse()`
+<br>
+
+```{r}
+spicegirls %>%
+    mutate(
+        nameIsMel = ifelse(firstName == 'Melanie', TRUE, FALSE))
+```
+
+
+---
+
 **Page sources**:
 
 Some content on this page has been modified from other courses, including:
