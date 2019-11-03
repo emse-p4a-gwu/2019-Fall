@@ -11,10 +11,7 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
----
+The best way to improve your data wrangling skills is to practice them will actual datasets. To facilitate that practice, I highly recommend you go through some free online tutorials. Here are some good ones:
 
-**Page sources**:
-
-Some content on this page has been modified from other courses, including:
-
-- Danielle Navarro's website ["R for Psychological Science"](https://psyr.org/index.html)
+- [Getting Started with the Tidyverse](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r), by Hugo Bowne-Anderson. Dataset: _Passengers on the Titanic_
+- [Good `dplyr` overview](https://riptutorial.com/r/topic/4250/dplyr), by riptutorial.com
