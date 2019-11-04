@@ -1,0 +1,39 @@
+---
+title: "HW6: Summary of the <insert dataset name> dataset from the <insert package name> package"
+author: "<First> <Last>"
+date: "12/1/2019"
+output: html_document
+---
+
+```{r, echo=FALSE}
+# Load the library that contains your dataset here:
+library()
+```
+
+# Data description
+
+Write your description here
+
+Summary table template:
+
+Variable | Description
+-------- | --------------------------
+var1     | description of var 1
+
+# Data visualizations
+
+```{r, echo=TRUE}
+# Write R code here to load your data file
+```
+
+```{r, echo=TRUE}
+# Write R code here to create your first plot
+```
+
+Write a description and interpretation of your first plot here.
+
+```{r, echo=TRUE}
+# Write R code here to create your second plot
+```
+
+Write a description and interpretation of your second plot here.
