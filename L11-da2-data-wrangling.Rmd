@@ -125,6 +125,8 @@ In this lesson, we are going to learn some of the most common `dplyr` functions:
 
 ## Select columns with `select()`
 
+![](images/rstudio-cheatsheet-select.png){ width=500 }
+
 To select specific columns, use `select()`. The first argument
 to this function is the data frame (`df`), and the subsequent
 arguments are the columns to keep:
@@ -149,6 +151,8 @@ Some additional options to select columns based on a specific criteria include:
 4) `one_of()` = Select column names that are from a group of names
 
 ## Select rows with `filter()`
+
+![](images/rstudio-cheatsheet-filter.png){ width=500 }
 
 Filter the rows for wildlife impacts that occurred in DC:
 
@@ -241,8 +245,7 @@ df %>%
 
 ## Create new variables with `mutate()`
 
-![](images/horst_monsters_mutate.png){ width=500 }
-[[Art by Allison Horst]](https://github.com/allisonhorst)
+![](images/rstudio-cheatsheet-mutate.png){ width=500 }
 
 You will often need to create new columns based on the values in existing
 columns. For this use `mutate()`. For example, let's create a new variable converting the `height` variable from feet to miles:
@@ -287,6 +290,8 @@ paradigm:
 
 ## The `group_by()` function
 
+![](images/rstudio-cheatsheet-group_by.png){ width=500 }
+
 The `group_by()` function enables you to perform operations across groups within the data frame. It is typically used by inserting it in the "pipeline" before the desired group operation. For example, if we wanted to add a a new column that computed the mean height of reported wildlife impacts for each state, we could insert `group_by(state)` in the pipeline:
 
 ```{r}
@@ -300,6 +305,8 @@ df %>%
 You'll see that the same value for `mean_height` is reported for the same states (e.g. the mean height in Florida is 892 ft).
 
 ## The `summarize()` function
+
+![](images/rstudio-cheatsheet-summarise.png){ width=500 }
 
 The `group_by()` function is often used together with `summarize()`, which collapses each group into a single-row summary of that group. For example, we collapse the result of the previous example by using `summarise()` instead of `mutate()`:
 

@@ -407,7 +407,7 @@ spicegirls %>%
 # Create new variables with `mutate()`
 
 <center>
-<img src="images/monsters_mutate.jpg" width="650">
+<img src="images/horst_monsters_mutate.jpg" width="650">
 </center>
 
 ---
