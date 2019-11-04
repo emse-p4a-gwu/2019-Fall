@@ -468,17 +468,17 @@ spicegirls %>%
 ```
 
 ---
-# if/else statements with `ifelse()`
+# if/else statements with `if_else()`
 
-To create a new variable based on a condition, use `ifelse()`
+To create a new variable based on a condition, use `if_else()`
 <br>
-`ifelse(<condition>, <if TRUE>, <else>)`
+`if_else(<condition>, <if TRUE>, <else>)`
 <br>
 --
 ```{r}
 spicegirls %>%
     mutate(
-        bornEvenOrOdd = ifelse(yearOfBirth %% 2 == 0, 'even', 'odd'))
+        bornEvenOrOdd = if_else(yearOfBirth %% 2 == 0, 'even', 'odd'))
 ```
 
 ---

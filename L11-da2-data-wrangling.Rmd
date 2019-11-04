@@ -405,10 +405,10 @@ write_csv(heightSummary, path = file.path('data_output', 'heightSummary.csv')
 
 # Tips
 
-You will often need to create new variables based on a condition. To do this, you can use the `ifelse()` function. Here's the general syntax:
+You will often need to create new variables based on a condition. To do this, you can use the `if_else()` function. Here's the general syntax:
 
 ```{r, eval=FALSE}
-ifelse(<condition>, <if TRUE>, <else>)
+if_else(<condition>, <if TRUE>, <else>)
 ```
 
 The first argument is a condition. If the condition is TRUE, then the value given to the second argument will be used; if not, then the third argument value will be used.
@@ -418,21 +418,23 @@ Here's an example of creating a variable to determine which months in the wildli
 ```{r, eval=FALSE}
 df %>%
     mutate(
-        summer_month = ifelse(incident_month %in% c(6, 7, 8), TRUE, FALSE))
+        summer_month = if_else(incident_month %in% c(6, 7, 8), TRUE, FALSE))
 ```
 
-Of course, in this particular case the `ifelse()` function isn't even needed because the condition returns `TRUE` and `FALSE` values. However, if you wanted to extend this example to determine all four seasons, you could use a series of nested `ifelse()` functions:
+Of course, in this particular case the `if_else()` function isn't even needed because the condition returns `TRUE` and `FALSE` values. However, if you wanted to extend this example to determine all four seasons, you could use a series of nested `if_else()` functions:
 
 ```{r, eval=FALSE}
 df %>%
     mutate(season =
-        ifelse(
+        if_else(
             incident_month %in% c(3, 4, 5), 'Spring',
-        ifelse(
+        if_else(
             incident_month %in% c(6, 7, 8), 'Summer',
-        ifelse(
+        if_else(
             incident_month %in% c(9, 10, 11), 'Fall', 'Winter'))))
 ```
+
+Note: The Base R version of this function is `ifelse()`, but I recommend using the `dplyr` version, `if_else()`, as it is a [stricter function](https://stackoverflow.com/questions/50646133/dplyr-if-else-vs-base-r-ifelse).
 
 ---
 

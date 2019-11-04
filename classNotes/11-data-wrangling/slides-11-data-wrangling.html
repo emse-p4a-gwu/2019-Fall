@@ -595,7 +595,7 @@ spicegirls %&gt;%
 # Create new variables with `mutate()`
 
 &lt;center&gt;
-&lt;img src="images/monsters_mutate.jpg" width="650"&gt;
+&lt;img src="images/horst_monsters_mutate.jpg" width="650"&gt;
 &lt;/center&gt;
 
 ---
@@ -682,18 +682,18 @@ spicegirls %&gt;%
 ```
 
 ---
-# if/else statements with `ifelse()`
+# if/else statements with `if_else()`
 
-To create a new variable based on a condition, use `ifelse()`
+To create a new variable based on a condition, use `if_else()`
 &lt;br&gt;
-`ifelse(&lt;condition&gt;, &lt;if TRUE&gt;, &lt;else&gt;)`
+`if_else(&lt;condition&gt;, &lt;if TRUE&gt;, &lt;else&gt;)`
 &lt;br&gt;
 --
 
 ```r
 spicegirls %&gt;%
     mutate(
-        bornEvenOrOdd = ifelse(yearOfBirth %% 2 == 0, 'even', 'odd'))
+        bornEvenOrOdd = if_else(yearOfBirth %% 2 == 0, 'even', 'odd'))
 ```
 
 ```
