@@ -24,6 +24,7 @@ Modern Dive | Chester Ismay & Albert Y. Kim | [course](https://moderndive.netlif
 Learning statistics with R | Danielle Navarro | [course](https://djnavarro.github.io/tidylsrbook/); [github](https://github.com/djnavarro/rbook)
 R for Psychological Science | Danielle Navarro | [course](https://psyr.org/index.html); [github](https://github.com/djnavarro/psyr)
 What They Forgot to Teach You About R | Jennifer Bryan & Jim Hester | [course](https://whattheyforgot.org/); [github](https://github.com/jennybc/what-they-forgot)
+Introduction to Open Data Science | The Ocean Health Index Team | [course](http://ohi-science.org/data-science-training/); [github](https://github.com/OHI-Science/data-science-training)
 Software Carpentry | [software-carpentry.org](https://software-carpentry.org/) | [lessons](https://software-carpentry.org/lessons/)
 Data Analysis and Visualization in R for Ecologists | François Michonneau & Auriel Fournier | [course](https://datacarpentry.org/R-ecology-lesson/); [github](https://github.com/datacarpentry/R-ecology-lesson)
 Data Analysis and Visualization in R _alpha_ | Data Carpentry contributors | [course](https://datacarpentry.org/R-genomics/index.html); [github](https://github.com/datacarpentry/R-genomics)

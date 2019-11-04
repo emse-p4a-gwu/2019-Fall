@@ -82,6 +82,15 @@ spicegirls
 ---
 # Select columns with `select()`
 
+<br>
+<br>
+<center>
+<img src="images/rstudio-cheatsheet-select.png" width="800">
+</center>
+
+---
+# Select columns with `select()`
+
 Example: Select the columns `firstName` & `lastName`
 <br>
 
@@ -138,6 +147,15 @@ Select columns based on name criteria:
 # Select only the "name" columns
 select(spicegirls, ends_with('name'))
 ```
+
+---
+# Select rows with `filter()`
+
+<br>
+<br>
+<center>
+<img src="images/rstudio-cheatsheet-filter.png" width="800">
+</center>
 
 ---
 # Select rows with `filter()`
@@ -395,6 +413,15 @@ spicegirls %>%
 ---
 # Create new variables with `mutate()`
 
+<br>
+<br>
+<center>
+<img src="images/rstudio-cheatsheet-mutate.png" width="800">
+</center>
+
+---
+# Create new variables with `mutate()`
+
 Example: Compute the age of each band member from `yearOfBirth`
 <br>
 
@@ -491,6 +518,15 @@ BONUS: Use the `incident_month` variable to create a new variable `season`, whic
 
 ---
 # Split-apply-combine with `group_by`
+
+<br>
+<br>
+<center>
+<img src="images/rstudio-cheatsheet-group_by.png" width="800">
+</center>
+
+---
+# Split-apply-combine with `group_by`
 <br>
 
 ```{r, echo=FALSE}
@@ -541,6 +577,15 @@ bands %>%
     group_by(band) %>%
     mutate(mean_age = mean(age))
 ```
+
+---
+# Summarize data frames with `summarise()`
+
+<br>
+<br>
+<center>
+<img src="images/rstudio-cheatsheet-summarise.png" width="800">
+</center>
 
 ---
 # Summarize data frames with `summarise()`

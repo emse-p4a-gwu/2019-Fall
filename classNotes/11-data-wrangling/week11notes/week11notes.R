@@ -10,10 +10,7 @@ spicegirls <- tibble(
     deceased    = c(FALSE, FALSE, FALSE, FALSE, FALSE)
 )
 
-# Bands data:
-spicegirls <- spicegirls %>%
-    select(-spice) %>%
-    mutate(band = 'spicegirls')
+# Beatles data:
 beatles <- tibble(
     firstName   = c("John", "Paul", "Ringo", "George"),
     lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
@@ -21,8 +18,12 @@ beatles <- tibble(
     deceased    = c(TRUE, FALSE, FALSE, TRUE),
     band        = 'beatles'
 )
-bands <- bind_rows(spicegirls, beatles)
 
+# Create the bands data frame:
+spicegirls <- spicegirls %>%
+    select(-spice) %>%
+    mutate(band = 'spicegirls')
+bands <- bind_rows(spicegirls, beatles)
 
 # Exporting data
 ageSummary <- bands %>%
