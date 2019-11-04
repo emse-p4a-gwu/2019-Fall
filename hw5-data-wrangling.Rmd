@@ -165,4 +165,4 @@ Use the flights data frame to find which season has the highest mean flight depa
 - Fall: September, October, November
 - Winter: December, January, February
 
-What season experiences the largest mean delay, and why might that be? Hint: Use a "pipeline" of `mutate`, `group_by()` and `summarise()`. Don't forget to filter out any `NA` values before summarizing! Also, you may need to use the `ifelse()` function, which we have not covered (Googled it!)
+What season experiences the largest mean delay, and why might that be? Hint: Use a "pipeline" of `mutate`, `group_by()` and `summarise()`. Don't forget to filter out any `NA` values before summarizing! Also, you may need to use the `if_else()` function - see the [Tips](L11-da2-data-wrangling.html#5_tips) section in the lesson on data wrangling!
