@@ -27,44 +27,44 @@ library(dplyr)
 # How many flights out of NYC airports in 2013 had an arrival delay of two
 # or more hours?
 
-# Answer:
+# Answer: 10,200 flights
 
 # b) [SOLO] ----------------
 # How many flights out of NYC airports in 2013 departed in fall semester (
 # i.e. the months August - December, inclusive)?
 
-# Answer:
+# Answer: 141,193 flights
 
 # c) [SOLO] ----------------
 # How many flights out of NYC airports in 2013 arrived more than two hours
 # late to their destinations, but did not _depart_ an NYC airport late?
 
-# Answer:
+# Answer: 29 flights
 
 # d) [SOLO] ----------------
 # How many flights out of NYC airports in 2013 were operated by
 # United, American, or Delta airlines?
 
-# Answer:
+# Answer: 139,504 flights
 
 # e) [SOLO] ----------------
 # List the top 3 airlines (by name, not carrier code) that had the highest
 # delay time of any one flight leaving a NYC airport in 2013.
 
-# Answer:
+# Answer: "Hawaiian Airlines Inc.", "Envoy Air", and "American Airlines Inc."
 
 # f) [SOLO] ----------------
 # How many flights out of NYC airports in 2013 flew to the 3 major DC-area
 # airports: Reagan National, Dulles, or BWI?
 
-# Answer:
+# Answer: 17,186 flights
 
 # g) [SOLO] ----------------
 # What is the year manufactured and tail number of the oldest airplane that
 # any one airline used in 2013 to fly out of NYC airports, and which airline
 # operated that plane?
 
-# Answer:
+# Answer: American Airlines operates the 1956 plane with tail number N381AA
 
 # h) [COLLABORATIVE] ----------------
 # Using the `flights` data frame, compute a new variable `speed` (in miles per
@@ -72,7 +72,7 @@ library(dplyr)
 # in the dataset, what was its speed and what were the origin and destination
 # airport codes?
 
-# Answer:
+# Answer: The fastest flight flew at an average of 703 mph from LGA to ATL.
 
 # i) [COLLABORATIVE] ----------------
 # Using the `flights` data frame, compute a new variable `delta_time` (in
@@ -83,14 +83,16 @@ library(dplyr)
 # made up the most time during its flight, how much time was made up (in
 # minutes) and what were the origin and destination airport codes?
 
-# Answer:
+# Answer: The flight that made up the most time during its flight made up 109
+#         minutes and flew from EWR to JAX.
 
 # j) [COLLABORATIVE] ----------------
 # Of all the flights in 2013 departing from NYC airports, list the top 3
 # destinations (airport names, not airport codes) with the highest mean
 # arrival delay.
 
-# Answer:
+# Answer: The top 3 airports are Columbia Metropolitan, Will Rogers World,
+#         and Tulsa Intl
 
 # k) [COLLABORATIVE] ----------------
 # Use the `flights` data frame to create a new summary data frame called
@@ -111,7 +113,7 @@ library(dplyr)
 #     On that day, how many flights were delayed and what was the mean delay
 #     time (in minutes)?
 
-# Answer:
+# Answer: On the day with the highest number of delayed flights there were 1,001 flight delays with an average delay of 9.02 minutes. On the day with the highest mean departure delay, there were 799 flight delays with an average delay of 83.5 minutes
 
 # --------------------------------------------------------------------
 
