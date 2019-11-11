@@ -19,69 +19,40 @@ output:
 
 ### 1) Choose a dataset [5 pts]
 
-You will need to select a dataset for your project. To keep things manageable, you must choose one of the datasets available in one the following R packages:
+You will need to select a dataset for your project. To keep things manageable, you must choose one of the following datasets from the following libraries. **Note that to load any of these data frames, all you need to do is load the library**:
 
-- `dplyr`
-- `ggplot2`
-- `dslabs`
+**dplyr**:
 
-As an example of the variety of datasets you can choose from, here is a preview of all of the datasets available in the [**dslabs** R package](https://github.com/rafalab/dslabs):
+- `storms`
+- `starwars`
 
-```{r, message=TRUE, eval=FALSE}
-# Install the package
-install.packages("dslabs")
+**ggplot2**:
 
-# View a summary of each dataset in the dslabs library:
-library(dslabs)
-data(package = "dslabs")
+- `diamonds`
+- `economics`
+- `midwest`
+- `mpg`
+- `msleep`
+- `txhousing`
 
-Data sets in package 'dslabs':
+[**dslabs**](https://github.com/rafalab/dslabs):
 
-admissions              Gender bias among graduate school admissions to
-                        UC Berkeley.
-brca                    Breast Cancer Wisconsin Diagnostic Dataset from
-                        UCI Machine Learning Repository
-brexit_polls            Brexit Poll Data
-death_prob              2015 US Period Life Table
-divorce_margarine       Divorce rate and margarine consumption data
-gapminder               Gapminder Data
-greenhouse_gases        Greenhouse gas concentrations over 2000 years
-heights                 Self-Reported Heights
-historic_co2            Atmospheric carbon dioxide concentration over
-                        800,000 years
-mnist_27                Useful example for illustrating machine
-                        learning algorithms based on MNIST data
-movielens               Movie ratings
-murders                 US gun murders by state for 2010
-na_example              Count data with some missing values
-nyc_regents_scores      NYC Regents exams scores 2010
-oecd (gapminder)        Gapminder Data
-olive                   Italian olive
-opec (gapminder)        Gapminder Data
-outlier_example         Adult male heights in feet with outliers
-polls_2008              Poll data for popular vote in 2008 presidential
-                        election
-polls_us_election_2016  Fivethirtyeight 2016 Poll Data
-raw_data_research_funding_rates
-                        Gender bias in research funding in the
-                        Netherlands
-reported_heights        Self-reported Heights
-research_funding_rates
-                        Gender bias in research funding in the
-                        Netherlands
-results_us_election_2016 (polls_us_election_2016)
-                        Fivethirtyeight 2016 Poll Data
-stars                   Physical Properties of Stars
-temp_carbon             Global temperature anomaly and carbon
-                        emissions, 1751-2018
-tissue_gene_expression
-                        Gene expression profiles for 189 biological
-                        samples taken from seven different tissue
-                        types.
-trump_tweets            Trump Tweets from 2009 to 2017
-us_contagious_diseases
-                        Contagious disease data for US states
-```
+- `brexit_polls`
+- `gapminder`
+- `greenhouse_gases`
+- `historic_co2`
+- `movielens`
+- `murders`
+- `nyc_regents_scores`
+- `olive`
+- `polls_us_election_2016`
+- `reported_heights`
+- `research_funding_rates`
+- `results_us_election_2016`
+- `stars`
+- `temp_carbon`
+- `trump_tweets`
+- `us_contagious_diseases`
 
 ### 2) Setup your analysis environment [10 pts]
 
@@ -117,8 +88,8 @@ Open up your "hw6.Rmd" file and write a paragraph in the section labeled `# Data
 
 Now that you have a basic understanding of the dataset, make some plots to explore the variables in the data and their potential relationships. You may use base R plotting functions or the **ggplot2** library to make your figures, but you must make at least two figures, including:
 
-1. A scatterplot of two variables.
-2. A histogram or barplot of one or more variables.
+1. A scatterplot of involving at least two variables.
+2. A histogram or barplot involving at least one variable.
 
 You can choose to plot whichever variables you wish, but you must be able to interpret the results of your plot. I recommend that you first make your plots in your `explore.R` file to iterate on your code until the plots are in their final form you desire. Then copy the code for your final plots over to the appropriate code chunks in your "hw6.Rmd" file.
 
