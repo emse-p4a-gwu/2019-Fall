@@ -245,7 +245,7 @@ plot(
   pch = 19,
   main = "Annual wildlife impacts",
   xlab = "Year",
-  ylab = "Age of victim")
+  ylab = "Count")
 ```
 ]
 --
@@ -540,7 +540,7 @@ Note addition of `stat = 'identity'`
 ---
 # Practice: `geom_bar()`
 
-Use the `birds` data frame and `geom_bar()` to create the following plots
+Use the `bears` and `birds` data frames with `geom_bar()` to create the following plots
 
 .leftcol[
 &lt;img src="slides-12-data-visualization_files/figure-html/ggbar_p1-1.png" width="504" /&gt;
@@ -641,7 +641,7 @@ install.packages("ggThemeAssist")
 First, assign the plot to an object name:
 
 ```r
-scatterPlot &lt;- ggplot(data = df) +
+scatterPlot &lt;- ggplot(data = bears) +
     geom_point(aes(x = year, y = age))
 ```
 
