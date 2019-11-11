@@ -1,0 +1,61 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Exo);
+@import url(https://fonts.googleapis.com/css?family=Muli:600,700,800);
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Upright:700');
+
+body {
+  font-family: 'Lato', 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Exo';
+  font-weight: 600;
+}
+
+h2, h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.remark-slide-content {
+  font-size: 23px;
+  padding-top: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 20px;
+}
+
+li {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+.slimtitle {
+  font-family: 'Exo';
+  font-weight: 600;
+  font-size: 55px;
+  margin-block-start: 0em;
+  margin-block-end: 0.1em;
+}
+
+.inverse h1 {
+  font-family: 'Exo';
+  font-weight: 800;
+  font-size: 2.5em;
+}
+
+.remark-code, .remark-inline-code {
+  font-family: Monaco, 'Inconsolata', 'Lucida Console', monospace;
+  border-radius: 5px; /* Rounding of edges */
+}
+
+.fancy{
+  font-family: 'Cormorant Upright', serif;
+  font-weight: 700;
+}

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 12: Data Visualization</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2019-11-11" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/jhelvy.css" type="text/css" />
+    <link rel="stylesheet" href="css/jhelvy-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 12: Data Visualization
+
+.large[EMSE 6574 | John Paul Helveston | November 11, 2019]
+
+---
+name: announcements
+class: left, middle, inverse
+
+# Getting started
+
+--
+1) Download the `week12notes.zip` file for class today (link in `slack/classroom`).
+
+--
+
+2) Make sure you have the "tidyverse" installed and loaded:
+
+```r
+library(tidyverse)
+```
+
+--
+3) Load two data frames:
+
+```r
+birds
+bears
+```
+
+---
+# The Challenger disaster
+
+On January 28, 1986 the space shuttle Challenger exploded
+
+.leftcol[
+&lt;img src="images/challenger_crew.jpg" width="100%" /&gt;
+]
+
+.rightcol[
+&lt;img src="images/explosion.jpg" width="100%" /&gt;
+]
+
+---
+# The Challenger disaster
+
+NASA Engineers had the data on temperature &amp; o-ring failure
+
+.leftcol-60[
+&lt;img src="images/oring_data.png" width="100%" /&gt;
+]
+
+.rightcol-40[
+&lt;img src="images/orings.png" width="100%" /&gt;
+]
+
+---
+class: center
+
+.slimtitle[What NASA was shown]
+
+.leftcol-70[
+&lt;img src="images/rockets_chart.png" width="80%" /&gt;
+]
+
+.rightcol-30[.left[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Tufte, Edward R. (1997) _Visual Explanations: Images and Quantities, Evidence and Narrative_, Graphics Press, Cheshire, Connecticut.]]
+
+---
+class: center
+
+# What NASA _should_ have been shown
+&lt;img src="images/tufte_plot.png" width="90%" /&gt;
+
+.left[Tufte, Edward R. (1997) _Visual Explanations: Images and Quantities,&lt;br&gt; Evidence and Narrative_, Graphics Press, Cheshire, Connecticut.]
+
+---
+# Today's data:
+## Bear attacks in North America
+
+Explore the `bears` data frame:
+&lt;br&gt;
+
+```r
+glimpse(bears)
+head(bears)
+```
+
+---
+class: center
+
+.slimtitle[Two basic plots in R]
+
+(there are others)
+
+.leftcol[
+### Scatterplots
+&lt;img src="slides-12-data-visualization_files/figure-html/base_scatter-1.png" width="504" /&gt;
+]
+
+.rightcol[
+### Histograms
+&lt;img src="slides-12-data-visualization_files/figure-html/base_hist-1.png" width="504" /&gt;
+]
+
+---
+# Scatterplots with `plot()`
+
+### Plot relationship between two variables
+
+--
+.leftcol[
+General syntax:
+
+
+```r
+plot(x = &lt;x_vector&gt;, y = &lt;y_vector&gt;)
+```
+]
+
+---
+# Scatterplots with `plot()`
+
+### Plot relationship between two variables
+
+.leftcol[
+General syntax:
+
+```r
+plot(x = &lt;x_vector&gt;, y = &lt;y_vector&gt;)
+```
+
+Example:
+
+```r
+var1 &lt;- 1:5
+var2 &lt;- 2*var1
+plot(x = var1, y = var2)
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-12-1.png" width="432" /&gt;
+]
+
+---
+# Scatterplots with `plot()`
+
+### `x` and `y` must have the same length!
+
+--
+
+```r
+var2 &lt;- var2[-1]
+```
+--
+
+```r
+length(var1) == length(var2)
+```
+
+```
+## [1] FALSE
+```
+--
+
+```r
+plot(x = var1, y = var2)
+```
+
+```
+## Error in xy.coords(x, y, xlabel, ylabel, log): 'x' and 'y' lengths differ
+```
+
+---
+# Scatterplots with `plot()`
+
+### Plotting variables from a data frame:
+
+.leftcol[
+Plot `year` vs. `age`:
+
+```r
+plot(x = bears$year, y = bears$age)
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-16-1.png" width="504" /&gt;
+]
+
+---
+# Making `plot()` pretty
+
+.leftcol[
+
+```r
+plot(x    = bears$year,
+     y    = bears$age,
+     col  = 'darkblue', # Point color
+     pch  = 19, # Point shape
+     main = "Age of bear victims over time",
+     xlab = "Year",
+     ylab = "Age of victim")
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-17-1.png" width="504" /&gt;
+]
+
+---
+# Practice: `plot()`
+
+Does the annual number of bird impacts appear to be changing over time? (use the `birds` data frame)
+
+--
+.leftcol[
+
+```r
+annualCount &lt;- birds %&gt;%
+    count(incident_year)
+
+plot(
+  x = annualCount$incident_year,
+  y = annualCount$n,
+  col  = "darkblue",
+  pch = 19,
+  main = "Annual wildlife impacts",
+  xlab = "Year",
+  ylab = "Age of victim")
+```
+]
+--
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-18-1.png" width="504" /&gt;
+]
+
+---
+# Histograms with `hist()`
+
+### Plot the _distribution_ of a single variable
+
+.leftcol[
+General syntax:
+
+```r
+hist(x = &lt;x_vector&gt;)
+```
+]
+
+---
+# Histograms with `hist()`
+
+### Plot the _distribution_ of a single variable
+
+.leftcol[
+General syntax:
+
+```r
+hist(x = &lt;x_vector&gt;)
+```
+
+Example:
+
+```r
+hist(bears$month)
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-21-1.png" width="432" /&gt;
+]
+
+---
+# Making `hist()` pretty
+
+.leftcol[
+
+```r
+hist(x      = bears$month,
+     breaks = 12,
+     col    = 'darkred',
+     main   = "Distribution of bear killings by month",
+     xlab   = "Month",
+     ylab   = "Count")
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-22-1.png" width="432" /&gt;
+]
+
+---
+# Practice: `hist()`
+
+Answer the following questions by visually examining the `birds` data frame:
+
+- Which months have the highest and lowest number of bird impacts in the dataset?
+- Which aircrafts experience more impacts: 2-engine, 3-engine, or 4-engine?
+- At what height do most impacts occur?
+
+---
+class: center
+.slimtitle[Advanced figures with `ggplot2`]
+
+&lt;img src="images/horst_monsters_ggplot2.png" width="65%" /&gt;
+
+---
+# "Grammar of Graphics" (gg)
+
+Concept developed by Leland Wilkinson, 1999
+
+**ggplot2** package developed by Hadley Wickham, 2005
+
+--
+.center[
+&lt;img src="images/ggPyramid.png" width="70%" /&gt;
+]
+
+---
+# Layer 1: The data
+
+The `ggplot()` function initializes the plot:
+
+--
+.leftcol[
+
+```r
+ggplot(data = bears)
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-25-1.png" width="504" /&gt;
+]
+
+---
+# Layer 2: The aesthetics
+
+The `aes()` function determines which variables will be _mapped_ to the axes:
+
+--
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age))
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-26-1.png" width="504" /&gt;
+]
+
+---
+# Layer 3: The geometries
+
+Use `+` to add geometries (e.g. points) to the plot:
+
+--
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point()
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-27-1.png" width="504" /&gt;
+]
+
+---
+# Other common geometries
+
+- `geom_point()`: makes a scatter plot
+- `geom_line()`: lines connecting data points
+- `geom_bar()`: adds bars for bar charts and histograms
+- `geom_boxplot()`: adds boxes for boxplots
+
+---
+# Scatterplots with `geom_point()`
+
+Example:
+
+--
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point()
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-28-1.png" width="504" /&gt;
+]
+
+---
+# Scatterplots with `geom_point()`
+
+Change the point color:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+*   geom_point(color = 'blue')
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-29-1.png" width="504" /&gt;
+]
+
+---
+# Scatterplots with `geom_point()`
+
+Change the point color **based on another variable**:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+*   geom_point(aes(color = gender))
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-30-1.png" width="504" /&gt;
+]
+
+---
+# Scatterplots with `geom_point()`
+
+Adjust labels with `labs()` layer:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point(aes(color = gender)) +
+    labs(x = "Year",
+         y = "Age",
+         title = "Bear victim age over time",
+         color = "Gender")
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-31-1.png" width="504" /&gt;
+]
+
+---
+# Practice: `geom_point()`
+
+Use the `birds` data frame and `geom_point()` to create the following plots
+
+.leftcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/ggpoint_p1-1.png" width="504" /&gt;
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/ggpoint_p2-1.png" width="504" /&gt;
+]
+
+---
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+# Histograms with `geom_bar()`
+
+Example:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = month)) +
+    geom_bar()
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-32-1.png" width="504" /&gt;
+]
+
+---
+# Histograms with `geom_bar()`
+
+Use `fill` (not `color`) to change the color of the bars:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = month)) +
+*   geom_bar(aes(fill = bearType))
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-33-1.png" width="504" /&gt;
+]
+
+---
+# Bar chars with `geom_bar()`
+
+Use both `x` and `y` variables:
+
+.leftcol[
+
+```r
+meanAgeAnnual &lt;- bears %&gt;%
+  filter(!is.na(age)) %&gt;%
+  group_by(year) %&gt;%
+  summarise(meanAge = mean(age))
+
+ggplot(data=meanAgeAnnual, aes(x=year, y=meanAge)) +
+    geom_bar(stat = 'identity')
+```
+
+Note addition of `stat = 'identity'`
+
+(Default "stat" is `count`)
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-34-1.png" width="504" /&gt;
+]
+
+---
+# Practice: `geom_bar()`
+
+Use the `birds` data frame and `geom_bar()` to create the following plots
+
+.leftcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/ggbar_p1-1.png" width="504" /&gt;
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/ggbar_p2-1.png" width="504" /&gt;
+]
+
+---
+# "Factors" = Categorical variables
+
+By default, R makes numeric variables _continuous_
+
+.leftcol[
+
+```r
+ggplot(bears, aes(x=year, y=age)) +
+    geom_point(aes(color=month))
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-35-1.png" width="504" /&gt;
+]
+
+---
+# "Factors" = Categorical variables
+
+You can make a continuous variable _categorical_ using `as.factor()`
+
+.leftcol[
+
+```r
+ggplot(bears, aes(x=year, y=age)) +
+*   geom_point(aes(color=as.factor(month)))
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-36-1.png" width="504" /&gt;
+]
+
+---
+# Working with themes
+
+Themes change _global_ features of your plot, like the background color, grid lines, etc.
+
+--
+Example:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point() +
+*   theme_bw()
+```
+]
+.rightcol[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-37-1.png" width="504" /&gt;
+]
+
+---
+# Some common themes
+
+.leftcol[
+Very commonly used:
+
+- `theme_bw`: **My personal default**
+- `theme_minimal`: Another simple, minimal theme
+- `theme_classic`: Classic R plotting style
+- `theme_void`: Completely blank
+]
+.rightcol[
+Others:
+
+- `theme_light`
+- `theme_dark`
+- `theme_grey`
+- `theme_gray`
+- `theme_linedraw`
+- `theme_test`
+]
+
+---
+# Getting some gg-assistance
+
+&lt;br&gt;
+.leftcol[
+
+```r
+install.packages("ggThemeAssist")
+```
+]
+
+---
+# Save figures with `ggsave()`
+
+--
+First, assign the plot to an object name:
+
+```r
+scatterPlot &lt;- ggplot(data = df) +
+    geom_point(aes(x = year, y = age))
+```
+
+--
+Then use `ggsave()` to save the plot:
+
+```r
+ggsave(filename = file.path('data', 'scatterPlot.pdf'),
+       plot   = scatterPlot,
+       width  = 6,
+       height = 4)
+```
+
+---
+# Extra practice 1
+
+Use the `mtcars` data frame to create the following plots
+
+.columns3[
+&lt;img src="slides-12-data-visualization_files/figure-html/mtcars_1-1.png" width="324" /&gt;
+]
+.columns3[
+&lt;img src="slides-12-data-visualization_files/figure-html/mtcars_2-1.png" width="324" /&gt;
+]
+.columns3[
+&lt;img src="slides-12-data-visualization_files/figure-html/mtcars_3-1.png" width="324" /&gt;
+]
+
+---
+# Extra practice 2
+
+Use the `mpg` data frame to create the following plot
+
+&lt;img src="slides-12-data-visualization_files/figure-html/mtcars_4-1.png" width="576" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
