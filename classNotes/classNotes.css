@@ -258,8 +258,16 @@ a > code {
 
 /* footer */
 
-div.my-footer {
-    background-color: #1a1917;
+div.footer-large {
+    position: absolute;
+    bottom: 100px;
+    right: 50px;
+    height: 100px;
+    width: 100%;
+}
+
+div.footer-small {
+    background-color: var(--color-black);
     position: absolute;
     bottom: 0px;
     left: 0px;
@@ -267,7 +275,7 @@ div.my-footer {
     width: 100%;
 }
 
-div.my-footer span {
+div.footer-small span {
     font-size: 10pt;
     color: #F7F8FA;
     position: absolute;
@@ -341,6 +349,7 @@ img.lil {
   margin-left: auto;
   margin-right: auto;
 }
+
 
 /* Split columns */
 
