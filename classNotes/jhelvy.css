@@ -10,8 +10,30 @@ a, a > code {
   padding-right: 4em;
   font-size: 90%;
 }
+.remark-code-line-highlighted     { background-color: #ffff88; }
+
+.inverse {
+  background-color: #272822;
+  color: #d6d6d6;
+  text-shadow: 0 0 20px #333;
+}
 .inverse h1, .inverse h2, .inverse h3 {
   color: #f3f3f3;
+}
+/* Two-column layout */
+.left-column {
+  color: #777;
+  width: 20%;
+  height: 92%;
+  float: left;
+}
+.left-column h2:last-of-type, .left-column h3:last-child {
+  color: #000;
+}
+.right-column {
+  width: 75%;
+  float: right;
+  padding-top: 1em;
 }
 .pull-left {
   float: left;
@@ -218,10 +240,6 @@ li {
 
 /* ----- ALL OTHER STYLING ----- */
 
-
-
-
-
 /* Primarily adapted from Allison Hill's css in this workshop:
 https://github.com/rstudio-education/arm-workshop-rsc2019
 */
@@ -354,7 +372,6 @@ ol li::before {
   background-color: var(--color-black);
   text-shadow: 0 0 0;
 }
-
 
 
 /* links */
