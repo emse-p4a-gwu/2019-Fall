@@ -401,7 +401,9 @@ img.lil {
 /* 3 equal columns */
 .columns3 {
   float: left;
-  width: 33.333%;
+  width: 32%;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 /* Clear floats after the columns */
 .row:after {
