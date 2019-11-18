@@ -248,25 +248,43 @@ You can quickly insert an [R code chunk](https://bookdown.org/yihui/rmarkdown/r-
 In between the chunk delimiters ` ```{r} ` and ` ``` `, you can write R code:
 
     `r ''````{r chunk-name}
-    print('hello world!')
+    cat('hello world!')
     ```
 The above R chunk renders as:
 
 ```{r, echo=FALSE}
-print('hello world!')
+cat('hello world!')
 ```
 
 You don't have to name the chunks, but it's a good practice (like commenting your code). In the above chunk, the name of the chunk is "chunk-name".
 
 ### Chunk options
 
-There are lots of options for customizing how markdown chunks appear. You insert option immediately after the `r` in the header ` ```{r} ` and separate them with commas. For example, if you just want to display the code but don't want it to actually run, you can add `eval=FALSE`:
+There are lots of options for customizing how markdown chunks appear. By default, code chunks print **code** + **output**:
+
+```{r}
+cat('hello world!')
+```
+
+But you can change this by inserting options immediately after the `r` in the header ` ```{r} ` and separate them with commas. For example, if you just want to display the code but don't want it to actually run, you can add `eval=FALSE`:
 
     `r ''````{r, eval=FALSE}
-    print('hello world!')
+    cat('hello world!')
     ```
 
-Here's a list of other options (for more details see <http://yihui.name/knitr/>):
+If you only want to print the **output** (i.e. run the code, but don't show the code itself), use `echo=FALSE`:
+
+    `r ''````{r, echo=FALSE}
+    cat('hello world!')
+    ```
+
+Finally, if you want to run the code in the background but you don't want anything to print, use `include=FALSE`:
+
+    `r ''````{r, include=FALSE}
+    cat('hello world!')
+    ```
+
+There are loads of other options for controlling how R chunks behave - here is a list of some (for more details see <http://yihui.name/knitr/>):
 
 ![](images/chunks_options.png){ width=600 }
 
@@ -288,6 +306,48 @@ library(gapminder)
 ggplot(gapminder) +
     geom_point(aes(x = gdpPercap, y = lifeExp, color = continent), size=0.8) +
     theme_minimal()
+```
+
+You can adjust the dimensions of plots using `fig.height` & `fig.width` inside the chunk settings. For example, in the above plot the setting are `{r, fig.height=4, fig.width=6}`.
+
+---
+
+# Tips
+
+## Knitting to other output formats
+
+As previously mentioned, the default output format for RMarkdown documents is html, but you can change this by adjusting the YAML `output`. For example, if I wanted to create a pdf document instead, I could use `pdf_document` in the YAML:
+
+```{r, eval=FALSE}
+---
+title: "This is a demo"
+author: "John Helveston"
+date: "11/18/2019"
+output: pdf_document
+---
+```
+
+## Convert a data frame to a table
+
+If you have a table already organized as a data frame in R, rather than painstakingly type the content into a typical markdown table, you can just use the `kable()` function to directly convert it. Here's an example using the `beatles` data frame from the earlier lesson on [data frames](L10-da1-data-frames.html):
+
+```{r}
+beatles <- data.frame(
+    firstName   = c("John", "Paul", "Ringo", "George"),
+    lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
+    instrument  = c("guitar", "bass", "drums", "guitar"),
+    yearOfBirth = c(1940, 1942, 1940, 1943),
+    deceased    = c(TRUE, FALSE, FALSE, TRUE)
+)
+kable(beatles)
+```
+
+## Inserting a Python code chunk
+
+One of the most impressive things about RMarkdown code chunks is that the code itself doesn't have to be R code. For example, if you want to use Python code instead, just change `{r}` to `{python}` in the code chunk:
+
+```{python}
+'In Python, you can concatenate strings' + ' like this!'
 ```
 
 ---
