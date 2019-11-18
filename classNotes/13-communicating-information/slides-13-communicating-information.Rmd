@@ -1,10 +1,550 @@
 ---
-title: "Week 13: Data Analysis 4 - Communicating Information"
-subtitle: "EMSE 6574, Section 11 "
-author: "John Helveston"
-date: October 07, 2019
+title: "Week 13: Communicating Information"
+author: "John Paul Helveston"
+date: November 18, 2019
 output:
   xaringan::moon_reader:
-    css: classNotes.css
+    css: "https://emse6574-gwu.github.io/2019-Fall/classNotes/classNotes.css"
+    # css: "classNotes.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
 ---
 
+```{r setup, include=FALSE}
+library(knitr)
+library(here)
+library(fontawesome) # from github: https://github.com/rstudio/fontawesome
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '')
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+```
+
+```{r start, include=FALSE}
+library(tidyverse)
+bears <- read_csv(file.path('week13notes', 'data', 'bears.csv'))
+birds <- read_csv(file.path('week13notes', 'data', 'birds.csv'))
+```
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 13: Communicating Information
+
+.large[EMSE 6574 | John Paul Helveston | November 18, 2019]
+
+---
+name: quiz
+class: left, middle, inverse
+
+# Quiz 5
+
+Go here: https://rstudio.cloud/spaces/39111/
+
+Link also on Slack [announcements](https://6574-s11-f19.slack.com/#announcements) channel
+
+Rules:
+
+- Up to [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
+- You may use a single cheat sheet.
+- You may *only* open the RStudio Cloud site to take the quiz.
+- Type code to find answers to the questions.
+- Type your final answer for each question as a comment.
+
+---
+name: announcements
+class: left, middle, inverse
+
+# Getting started
+
+--
+1) Download the `week13notes.zip` file for class today (link in `slack/classroom`).
+
+--
+
+2) Make sure you have the "tidyverse" installed and loaded:
+```{r, eval=FALSE}
+library(tidyverse)
+```
+
+--
+3) Load two data frames:
+```{r, eval=FALSE}
+birds
+bears
+```
+
+---
+# Literate programming
+
+.leftcol[
+### Treat programs as a "literature" understandable to **human beings**
+
+### Core tenant: _reproducibility_
+]
+.rightcol[.center[
+[Donald E. Knuth](https://en.wikipedia.org/wiki/Donald_Knuth)
+
+```{r, echo=FALSE, out.width='50%'}
+include_graphics('https://upload.wikimedia.org/wikipedia/commons/4/4f/KnuthAtOpenContentAlliance.jpg')
+```
+]]
+
+---
+## The horrors of a non-reproducible workflow
+
+<iframe width="800" height="500" src="https://www.youtube.com/embed/s3JldKoA0zw" frameborder="0" allowfullscreen></iframe>
+
+---
+## RMarkdown to the rescue
+
+<iframe src="https://player.vimeo.com/video/178485416?color=428bca&title=0&byline=0&portrait=0" width="800" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+---
+# RMarkdown to the rescue
+
+.leftcol-40[
+Integrates two languages:
+
+- Markdown: Documentantion language
+- R: Programming language
+
+Enables _reproducible_ integration of text, code, output
+]
+.rightcol-60[
+```{r, echo=FALSE, out.width='100%'}
+include_graphics(file.path('img', 'horst_monsters_rmarkdown.png'))
+```
+]
+
+---
+# Elements of an RMarkdown file (`.Rmd`)
+
+.leftcol[
+### 1) YAML metadata
+```{r, eval=FALSE}
+---
+title: "This is a demo"
+author: "John Helveston"
+date: "11/18/2019"
+output: html_document
+---
+```
+
+### 2) Markdown text
+
+```
+# Section 1
+
+This is a sentence...
+```
+]
+.rightcol[
+### 3) R Code
+
+    `r ''````{r}
+    plot(x = 1:5, y = 1:5)
+    ```
+### 4) Code output
+```{r, echo=FALSE, out.width='40%'}
+plot(x = 1:5, y = 1:5)
+```
+
+]
+
+---
+# Build your first RMarkdown document
+
+Open the `week13notes.Rmd` file, and click the "knit" button
+
+```{r, echo=FALSE, out.width='60%'}
+include_graphics(file.path('img', 'knit_screenshot.png'))
+```
+
+---
+# The YAML header
+
+.leftcol[
+YAML stands for:
+
+- **Y**: Yet
+- **A**: Another
+- **M**: Markdown
+- **L**: Language
+]
+--
+.rightcol[
+At the top of the file:
+
+```{r, eval=FALSE}
+---
+title: "This is a demo"
+author: "John Helveston"
+date: "11/18/2019"
+output: html_document
+---
+```
+]
+
+---
+# Markdown
+
+--
+.leftcol[
+Basic formatting
+
+Type this...             | ...to get this
+-------------------------|------------------------------------
+`normal text`            | normal text
+`*italic text*`          | *italic text*
+`**bold text**`          |**bold text**
+`***bold italic text***` | ***bold italic text***
+`~~strikethrough~~`      | ~~strikethrough~~
+`` `code text` ``        | `code text`
+]
+--
+.rightcol[
+Headers
+```{r, eval=FALSE}
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+```
+
+```{r, echo=FALSE, out.width='100%'}
+include_graphics(file.path('img', 'headers.png'))
+```
+]
+
+---
+# Markdown
+
+.leftcol[
+
+Bullet list:
+```{r, eval=FALSE}
+- first item
+- second item
+- third item
+```
+
+- first item
+- second item
+- third item
+]
+.rightcol[
+
+Numbered list:
+```{r, eval=FALSE}
+1. first item
+2. second item
+3. third item
+```
+
+1. first item
+2. second item
+3. third item
+]
+
+---
+# Markdown
+
+Simple **url link** to another site:
+
+```{r, eval=FALSE}
+[Download R](http://www.r-project.org/)
+```
+[Download R](http://www.r-project.org/)
+
+---
+# Markdown
+
+Basic tables:
+
+```{r, eval=FALSE}
+Table Header  | Second Header
+------------- | -------------
+Cell 1, 1     | Cell 2, 1
+Cell 1, 2     | Cell 2, 2
+```
+
+Table Header  | Second Header
+------------- | -------------
+Cell 1, 1     | Cell 2, 1
+Cell 1, 2     | Cell 2, 2
+
+
+---
+# Markdown
+
+Useful tools:
+
+- Quick markdown reference guide: [https://commonmark.org/help/](https://commonmark.org/help/)
+- Quick demo guide: [https://markdown-it.github.io/](https://markdown-it.github.io/).
+- Online table converter: [http://www.tablesgenerator.com](http://www.tablesgenerator.com/markdown_tables)
+
+---
+# Practice: Markdown basics
+
+- Open `week13notes.Rmd`
+- At the bottom, write markdown text to create a new section with the following content (with the correct formatting - use `#` for the header):
+
+----
+### Markdown practice
+
+This is a markdown sentence. Some words are in *italics*, others in **bold**, and some are ***both***! Finally, some are written in `code formatting`. Here is a markdown table:
+
+Animal  | Sound
+------- | -----------
+Dog     | Woof
+Cat     | Meow
+Cow     | Moo
+
+---
+# R Code
+
+Two types:
+
+- Inline code
+- Code chunks
+
+---
+# Inline R code
+
+To embed R code directly in a markdown sentence, use
+```{r, eval=FALSE}
+`r <insert code>`
+```
+
+--
+
+.leftcol[
+For example, this:
+
+```{r, eval=FALSE}
+The value of pi is `r pi`
+```
+
+Produces this:
+
+` The value of pi is 3.141593`
+]
+
+---
+# R Code chunks
+
+Basic syntax for code chunk:
+
+```{r, echo=FALSE, out.width='15%'}
+include_graphics(file.path('img', 'code_chunk_syntax.png'))
+```
+
+--
+.leftcol[
+For example, this:
+
+```{r, echo=FALSE, out.width='40%'}
+include_graphics(file.path('img', 'code_chunk_example.png'))
+```
+
+Produces this:
+```{r, echo=FALSE}
+cat('hello world!')
+```
+]
+
+---
+# Outputs
+
+Control what chunks output using options inside `{r}`:
+
+Example: `{r, echo=FALSE, message=FALSE}`
+
+```{r, echo=FALSE, out.width='60%'}
+include_graphics(file.path('img', 'chunks_options.png'))
+```
+
+---
+# Outputs
+
+By default, code chunks print **code** + **output**:
+```{r}
+cat('hello world!')
+```
+--
+.columns3[
+`{r, eval=FALSE}`
+
+Prints only **code** (doesn't run the code)
+
+```{r, eval=FALSE}
+cat('hello world!')
+```
+]
+--
+.columns3[
+`{r, echo=FALSE}`
+
+Prints only **output**
+
+```{r, echo=FALSE}
+cat('hello world!')
+```
+]
+--
+.columns3[
+`{r, include=FALSE}`
+
+Runs, but doesn't print anything
+
+```{r, include=FALSE}
+cat('hello world!')
+```
+]
+
+---
+# Outputs
+
+Adjust the dimensions of plots using `fig.height` & `fig.width`
+<br>
+
+--
+`{r, fig.height=4, fig.width=6}`
+
+--
+```{r, fig.height=4, fig.width=6}
+ggplot(data = bears) +
+    geom_bar(aes(x = month, fill = bearType))
+```
+
+---
+# Practice: Building a `.Rmd` from scratch!
+
+1. Create a new R Markdown file (`.Rmd`) in RStudio.
+2. Insert a YAML Header with the title "Fuel Economy Analysis". Add your name and today's date.
+3. Create a chunk and load the `tidyverse` library in that chunk.
+4. Create another chunk; in that chunk, use the `mpg` data frame to make and display a scatter plot of the highway fuel economy versus the engine displacement.
+5. Click the `knit` button and preview your document.
+6. In the chunk where you loaded the `tidyverse` library, change the chunk settings to hide the message that appeared after loading the library (HINT: Use `message`).
+7. Change the plot chunk settings to hide the code that made the plot - only show the plot (HINT: Use `echo` setting).
+8. Set the `fig.width` and `fig.height` of your plot to `5`.
+9. Click the `knit` button and preview your document.
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+# Knitting to other output formats
+
+.leftcol[
+Change the YAML `output`:
+```{r, eval=FALSE}
+---
+title: "This is a demo"
+author: "John Helveston"
+date: "11/18/2019"
+output: pdf_document #<<
+---
+```
+]
+--
+.rightcol[.center[
+```{r, echo=FALSE, out.width='70%'}
+include_graphics(file.path('img', 'RMarkdownOutputFormats.png'))
+```
+]]
+
+---
+# Convert a data frame to a table
+
+Use the `kable()` function:
+
+--
+.leftcol[
+```{r eval=FALSE}
+bears %>%
+  count(bearType, wildOrCaptive) %>%
+  kable()
+```
+]
+.rightcol[
+```{r, echo=FALSE}
+bears %>%
+  count(bearType, wildOrCaptive) %>%
+  kable()
+```
+]
+
+---
+# Inserting a Python code chunk
+
+Change `{r}` to `{python}` in the code chunk.
+
+--
+Example:
+
+```{python}
+'In Python, you can concatenate strings' + ' like this!'
+```
+
+---
+# Publishing to the web
+
+You can publish your report to the web for free using RPubs: http://rpubs.com/
+
+1. Click the `knit` button to compile the `.html` file
+2. Click the `publish` button in the top-right
+
+---
+# Practice analysis 1: Birds & Bears
+
+1) Create a new R Markdown file (`.Rmd`) in RStudio - title it _"Birds and Bears Analysis"_
+
+2) Create a code chunk to load the `tidyverse` library and the `birds.csv` and `bears.csv` files.
+
+3) Answer each of the following questions with text and code chunks with supportive plots of the data:
+
+- Which months have the highest and lowest number of bird impacts with aircraft?
+- Does the annual number of bird impacts appear to be changing over time?
+- At what heights do most bird impacts occur?
+- Which months have the highest frequency of bear killings?
+- How do the the number of bear attacks on men vs women compare, and does there appear to be any trend over time?
+
+4) Publish your results to the web using RPubs.
+
+---
+# Practice analysis 2: College Majors
+
+1) Create a new R Markdown file (`.Rmd`) in RStudio - title it _"College Majors Analysis"_
+
+2) Create a code chunk to load the `tidyverse` library and the `recent_grads.csv` file.
+
+3) Answer each of the following questions with text and code chunks with supportive plots of the data:
+
+- What categories of majors make more money than others?
+- What categories of majors have the best employment rate?
+- What are the highest earning majors?
+- Within the engineering majors, which ones have a better gender balance?
+
+4) Publish your results to the web using RPubs.

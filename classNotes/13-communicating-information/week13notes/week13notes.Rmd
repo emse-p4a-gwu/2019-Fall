@@ -1,0 +1,35 @@
+---
+title: "My First RMarkdown Document!"
+author: "First last"
+date: "11/18/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+
+# Import libraries
+library(tidyverse)
+# This is an example of loading data within a code chunk
+birds <- read_csv(file.path('data', 'wildlife_impacts.csv'))
+bears <- read_csv(file.path('data', 'bear_killings.csv'))
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see [rmarkdown.rstudio.com](http://rmarkdown.rstudio.com).
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Useful tools
+
+- Quick markdown reference guide: [https://commonmark.org/help/](https://commonmark.org/help/)
+- Quick demo guide: [https://markdown-it.github.io/](https://markdown-it.github.io/).
+- Online table converter: [http://www.tablesgenerator.com](http://www.tablesgenerator.com/markdown_tables)
+
+## Link to data source of final practice today
+
+https://github.com/rfordatascience/tidytuesday/tree/master/data/2018/2018-10-16
