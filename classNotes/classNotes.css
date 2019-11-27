@@ -1,99 +1,27 @@
+/*
+Default styling found here:
+https://github.com/yihui/xaringan/blob/master/inst/rmarkdown/templates/xaringan/resources/default.css
+*/
+
 @import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Exo);
 @import url(https://fonts.googleapis.com/css?family=Muli:600,700,800);
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:400');
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Upright:700');
 
-/* ----- COPIED FROM DEFAULT ----- */
-/*
-https://github.com/yihui/xaringan/blob/master/inst/rmarkdown/templates/xaringan/resources/default.css
-*/
-
-a, a > code {
-  color: rgb(249, 38, 114);
-  text-decoration: none;
-}
-.footnote {
-  position: absolute;
-  bottom: 3em;
-  padding-right: 4em;
-  font-size: 90%;
-}
-.remark-code-line-highlighted     { background-color: #ffff88; }
-
-.inverse {
-  background-color: #272822;
-  color: #d6d6d6;
-  text-shadow: 0 0 20px #333;
-}
-.inverse h1, .inverse h2, .inverse h3 {
-  color: #f3f3f3;
-}
-/* Two-column layout */
-.left-column {
-  color: #777;
-  width: 20%;
-  height: 92%;
-  float: left;
-}
-.left-column h2:last-of-type, .left-column h3:last-child {
-  color: #000;
-}
-.right-column {
-  width: 75%;
-  float: right;
-  padding-top: 1em;
-}
-.pull-left {
-  float: left;
-  width: 47%;
-}
-.pull-right {
-  float: right;
-  width: 47%;
-}
-.pull-right ~ * {
-  clear: both;
-}
-img, video, iframe {
-  max-width: 100%;
-}
-blockquote {
-  border-left: solid 5px lightgray;
-  padding-left: 1em;
-}
-.remark-slide table {
-  margin: auto;
-  border-top: 1px solid #666;
-  border-bottom: 1px solid #666;
-}
-.remark-slide table thead th { border-bottom: 1px solid #ddd; }
-th, td { padding: 5px; }
-.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) { background: #eee }
-
-@page { margin: 0; }
-@media print {
-  .remark-slide-scaler {
-    width: 100% !important;
-    height: 100% !important;
-    transform: scale(1) !important;
-    top: 0 !important;
-    left: 0 !important;
-  }
-}
-
-
 /* ----- MAIN STYLING ----- */
 
-/* Primarily adapted from Allison Hill's css in this workshop:
+/*
+Adapted from Allison Hill's css in this workshop:
 https://github.com/rstudio-education/arm-workshop-rsc2019
 */
 
+/* Colors */
+
 :root {
-  --color-lightblue: #61acf0; /* lightblue */
   --color-blue: #1E90FF; /* dodger blue */
-  --color-orange: #f0a561; /* orange */
-  --color-lime: #cbd20a; /* lime */
+  --color-orange: #ff9966; /* orange */
+  --color-green: #8FC977FF; /* green */
   --color-red: #e74a2f; /* red */
   --color-black: #1a1917; /* black */
   --color-tan: #eae9ea; /* tan */
@@ -114,8 +42,8 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
   background-color: var(--color-tan);
 }
 
-.blue {
-  color: var(--color-blue);
+.red {
+  color: var(--color-red);
   font-size: 200%;
   font-weight:700;
 }
@@ -126,40 +54,45 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
   font-weight:700;
 }
 
-.lime {
-  color: var(--color-lime);
+.green {
+  color: var(--color-green);
   font-size: 200%;
   font-weight:700;
 }
 
-.red {
-  color: var(--color-red);
-  font-size: 200%;
-  font-weight:700;
-}
-
-.blueinline {
+.blue {
   color: var(--color-blue);
-}
-
-.orangeinline {
-  color: var(--color-orange);
-}
-
-.limeinline {
-  color: var(--color-lime);
+  font-size: 200%;
+  font-weight:700;
 }
 
 .redinline {
   color: var(--color-red);
 }
 
+.orangeinline {
+  color: var(--color-orange);
+}
+
+.greeninline {
+  color: var(--color-green);
+}
+
+.blueinline {
+  color: var(--color-blue);
+}
+
+/* Code block colors */
+.hljs-github .hljs {
+    background: #fff;
+}
+
+/* In line code */
+
 /* Background color for highlighted code */
 .remark-code-line-highlighted {
   background-color: rgba(253, 255, 50, .5);
 }
-
-/* in line code */
 
 .remark-inline-code {
   color: var(--color-blue);
@@ -167,7 +100,7 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
 }
 
 .inverse .remark-inline-code {
-  color: var(--color-lightblue);
+  color: var(--color-blue);
   background-color: transparent;
 }
 
@@ -175,51 +108,12 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
   color: var(--color-blue);
 }
 
-
-/* from emi tanaka's ninjutsu css! */
-
-.img-fill img { object-fit: fill; height:100%; width:100%; overflow: hidden;}
-.img-contain img { object-fit: contain; height:100%; width:100%;  overflow: hidden}
-.img-cover img { object-fit: cover; height:100%; width:100%;  overflow: hidden}
-.img-none img { object-fit: none; height:100%; width:100%; }
-
-/* from lucy's css!
-
-ol {
-  max-width: 350px;
-  counter-reset: my-counter;
-  list-style: none;
-  padding-left: 40px;
-}
-ol li {
-  counter-increment: my-counter;
-  position: relative;
-  margin: 20px 0;
-}
-ol li::before {
-  content: counter(my-counter);
-  color: #fff;
-  font-weight: bold;
-  position: absolute;
-  left: -60px;
-  width: 9%;
-  height: 0;
-  padding-bottom: 9%;
-  line-height: 1em;
-  margin-top: -0.5em;
-  background: var(--color-orange);
-  border-radius: 50%;
-  text-align: center;
-}
-*/
-
 .inverse {
   background-color: var(--color-black);
   text-shadow: 0 0 0;
 }
 
-
-/* links */
+/* Links */
 
 a,
 a:visited {
@@ -244,43 +138,31 @@ a > code {
   color: #FFF;
 }
 
-/* from the hygge css! */
-
-.polaroid img {
-    display: block;
-    width: inherit;
-    border: 10px solid #fff;
-    border-bottom: 45px solid #fff;
-    -webkit-box-shadow: 3px 3px 3px #111;
-    -moz-box-shadow: 3px 3px 3px #111;
-    box-shadow: 3px 3px 3px #111;
-}
-
-/* footer */
+/* Footer */
 
 div.footer-large {
-    position: absolute;
-    bottom: 100px;
-    right: 50px;
-    height: 100px;
-    width: 100%;
+  position: absolute;
+  bottom: 100px;
+  right: 50px;
+  height: 100px;
+  width: 100%;
 }
 
 div.footer-small {
-    background-color: var(--color-black);
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    height: 20px;
-    width: 100%;
+  background-color: var(--color-black);
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 20px;
+  width: 100%;
 }
 
 div.footer-small span {
-    font-size: 10pt;
-    color: #F7F8FA;
-    position: absolute;
-    left: 15px;
-    bottom: 2px;
+  font-size: 10pt;
+  color: #F7F8FA;
+  position: absolute;
+  left: 15px;
+  bottom: 2px;
 }
 
 .remark-slide-number {
@@ -290,8 +172,54 @@ div.footer-small span {
   right: 20px;
 }
 
-img.circle {
+/* Images */
+
+/* from the hygge css! */
+
+.polaroid img {
+  display: block;
+  border: 10px solid #fff;
+  border-bottom: 45px solid #fff;
+  -webkit-box-shadow: 3px 3px 3px #111;
+  -moz-box-shadow: 3px 3px 3px #111;
+  box-shadow: 3px 3px 3px #111;
+}
+
+.whiteborder img {
+  display: block;
+  border: 3px solid #fff;
+}
+
+.whiteborderthick img {
+  display: block;
+  border: 10px solid #fff;
+}
+
+.blackborder img {
+  display: block;
+  border: 3px solid #000;
+}
+
+.blackborderthick img {
+  display: block;
+  border: 10px solid #000;
+}
+
+.circle img {
   border-radius:50%;
+}
+
+.circleborder img {
+  display: block;
+  border: 3px solid #000;
+  border-radius:50%;
+}
+
+.lil img {
+  width: 15%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* split rows*/
@@ -337,19 +265,6 @@ pre {
   max-width: 100%;
   overflow-x: auto;
 }
-
-/* Code block colors */
-.hljs-github .hljs {
-    background: #fff;
-}
-
-img.lil {
-  width: 15%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 
 /* Split columns */
 
@@ -416,8 +331,6 @@ img.lil {
 .title-slide .remark-slide-number {
   display: none;
 }
-
-
 
 /* ----- FONTS ----- */
 
