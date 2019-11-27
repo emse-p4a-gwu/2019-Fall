@@ -20,11 +20,11 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
 
 :root {
   --color-blue: #1E90FF; /* dodger blue */
-  --color-orange: #ff9966; /* orange */
-  --color-green: #8FC977FF; /* green */
-  --color-red: #e74a2f; /* red */
-  --color-black: #1a1917; /* black */
-  --color-tan: #eae9ea; /* tan */
+  --color-orange: #FF9966; /* orange */
+  --color-green: #8FC977; /* green */
+  --color-red: #E74A2F; /* red */
+  --color-black: #1A1917; /* black */
+  --color-tan: #EAE9EA; /* tan */
   --color-gray: rgb(82, 86, 89); /* gray */
 }
 
