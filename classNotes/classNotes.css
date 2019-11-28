@@ -25,7 +25,7 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
   --color-red: #E74A2F; /* red */
   --color-black: #1A1917; /* black */
   --color-tan: #EAE9EA; /* tan */
-  --color-gray: rgb(82, 86, 89); /* gray */
+  --color-gray: #696969; /* gray */
 }
 
 /* Background glow color around main slide container */
@@ -82,11 +82,6 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
   color: var(--color-blue);
 }
 
-/* Code block colors */
-.hljs-github .hljs {
-    background: #fff;
-}
-
 /* In line code */
 
 /* Background color for highlighted code */
@@ -94,23 +89,46 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
   background-color: rgba(253, 255, 50, .5);
 }
 
+/* Color of inline code, i.e. `code` */
 .remark-inline-code {
   color: var(--color-blue);
   background-color: rgb(220,220,220);
+  border-radius: 5px; /* Rounded edges */
 }
-
 .inverse .remark-inline-code {
   color: var(--color-blue);
   background-color: transparent;
 }
 
+/* Code chunk colors */
+.hljs-github .hljs {
+  background: #fff;
+  border-radius: 5px; /* Rounded edges */
+  border: 1px solid #000;
+}
+
+/* Code block output colors */
 .remark-code {
-  color: var(--color-blue);
+  display: block;
+  overflow-x: auto;
+  padding: .5em;
+  color: #fff;
+  background: var(--color-gray);
 }
 
 .inverse {
   background-color: var(--color-black);
   text-shadow: 0 0 0;
+}
+
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+
+pre {
+  background-color: #000;
+  border-radius: 5px; /* Rounded edges */
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.5em 0px;
 }
 
 /* Links */
@@ -258,14 +276,6 @@ div.footer-small span {
   grid-column: 3 / 4;
 }
 
-/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
-
-pre {
-  background: transparent;
-  max-width: 100%;
-  overflow-x: auto;
-}
-
 /* Split columns */
 
 .leftcol {
@@ -386,7 +396,6 @@ li {
 
 .remark-code, .remark-inline-code {
   font-family: Monaco, 'Inconsolata', 'Lucida Console', monospace;
-  border-radius: 5px; /* Rounding of edges */
 }
 
 .fancy{
