@@ -209,7 +209,7 @@ Actual probability of getting sequence 1, 3, 5:
 name: practice1
 class: inverse
 
-# Practice
+# Practice: Coins &amp; Dice
 
 Use the `sample()` function and a monte carlo simulation to estimate the answers to these questions:
 
@@ -219,10 +219,53 @@ Use the `sample()` function and a monte carlo simulation to estimate the answers
 
 - If you rolled 2 dice, what is the probability that you'll get an outcome that sums to 8?
 
-.leftcol[
-**Bonus**:
 
-What are the odds that five cards drawn from a 52-card deck will sum to a prime number? Set aces to 1 and all "face" cards (Jack, Queen, King) equal to 10. Hint: use `isPrime()` as a helper.
+---
+.font150[When `replace = FALSE`]
+
+Sometimes events cannot be independently simulated  
+&lt;br&gt;
+
+--
+What are the odds that 3 cards drawn from a 52-card deck will sum to an even number? Set aces to 1 and all "face" cards (Jack, Queen, King) equal to 10.
+&lt;br&gt;
+
+--
+
+```r
+deck &lt;- rep(c(seq(10), 10, 10, 10), 4)
+```
+
+--
+
+```r
+N &lt;- 100000
+count &lt;- 0
+for (i in 1:N) {
+*  cards = sample(x = deck, size = 3, replace = FALSE)
+   if (sum(cards) %% 2 == 0) {
+      count &lt;- count + 1
+   }
+}
+count / N
+```
+
+```
+## [1] 0.50267
+```
+
+---
+name: practice2
+class: inverse
+
+# Practice: Cards
+
+Use the `sample()` function and a monte carlo simulation to estimate the answers to these questions:
+
+- What are the odds that four cards drawn from a 52-card deck will have the same suit? 
+
+.leftcol[
+- What are the odds that five cards drawn from a 52-card deck will sum to a prime number? Set aces to 1 and all "face" cards (Jack, Queen, King) equal to 10. Hint: use `isPrime()` as a helper.
 ]
 .rightcol[
 
@@ -268,7 +311,7 @@ sample(x = c(0, 1), size = 10, replace = TRUE)
 ```
 
 ```
-##  [1] 0 1 0 1 1 1 0 1 0 1
+##  [1] 0 1 1 1 1 1 1 0 1 1
 ```
 ]
 
@@ -289,7 +332,7 @@ sample(x = c(0, 1), size = 10, replace = TRUE)
 ```
 
 ```
-##  [1] 0 1 0 1 1 1 0 1 0 1
+##  [1] 0 1 1 1 1 1 1 0 1 1
 ```
 ]
 .rightcol[
@@ -315,7 +358,7 @@ sample(x = c(0, 1), size = 10, replace = TRUE)
 ```
 
 ```
-##  [1] 0 1 0 1 1 1 0 1 0 1
+##  [1] 0 1 1 1 1 1 1 0 1 1
 ```
 ]
 .rightcol[
@@ -331,8 +374,8 @@ runif(n = 10, min = 0, max = 1)
 ```
 
 ```
-##  [1] 0.4917393 0.7354521 0.8095845 0.8784901 0.5351608 0.2818856 0.8632363
-##  [8] 0.9432800 0.1787074 0.8279663
+##  [1] 0.60595855 0.18131703 0.39471650 0.22893047 0.08734609 0.56427848
+##  [7] 0.51454060 0.42721489 0.70768957 0.14946550
 ```
 ]
 
@@ -349,7 +392,7 @@ Example:
 
 Find the area of `\(y = x^2\)` between `\(3 &lt; x &lt; 7\)`
 
-&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-27-1.png" width="432" /&gt;
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-30-1.png" width="432" /&gt;
 ]]
 --
 .rightcol[
@@ -358,7 +401,7 @@ Find the area of `\(y = x^2\)` between `\(3 &lt; x &lt; 7\)`
 &lt;br&gt;
 &lt;br&gt;
 
-&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-28-1.png" width="576" /&gt;
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-31-1.png" width="576" /&gt;
 ]
 
 ---
@@ -367,7 +410,7 @@ class: center
 .font150[Monte Carlo Integration]
 
 .leftcol[
-&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-29-1.png" width="576" /&gt;
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-32-1.png" width="576" /&gt;
 ]
 .rightcol[
 `\(\frac{\text{# Points Under Curve}}{\text{# Total Points}} = \frac{\text{Area Under Curve}}{\text{Area of Rectangle}}\)`
@@ -382,7 +425,7 @@ class: center
 
 --
 .leftcol[
-&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-30-1.png" width="576" /&gt;
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-33-1.png" width="576" /&gt;
 Area of rectangle:
 
 ```r
@@ -411,14 +454,14 @@ head(points)
 
 ```
 ## # A tibble: 6 x 3
-##       x     y belowCurve
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;     
-## 1  6.22 12.2  TRUE      
-## 2  4.05 21.6  FALSE     
-## 3  5.67 28.8  TRUE      
-## 4  5.93 28.9  TRUE      
-## 5  6.34 41.0  FALSE     
-## 6  5.06  6.64 TRUE
+##       x      y belowCurve
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;lgl&gt;     
+## 1  3.98  8.36  TRUE      
+## 2  3.55 45.8   FALSE     
+## 3  5.72 29.9   TRUE      
+## 4  6.56  0.157 TRUE      
+## 5  3.89 26.4   FALSE     
+## 6  3.55 20.0   FALSE
 ```
 ]
 
@@ -427,7 +470,7 @@ head(points)
 .font150[Monte Carlo Integration]
 
 .leftcol[
-&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-33-1.png" width="576" /&gt;
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-36-1.png" width="576" /&gt;
 Area of rectangle:
 
 ```r
@@ -454,16 +497,15 @@ points &lt;- tibble(
 ```
 
 ```
-## [1] 5330
+## [1] 5399
 ```
 ]
 
 ---
-
 .font150[Monte Carlo Integration]
 
 .leftcol[
-&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-37-1.png" width="576" /&gt;
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-40-1.png" width="576" /&gt;
 Area of rectangle:
 
 ```r
@@ -490,7 +532,7 @@ sum(points$belowCurve)
 ```
 
 ```
-## [1] 5330
+## [1] 5399
 ```
 Area under curve:
 
@@ -501,7 +543,7 @@ areaUnderCurve
 ```
 
 ```
-## [1] 104.468
+## [1] 105.8204
 ```
 ]
 
@@ -517,7 +559,7 @@ areaUnderCurve
 ```
 
 ```
-## [1] 104.468
+## [1] 105.8204
 ```
 
 --
@@ -536,7 +578,7 @@ areaUnderCurve
 ```
 
 ```
-## [1] 104.468
+## [1] 105.8204
 ```
 
 Actual area under curve:
@@ -553,10 +595,10 @@ error
 ```
 
 ```
-## [1] 0.8653333
+## [1] 0.4870667
 ```
 
-That's an error of 0.83 % - not bad!
+That's an error of 0.46 % - not bad!
 
 ---
 # Monte Carlo `\(\pi\)`
@@ -621,6 +663,7 @@ Ratio of areas = `\(\pi / 4\)`:
 ]
 
 ---
+name: practice3
 class: inverse
 
 # Practice: Estimate `\(\pi\)`
@@ -628,7 +671,7 @@ class: inverse
 
 
 .leftcol-30[
-&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-49-1.png" width="432" /&gt;
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-52-1.png" width="432" /&gt;
 &lt;br&gt;
 
 `\(\pi = 4 \left( \frac{A_{circle}}{A_{square}} \right)\)`
@@ -651,6 +694,7 @@ class: center, middle
 &lt;img src="img/monte_hall.jpg" width="80%" /&gt;
 
 ---
+name: practice4
 class: inverse
 
 # Practice: Monte Hall Problem

@@ -33,7 +33,7 @@ numObs / N
 (1/6)^3
 
 
-# Practice ----------------------------
+# Practice: Coins & Dice  ----------------------------
 
 # If you flipped a coin 3 times in a row, what is the probability that you'll get three "tails" in a row?
 
@@ -41,7 +41,28 @@ numObs / N
 
 # If you rolled 2 dice, what is the probability that you'll get an outcome that sums to 8?
 
-# **Bonus**: What are the odds that five cards drawn from a 52-card deck will sum to a prime number? Set aces to 1 and all "face" cards (Jack, Queen, King) equal to 10. Hint: use `isPrime()` as a helper.
+
+# When replace = FALSE  ----------------------------
+
+# What are the odds that 3 cards drawn from a 52-card deck will sum to an even number? Set aces to 1 and all "face" cards (Jack, Queen, King) equal to 10.
+
+deck <- rep(c(seq(10), 10, 10, 10), 4)
+N <- 100000
+count <- 0
+for (i in 1:N) {
+   cards = sample(x = deck, size = 3, replace = FALSE) #<<
+   if (sum(cards) %% 2 == 0) {
+      count <- count + 1
+   }
+}
+count / N
+
+
+# Practice: Cards  ----------------------------
+
+# What are the odds that four cards drawn from a 52-card deck will have the same suit?
+
+# What are the odds that five cards drawn from a 52-card deck will sum to a prime number? Set aces to 1 and all "face" cards (Jack, Queen, King) equal to 10. Hint: use `isPrime()` as a helper.
 
 isPrime <- function(n) {
     if (n == 2) { return(TRUE) }
