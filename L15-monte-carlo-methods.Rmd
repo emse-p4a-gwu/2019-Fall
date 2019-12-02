@@ -21,7 +21,7 @@ But when I hear Monte Carlo, I envision this:
 
 ![](images/monte_carlo_pi.gif){ width=300 }
 
-No, that's not some grainy image coming into focus - that's a [Monte Carlo simulation]() approximating the value of $\pi$ (`r pi`...).
+No, that's not some grainy image coming into focus - that's a [Monte Carlo simulation](https://en.wikipedia.org/wiki/Monte_Carlo_method) approximating the value of $\pi$ (`r pi`...).
 
 ---
 
