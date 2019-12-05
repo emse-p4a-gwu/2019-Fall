@@ -277,8 +277,12 @@ div.footer-small span {
   grid-column: 3 / 4;
 }
 
-/* Split columns */
+/* 2 columns */
 
+.cols2 {
+  float: left;
+  width: 49%;
+}
 .leftcol {
   float: left;
   width: 49%;
@@ -287,7 +291,6 @@ div.footer-small span {
   float: right;
   width: 49%;
 }
-
 .leftcol-60 {
   float: left;
   width: 59%;
@@ -296,7 +299,6 @@ div.footer-small span {
   float: right;
   width: 39%;
 }
-
 .leftcol-40 {
   float: left;
   width: 39%;
@@ -305,7 +307,6 @@ div.footer-small span {
   float: right;
   width: 59%;
 }
-
 .leftcol-70 {
   float: left;
   width: 69%;
@@ -314,7 +315,6 @@ div.footer-small span {
   float: right;
   width: 29%;
 }
-
 .leftcol-30 {
   float: left;
   width: 29%;
@@ -324,8 +324,8 @@ div.footer-small span {
   width: 69%;
 }
 
-/* 3 equal columns */
-.columns3 {
+/* 3  columns */
+.cols3 {
   float: left;
   width: 32%;
   margin-left: 5px;
