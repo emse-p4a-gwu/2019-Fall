@@ -206,22 +206,22 @@ div.footer-small span {
 
 .whiteborder img {
   display: block;
-  border: 3px solid #fff;
+  border: 1px solid #fff;
 }
 
 .whiteborderthick img {
   display: block;
-  border: 10px solid #fff;
+  border: 5px solid #fff;
 }
 
 .blackborder img {
   display: block;
-  border: 3px solid #000;
+  border: 1px solid #000;
 }
 
 .blackborderthick img {
   display: block;
-  border: 10px solid #000;
+  border: 5px solid #000;
 }
 
 .circle img {
