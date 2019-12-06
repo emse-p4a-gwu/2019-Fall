@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>EMSE Undergraduate Data Analytics</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2019-12-09" />
+    <link href="courseOverview_files/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://emse6574-gwu.github.io/2019-Fall/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# EMSE Undergraduate Data Analytics
+
+.large[John Paul Helveston | December 09, 2019]
+
+---
+class: center 
+
+# Translating _data_ into _information_
+
+--
+.leftcol[
+**Data**
+
+Student engagement scores
+
+ Class       | School Type | Male | Female 
+ ------------|-------------|------|-------
+ Special Ed. | Charter     | 643  | 793
+ Special Ed. | Public      | 735  | 928
+ General Ed. | Charter     | 590  | 724
+ General Ed. | Public      | 863  | 662   
+
+]
+--
+.rightcol[
+**Information**
+
+.blackborder[
+&lt;img src="courseOverview_files/figure-html/unnamed-chunk-1-1.png" width="432" /&gt;
+]]
+
+---
+# Data exploration: an iterative process
+
+--
+.leftcol[
+Encode data:
+
+.code60[
+
+```r
+engagement_data &lt;- data.frame(
+    Male   = c(643, 735, 590, 863),
+    Female = c(793, 928, 724, 662),
+    School = c('Special Ed., Charter', 'Special Ed., Public',
+               'General Ed., Charter', 'General Ed., Public'))
+engagement_data
+```
+
+```
+##   Male Female               School
+## 1  643    793 Special Ed., Charter
+## 2  735    928  Special Ed., Public
+## 3  590    724 General Ed., Charter
+## 4  863    662  General Ed., Public
+```
+]]
+--
+.rightcol[
+Re-shape data for plotting:
+
+.code60[
+
+```r
+engagement_data &lt;- engagement_data %&gt;% 
+    gather(Gender, Engagement, Male:Female) %&gt;%
+    mutate(Gender = fct_relevel(
+      Gender, c('Male', 'Female')))
+engagement_data
+```
+
+```
+##                 School Gender Engagement
+## 1 Special Ed., Charter   Male        643
+## 2  Special Ed., Public   Male        735
+## 3 General Ed., Charter   Male        590
+## 4  General Ed., Public   Male        863
+## 5 Special Ed., Charter Female        793
+## 6  Special Ed., Public Female        928
+## 7 General Ed., Charter Female        724
+## 8  General Ed., Public Female        662
+```
+]]
+
+---
+# Data exploration: an iterative process
+
+.leftcol[
+Initial exploratory plotting:
+
+.code60[.blackborder[
+
+```r
+engagement_data %&gt;% 
+    ggplot() +
+    geom_bar(aes(x = School, y = Engagement, 
+                 fill = Gender), stat = 'identity', 
+             position = 'dodge') +
+    coord_flip()
+```
+
+&lt;img src="courseOverview_files/figure-html/unnamed-chunk-4-1.png" width="432" /&gt;
+]]]
+--
+.rightcol[
+More exploratory plotting:
+
+.blackborder[
+&lt;img src="courseOverview_files/figure-html/unnamed-chunk-5-1.png" width="432" /&gt;
+]]
+
+---
+# Data exploration: an iterative process
+
+.leftcol[
+Directly label figure:
+
+.blackborder[
+&lt;img src="courseOverview_files/figure-html/unnamed-chunk-6-1.png" width="432" /&gt;
+]]
+--
+.rightcol[
+
+Format colors:
+
+.blackborder[
+&lt;img src="courseOverview_files/figure-html/unnamed-chunk-7-1.png" width="432" /&gt;
+]]
+
+---
+# A fully reproducible analysis
+
+.leftcol[
+Code:
+
+.code50[
+
+```r
+engagement_data &lt;- data.frame(
+    Male   = c(643, 735, 590, 863),
+    Female = c(793, 928, 724, 662),
+    School = c('Special Ed., Charter', 'Special Ed., Public',
+               'General Ed., Charter', 'General Ed., Public'),
+    Highlight = c(0, 0, 0, 1)) %&gt;%
+    gather(Gender, Engagement, Male:Female) %&gt;%
+    mutate(Gender = fct_relevel(Gender, c('Male', 'Female')))
+engagement_data %&gt;%
+    mutate(Highlight = as.factor(Highlight)) %&gt;% 
+    ggplot(aes(x=x, y=Engagement, group=School, color=Highlight)) +
+    geom_point() +
+    geom_line() +
+    scale_color_manual(values = c('#757575', '#ed573e')) +
+    labs(x='Sex', y='Engagement') +
+    theme_cowplot() +
+    scale_x_continuous(limits = c(-0.2, 2), labels = c('Male', 'Female'),
+                       breaks = c(0, 1)) +
+    theme(legend.position = 'none') +
+    geom_text_repel(aes(label = School, color = as.factor(Highlight)),
+                    data          = subset(engagement, Gender == 'Female'),
+                    size          = 5,
+                    nudge_x       = 0.2,
+                    hjust         = 0,
+                    segment.color = NA)
+```
+]]
+.rightcol[
+Result:
+
+.blackborder[
+&lt;img src="courseOverview_files/figure-html/unnamed-chunk-9-1.png" width="432" /&gt;
+]]
+
+---
+## Course 1: [Programming for Analytics](https://emse6574-gwu.github.io/2019-Fall/)
+
+**"Computational Literacy"**
+- Data types (numerical, logical, strings), conditional statements (if/else), loops, functions, testing.
+- Data structures, data import / export, data manipulation &amp; visualization.
+&lt;br&gt;
+
+--
+&lt;br&gt;
+
+## Course 2: [Exploratory Data Analysis](https://emse-eda-gwu.github.io/2020-Spring/)
+
+**"Data Literacy"**
+- Data provenance, validity.
+- Design rules for visualizing and communicating information contained in data.
+- Reproducibility: Reports that contain code, equations, visualizations, and narrative text.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
