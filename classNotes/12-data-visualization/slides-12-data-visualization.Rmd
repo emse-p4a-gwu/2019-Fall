@@ -4,8 +4,7 @@ author: "John Paul Helveston"
 date: November 11, 2019
 output:
   xaringan::moon_reader:
-    css: ["default", "css/jhelvy.css", "css/jhelvy-fonts.css"]
-    lib_dir: libs
+    css: ['default', 'https://emse6574-gwu.github.io/2019-Fall/classNotes/classNotes.css']
     nature:
       highlightStyle: github
       highlightLines: true
@@ -246,6 +245,8 @@ plot(x    = bears$year,
 ]
 
 ---
+class: inverse 
+
 # Practice: `plot()`
 
 Does the annual number of bird impacts appear to be changing over time? (use the `birds` data frame)
@@ -324,6 +325,8 @@ hist(x      = bears$month,
 ]
 
 ---
+class: inverse
+
 # Practice: `hist()`
 
 Answer the following questions by visually examining the `birds` data frame:
@@ -355,53 +358,69 @@ include_graphics(file.path('images', 'ggPyramid.png'))
 ]
 
 ---
+# Plotting with ggplot2
+
+.leftcol[
+Layers:
+
+1. The data: `ggplot(data = ___)`
+2. The aesthetics: `aes(x = ____, y = ____)`
+3. The geometries: `geom_point()`, `geom_bar()`
+]
+--
+.rightcol[
+Example data:
+.code60[
+```{r}
+glimpse(bears)
+```
+]]
+
+---
 # Layer 1: The data
 
 The `ggplot()` function initializes the plot:
 
---
 .leftcol[
 ```{r ggblank, fig.show='hide'}
 ggplot(data = bears)
 ```
 ]
-.rightcol[
+.rightcol[.blackborder[
 ```{r ref.label='ggblank', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
 # Layer 2: The aesthetics
 
 The `aes()` function determines which variables will be _mapped_ to the axes:
 
---
 .leftcol[
 ```{r ggaes, fig.show='hide'}
 ggplot(data = bears, aes(x = year, y = age))
 ```
 ]
-.rightcol[
+.rightcol[.blackborder[
 ```{r ref.label='ggaes', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
 # Layer 3: The geometries
 
 Use `+` to add geometries (e.g. points) to the plot:
 
---
 .leftcol[
 ```{r ggpoint, fig.show='hide'}
 ggplot(data = bears, aes(x = year, y = age)) +
-    geom_point()
+    geom_point() #<<
 ```
 ]
-.rightcol[
+.rightcol[.blackborder[
 ```{r ref.label='ggpoint', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
 # Other common geometries
@@ -414,19 +433,16 @@ ggplot(data = bears, aes(x = year, y = age)) +
 ---
 # Scatterplots with `geom_point()`
 
-Example:
-
---
 .leftcol[
 ```{r ggbears, fig.show='hide'}
 ggplot(data = bears, aes(x = year, y = age)) +
     geom_point()
 ```
 ]
-.rightcol[
+.rightcol[.blackborder[
 ```{r ref.label='ggbears', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
 # Scatterplots with `geom_point()`
@@ -439,10 +455,10 @@ ggplot(data = bears, aes(x = year, y = age)) +
     geom_point(color = 'blue') #<<
 ```
 ]
-.rightcol[
+.rightcol[.blackborder[
 ```{r ref.label='ggbearsblue', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
 # Scatterplots with `geom_point()`
@@ -455,10 +471,10 @@ ggplot(data = bears, aes(x = year, y = age)) +
     geom_point(aes(color = gender)) #<<
 ```
 ]
-.rightcol[
+.rightcol[.blackborder[
 ```{r ref.label='ggbearsage', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
 # Scatterplots with `geom_point()`
@@ -469,18 +485,20 @@ Adjust labels with `labs()` layer:
 ```{r ggbearsagelabs, fig.show='hide'}
 ggplot(data = bears, aes(x = year, y = age)) +
     geom_point(aes(color = gender)) +
-    labs(x = "Year",
-         y = "Age",
-         title = "Bear victim age over time",
-         color = "Gender")
+    labs(x = "Year", #<<
+         y = "Age",  #<<
+         title = "Bear victim age over time", #<<
+         color = "Gender") #<<
 ```
 ]
-.rightcol[
+.rightcol[.blackborder[
 ```{r ref.label='ggbearsagelabs', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
+class: inverse
+
 # Practice: `geom_point()`
 
 Use the `birds` data frame and `geom_point()` to create the following plots
@@ -501,6 +519,8 @@ birds %>%
 ]
 
 ---
+class: inverse
+
 # [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
 
 ## Stand up
@@ -512,7 +532,7 @@ birds %>%
 ---
 # Histograms with `geom_bar()`
 
-Example:
+The default `geom_bar()` is a count of `x`
 
 .leftcol[
 ```{r ggbearshist, fig.show='hide'}
@@ -520,10 +540,10 @@ ggplot(data = bears, aes(x = month)) +
     geom_bar()
 ```
 ]
-.rightcol[
+.rightcol[.blackborder[
 ```{r ref.label='ggbearshist', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
 # Histograms with `geom_bar()`
@@ -536,15 +556,17 @@ ggplot(data = bears, aes(x = month)) +
     geom_bar(aes(fill = bearType)) #<<
 ```
 ]
-.rightcol[
+.rightcol[.blackborder[
 ```{r ref.label='ggbearshist_fill', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
-# Bar chars with `geom_bar()`
+# Bar charts with `geom_bar()`
 
-Use both `x` and `y` variables:
+To plot a `y` variable other than "count", add `stat = 'identity'`:
+
+(Default "stat" is `count`)
 
 .leftcol[
 ```{r ggbearsbar, fig.show='hide'}
@@ -554,19 +576,17 @@ meanAgeAnnual <- bears %>%
   summarise(meanAge = mean(age))
 
 ggplot(data=meanAgeAnnual, aes(x=year, y=meanAge)) +
-    geom_bar(stat = 'identity')
+    geom_bar(stat = 'identity') #<<
 ```
-
-Note addition of `stat = 'identity'`
-
-(Default "stat" is `count`)
 ]
-.rightcol[
+.rightcol[.blackborder[
 ```{r ref.label='ggbearsbar', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
+class: inverse
+
 # Practice: `geom_bar()`
 
 Use the `bears` and `birds` data frames with `geom_bar()` to create the following plots
@@ -601,15 +621,15 @@ ggplot(data = maxCost, aes(x=incident_year, y=maxCost)) +
 By default, R makes numeric variables _continuous_
 
 .leftcol[
-```{r bears_continuous, fig.show='hide'}
-ggplot(bears, aes(x=year, y=age)) +
-    geom_point(aes(color=month))
+```{r ggbearshist_continuous, fig.show='hide'}
+ggplot(data = bears, aes(x = month)) +
+    geom_bar(aes(fill = bearType))
 ```
 ]
-.rightcol[
-```{r ref.label='bears_continuous', echo=FALSE, fig.height=5, fig.width=7}
+.rightcol[.blackborder[
+```{r ref.label='ggbearshist_continuous', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
 # "Factors" = Categorical variables
@@ -617,15 +637,15 @@ ggplot(bears, aes(x=year, y=age)) +
 You can make a continuous variable _categorical_ using `as.factor()`
 
 .leftcol[
-```{r bears_cat, fig.show='hide'}
-ggplot(bears, aes(x=year, y=age)) +
-    geom_point(aes(color=as.factor(month))) #<<
+```{r ggbearshist_factor, fig.show='hide'}
+ggplot(data = bears, aes(x = as.factor(month))) +
+    geom_bar(aes(fill = bearType))
 ```
 ]
-.rightcol[
-```{r ref.label='bears_cat', echo=FALSE, fig.height=5, fig.width=7}
+.rightcol[.blackborder[
+```{r ref.label='ggbearshist_factor', echo=FALSE, fig.height=5, fig.width=7}
 ```
-]
+]]
 
 ---
 # Working with themes
@@ -699,11 +719,13 @@ ggsave(filename = file.path('data', 'scatterPlot.pdf'),
 ```
 
 ---
+class: inverse
+
 # Extra practice 1
 
 Use the `mtcars` data frame to create the following plots
 
-.columns3[
+.cols3[
 ```{r, mtcars_1, echo=FALSE, fig.height=4, fig.width=4.5}
 ggplot(mtcars, aes(x=wt, y=mpg)) +
     geom_point() +
@@ -712,7 +734,7 @@ ggplot(mtcars, aes(x=wt, y=mpg)) +
          y = 'Fuel Economy (mpg)')
 ```
 ]
-.columns3[
+.cols3[
 ```{r, mtcars_2, echo=FALSE, fig.height=4, fig.width=4.5}
 ggplot(mtcars, aes(x=hp, y=mpg)) +
     geom_point(aes(color=as.factor(cyl))) +
@@ -722,7 +744,7 @@ ggplot(mtcars, aes(x=hp, y=mpg)) +
          color = 'Num. Cylinders')
 ```
 ]
-.columns3[
+.cols3[
 ```{r, mtcars_3, echo=FALSE, fig.height=4, fig.width=4.5}
 mtcars %>%
   group_by(cyl) %>%
@@ -735,6 +757,8 @@ mtcars %>%
 ]
 
 ---
+class: inverse
+
 # Extra practice 2
 
 Use the `mpg` data frame to create the following plot

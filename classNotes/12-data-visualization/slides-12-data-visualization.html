@@ -5,9 +5,8 @@
     <meta charset="utf-8" />
     <meta name="author" content="John Paul Helveston" />
     <meta name="date" content="2019-11-11" />
-    <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/jhelvy.css" type="text/css" />
-    <link rel="stylesheet" href="css/jhelvy-fonts.css" type="text/css" />
+    <link href="slides-12-data-visualization_files/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://emse6574-gwu.github.io/2019-Fall/classNotes/classNotes.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -227,6 +226,8 @@ plot(x    = bears$year,
 ]
 
 ---
+class: inverse 
+
 # Practice: `plot()`
 
 Does the annual number of bird impacts appear to be changing over time? (use the `birds` data frame)
@@ -307,6 +308,8 @@ hist(x      = bears$month,
 ]
 
 ---
+class: inverse
+
 # Practice: `hist()`
 
 Answer the following questions by visually examining the `birds` data frame:
@@ -334,53 +337,89 @@ Concept developed by Leland Wilkinson, 1999
 ]
 
 ---
+# Plotting with ggplot2
+
+.leftcol[
+Layers:
+
+1. The data: `ggplot(data = ___)`
+2. The aesthetics: `aes(x = ____, y = ____)`
+3. The geometries: `geom_point()`, `geom_bar()`
+]
+--
+.rightcol[
+Example data:
+.code60[
+
+```r
+glimpse(bears)
+```
+
+```
+## Observations: 166
+## Variables: 14
+## $ name          &lt;chr&gt; "Mary Porterfield", "Wilie Porterfield", "Henry Porterf…
+## $ age           &lt;dbl&gt; 3, 5, 7, 18, 1, 61, 60, 9, 52, NA, 60, 56, 70, 5, 11, 7…
+## $ gender        &lt;chr&gt; "female", "male", "male", "male", NA, "male", "male", "…
+## $ date          &lt;chr&gt; "19/05/1901", "19/05/1901", "19/05/1901", "24/11/1906",…
+## $ month         &lt;dbl&gt; 5, 5, 5, 11, 10, 9, 6, 8, 9, 10, 6, 7, 10, 10, 10, 7, 1…
+## $ year          &lt;dbl&gt; 1901, 1901, 1901, 1906, 1908, 1916, 1922, 1929, 1929, 1…
+## $ wildOrCaptive &lt;chr&gt; "Wild", "Wild", "Wild", "Wild", "Captive", "Wild", "Wil…
+## $ location      &lt;chr&gt; "Job, West Virginia", "Job, West Virginia", "Job, West …
+## $ description   &lt;chr&gt; "The children were gathering flowers near their home wh…
+## $ bearType      &lt;chr&gt; "Black", "Black", "Black", "Black", "Black", "Brown", "…
+## $ hunter        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ grizzly       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0…
+## $ hiker         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ onlyOneKilled &lt;dbl&gt; 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0…
+```
+]]
+
+---
 # Layer 1: The data
 
 The `ggplot()` function initializes the plot:
 
---
 .leftcol[
 
 ```r
 ggplot(data = bears)
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-25-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-26-1.png" width="504" /&gt;
+]]
 
 ---
 # Layer 2: The aesthetics
 
 The `aes()` function determines which variables will be _mapped_ to the axes:
 
---
 .leftcol[
 
 ```r
 ggplot(data = bears, aes(x = year, y = age))
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-26-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-27-1.png" width="504" /&gt;
+]]
 
 ---
 # Layer 3: The geometries
 
 Use `+` to add geometries (e.g. points) to the plot:
 
---
 .leftcol[
 
 ```r
 ggplot(data = bears, aes(x = year, y = age)) +
-    geom_point()
+*   geom_point()
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-27-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-28-1.png" width="504" /&gt;
+]]
 
 ---
 # Other common geometries
@@ -393,9 +432,6 @@ ggplot(data = bears, aes(x = year, y = age)) +
 ---
 # Scatterplots with `geom_point()`
 
-Example:
-
---
 .leftcol[
 
 ```r
@@ -403,9 +439,9 @@ ggplot(data = bears, aes(x = year, y = age)) +
     geom_point()
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-28-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-29-1.png" width="504" /&gt;
+]]
 
 ---
 # Scatterplots with `geom_point()`
@@ -419,9 +455,9 @@ ggplot(data = bears, aes(x = year, y = age)) +
 *   geom_point(color = 'blue')
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-29-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-30-1.png" width="504" /&gt;
+]]
 
 ---
 # Scatterplots with `geom_point()`
@@ -435,9 +471,9 @@ ggplot(data = bears, aes(x = year, y = age)) +
 *   geom_point(aes(color = gender))
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-30-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-31-1.png" width="504" /&gt;
+]]
 
 ---
 # Scatterplots with `geom_point()`
@@ -449,17 +485,19 @@ Adjust labels with `labs()` layer:
 ```r
 ggplot(data = bears, aes(x = year, y = age)) +
     geom_point(aes(color = gender)) +
-    labs(x = "Year",
-         y = "Age",
-         title = "Bear victim age over time",
-         color = "Gender")
+*   labs(x = "Year",
+*        y = "Age",
+*        title = "Bear victim age over time",
+*        color = "Gender")
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-31-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-32-1.png" width="504" /&gt;
+]]
 
 ---
+class: inverse
+
 # Practice: `geom_point()`
 
 Use the `birds` data frame and `geom_point()` to create the following plots
@@ -472,6 +510,8 @@ Use the `birds` data frame and `geom_point()` to create the following plots
 ]
 
 ---
+class: inverse
+
 # [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
 
 ## Stand up
@@ -483,7 +523,7 @@ Use the `birds` data frame and `geom_point()` to create the following plots
 ---
 # Histograms with `geom_bar()`
 
-Example:
+The default `geom_bar()` is a count of `x`
 
 .leftcol[
 
@@ -492,9 +532,9 @@ ggplot(data = bears, aes(x = month)) +
     geom_bar()
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-32-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-33-1.png" width="504" /&gt;
+]]
 
 ---
 # Histograms with `geom_bar()`
@@ -508,14 +548,16 @@ ggplot(data = bears, aes(x = month)) +
 *   geom_bar(aes(fill = bearType))
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-33-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-34-1.png" width="504" /&gt;
+]]
 
 ---
-# Bar chars with `geom_bar()`
+# Bar charts with `geom_bar()`
 
-Use both `x` and `y` variables:
+To plot a `y` variable other than "count", add `stat = 'identity'`:
+
+(Default "stat" is `count`)
 
 .leftcol[
 
@@ -526,18 +568,16 @@ meanAgeAnnual &lt;- bears %&gt;%
   summarise(meanAge = mean(age))
 
 ggplot(data=meanAgeAnnual, aes(x=year, y=meanAge)) +
-    geom_bar(stat = 'identity')
+*   geom_bar(stat = 'identity')
 ```
-
-Note addition of `stat = 'identity'`
-
-(Default "stat" is `count`)
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-34-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-35-1.png" width="504" /&gt;
+]]
 
 ---
+class: inverse
+
 # Practice: `geom_bar()`
 
 Use the `bears` and `birds` data frames with `geom_bar()` to create the following plots
@@ -557,13 +597,13 @@ By default, R makes numeric variables _continuous_
 .leftcol[
 
 ```r
-ggplot(bears, aes(x=year, y=age)) +
-    geom_point(aes(color=month))
+ggplot(data = bears, aes(x = month)) +
+    geom_bar(aes(fill = bearType))
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-35-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-36-1.png" width="504" /&gt;
+]]
 
 ---
 # "Factors" = Categorical variables
@@ -573,13 +613,13 @@ You can make a continuous variable _categorical_ using `as.factor()`
 .leftcol[
 
 ```r
-ggplot(bears, aes(x=year, y=age)) +
-*   geom_point(aes(color=as.factor(month)))
+ggplot(data = bears, aes(x = as.factor(month))) +
+    geom_bar(aes(fill = bearType))
 ```
 ]
-.rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-36-1.png" width="504" /&gt;
-]
+.rightcol[.blackborder[
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-37-1.png" width="504" /&gt;
+]]
 
 ---
 # Working with themes
@@ -598,7 +638,7 @@ ggplot(data = bears, aes(x = year, y = age)) +
 ```
 ]
 .rightcol[
-&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-37-1.png" width="504" /&gt;
+&lt;img src="slides-12-data-visualization_files/figure-html/unnamed-chunk-38-1.png" width="504" /&gt;
 ]
 
 ---
@@ -656,21 +696,25 @@ ggsave(filename = file.path('data', 'scatterPlot.pdf'),
 ```
 
 ---
+class: inverse
+
 # Extra practice 1
 
 Use the `mtcars` data frame to create the following plots
 
-.columns3[
+.cols3[
 &lt;img src="slides-12-data-visualization_files/figure-html/mtcars_1-1.png" width="324" /&gt;
 ]
-.columns3[
+.cols3[
 &lt;img src="slides-12-data-visualization_files/figure-html/mtcars_2-1.png" width="324" /&gt;
 ]
-.columns3[
+.cols3[
 &lt;img src="slides-12-data-visualization_files/figure-html/mtcars_3-1.png" width="324" /&gt;
 ]
 
 ---
+class: inverse
+
 # Extra practice 2
 
 Use the `mpg` data frame to create the following plot
@@ -729,7 +773,24 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();</script>
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {
