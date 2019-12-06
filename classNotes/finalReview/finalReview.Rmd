@@ -1,0 +1,1647 @@
+---
+title: "Final Exam Review"
+author: "John Paul Helveston"
+date: December 09, 2019
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse6574-gwu.github.io/2019-Fall/classNotes/classNotes.css']
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(here)
+library(fontawesome) # from github: https://github.com/rstudio/fontawesome
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '')
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+set.seed(42)
+beatles_orig <- tibble(
+    firstName   = c("John", "Paul", "Ringo", "George"),
+    lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
+    instrument  = c("guitar", "bass", "drums", "guitar"),
+    yearOfBirth = c(1940, 1942, 1940, 1943),
+    deceased    = c(TRUE, FALSE, FALSE, TRUE))
+birds <- read_csv(here::here('finalReview', 'data', 'birds.csv'))
+bears <- read_csv(here::here('finalReview', 'data', 'bears.csv'))
+```
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 16: Final Exam Review
+
+.large[EMSE 6574 | John Paul Helveston | December 09, 2019]
+
+---
+# Things to review
+
+--
+- Lesson pages (esp. tips sections)
+
+--
+- All lecture slides (esp. exercises covered in class)
+
+--
+- Practice your weaknesses, e.g. code tracing, writing functions, "tidyverse" functions, etc.
+
+--
+- Memorize syntax: functions, test functions, "tidyverse" functions, etc.
+
+--
+- Review hw, quiz, and exam solutions (on blackboard)
+
+---
+# Data types
+
+.leftcol[
+Numeric: Double vs. Integer
+.code60[
+```{r}
+class(3.14)
+class(3)
+class(3L)
+```
+]
+Logical:
+.code60[
+```{r}
+x <- 2 == 2
+x
+```
+]]
+.rightcol[
+
+Character / string:
+.code60[
+```{r}
+s <- '3.14'
+class(s)
+```
+```{r, error=TRUE}
+s + 7
+```
+]]
+
+---
+.slimtitle[Checking / coercing data types]
+
+.leftcol[
+Check if number is integer _type_ :
+```{r}
+is.integer(3)
+```
+Check if number is integer _value_ :
+```{r}
+3 == as.integer(3)
+```
+]
+.rightcol[
+Convert number to string:
+```{r}
+as.character(3.14)
+```
+Convert number to logical:
+```{r}
+as.logical(3.14)
+```
+Math with logical:
+```{r}
+TRUE + TRUE
+```
+]
+
+---
+```{r}
+w <- TRUE
+x <- FALSE
+y <- FALSE
+z <- TRUE
+```
+
+.leftcol[
+## Logical operators
+
+Write a logical statement that compares the objects `x`, `y`, and `z` and returns `TRUE`
+]
+.rightcol[
+## Relational operators
+
+Fill in the correct relational operators to make this statement return `TRUE`:
+
+`! (x __ y) & ! (z __ y)`
+]
+
+---
+# Number "chopping"
+
+"Chopping" with orders of 10:
+
+.leftcol[
+
+The mod operator (`%%`) "chops" a number and returns everything to the _right_
+
+```{r}
+123456 %% 1
+123456 %% 10
+123456 %% 100
+```
+
+]
+
+.rightcol[
+
+The integer divide operator (`%/%`) "chops" a number and returns everything to the _left_
+
+```{r}
+123456 %/% 1
+123456 %/% 10
+123456 %/% 100
+```
+
+]
+
+---
+# Functions
+
+```{r eval=FALSE}
+FNAME <- function(ARG1, ARG2, ETC) {
+    STATEMENT1
+    STATEMENT2
+    return(VALUE)
+}
+```
+
+--
+How I remember this:
+
+|"function name" | is a | function   | of ()               | that does...  |
+|:---------------|:-----|:-----------|:--------------------|:--------------|
+|`FNAME`         | `<-` | `function` | `(ARG1, ARG2, ETC)` | `{}`          |
+
+Example:
+
+|"function name" | is a | function   | of () | that does...              |
+|:---------------|:-----|:-----------|:------|:--------------------------|
+|`mySqrt`        | `<-` | `function` | `(n)` | `{ return(n^0.5) }`       |
+
+---
+# Test Functions
+
+```{r eval=FALSE}
+testFNAME <- function() {
+    cat('Testing FNAME()...')
+    # Insert tests here
+    stopifnot(FNAME(ARG1, ARG2, ETC) == TRUE)
+    cat('Passed!')
+}
+```
+<br>
+
+--
+`stopifnot()` stops the function if its argument is not `TRUE`.
+
+---
+# Use `if` statements to filter function inputs
+
+Write the function `isEvenNumber(n)` that returns `TRUE` if `n` is an even number and `FALSE` otherwise. If `n` is not a number, the function should return `FALSE` instead of causing an error.
+
+Test cases:
+- `isEvenNumber(42) == TRUE`
+- `isEvenNumber(43) == FALSE`
+- `isEvenNumber('not a number') == FALSE`
+
+--
+
+.leftcol[
+```{r, eval=FALSE}
+isEvenNumber <- function(n) {
+    return((n %% 2) == 0)
+}
+```
+]
+--
+
+.rightcol[
+```{r, eval=FALSE}
+isEvenNumber <- function(n) {
+    if (! is.numeric(n)) { return(FALSE) }
+    if (n != as.integer(n)) { return(FALSE) }
+    return((n %% 2) == 0)
+}
+```
+]
+
+---
+# The `almostEqual()` function
+
+```{r}
+almostEqual <- function(d1, d2) {
+    epsilon = 0.00001
+    return(abs(d1-d2) <= epsilon)
+}
+```
+
+--
+```{r}
+0.1 + 0.2 == 0.3
+```
+
+--
+```{r}
+almostEqual(0.1 + 0.2, 0.3)
+```
+
+---
+# Iteration review: loop over a sequence
+```{r}
+seq(5)
+```
+
+--
+.leftcol[
+### `for` loop
+```{r}
+for (i in seq(5)) {
+    cat(i, '\n')
+}
+```
+]
+--
+.rightcol[
+### `while` loop
+```{r}
+i <- 1
+while (i <= 5) {
+    cat(i, '\n')
+    i <- i + 1
+}
+```
+]
+
+---
+.slimtitle[Searching for something in a sequence]
+
+```{r}
+seq(5)
+```
+Count of **even** numbers in sequence:
+--
+.leftcol[
+`for` loop
+
+```{r}
+count <- 0
+for (i in seq(5)) {
+    if (i %% 2 == 0) {
+        count <- count + 1
+    }
+}
+count
+```
+]
+--
+.rightcol[
+`while` loop
+
+```{r}
+count <- 0
+i <- 1
+while (i <= 5) {
+    if (i %% 2 == 0) {
+        count <- count + 1
+    }
+    i <- i + 1
+}
+count
+```
+]
+
+---
+# `for` vs. `while`
+
+.leftcol[
+### Use `for` loops when there is a _known_ number of iterations.
+]
+.rightcol[
+### Use `while` loops when there is an _unknown_ number of iterations.
+]
+
+---
+# Vectors with `c()`
+
+--
+```{r}
+# Numeric vectors
+x <- c(1, 2, 3)
+x
+```
+--
+```{r}
+# Character vectors
+y <- c('one', 'two', 'three')
+y
+```
+--
+```{r}
+# Logical vectors
+y <- c(TRUE, FALSE, TRUE)
+y
+```
+
+---
+.slimtitle[Vector coercion]
+
+```{r}
+c(1, 2, "3")
+```
+--
+Logicals become 1 and 0 as numbers:
+```{r}
+c(1, 2, TRUE, FALSE)
+```
+--
+One float makes all integers floats:
+```{r}
+c(1L, 2, pi)
+```
+
+---
+# Summation with loop vs. vector
+
+```{r}
+x <- 1:10
+x
+```
+
+.leftcol[
+**Loop**
+
+```{r}
+total <- 0
+for (item in x) {
+    total <- total + item
+}
+total
+```
+]
+.rightcol[
+**The `sum()` function**:
+```{r}
+sum(x)
+```
+]
+---
+.slimtitle[Vector slicing with brackets `[]`]
+
+```{r}
+x <- seq(1, 10)
+```
+.leftcol[
+Return an element by index:
+```{r}
+x[1]
+```
+Return sub-vector:
+```{r}
+x[1:3]
+```
+```{r}
+x[c(2, 7)]
+```
+]
+.rightcol[
+Returns the last element:
+```{r}
+x[length(x)]
+```
+Negative integers remove elements:
+```{r}
+x[-1] # Removes first element
+x[-length(x)] # Removes last element
+```
+]
+
+---
+# Comparing vectors
+
+```{r}
+x <- c(1, 2, 3)
+y <- c(1, 2, 3)
+z <- c(-1, 2,-3)
+```
+
+.leftcol[
+Check if _all_ elements are same:
+```{r}
+all(x == y)
+all(x == z)
+```
+]
+.rightcol[
+Check if _any_ elements are same:
+```{r}
+any(x == y)
+any(x == z)
+```
+]
+
+---
+# Creating a data frame with `tibble()`
+
+```{r}
+library(tidyverse)
+beatles <- tibble(
+    firstName   = c("John", "Paul", "Ringo", "George"),
+    lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
+    instrument  = c("guitar", "bass", "drums", "guitar"),
+    yearOfBirth = c(1940, 1942, 1940, 1943),
+    deceased    = c(TRUE, FALSE, FALSE, TRUE)
+)
+beatles
+```
+
+---
+# Slicing data frames: `$` and `[row, col]`
+
+--
+Data frame _columns_ are vectors:
+```{r}
+beatles$firstName
+```
+
+--
+Data frame _rows_ are observations:
+```{r}
+beatles[1,]
+```
+
+---
+# Slicing data frames
+
+Select specific elements using `[row, col]` indices:
+```{r}
+beatles[1,2]
+beatles[1:2, c(2, 4)]
+```
+
+---
+# Data frame dimensions
+
+```{r}
+nrow(beatles) # Number of rows
+ncol(beatles) # Number of columns
+dim(beatles)  # Number of rows and columns
+```
+
+---
+# Data frame column names
+
+```{r}
+names(beatles)
+colnames(beatles)
+```
+
+Change column names:
+```{r}
+colnames(beatles) <- c('one', 'two', 'three', 'four', 'five')
+colnames(beatles)
+```
+```{r, include=FALSE}
+beatles <- beatles_orig
+```
+---
+# Combining data frames: `bind_cols()`:
+
+```{r}
+names <- tibble(
+    firstName = c("John", "Paul", "Ringo", "George"),
+    lastName  = c("Lennon", "McCartney", "Starr", "Harrison"))
+instruments <- tibble(
+    instrument = c("guitar", "bass", "drums", "guitar"))
+```
+--
+```{r}
+bind_cols(names, instruments)
+```
+
+---
+# Combining data frames: `bind_rows()`:
+
+```{r}
+members1 <- tibble(
+    firstName = c("John", "Paul"),
+    lastName  = c("Lennon", "McCartney"))
+members2 <- tibble(
+    firstName = c("Ringo", "George"),
+    lastName  = c("Starr", "Harrison"))
+```
+--
+```{r}
+bind_rows(members1, members2)
+```
+
+---
+# Importing external data
+
+Define path to the data with `file.path()`:
+```{r, eval=FALSE}
+pathToData <- file.path('data', 'msleep.csv')
+```
+
+Read in the data with `read_csv()`:
+```{r, eval=FALSE}
+library(readr)
+msleep <- read_csv(pathToData)
+```
+
+---
+# Previewing data frames
+
+```{r}
+glimpse(msleep)
+```
+
+---
+# Previewing data frames
+
+```{r}
+head(msleep)
+tail(msleep)
+```
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+# The tidyverse
+
+`stringr` + `dplyr` + `readr` +  `ggplot2` + more = `tidyverse`
+
+```{r, echo=FALSE, out.width='80%'}
+include_graphics(file.path('img', 'horst_monsters_tidyverse.jpeg'))
+```
+
+---
+# The main `dplyr` verbs
+
+- `select()`: subset columns
+- `filter()`: subset rows on conditions
+- `arrange()`: sort results
+- `mutate()`: create new columns by using information from other columns
+- `group_by()`: group data to perform grouped operations
+- `summarize()`: create summary statistics (usually on grouped data)
+- `count()`: count discrete rows
+
+---
+# Select columns with `select()`
+
+.leftcol[
+```{r}
+beatles %>%
+    select(firstName, lastName)
+```
+]
+.rightcol[
+Can also search column names:
+- `contains()`
+- `ends_with()`
+```{r}
+beatles %>%
+    select(contains('name'))
+```
+]
+
+---
+# Select columns with `select()`
+
+Select all columns *except* certain ones with a `-` sign:
+```{r}
+beatles %>%
+    select(-firstName, -lastName)
+```
+
+---
+# Select rows with `filter()`
+
+Filter the band members born after 1940
+
+```{r}
+beatles %>%
+    filter(yearOfBirth > 1940)
+```
+
+---
+# Select rows with `filter()`
+
+Filter the band members with 4-letter first names
+
+```{r}
+beatles %>%
+    filter(str_length(firstName) == 4)
+```
+
+---
+# Sequence operations with pipes: `%>%`
+
+Step 1: Filter the band members born after 1940
+
+Step 2: Select only the columns `firstName` & `lastName`
+
+```{r}
+beatles %>%
+    filter(yearOfBirth > 1940) %>%
+    select(firstName, lastName)
+```
+
+---
+# Sort rows with `arrange()`
+
+Sort the data frame by year of birth:
+```{r}
+beatles %>%
+    arrange(yearOfBirth)
+```
+
+---
+# Sort rows with `arrange()`
+
+Use the `desc()` function to sort in descending order:
+```{r}
+beatles %>%
+    arrange(desc(yearOfBirth))
+```
+
+---
+# Create new variables with `mutate()`
+
+Compute the age of each band member from `yearOfBirth`
+
+```{r}
+beatles %>%
+    mutate(age = 2019 - yearOfBirth)
+```
+
+---
+# You can immediately use new variables
+
+```{r}
+beatles %>%
+    select(firstName, lastName, yearOfBirth) %>%
+    mutate(
+        age      = 2019 - yearOfBirth,
+        meanAge  = mean(age),
+        youngest = (age == min(age)),
+        oldest   = (age == max(age)))
+```
+
+---
+# if / else statements with `if_else()`
+
+To create a new variable based on a condition, use `if_else()`
+
+`if_else(<condition>, <if TRUE>, <else>)`
+
+--
+```{r}
+beatles %>%
+    mutate(
+        bornEvenOrOdd = if_else(yearOfBirth %% 2 == 0, 'even', 'odd'))
+```
+
+---
+# Create summary data frames
+
+.leftcol[
+`mutate()` adds a new column:
+```{r}
+beatles %>%
+    mutate(age = 2019 - yearOfBirth) %>%
+    mutate(mean_age = mean(age))
+```
+]
+.rightcol[
+`summarise()` adds a new column and drops all others:
+```{r}
+beatles %>%
+    mutate(age = 2019 - yearOfBirth) %>%
+    summarise(mean_age = mean(age))
+```
+]
+
+---
+# Operating on groups in the data
+
+```{r, echo=FALSE}
+spicegirls <- tibble(
+    firstName   = c("Melanie", "Melanie", "Emma", "Geri", "Victoria"),
+    lastName    = c("Brown", "Chisholm", "Bunton", "Halliwell", "Beckham"),
+    spice       = c("Scary", "Sporty", "Baby", "Ginger", "Posh"),
+    yearOfBirth = c(1975, 1974, 1976, 1972, 1974),
+    deceased    = c(FALSE, FALSE, FALSE, FALSE, FALSE)) %>%
+    select(-spice) %>%
+    mutate(band = 'spicegirls')
+beatles <- tibble(
+    firstName   = c("John", "Paul", "Ringo", "George"),
+    lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
+    yearOfBirth = c(1940, 1942, 1940, 1943),
+    deceased    = c(TRUE, FALSE, FALSE, TRUE),
+    band        = 'beatles'
+)
+bands <- bind_rows(spicegirls, beatles)
+```
+```{r}
+bands
+```
+
+---
+# Operating on groups in the data
+
+```{r}
+bands %>%
+    mutate(
+        age = 2019 - yearOfBirth)
+```
+
+---
+# Operating on groups in the data
+
+```{r}
+bands %>%
+    mutate(
+        age = 2019 - yearOfBirth,
+        mean_age = mean(age))
+```
+
+---
+# Operating on groups in the data
+
+```{r}
+bands %>%
+    mutate(age = 2019 - yearOfBirth) %>%
+    group_by(band) %>% #<<
+    mutate(mean_age = mean(age))
+```
+
+---
+# Operating on groups in the data
+
+```{r}
+bands %>%
+    mutate(age = 2019 - yearOfBirth) %>%
+    group_by(band) %>%
+    summarise(mean_age = mean(age)) #<<
+```
+
+---
+# Count observations with `count()`
+
+How many members are in each band?
+.leftcol[
+Method 1: Use `group_by()` + `summarise()`
+```{r}
+bands %>%
+    group_by(band) %>%
+    summarise(count = n())
+```
+]
+.rightcol[
+Method 2: Use `count()`
+```{r}
+bands %>%
+    count(band)
+```
+]
+
+---
+# Exporting data
+
+```{r}
+ageSummary <- bands %>%
+    mutate(age = 2019 - yearOfBirth) %>%
+    group_by(band) %>%
+    summarise(mean_age = mean(age))
+ageSummary
+```
+
+Save `ageSummary` data frame:
+```{r, eval=FALSE}
+savePath <- file.path('data', 'ageSummary.csv')
+write_csv(ageSummary, savePath)
+```
+
+---
+# Plotting with ggplot2
+
+.leftcol[
+Layers:
+
+1. The data: `ggplot(data = ___)`
+2. The aesthetics: `aes(x = ____, y = ____)`
+3. The geometries: `geom_point()`, `geom_bar()`
+]
+--
+.rightcol[
+Example data:
+.code60[
+```{r}
+glimpse(bears)
+```
+]]
+
+---
+# Layer 1: The data
+
+The `ggplot()` function initializes the plot:
+
+.leftcol[
+```{r ggblank, fig.show='hide'}
+ggplot(data = bears)
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggblank', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# Layer 2: The aesthetics
+
+The `aes()` function determines which variables will be _mapped_ to the axes:
+
+.leftcol[
+```{r ggaes, fig.show='hide'}
+ggplot(data = bears, aes(x = year, y = age))
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggaes', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# Layer 3: The geometries
+
+Use `+` to add geometries (e.g. points) to the plot:
+
+.leftcol[
+```{r ggpoint, fig.show='hide'}
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point() #<<
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggpoint', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# Scatterplots with `geom_point()`
+
+.leftcol[
+```{r ggbears, fig.show='hide'}
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point()
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggbears', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# Scatterplots with `geom_point()`
+
+Change the point color:
+
+.leftcol[
+```{r ggbearsblue, fig.show='hide'}
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point(color = 'blue') #<<
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggbearsblue', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# Scatterplots with `geom_point()`
+
+Change the point color **based on another variable**:
+
+.leftcol[
+```{r ggbearsage, fig.show='hide'}
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point(aes(color = gender)) #<<
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggbearsage', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# Scatterplots with `geom_point()`
+
+Adjust labels with `labs()` layer:
+
+.leftcol[
+```{r ggbearsagelabs, fig.show='hide'}
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point(aes(color = gender)) +
+    labs(x = "Year", #<<
+         y = "Age",  #<<
+         title = "Bear victim age over time", #<<
+         color = "Gender") #<<
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggbearsagelabs', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# Histograms with `geom_bar()`
+
+The default `geom_bar()` is a count of `x`
+
+.leftcol[
+```{r ggbearshist, fig.show='hide'}
+ggplot(data = bears, aes(x = month)) +
+    geom_bar()
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggbearshist', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# Histograms with `geom_bar()`
+
+Use `fill` (not `color`) to change the color of the bars:
+
+.leftcol[
+```{r ggbearshist_fill, fig.show='hide'}
+ggplot(data = bears, aes(x = month)) +
+    geom_bar(aes(fill = bearType)) #<<
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggbearshist_fill', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# Bar charts with `geom_bar()`
+
+To plot a `y` variable other than "count", add `stat = 'identity'`:
+
+(Default "stat" is `count`)
+
+.leftcol[
+```{r ggbearsbar, fig.show='hide'}
+meanAgeAnnual <- bears %>%
+  filter(!is.na(age)) %>%
+  group_by(year) %>%
+  summarise(meanAge = mean(age))
+
+ggplot(data=meanAgeAnnual, aes(x=year, y=meanAge)) +
+    geom_bar(stat = 'identity') #<<
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggbearsbar', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# "Factors" = Categorical variables
+
+By default, R makes numeric variables _continuous_
+
+.leftcol[
+```{r ggbearshist_continuous, fig.show='hide'}
+ggplot(data = bears, aes(x = month)) +
+    geom_bar(aes(fill = bearType))
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggbearshist_continuous', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# "Factors" = Categorical variables
+
+You can make a continuous variable _categorical_ using `as.factor()`
+
+.leftcol[
+```{r ggbearshist_factor, fig.show='hide'}
+ggplot(data = bears, aes(x = as.factor(month))) +
+    geom_bar(aes(fill = bearType))
+```
+]
+.rightcol[.blackborder[
+```{r ref.label='ggbearshist_factor', echo=FALSE, fig.height=5, fig.width=7}
+```
+]]
+
+---
+# Save figures with `ggsave()`
+
+--
+First, assign the plot to an object name:
+```{r, eval=FALSE}
+scatterPlot <- ggplot(data = bears) +
+    geom_point(aes(x = year, y = age))
+```
+
+--
+Then use `ggsave()` to save the plot:
+```{r, eval=FALSE}
+ggsave(filename = file.path('data', 'scatterPlot.pdf'),
+       plot   = scatterPlot,
+       width  = 6,
+       height = 4)
+```
+
+---
+# RMarkdown 
+
+### Know the basic elements: 
+
+- YAML
+- Markdown formatting
+- Code chunks
+- Tables: markdown & `kable()`
+
+---
+# Elements of an RMarkdown file (`.Rmd`)
+
+.leftcol[
+### 1) YAML metadata
+```{r, eval=FALSE}
+---
+title: "This is a demo"
+author: "John Helveston"
+date: "11/18/2019"
+output: html_document
+---
+```
+
+### 2) Markdown text
+
+```
+# Section 1
+
+This is a sentence...
+```
+]
+.rightcol[
+### 3) R Code
+
+    `r ''````{r}
+    plot(x = 1:5, y = 1:5)
+    ```
+    
+### 4) Code output
+```{r, echo=FALSE, out.width='40%'}
+plot(x = 1:5, y = 1:5)
+```
+
+]
+
+---
+# Markdown tables
+
+--
+.leftcol[
+Basic tables 
+
+```{r, eval=FALSE}
+Table Header  | Second Header
+------------- | -------------
+Cell 1, 1     | Cell 2, 1
+Cell 1, 2     | Cell 2, 2
+```
+
+Table Header  | Second Header
+------------- | -------------
+Cell 1, 1     | Cell 2, 1
+Cell 1, 2     | Cell 2, 2
+]
+.rightcol[
+Tables with `kable()`
+
+```{r}
+bears %>%
+  count(bearType, wildOrCaptive) %>%
+  kable()
+```
+]
+
+---
+class: inverse, middle, center
+
+# List of all class practice problems
+
+---
+class: inverse
+
+# Number chopping
+
+1) `onesDigit(x)`: Write a function that takes an integer and returns its ones digit.
+
+2) `tensDigit(x)`: Write a function that takes an integer and returns its tens digit.
+
+.leftcol[
+`onesDigit(x)` tests:
+
+- onesDigit(123) == 3
+- onesDigit(7890) == 0
+- onesDigit(6) == 6
+- onesDigit(-54) == 4
+]
+
+.rightcol[
+`tensDigit(x)` tests:
+
+- tensDigit(456) == 5
+- tensDigit(23) == 2
+- tensDigit(1) == 0
+- tensDigit(-7890) == 9
+]
+
+---
+class: inverse
+
+# General function writing
+
+.leftcol[
+
+1) `eggCartons(eggs)`: Write a program that reads in a non-negative number of eggs and prints the number of egg cartons required to hold that many eggs (given that each egg carton holds one dozen eggs, and you cannot buy fractional egg cartons). Be sure your program works for multiples of 12, including 0.
+
+- eggCartons(0) == 0
+- eggCartons(1) == 1
+- eggCartons(12) == 1
+- eggCartons(13) == 2
+- eggCartons(24) == 2
+- eggCartons(25) == 3
+
+]
+
+.rightcol[
+
+2) `militaryTimeToStandardTime(n)`: Write a program that takes an integer between 0 and 23 (representing the hour in military time), and returns the same hour in standard time. For example, 17 in military time is 5 o'clock in standard time.
+
+- militaryTimeToStandardTime(0) == 12
+- militaryTimeToStandardTime(1) == 1
+- militaryTimeToStandardTime(11) == 11
+- militaryTimeToStandardTime(12) == 12
+- militaryTimeToStandardTime(13) == 1
+- militaryTimeToStandardTime(23) == 11
+
+]
+
+---
+class: inverse
+
+# Conditionals (if / else)
+
+Write the function `getInRange(x, bound1, bound2)` which takes 3 numeric values: `x`, `bound1`, and `bound2`, where `bound1` is not necessarily less than `bound2`. If `x` is between the two bounds, just return it unmodified. Otherwise, if `x` is less than the lower bound, return the lower bound, or if `x` is greater than the upper bound, return the upper bound. For example:
+
+- `getInRange(1, 3, 5)` returns `3` (the lower bound, since 1 is below the range [3,5])
+- `getInRange(4, 3, 5)` returns `4` (the original value, since 4 is below the range [3,5])
+- `getInRange(6, 3, 5)` returns `5` (the upper bound, since 6 is above the range [3,5])
+- `getInRange(6, 5, 3)` returns `5` (the upper bound, since 6 is above the range [3,5])
+
+**Start** by writing the test function `testGetInRange()` that tests for a variety of values of `x`, `bound1`, `bound2`.
+<br>
+
+**Bonus**: Re-write `getInRange(x, bound1, bound2)` without using conditionals
+
+---
+class: inverse
+
+.slimtitle[Loops / Vectors]
+
+.font80[
+1) `sumFromMToN(m, n)`: Write a function that sums the total of the integers between `m` and `n`. **Challenge**: Try solving this without a loop (it's possible - Google it!).
+
+- `sumFromMToN(5, 10) == (5+6+7+8+9+10)`
+- `sumFromMToN(1, 1) == 1`
+
+2) `sumEveryKthFromMToN(m, n, k)`: Write a function to sum every kth integer from `m` to `n`.
+
+- `sumEveryKthFromMToN(5, 20, 7) == (5 + 12 + 19)`
+- `sumEveryKthFromMToN(1, 10, 2) == (1 + 3 + 5 + 7 + 9)`
+- `sumEveryKthFromMToN(0, 0, 1) == 0`
+
+3) `sumOfOddsFromMToN(m, n)`: Write a function that sums every _odd_ integer between `m` and `n`. **Challenge**: Try solving this without a loop (Hint: use a vector operation...we'll cover this next week!).
+
+- `sumOfOddsFromMToN(4, 10) == (5 + 7 + 9)`
+- `sumOfOddsFromMToN(5, 9) == (5 + 7 + 9)`
+]
+
+---
+class: inverse
+
+.slimtitle[Loops / Vectors]
+
+.leftcol[
+.font80[
+1) `isMultipleOf4Or7(n)`
+
+Write a function that returns `TRUE` if `n` is a multiple of 4 or 7 and `FALSE` otherwise. Here's some test cases:
+
+- `isMultipleOf4Or7(0) == FALSE`
+- `isMultipleOf4Or7(1) == FALSE`
+- `isMultipleOf4Or7(-7) == FALSE`
+- `isMultipleOf4Or7(4) == TRUE`
+- `isMultipleOf4Or7(7) == TRUE`
+- `isMultipleOf4Or7(28) == TRUE`
+- `isMultipleOf4Or7('notANumer') == FALSE`
+]]
+
+.rightcol[
+.font80[
+2) `nthMultipleOf4Or7(n)`
+
+Write a function that returns the nth positive integer that is a multiple of either 4 or 7. Hint: use `isMultipleOf4Or7(n)` as a helper function! Here's some test cases:
+
+- `nthMultipleOf4Or7(1) == 4`
+- `nthMultipleOf4Or7(2) == 7`
+- `nthMultipleOf4Or7(3) == 8`
+- `nthMultipleOf4Or7(4) == 12`
+- `nthMultipleOf4Or7(5) == 14`
+- `nthMultipleOf4Or7(6) == 16`
+- `nthMultipleOf4Or7(10) == 28`
+]]
+
+---
+class: inverse
+
+.slimtitle[Loops / Vectors]
+
+.leftcol[
+.font80[
+1) `isPrime(n)`
+
+Write a function that takes a non-negative integer, `n`, and returns `TRUE` if it is a prime number and `FALSE` otherwise. Here's some test cases:
+
+- `isPrime(1) == FALSE`
+- `isPrime(2) == TRUE`
+- `isPrime(7) == TRUE`
+- `isPrime(13) == TRUE`
+- `isPrime(14) == FALSE`
+]]
+
+.rightcol[
+.font80[
+2) `nthPrime(n)`
+
+Write a function that takes a non-negative integer, `n`, and returns the nth prime number, where `nthPrime(1)` returns the first prime number (2). Hint: use `isPrime(n)` as a helper function! Here's some test cases:
+
+- `nthPrime(1) == 2`
+- `nthPrime(2) == 3`
+- `nthPrime(3) == 5`
+- `nthPrime(4) == 7`
+- `nthPrime(7) == 17`
+]]
+
+---
+class: inverse
+
+.slimtitle[Vectors]
+
+.font80[
+1) `reverse(x)`
+
+Write a function that returns the vector in reverse order. You cannot use the `rev()` function. You cannot use loops! Test cases:
+
+- `reverse(c(5, 1, 3)) == c(3, 1, 5)`
+- `reverse(c('a', 'b', 'c')) == c('c', 'b', 'a')`
+- `reverse(c(FALSE, TRUE, TRUE)) == c(TRUE, TRUE, FALSE)`
+- `reverse(seq(10)) == seq(10, 1, -1)`
+
+2) `middleValue(a)`
+
+Write a function that takes a vector of numbers `a` and returns the value of the middle element (or the average of the two middle elements). Test cases:
+
+- `middleValue(c(0,0,0)) == 0`
+- `middleValue(c(1,2,3)) == 2`
+- `middleValue(c(4,5,6,7,8)) == 6`
+- `middleValue(c(5,3,8,4)) == mean(c(3,8))`
+- `middleValue(c(4,5,6,7)) == mean(c(5,6))`
+]
+
+---
+class: inverse
+
+.slimtitle[Vectors]
+
+.leftcol[
+.font80[
+1) `dotProduct(a, b)`
+
+The "dot product" of two vectors is the sum of the products of the corresponding terms. So the dot product of the vectors `c(1,2,3)` and `c(4,5,6)` is `(1*4) + (2*5) + (3*6)`, or `4 + 10 + 18 = 32`. Write a function that takes two vectors and returns the dot product of those vectors. If the vectors are not equal length, ignore the extra elements in the longer vector. Try not to use loops! Test cases:
+
+- `dotProduct(c(1,2,3), c(4,5,6)) == 32`
+- `dotProduct(c(1,2), c(4,5,6)) == 14`
+- `dotProduct(c(2,3,4), c(-7,1,9)) == 25`
+- `dotProduct(c(0,0,0), c(-7,1,9)) == 0`
+]]
+.rightcol[
+.font80[
+2) `alternatingSum(a)`
+
+Write a function that takes a vector of numbers `a` and returns the alternating sum, where the sign alternates from positive to negative or vice versa. Test cases:
+
+- `alternatingSum(c(5,3,8,4)) == (5 - 3 + 8 - 4)`
+- `alternatingSum(c(1,2,3)) == (1 - 2 + 3)`
+- `alternatingSum(c(0,0,0)) == 0`
+]]
+
+---
+class: inverse
+
+.slimtitle[Data frames]
+
+.leftcol[
+.code60[
+```{r, eval=FALSE}
+animals_farm = tibble(
+    name           = c("cow", "horse"),
+    sound          = c("moo", "neigh"),
+    aveWeightLbs   = c(2400, 1500),
+    aveLifeSpanYrs = c(20, 25)
+)
+animals_pet = tibble(
+    name           = c("dog", "cat"),
+    sound          = c("woof", "meow"),
+    aveWeightLbs   = c(40, 8),
+    aveLifeSpanYrs = c(10, 12)
+)
+```
+]]
+.rightcol[
+.font80[
+Use R code to find answers to these questions:
+
+1. How many rows are in the `animals_farm` data frame?
+2. How many columns are in the `animals_pet` data frame?
+3. Create a new data frame, `animals`, by combining `animals_farm` and `animals_pet`.
+4. Create a new column in `animals` called `type` and set the values to `"farm"` or `"pet"`.
+5. Change the column names of `animals` to title case.
+]
+```{r, eval=FALSE, echo=FALSE}
+nrow(animals_farm)
+ncol(animals_pet)
+animals <- bind_rows(animals_farm, animals_pet)
+animals$type <- c('farm', 'farm', 'pet', 'pet')
+library(stringr)
+colnames(animals) <- str_to_title(colnames(animals))
+```
+]
+
+---
+class: inverse
+
+.slimtitle[Data frames]
+
+```{r}
+beatles <- tibble(
+    firstName   = c("John", "Paul", "Ringo", "George"),
+    lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
+    instrument  = c("guitar", "bass", "drums", "guitar"),
+    yearOfBirth = c(1940, 1942, 1940, 1943),
+    deceased    = c(TRUE, FALSE, FALSE, TRUE)
+)
+```
+
+Use R code to find answers to these questions:
+
+1. Create a new column, `playsGuitar`, which is `TRUE` if the band member plays the guitar and `FALSE` otherwise.
+2. Select the rows for the band members who have four-letter first names.
+3. Create a new column, `fullName`, which contains the band member's first and last name separated by a space (e.g. `"John Lennon"`)
+
+```{r, eval=FALSE, echo=FALSE}
+# Solutions
+beatles$playsGuitar <- beatles$instrument == 'guitar'
+library(stringr)
+beatles[str_length(beatles$firstName) == 4,]
+beatles$fullName <- str_c(beatles$firstName, beatles$lastName, sep = ' ')
+```
+
+---
+class: inverse
+
+# Data wrangling: `select` columns & `filter` rows
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `birds.csv` file that is in the `data` folder.
+
+2) Use the `df` object and the `select()` and `filter()` functions to answer the following questions:
+
+- Create a new data frame, `df_birds`, that contains only the variables (columns) about the species of bird.
+- Create a new data frame, `dc`, that contains only the observations (rows) from DC airports.
+- Create a new data frame, `dc_birds_known`, that contains only the observations (rows) from DC airports and those where the species of bird is known.
+- How many _known_ unique species of birds have been involved in accidents at DC airports?
+
+---
+class: inverse
+
+# Data wrangling: `select`, `filter`, and `%>%`
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `birds.csv` file that is in the `data` folder.
+
+2) Use the `df` object and the `select()` and `filter()` functions to answer the following questions:
+
+- Create a new data frame, `dc_dawn`, that contains only the observations (rows) from DC airports that occurred at dawn.
+- Create a new data frame, `dc_dawn_birds`, that contains only the observations (rows) from DC airports that occurred at dawn and only the variables (columns) about the species of bird.
+- Create a new data frame, `dc_dawn_birds_known`, that contains only the observations (rows) from DC airports that occurred at dawn and only the variables (columns) about the KNOWN species of bird.
+- How many _known_ unique species of birds have been involved in accidents at DC airports at dawn?
+
+---
+class: inverse
+
+# Data wrangling: `mutate`
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `birds.csv` file that is in the `data` folder.
+
+2) Use the `df` object and the `mutate()` functions to add the following new variables:
+
+- `height_miles`: The `height` variable converted to miles (Hint: there are 5,280 feet in a mile).
+- `cost_mil`: `TRUE` if the repair costs was greater or equal to $1 million, `FALSE` otherwise.
+
+BONUS: Use the `incident_month` variable to create a new variable `season`, which takes one of four values based on the incident month:
+
+- `spring`: March, April, May
+- `summer`: June, July, August
+- `fall`: September, October, November
+- `winter`: December, January, February
+
+---
+class: inverse
+
+# Data wrangling: `group_by` + `summarise`
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `birds.csv` file that is in the `data` folder.
+
+2) Use the `df` object and the `group_by()` and `summarise` functions to answer the following questions:
+
+- Create a summary data frame that contains the mean `height` for each different time of day.
+- Create a summary data frame that contains the maximum `cost_repairs_infl_adj` for each year.
+
+---
+class: inverse
+
+# Data wrangling: `count`
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `birds.csv` file that is in the `data` folder.
+
+2) Use the `df` object and the `count()` function to answer the following questions:
+
+- Which month has had the greatest number of reported incidents?
+- Which year has had the greatest number of reported incidents?
+
+---
+class: inverse
+
+# Practice: `geom_point()`
+
+Use the `birds` data frame and `geom_point()` to create the following plots
+
+.leftcol[
+```{r, ggpoint_p1, echo=FALSE, fig.height=5, fig.width=7}
+ggplot(birds, aes(x=cost_repairs_infl_adj, y=height)) +
+  geom_point() + 
+  theme(text = element_text(size=20))
+```
+]
+.rightcol[
+```{r, ggpoint_p2, echo=FALSE, fig.height=5, fig.width=7}
+birds %>%
+  mutate(phase_of_flt = str_to_lower(phase_of_flt)) %>%
+  ggplot(aes(x=speed, y=height)) +
+  geom_point(aes(color = phase_of_flt)) + 
+  theme(text = element_text(size=20))
+```
+]
+
+---
+class: inverse
+
+# Practice: `geom_bar()`
+
+Use the `bears` and `birds` data frames with `geom_bar()` to create the following plots
+
+.leftcol[
+```{r, ggbar_p1, echo=FALSE, fig.height=5, fig.width=7}
+ggplot(data = bears, aes(x=year)) +
+    geom_bar(aes(fill = gender)) +
+    labs(x     = "Year",
+         y     = 'Number of killings',
+         fill  = "Victim gender",
+         title = "Annual deadly bear attacks over time") + 
+  theme(text = element_text(size=20))
+```
+]
+.rightcol[
+```{r, ggbar_p2, echo=FALSE, fig.height=5, fig.width=7}
+maxCost <- birds %>%
+  filter(!is.na(cost_repairs_infl_adj)) %>%
+  group_by(incident_year) %>%
+  summarise(maxCost = max(cost_repairs_infl_adj))
+ggplot(data = maxCost, aes(x=incident_year, y=maxCost)) +
+    geom_bar(stat = 'identity') +
+    labs(x     = "Year",
+         y     = 'Maximum cost ($)',
+         title = "Max annual cost from wildlife impact") + 
+  theme(text = element_text(size=20))
+```
+]
+
+---
+class: inverse
+
+# Extra plots practice 1
+
+Use the `mtcars` data frame to create the following plots
+
+.cols3[
+```{r, mtcars_1, echo=FALSE, fig.height=4, fig.width=4.5}
+ggplot(mtcars, aes(x=wt, y=mpg)) +
+    geom_point() +
+    theme_bw() +
+    labs(x = "Weight",
+         y = 'Fuel Economy (mpg)') + 
+  theme(text = element_text(size=20))
+```
+]
+.cols3[
+```{r, mtcars_2, echo=FALSE, fig.height=4, fig.width=4.5}
+ggplot(mtcars, aes(x=hp, y=mpg)) +
+    geom_point(aes(color=as.factor(cyl))) +
+    theme_bw() +
+    labs(x = "Horsepower (hp)",
+         y = 'Fuel Economy (mpg)',
+         color = 'Num. Cylinders') + 
+  theme(text = element_text(size=20))
+```
+]
+.cols3[
+```{r, mtcars_3, echo=FALSE, fig.height=4, fig.width=4.5}
+mtcars %>%
+  group_by(cyl) %>%
+  summarise(meanMpg = mean(mpg)) %>%
+  ggplot(aes(x=cyl, y=meanMpg)) +
+    geom_bar(stat = 'identity') +
+    labs(x = "Num. Cylinders",
+         y = 'Mean Fuel Economy (mpg)') + 
+  theme(text = element_text(size=20))
+```
+]
+
+---
+class: inverse
+
+# Extra plots practice 2
+
+Use the `mpg` data frame to create the following plot
+
+```{r, mtcars_4, echo=FALSE, fig.height=6, fig.width=8}
+mpg %>%
+    mutate(manufacturer = str_to_title(manufacturer)) %>%
+    group_by(manufacturer) %>%
+    summarise(meanHwy = mean(hwy)) %>%
+    mutate(manufacturer = fct_reorder(manufacturer, meanHwy)) %>%
+    ggplot(aes(x=manufacturer, y=meanHwy)) +
+    geom_bar(stat='identity') +
+    coord_flip() +
+    labs(
+        x='Vehicle manufacturer',
+        y='Highway fuel economy (mpg)') + 
+  theme(text = element_text(size=20))
+```

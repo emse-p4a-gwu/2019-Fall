@@ -1,0 +1,2325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Final Exam Review</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2019-12-09" />
+    <link href="finalReview_files/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://emse6574-gwu.github.io/2019-Fall/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 16: Final Exam Review
+
+.large[EMSE 6574 | John Paul Helveston | December 09, 2019]
+
+---
+# Things to review
+
+--
+- Lesson pages (esp. tips sections)
+
+--
+- All lecture slides (esp. exercises covered in class)
+
+--
+- Practice your weaknesses, e.g. code tracing, writing functions, "tidyverse" functions, etc.
+
+--
+- Memorize syntax: functions, test functions, "tidyverse" functions, etc.
+
+--
+- Review hw, quiz, and exam solutions (on blackboard)
+
+---
+# Data types
+
+.leftcol[
+Numeric: Double vs. Integer
+.code60[
+
+```r
+class(3.14)
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+class(3)
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+class(3L)
+```
+
+```
+## [1] "integer"
+```
+]
+Logical:
+.code60[
+
+```r
+x &lt;- 2 == 2
+x
+```
+
+```
+## [1] TRUE
+```
+]]
+.rightcol[
+
+Character / string:
+.code60[
+
+```r
+s &lt;- '3.14'
+class(s)
+```
+
+```
+## [1] "character"
+```
+
+```r
+s + 7
+```
+
+```
+## Error in s + 7: non-numeric argument to binary operator
+```
+]]
+
+---
+.slimtitle[Checking / coercing data types]
+
+.leftcol[
+Check if number is integer _type_ :
+
+```r
+is.integer(3)
+```
+
+```
+## [1] FALSE
+```
+Check if number is integer _value_ :
+
+```r
+3 == as.integer(3)
+```
+
+```
+## [1] TRUE
+```
+]
+.rightcol[
+Convert number to string:
+
+```r
+as.character(3.14)
+```
+
+```
+## [1] "3.14"
+```
+Convert number to logical:
+
+```r
+as.logical(3.14)
+```
+
+```
+## [1] TRUE
+```
+Math with logical:
+
+```r
+TRUE + TRUE
+```
+
+```
+## [1] 2
+```
+]
+
+---
+
+```r
+w &lt;- TRUE
+x &lt;- FALSE
+y &lt;- FALSE
+z &lt;- TRUE
+```
+
+.leftcol[
+## Logical operators
+
+Write a logical statement that compares the objects `x`, `y`, and `z` and returns `TRUE`
+]
+.rightcol[
+## Relational operators
+
+Fill in the correct relational operators to make this statement return `TRUE`:
+
+`! (x __ y) &amp; ! (z __ y)`
+]
+
+---
+# Number "chopping"
+
+"Chopping" with orders of 10:
+
+.leftcol[
+
+The mod operator (`%%`) "chops" a number and returns everything to the _right_
+
+
+```r
+123456 %% 1
+```
+
+```
+## [1] 0
+```
+
+```r
+123456 %% 10
+```
+
+```
+## [1] 6
+```
+
+```r
+123456 %% 100
+```
+
+```
+## [1] 56
+```
+
+]
+
+.rightcol[
+
+The integer divide operator (`%/%`) "chops" a number and returns everything to the _left_
+
+
+```r
+123456 %/% 1
+```
+
+```
+## [1] 123456
+```
+
+```r
+123456 %/% 10
+```
+
+```
+## [1] 12345
+```
+
+```r
+123456 %/% 100
+```
+
+```
+## [1] 1234
+```
+
+]
+
+---
+# Functions
+
+
+```r
+FNAME &lt;- function(ARG1, ARG2, ETC) {
+    STATEMENT1
+    STATEMENT2
+    return(VALUE)
+}
+```
+
+--
+How I remember this:
+
+|"function name" | is a | function   | of ()               | that does...  |
+|:---------------|:-----|:-----------|:--------------------|:--------------|
+|`FNAME`         | `&lt;-` | `function` | `(ARG1, ARG2, ETC)` | `{}`          |
+
+Example:
+
+|"function name" | is a | function   | of () | that does...              |
+|:---------------|:-----|:-----------|:------|:--------------------------|
+|`mySqrt`        | `&lt;-` | `function` | `(n)` | `{ return(n^0.5) }`       |
+
+---
+# Test Functions
+
+
+```r
+testFNAME &lt;- function() {
+    cat('Testing FNAME()...')
+    # Insert tests here
+    stopifnot(FNAME(ARG1, ARG2, ETC) == TRUE)
+    cat('Passed!')
+}
+```
+&lt;br&gt;
+
+--
+`stopifnot()` stops the function if its argument is not `TRUE`.
+
+---
+# Use `if` statements to filter function inputs
+
+Write the function `isEvenNumber(n)` that returns `TRUE` if `n` is an even number and `FALSE` otherwise. If `n` is not a number, the function should return `FALSE` instead of causing an error.
+
+Test cases:
+- `isEvenNumber(42) == TRUE`
+- `isEvenNumber(43) == FALSE`
+- `isEvenNumber('not a number') == FALSE`
+
+--
+
+.leftcol[
+
+```r
+isEvenNumber &lt;- function(n) {
+    return((n %% 2) == 0)
+}
+```
+]
+--
+
+.rightcol[
+
+```r
+isEvenNumber &lt;- function(n) {
+    if (! is.numeric(n)) { return(FALSE) }
+    if (n != as.integer(n)) { return(FALSE) }
+    return((n %% 2) == 0)
+}
+```
+]
+
+---
+# The `almostEqual()` function
+
+
+```r
+almostEqual &lt;- function(d1, d2) {
+    epsilon = 0.00001
+    return(abs(d1-d2) &lt;= epsilon)
+}
+```
+
+--
+
+```r
+0.1 + 0.2 == 0.3
+```
+
+```
+## [1] FALSE
+```
+
+--
+
+```r
+almostEqual(0.1 + 0.2, 0.3)
+```
+
+```
+## [1] TRUE
+```
+
+---
+# Iteration review: loop over a sequence
+
+```r
+seq(5)
+```
+
+```
+## [1] 1 2 3 4 5
+```
+
+--
+.leftcol[
+### `for` loop
+
+```r
+for (i in seq(5)) {
+    cat(i, '\n')
+}
+```
+
+```
+## 1 
+## 2 
+## 3 
+## 4 
+## 5
+```
+]
+--
+.rightcol[
+### `while` loop
+
+```r
+i &lt;- 1
+while (i &lt;= 5) {
+    cat(i, '\n')
+    i &lt;- i + 1
+}
+```
+
+```
+## 1 
+## 2 
+## 3 
+## 4 
+## 5
+```
+]
+
+---
+.slimtitle[Searching for something in a sequence]
+
+
+```r
+seq(5)
+```
+
+```
+## [1] 1 2 3 4 5
+```
+Count of **even** numbers in sequence:
+--
+.leftcol[
+`for` loop
+
+
+```r
+count &lt;- 0
+for (i in seq(5)) {
+    if (i %% 2 == 0) {
+        count &lt;- count + 1
+    }
+}
+count
+```
+
+```
+## [1] 2
+```
+]
+--
+.rightcol[
+`while` loop
+
+
+```r
+count &lt;- 0
+i &lt;- 1
+while (i &lt;= 5) {
+    if (i %% 2 == 0) {
+        count &lt;- count + 1
+    }
+    i &lt;- i + 1
+}
+count
+```
+
+```
+## [1] 2
+```
+]
+
+---
+# `for` vs. `while`
+
+.leftcol[
+### Use `for` loops when there is a _known_ number of iterations.
+]
+.rightcol[
+### Use `while` loops when there is an _unknown_ number of iterations.
+]
+
+---
+# Vectors with `c()`
+
+--
+
+```r
+# Numeric vectors
+x &lt;- c(1, 2, 3)
+x
+```
+
+```
+## [1] 1 2 3
+```
+--
+
+```r
+# Character vectors
+y &lt;- c('one', 'two', 'three')
+y
+```
+
+```
+## [1] "one"   "two"   "three"
+```
+--
+
+```r
+# Logical vectors
+y &lt;- c(TRUE, FALSE, TRUE)
+y
+```
+
+```
+## [1]  TRUE FALSE  TRUE
+```
+
+---
+.slimtitle[Vector coercion]
+
+
+```r
+c(1, 2, "3")
+```
+
+```
+## [1] "1" "2" "3"
+```
+--
+Logicals become 1 and 0 as numbers:
+
+```r
+c(1, 2, TRUE, FALSE)
+```
+
+```
+## [1] 1 2 1 0
+```
+--
+One float makes all integers floats:
+
+```r
+c(1L, 2, pi)
+```
+
+```
+## [1] 1.000000 2.000000 3.141593
+```
+
+---
+# Summation with loop vs. vector
+
+
+```r
+x &lt;- 1:10
+x
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+.leftcol[
+**Loop**
+
+
+```r
+total &lt;- 0
+for (item in x) {
+    total &lt;- total + item
+}
+total
+```
+
+```
+## [1] 55
+```
+]
+.rightcol[
+**The `sum()` function**:
+
+```r
+sum(x)
+```
+
+```
+## [1] 55
+```
+]
+---
+.slimtitle[Vector slicing with brackets `[]`]
+
+
+```r
+x &lt;- seq(1, 10)
+```
+.leftcol[
+Return an element by index:
+
+```r
+x[1]
+```
+
+```
+## [1] 1
+```
+Return sub-vector:
+
+```r
+x[1:3]
+```
+
+```
+## [1] 1 2 3
+```
+
+```r
+x[c(2, 7)]
+```
+
+```
+## [1] 2 7
+```
+]
+.rightcol[
+Returns the last element:
+
+```r
+x[length(x)]
+```
+
+```
+## [1] 10
+```
+Negative integers remove elements:
+
+```r
+x[-1] # Removes first element
+```
+
+```
+## [1]  2  3  4  5  6  7  8  9 10
+```
+
+```r
+x[-length(x)] # Removes last element
+```
+
+```
+## [1] 1 2 3 4 5 6 7 8 9
+```
+]
+
+---
+# Comparing vectors
+
+
+```r
+x &lt;- c(1, 2, 3)
+y &lt;- c(1, 2, 3)
+z &lt;- c(-1, 2,-3)
+```
+
+.leftcol[
+Check if _all_ elements are same:
+
+```r
+all(x == y)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+all(x == z)
+```
+
+```
+## [1] FALSE
+```
+]
+.rightcol[
+Check if _any_ elements are same:
+
+```r
+any(x == y)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+any(x == z)
+```
+
+```
+## [1] TRUE
+```
+]
+
+---
+# Creating a data frame with `tibble()`
+
+
+```r
+library(tidyverse)
+beatles &lt;- tibble(
+    firstName   = c("John", "Paul", "Ringo", "George"),
+    lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
+    instrument  = c("guitar", "bass", "drums", "guitar"),
+    yearOfBirth = c(1940, 1942, 1940, 1943),
+    deceased    = c(TRUE, FALSE, FALSE, TRUE)
+)
+beatles
+```
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 Ringo     Starr     drums             1940 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+
+---
+# Slicing data frames: `$` and `[row, col]`
+
+--
+Data frame _columns_ are vectors:
+
+```r
+beatles$firstName
+```
+
+```
+## [1] "John"   "Paul"   "Ringo"  "George"
+```
+
+--
+Data frame _rows_ are observations:
+
+```r
+beatles[1,]
+```
+
+```
+## # A tibble: 1 x 5
+##   firstName lastName instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon   guitar            1940 TRUE
+```
+
+---
+# Slicing data frames
+
+Select specific elements using `[row, col]` indices:
+
+```r
+beatles[1,2]
+```
+
+```
+## # A tibble: 1 x 1
+##   lastName
+##   &lt;chr&gt;   
+## 1 Lennon
+```
+
+```r
+beatles[1:2, c(2, 4)]
+```
+
+```
+## # A tibble: 2 x 2
+##   lastName  yearOfBirth
+##   &lt;chr&gt;           &lt;dbl&gt;
+## 1 Lennon           1940
+## 2 McCartney        1942
+```
+
+---
+# Data frame dimensions
+
+
+```r
+nrow(beatles) # Number of rows
+```
+
+```
+## [1] 4
+```
+
+```r
+ncol(beatles) # Number of columns
+```
+
+```
+## [1] 5
+```
+
+```r
+dim(beatles)  # Number of rows and columns
+```
+
+```
+## [1] 4 5
+```
+
+---
+# Data frame column names
+
+
+```r
+names(beatles)
+```
+
+```
+## [1] "firstName"   "lastName"    "instrument"  "yearOfBirth" "deceased"
+```
+
+```r
+colnames(beatles)
+```
+
+```
+## [1] "firstName"   "lastName"    "instrument"  "yearOfBirth" "deceased"
+```
+
+Change column names:
+
+```r
+colnames(beatles) &lt;- c('one', 'two', 'three', 'four', 'five')
+colnames(beatles)
+```
+
+```
+## [1] "one"   "two"   "three" "four"  "five"
+```
+
+---
+# Combining data frames: `bind_cols()`:
+
+
+```r
+names &lt;- tibble(
+    firstName = c("John", "Paul", "Ringo", "George"),
+    lastName  = c("Lennon", "McCartney", "Starr", "Harrison"))
+instruments &lt;- tibble(
+    instrument = c("guitar", "bass", "drums", "guitar"))
+```
+--
+
+```r
+bind_cols(names, instruments)
+```
+
+```
+## # A tibble: 4 x 3
+##   firstName lastName  instrument
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     
+## 1 John      Lennon    guitar    
+## 2 Paul      McCartney bass      
+## 3 Ringo     Starr     drums     
+## 4 George    Harrison  guitar
+```
+
+---
+# Combining data frames: `bind_rows()`:
+
+
+```r
+members1 &lt;- tibble(
+    firstName = c("John", "Paul"),
+    lastName  = c("Lennon", "McCartney"))
+members2 &lt;- tibble(
+    firstName = c("Ringo", "George"),
+    lastName  = c("Starr", "Harrison"))
+```
+--
+
+```r
+bind_rows(members1, members2)
+```
+
+```
+## # A tibble: 4 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 John      Lennon   
+## 2 Paul      McCartney
+## 3 Ringo     Starr    
+## 4 George    Harrison
+```
+
+---
+# Importing external data
+
+Define path to the data with `file.path()`:
+
+```r
+pathToData &lt;- file.path('data', 'msleep.csv')
+```
+
+Read in the data with `read_csv()`:
+
+```r
+library(readr)
+msleep &lt;- read_csv(pathToData)
+```
+
+---
+# Previewing data frames
+
+
+```r
+glimpse(msleep)
+```
+
+```
+## Observations: 83
+## Variables: 11
+## $ name         &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Greate…
+## $ genus        &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bos"…
+## $ vore         &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi",…
+## $ order        &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorpha"…
+## $ conservation &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", NA,…
+## $ sleep_total  &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, …
+## $ sleep_rem    &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6,…
+## $ sleep_cycle  &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833…
+## $ awake        &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9, 2…
+## $ brainwt      &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07…
+## $ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490…
+```
+
+---
+# Previewing data frames
+
+
+```r
+head(msleep)
+```
+
+```
+## # A tibble: 6 x 11
+##   name  genus vore  order conservation sleep_total sleep_rem sleep_cycle
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Chee… Acin… carni Carn… lc                  12.1      NA        NA    
+## 2 Owl … Aotus omni  Prim… &lt;NA&gt;                17         1.8      NA    
+## 3 Moun… Aplo… herbi Rode… nt                  14.4       2.4      NA    
+## 4 Grea… Blar… omni  Sori… lc                  14.9       2.3       0.133
+## 5 Cow   Bos   herbi Arti… domesticated         4         0.7       0.667
+## 6 Thre… Brad… herbi Pilo… &lt;NA&gt;                14.4       2.2       0.767
+## # … with 3 more variables: awake &lt;dbl&gt;, brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;
+```
+
+```r
+tail(msleep)
+```
+
+```
+## # A tibble: 6 x 11
+##   name  genus vore  order conservation sleep_total sleep_rem sleep_cycle
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Tenr… Tenr… omni  Afro… &lt;NA&gt;                15.6       2.3      NA    
+## 2 Tree… Tupa… omni  Scan… &lt;NA&gt;                 8.9       2.6       0.233
+## 3 Bott… Turs… carni Ceta… &lt;NA&gt;                 5.2      NA        NA    
+## 4 Genet Gene… carni Carn… &lt;NA&gt;                 6.3       1.3      NA    
+## 5 Arct… Vulp… carni Carn… &lt;NA&gt;                12.5      NA        NA    
+## 6 Red … Vulp… carni Carn… &lt;NA&gt;                 9.8       2.4       0.35 
+## # … with 3 more variables: awake &lt;dbl&gt;, brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;
+```
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+# The tidyverse
+
+`stringr` + `dplyr` + `readr` +  `ggplot2` + more = `tidyverse`
+
+&lt;img src="img/horst_monsters_tidyverse.jpeg" width="80%" /&gt;
+
+---
+# The main `dplyr` verbs
+
+- `select()`: subset columns
+- `filter()`: subset rows on conditions
+- `arrange()`: sort results
+- `mutate()`: create new columns by using information from other columns
+- `group_by()`: group data to perform grouped operations
+- `summarize()`: create summary statistics (usually on grouped data)
+- `count()`: count discrete rows
+
+---
+# Select columns with `select()`
+
+.leftcol[
+
+```r
+beatles %&gt;%
+    select(firstName, lastName)
+```
+
+```
+## # A tibble: 4 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 John      Lennon   
+## 2 Paul      McCartney
+## 3 Ringo     Starr    
+## 4 George    Harrison
+```
+]
+.rightcol[
+Can also search column names:
+- `contains()`
+- `ends_with()`
+
+```r
+beatles %&gt;%
+    select(contains('name'))
+```
+
+```
+## # A tibble: 4 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 John      Lennon   
+## 2 Paul      McCartney
+## 3 Ringo     Starr    
+## 4 George    Harrison
+```
+]
+
+---
+# Select columns with `select()`
+
+Select all columns *except* certain ones with a `-` sign:
+
+```r
+beatles %&gt;%
+    select(-firstName, -lastName)
+```
+
+```
+## # A tibble: 4 x 3
+##   instrument yearOfBirth deceased
+##   &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 guitar            1940 TRUE    
+## 2 bass              1942 FALSE   
+## 3 drums             1940 FALSE   
+## 4 guitar            1943 TRUE
+```
+
+---
+# Select rows with `filter()`
+
+Filter the band members born after 1940
+
+
+```r
+beatles %&gt;%
+    filter(yearOfBirth &gt; 1940)
+```
+
+```
+## # A tibble: 2 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Paul      McCartney bass              1942 FALSE   
+## 2 George    Harrison  guitar            1943 TRUE
+```
+
+---
+# Select rows with `filter()`
+
+Filter the band members with 4-letter first names
+
+
+```r
+beatles %&gt;%
+    filter(str_length(firstName) == 4)
+```
+
+```
+## # A tibble: 2 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE
+```
+
+---
+# Sequence operations with pipes: `%&gt;%`
+
+Step 1: Filter the band members born after 1940
+
+Step 2: Select only the columns `firstName` &amp; `lastName`
+
+
+```r
+beatles %&gt;%
+    filter(yearOfBirth &gt; 1940) %&gt;%
+    select(firstName, lastName)
+```
+
+```
+## # A tibble: 2 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 Paul      McCartney
+## 2 George    Harrison
+```
+
+---
+# Sort rows with `arrange()`
+
+Sort the data frame by year of birth:
+
+```r
+beatles %&gt;%
+    arrange(yearOfBirth)
+```
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 John      Lennon    guitar            1940 TRUE    
+## 2 Ringo     Starr     drums             1940 FALSE   
+## 3 Paul      McCartney bass              1942 FALSE   
+## 4 George    Harrison  guitar            1943 TRUE
+```
+
+---
+# Sort rows with `arrange()`
+
+Use the `desc()` function to sort in descending order:
+
+```r
+beatles %&gt;%
+    arrange(desc(yearOfBirth))
+```
+
+```
+## # A tibble: 4 x 5
+##   firstName lastName  instrument yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
+## 1 George    Harrison  guitar            1943 TRUE    
+## 2 Paul      McCartney bass              1942 FALSE   
+## 3 John      Lennon    guitar            1940 TRUE    
+## 4 Ringo     Starr     drums             1940 FALSE
+```
+
+---
+# Create new variables with `mutate()`
+
+Compute the age of each band member from `yearOfBirth`
+
+
+```r
+beatles %&gt;%
+    mutate(age = 2019 - yearOfBirth)
+```
+
+```
+## # A tibble: 4 x 6
+##   firstName lastName  instrument yearOfBirth deceased   age
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;    &lt;dbl&gt;
+## 1 John      Lennon    guitar            1940 TRUE        79
+## 2 Paul      McCartney bass              1942 FALSE       77
+## 3 Ringo     Starr     drums             1940 FALSE       79
+## 4 George    Harrison  guitar            1943 TRUE        76
+```
+
+---
+# You can immediately use new variables
+
+
+```r
+beatles %&gt;%
+    select(firstName, lastName, yearOfBirth) %&gt;%
+    mutate(
+        age      = 2019 - yearOfBirth,
+        meanAge  = mean(age),
+        youngest = (age == min(age)),
+        oldest   = (age == max(age)))
+```
+
+```
+## # A tibble: 4 x 7
+##   firstName lastName  yearOfBirth   age meanAge youngest oldest
+##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;lgl&gt;    &lt;lgl&gt; 
+## 1 John      Lennon           1940    79    77.8 FALSE    TRUE  
+## 2 Paul      McCartney        1942    77    77.8 FALSE    FALSE 
+## 3 Ringo     Starr            1940    79    77.8 FALSE    TRUE  
+## 4 George    Harrison         1943    76    77.8 TRUE     FALSE
+```
+
+---
+# if / else statements with `if_else()`
+
+To create a new variable based on a condition, use `if_else()`
+
+`if_else(&lt;condition&gt;, &lt;if TRUE&gt;, &lt;else&gt;)`
+
+--
+
+```r
+beatles %&gt;%
+    mutate(
+        bornEvenOrOdd = if_else(yearOfBirth %% 2 == 0, 'even', 'odd'))
+```
+
+```
+## # A tibble: 4 x 6
+##   firstName lastName  instrument yearOfBirth deceased bornEvenOrOdd
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;        
+## 1 John      Lennon    guitar            1940 TRUE     even         
+## 2 Paul      McCartney bass              1942 FALSE    even         
+## 3 Ringo     Starr     drums             1940 FALSE    even         
+## 4 George    Harrison  guitar            1943 TRUE     odd
+```
+
+---
+# Create summary data frames
+
+.leftcol[
+`mutate()` adds a new column:
+
+```r
+beatles %&gt;%
+    mutate(age = 2019 - yearOfBirth) %&gt;%
+    mutate(mean_age = mean(age))
+```
+
+```
+## # A tibble: 4 x 7
+##   firstName lastName  instrument yearOfBirth deceased   age mean_age
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 John      Lennon    guitar            1940 TRUE        79     77.8
+## 2 Paul      McCartney bass              1942 FALSE       77     77.8
+## 3 Ringo     Starr     drums             1940 FALSE       79     77.8
+## 4 George    Harrison  guitar            1943 TRUE        76     77.8
+```
+]
+.rightcol[
+`summarise()` adds a new column and drops all others:
+
+```r
+beatles %&gt;%
+    mutate(age = 2019 - yearOfBirth) %&gt;%
+    summarise(mean_age = mean(age))
+```
+
+```
+## # A tibble: 1 x 1
+##   mean_age
+##      &lt;dbl&gt;
+## 1     77.8
+```
+]
+
+---
+# Operating on groups in the data
+
+
+
+```r
+bands
+```
+
+```
+## # A tibble: 9 x 5
+##   firstName lastName  yearOfBirth deceased band      
+##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;     
+## 1 Melanie   Brown            1975 FALSE    spicegirls
+## 2 Melanie   Chisholm         1974 FALSE    spicegirls
+## 3 Emma      Bunton           1976 FALSE    spicegirls
+## 4 Geri      Halliwell        1972 FALSE    spicegirls
+## 5 Victoria  Beckham          1974 FALSE    spicegirls
+## 6 John      Lennon           1940 TRUE     beatles   
+## 7 Paul      McCartney        1942 FALSE    beatles   
+## 8 Ringo     Starr            1940 FALSE    beatles   
+## 9 George    Harrison         1943 TRUE     beatles
+```
+
+---
+# Operating on groups in the data
+
+
+```r
+bands %&gt;%
+    mutate(
+        age = 2019 - yearOfBirth)
+```
+
+```
+## # A tibble: 9 x 6
+##   firstName lastName  yearOfBirth deceased band         age
+##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;      &lt;dbl&gt;
+## 1 Melanie   Brown            1975 FALSE    spicegirls    44
+## 2 Melanie   Chisholm         1974 FALSE    spicegirls    45
+## 3 Emma      Bunton           1976 FALSE    spicegirls    43
+## 4 Geri      Halliwell        1972 FALSE    spicegirls    47
+## 5 Victoria  Beckham          1974 FALSE    spicegirls    45
+## 6 John      Lennon           1940 TRUE     beatles       79
+## 7 Paul      McCartney        1942 FALSE    beatles       77
+## 8 Ringo     Starr            1940 FALSE    beatles       79
+## 9 George    Harrison         1943 TRUE     beatles       76
+```
+
+---
+# Operating on groups in the data
+
+
+```r
+bands %&gt;%
+    mutate(
+        age = 2019 - yearOfBirth,
+        mean_age = mean(age))
+```
+
+```
+## # A tibble: 9 x 7
+##   firstName lastName  yearOfBirth deceased band         age mean_age
+##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Melanie   Brown            1975 FALSE    spicegirls    44     59.4
+## 2 Melanie   Chisholm         1974 FALSE    spicegirls    45     59.4
+## 3 Emma      Bunton           1976 FALSE    spicegirls    43     59.4
+## 4 Geri      Halliwell        1972 FALSE    spicegirls    47     59.4
+## 5 Victoria  Beckham          1974 FALSE    spicegirls    45     59.4
+## 6 John      Lennon           1940 TRUE     beatles       79     59.4
+## 7 Paul      McCartney        1942 FALSE    beatles       77     59.4
+## 8 Ringo     Starr            1940 FALSE    beatles       79     59.4
+## 9 George    Harrison         1943 TRUE     beatles       76     59.4
+```
+
+---
+# Operating on groups in the data
+
+
+```r
+bands %&gt;%
+    mutate(age = 2019 - yearOfBirth) %&gt;%
+*   group_by(band) %&gt;%
+    mutate(mean_age = mean(age))
+```
+
+```
+## # A tibble: 9 x 7
+## # Groups:   band [2]
+##   firstName lastName  yearOfBirth deceased band         age mean_age
+##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Melanie   Brown            1975 FALSE    spicegirls    44     44.8
+## 2 Melanie   Chisholm         1974 FALSE    spicegirls    45     44.8
+## 3 Emma      Bunton           1976 FALSE    spicegirls    43     44.8
+## 4 Geri      Halliwell        1972 FALSE    spicegirls    47     44.8
+## 5 Victoria  Beckham          1974 FALSE    spicegirls    45     44.8
+## 6 John      Lennon           1940 TRUE     beatles       79     77.8
+## 7 Paul      McCartney        1942 FALSE    beatles       77     77.8
+## 8 Ringo     Starr            1940 FALSE    beatles       79     77.8
+## 9 George    Harrison         1943 TRUE     beatles       76     77.8
+```
+
+---
+# Operating on groups in the data
+
+
+```r
+bands %&gt;%
+    mutate(age = 2019 - yearOfBirth) %&gt;%
+    group_by(band) %&gt;%
+*   summarise(mean_age = mean(age))
+```
+
+```
+## # A tibble: 2 x 2
+##   band       mean_age
+##   &lt;chr&gt;         &lt;dbl&gt;
+## 1 beatles        77.8
+## 2 spicegirls     44.8
+```
+
+---
+# Count observations with `count()`
+
+How many members are in each band?
+.leftcol[
+Method 1: Use `group_by()` + `summarise()`
+
+```r
+bands %&gt;%
+    group_by(band) %&gt;%
+    summarise(count = n())
+```
+
+```
+## # A tibble: 2 x 2
+##   band       count
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 beatles        4
+## 2 spicegirls     5
+```
+]
+.rightcol[
+Method 2: Use `count()`
+
+```r
+bands %&gt;%
+    count(band)
+```
+
+```
+## # A tibble: 2 x 2
+##   band           n
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 beatles        4
+## 2 spicegirls     5
+```
+]
+
+---
+# Exporting data
+
+
+```r
+ageSummary &lt;- bands %&gt;%
+    mutate(age = 2019 - yearOfBirth) %&gt;%
+    group_by(band) %&gt;%
+    summarise(mean_age = mean(age))
+ageSummary
+```
+
+```
+## # A tibble: 2 x 2
+##   band       mean_age
+##   &lt;chr&gt;         &lt;dbl&gt;
+## 1 beatles        77.8
+## 2 spicegirls     44.8
+```
+
+Save `ageSummary` data frame:
+
+```r
+savePath &lt;- file.path('data', 'ageSummary.csv')
+write_csv(ageSummary, savePath)
+```
+
+---
+# Plotting with ggplot2
+
+.leftcol[
+Layers:
+
+1. The data: `ggplot(data = ___)`
+2. The aesthetics: `aes(x = ____, y = ____)`
+3. The geometries: `geom_point()`, `geom_bar()`
+]
+--
+.rightcol[
+Example data:
+.code60[
+
+```r
+glimpse(bears)
+```
+
+```
+## Observations: 166
+## Variables: 14
+## $ name          &lt;chr&gt; "Mary Porterfield", "Wilie Porterfield", "Henry Po…
+## $ age           &lt;dbl&gt; 3, 5, 7, 18, 1, 61, 60, 9, 52, NA, 60, 56, 70, 5, …
+## $ gender        &lt;chr&gt; "female", "male", "male", "male", NA, "male", "mal…
+## $ date          &lt;chr&gt; "19/05/1901", "19/05/1901", "19/05/1901", "24/11/1…
+## $ month         &lt;dbl&gt; 5, 5, 5, 11, 10, 9, 6, 8, 9, 10, 6, 7, 10, 10, 10,…
+## $ year          &lt;dbl&gt; 1901, 1901, 1901, 1906, 1908, 1916, 1922, 1929, 19…
+## $ wildOrCaptive &lt;chr&gt; "Wild", "Wild", "Wild", "Wild", "Captive", "Wild",…
+## $ location      &lt;chr&gt; "Job, West Virginia", "Job, West Virginia", "Job, …
+## $ description   &lt;chr&gt; "The children were gathering flowers near their ho…
+## $ bearType      &lt;chr&gt; "Black", "Black", "Black", "Black", "Black", "Brow…
+## $ hunter        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ grizzly       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,…
+## $ hiker         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ onlyOneKilled &lt;dbl&gt; 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+```
+]]
+
+---
+# Layer 1: The data
+
+The `ggplot()` function initializes the plot:
+
+.leftcol[
+
+```r
+ggplot(data = bears)
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-85-1.png" width="504" /&gt;
+]]
+
+---
+# Layer 2: The aesthetics
+
+The `aes()` function determines which variables will be _mapped_ to the axes:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age))
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-86-1.png" width="504" /&gt;
+]]
+
+---
+# Layer 3: The geometries
+
+Use `+` to add geometries (e.g. points) to the plot:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+*   geom_point()
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-87-1.png" width="504" /&gt;
+]]
+
+---
+# Scatterplots with `geom_point()`
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point()
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-88-1.png" width="504" /&gt;
+]]
+
+---
+# Scatterplots with `geom_point()`
+
+Change the point color:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+*   geom_point(color = 'blue')
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-89-1.png" width="504" /&gt;
+]]
+
+---
+# Scatterplots with `geom_point()`
+
+Change the point color **based on another variable**:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+*   geom_point(aes(color = gender))
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-90-1.png" width="504" /&gt;
+]]
+
+---
+# Scatterplots with `geom_point()`
+
+Adjust labels with `labs()` layer:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = year, y = age)) +
+    geom_point(aes(color = gender)) +
+*   labs(x = "Year",
+*        y = "Age",
+*        title = "Bear victim age over time",
+*        color = "Gender")
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-91-1.png" width="504" /&gt;
+]]
+
+---
+# Histograms with `geom_bar()`
+
+The default `geom_bar()` is a count of `x`
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = month)) +
+    geom_bar()
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-92-1.png" width="504" /&gt;
+]]
+
+---
+# Histograms with `geom_bar()`
+
+Use `fill` (not `color`) to change the color of the bars:
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = month)) +
+*   geom_bar(aes(fill = bearType))
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-93-1.png" width="504" /&gt;
+]]
+
+---
+# Bar charts with `geom_bar()`
+
+To plot a `y` variable other than "count", add `stat = 'identity'`:
+
+(Default "stat" is `count`)
+
+.leftcol[
+
+```r
+meanAgeAnnual &lt;- bears %&gt;%
+  filter(!is.na(age)) %&gt;%
+  group_by(year) %&gt;%
+  summarise(meanAge = mean(age))
+
+ggplot(data=meanAgeAnnual, aes(x=year, y=meanAge)) +
+*   geom_bar(stat = 'identity')
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-94-1.png" width="504" /&gt;
+]]
+
+---
+# "Factors" = Categorical variables
+
+By default, R makes numeric variables _continuous_
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = month)) +
+    geom_bar(aes(fill = bearType))
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-95-1.png" width="504" /&gt;
+]]
+
+---
+# "Factors" = Categorical variables
+
+You can make a continuous variable _categorical_ using `as.factor()`
+
+.leftcol[
+
+```r
+ggplot(data = bears, aes(x = as.factor(month))) +
+    geom_bar(aes(fill = bearType))
+```
+]
+.rightcol[.blackborder[
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-96-1.png" width="504" /&gt;
+]]
+
+---
+# Save figures with `ggsave()`
+
+--
+First, assign the plot to an object name:
+
+```r
+scatterPlot &lt;- ggplot(data = bears) +
+    geom_point(aes(x = year, y = age))
+```
+
+--
+Then use `ggsave()` to save the plot:
+
+```r
+ggsave(filename = file.path('data', 'scatterPlot.pdf'),
+       plot   = scatterPlot,
+       width  = 6,
+       height = 4)
+```
+
+---
+# RMarkdown 
+
+### Know the basic elements: 
+
+- YAML
+- Markdown formatting
+- Code chunks
+- Tables: markdown &amp; `kable()`
+
+---
+# Elements of an RMarkdown file (`.Rmd`)
+
+.leftcol[
+### 1) YAML metadata
+
+```r
+---
+title: "This is a demo"
+author: "John Helveston"
+date: "11/18/2019"
+output: html_document
+---
+```
+
+### 2) Markdown text
+
+```
+# Section 1
+
+This is a sentence...
+```
+]
+.rightcol[
+### 3) R Code
+
+    ```{r}
+    plot(x = 1:5, y = 1:5)
+    ```
+    
+### 4) Code output
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-100-1.png" width="40%" /&gt;
+
+]
+
+---
+# Markdown tables
+
+--
+.leftcol[
+Basic tables 
+
+
+```r
+Table Header  | Second Header
+------------- | -------------
+Cell 1, 1     | Cell 2, 1
+Cell 1, 2     | Cell 2, 2
+```
+
+Table Header  | Second Header
+------------- | -------------
+Cell 1, 1     | Cell 2, 1
+Cell 1, 2     | Cell 2, 2
+]
+.rightcol[
+Tables with `kable()`
+
+
+```r
+bears %&gt;%
+  count(bearType, wildOrCaptive) %&gt;%
+  kable()
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; bearType &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; wildOrCaptive &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Black &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Captive &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Black &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Wild &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 60 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Brown &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Captive &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Brown &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Wild &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 72 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Polar &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Captive &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Polar &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Wild &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+---
+class: inverse, middle, center
+
+# List of all class practice problems
+
+---
+class: inverse
+
+# Number chopping
+
+1) `onesDigit(x)`: Write a function that takes an integer and returns its ones digit.
+
+2) `tensDigit(x)`: Write a function that takes an integer and returns its tens digit.
+
+.leftcol[
+`onesDigit(x)` tests:
+
+- onesDigit(123) == 3
+- onesDigit(7890) == 0
+- onesDigit(6) == 6
+- onesDigit(-54) == 4
+]
+
+.rightcol[
+`tensDigit(x)` tests:
+
+- tensDigit(456) == 5
+- tensDigit(23) == 2
+- tensDigit(1) == 0
+- tensDigit(-7890) == 9
+]
+
+---
+class: inverse
+
+# General function writing
+
+.leftcol[
+
+1) `eggCartons(eggs)`: Write a program that reads in a non-negative number of eggs and prints the number of egg cartons required to hold that many eggs (given that each egg carton holds one dozen eggs, and you cannot buy fractional egg cartons). Be sure your program works for multiples of 12, including 0.
+
+- eggCartons(0) == 0
+- eggCartons(1) == 1
+- eggCartons(12) == 1
+- eggCartons(13) == 2
+- eggCartons(24) == 2
+- eggCartons(25) == 3
+
+]
+
+.rightcol[
+
+2) `militaryTimeToStandardTime(n)`: Write a program that takes an integer between 0 and 23 (representing the hour in military time), and returns the same hour in standard time. For example, 17 in military time is 5 o'clock in standard time.
+
+- militaryTimeToStandardTime(0) == 12
+- militaryTimeToStandardTime(1) == 1
+- militaryTimeToStandardTime(11) == 11
+- militaryTimeToStandardTime(12) == 12
+- militaryTimeToStandardTime(13) == 1
+- militaryTimeToStandardTime(23) == 11
+
+]
+
+---
+class: inverse
+
+# Conditionals (if / else)
+
+Write the function `getInRange(x, bound1, bound2)` which takes 3 numeric values: `x`, `bound1`, and `bound2`, where `bound1` is not necessarily less than `bound2`. If `x` is between the two bounds, just return it unmodified. Otherwise, if `x` is less than the lower bound, return the lower bound, or if `x` is greater than the upper bound, return the upper bound. For example:
+
+- `getInRange(1, 3, 5)` returns `3` (the lower bound, since 1 is below the range [3,5])
+- `getInRange(4, 3, 5)` returns `4` (the original value, since 4 is below the range [3,5])
+- `getInRange(6, 3, 5)` returns `5` (the upper bound, since 6 is above the range [3,5])
+- `getInRange(6, 5, 3)` returns `5` (the upper bound, since 6 is above the range [3,5])
+
+**Start** by writing the test function `testGetInRange()` that tests for a variety of values of `x`, `bound1`, `bound2`.
+&lt;br&gt;
+
+**Bonus**: Re-write `getInRange(x, bound1, bound2)` without using conditionals
+
+---
+class: inverse
+
+.slimtitle[Loops / Vectors]
+
+.font80[
+1) `sumFromMToN(m, n)`: Write a function that sums the total of the integers between `m` and `n`. **Challenge**: Try solving this without a loop (it's possible - Google it!).
+
+- `sumFromMToN(5, 10) == (5+6+7+8+9+10)`
+- `sumFromMToN(1, 1) == 1`
+
+2) `sumEveryKthFromMToN(m, n, k)`: Write a function to sum every kth integer from `m` to `n`.
+
+- `sumEveryKthFromMToN(5, 20, 7) == (5 + 12 + 19)`
+- `sumEveryKthFromMToN(1, 10, 2) == (1 + 3 + 5 + 7 + 9)`
+- `sumEveryKthFromMToN(0, 0, 1) == 0`
+
+3) `sumOfOddsFromMToN(m, n)`: Write a function that sums every _odd_ integer between `m` and `n`. **Challenge**: Try solving this without a loop (Hint: use a vector operation...we'll cover this next week!).
+
+- `sumOfOddsFromMToN(4, 10) == (5 + 7 + 9)`
+- `sumOfOddsFromMToN(5, 9) == (5 + 7 + 9)`
+]
+
+---
+class: inverse
+
+.slimtitle[Loops / Vectors]
+
+.leftcol[
+.font80[
+1) `isMultipleOf4Or7(n)`
+
+Write a function that returns `TRUE` if `n` is a multiple of 4 or 7 and `FALSE` otherwise. Here's some test cases:
+
+- `isMultipleOf4Or7(0) == FALSE`
+- `isMultipleOf4Or7(1) == FALSE`
+- `isMultipleOf4Or7(-7) == FALSE`
+- `isMultipleOf4Or7(4) == TRUE`
+- `isMultipleOf4Or7(7) == TRUE`
+- `isMultipleOf4Or7(28) == TRUE`
+- `isMultipleOf4Or7('notANumer') == FALSE`
+]]
+
+.rightcol[
+.font80[
+2) `nthMultipleOf4Or7(n)`
+
+Write a function that returns the nth positive integer that is a multiple of either 4 or 7. Hint: use `isMultipleOf4Or7(n)` as a helper function! Here's some test cases:
+
+- `nthMultipleOf4Or7(1) == 4`
+- `nthMultipleOf4Or7(2) == 7`
+- `nthMultipleOf4Or7(3) == 8`
+- `nthMultipleOf4Or7(4) == 12`
+- `nthMultipleOf4Or7(5) == 14`
+- `nthMultipleOf4Or7(6) == 16`
+- `nthMultipleOf4Or7(10) == 28`
+]]
+
+---
+class: inverse
+
+.slimtitle[Loops / Vectors]
+
+.leftcol[
+.font80[
+1) `isPrime(n)`
+
+Write a function that takes a non-negative integer, `n`, and returns `TRUE` if it is a prime number and `FALSE` otherwise. Here's some test cases:
+
+- `isPrime(1) == FALSE`
+- `isPrime(2) == TRUE`
+- `isPrime(7) == TRUE`
+- `isPrime(13) == TRUE`
+- `isPrime(14) == FALSE`
+]]
+
+.rightcol[
+.font80[
+2) `nthPrime(n)`
+
+Write a function that takes a non-negative integer, `n`, and returns the nth prime number, where `nthPrime(1)` returns the first prime number (2). Hint: use `isPrime(n)` as a helper function! Here's some test cases:
+
+- `nthPrime(1) == 2`
+- `nthPrime(2) == 3`
+- `nthPrime(3) == 5`
+- `nthPrime(4) == 7`
+- `nthPrime(7) == 17`
+]]
+
+---
+class: inverse
+
+.slimtitle[Vectors]
+
+.font80[
+1) `reverse(x)`
+
+Write a function that returns the vector in reverse order. You cannot use the `rev()` function. You cannot use loops! Test cases:
+
+- `reverse(c(5, 1, 3)) == c(3, 1, 5)`
+- `reverse(c('a', 'b', 'c')) == c('c', 'b', 'a')`
+- `reverse(c(FALSE, TRUE, TRUE)) == c(TRUE, TRUE, FALSE)`
+- `reverse(seq(10)) == seq(10, 1, -1)`
+
+2) `middleValue(a)`
+
+Write a function that takes a vector of numbers `a` and returns the value of the middle element (or the average of the two middle elements). Test cases:
+
+- `middleValue(c(0,0,0)) == 0`
+- `middleValue(c(1,2,3)) == 2`
+- `middleValue(c(4,5,6,7,8)) == 6`
+- `middleValue(c(5,3,8,4)) == mean(c(3,8))`
+- `middleValue(c(4,5,6,7)) == mean(c(5,6))`
+]
+
+---
+class: inverse
+
+.slimtitle[Vectors]
+
+.leftcol[
+.font80[
+1) `dotProduct(a, b)`
+
+The "dot product" of two vectors is the sum of the products of the corresponding terms. So the dot product of the vectors `c(1,2,3)` and `c(4,5,6)` is `(1*4) + (2*5) + (3*6)`, or `4 + 10 + 18 = 32`. Write a function that takes two vectors and returns the dot product of those vectors. If the vectors are not equal length, ignore the extra elements in the longer vector. Try not to use loops! Test cases:
+
+- `dotProduct(c(1,2,3), c(4,5,6)) == 32`
+- `dotProduct(c(1,2), c(4,5,6)) == 14`
+- `dotProduct(c(2,3,4), c(-7,1,9)) == 25`
+- `dotProduct(c(0,0,0), c(-7,1,9)) == 0`
+]]
+.rightcol[
+.font80[
+2) `alternatingSum(a)`
+
+Write a function that takes a vector of numbers `a` and returns the alternating sum, where the sign alternates from positive to negative or vice versa. Test cases:
+
+- `alternatingSum(c(5,3,8,4)) == (5 - 3 + 8 - 4)`
+- `alternatingSum(c(1,2,3)) == (1 - 2 + 3)`
+- `alternatingSum(c(0,0,0)) == 0`
+]]
+
+---
+class: inverse
+
+.slimtitle[Data frames]
+
+.leftcol[
+.code60[
+
+```r
+animals_farm = tibble(
+    name           = c("cow", "horse"),
+    sound          = c("moo", "neigh"),
+    aveWeightLbs   = c(2400, 1500),
+    aveLifeSpanYrs = c(20, 25)
+)
+animals_pet = tibble(
+    name           = c("dog", "cat"),
+    sound          = c("woof", "meow"),
+    aveWeightLbs   = c(40, 8),
+    aveLifeSpanYrs = c(10, 12)
+)
+```
+]]
+.rightcol[
+.font80[
+Use R code to find answers to these questions:
+
+1. How many rows are in the `animals_farm` data frame?
+2. How many columns are in the `animals_pet` data frame?
+3. Create a new data frame, `animals`, by combining `animals_farm` and `animals_pet`.
+4. Create a new column in `animals` called `type` and set the values to `"farm"` or `"pet"`.
+5. Change the column names of `animals` to title case.
+]
+
+]
+
+---
+class: inverse
+
+.slimtitle[Data frames]
+
+
+```r
+beatles &lt;- tibble(
+    firstName   = c("John", "Paul", "Ringo", "George"),
+    lastName    = c("Lennon", "McCartney", "Starr", "Harrison"),
+    instrument  = c("guitar", "bass", "drums", "guitar"),
+    yearOfBirth = c(1940, 1942, 1940, 1943),
+    deceased    = c(TRUE, FALSE, FALSE, TRUE)
+)
+```
+
+Use R code to find answers to these questions:
+
+1. Create a new column, `playsGuitar`, which is `TRUE` if the band member plays the guitar and `FALSE` otherwise.
+2. Select the rows for the band members who have four-letter first names.
+3. Create a new column, `fullName`, which contains the band member's first and last name separated by a space (e.g. `"John Lennon"`)
+
+
+
+---
+class: inverse
+
+# Data wrangling: `select` columns &amp; `filter` rows
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `birds.csv` file that is in the `data` folder.
+
+2) Use the `df` object and the `select()` and `filter()` functions to answer the following questions:
+
+- Create a new data frame, `df_birds`, that contains only the variables (columns) about the species of bird.
+- Create a new data frame, `dc`, that contains only the observations (rows) from DC airports.
+- Create a new data frame, `dc_birds_known`, that contains only the observations (rows) from DC airports and those where the species of bird is known.
+- How many _known_ unique species of birds have been involved in accidents at DC airports?
+
+---
+class: inverse
+
+# Data wrangling: `select`, `filter`, and `%&gt;%`
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `birds.csv` file that is in the `data` folder.
+
+2) Use the `df` object and the `select()` and `filter()` functions to answer the following questions:
+
+- Create a new data frame, `dc_dawn`, that contains only the observations (rows) from DC airports that occurred at dawn.
+- Create a new data frame, `dc_dawn_birds`, that contains only the observations (rows) from DC airports that occurred at dawn and only the variables (columns) about the species of bird.
+- Create a new data frame, `dc_dawn_birds_known`, that contains only the observations (rows) from DC airports that occurred at dawn and only the variables (columns) about the KNOWN species of bird.
+- How many _known_ unique species of birds have been involved in accidents at DC airports at dawn?
+
+---
+class: inverse
+
+# Data wrangling: `mutate`
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `birds.csv` file that is in the `data` folder.
+
+2) Use the `df` object and the `mutate()` functions to add the following new variables:
+
+- `height_miles`: The `height` variable converted to miles (Hint: there are 5,280 feet in a mile).
+- `cost_mil`: `TRUE` if the repair costs was greater or equal to $1 million, `FALSE` otherwise.
+
+BONUS: Use the `incident_month` variable to create a new variable `season`, which takes one of four values based on the incident month:
+
+- `spring`: March, April, May
+- `summer`: June, July, August
+- `fall`: September, October, November
+- `winter`: December, January, February
+
+---
+class: inverse
+
+# Data wrangling: `group_by` + `summarise`
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `birds.csv` file that is in the `data` folder.
+
+2) Use the `df` object and the `group_by()` and `summarise` functions to answer the following questions:
+
+- Create a summary data frame that contains the mean `height` for each different time of day.
+- Create a summary data frame that contains the maximum `cost_repairs_infl_adj` for each year.
+
+---
+class: inverse
+
+# Data wrangling: `count`
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `birds.csv` file that is in the `data` folder.
+
+2) Use the `df` object and the `count()` function to answer the following questions:
+
+- Which month has had the greatest number of reported incidents?
+- Which year has had the greatest number of reported incidents?
+
+---
+class: inverse
+
+# Practice: `geom_point()`
+
+Use the `birds` data frame and `geom_point()` to create the following plots
+
+.leftcol[
+&lt;img src="finalReview_files/figure-html/ggpoint_p1-1.png" width="504" /&gt;
+]
+.rightcol[
+&lt;img src="finalReview_files/figure-html/ggpoint_p2-1.png" width="504" /&gt;
+]
+
+---
+class: inverse
+
+# Practice: `geom_bar()`
+
+Use the `bears` and `birds` data frames with `geom_bar()` to create the following plots
+
+.leftcol[
+&lt;img src="finalReview_files/figure-html/ggbar_p1-1.png" width="504" /&gt;
+]
+.rightcol[
+&lt;img src="finalReview_files/figure-html/ggbar_p2-1.png" width="504" /&gt;
+]
+
+---
+class: inverse
+
+# Extra plots practice 1
+
+Use the `mtcars` data frame to create the following plots
+
+.cols3[
+&lt;img src="finalReview_files/figure-html/mtcars_1-1.png" width="324" /&gt;
+]
+.cols3[
+&lt;img src="finalReview_files/figure-html/mtcars_2-1.png" width="324" /&gt;
+]
+.cols3[
+&lt;img src="finalReview_files/figure-html/mtcars_3-1.png" width="324" /&gt;
+]
+
+---
+class: inverse
+
+# Extra plots practice 2
+
+Use the `mpg` data frame to create the following plot
+
+&lt;img src="finalReview_files/figure-html/mtcars_4-1.png" width="576" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
