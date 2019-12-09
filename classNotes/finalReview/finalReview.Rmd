@@ -147,7 +147,7 @@ Fill in the correct relational operators to make this statement return `TRUE`:
 ---
 # Number "chopping"
 
-"Chopping" with orders of 10:
+"Chopping" with orders of 10 - **only works with `n > 0`**
 
 .leftcol[
 
@@ -1088,9 +1088,9 @@ ggsave(filename = file.path('data', 'scatterPlot.pdf'),
 ```
 
 ---
-# RMarkdown 
+# RMarkdown
 
-### Know the basic elements: 
+### Know the basic elements:
 
 - YAML
 - Markdown formatting
@@ -1125,7 +1125,7 @@ This is a sentence...
     `r ''````{r}
     plot(x = 1:5, y = 1:5)
     ```
-    
+
 ### 4) Code output
 ```{r, echo=FALSE, out.width='40%'}
 plot(x = 1:5, y = 1:5)
@@ -1138,7 +1138,7 @@ plot(x = 1:5, y = 1:5)
 
 --
 .leftcol[
-Basic tables 
+Basic tables
 
 ```{r, eval=FALSE}
 Table Header  | Second Header
@@ -1536,7 +1536,7 @@ Use the `birds` data frame and `geom_point()` to create the following plots
 .leftcol[
 ```{r, ggpoint_p1, echo=FALSE, fig.height=5, fig.width=7}
 ggplot(birds, aes(x=cost_repairs_infl_adj, y=height)) +
-  geom_point() + 
+  geom_point() +
   theme(text = element_text(size=20))
 ```
 ]
@@ -1545,7 +1545,7 @@ ggplot(birds, aes(x=cost_repairs_infl_adj, y=height)) +
 birds %>%
   mutate(phase_of_flt = str_to_lower(phase_of_flt)) %>%
   ggplot(aes(x=speed, y=height)) +
-  geom_point(aes(color = phase_of_flt)) + 
+  geom_point(aes(color = phase_of_flt)) +
   theme(text = element_text(size=20))
 ```
 ]
@@ -1564,7 +1564,7 @@ ggplot(data = bears, aes(x=year)) +
     labs(x     = "Year",
          y     = 'Number of killings',
          fill  = "Victim gender",
-         title = "Annual deadly bear attacks over time") + 
+         title = "Annual deadly bear attacks over time") +
   theme(text = element_text(size=20))
 ```
 ]
@@ -1578,7 +1578,7 @@ ggplot(data = maxCost, aes(x=incident_year, y=maxCost)) +
     geom_bar(stat = 'identity') +
     labs(x     = "Year",
          y     = 'Maximum cost ($)',
-         title = "Max annual cost from wildlife impact") + 
+         title = "Max annual cost from wildlife impact") +
   theme(text = element_text(size=20))
 ```
 ]
@@ -1596,7 +1596,7 @@ ggplot(mtcars, aes(x=wt, y=mpg)) +
     geom_point() +
     theme_bw() +
     labs(x = "Weight",
-         y = 'Fuel Economy (mpg)') + 
+         y = 'Fuel Economy (mpg)') +
   theme(text = element_text(size=20))
 ```
 ]
@@ -1607,7 +1607,7 @@ ggplot(mtcars, aes(x=hp, y=mpg)) +
     theme_bw() +
     labs(x = "Horsepower (hp)",
          y = 'Fuel Economy (mpg)',
-         color = 'Num. Cylinders') + 
+         color = 'Num. Cylinders') +
   theme(text = element_text(size=20))
 ```
 ]
@@ -1619,7 +1619,7 @@ mtcars %>%
   ggplot(aes(x=cyl, y=meanMpg)) +
     geom_bar(stat = 'identity') +
     labs(x = "Num. Cylinders",
-         y = 'Mean Fuel Economy (mpg)') + 
+         y = 'Mean Fuel Economy (mpg)') +
   theme(text = element_text(size=20))
 ```
 ]
@@ -1642,6 +1642,6 @@ mpg %>%
     coord_flip() +
     labs(
         x='Vehicle manufacturer',
-        y='Highway fuel economy (mpg)') + 
+        y='Highway fuel economy (mpg)') +
   theme(text = element_text(size=20))
 ```
