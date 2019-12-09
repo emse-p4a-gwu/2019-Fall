@@ -241,6 +241,7 @@ engagement_plot
 ## Course 1: [Programming for Analytics](https://emse6574-gwu.github.io/2019-Fall/)
 
 **"Computational Literacy"**
+
 - Data types (numerical, logical, strings), conditional statements (if/else), loops, functions, testing.
 - Data structures, data import / export, data manipulation & visualization.
 <br>
@@ -251,6 +252,7 @@ engagement_plot
 ## Course 2: [Exploratory Data Analysis](https://emse-eda-gwu.github.io/2020-Spring/)
 
 **"Data Literacy"**
+
 - Data provenance, validity.
 - Design rules for visualizing and communicating information contained in data.
 - Reproducibility: Reports that contain code, equations, visualizations, and narrative text.

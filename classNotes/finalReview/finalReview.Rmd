@@ -46,6 +46,12 @@ class: title-slide, center, middle, inverse
 .large[EMSE 6574 | John Paul Helveston | December 09, 2019]
 
 ---
+name: announcements
+class: left, middle, inverse
+
+### Download the `finalReview.zip` file for class today (link in `slack/classroom`).
+
+---
 # Things to review
 
 --
