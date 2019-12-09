@@ -22,6 +22,14 @@ class: title-slide, center, middle, inverse
 .large[EMSE 6574 | John Paul Helveston | December 09, 2019]
 
 ---
+name: announcements
+class: left, middle, inverse
+
+### Download the `finalReview.zip` file for class today
+
+### Link in `slack/classroom`
+
+---
 # Things to review
 
 --
@@ -34,7 +42,7 @@ class: title-slide, center, middle, inverse
 - Practice your weaknesses, e.g. code tracing, writing functions, "tidyverse" functions, etc.
 
 --
-- Memorize syntax: functions, test functions, "tidyverse" functions, etc.
+- Memorize syntax: functions, test functions, "tidyverse" functions, plotting with `ggplot2`, etc.
 
 --
 - Review hw, quiz, and exam solutions (on blackboard)
@@ -159,6 +167,8 @@ TRUE + TRUE
 ]
 
 ---
+# Logical &amp; Relational operators
+
 
 ```r
 w &lt;- TRUE
@@ -168,12 +178,12 @@ z &lt;- TRUE
 ```
 
 .leftcol[
-## Logical operators
+### Logical: `&amp;`, `|`, `!`
 
 Write a logical statement that compares the objects `x`, `y`, and `z` and returns `TRUE`
 ]
 .rightcol[
-## Relational operators
+### Relational: `==`, `!=`, `&lt;`, `&gt;`, `&lt;=`, `&gt;=`
 
 Fill in the correct relational operators to make this statement return `TRUE`:
 
@@ -183,7 +193,7 @@ Fill in the correct relational operators to make this statement return `TRUE`:
 ---
 # Number "chopping"
 
-"Chopping" with orders of 10:
+"Chopping" with orders of 10 - **only works with `n &gt; 0`**
 
 .leftcol[
 
@@ -1091,28 +1101,6 @@ beatles %&gt;%
 ```
 
 ---
-# Sequence operations with pipes: `%&gt;%`
-
-Step 1: Filter the band members born after 1940
-
-Step 2: Select only the columns `firstName` &amp; `lastName`
-
-
-```r
-beatles %&gt;%
-    filter(yearOfBirth &gt; 1940) %&gt;%
-    select(firstName, lastName)
-```
-
-```
-## # A tibble: 2 x 2
-##   firstName lastName 
-##   &lt;chr&gt;     &lt;chr&gt;    
-## 1 Paul      McCartney
-## 2 George    Harrison
-```
-
----
 # Sort rows with `arrange()`
 
 Sort the data frame by year of birth:
@@ -1498,7 +1486,7 @@ ggplot(data = bears)
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-85-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-84-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1513,7 +1501,7 @@ ggplot(data = bears, aes(x = year, y = age))
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-86-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-85-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1529,7 +1517,7 @@ ggplot(data = bears, aes(x = year, y = age)) +
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-87-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-86-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1543,7 +1531,7 @@ ggplot(data = bears, aes(x = year, y = age)) +
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-88-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-87-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1559,7 +1547,7 @@ ggplot(data = bears, aes(x = year, y = age)) +
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-89-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-88-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1575,7 +1563,7 @@ ggplot(data = bears, aes(x = year, y = age)) +
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-90-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-89-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1595,7 +1583,7 @@ ggplot(data = bears, aes(x = year, y = age)) +
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-91-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-90-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1611,7 +1599,7 @@ ggplot(data = bears, aes(x = month)) +
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-92-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-91-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1627,7 +1615,7 @@ ggplot(data = bears, aes(x = month)) +
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-93-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-92-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1650,7 +1638,7 @@ ggplot(data=meanAgeAnnual, aes(x=year, y=meanAge)) +
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-94-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-93-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1666,7 +1654,7 @@ ggplot(data = bears, aes(x = month)) +
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-95-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-94-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1682,7 +1670,7 @@ ggplot(data = bears, aes(x = as.factor(month))) +
 ```
 ]
 .rightcol[.blackborder[
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-96-1.png" width="504" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-95-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -1707,9 +1695,9 @@ ggsave(filename = file.path('data', 'scatterPlot.pdf'),
 ```
 
 ---
-# RMarkdown 
+# RMarkdown
 
-### Know the basic elements: 
+### Know the basic elements:
 
 - YAML
 - Markdown formatting
@@ -1745,9 +1733,9 @@ This is a sentence...
     ```{r}
     plot(x = 1:5, y = 1:5)
     ```
-    
+
 ### 4) Code output
-&lt;img src="finalReview_files/figure-html/unnamed-chunk-100-1.png" width="40%" /&gt;
+&lt;img src="finalReview_files/figure-html/unnamed-chunk-99-1.png" width="40%" /&gt;
 
 ]
 
@@ -1756,7 +1744,7 @@ This is a sentence...
 
 --
 .leftcol[
-Basic tables 
+Basic tables
 
 
 ```r
