@@ -45,3 +45,10 @@ animals_pet = tibble(
 
 birds <- read_csv(file.path('data', 'birds.csv'))
 bears <- read_csv(file.path('data', 'bears.csv'))
+
+
+
+bands %>% 
+    mutate(age = 2019 - yearOfBirth) %>%
+    group_by(deceased, band) %>%
+    summarise(mean_age = mean(age))
