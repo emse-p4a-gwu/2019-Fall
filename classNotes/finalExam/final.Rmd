@@ -46,7 +46,7 @@ set.seed(42)
 
 .font80[
 - Write your name on your packet! 
-- Go to http://rstudio.cloud/ and select the "final_A" assignment.
+- Go to http://rstudio.cloud/ and select the "final_B" assignment.
 - Type code in the `final.R` file in the project folder to find answers to the questions.
 - Write your final answer for each question on your physical exam packet where indicated.
 - When finished, check the boxes next to each file in the RStudio project and export them by clicking "More" then clicking "Export".
