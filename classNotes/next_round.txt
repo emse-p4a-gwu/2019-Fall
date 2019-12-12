@@ -3,6 +3,7 @@ General:
 - Change homework assignment instructions to use GWnet ID name in .R file name and to only submit the .R file
 - Add purpose statement and skills to all assignments
 - Potentially remove Exam 2 and replace with another quiz, and maybe move exam 1 back to include strings. Then we just have one "midterm" and one "final". Would have to make homeworks and / or quizzes count for more.
+- Add strings to final review slides
 
 3-Functions:
 - Include the `almostEqual()` function in the classNotes
