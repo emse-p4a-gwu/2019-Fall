@@ -11,7 +11,7 @@ This course provides a foundation in programming using the [R programming langua
 
 For more details, please see the [course website](https://p4a.seas.gwu.edu/2019-Fall).
 
-### Acknowledgements
+### Acknowledgments
 
 This course was inspired by many other courses / resources that cover similar material - see the course [about page](https://emse6574-gwu.github.io/2019-Fall/about.html) for more details.
 
