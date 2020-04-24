@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Monte Carlo Methods</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" href="images/favicon.ico">
+<style type="text/css">
+
+/* Text */
+
+h1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 60px;
+}
+h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 50px;
+}
+h3{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 26px;
+}
+blockquote{
+  background-color: #ecf0f1;
+  padding: 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+/* Images */
+
+img {
+  padding-bottom: 10px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+.tableSmall table {
+  width:30%;
+}
+.tableMedium table {
+  width:60%;
+}
+
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EMSE6574: Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map-ok"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lessons
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="L1.1-course-introduction.html">Week 1.1: Course Introduction</a>
+    </li>
+    <li>
+      <a href="L1.2-getting-started.html">Week 1.2: Getting Started</a>
+    </li>
+    <li>
+      <a href="L2-programming-basics.html">Week 2: Programming Basics</a>
+    </li>
+    <li>
+      <a href="L3-functions.html">Week 3: Functions</a>
+    </li>
+    <li>
+      <a href="L4.1-conditionals.html">Week 4.1: Conditionals</a>
+    </li>
+    <li>
+      <a href="L4.2-testing-debugging.html">Week 4.2: Testing &amp; Debugging</a>
+    </li>
+    <li>
+      <a href="L5-loops.html">Week 5: Loops</a>
+    </li>
+    <li>
+      <a href="L6-vectors.html">Week 6: Vectors</a>
+    </li>
+    <li>
+      <a href="L7-strings.html">Week 7: Strings</a>
+    </li>
+    <li>
+      <a href="dataAnalysisPrelude.html">Data Analysis Prelude</a>
+    </li>
+    <li>
+      <a href="challengerExplosion.html">Case Study on Challenger Explosion</a>
+    </li>
+    <li>
+      <a href="L10-da1-data-frames.html">Week 10: Data Analysis 1 - Data Frames</a>
+    </li>
+    <li>
+      <a href="L11-da2-data-wrangling.html">Week 11: Data Analysis 2 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="L12-da3-data-visualization.html">Week 12: Data Analysis 3 - Data Visualization</a>
+    </li>
+    <li>
+      <a href="L13-da4-communicating-information.html">Week 13: Data Analysis 4 - Communicating Information</a>
+    </li>
+    <li>
+      <a href="L15-monte-carlo-methods.html">Week 15: Monte Carlo Methods</a>
+    </li>
+    <li>
+      <a href="TurtleGraphics.html">Turtle Graphics</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="hw1-programming-basics.html">HW 1 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw2-functions.html">HW 2 - Functions Basics</a>
+    </li>
+    <li>
+      <a href="hw3-loops-vectors.html">HW 3 - Loops &amp; Vectors</a>
+    </li>
+    <li>
+      <a href="hw4-strings.html">HW 4 - Strings</a>
+    </li>
+    <li>
+      <a href="hw5-data-wrangling.html">HW 5 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="hw6-data-visualization.html">HW 6 - Data Visualization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fa fa-info"></span>
+         
+        About
+      </a>
+    </li>
+    <li>
+      <a href="LICENSE.html">
+        <span class="fa fa-gavel"></span>
+         
+        License
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://6574-s11-f19.slack.com/">
+    <span class="fa fa-slack"></span>
+     
+    Slack
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jph@gwu.edu">
+        <span class="fa fa-envelope"></span>
+         
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/">
+        <span class="fa fa-github"></span>
+         
+        GitHub
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Monte Carlo Methods</h1>
+
+</div>
+
+
+<p>When you hear the words “Monte Carlo”, most people envision this:</p>
+<p><img src="images/monte_carlo_slots.gif" width="200" /></p>
+<p>…or this:</p>
+<p><img src="images/monte_carlo_f1.gif" width="300" /></p>
+<p>But when I hear Monte Carlo, I envision this:</p>
+<p><img src="images/monte_carlo_pi.gif" width="300" /></p>
+<p>No, that’s not some grainy image coming into focus - that’s a <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo simulation</a> approximating the value of <span class="math inline">\(\pi\)</span> (3.1415927…).</p>
+<hr />
+<div id="what-is-monte-carlo-simulation" class="section level1">
+<h1><span class="header-section-number">1</span> What is Monte Carlo simulation?</h1>
+<div id="basic-idea" class="section level2">
+<h2><span class="header-section-number">1.1</span> Basic idea</h2>
+<p>Monte Carlo simulation uses (pseudo)random numbers to solve (not-so-random) problems. The general approach goes like this:</p>
+<ul>
+<li>Run a series of trials.</li>
+<li>In each trial, simulate an event (e.g. a coin toss, a dice roll, etc.).</li>
+<li>Count the number of successful trials.</li>
+<li>Guess that the Expected Odds <span class="math inline">\(\simeq\)</span> Observed Odds = <span class="math inline">\(\frac{\text{# Successful Trials}}{\text{# Total Trials}}\)</span></li>
+</ul>
+<p>For many applications, Monte Carlo simulations result in a sufficiently accurate result with a reasonable amount of trials (~ 100,000). You can always improve your accuracy with more trials, but that comes at the expense of increased run time. To summarize:</p>
+<ol style="list-style-type: decimal">
+<li>As # of trials increases, observed odds –&gt; expected odds.</li>
+<li>More trials –&gt; more accurate (+ more time).</li>
+</ol>
+</div>
+<div id="why-the-name-monte-carlo" class="section level2">
+<h2><span class="header-section-number">1.2</span> Why the name “Monte Carlo”?</h2>
+<p>The name “Monte Carlo” comes from the (pseudo)random nature of the simulation process. Running a series of trials is similar to how many gambling games work in casinos, and <a href="https://en.wikipedia.org/wiki/Monte_Carlo">Monte Carlo</a> is famous for gambling. Of course, in the casinos the odds are always slightly in the favor of the house, so after millions of trials the odds are that the house will win more money than the gamblers.</p>
+</div>
+<div id="why-even-do-this" class="section level2">
+<h2><span class="header-section-number">1.3</span> Why even do this?</h2>
+<p>Many problems have “closed-form” solutions, meaning they can be solved with math alone. But there are also many problems for which no known closed-form solution exists. Integration is a classic example - there are many integrals for which a purely mathematical solution cannot be determined. However, solutions can be <em>approximated</em> using simulation.</p>
+<p>R comes with many tools for running (pseudo)random simulations, which is one reason R is such a popular programming language for people who build and work with statistical models that involve simulations.</p>
+<hr />
+</div>
+</div>
+<div id="monte-carlo-integration" class="section level1">
+<h1><span class="header-section-number">2</span> Monte Carlo integration</h1>
+<p>Integration is ultimately about computing the area below the curve of a function. Let’s take a simple example - suppose we want to find the integral from 3 to 7 of the following function:</p>
+<p><span class="math display">\[f(x) = x^2\]</span></p>
+<p>That is, we want to compute the area under the curve of <span class="math inline">\(x^2\)</span> between <span class="math inline">\(3 &lt; x &lt; 7\)</span>. Here’s what that looks like:</p>
+<!-- ```{r} -->
+<!-- x1 <- seq(1, 10, by = 0.1) -->
+<!-- y1 <- x1^2 -->
+<!-- plot(x1, y1, type = "l", col='#B34D33FF') -->
+<!-- x2 <- x1[which(3 < x1 & x1 < 7)] -->
+<!-- y2 <- x2^2 -->
+<!-- polygon(c(x2, rev(x2)), c(0*y2, rev(y2)), col='#E64D334D', border=NA) -->
+<!-- ``` -->
+<p><img src="L15-monte-carlo-methods_files/figure-html/unnamed-chunk-1-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>One way to estimate the shaded area is to draw a bunch of random points inside a rectangle in the x-y plane that contains the shaded area and then count how many fall below the function line. So we’re going to randomly draw points inside this box:</p>
+<p><img src="L15-monte-carlo-methods_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Let’s simulate some random points inside the box:</p>
+<pre class="r"><code>numTrials &lt;- 100000
+# The function runif() samples from a &quot;uniform&quot; distribution
+x &lt;- runif(numTrials, min = 3, max = 7) # Values of x between 3 and 7
+y &lt;- runif(numTrials, min = 0, max = 7^2) # Values of y between 0 and 7^2</code></pre>
+<p>Now that we have our points, we can use them to estimate the area under the curve. The logic here is that the ratio of points below the curve to the total number of points will be equal to the ratio of the area under <span class="math inline">\(f(x)\)</span> to the total area of the rectangle. That is:</p>
+<p><span class="math display">\[\frac{\text{# Points Under Curve}}{\text{# Total Points}} = \frac{\text{Area Under Curve}}{\text{Area of Rectangle}}\]</span></p>
+<p>So, to get the area under the curve, we need to compute the area of the rectangle and multiply it by <span class="math inline">\((\text{# Points Under Curve}) / (\text{# Total Points})\)</span>. We know the total area of the rectangle is its length (<span class="math inline">\((7 - 3) = 4\)</span>) times its height (<span class="math inline">\(7^2\)</span>), which is <span class="math inline">\(4 * 49 = 196\)</span>. So the area under the curve should be 196 times the ratio of points under the curve to the total number of points. Let’s write the code!</p>
+<pre class="r"><code># Determine which y points are less than or equal to x^2:
+belowCurve &lt;- y &lt;= x^2 # This will create a vector of TRUE and FALSE values
+# Compute the ratio of points below the curve:
+ratio &lt;- sum(belowCurve) / numTrials
+totalArea &lt;- (7 - 3) * 7^2 # Rectangle length x height = 196
+areaUnderCurve &lt;- ratio * totalArea
+areaUnderCurve</code></pre>
+<pre><code>## [1] 105.6048</code></pre>
+<p>So, using Monte Carlo simulation with 100,000 points, we estimate that the area under the curve is 105.6048. How’d we do? Well, if you’re familiar with calculus, the integral of <span class="math inline">\(f(x) = x^2\)</span> has a closed-form solution (<span class="math inline">\(\frac{x^3}{3} + C\)</span>), so we can check our estimate against the pure-math solution:</p>
+<p><span class="math display">\[\int_{3}^{7} x^2 \mathrm{dx} = \left ( \frac{x^3}{3} \right ) \Big|_3^7 = \frac{7^3}{3} - \frac{3^3}{3} = 105.33\bar{3}\]</span></p>
+<p>So our estimate error is: <code>105.333 -</code> <code>105.6048</code> <code>=</code> <code>-0.2714667</code>.</p>
+<p>That’s an error of just 0.26 % - not bad!</p>
+<hr />
+</div>
+<div id="monte-carlo-pi" class="section level1">
+<h1><span class="header-section-number">3</span> Monte Carlo <span class="math inline">\(\pi\)</span></h1>
+<p>Now let’s look at something a bit trickier - approximating <span class="math inline">\(\pi\)</span>!</p>
+<p>Watch this quick video to see a summary of how this works (…I hope you like lounge music)</p>
+<iframe width="640" height="400" src="https://www.youtube.com/embed/ELetCV_wX_c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p>Now let’s approximate <span class="math inline">\(\pi\)</span> ourselves! Let’s start with some basic geometry.</p>
+<p>The area of a circle is:</p>
+<blockquote>
+<p><span class="math inline">\(A_{circle} = \pi r^2\)</span></p>
+</blockquote>
+<p>If we draw a square containing that circle, its area will be:</p>
+<blockquote>
+<p><span class="math inline">\(A_{square} = 4r^2\)</span></p>
+</blockquote>
+<p>This is because each side of the square is simply <span class="math inline">\(2r\)</span>, as can be seen in this image:</p>
+<p><img src="images/pi.png" /></p>
+<p>Knowing these two equations for the areas of a circle and square, we can compute <span class="math inline">\(\pi\)</span> by taking the ratio, <span class="math inline">\(R\)</span>, of the area of a circle to that of a square containing that circle:</p>
+<p><span class="math inline">\(R = \dfrac{\pi r^2}{4r^2} = \dfrac{\pi}{4}\)</span></p>
+<p>So to compute <span class="math inline">\(\pi\)</span>, all we need to do is multiply 4 times the ratio of the area of the circle to that of the square. Just like with integration, we can approximate that ratio by simulating lots of points in the square and then simply counting the number that fall inside the circle.</p>
+<p><strong>Let’s write the code!</strong></p>
+<p>First, generate lots of random points in a square. For this example, we’ll use a square with side length of 1 centered at <code>(x, y) = (0, 0)</code>, so we need to draw random points between <code>x = (-0.5, 0.5)</code> and <code>y = (-0.5, 0.5)</code>:</p>
+<pre class="r"><code>numTrials &lt;- 1000
+points &lt;- data.frame(
+    x = runif(numTrials, -0.5, 0.5),
+    y = runif(numTrials, -0.5, 0.5))
+head(points)</code></pre>
+<pre><code>##              x           y
+## 1 -0.160758898  0.35144718
+## 2 -0.309970142 -0.01519152
+## 3 -0.002902446 -0.40809253
+## 4  0.448293833 -0.44086915
+## 5 -0.465159468 -0.44701151
+## 6 -0.292743448 -0.12471248</code></pre>
+<p>For this example, we’re putting the points in a data frame to make it easier to work with. Now that we have random x and y points, let’s compute the radius to each point (the distance from <code>(x, y) = (0, 0)</code>) so we can determine which points fall inside the circle (which has a radius of 0.5):</p>
+<pre class="r"><code>library(dplyr)
+points &lt;- points %&gt;%
+    mutate(
+        radius = sqrt(x^2 + y^2),
+        pointInCircle = ifelse(radius &lt;= 0.5, TRUE, FALSE))</code></pre>
+<p>Just to make sure we correctly labeled the points, let’s plot them, coloring them based on the <code>pointInCircle</code> variable we just created:</p>
+<pre class="r"><code>library(ggplot2)
+ggplot(points) +
+    geom_point(aes(x = x, y = y, color = pointInCircle), size = 0.7) +
+    theme_minimal()</code></pre>
+<p><img src="L15-monte-carlo-methods_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Looks like we correctly labeled the points! Now we have everything we need to estimate <span class="math inline">\(\pi\)</span>!</p>
+<pre class="r"><code>ratio &lt;- sum(points$pointInCircle) / nrow(points)
+piApprox &lt;- 4 * ratio
+piApprox</code></pre>
+<pre><code>## [1] 3.112</code></pre>
+<p>So our estimate error is: <code>3.1415 -</code> <code>3.112</code> <code>=</code> <code>-0.0295927</code>.</p>
+<p>That’s an error of just 0.94 % - not bad for only 1,000 points!</p>
+<p>To get an even better estimate of <span class="math inline">\(\pi\)</span>, we can increase N. Let’s see what we get with 100,000 trials:</p>
+<pre class="r"><code>numTrials &lt;- 100000
+points &lt;- data.frame(
+    x = runif(numTrials, -0.5, 0.5),
+    y = runif(numTrials, -0.5, 0.5)) %&gt;%
+    mutate(
+        radius = sqrt(x^2 + y^2),
+        pointInCircle = ifelse(radius &lt;= 0.5, TRUE, FALSE))
+ratio &lt;- sum(points$pointInCircle) / nrow(points)
+piApprox &lt;- 4 * ratio
+piApprox</code></pre>
+<pre><code>## [1] 3.14268</code></pre>
+<pre class="r"><code># Compute error:
+error &lt;- piApprox - pi
+percentError &lt;- round(100*abs(error / pi), 2)
+percentError</code></pre>
+<pre><code>## [1] 0.03</code></pre>
+<p>By increasing the number of trials from 1,000 to 100,000, we improved our estimate error from 0.94 % to 0.03 %!</p>
+<hr />
+<p><strong>Page sources</strong>:</p>
+<p>Some content on this page has been modified from other courses, including:</p>
+<ul>
+<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112: Fundamentals of Programming</a>, by <a href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
+</ul>
+</div>
+
+
+<hr>
+
+<div>
+<center>
+    EMSE 6574, Sec. 11: Programming for Analytics (Fall 2019)
+    <br>
+    <a href="https://www.gwu.edu/">George Washington University</a> |
+    <a href="https://www.seas.gwu.edu/">School of Engineering & Applied Science</a>
+    <br>
+    <a href="https://www.jhelvy.com"><i class="fas fa-user"></i> Dr. John Paul Helveston</a> |
+    <a href="mailto:jph@gwu.edu"><i class="fas fa-envelope"></i> jph@gwu.edu</a> |
+    <i class="far fa-calendar-alt"></i> Mondays |
+    <i class="far fa-clock"></i> 6:10–8:40 PM |
+    <i class="fas fa-university"></i> Phillips Hall 108 |
+    <a href="https://twitter.com/JohnHelveston"><i class="fab fa-twitter"></i></a> |
+    <a href="https://github.com/emse6574-gwu/2019-Fall/"><i class="fab fa-github"></i></a>
+    <br>
+    This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    <br>
+    See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.
+    <br>
+    Content <i class="fab fa-creative-commons"></i> 2019 <a href="https://www.jhelvy.com">John Paul Helveston</a>
+</center>
+</div>
+
+<!-- Add function to open links to external links in new tab, from: -->
+<!-- https://yihui.name/en/2018/09/target-blank/ -->
+
+<script src="js/external-link.js"></script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

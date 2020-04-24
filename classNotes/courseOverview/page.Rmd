@@ -1,0 +1,212 @@
+---
+title: "EMSE Undergraduate Data Analytics"
+author: "John Paul Helveston"
+date: December 09, 2019
+output: "html_document"
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(here)
+library(tidyverse)
+library(cowplot)
+library(ggrepel)
+library(fontawesome) # from github: https://github.com/rstudio/fontawesome
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '')
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+set.seed(42)
+```
+
+# Translating _data_ into _information_
+
+### Data:
+
+Student engagement scores
+
+ Class       | School Type | Male | Female 
+ ------------|-------------|------|-------
+ Special Ed. | Charter     | 643  | 793
+ Special Ed. | Public      | 735  | 928
+ General Ed. | Charter     | 590  | 724
+ General Ed. | Public      | 863  | 662   
+
+### Information:
+
+```{r, echo=FALSE, fig.width=6, fig.height=5}
+engagement <- data.frame(
+    Male   = c(643, 735, 590, 863),
+    Female = c(793, 928, 724, 662),
+    School = c('Special Ed., Charter', 'Special Ed., Public',
+               'General Ed., Charter', 'General Ed., Public'),
+    Highlight = c(0, 0, 0, 1)) %>%
+    gather(Gender, Engagement, Male:Female) %>%
+    mutate(Gender = fct_relevel(Gender, c('Male', 'Female')))
+engagement$x <- rep(c(0, 1), each = 4)
+engagement_plot <- engagement %>%
+    mutate(Highlight = as.factor(Highlight)) %>% 
+    ggplot(aes(x=x, y=Engagement, group=School, color=Highlight)) +
+    geom_point() +
+    geom_line() +
+    scale_color_manual(values = c('#757575', '#ed573e')) +
+    labs(x='Sex', y='Engagement') +
+    theme_cowplot() +
+    scale_x_continuous(limits = c(-0.2, 2), labels = c('Male', 'Female'),
+                       breaks = c(0, 1)) +
+    theme(legend.position = 'none') +
+    geom_text_repel(aes(label = School, color = as.factor(Highlight)),
+                    data          = subset(engagement, Gender == 'Female'),
+                    size          = 5,
+                    nudge_x       = 0.2,
+                    hjust         = 0,
+                    segment.color = NA)
+engagement_plot
+```
+
+# Data exploration: an iterative process
+
+### Encode data:
+
+```{r}
+engagement_data <- data.frame(
+    Male   = c(643, 735, 590, 863),
+    Female = c(793, 928, 724, 662),
+    School = c('Special Ed., Charter', 'Special Ed., Public',
+               'General Ed., Charter', 'General Ed., Public'))
+engagement_data
+```
+
+### Re-shape data for plotting:
+
+```{r}
+engagement_data <- engagement_data %>% 
+    gather(Gender, Engagement, Male:Female) %>%
+    mutate(Gender = fct_relevel(
+      Gender, c('Male', 'Female')))
+engagement_data
+```
+
+### Initial exploratory plotting:
+
+```{r, fig.width=6, fig.height=3}
+engagement_data %>% 
+    ggplot() +
+    geom_bar(aes(x = School, y = Engagement, 
+                 fill = Gender), stat = 'identity', 
+             position = 'dodge') +
+    coord_flip()
+```
+
+### More exploratory plotting:
+
+```{r, fig.width=6, fig.height=5}
+engagement %>%
+    mutate(Highlight = as.factor(Highlight)) %>% 
+    ggplot(aes(x=x, y=Engagement, group=School, color=School)) +
+    geom_point() +
+    geom_line() +
+    labs(x='Sex', y='Engagement') 
+```
+
+### Directly label figure:
+
+```{r, fig.width=6, fig.height=5}
+engagement %>%
+    mutate(Highlight = as.factor(Highlight)) %>% 
+    ggplot(aes(x=x, y=Engagement, group=School, color=School)) +
+    geom_point() +
+    geom_line() +
+    labs(x='Sex', y='Engagement') +
+    theme_cowplot() +
+    scale_x_continuous(limits = c(-0.2, 2), labels = c('Male', 'Female'),
+                       breaks = c(0, 1)) +
+    theme(legend.position = 'none') +
+    geom_text_repel(aes(label = School, color = as.factor(School)),
+                    data          = subset(engagement, Gender == 'Female'),
+                    size          = 5,
+                    nudge_x       = 0.2,
+                    hjust         = 0,
+                    segment.color = NA)
+```
+
+### Format colors:
+
+```{r, fig.width=6, fig.height=5}
+engagement %>%
+    mutate(Highlight = as.factor(Highlight)) %>% 
+    ggplot(aes(x=x, y=Engagement, group=School, color=Highlight)) +
+    geom_point() +
+    geom_line() +
+    scale_color_manual(values = c('#757575', '#ed573e')) +
+    labs(x='Sex', y='Engagement') +
+    theme_cowplot() +
+    scale_x_continuous(limits = c(-0.2, 2), labels = c('Male', 'Female'),
+                       breaks = c(0, 1)) +
+    theme(legend.position = 'none') +
+    geom_text_repel(aes(label = School, color = as.factor(Highlight)),
+                    data          = subset(engagement, Gender == 'Female'),
+                    size          = 5,
+                    nudge_x       = 0.2,
+                    hjust         = 0,
+                    segment.color = NA)
+```
+
+# A fully reproducible analysis
+
+### Code:
+
+```{r, eval=FALSE}
+engagement_data <- data.frame(
+    Male   = c(643, 735, 590, 863),
+    Female = c(793, 928, 724, 662),
+    School = c('Special Ed., Charter', 'Special Ed., Public',
+               'General Ed., Charter', 'General Ed., Public'),
+    Highlight = c(0, 0, 0, 1)) %>%
+    gather(Gender, Engagement, Male:Female) %>%
+    mutate(Gender = fct_relevel(Gender, c('Male', 'Female')))
+engagement_data %>%
+    mutate(Highlight = as.factor(Highlight)) %>% 
+    ggplot(aes(x=x, y=Engagement, group=School, color=Highlight)) +
+    geom_point() +
+    geom_line() +
+    scale_color_manual(values = c('#757575', '#ed573e')) +
+    labs(x='Sex', y='Engagement') +
+    theme_cowplot() +
+    scale_x_continuous(limits = c(-0.2, 2), labels = c('Male', 'Female'),
+                       breaks = c(0, 1)) +
+    theme(legend.position = 'none') +
+    geom_text_repel(aes(label = School, color = as.factor(Highlight)),
+                    data          = subset(engagement, Gender == 'Female'),
+                    size          = 5,
+                    nudge_x       = 0.2,
+                    hjust         = 0,
+                    segment.color = NA)
+```
+
+### Result:
+
+```{r, echo=FALSE, fig.width=6, fig.height=5}
+engagement_plot 
+```
+
+# Summary of course sequence
+
+## Course 1: [Programming for Analytics](https://emse6574-gwu.github.io/2019-Fall/)
+
+**"Computational Literacy"**
+
+- Data types (numerical, logical, strings), conditional statements (if/else), loops, functions, testing.
+- Data structures, data import / export, data manipulation & visualization.
+
+## Course 2: [Exploratory Data Analysis](https://emse-eda-gwu.github.io/2020-Spring/)
+
+**"Data Literacy"**
+
+- Data provenance, validity.
+- Design rules for visualizing and communicating information contained in data.
+- Reproducibility: Reports that contain code, equations, visualizations, and narrative text.

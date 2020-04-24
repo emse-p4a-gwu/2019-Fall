@@ -1,0 +1,69 @@
+---
+title: "Final Exam"
+author: "John Paul Helveston"
+date: December 122, 2019
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse6574-gwu.github.io/2019-Fall/classNotes/classNotes.css']
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(here)
+library(fontawesome) # from github: https://github.com/rstudio/fontawesome
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '')
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+set.seed(42)
+```
+
+.leftcol[
+
+#### Instructions
+
+**Part I**
+
+.font80[
+- Write your name on your packet! 
+- Write your answers on your Part I packet. 
+- When finished with Part I, turn it in to get Part II.
+]
+
+**Part II**
+
+.font80[
+- Write your name on your packet! 
+- Go to http://rstudio.cloud/ and select the "final_B" assignment.
+- Type code in the `final.R` file in the project folder to find answers to the questions.
+- Write your final answer for each question on your physical exam packet where indicated.
+- When finished, check the boxes next to each file in the RStudio project and export them by clicking "More" then clicking "Export".
+- Submit the resulting `.zip` file on Blackboard, and hand in your physical exam packet.
+]]
+
+.rightcol[
+
+#### Rules
+
+.font80[
+- You may reference two, physical 8.5" x 11" sheets of notes.
+- For Part I, you may not use your computer or any electronic device.
+- For Part II, you may only open the RStudio Cloud site to take the exam, and then the course Blackboard site to submit your `.zip` file. 
+- **Once you submit Part I, you will not be allowed to review it**.
+]
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/c3L0fbtftRY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+]

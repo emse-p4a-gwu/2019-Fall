@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Course Introduction</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" href="images/favicon.ico">
+<style type="text/css">
+
+/* Text */
+
+h1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 60px;
+}
+h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 50px;
+}
+h3{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 26px;
+}
+blockquote{
+  background-color: #ecf0f1;
+  padding: 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+/* Images */
+
+img {
+  padding-bottom: 10px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+.tableSmall table {
+  width:30%;
+}
+.tableMedium table {
+  width:60%;
+}
+
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EMSE6574: Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map-ok"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lessons
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="L1.1-course-introduction.html">Week 1.1: Course Introduction</a>
+    </li>
+    <li>
+      <a href="L1.2-getting-started.html">Week 1.2: Getting Started</a>
+    </li>
+    <li>
+      <a href="L2-programming-basics.html">Week 2: Programming Basics</a>
+    </li>
+    <li>
+      <a href="L3-functions.html">Week 3: Functions</a>
+    </li>
+    <li>
+      <a href="L4.1-conditionals.html">Week 4.1: Conditionals</a>
+    </li>
+    <li>
+      <a href="L4.2-testing-debugging.html">Week 4.2: Testing &amp; Debugging</a>
+    </li>
+    <li>
+      <a href="L5-loops.html">Week 5: Loops</a>
+    </li>
+    <li>
+      <a href="L6-vectors.html">Week 6: Vectors</a>
+    </li>
+    <li>
+      <a href="L7-strings.html">Week 7: Strings</a>
+    </li>
+    <li>
+      <a href="dataAnalysisPrelude.html">Data Analysis Prelude</a>
+    </li>
+    <li>
+      <a href="challengerExplosion.html">Case Study on Challenger Explosion</a>
+    </li>
+    <li>
+      <a href="L10-da1-data-frames.html">Week 10: Data Analysis 1 - Data Frames</a>
+    </li>
+    <li>
+      <a href="L11-da2-data-wrangling.html">Week 11: Data Analysis 2 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="L12-da3-data-visualization.html">Week 12: Data Analysis 3 - Data Visualization</a>
+    </li>
+    <li>
+      <a href="L13-da4-communicating-information.html">Week 13: Data Analysis 4 - Communicating Information</a>
+    </li>
+    <li>
+      <a href="L15-monte-carlo-methods.html">Week 15: Monte Carlo Methods</a>
+    </li>
+    <li>
+      <a href="TurtleGraphics.html">Turtle Graphics</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="hw1-programming-basics.html">HW 1 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw2-functions.html">HW 2 - Functions Basics</a>
+    </li>
+    <li>
+      <a href="hw3-loops-vectors.html">HW 3 - Loops &amp; Vectors</a>
+    </li>
+    <li>
+      <a href="hw4-strings.html">HW 4 - Strings</a>
+    </li>
+    <li>
+      <a href="hw5-data-wrangling.html">HW 5 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="hw6-data-visualization.html">HW 6 - Data Visualization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fa fa-info"></span>
+         
+        About
+      </a>
+    </li>
+    <li>
+      <a href="LICENSE.html">
+        <span class="fa fa-gavel"></span>
+         
+        License
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://6574-s11-f19.slack.com/">
+    <span class="fa fa-slack"></span>
+     
+    Slack
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jph@gwu.edu">
+        <span class="fa fa-envelope"></span>
+         
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/">
+        <span class="fa fa-github"></span>
+         
+        GitHub
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Course Introduction</h1>
+
+</div>
+
+
+<hr />
+<div id="teaching-team" class="section level1">
+<h1><span class="header-section-number">1</span> Teaching Team</h1>
+<div id="meet-your-instructor" class="section level2">
+<h2><span class="header-section-number">1.1</span> Meet your instructor!</h2>
+<p>Dr. John Helveston, Assistant Professor in Engineering Management &amp; Systems Engineering</p>
+<p><img src="images/helveston.jpg" width="250" /></p>
+<p>Background:</p>
+<ul>
+<li>2016 PhD in Engineering &amp; Public Policy at Carnegie Mellon University</li>
+<li>2015 MS in Engineering &amp; Public Policy at Carnegie Mellon University</li>
+<li>2010 BS in Engineering Science &amp; Mechanics at Virginia Tech</li>
+</ul>
+</div>
+<div id="meet-your-tutors" class="section level2">
+<h2><span class="header-section-number">1.2</span> Meet your tutors!</h2>
+<p>Yanjie He, Masters student in Data Analytics</p>
+<p><img src="images/yanjie.jpg" width="250" /></p>
+<p>Lingmei Zhao, Masters student in Statistics</p>
+<p><img src="images/lingmei.jpg" width="250" /></p>
+</div>
+<div id="meet-your-classmates" class="section level2">
+<h2><span class="header-section-number">1.3</span> Meet your classmates!</h2>
+<p>Get to know your neighbor! Choose someone to go first. In <a href="https://www.youtube.com/watch?v=48z7nQaehWI">2 minutes</a>, share:</p>
+<ul>
+<li>Your name</li>
+<li>Your program</li>
+<li>Something notable you did over the summer</li>
+</ul>
+<p>Then switch for another two minutes.</p>
+<p>Afterwards: let’s here from a few of you - tell us something you learned!</p>
+<hr />
+</div>
+</div>
+<div id="the-syllabus" class="section level1">
+<h1><span class="header-section-number">2</span> The syllabus</h1>
+<p>Let’s go over the <a href="syllabus.html">syllabus</a> and the course assignments.</p>
+<hr />
+</div>
+<div id="course-mantras" class="section level1">
+<h1><span class="header-section-number">3</span> Course Mantras</h1>
+<p>Here are some philosophies that will get you far in data analytic work. We will be revisiting these over and over again.</p>
+<ul>
+<li>Embrace plain text (as opposed to rich text).</li>
+<li>Everything you do should be reproducible.</li>
+</ul>
+<p><strong>Example</strong>: RMarkdown -&gt; HTML. This webpage was generated from <a href="https://raw.githubusercontent.com/emse6574-gwu/2019-Fall/master/L1.1-course-introduction.Rmd">this markdown source file</a> on GitHub.</p>
+<p>If you want to generate the HTML page, download the <code>.Rmd</code> file and run the following code in R:</p>
+<pre class="r"><code>rmarkdown::render(&#39;L1.1-course-introduction.Rmd&#39;)</code></pre>
+<hr />
+</div>
+<div id="communication-help" class="section level1">
+<h1><span class="header-section-number">4</span> Communication &amp; Help</h1>
+<p>All course communication will be managed through <a href="https://6574-s11-f19.slack.com/">Slack</a> - Sign up <a href="https://join.slack.com/t/6574-s11-f19/shared_invite/enQtNzIxNzQ2OTU1MjAwLWZiYjFlOTlhMjAxNDEwMjQ0MDcwYmMxOTAyZGVhNWM4YzFhY2U2ZDIyYzMxZGQwYjMxNDBiYzMzNWRmZmQxMDY"><strong>HERE</strong></a></p>
+<p><strong>Please don’t email the instructors</strong> - just use Slack.</p>
+<blockquote>
+<p><a href="https://youtu.be/9RJZMSsH7-g">Watch this 2-minute video for a quick summary of Slack</a></p>
+</blockquote>
+<p><strong>You can use Slack to</strong>:</p>
+<ul>
+<li>Ask questions.</li>
+<li>Ask for help with an assignment.</li>
+<li>Send direct, private messages to each other or the instructors (just like email…but better!)</li>
+</ul>
+<p><strong>Asking for help on Slack</strong>:</p>
+<p>Slack can be used to ask quick questions and receive quick responses without attending office hours in person. This also enables other students to see answers to common questions. Questions should be specific and include all needed information. For example, if your code has an error you don’t understand, <strong>include the code and the error message</strong> in your question.</p>
+<p><strong>Other Help Resources</strong>:</p>
+<ul>
+<li><strong>Office Hours</strong>: Office hours let you ask questions to TAs and professors directly, and can help you understand concepts and debug programs that you’re struggling with alone.</li>
+<li><strong>Library Services</strong>: While the University Library is not a stand in for TAs, you can schedule a consultation for general help with Coding, Programming, Data, Statistical, and GIS. See more at <a href="https://academiccommons.gwu.edu/writing-research-help" class="uri">https://academiccommons.gwu.edu/writing-research-help</a></li>
+</ul>
+</div>
+
+
+<hr>
+
+<div>
+<center>
+    EMSE 6574, Sec. 11: Programming for Analytics (Fall 2019)
+    <br>
+    <a href="https://www.gwu.edu/">George Washington University</a> |
+    <a href="https://www.seas.gwu.edu/">School of Engineering & Applied Science</a>
+    <br>
+    <a href="https://www.jhelvy.com"><i class="fas fa-user"></i> Dr. John Paul Helveston</a> |
+    <a href="mailto:jph@gwu.edu"><i class="fas fa-envelope"></i> jph@gwu.edu</a> |
+    <i class="far fa-calendar-alt"></i> Mondays |
+    <i class="far fa-clock"></i> 6:10–8:40 PM |
+    <i class="fas fa-university"></i> Phillips Hall 108 |
+    <a href="https://twitter.com/JohnHelveston"><i class="fab fa-twitter"></i></a> |
+    <a href="https://github.com/emse6574-gwu/2019-Fall/"><i class="fab fa-github"></i></a>
+    <br>
+    This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    <br>
+    See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.
+    <br>
+    Content <i class="fab fa-creative-commons"></i> 2019 <a href="https://www.jhelvy.com">John Paul Helveston</a>
+</center>
+</div>
+
+<!-- Add function to open links to external links in new tab, from: -->
+<!-- https://yihui.name/en/2018/09/target-blank/ -->
+
+<script src="js/external-link.js"></script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

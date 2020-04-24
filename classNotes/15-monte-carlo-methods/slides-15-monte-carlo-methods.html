@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 15: Monte Carlo Methods</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2019-12-02" />
+    <link href="slides-15-monte-carlo-methods_files/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://emse6574-gwu.github.io/2019-Fall/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 15: Monte Carlo Methods
+
+.large[EMSE 6574 | John Paul Helveston | December 02, 2019]
+
+---
+class: center
+
+# Monte Carlo, Monaco
+
+.leftcol[.circleborder[
+&lt;img src="img/monaco_big.png" width="100%" /&gt;
+]]
+.rightcol[.blackborder[
+&lt;img src="img/monaco_zoom.png" width="80%" /&gt;
+]]
+
+---
+class: center
+
+# "Monte Carlo" is associated with 3 things
+
+--
+.columns3[
+### Gambling
+
+&lt;img src="img/monte_carlo_slots.gif" width="60%" /&gt;
+]
+--
+.columns3[
+### Racing
+
+&lt;img src="img/monte_carlo_f1.gif" width="80%" /&gt;
+]
+--
+.columns3[
+### Simulation
+
+&lt;img src="img/monte_carlo_pi.gif" width="80%" /&gt;
+]
+
+---
+# Monte Carlo Simulation
+
+--
+### General process:
+
+- Run a series of trials.
+- In each trial, simulate an event (e.g. a coin toss, a dice roll, etc.).
+- Count the number of "successful" trials
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+--
+### `\(\frac{\text{# Successful Trials}}{\text{# Total Trials}}\)` = Observed Odds `\(\simeq\)` Expected Odds
+&lt;br&gt;
+
+--
+.font120[**Law of large numbers**: As # of trials increases, Observed Odds --&gt; Expected Odds.]
+
+---
+# How would you measure if a coin is "fair"?
+
+--
+Run a series of trials and record outcome: "heads" or "tails"
+--
+
+```r
+coin &lt;- c("heads", "tails")
+N &lt;- 10000
+*tosses &lt;- sample(x = coin, size = N, replace = TRUE)
+head(tosses)
+```
+
+```
+## [1] "heads" "heads" "heads" "heads" "tails" "tails"
+```
+--
+Probability of getting "heads":
+
+```r
+sum(tosses == "heads") / N
+```
+
+```
+## [1] 0.5016
+```
+
+---
+# Tossing a less-fair coin
+
+--
+Set the `prob` argument to a 40-60 coin
+--
+
+```r
+coin &lt;- c("heads", "tails")
+N &lt;- 10000
+*tosses &lt;- sample(x = coin, size = N, replace = TRUE, prob = c(0.4, 0.6))
+head(tosses)
+```
+
+```
+## [1] "tails" "heads" "heads" "tails" "heads" "heads"
+```
+--
+Probability of getting "heads":
+
+```r
+sum(tosses == "heads") / N
+```
+
+```
+## [1] 0.3983
+```
+
+---
+# A more complex simulation: dice rolling
+
+What is the probability of rolling one 6-sided dice 3 times and getting the sequence 1, 3, 5?
+
+--
+.leftcol-60[
+
+```r
+library(tidyverse)
+dice &lt;- c(1, 2, 3, 4, 5, 6)
+N &lt;- 10000
+rolls &lt;- tibble(
+  roll1 = sample(x = dice, size = N, replace = TRUE),
+  roll2 = sample(x = dice, size = N, replace = TRUE),
+  roll3 = sample(x = dice, size = N, replace = TRUE)
+)
+```
+]
+--
+.rightcol-40[
+
+```r
+dim(rolls)
+```
+
+```
+## [1] 10000     3
+```
+
+```r
+head(rolls)
+```
+
+```
+## # A tibble: 6 x 3
+##   roll1 roll2 roll3
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     3     4     3
+## 2     1     6     1
+## 3     6     1     3
+## 4     1     2     6
+## 5     3     1     3
+## 6     4     2     5
+```
+]
+
+---
+# A more complex simulation: dice rolling
+
+Simulated probability of getting sequence 1, 3, 5:
+
+```r
+numObs &lt;- rolls %&gt;%
+  filter(roll1 == 1, roll2 == 3, roll3 == 5) %&gt;%
+  nrow()
+numObs / N
+```
+
+```
+## [1] 0.0056
+```
+
+--
+Actual probability of getting sequence 1, 3, 5:
+
+```r
+(1/6)^3
+```
+
+```
+## [1] 0.00462963
+```
+
+---
+name: practice1
+class: inverse
+
+# Practice: Coins &amp; Dice
+
+Use the `sample()` function and a monte carlo simulation to estimate the answers to these questions:
+
+- If you flipped a coin 3 times in a row, what is the probability that you'll get three "tails" in a row?
+
+- If you rolled 2 dice, what is the probability that you'll get "snake-eyes" (two 1's)?
+
+- If you rolled 2 dice, what is the probability that you'll get an outcome that sums to 8?
+
+
+---
+.font150[When `replace = FALSE`]
+
+Sometimes events cannot be independently simulated  
+&lt;br&gt;
+
+--
+What are the odds that 3 cards drawn from a 52-card deck will sum to an even number? Set aces to 1 and all "face" cards (Jack, Queen, King) equal to 10.
+&lt;br&gt;
+
+--
+
+```r
+deck &lt;- rep(c(seq(10), 10, 10, 10), 4)
+```
+
+--
+
+```r
+N &lt;- 100000
+count &lt;- 0
+for (i in 1:N) {
+*  cards = sample(x = deck, size = 3, replace = FALSE)
+   if (sum(cards) %% 2 == 0) {
+      count &lt;- count + 1
+   }
+}
+count / N
+```
+
+```
+## [1] 0.50267
+```
+
+---
+name: practice2
+class: inverse
+
+# Practice: Cards
+
+Use the `sample()` function and a monte carlo simulation to estimate the answers to these questions:
+
+- What are the odds that four cards drawn from a 52-card deck will have the same suit? 
+
+.leftcol[
+- What are the odds that five cards drawn from a 52-card deck will sum to a prime number? Set aces to 1 and all "face" cards (Jack, Queen, King) equal to 10. Hint: use `isPrime()` as a helper.
+]
+.rightcol[
+
+```r
+isPrime &lt;- function(n) {
+    if (n == 2) { return(TRUE) }
+    for (i in seq(2, n-1)) {
+        if (n %% i == 0) {
+            return(FALSE)
+        }
+    }
+    return(TRUE)
+}
+```
+]
+
+
+---
+# Discrete vs. continuous random numbers
+
+--
+.leftcol[
+### Discrete
+
+`sample()`: Takes random samples from `x`
+]
+
+---
+# Discrete vs. continuous random numbers
+
+.leftcol[
+### Discrete
+
+`sample()`: Takes random samples from `x`
+&lt;br&gt;
+&lt;br&gt;
+
+Example:
+
+
+```r
+sample(x = c(0, 1), size = 10, replace = TRUE)
+```
+
+```
+##  [1] 0 1 1 1 1 1 1 0 1 1
+```
+]
+
+---
+# Discrete vs. continuous random numbers
+
+.leftcol[
+### Discrete
+
+`sample()`: Takes random samples from `x`
+&lt;br&gt;
+&lt;br&gt;
+
+Example:
+
+```r
+sample(x = c(0, 1), size = 10, replace = TRUE)
+```
+
+```
+##  [1] 0 1 1 1 1 1 1 0 1 1
+```
+]
+.rightcol[
+### Continuous
+
+`runif()`: Takes random samples of numbers between upper and lower bound
+]
+
+---
+# Discrete vs. continuous random numbers
+
+.leftcol[
+### Discrete
+
+`sample()`: Takes random samples from `x`
+&lt;br&gt;
+&lt;br&gt;
+
+Example:
+
+```r
+sample(x = c(0, 1), size = 10, replace = TRUE)
+```
+
+```
+##  [1] 0 1 1 1 1 1 1 0 1 1
+```
+]
+.rightcol[
+### Continuous
+
+`runif()`: Takes random samples of numbers between upper and lower bound
+&lt;br&gt;
+
+Example:
+
+```r
+runif(n = 10, min = 0, max = 1)
+```
+
+```
+##  [1] 0.60595855 0.18131703 0.39471650 0.22893047 0.08734609 0.56427848
+##  [7] 0.51454060 0.42721489 0.70768957 0.14946550
+```
+]
+
+---
+class: center
+
+# Monte Carlo Integration
+
+Integration = compute the area "under the curve"
+
+--
+.leftcol[.left[
+Example:
+
+Find the area of `\(y = x^2\)` between `\(3 &lt; x &lt; 7\)`
+
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-30-1.png" width="432" /&gt;
+]]
+--
+.rightcol[
+
+`\(\frac{\text{# Points Under Curve}}{\text{# Total Points}} = \frac{\text{Area Under Curve}}{\text{Area of Rectangle}}\)`
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-31-1.png" width="576" /&gt;
+]
+
+---
+class: center
+
+.font150[Monte Carlo Integration]
+
+.leftcol[
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-32-1.png" width="576" /&gt;
+]
+.rightcol[
+`\(\frac{\text{# Points Under Curve}}{\text{# Total Points}} = \frac{\text{Area Under Curve}}{\text{Area of Rectangle}}\)`
+]
+
+
+`\(\text{Area Under Curve} = \text{Area of Rectangle} \left( \frac{\text{# Points Under Curve}}{\text{# Total Points}} \right)\)`
+
+---
+
+.font150[Monte Carlo Integration]
+
+--
+.leftcol[
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-33-1.png" width="576" /&gt;
+Area of rectangle:
+
+```r
+x &lt;- 7 - 3
+y &lt;- 7^2 - 0
+area_rectangle &lt;- x*y
+area_rectangle
+```
+
+```
+## [1] 196
+```
+]
+--
+.rightcol[
+Simulate points:
+
+```r
+N &lt;- 10000
+points &lt;- tibble(
+    x = runif(N, min = 3, max = 7),
+    y = runif(N, min = 0, max = 7^2)) %&gt;%
+    mutate(belowCurve = y &lt; x^2)
+head(points)
+```
+
+```
+## # A tibble: 6 x 3
+##       x      y belowCurve
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;lgl&gt;     
+## 1  3.98  8.36  TRUE      
+## 2  3.55 45.8   FALSE     
+## 3  5.72 29.9   TRUE      
+## 4  6.56  0.157 TRUE      
+## 5  3.89 26.4   FALSE     
+## 6  3.55 20.0   FALSE
+```
+]
+
+---
+
+.font150[Monte Carlo Integration]
+
+.leftcol[
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-36-1.png" width="576" /&gt;
+Area of rectangle:
+
+```r
+x &lt;- 7 - 3
+y &lt;- 7^2 - 0
+area_rectangle &lt;- x*y
+area_rectangle
+```
+
+```
+## [1] 196
+```
+]
+.rightcol[
+Simulate points:
+
+```r
+N &lt;- 10000
+points &lt;- tibble(
+    x = runif(N, min = 3, max = 7),
+    y = runif(N, min = 0, max = 7^2)) %&gt;%
+    mutate(belowCurve = y &lt; x^2)
+*sum(points$belowCurve)
+```
+
+```
+## [1] 5399
+```
+]
+
+---
+.font150[Monte Carlo Integration]
+
+.leftcol[
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-40-1.png" width="576" /&gt;
+Area of rectangle:
+
+```r
+x &lt;- 7 - 3
+y &lt;- 7^2 - 0
+area_rectangle &lt;- x*y
+area_rectangle
+```
+
+```
+## [1] 196
+```
+]
+.rightcol[
+Simulate points:
+
+```r
+N &lt;- 10000
+points &lt;- tibble(
+    x = runif(N, min = 3, max = 7),
+    y = runif(N, min = 0, max = 7^2)) %&gt;%
+    mutate(belowCurve = y &lt; x^2)
+sum(points$belowCurve)
+```
+
+```
+## [1] 5399
+```
+Area under curve:
+
+```r
+points_ratio &lt;- sum(points$belowCurve) / N
+areaUnderCurve &lt;- area_rectangle * points_ratio
+areaUnderCurve
+```
+
+```
+## [1] 105.8204
+```
+]
+
+---
+
+### How did we do?
+
+--
+Simulated area under curve:
+
+```r
+areaUnderCurve
+```
+
+```
+## [1] 105.8204
+```
+
+--
+Actual area under curve:
+
+`\(\int_{3}^{7} x^2 \mathrm{dx} = \left ( \frac{x^3}{3} \right ) \Big|_3^7 = \frac{7^3}{3} - \frac{3^3}{3} = 105.33\bar{3}\)`
+
+---
+
+### How did we do?
+
+Simulated area under curve:
+
+```r
+areaUnderCurve
+```
+
+```
+## [1] 105.8204
+```
+
+Actual area under curve:
+
+`\(\int_{3}^{7} x^2 \mathrm{dx} = \left ( \frac{x^3}{3} \right ) \Big|_3^7 = \frac{7^3}{3} - \frac{3^3}{3} = 105.33\bar{3}\)`
+
+Error:
+
+
+```r
+actualAreaUnderCurve &lt;- (7^3 / 3) - (3^3 / 3)
+error &lt;- abs(actualAreaUnderCurve - areaUnderCurve)
+error
+```
+
+```
+## [1] 0.4870667
+```
+
+That's an error of 0.46 % - not bad!
+
+---
+# Monte Carlo `\(\pi\)`
+
+--
+.leftcol[
+&lt;img src="img/pi.png" width="90%" /&gt;
+]
+--
+.rightcol-40[
+Area of a circle:
+
+`\(\quad\quad A_{circle} = \pi r^2\)`
+
+Area of square containing circle:
+
+`\(\quad\quad A_{square} = 4r^2\)`
+]
+
+---
+# Monte Carlo `\(\pi\)`
+
+.leftcol[
+&lt;img src="img/pi.png" width="90%" /&gt;
+]
+.rightcol-40[
+Area of a circle:
+
+`\(\quad\quad A_{circle} = \pi r^2\)`
+
+Area of square containing circle:
+
+`\(\quad\quad A_{square} = 4r^2\)`
+
+Ratio of areas = `\(\pi / 4\)`:
+
+`\(\quad\quad \frac{A_{circle}}{A_{square}} = \dfrac{\pi r^2}{4r^2} = \dfrac{\pi}{4}\)`
+]
+
+---
+# Monte Carlo `\(\pi\)`
+
+.leftcol[
+&lt;img src="img/pi.png" width="90%" /&gt;
+]
+.rightcol-40[
+Area of a circle:
+
+`\(\quad\quad A_{circle} = \pi r^2\)`
+
+Area of square containing circle:
+
+`\(\quad\quad A_{square} = 4r^2\)`
+
+Ratio of areas = `\(\pi / 4\)`:
+
+`\(\quad\quad \frac{A_{circle}}{A_{square}} = \dfrac{\pi r^2}{4r^2} = \dfrac{\pi}{4}\)`
+
+&lt;br&gt;
+
+`\(\pi = 4 \left( \frac{A_{circle}}{A_{square}} \right)\)`
+]
+
+---
+name: practice3
+class: inverse
+
+# Practice: Estimate `\(\pi\)`
+
+
+
+.leftcol-30[
+&lt;img src="slides-15-monte-carlo-methods_files/figure-html/unnamed-chunk-52-1.png" width="432" /&gt;
+&lt;br&gt;
+
+`\(\pi = 4 \left( \frac{A_{circle}}{A_{square}} \right)\)`
+
+]
+.rightcol-70[
+1. Create a tibble with variables `x` and `y` that each contain 10,000 random points between -1 and 1, representing the (x, y) coordinates to a random point inside a square of side length 2 centered at &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp; `(x, y) = (0, 0)`. Hint: use `runif()`
+
+2. Create a new variable, `radius`, that is equal to the distance from the center of the square (0, 0) to each (x, y) point.
+3. Create the variable, `pointInCircle`, that is `TRUE` if the point lies _within_ the circle inscribed in the square, and `FALSE` otherwise.
+
+4. Create the scatterplot on the left (don't worry about the precise colors, dimensions, etc.).
+5. Estimate `\(\pi\)` by multiplying 4 times the ratio of points inside the circle to the total number of points
+
+]
+
+---
+class: center, middle
+
+&lt;img src="img/monte_hall.jpg" width="80%" /&gt;
+
+---
+name: practice4
+class: inverse
+
+# Practice: Monte Hall Problem
+
+.leftcol-40[
+&lt;img src="img/monte_hall.jpg" width="80%" /&gt;
+
+Choice 1 : Door 1, 2, or 3
+
+Choice 2 : Swap doors, or keep your original?
+]
+.rightcol-60[
+In this simulation, the prize is always behind door #1:
+
+- If you choose door #1, you must KEEP it to win.
+- If you choose door #2 or #3, you must SWAP to win.
+
+1. Create the tibble, `choices`, with two variables: `door` contains the first door chosen (`1`, `2`, or `3`); `swap` contains a logical value (`TRUE` or `FALSE`) for whether the contestant chose to swap door. Hint: use `sample()`
+
+2. Create a new tibble, `wins`, which contains only the rows from `choices` that resulted in a win.
+
+3. Compute the percentage of times the contestant won after swapping doors.
+
+]
+
+---
+# Reminders
+
+--
+### 1) Please fill the GW course feedback (see slack announcement)
+
+--
+### 2) Next week: final review
+
+--
+### 3) Final is Thursday, 12/12, from 10:20am - 12:20pm in Phillips 108
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

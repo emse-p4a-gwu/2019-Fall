@@ -1,0 +1,743 @@
+---
+title: "Week 6: Vectors"
+subtitle: "EMSE 6574, Section 11 "
+author: "John Helveston"
+date: September 30, 2019
+output:
+  xaringan::moon_reader:
+    css: classNotes.css
+---
+
+# Announcements
+
+--
+### 2nd tutor session on Sat. this week (not Fri.)
+
+--
+### Quiz 3 next week, Exam 1 week after that
+
+--
+### Quiz 2 review
+
+---
+# Iteration review: loop over a sequence
+```{r}
+seq(5)
+```
+
+--
+.pull-left[
+### `for` loop
+<br>
+
+```{r}
+for (i in seq(5)) {
+    cat(i, '\n')
+}
+```
+]
+--
+.pull-right[
+### `while` loop
+<br>
+
+```{r}
+i <- 1
+while (i <= 5) {
+    cat(i, '\n')
+    i <- i + 1
+}
+```
+]
+
+---
+# Search for something in a sequence
+
+```{r}
+seq(5)
+```
+
+### Count of **even** numbers in sequence:
+
+--
+.pull-left[
+### `for` loop
+<br>
+
+```{r}
+count <- 0
+for (i in seq(5)) {
+    if (i %% 2 == 0) {
+        count <- count + 1
+    }
+}
+count
+```
+]
+--
+.pull-right[
+### `while` loop
+<br>
+
+```{r}
+count <- 0
+i <- 1
+while (i <= 5) {
+    if (i %% 2 == 0) {
+        count <- count + 1
+    }
+    i <- i + 1
+}
+count
+```
+]
+
+---
+# This week: Vectors!
+
+### Note: We've been dealing with vectors all along!
+
+```{r}
+x <- 1
+x
+```
+
+--
+```{r}
+is.vector(x)
+```
+
+--
+```{r}
+length(x)
+```
+
+---
+# The "concatenate" function
+
+The universal vector generator: `c()`
+
+--
+```{r}
+# Numeric vectors
+x <- c(1, 2, 3)
+x
+```
+--
+```{r}
+# Character vectors
+y <- c('one', 'two', 'three')
+y
+```
+--
+```{r}
+# Logical vectors
+y <- c(TRUE, FALSE, TRUE)
+y
+```
+
+---
+# Other ways to make a vector
+
+1) Sequences (we saw these last week):
+
+--
+```{r}
+seq(1, 5)
+```
+--
+```{r}
+1:5
+```
+<br>
+
+--
+2) Repeating a value:
+
+--
+```{r}
+rep(5, 10)
+```
+--
+```{r}
+rep("snarf", 5)
+```
+
+---
+# Repeating a vector
+
+--
+```{r}
+x <- rep(c("foo", "snarf"), 3)
+x
+length(x)
+```
+<br>
+
+--
+Note the difference when adding the `each` argument:
+```{r}
+x <- rep(c("foo", "snarf"), each = 3)
+x
+length(x)
+```
+
+---
+# Elements in vectors must be the same type
+
+--
+If a vector has a _single_ character element, R makes everything a **character**:
+--
+```{r}
+c(1, 2, "3")
+```
+--
+```{r}
+c(TRUE, FALSE, "TRUE")
+```
+<br>
+
+--
+If a vector has numeric and logical elements, R makes everything a **number**:
+--
+```{r}
+c(1, 2, TRUE, FALSE)
+```
+<br>
+
+--
+If a vector has integers and floats, R makes everything a **float**:
+```{r}
+c(1L, 2, pi)
+```
+
+---
+# Doing math on numeric vectors
+
+```{r}
+x <- 1:10
+x
+```
+
+--
+```{r}
+x + 5
+```
+
+--
+```{r}
+x / 2
+```
+
+--
+```{r}
+x + x
+```
+
+--
+```{r}
+x - x
+```
+
+---
+# Practice: Think-Pair-Share
+
+[3 minutes](https://www.youtube.com/watch?v=iHdviZkM7S4) - no typing!
+
+.pull-left[
+```{r}
+f1 <- function(x) {
+    m = x
+    n = x + 4
+    m = m + 5
+    return(c(m, n))
+}
+```
+]
+.pull-right[
+```{r}
+f2 <- function(x) {
+    return(c(x, x / 2))
+}
+```
+]
+<br>
+
+What will this return?
+```{r, echo=FALSE}
+x <- c(1, 2, 3)
+y <- c(TRUE, FALSE, 7)
+```
+```{r, eval=FALSE}
+x <- c(1, 2, 3)
+y <- c(TRUE, FALSE, 7)
+f1(x)
+f2(y)
+```
+--
+```{r}
+f1(x)
+f2(y)
+```
+
+---
+# Using vectors instead of a loop: Summation
+
+```{r}
+x <- 1:10
+x
+```
+
+--
+**Using a loop**:
+```{r}
+total <- 0
+for (item in x) {
+    total <- total + item
+}
+total
+```
+<br>
+
+--
+**Using the `sum()` function**:
+```{r}
+sum(x)
+```
+
+---
+# Other useful "summary" functions
+
+--
+```{r}
+x
+```
+--
+```{r}
+length(x)
+```
+--
+```{r}
+prod(x)
+```
+--
+```{r}
+mean(x)
+```
+--
+```{r}
+median(x)
+```
+--
+```{r}
+max(x)
+```
+--
+```{r}
+min(x)
+```
+
+---
+# Using vectors instead of a loop
+
+Example: Get the remainder for each value in a vector:
+
+```{r}
+x <- c(3.1415, 1.618, 2.718)
+x
+```
+--
+**Using a loop**:
+```{r}
+remainder <- c()
+for (i in x) {
+    remainder <- c(remainder, i %% 1)
+}
+remainder
+```
+
+--
+**Using a vector**:
+```{r}
+remainder <- x %% 1
+remainder
+```
+
+---
+# Get elements in a vector: Use brackets `[]`
+
+```{r}
+x <- seq(1, 10)
+x
+```
+--
+```{r}
+x[1] # Returns the first element
+```
+--
+```{r}
+x[3] # Returns the third element
+```
+--
+```{r}
+x[1:3]  # Returns the first three elements
+```
+--
+```{r}
+x[c(2, 7)] # Returns the 2nd and 7th elements
+```
+--
+```{r}
+x[length(x)] # Returns the last element
+```
+
+---
+# Use negative integers to _remove_ elements
+
+```{r}
+x <- seq(1, 10)
+x
+```
+--
+```{r}
+x[-1] # Returns everything except the first element
+```
+--
+```{r}
+x[-1:-3]  # Returns everything except the first three elements
+```
+--
+```{r}
+x[-c(2, 7)] # Returns everything except the 2nd and 7th elements
+```
+--
+```{r}
+x[-length(x)] # Returns everything except the last elements
+```
+
+---
+# You can name vector elements
+
+```{r}
+x <- seq(5)
+x
+```
+
+--
+1) Use the `names()` function:
+```{r}
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+x
+```
+
+--
+2) Use the `c()` function:
+```{r}
+y <- c('a' = 1, 'b' = 2, 'c' = 3, 'd' = 4, 'e' = 5)
+y
+```
+
+---
+# You can use names to extract elements in a vector
+
+```{r}
+x
+```
+--
+```{r}
+x['a']
+```
+--
+```{r}
+x[c('a', 'c')]
+```
+
+---
+# Logical indices
+
+--
+```{r}
+x <- seq(10, 1)
+x
+```
+
+--
+Create a logical vector:
+```{r}
+x > 5
+```
+
+--
+Use logical vector in brackets to filter elements:
+```{r}
+x[x > 5]
+```
+
+---
+# Practice: Think-Pair-Share
+
+[4 minutes](https://www.youtube.com/watch?v=zVHWhLme2NQ) - no typing!
+
+```{r}
+f <- function(x) {
+    for (i in seq(length(x))) {
+        x[i] <- x[i] + sum(x) + max(x)
+    }
+    return(x)
+}
+x <- c(1, 2, 3)
+```
+
+What will this return?
+```{r, eval=FALSE}
+f(x)
+```
+--
+```{r, echo=FALSE}
+f(x)
+```
+
+---
+# Comparing vectors
+
+Check if 2 vectors are the same:
+
+```{r}
+x <- c(1, 2, 3)
+y <- c(1, 2, 3)
+```
+```{r, eval=FALSE}
+x == y
+```
+--
+```{r, echo=FALSE}
+x == y
+```
+<br>
+
+--
+To check if _all_ elements are the same, use `all()`:
+```{r}
+all(x == y)
+```
+
+---
+# Comparing vectors
+
+To check if _any_ elements are the same, use `any()`:
+
+--
+```{r}
+a <- c(1, 2, 3)
+b <- c(-1, 2,-3)
+a == b
+```
+--
+```{r}
+all(a == b)
+```
+--
+```{r}
+any(a == b)
+```
+
+---
+# `all()` vs. `identical()`
+
+--
+```{r}
+x <- c(1, 2, 3)
+y <- c(1, 2, 3)
+names(x) <- c('a', 'b', 'c')
+names(y) <- c('one', 'two', 'three')
+```
+<br>
+
+--
+```{r}
+all(x == y) # Only compares the elements
+```
+<br>
+
+--
+```{r}
+identical(x, y) # Also compares the **names** of the elements
+```
+<br>
+
+--
+```{r}
+names(y) <- c('a', 'b', 'c')
+identical(x, y)
+```
+
+
+---
+# Practice: Think-Pair-Share
+
+[10 minutes](https://www.youtube.com/watch?v=4ASKMcdCc3g)
+
+.pull-left[
+
+Re-write `isPrime(n)` from last week, but **without loops!**
+
+Remember, `isPrime(n)` takes a non-negative integer, `n`, and returns `TRUE` if it is a prime number and `FALSE` otherwise. Here's some test cases:
+
+- `isPrime(1) == FALSE`
+- `isPrime(2) == TRUE`
+- `isPrime(7) == TRUE`
+- `isPrime(13) == TRUE`
+- `isPrime(14) == FALSE`
+]
+.pull-right[
+Loop solution:
+
+```{r, eval=FALSE}
+isPrime <- function(n) {
+    if (n <= 1) { return(FALSE) }
+    if (n == 2) { return(TRUE) }
+    for (i in seq(2, n-1)) {
+        if (n %% i == 0) {
+            return(FALSE)
+        }
+    }
+    return(TRUE)
+}
+```
+]
+
+---
+# 5 minute break - stand up, move around, stretch!
+
+### [5 minutes](https://www.youtube.com/watch?v=_W0bSen8Qjg)
+
+---
+# Vectorized operations
+
+--
+```{r}
+x1 <- c(1, 2, 3)
+x2 <- c(4, 5, 6)
+```
+--
+```{r}
+# Addition
+x1 + x2 # Returns (1+4, 2+5, 3+6)
+```
+--
+```{r}
+# Subtraction
+x1 - x2 # Returns (1-4, 2-5, 3-6)
+```
+--
+```{r}
+# Multiplicattion
+x1 * x2 # Returns (1*4, 2*5, 3*6)
+```
+--
+```{r}
+# Division
+x1 / x2 # Returns (1/4, 2/5, 3/6)
+```
+
+---
+# Vectorized operations
+
+### Be careful to match dimensions!
+
+--
+```{r}
+x1 <- c(1, 2, 3, 4)
+x2 <- c(4, 5)
+```
+```{r, eval=FALSE}
+x1 + x2
+```
+--
+```{r, echo=FALSE}
+x1 + x2
+```
+
+--
+Single-value vector operations
+```{r}
+x1 <- c(1, 2, 3)
+x2 <- c(4)
+```
+```{r, eval=FALSE}
+x1 + x2
+```
+--
+```{r, echo=FALSE}
+x1 + x2
+```
+
+---
+# Sorting
+--
+```{r}
+a = c(2, 4, 6, 3, 1, 5)
+a
+```
+--
+```{r}
+sort(a)
+```
+--
+```{r}
+sort(a, decreasing = TRUE)
+```
+--
+Use `order()` to get the index values of the sorted order:
+```{r}
+order(a)
+```
+
+--
+This does the same thing as `sort(a)`:
+```{r}
+a[order(a)]
+```
+
+---
+# Group practice - no loops! [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
+
+1) `reverse(x)`
+
+Write a function that returns the vector in reverse order. You cannot use the `rev()` function. Test cases:
+
+- `reverse(c(5, 1, 3)) == c(3, 1, 5)`
+- `reverse(c('a', 'b', 'c')) == c('c', 'b', 'a')`
+- `reverse(c(FALSE, TRUE, TRUE)) == c(TRUE, TRUE, FALSE)`
+- `reverse(seq(10)) == seq(10, 1, -1)`
+
+2) `middleValue(a)`
+
+Write a function that takes a vector of numbers `a` and returns the value of the middle element (or the average of the two middle elements). Test cases:
+
+- `middleValue(c(0,0,0)) == 0`
+- `middleValue(c(1,2,3)) == 2`
+- `middleValue(c(4,5,6,7,8)) == 6`
+- `middleValue(c(5,3,8,4)) == mean(c(3,8))`
+- `middleValue(c(4,5,6,7)) == mean(c(5,6))`
+
+---
+# Group practice - no loops! [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw)
+
+1) `dotProduct(a, b)`
+
+The "dot product" of two vectors is the sum of the products of the corresponding terms. So the dot product of the vectors `c(1,2,3)` and `c(4,5,6)` is `(1*4) + (2*5) + (3*6)`, or `4 + 10 + 18 = 32`. Write a function that takes two vectors and returns the dot product of those vectors. If the vectors are not equal length, ignore the extra elements in the longer vector. Test cases:
+
+- `dotProduct(c(1,2,3), c(4,5,6)) == 32`
+- `dotProduct(c(1,2), c(4,5,6)) == 14`
+- `dotProduct(c(2,3,4), c(-7,1,9)) == 25`
+- `dotProduct(c(0,0,0), c(-7,1,9)) == 0`
+
+2) `alternatingSum(a)`
+
+Write a function that takes a vector of numbers `a` and returns the alternating sum, where the sign alternates from positive to negative or vice versa. Test cases:
+
+- `alternatingSum(c(5,3,8,4)) == (5 - 3 + 8 - 4)`
+- `alternatingSum(c(1,2,3)) == (1 - 2 + 3)`
+- `alternatingSum(c(0,0,0)) == 0`
+- `alternatingSum(c(-7,5,3)) == (-7 - 5 + 3)`

@@ -1,0 +1,15 @@
+Having successfully completed this course, students will be able to:
+
+- Write clear, robust, and reasonably efficient code in R using:
+    - Sequential, conditional, and loop statements.
+    - Multiple data types, including numeric, string, and logical data.
+    - Data structures, including vectors and data frames.
+    - Visualizations of data.
+
+- Develop simple programs to effectively solve medium-sized tasks by:
+    - Employing modular, top-down design in program construction.
+    - Demonstrating an effective programming style based on established standards, practices, and guidelines.
+    - Proactively creating and writing test cases to test and debug code.
+    - Applying computational problem-solving skills to new problems.
+
+- Import, manipulate, visualize, and export data in R.

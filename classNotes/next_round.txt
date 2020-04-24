@@ -1,0 +1,21 @@
+General:
+- Add early discussion of Polya problem solving: Solve problem before coding - come up with a plan, then execute the code
+- Change homework assignment instructions to use GWnet ID name in .R file name and to only submit the .R file
+- Add purpose statement and skills to all assignments
+- Potentially remove Exam 2 and replace with another quiz, and maybe move exam 1 back to include strings. Then we just have one "midterm" and one "final". Would have to make homeworks and / or quizzes count for more.
+- Add strings to final review slides
+
+3-Functions:
+- Include the `almostEqual()` function in the classNotes
+
+5-Loops:
+- Greater discussion of iteration in each loop type, esp. with while loops
+- Use the walkThroughDigits(n) function first before going on to isPrime
+
+Vectors:
+- Add %in%
+
+Potential New Topics:
+- Lecture on building a program. Abstracting away functions that can be repeatedly used, and otherwise good programming practices: https://www.thoughtworks.com/insights/blog/coding-habits-data-scientists
+- Lecture on building a package (potentially instead of monte carlo lecture).
+- If time, add lecture on tidy data and joins

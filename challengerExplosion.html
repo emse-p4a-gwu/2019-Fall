@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>A case study on turning data into information</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" href="images/favicon.ico">
+<style type="text/css">
+
+/* Text */
+
+h1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 60px;
+}
+h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 50px;
+}
+h3{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 26px;
+}
+blockquote{
+  background-color: #ecf0f1;
+  padding: 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+/* Images */
+
+img {
+  padding-bottom: 10px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+.tableSmall table {
+  width:30%;
+}
+.tableMedium table {
+  width:60%;
+}
+
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EMSE6574: Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map-ok"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lessons
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="L1.1-course-introduction.html">Week 1.1: Course Introduction</a>
+    </li>
+    <li>
+      <a href="L1.2-getting-started.html">Week 1.2: Getting Started</a>
+    </li>
+    <li>
+      <a href="L2-programming-basics.html">Week 2: Programming Basics</a>
+    </li>
+    <li>
+      <a href="L3-functions.html">Week 3: Functions</a>
+    </li>
+    <li>
+      <a href="L4.1-conditionals.html">Week 4.1: Conditionals</a>
+    </li>
+    <li>
+      <a href="L4.2-testing-debugging.html">Week 4.2: Testing &amp; Debugging</a>
+    </li>
+    <li>
+      <a href="L5-loops.html">Week 5: Loops</a>
+    </li>
+    <li>
+      <a href="L6-vectors.html">Week 6: Vectors</a>
+    </li>
+    <li>
+      <a href="L7-strings.html">Week 7: Strings</a>
+    </li>
+    <li>
+      <a href="dataAnalysisPrelude.html">Data Analysis Prelude</a>
+    </li>
+    <li>
+      <a href="challengerExplosion.html">Case Study on Challenger Explosion</a>
+    </li>
+    <li>
+      <a href="L10-da1-data-frames.html">Week 10: Data Analysis 1 - Data Frames</a>
+    </li>
+    <li>
+      <a href="L11-da2-data-wrangling.html">Week 11: Data Analysis 2 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="L12-da3-data-visualization.html">Week 12: Data Analysis 3 - Data Visualization</a>
+    </li>
+    <li>
+      <a href="L13-da4-communicating-information.html">Week 13: Data Analysis 4 - Communicating Information</a>
+    </li>
+    <li>
+      <a href="L15-monte-carlo-methods.html">Week 15: Monte Carlo Methods</a>
+    </li>
+    <li>
+      <a href="TurtleGraphics.html">Turtle Graphics</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="hw1-programming-basics.html">HW 1 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw2-functions.html">HW 2 - Functions Basics</a>
+    </li>
+    <li>
+      <a href="hw3-loops-vectors.html">HW 3 - Loops &amp; Vectors</a>
+    </li>
+    <li>
+      <a href="hw4-strings.html">HW 4 - Strings</a>
+    </li>
+    <li>
+      <a href="hw5-data-wrangling.html">HW 5 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="hw6-data-visualization.html">HW 6 - Data Visualization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fa fa-info"></span>
+         
+        About
+      </a>
+    </li>
+    <li>
+      <a href="LICENSE.html">
+        <span class="fa fa-gavel"></span>
+         
+        License
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://6574-s11-f19.slack.com/">
+    <span class="fa fa-slack"></span>
+     
+    Slack
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jph@gwu.edu">
+        <span class="fa fa-envelope"></span>
+         
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/">
+        <span class="fa fa-github"></span>
+         
+        GitHub
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">A case study on turning data into information</h1>
+
+</div>
+
+
+<p>This short case study is an example of what it means to turn “data” into “information”. In this example, we’ll be examining data about the relationship between the temperature of different NASA rocket launches and damage to the rock O-rings - the root cause of the <a href="https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster">1986 Space Shuttle Challenger explosion</a>.</p>
+<p>Don’t worry yet if you don’t understand the specific code here - just try to follow along to see how we can pull out <em>information</em> from raw data.</p>
+<div id="the-challenger-disaster" class="section level1">
+<h1>The Challenger disaster</h1>
+<p>On January 28, 1986 the space shuttle Challenger exploded. In his book titled <a href="https://www.edwardtufte.com/tufte/books_visex">“Visual Explanations”</a>, Edward Tufte (1997) provides a detailed account of the background to the incident. In short, the temperature on the day of the launch was too low and resulted in failure of the O-rings in the rocket, which led to an explosion that destroyed the rocket and killed the 7-person crew, pictured below.</p>
+<p><img src="images/challenger_crew.jpg" /> [<a href="https://www.flickr.com/photos/gsfc/12191288154">Image source</a>]</p>
+</div>
+<div id="the-data" class="section level1">
+<h1>The data</h1>
+<p>The R package <code>DAAG</code> has a dataset called <code>orings</code> which contains data on temperatures and O-ring damage during launches prior to the Challenger incident. Let’s load the <code>DAAG</code> library and preview the data:</p>
+<pre class="r"><code>library(DAAG)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre class="r"><code>head(orings)</code></pre>
+<pre><code>##   Temperature Erosion Blowby Total
+## 1          53       3      2     5
+## 2          57       1      0     1
+## 3          58       1      0     1
+## 4          63       1      0     1
+## 5          66       0      0     0
+## 6          67       0      0     0</code></pre>
+<p>We can see that the dataset contains observations about the temperatures of launches and O-ring damage, but we don’t yet have <em>information</em>. One step forward towards <em>information</em> is to simply plot the data to <em>see</em> if there might be a relationship between temperature and O-ring damage:</p>
+<pre class="r"><code>library(ggplot2)
+plot &lt;- ggplot(orings, aes(x=Temperature, y=Total)) +
+    geom_point() +
+    labs(x = &#39;Temperature (F)&#39;, y = &#39;Total O-Ring Damage&#39;)
+plot</code></pre>
+<p><img src="challengerExplosion_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>The graph above shows O-ring damage on the y-axis and temperature on the x-axis. We can easily see that no prior launches below 66 degrees F were damage-free, and it appears that at lower temperatures (such as 55 degrees) the damage was even more severe.</p>
+<p>Now, what temperature was forecasted for the day of the Challenger launch? <strong>26 to 29 degrees</strong>. Let’s add that context to our plot:</p>
+<pre class="r"><code>plot +
+    # Modify the x and y limits
+    xlim(25, 85) +
+    ylim(0, 6) +
+    # Add a red rectangle for the forecasted temperature on launch day
+    annotate(&quot;rect&quot;, xmin = 26, xmax = 29,  ymin=0, ymax=6,
+             alpha = 0.3, fill = &quot;red&quot;) +
+    # Add text
+    annotate(&quot;text&quot;, x = 30, y = 3,
+             label = &quot;Forecast \n temperature \n 26 to 29&quot;)</code></pre>
+<p><img src="challengerExplosion_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Now we have some <em>information</em>. The transformation of the raw data into a visualization makes it obvious that the temperature forecasted for the day of the Challenger launch should raise red flags. It falls far below the temperature range of prior launches, and those prior launches suggest that O-ring damage may be correlated with decreasing temperature.</p>
+<p>To their credit, the engineers working on the Challenger were worried about the potential for O-ring failure. But the critical step in making the link to temperature was not thoroughly communicated. Instead, the <em>raw data</em> was presented in tabular form along with diagrams like the one below, which show how erosion in the primary O-ring interacted with the secondary O-ring:</p>
+<p><img src="images/rockets_chart.png" width="600" /> [<a href="https://www.edwardtufte.com/tufte/books_visex">Image source</a>]</p>
+<p>While the above diagram contains a lot of <em>data</em>, the critical <strong>information</strong> about the relationship between launch temperature and O-ring damage is not obvious. In contrast, the scatterplot achieves this without putting much cognitive load on the viewer. Just about anyone can look at that plot and understand that the forecasted temperature on January 28, 1986 might be a risk for O-ring failure.</p>
+<hr />
+<p><strong>References</strong>:</p>
+<ul>
+<li>The <a href="https://vizdatar.wordpress.com/2015/05/06/space-shuttle-challenger-explosion-2/">Space shuttle Challenger explosion</a> blog post, by Vikram Dayal</li>
+<li>Robison et al. (2002) <a href="https://people.rit.edu/wlrgsh/FINRobison.pdf">Representation and Misrepresentation: Tufte and the Morton Thiokol Engineers on the Challenger</a>, <em>Science and Engineering Ethics</em>, 8, 59-81.</li>
+<li>Tufte, Edward R. (1997) <a href="https://www.edwardtufte.com/tufte/books_visex">“Visual Explanations: Images and Quantities, Evidence and Narrative”</a>, Graphics Press, Cheshire, Connecticut.</li>
+</ul>
+</div>
+
+
+<hr>
+
+<div>
+<center>
+    EMSE 6574, Sec. 11: Programming for Analytics (Fall 2019)
+    <br>
+    <a href="https://www.gwu.edu/">George Washington University</a> |
+    <a href="https://www.seas.gwu.edu/">School of Engineering & Applied Science</a>
+    <br>
+    <a href="https://www.jhelvy.com"><i class="fas fa-user"></i> Dr. John Paul Helveston</a> |
+    <a href="mailto:jph@gwu.edu"><i class="fas fa-envelope"></i> jph@gwu.edu</a> |
+    <i class="far fa-calendar-alt"></i> Mondays |
+    <i class="far fa-clock"></i> 6:10–8:40 PM |
+    <i class="fas fa-university"></i> Phillips Hall 108 |
+    <a href="https://twitter.com/JohnHelveston"><i class="fab fa-twitter"></i></a> |
+    <a href="https://github.com/emse6574-gwu/2019-Fall/"><i class="fab fa-github"></i></a>
+    <br>
+    This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    <br>
+    See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.
+    <br>
+    Content <i class="fab fa-creative-commons"></i> 2019 <a href="https://www.jhelvy.com">John Paul Helveston</a>
+</center>
+</div>
+
+<!-- Add function to open links to external links in new tab, from: -->
+<!-- https://yihui.name/en/2018/09/target-blank/ -->
+
+<script src="js/external-link.js"></script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

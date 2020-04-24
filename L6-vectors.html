@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Vectors</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" href="images/favicon.ico">
+<style type="text/css">
+
+/* Text */
+
+h1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 60px;
+}
+h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 50px;
+}
+h3{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 26px;
+}
+blockquote{
+  background-color: #ecf0f1;
+  padding: 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+/* Images */
+
+img {
+  padding-bottom: 10px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+.tableSmall table {
+  width:30%;
+}
+.tableMedium table {
+  width:60%;
+}
+
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EMSE6574: Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map-ok"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lessons
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="L1.1-course-introduction.html">Week 1.1: Course Introduction</a>
+    </li>
+    <li>
+      <a href="L1.2-getting-started.html">Week 1.2: Getting Started</a>
+    </li>
+    <li>
+      <a href="L2-programming-basics.html">Week 2: Programming Basics</a>
+    </li>
+    <li>
+      <a href="L3-functions.html">Week 3: Functions</a>
+    </li>
+    <li>
+      <a href="L4.1-conditionals.html">Week 4.1: Conditionals</a>
+    </li>
+    <li>
+      <a href="L4.2-testing-debugging.html">Week 4.2: Testing &amp; Debugging</a>
+    </li>
+    <li>
+      <a href="L5-loops.html">Week 5: Loops</a>
+    </li>
+    <li>
+      <a href="L6-vectors.html">Week 6: Vectors</a>
+    </li>
+    <li>
+      <a href="L7-strings.html">Week 7: Strings</a>
+    </li>
+    <li>
+      <a href="dataAnalysisPrelude.html">Data Analysis Prelude</a>
+    </li>
+    <li>
+      <a href="challengerExplosion.html">Case Study on Challenger Explosion</a>
+    </li>
+    <li>
+      <a href="L10-da1-data-frames.html">Week 10: Data Analysis 1 - Data Frames</a>
+    </li>
+    <li>
+      <a href="L11-da2-data-wrangling.html">Week 11: Data Analysis 2 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="L12-da3-data-visualization.html">Week 12: Data Analysis 3 - Data Visualization</a>
+    </li>
+    <li>
+      <a href="L13-da4-communicating-information.html">Week 13: Data Analysis 4 - Communicating Information</a>
+    </li>
+    <li>
+      <a href="L15-monte-carlo-methods.html">Week 15: Monte Carlo Methods</a>
+    </li>
+    <li>
+      <a href="TurtleGraphics.html">Turtle Graphics</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="hw1-programming-basics.html">HW 1 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw2-functions.html">HW 2 - Functions Basics</a>
+    </li>
+    <li>
+      <a href="hw3-loops-vectors.html">HW 3 - Loops &amp; Vectors</a>
+    </li>
+    <li>
+      <a href="hw4-strings.html">HW 4 - Strings</a>
+    </li>
+    <li>
+      <a href="hw5-data-wrangling.html">HW 5 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="hw6-data-visualization.html">HW 6 - Data Visualization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fa fa-info"></span>
+         
+        About
+      </a>
+    </li>
+    <li>
+      <a href="LICENSE.html">
+        <span class="fa fa-gavel"></span>
+         
+        License
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://6574-s11-f19.slack.com/">
+    <span class="fa fa-slack"></span>
+     
+    Slack
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jph@gwu.edu">
+        <span class="fa fa-envelope"></span>
+         
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/">
+        <span class="fa fa-github"></span>
+         
+        GitHub
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Vectors</h1>
+
+</div>
+
+
+<blockquote>
+<h3 id="learning-objectives">Learning Objectives</h3>
+<ul>
+<li>Describe what a vector is.</li>
+<li>Create vectors of different data types.</li>
+<li>Use indexing to subset and modify specific portions of vectors.</li>
+<li>Understand how to use vectorized functions to avoid loop operations.</li>
+</ul>
+<h3 id="suggested-readings">Suggested readings</h3>
+<ul>
+<li><a href="https://r4ds.had.co.nz/vectors.html">Chapter 20</a> of “R for Data Science”, by Garrett Grolemund and Hadley Wickham</li>
+<li><a href="https://rstudio-education.github.io/hopr/r-objects.html#atomic-vectors">Chapter 5.1</a> of “Hands-On Programming with R”, by Garrett Grolemund</li>
+</ul>
+</blockquote>
+<hr />
+<p>So far we’ve only dealt with objects that contain one value (e.g. <code>x &lt;- 1</code>), but R actually stores those values in a <em>vector</em> of length one:</p>
+<pre class="r"><code>x &lt;- 1
+length(x)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>is.vector(x)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>A <em>vector</em> is a basic data structure in R. All elements in a vector must have the same type.</p>
+<blockquote>
+<p><a href="https://vimeo.com/220490316">Watch this 1-minute video for a quick summary of <strong>vectors</strong></a></p>
+</blockquote>
+<hr />
+<div id="vector-basics" class="section level1">
+<h1><span class="header-section-number">1</span> Vector basics</h1>
+<div id="creating-vectors" class="section level2">
+<h2><span class="header-section-number">1.1</span> Creating vectors</h2>
+<p>The most basic way of creating a vector is to use the <code>c()</code> function (“c” is for “concatenate”):</p>
+<pre class="r"><code>x &lt;- c(1, 2, 3)
+length(x)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>As we saw in the <a href="L5-loops.html">loops</a> lesson, you can also create vectors of sequences using the <code>:</code> operator or the <code>seq()</code> function:</p>
+<pre class="r"><code>seq(1, 10)</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>1:5</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<p>You can also create a vector by using the <code>rep()</code> function, which replicates the same value <code>n</code> times:</p>
+<pre class="r"><code>y &lt;- rep(5, 10) # The number 5 ten times
+z &lt;- rep(10, 5) # The number 10 five times</code></pre>
+<pre class="r"><code>y</code></pre>
+<pre><code>##  [1] 5 5 5 5 5 5 5 5 5 5</code></pre>
+<pre class="r"><code>z</code></pre>
+<pre><code>## [1] 10 10 10 10 10</code></pre>
+<p>In fact, you can use the <code>rep()</code> function to create longer vectors made up of repeated vectors:</p>
+<pre class="r"><code>rep(c(1, 2), 3) # Repeat the vector c(1, 2) three times</code></pre>
+<pre><code>## [1] 1 2 1 2 1 2</code></pre>
+<p>If you add the <code>each</code> argument, <code>rep()</code> will repeat each element in the vector:</p>
+<pre class="r"><code>rep(c(1, 2), each = 3) # Repeat each element of the vector c(1, 2) three times</code></pre>
+<pre><code>## [1] 1 1 1 2 2 2</code></pre>
+<p>You can see how long a vector is using the <code>length()</code> function:</p>
+<pre class="r"><code>length(y)</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code>length(z)</code></pre>
+<pre><code>## [1] 5</code></pre>
+</div>
+<div id="vector-coercion" class="section level2">
+<h2><span class="header-section-number">1.2</span> Vector coercion</h2>
+<p>Each element in a vector must have the <strong>same type</strong>. If you mix types in a vector, R will <em>coerce</em> all the elements to either a numeric or character type.</p>
+<p>If a vector has a <em>single</em> character element, R makes everything a <strong>character</strong>:</p>
+<pre class="r"><code>c(1, 2, &quot;3&quot;)</code></pre>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
+<pre class="r"><code>c(TRUE, FALSE, &quot;TRUE&quot;)</code></pre>
+<pre><code>## [1] &quot;TRUE&quot;  &quot;FALSE&quot; &quot;TRUE&quot;</code></pre>
+<p>If a vector has numeric and logical elements, R makes everything a <strong>number</strong>:</p>
+<pre class="r"><code>c(1, 2, TRUE, FALSE)</code></pre>
+<pre><code>## [1] 1 2 1 0</code></pre>
+<p>If a vector has integers and floats, R makes everything a <strong>float</strong>:</p>
+<pre class="r"><code>c(1L, 2, pi)</code></pre>
+<pre><code>## [1] 1.000000 2.000000 3.141593</code></pre>
+<p>```</p>
+</div>
+<div id="deleting-vectors" class="section level2">
+<h2><span class="header-section-number">1.3</span> Deleting vectors</h2>
+<p>You can delete a vector by assigning <code>NULL</code> to it:</p>
+<pre class="r"><code>x &lt;- seq(1, 10)
+x</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>x &lt;- NULL
+x</code></pre>
+<pre><code>## NULL</code></pre>
+</div>
+<div id="numeric-vectors" class="section level2">
+<h2><span class="header-section-number">1.4</span> Numeric vectors</h2>
+<p>As we saw in the <a href="5-loops.html">loops</a> lesson, you can create a vector of integers using the <code>:</code> operator or the <code>seq()</code> function:</p>
+<pre class="r"><code>1:10</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>seq(1, 10)</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<p>Numeric vectors don’t all have to be integers though - they can be any number:</p>
+<pre class="r"><code>v &lt;- c(pi, 7, 42, 365)
+v</code></pre>
+<pre><code>## [1]   3.141593   7.000000  42.000000 365.000000</code></pre>
+<pre class="r"><code>typeof(v)</code></pre>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<p>R has many built-in functions that are designed to give <em>summary</em> information about numeric vectors. Note that these functions take a vectors of numbers and return <em>single values</em>. Here are some common ones:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mean(x)</code></td>
+<td>Mean of values in <code>x</code></td>
+<td><code>mean(c(1,2,3,4,5))</code> returns <code>3</code></td>
+</tr>
+<tr class="even">
+<td><code>median(x)</code></td>
+<td>Median of values in <code>x</code></td>
+<td><code>median(c(1,2,2,4,5))</code> returns <code>2</code></td>
+</tr>
+<tr class="odd">
+<td><code>max(x)</code></td>
+<td>Max element in <code>x</code></td>
+<td><code>max(c(1,2,3,4,5))</code> returns <code>5</code></td>
+</tr>
+<tr class="even">
+<td><code>min(x)</code></td>
+<td>Min element in <code>x</code></td>
+<td><code>min(c(1,2,3,4,5))</code> returns <code>1</code></td>
+</tr>
+<tr class="odd">
+<td><code>sum(x)</code></td>
+<td>Sums the elements in <code>x</code></td>
+<td><code>sum(c(1,2,3,4,5))</code> returns <code>15</code></td>
+</tr>
+<tr class="even">
+<td><code>prod(x)</code></td>
+<td>Product of the elements in <code>x</code></td>
+<td><code>prod(c(1,2,3,4,5))</code> returns <code>120</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="character-vectors" class="section level2">
+<h2><span class="header-section-number">1.5</span> Character vectors</h2>
+<p>Character vectors are vectors where each element is a string:</p>
+<pre class="r"><code>stringVector &lt;- c(&#39;oh&#39;, &#39;what&#39;, &#39;a&#39;, &#39;beautiful&#39;, &#39;morning&#39;)
+stringVector</code></pre>
+<pre><code>## [1] &quot;oh&quot;        &quot;what&quot;      &quot;a&quot;         &quot;beautiful&quot; &quot;morning&quot;</code></pre>
+<pre class="r"><code>typeof(stringVector)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>As we’ll see in the next lesson on <a href="L7-strings.html">strings</a>, you can “collapse” a character vector into a single string using the <code>str_c()</code> function from the <code>stringr</code> library:</p>
+<pre class="r"><code>library(stringr)
+str_c(stringVector, collapse = &#39; &#39;)</code></pre>
+<pre><code>## [1] &quot;oh what a beautiful morning&quot;</code></pre>
+</div>
+<div id="logical-vectors" class="section level2">
+<h2><span class="header-section-number">1.6</span> Logical vectors</h2>
+<p>Logical vectors contain only <code>TRUE</code> or <code>FALSE</code> elements:</p>
+<pre class="r"><code>logicalVector &lt;- c(rep(TRUE, 3), rep(FALSE, 3))
+logicalVector</code></pre>
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
+<p>If you add a numeric type to a logical vector, the logical elements will be converted to either a <code>1</code> for <code>TRUE</code> or <code>0</code> for <code>FALSE</code>:</p>
+<pre class="r"><code>c(logicalVector, 42)</code></pre>
+<pre><code>## [1]  1  1  1  0  0  0 42</code></pre>
+<p><strong>Warning</strong>: If you add a character type to a logical vector, the logical elements will be converted to strings of <code>&quot;TRUE&quot;</code> and <code>&quot;FALSE&quot;</code>. So even though they may still <em>look</em> like logical types, they aren’t:</p>
+<pre class="r"><code>y &lt;- c(logicalVector, &#39;string&#39;)
+y</code></pre>
+<pre><code>## [1] &quot;TRUE&quot;   &quot;TRUE&quot;   &quot;TRUE&quot;   &quot;FALSE&quot;  &quot;FALSE&quot;  &quot;FALSE&quot;  &quot;string&quot;</code></pre>
+<pre class="r"><code>typeof(y)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+</div>
+<div id="comparing-vectors" class="section level2">
+<h2><span class="header-section-number">1.7</span> Comparing vectors</h2>
+<p>If you want to check if two vectors are identical (in that they contain all the same elements), you can’t use the typical <code>==</code> operator by itself. The reason is because the <code>==</code> operator is performed element-wise, so it will return a logical vector:</p>
+<pre class="r"><code>x &lt;- c(1,2,3)
+y &lt;- c(1,2,3)
+x == y</code></pre>
+<pre><code>## [1] TRUE TRUE TRUE</code></pre>
+<p>Instead of getting one <code>TRUE</code>, you get a vector of <code>TRUE</code>s, because the individual elements are indeed equal. To compare if <em>all</em> the elements in the two vectors are identical, wrap the comparison inside the <code>all()</code> function:</p>
+<pre class="r"><code>all(x == y)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Keep in mind that there are really two steps going on here: 1) <code>x == y</code> creates a logical vectors of <code>TRUE</code>’s and <code>FALSE</code>’s based on element-wise comparisons, and 2) the <code>all()</code> function compares whether all of the values in the logical vector are <code>TRUE</code>.</p>
+<p>You can also use the <code>all()</code> function to compare if other types of conditions are all <code>TRUE</code> for all elements in two vectors:</p>
+<pre class="r"><code>a &lt;- c(1,2,3)
+b &lt;- -1*c(1,2,3)
+all(a &gt; b)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>In contrast to the <code>all()</code> function, the <code>any()</code> function will return <code>TRUE</code> if <em>any</em> of the elements in a vector are <code>TRUE</code>:</p>
+<pre class="r"><code>a &lt;- c(1,2,3)
+b &lt;- c(-1,2,-3)
+a == b</code></pre>
+<pre><code>## [1] FALSE  TRUE FALSE</code></pre>
+<pre class="r"><code>any(a == b)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>For most situations, the <code>all()</code> function works just fine for comparing vectors, but it only compares the <em>elements</em> in the vectors, not their <em>attributes</em>. In some situations, you might also want to check if the attributes of vector, such as their <em>names</em> and <em>data types</em>, are also the same. In this case, you should use the <code>identical()</code> function.</p>
+<pre class="r"><code>names(x) &lt;- c(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;)
+names(y) &lt;- c(&#39;one&#39;, &#39;two&#39;, &#39;three&#39;)
+all(x == y) # Only compares the elements</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>identical(x, y) # Also compares the **names** of the elements</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>Notice that for the <code>identical()</code> function, you don’t need to add a conditional statement - you just provide it the two vectors you want to compare. This is because <code>identical()</code> by definition is comparing if two things are the same.</p>
+</div>
+</div>
+<div id="accessing-elements-in-a-vector" class="section level1">
+<h1><span class="header-section-number">2</span> Accessing elements in a vector</h1>
+<p>You can access elements from a vector using brackets <code>[]</code> and indices inside the brackets. You can use integer indices (probably the most common way), character indices (by naming each element), and logical indices.</p>
+<div id="using-integer-indices" class="section level2">
+<h2><span class="header-section-number">2.1</span> Using integer indices</h2>
+<p>Vector indices start from 1 (this is important - <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">most programming languages start from 0</a>):</p>
+<pre class="r"><code>x &lt;- seq(1, 10)
+x[1] # Returns the first element</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>x[3] # Returns the third element</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>x[length(x)] # Returns the last element</code></pre>
+<pre><code>## [1] 10</code></pre>
+<p>You can access multiple elements by using a vector of indices inside the brackets:</p>
+<pre class="r"><code>x[c(1:3)]  # Returns the first three elements</code></pre>
+<pre><code>## [1] 1 2 3</code></pre>
+<pre class="r"><code>x[c(2, 7)] # Returns the 2nd and 7th elements</code></pre>
+<pre><code>## [1] 2 7</code></pre>
+<p>You can also use negative integers to <em>remove</em> elements, which returns all elements except that those specified:</p>
+<pre class="r"><code>x[-1] # Returns everything except the first element</code></pre>
+<pre><code>## [1]  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>x[-c(2, 7)] # Returns everything except the 2nd and 7th elements</code></pre>
+<pre><code>## [1]  1  3  4  5  6  8  9 10</code></pre>
+<p>But you cannot mix positive and negative integers while indexing:</p>
+<pre class="r"><code>x[c(-2, 7)]</code></pre>
+<pre><code>## Error in x[c(-2, 7)]: only 0&#39;s may be mixed with negative subscripts</code></pre>
+<p>If you try to use a float as an index, it gets rounded <strong>down</strong> to the nearest integer:</p>
+<pre class="r"><code>x[3.1415] # Returns the 3rd element</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>x[3.9999] # Still returns the 3rd element</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="using-characters-indices" class="section level2">
+<h2><span class="header-section-number">2.2</span> Using characters indices</h2>
+<p>You can name the elements in a vector and then use those names to access elements. To create a named vector, use the <code>names()</code> function:</p>
+<pre class="r"><code>x &lt;- seq(5)
+names(x) &lt;- c(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;)</code></pre>
+<pre><code>## Error in names(x) &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;): &#39;names&#39; attribute [10] must be the same length as the vector [5]</code></pre>
+<pre class="r"><code>x</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<p>You can also create a named vector by putting the names directly in the <code>c()</code> function:</p>
+<pre class="r"><code>x &lt;- c(&#39;a&#39; = 1, &#39;b&#39; = 2, &#39;c&#39; = 3, &#39;d&#39; = 4, &#39;e&#39; = 5)
+x</code></pre>
+<pre><code>## a b c d e 
+## 1 2 3 4 5</code></pre>
+<p>Once your vector has names, you can then use those names as indices:</p>
+<pre class="r"><code>x[&#39;a&#39;] # Returns the first element</code></pre>
+<pre><code>## a 
+## 1</code></pre>
+<pre class="r"><code>x[c(&#39;a&#39;, &#39;c&#39;)] # Returns the 1st and 3rd elements</code></pre>
+<pre><code>## a c 
+## 1 3</code></pre>
+</div>
+<div id="using-logical-indices" class="section level2">
+<h2><span class="header-section-number">2.3</span> Using logical indices</h2>
+<p>When using a logical vector for indexing, the position where the logical vector is <code>TRUE</code> is returned. This is helpful for filtering vectors based on conditions:</p>
+<pre class="r"><code>x &lt;- seq(1, 10)
+x &gt; 5 # Create logical vector</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<pre class="r"><code>x[x &gt; 5] # Put logical vector in brackets to filter out the TRUE elements</code></pre>
+<pre><code>## [1]  6  7  8  9 10</code></pre>
+<p>You can also use the <code>which()</code> function to find the numeric indices for which a condition is <code>TRUE</code>, and then use those indices to select elements:</p>
+<pre class="r"><code>which(x &lt; 5) # Returns indices of TRUE elements</code></pre>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<pre class="r"><code>x[which(x &lt; 5)] # Use which to select elements based on a condition</code></pre>
+<pre><code>## [1] 1 2 3 4</code></pre>
+</div>
+</div>
+<div id="vectorized-operations" class="section level1">
+<h1><span class="header-section-number">3</span> Vectorized operations</h1>
+<p>Most base functions in R are “vectorized”, meaning that when you give them a vector, they perform the operation on each element in the vector.</p>
+<div id="arithmetic-operations" class="section level2">
+<h2><span class="header-section-number">3.1</span> Arithmetic operations</h2>
+<p>When you perform arithmetic operations on vectors, they are executed on an element-by-element basis:</p>
+<pre class="r"><code>x1 &lt;- c(1, 2, 3)
+x2 &lt;- c(4, 5, 6)</code></pre>
+<pre class="r"><code># Addition
+x1 + x2 # Returns (1+4, 2+5, 3+6)</code></pre>
+<pre><code>## [1] 5 7 9</code></pre>
+<pre class="r"><code># Subtraction
+x1 - x2 # Returns (1-4, 2-5, 3-6)</code></pre>
+<pre><code>## [1] -3 -3 -3</code></pre>
+<pre class="r"><code># Multiplicattion
+x1 * x2 # Returns (1*4, 2*5, 3*6)</code></pre>
+<pre><code>## [1]  4 10 18</code></pre>
+<pre class="r"><code># Addition
+x1 / x2 # Returns (1/4, 2/5, 3/6)</code></pre>
+<pre><code>## [1] 0.25 0.40 0.50</code></pre>
+<p>When performing vectorized operations, the vectors need to have the same dimensions, or one of the vectors needs to be a single-value vector:</p>
+<pre class="r"><code># Careful! Mis-matched dimensions will only give you a warning, but will still return a value:
+x1 &lt;- c(1, 2, 3)
+x2 &lt;- c(4, 5)
+x1 + x2</code></pre>
+<pre><code>## Warning in x1 + x2: longer object length is not a multiple of shorter object
+## length</code></pre>
+<pre><code>## [1] 5 7 7</code></pre>
+<p>What R does in these cases is <em>repeat</em> the shorter vector, so in the above case the last value is <code>3 + 4</code>.</p>
+<p>If you have a single value vector, R will add it element-wise:</p>
+<pre class="r"><code>x1 &lt;- c(1, 2, 3)
+x2 &lt;- c(4)
+x1 + x2</code></pre>
+<pre><code>## [1] 5 6 7</code></pre>
+</div>
+<div id="sorting" class="section level2">
+<h2><span class="header-section-number">3.2</span> Sorting</h2>
+<p>You can reorder the arrangement of elements in a vector by using the <code>sort()</code> function:</p>
+<pre class="r"><code>a = c(2, 4, 6, 3, 1, 5)
+sort(a)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6</code></pre>
+<pre class="r"><code>sort(a, decreasing = TRUE)</code></pre>
+<pre><code>## [1] 6 5 4 3 2 1</code></pre>
+<p>To get the index values of the sorted order, use the <code>order()</code> function:</p>
+<pre class="r"><code>order(a)</code></pre>
+<pre><code>## [1] 5 1 4 2 6 3</code></pre>
+<p>These indices tell us that the first value in the sorted arrangement of vector <code>a</code> is element number 5 (which is a <code>1</code>), the second value is element number <code>1</code> (which is a <code>2</code>), and so on. If you use <code>order()</code> as the indices to the vector, you’ll get the sorted vector:</p>
+<pre class="r"><code>a[order(a)] # Same as sort(a)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6</code></pre>
+</div>
+</div>
+<div id="tips" class="section level1">
+<h1><span class="header-section-number">4</span> Tips</h1>
+<div id="use-vectors-instead-of-a-loop" class="section level2">
+<h2><span class="header-section-number">4.1</span> Use vectors instead of a loop</h2>
+<p>As we saw in the <a href="5-loops.html">loops</a> lesson, you can use a loop to perform an operation on each element in a vector. For example, the following loop get the decimal values for each element in a vector of floats:</p>
+<pre class="r"><code>x &lt;- c(3.1415, 1.618, 2.718)
+remainder &lt;- c()
+for (i in x) {
+    remainder &lt;- c(remainder, i %% 1)
+}
+remainder</code></pre>
+<pre><code>## [1] 0.1415 0.6180 0.7180</code></pre>
+<p>You could achieve the same thing by just performing the operation inside the loop (the <code>i %% 1</code> bit) on the whole vector:</p>
+<pre class="r"><code>remainder &lt;- x %% 1
+remainder</code></pre>
+<pre><code>## [1] 0.1415 0.6180 0.7180</code></pre>
+<p>In many cases, using a vector can save you a whole lot of code (and time!) by avoiding loops entirely!</p>
+<hr />
+<p><strong>Page sources</strong>:</p>
+<p>Some content on this page has been modified from other courses, including:</p>
+<ul>
+<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112: Fundamentals of Programming</a>, by <a href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
+<li>Danielle Navarro’s website <a href="https://psyr.org/index.html">“R for Psychological Science”</a></li>
+<li><a href="https://rstudio.cloud/learn/primers/1.2">RStudio primers</a></li>
+</ul>
+</div>
+</div>
+
+
+<hr>
+
+<div>
+<center>
+    EMSE 6574, Sec. 11: Programming for Analytics (Fall 2019)
+    <br>
+    <a href="https://www.gwu.edu/">George Washington University</a> |
+    <a href="https://www.seas.gwu.edu/">School of Engineering & Applied Science</a>
+    <br>
+    <a href="https://www.jhelvy.com"><i class="fas fa-user"></i> Dr. John Paul Helveston</a> |
+    <a href="mailto:jph@gwu.edu"><i class="fas fa-envelope"></i> jph@gwu.edu</a> |
+    <i class="far fa-calendar-alt"></i> Mondays |
+    <i class="far fa-clock"></i> 6:10–8:40 PM |
+    <i class="fas fa-university"></i> Phillips Hall 108 |
+    <a href="https://twitter.com/JohnHelveston"><i class="fab fa-twitter"></i></a> |
+    <a href="https://github.com/emse6574-gwu/2019-Fall/"><i class="fab fa-github"></i></a>
+    <br>
+    This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    <br>
+    See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.
+    <br>
+    Content <i class="fab fa-creative-commons"></i> 2019 <a href="https://www.jhelvy.com">John Paul Helveston</a>
+</center>
+</div>
+
+<!-- Add function to open links to external links in new tab, from: -->
+<!-- https://yihui.name/en/2018/09/target-blank/ -->
+
+<script src="js/external-link.js"></script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

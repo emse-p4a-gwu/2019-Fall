@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Homework 6 - Data Visualization &amp; Communication</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" href="images/favicon.ico">
+<style type="text/css">
+
+/* Text */
+
+h1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 60px;
+}
+h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 50px;
+}
+h3{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 26px;
+}
+blockquote{
+  background-color: #ecf0f1;
+  padding: 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+/* Images */
+
+img {
+  padding-bottom: 10px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+.tableSmall table {
+  width:30%;
+}
+.tableMedium table {
+  width:60%;
+}
+
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EMSE6574: Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map-ok"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lessons
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="L1.1-course-introduction.html">Week 1.1: Course Introduction</a>
+    </li>
+    <li>
+      <a href="L1.2-getting-started.html">Week 1.2: Getting Started</a>
+    </li>
+    <li>
+      <a href="L2-programming-basics.html">Week 2: Programming Basics</a>
+    </li>
+    <li>
+      <a href="L3-functions.html">Week 3: Functions</a>
+    </li>
+    <li>
+      <a href="L4.1-conditionals.html">Week 4.1: Conditionals</a>
+    </li>
+    <li>
+      <a href="L4.2-testing-debugging.html">Week 4.2: Testing &amp; Debugging</a>
+    </li>
+    <li>
+      <a href="L5-loops.html">Week 5: Loops</a>
+    </li>
+    <li>
+      <a href="L6-vectors.html">Week 6: Vectors</a>
+    </li>
+    <li>
+      <a href="L7-strings.html">Week 7: Strings</a>
+    </li>
+    <li>
+      <a href="dataAnalysisPrelude.html">Data Analysis Prelude</a>
+    </li>
+    <li>
+      <a href="challengerExplosion.html">Case Study on Challenger Explosion</a>
+    </li>
+    <li>
+      <a href="L10-da1-data-frames.html">Week 10: Data Analysis 1 - Data Frames</a>
+    </li>
+    <li>
+      <a href="L11-da2-data-wrangling.html">Week 11: Data Analysis 2 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="L12-da3-data-visualization.html">Week 12: Data Analysis 3 - Data Visualization</a>
+    </li>
+    <li>
+      <a href="L13-da4-communicating-information.html">Week 13: Data Analysis 4 - Communicating Information</a>
+    </li>
+    <li>
+      <a href="L15-monte-carlo-methods.html">Week 15: Monte Carlo Methods</a>
+    </li>
+    <li>
+      <a href="TurtleGraphics.html">Turtle Graphics</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="hw1-programming-basics.html">HW 1 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw2-functions.html">HW 2 - Functions Basics</a>
+    </li>
+    <li>
+      <a href="hw3-loops-vectors.html">HW 3 - Loops &amp; Vectors</a>
+    </li>
+    <li>
+      <a href="hw4-strings.html">HW 4 - Strings</a>
+    </li>
+    <li>
+      <a href="hw5-data-wrangling.html">HW 5 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="hw6-data-visualization.html">HW 6 - Data Visualization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fa fa-info"></span>
+         
+        About
+      </a>
+    </li>
+    <li>
+      <a href="LICENSE.html">
+        <span class="fa fa-gavel"></span>
+         
+        License
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://6574-s11-f19.slack.com/">
+    <span class="fa fa-slack"></span>
+     
+    Slack
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jph@gwu.edu">
+        <span class="fa fa-envelope"></span>
+         
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/">
+        <span class="fa fa-github"></span>
+         
+        GitHub
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Homework 6 - Data Visualization &amp; Communication</h1>
+
+</div>
+
+
+<p><strong>Due</strong>: Sunday, 01-Dec. at 8pm</p>
+<p><strong>Rules</strong>: This entire assignment is <strong>SOLO</strong>. You may not work with other classmates, though you may consult instructors for help.</p>
+<p><strong>Overview</strong>: For this assignment, you will need to find a dataset of your choosing and create a short report that contains a description of the dataset as well as a few key insights about the data, including at least two summary visualizations. You will publish your report online at <a href="http://rpubs.com/" class="uri">http://rpubs.com/</a>. Before beginning the assignment, be sure to have reviewed the lessons on <a href="L10-da1-data-frames.html">Data Frames</a>, <a href="L11-da2-data-wrangling.html">Data Wrangling</a>, <a href="L12-da3-data-visualization.Rmd">Data Visualization</a> and <a href="L13-da4-communicating-information.Rmd">Communicating Information</a>.</p>
+<hr />
+<div id="mini-data-analysis-project" class="section level1">
+<h1>Mini data analysis project</h1>
+<div id="choose-a-dataset-5-pts" class="section level3">
+<h3>1) Choose a dataset [5 pts]</h3>
+<p>You will need to select a dataset for your project. To keep things manageable, you must choose one of the following datasets from the following libraries. <strong>Note that to load any of these data frames, all you need to do is load the library</strong>:</p>
+<p><strong>dplyr</strong>:</p>
+<ul>
+<li><code>storms</code></li>
+<li><code>starwars</code></li>
+</ul>
+<p><strong>ggplot2</strong>:</p>
+<ul>
+<li><code>diamonds</code></li>
+<li><code>economics</code></li>
+<li><code>midwest</code></li>
+<li><code>mpg</code></li>
+<li><code>msleep</code></li>
+<li><code>txhousing</code></li>
+</ul>
+<p><a href="https://github.com/rafalab/dslabs"><strong>dslabs</strong></a>:</p>
+<ul>
+<li><code>brexit_polls</code></li>
+<li><code>gapminder</code></li>
+<li><code>greenhouse_gases</code></li>
+<li><code>historic_co2</code></li>
+<li><code>movielens</code></li>
+<li><code>murders</code></li>
+<li><code>nyc_regents_scores</code></li>
+<li><code>olive</code></li>
+<li><code>polls_us_election_2016</code></li>
+<li><code>reported_heights</code></li>
+<li><code>research_funding_rates</code></li>
+<li><code>results_us_election_2016</code></li>
+<li><code>stars</code></li>
+<li><code>temp_carbon</code></li>
+<li><code>trump_tweets</code></li>
+<li><code>us_contagious_diseases</code></li>
+</ul>
+</div>
+<div id="setup-your-analysis-environment-10-pts" class="section level3">
+<h3>2) Setup your analysis environment [10 pts]</h3>
+<p>Once you’ve chosen a dataset, start setting up your analysis environment by following these steps:</p>
+<ol style="list-style-type: decimal">
+<li>Open RStudio and create a new project called “hw6-lastName”, replacing “lastName” with your last name.</li>
+<li>Download the <a href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw6.Rmd">hw6.Rmd template script</a> and place it in RStudio project folder you just created.</li>
+<li>In the “yaml header” at the top of this file, fill out your name, and give your project a title. Your title must include the dataset name and the package from which the dataset is sourced. For example, if you are using the <code>admissions</code> dataset in the <code>dslabs</code> package, an example title might be: “Summary of the <code>admissions</code> dataset from the <code>dslabs</code> package”</li>
+<li>Create a <code>.R</code> file and save it in your project folder as <code>explore.R</code> - we’ll use this file to explore your dataset later.</li>
+</ol>
+</div>
+<div id="inspect-your-data-10-pts" class="section level3">
+<h3>3) Inspect your data [10 pts]</h3>
+<p>Now that your environment is set up, open up your <code>explore.R</code> file and begin exploring your dataset. Be sure to load the library that contains the dataset.</p>
+<p>Write some code to preview and summarize the dataset using some of the methods we’ve seen in class and in the lessons on <a href="L10-da1-data-frames.html">data frames</a> and <a href="L11-da2-data-wrangling.html">data wrangling</a>. You should be able to quickly get an understanding of what variables are included in the data frame and their nature. Consider the following questions in your exploration:</p>
+<ul>
+<li>What type of data is each variable?</li>
+<li>What is the total size of the data frame?</li>
+<li>What are the boundaries of each period of observation (e.g. what time period do the observations in the data frame span)?</li>
+<li>Do any variables have missing values, and if so which ones have more NAs than others? Why might that be the case?</li>
+</ul>
+<p><strong>Do not brush this step off</strong> - the more thoroughly you inspect your dataset, the easier (and better) you data exploration will be. This will be important for step 4, and absolutely critical for step 5. Make sure you take the time to develop an understanding of the variables in your dataset as it is nearly impossible to imagine what summary plots might be worth creating otherwise.</p>
+</div>
+<div id="document-and-summarize-your-dataset-15-pts" class="section level3">
+<h3>4) Document and summarize your dataset [15 pts]</h3>
+<p>Open up your “hw6.Rmd” file and write a paragraph in the section labeled <code># Data description</code> describing of your dataset. Include the following:</p>
+<ol style="list-style-type: decimal">
+<li>A brief overview of the subject matter of the dataset. What is this dataset about?</li>
+<li>A description of the data <em>source</em>. Read the package help files to identify as much information as possible about how the data were collected (when, where, by whom, etc.) and whether the data have already been pre-processed or not. If the data come from a published paper, include a citation to that paper.</li>
+<li>A summary table of each variable in the dataset. Each row should be a variable, and the columns should be the variable name and a short description of the variable (the “hw6.Rmd” template already has this table started for you).</li>
+</ol>
+</div>
+<div id="make-plots-30-pts-15-per-plot" class="section level3">
+<h3>5) Make plots [30 pts (15 per plot)]</h3>
+<p>Now that you have a basic understanding of the dataset, make some plots to explore the variables in the data and their potential relationships. You may use base R plotting functions or the <strong>ggplot2</strong> library to make your figures, but you must make at least two figures, including:</p>
+<ol style="list-style-type: decimal">
+<li>A scatterplot of involving at least two variables.</li>
+<li>A histogram or barplot involving at least one variable.</li>
+</ol>
+<p>You can choose to plot whichever variables you wish, but you must be able to interpret the results of your plot. I recommend that you first make your plots in your <code>explore.R</code> file to iterate on your code until the plots are in their final form you desire. Then copy the code for your final plots over to the appropriate code chunks in your “hw6.Rmd” file.</p>
+</div>
+<div id="interpret-your-plots-15-pts" class="section level3">
+<h3>6) Interpret your plots [15 pts]</h3>
+<p>Below each figure, write a description and interpretation of your plot. Make sure you address at least the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>Describe what variables you are plotting and why.</li>
+<li>Describe the primary relationship / trend / information you hope the reader will gain from your visualization.</li>
+</ol>
+</div>
+<div id="publish-your-writeup-10-pts" class="section level3">
+<h3>7) Publish your writeup [10 pts]</h3>
+<p>Once you have completed your analysis, compile the “hw6.Rmd” file by opening it in RStudio and clicking the “knit” button. In the upper-right of the window that opens showing your compiled hw6.html file, click on the “Publish” button and publish your file to <a href="http://rpubs.com/" class="uri">http://rpubs.com/</a>. You should create an account with rpubs if you have not already. Once published, you can update it by making edits to your “hw6.Rmd” file, clicking the “knit” button again, and then clicking the “Republish” button in the upper-right of the RStudio preview window.</p>
+<p>For a visual overview of the publishing process, refer to the instructions in the <a href="https://emse6574-gwu.github.io/2019-Fall/L13-da4-communicating-information.html#34_publish_to_the_web">youtube video</a> in the lesson on Communicating Information.</p>
+</div>
+<div id="submit-your-files-on-blackboard-5-pts" class="section level3">
+<h3>8) Submit your files on Blackboard [5 pts]</h3>
+<p>After publishing your “hw6.Rmd” file, create a zip file of all files in your R project folder for this assignment and submit the zip file on Blackboard by the due deadline. <strong>Include a link to your published report on rpubs in your Blackboard submission</strong></p>
+</div>
+</div>
+
+
+<hr>
+
+<div>
+<center>
+    EMSE 6574, Sec. 11: Programming for Analytics (Fall 2019)
+    <br>
+    <a href="https://www.gwu.edu/">George Washington University</a> |
+    <a href="https://www.seas.gwu.edu/">School of Engineering & Applied Science</a>
+    <br>
+    <a href="https://www.jhelvy.com"><i class="fas fa-user"></i> Dr. John Paul Helveston</a> |
+    <a href="mailto:jph@gwu.edu"><i class="fas fa-envelope"></i> jph@gwu.edu</a> |
+    <i class="far fa-calendar-alt"></i> Mondays |
+    <i class="far fa-clock"></i> 6:10–8:40 PM |
+    <i class="fas fa-university"></i> Phillips Hall 108 |
+    <a href="https://twitter.com/JohnHelveston"><i class="fab fa-twitter"></i></a> |
+    <a href="https://github.com/emse6574-gwu/2019-Fall/"><i class="fab fa-github"></i></a>
+    <br>
+    This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    <br>
+    See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.
+    <br>
+    Content <i class="fab fa-creative-commons"></i> 2019 <a href="https://www.jhelvy.com">John Paul Helveston</a>
+</center>
+</div>
+
+<!-- Add function to open links to external links in new tab, from: -->
+<!-- https://yihui.name/en/2018/09/target-blank/ -->
+
+<script src="js/external-link.js"></script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

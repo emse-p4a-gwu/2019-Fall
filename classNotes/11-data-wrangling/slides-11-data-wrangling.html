@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 11: Data Analysis 2 - Data Wrangling</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Helveston" />
+    <meta name="date" content="2019-11-04" />
+    <link rel="stylesheet" href="classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Week 11: Data Analysis 2 - Data Wrangling
+## EMSE 6574, Section 11
+### John Helveston
+### November 04, 2019
+
+---
+
+
+
+
+# Announcements
+
+--
+1) Download the `week11notes.zip` file for class today (link in `slack/classroom`).
+&lt;br&gt;
+&lt;br&gt;
+
+--
+2) Make sure you have the "tidyverse" installed:
+
+```r
+install.packages('tidyverse')
+library(tidyverse)
+```
+
+---
+# The tidyverse
+
+&lt;br&gt;
+`stringr` + `dplyr` + `readr` +  `ggplot2` + more = `tidyverse`
+
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/horst_monsters_tidyverse.jpeg" width="800"&gt;
+&lt;/center&gt;
+
+---
+# Today: better data wrangling with **dplyr**
+
+&lt;center&gt;
+&lt;img src="images/horst_monsters_data_wrangling.png" width="650"&gt;
+&lt;/center&gt;
+
+---
+# 80% of the job is data wrangling
+
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;center&gt;
+&lt;img src="images/data-wrangle.png" width="700"&gt;
+&lt;/center&gt;
+
+---
+# The main `dplyr` verbs
+
+- `select()`: subset columns
+- `filter()`: subset rows on conditions
+- `arrange()`: sort results
+- `mutate()`: create new columns by using information from other columns
+- `group_by()`: group data to perform grouped operations
+- `summarize()`: create summary statistics (usually on grouped data)
+- `count()`: count discrete rows
+
+---
+# This week's British Band: The Spice Girls
+
+
+```r
+spicegirls &lt;- tibble(
+    firstName   = c("Melanie", "Melanie", "Emma", "Geri", "Victoria"),
+    lastName    = c("Brown", "Chisholm", "Bunton", "Halliwell", "Beckham"),
+    spice       = c("Scary", "Sporty", "Baby", "Ginger", "Posh"),
+    yearOfBirth = c(1975, 1974, 1976, 1972, 1974),
+    deceased    = c(FALSE, FALSE, FALSE, FALSE, FALSE)
+)
+spicegirls
+```
+
+```
+## # A tibble: 5 x 5
+##   firstName lastName  spice  yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Melanie   Brown     Scary         1975 FALSE   
+## 2 Melanie   Chisholm  Sporty        1974 FALSE   
+## 3 Emma      Bunton    Baby          1976 FALSE   
+## 4 Geri      Halliwell Ginger        1972 FALSE   
+## 5 Victoria  Beckham   Posh          1974 FALSE
+```
+
+---
+# Select columns with `select()`
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/rstudio-cheatsheet-select.png" width="800"&gt;
+&lt;/center&gt;
+
+---
+# Select columns with `select()`
+
+Example: Select the columns `firstName` &amp; `lastName`
+&lt;br&gt;
+
+---
+# Select columns with `select()`
+
+Example: Select the columns `firstName` &amp; `lastName`
+&lt;br&gt;
+
+Base R:
+
+```r
+spicegirls[c('firstName', 'lastName')]
+```
+
+```
+## # A tibble: 5 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 Melanie   Brown    
+## 2 Melanie   Chisholm 
+## 3 Emma      Bunton   
+## 4 Geri      Halliwell
+## 5 Victoria  Beckham
+```
+
+---
+# Select columns with `select()`
+
+Example: Select the columns `firstName` &amp; `lastName`
+&lt;br&gt;
+
+Base R:
+
+```r
+spicegirls[c('firstName', 'lastName')]
+```
+&lt;br&gt;
+
+dplyr:
+
+```r
+select(spicegirls, firstName, lastName)
+```
+
+```
+## # A tibble: 5 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 Melanie   Brown    
+## 2 Melanie   Chisholm 
+## 3 Emma      Bunton   
+## 4 Geri      Halliwell
+## 5 Victoria  Beckham
+```
+
+---
+# Select columns with `select()`
+
+Select all columns *except* certain ones with a `-` sign:
+
+```r
+select(spicegirls, -firstName, -lastName)
+```
+
+```
+## # A tibble: 5 x 3
+##   spice  yearOfBirth deceased
+##   &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Scary         1975 FALSE   
+## 2 Sporty        1974 FALSE   
+## 3 Baby          1976 FALSE   
+## 4 Ginger        1972 FALSE   
+## 5 Posh          1974 FALSE
+```
+
+---
+# Select columns with `select()`
+
+Select columns based on name criteria:
+
+- `ends_with()` = Select columns that end with a character string
+- `contains()` = Select columns that contain a character string
+- `matches()` = Select columns that match a regular expression
+- `one_of()` = Select column names that are from a group of names
+&lt;br&gt;
+&lt;br&gt;
+
+--
+
+```r
+# Select only the "name" columns
+select(spicegirls, ends_with('name'))
+```
+
+```
+## # A tibble: 5 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 Melanie   Brown    
+## 2 Melanie   Chisholm 
+## 3 Emma      Bunton   
+## 4 Geri      Halliwell
+## 5 Victoria  Beckham
+```
+
+---
+# Select rows with `filter()`
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/rstudio-cheatsheet-filter.png" width="800"&gt;
+&lt;/center&gt;
+
+---
+# Select rows with `filter()`
+
+Example: Filter the band members born after 1974
+&lt;br&gt;
+
+```
+## # A tibble: 2 x 5
+##   firstName lastName spice yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Melanie   Brown    Scary        1975 FALSE   
+## 2 Emma      Bunton   Baby         1976 FALSE
+```
+
+---
+# Select rows with `filter()`
+
+Example: Filter the band members born after 1974
+&lt;br&gt;
+
+```
+## # A tibble: 2 x 5
+##   firstName lastName spice yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Melanie   Brown    Scary        1975 FALSE   
+## 2 Emma      Bunton   Baby         1976 FALSE
+```
+&lt;br&gt;
+
+Base R:
+
+```r
+spicegirls[spicegirls$yearOfBirth &gt; 1974,]
+```
+
+---
+# Select rows with `filter()`
+
+Example: Filter the band members born after 1974
+&lt;br&gt;
+
+```
+## # A tibble: 2 x 5
+##   firstName lastName spice yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Melanie   Brown    Scary        1975 FALSE   
+## 2 Emma      Bunton   Baby         1976 FALSE
+```
+&lt;br&gt;
+
+Base R:
+
+```r
+spicegirls[spicegirls$yearOfBirth &gt; 1974,]
+```
+&lt;br&gt;
+
+dplyr:
+
+```r
+filter(spicegirls, yearOfBirth &gt; 1974)
+```
+
+---
+# Select rows with `filter()`
+
+Example: Filter the band members born after 1974
+
+```r
+filter(spicegirls, yearOfBirth &gt; 1974)
+```
+
+```
+## # A tibble: 2 x 5
+##   firstName lastName spice yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Melanie   Brown    Scary        1975 FALSE   
+## 2 Emma      Bunton   Baby         1976 FALSE
+```
+
+---
+# Select rows with `filter()`
+
+Example: Filter the band members born after 1974
+
+```r
+filter(spicegirls, yearOfBirth &gt; 1974)
+```
+
+```
+## # A tibble: 2 x 5
+##   firstName lastName spice yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Melanie   Brown    Scary        1975 FALSE   
+## 2 Emma      Bunton   Baby         1976 FALSE
+```
+&lt;br&gt;
+
+Example: Filter the band members named "Melanie"
+--
+
+```r
+filter(spicegirls, firstName == "Melanie")
+```
+
+```
+## # A tibble: 2 x 5
+##   firstName lastName spice  yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Melanie   Brown    Scary         1975 FALSE   
+## 2 Melanie   Chisholm Sporty        1974 FALSE
+```
+
+---
+# Practice: `select` columns, `filter` rows
+
+Data: Wildlife impacts data (we saw this last week)
+&lt;br&gt;
+&lt;br&gt;
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `wildlife_impacts.csv` file that is in the `data` folder.
+&lt;br&gt;
+&lt;br&gt;
+
+2) Use the `df` object and the `select()` and `filter()` functions to answer the following questions:
+
+- Create a new data frame, `df_birds`, that contains only the variables (columns) about the species of bird.
+- Create a new data frame, `dc`, that contains only the observations (rows) from DC airports.
+- Create a new data frame, `dc_birds_known`, that contains only the observations (rows) from DC airports and those where the species of bird is known.
+- How many _known_ unique species of birds have been involved in accidents at DC airports?
+
+---
+# Sequence operations with pipes: `%&gt;%`
+
+&lt;br&gt;
+&lt;br&gt;
+--
+.pull-left[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/magrittePipe.jpg" width="300"&gt;
+&lt;/center&gt;
+]
+
+--
+&lt;center&gt;
+.pull-right[
+&lt;img src="images/magrittr.png" width="250"&gt;
+&lt;/center&gt;
+]
+
+---
+# Think of the words "...and then..."
+
+&lt;br&gt;
+
+--
+**Without Pipes**:
+
+```r
+leave_house(get_dressed(get_out_of_bed(wake_up(me))))
+```
+&lt;br&gt;
+
+--
+**With Pipes**:
+
+```r
+me %&gt;%
+    wake_up %&gt;%
+    get_out_of_bed %&gt;%
+    get_dressed %&gt;%
+    leave_house
+```
+
+---
+# Sequence operations with pipes: `%&gt;%`
+
+What if I want to filter rows, and then select columns?
+
+---
+# Sequence operations with pipes: `%&gt;%`
+
+What if I want to filter rows, and then select columns?
+&lt;br&gt;
+&lt;br&gt;
+
+Example:
+
+Step 1: Filter the band members born after 1974
+
+Step 2: Select only the columns `firstName` &amp; `lastName`
+&lt;br&gt;
+&lt;br&gt;
+
+--
+**Without Pipes**:
+
+```r
+select(filter(spicegirls, yearOfBirth &gt; 1974), firstName, lastName)
+```
+
+```
+## # A tibble: 2 x 2
+##   firstName lastName
+##   &lt;chr&gt;     &lt;chr&gt;   
+## 1 Melanie   Brown   
+## 2 Emma      Bunton
+```
+
+---
+# Sequence operations with pipes: `%&gt;%`
+
+What if I want to filter rows, and then select columns?
+&lt;br&gt;
+&lt;br&gt;
+
+Example:
+
+Step 1: Filter the band members born after 1974
+
+Step 2: Select only the columns `firstName` &amp; `lastName`
+&lt;br&gt;
+&lt;br&gt;
+
+--
+**With Pipes**:
+
+```r
+spicegirls %&gt;%
+    filter(yearOfBirth &gt; 1974) %&gt;%
+    select(firstName, lastName)
+```
+
+```
+## # A tibble: 2 x 2
+##   firstName lastName
+##   &lt;chr&gt;     &lt;chr&gt;   
+## 1 Melanie   Brown   
+## 2 Emma      Bunton
+```
+
+---
+# Think of the words "...and then..."
+
+**Without Pipes**:
+
+```r
+select(filter(spicegirls, yearOfBirth &gt; 1974), firstName, lastName)
+```
+
+```
+## # A tibble: 2 x 2
+##   firstName lastName
+##   &lt;chr&gt;     &lt;chr&gt;   
+## 1 Melanie   Brown   
+## 2 Emma      Bunton
+```
+
+**With Pipes**:
+
+```r
+spicegirls %&gt;%
+    filter(yearOfBirth &gt; 1974) %&gt;%
+    select(firstName, lastName)
+```
+
+```
+## # A tibble: 2 x 2
+##   firstName lastName
+##   &lt;chr&gt;     &lt;chr&gt;   
+## 1 Melanie   Brown   
+## 2 Emma      Bunton
+```
+
+---
+# Practice: `select`, `filter`, and `%&gt;%`
+
+Data: Wildlife impacts data
+&lt;br&gt;
+&lt;br&gt;
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `wildlife_impacts.csv` file that is in the `data` folder.
+&lt;br&gt;
+&lt;br&gt;
+
+2) Use the `df` object and the `select()` and `filter()` functions to answer the following questions:
+
+- Create a new data frame, `dc_dawn`, that contains only the observations (rows) from DC airports that occurred at dawn.
+- Create a new data frame, `dc_dawn_birds`, that contains only the observations (rows) from DC airports that occurred at dawn and only the variables (columns) about the species of bird.
+- Create a new data frame, `dc_dawn_birds_known`, that contains only the observations (rows) from DC airports that occurred at dawn and only the variables (columns) about the KNOWN species of bird.
+- How many _known_ unique species of birds have been involved in accidents at DC airports at dawn?
+
+---
+# Sort rows with `arrange()`
+
+--
+Sort the data frame by year of birth:
+
+```r
+spicegirls %&gt;%
+    arrange(yearOfBirth)
+```
+
+```
+## # A tibble: 5 x 5
+##   firstName lastName  spice  yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Geri      Halliwell Ginger        1972 FALSE   
+## 2 Melanie   Chisholm  Sporty        1974 FALSE   
+## 3 Victoria  Beckham   Posh          1974 FALSE   
+## 4 Melanie   Brown     Scary         1975 FALSE   
+## 5 Emma      Bunton    Baby          1976 FALSE
+```
+
+---
+# Sort rows with `arrange()`
+
+Use the `desc()` function to sort in descending order:
+
+```r
+spicegirls %&gt;%
+    arrange(desc(yearOfBirth))
+```
+
+```
+## # A tibble: 5 x 5
+##   firstName lastName  spice  yearOfBirth deceased
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;   
+## 1 Emma      Bunton    Baby          1976 FALSE   
+## 2 Melanie   Brown     Scary         1975 FALSE   
+## 3 Melanie   Chisholm  Sporty        1974 FALSE   
+## 4 Victoria  Beckham   Posh          1974 FALSE   
+## 5 Geri      Halliwell Ginger        1972 FALSE
+```
+
+---
+# Sort rows with `arrange()`
+
+Example of filtering, arranging, and selecting:
+
+
+```r
+spicegirls %&gt;%
+    filter(yearOfBirth &lt; 1975) %&gt;%
+    arrange(desc(yearOfBirth)) %&gt;%
+    select(ends_with('name'))
+```
+
+```
+## # A tibble: 3 x 2
+##   firstName lastName 
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 Melanie   Chisholm 
+## 2 Victoria  Beckham  
+## 3 Geri      Halliwell
+```
+
+---
+# 5 minute break - stand up, move around, stretch!
+
+### [5 minutes](https://www.youtube.com/watch?v=_W0bSen8Qjg)
+
+---
+# Create new variables with `mutate()`
+
+&lt;center&gt;
+&lt;img src="images/horst_monsters_mutate.jpg" width="650"&gt;
+&lt;/center&gt;
+
+---
+# Create new variables with `mutate()`
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/rstudio-cheatsheet-mutate.png" width="800"&gt;
+&lt;/center&gt;
+
+---
+# Create new variables with `mutate()`
+
+Example: Compute the age of each band member from `yearOfBirth`
+&lt;br&gt;
+
+---
+# Create new variables with `mutate()`
+
+Example: Compute the age of each band member from `yearOfBirth`
+&lt;br&gt;
+
+Base R:
+
+```r
+spicegirls$age &lt;- 2019 - spicegirls$yearOfBirth
+```
+
+---
+# Create new variables with `mutate()`
+
+Example: Compute the age of each band member from `yearOfBirth`
+&lt;br&gt;
+
+Base R:
+
+```r
+spicegirls$age &lt;- 2019 - spicegirls$yearOfBirth
+```
+&lt;br&gt;
+
+dplyr:
+
+```r
+spicegirls %&gt;%
+    mutate(age = 2019 - yearOfBirth)
+```
+
+```
+## # A tibble: 5 x 6
+##   firstName lastName  spice  yearOfBirth deceased   age
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;    &lt;dbl&gt;
+## 1 Melanie   Brown     Scary         1975 FALSE       44
+## 2 Melanie   Chisholm  Sporty        1974 FALSE       45
+## 3 Emma      Bunton    Baby          1976 FALSE       43
+## 4 Geri      Halliwell Ginger        1972 FALSE       47
+## 5 Victoria  Beckham   Posh          1974 FALSE       45
+```
+
+---
+# You can immediately use new variables
+
+
+```r
+spicegirls %&gt;%
+    select(firstName, lastName, yearOfBirth) %&gt;%
+    mutate(
+        age      = 2019 - yearOfBirth,
+        meanAge  = mean(age),
+        youngest = (age == min(age)),
+        oldest   = (age == max(age)))
+```
+
+```
+## # A tibble: 5 x 7
+##   firstName lastName  yearOfBirth   age meanAge youngest oldest
+##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;lgl&gt;    &lt;lgl&gt; 
+## 1 Melanie   Brown            1975    44    44.8 FALSE    FALSE 
+## 2 Melanie   Chisholm         1974    45    44.8 FALSE    FALSE 
+## 3 Emma      Bunton           1976    43    44.8 TRUE     FALSE 
+## 4 Geri      Halliwell        1972    47    44.8 FALSE    TRUE  
+## 5 Victoria  Beckham          1974    45    44.8 FALSE    FALSE
+```
+
+---
+# if/else statements with `if_else()`
+
+To create a new variable based on a condition, use `if_else()`
+&lt;br&gt;
+`if_else(&lt;condition&gt;, &lt;if TRUE&gt;, &lt;else&gt;)`
+&lt;br&gt;
+--
+
+```r
+spicegirls %&gt;%
+    mutate(
+        bornEvenOrOdd = if_else(yearOfBirth %% 2 == 0, 'even', 'odd'))
+```
+
+```
+## # A tibble: 5 x 6
+##   firstName lastName  spice  yearOfBirth deceased bornEvenOrOdd
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;        
+## 1 Melanie   Brown     Scary         1975 FALSE    odd          
+## 2 Melanie   Chisholm  Sporty        1974 FALSE    even         
+## 3 Emma      Bunton    Baby          1976 FALSE    even         
+## 4 Geri      Halliwell Ginger        1972 FALSE    even         
+## 5 Victoria  Beckham   Posh          1974 FALSE    even
+```
+
+---
+# Practice: `mutate`
+
+Data: Wildlife impacts data
+&lt;br&gt;
+&lt;br&gt;
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `wildlife_impacts.csv` file that is in the `data` folder.
+&lt;br&gt;
+&lt;br&gt;
+
+2) Use the `df` object and the `mutate()` functions to add the following new variables:
+
+- `height_miles`: The `height` variable converted to miles (Hint: there are 5,280 feet in a mile).
+- `cost_mil`: `TRUE` if the repair costs was greater or equal to $1 million, `FALSE` otherwise.
+
+BONUS: Use the `incident_month` variable to create a new variable `season`, which takes one of four values based on the incident month:
+
+- `spring`: March, April, May
+- `summer`: June, July, August
+- `fall`: September, October, November
+- `winter`: December, January, February
+
+---
+# Split-apply-combine with `group_by`
+&lt;br&gt;
+
+### 1. **Split** the data into groups
+&lt;br&gt;
+
+### 2. **Apply** some analysis to each group
+&lt;br&gt;
+
+### 3. **Combine** the results
+
+---
+# Split-apply-combine with `group_by`
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/rstudio-cheatsheet-group_by.png" width="800"&gt;
+&lt;/center&gt;
+
+---
+# Split-apply-combine with `group_by`
+&lt;br&gt;
+
+
+
+```r
+bands
+```
+
+```
+## # A tibble: 9 x 5
+##   firstName lastName  yearOfBirth deceased band      
+##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;     
+## 1 Melanie   Brown            1975 FALSE    spicegirls
+## 2 Melanie   Chisholm         1974 FALSE    spicegirls
+## 3 Emma      Bunton           1976 FALSE    spicegirls
+## 4 Geri      Halliwell        1972 FALSE    spicegirls
+## 5 Victoria  Beckham          1974 FALSE    spicegirls
+## 6 John      Lennon           1940 TRUE     beatles   
+## 7 Paul      McCartney        1942 FALSE    beatles   
+## 8 Ringo     Starr            1940 FALSE    beatles   
+## 9 George    Harrison         1943 TRUE     beatles
+```
+
+---
+# Split-apply-combine with `group_by`
+
+Compute the mean band member age for each band
+
+```r
+bands %&gt;%
+    mutate(
+        age = 2019 - yearOfBirth)
+```
+
+```
+## # A tibble: 9 x 6
+##   firstName lastName  yearOfBirth deceased band         age
+##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;      &lt;dbl&gt;
+## 1 Melanie   Brown            1975 FALSE    spicegirls    44
+## 2 Melanie   Chisholm         1974 FALSE    spicegirls    45
+## 3 Emma      Bunton           1976 FALSE    spicegirls    43
+## 4 Geri      Halliwell        1972 FALSE    spicegirls    47
+## 5 Victoria  Beckham          1974 FALSE    spicegirls    45
+## 6 John      Lennon           1940 TRUE     beatles       79
+## 7 Paul      McCartney        1942 FALSE    beatles       77
+## 8 Ringo     Starr            1940 FALSE    beatles       79
+## 9 George    Harrison         1943 TRUE     beatles       76
+```
+
+---
+# Split-apply-combine with `group_by`
+
+Compute the mean band member age for each band
+
+```r
+bands %&gt;%
+    mutate(
+        age = 2019 - yearOfBirth,
+        mean_age = mean(age))
+```
+
+```
+## # A tibble: 9 x 7
+##   firstName lastName  yearOfBirth deceased band         age mean_age
+##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Melanie   Brown            1975 FALSE    spicegirls    44     59.4
+## 2 Melanie   Chisholm         1974 FALSE    spicegirls    45     59.4
+## 3 Emma      Bunton           1976 FALSE    spicegirls    43     59.4
+## 4 Geri      Halliwell        1972 FALSE    spicegirls    47     59.4
+## 5 Victoria  Beckham          1974 FALSE    spicegirls    45     59.4
+## 6 John      Lennon           1940 TRUE     beatles       79     59.4
+## 7 Paul      McCartney        1942 FALSE    beatles       77     59.4
+## 8 Ringo     Starr            1940 FALSE    beatles       79     59.4
+## 9 George    Harrison         1943 TRUE     beatles       76     59.4
+```
+
+---
+# Split-apply-combine with `group_by`
+
+Compute the mean band member age for each band
+
+```r
+bands %&gt;%
+    mutate(age = 2019 - yearOfBirth) %&gt;%
+    group_by(band) %&gt;%
+    mutate(mean_age = mean(age))
+```
+
+```
+## # A tibble: 9 x 7
+## # Groups:   band [2]
+##   firstName lastName  yearOfBirth deceased band         age mean_age
+##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Melanie   Brown            1975 FALSE    spicegirls    44     44.8
+## 2 Melanie   Chisholm         1974 FALSE    spicegirls    45     44.8
+## 3 Emma      Bunton           1976 FALSE    spicegirls    43     44.8
+## 4 Geri      Halliwell        1972 FALSE    spicegirls    47     44.8
+## 5 Victoria  Beckham          1974 FALSE    spicegirls    45     44.8
+## 6 John      Lennon           1940 TRUE     beatles       79     77.8
+## 7 Paul      McCartney        1942 FALSE    beatles       77     77.8
+## 8 Ringo     Starr            1940 FALSE    beatles       79     77.8
+## 9 George    Harrison         1943 TRUE     beatles       76     77.8
+```
+
+---
+# Summarize data frames with `summarise()`
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/rstudio-cheatsheet-summarise.png" width="800"&gt;
+&lt;/center&gt;
+
+---
+# Summarize data frames with `summarise()`
+
+Compute the mean band member age for each band
+
+```r
+bands %&gt;%
+    mutate(age = 2019 - yearOfBirth) %&gt;%
+    group_by(band) %&gt;%
+    summarise(mean_age = mean(age))
+```
+
+```
+## # A tibble: 2 x 2
+##   band       mean_age
+##   &lt;chr&gt;         &lt;dbl&gt;
+## 1 beatles        77.8
+## 2 spicegirls     44.8
+```
+
+---
+# Summarize data frames with `summarise()`
+
+Compute the mean band member age for each band
+
+```r
+bands %&gt;%
+    mutate(age = 2019 - yearOfBirth) %&gt;%
+    group_by(band) %&gt;%
+    summarise(
+        mean_age = mean(age),
+        min_age = min(age),
+        max_age = max(age))
+```
+
+```
+## # A tibble: 2 x 4
+##   band       mean_age min_age max_age
+##   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 beatles        77.8      76      79
+## 2 spicegirls     44.8      43      47
+```
+
+---
+# Practice: `group_by` + `summarise`
+
+Data: Wildlife impacts data
+&lt;br&gt;
+&lt;br&gt;
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `wildlife_impacts.csv` file that is in the `data` folder.
+&lt;br&gt;
+&lt;br&gt;
+
+2) Use the `df` object and the `group_by()` and `summarise` functions to answer the following questions:
+
+- Create a summary data frame that contains the mean `height` for each different time of day.
+- Create a summary data frame that contains the maximum `cost_repairs_infl_adj` for each year.
+
+---
+# Count observations with `count()`
+
+Example: How many members are in each band?
+&lt;br&gt;
+--
+
+```r
+bands %&gt;%
+    group_by(band) %&gt;%
+    summarise(count = n())
+```
+
+```
+## # A tibble: 2 x 2
+##   band       count
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 beatles        4
+## 2 spicegirls     5
+```
+
+---
+# Count observations with `count()`
+
+Same thing, but faster:
+&lt;br&gt;
+
+```r
+bands %&gt;%
+    count(band)
+```
+
+```
+## # A tibble: 2 x 2
+##   band           n
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 beatles        4
+## 2 spicegirls     5
+```
+
+---
+# Count observations with `count()`
+
+Counting *combinations of variables*:
+&lt;br&gt;
+
+```r
+bands %&gt;%
+    mutate(startsWithG = str_detect(firstName, '^G')) %&gt;%
+    count(band, startsWithG)
+```
+
+```
+## # A tibble: 4 x 3
+##   band       startsWithG     n
+##   &lt;chr&gt;      &lt;lgl&gt;       &lt;int&gt;
+## 1 beatles    FALSE           3
+## 2 beatles    TRUE            1
+## 3 spicegirls FALSE           4
+## 4 spicegirls TRUE            1
+```
+
+---
+# Practice: `count`
+
+Data: Wildlife impacts data
+&lt;br&gt;
+&lt;br&gt;
+
+1) Create the data frame object `df` by using `file.path()` and `read_csv()` to load the `wildlife_impacts.csv` file that is in the `data` folder.
+&lt;br&gt;
+&lt;br&gt;
+
+2) Use the `df` object and the `count()` function to answer the following questions:
+
+- Which month has had the greatest number of reported incidents?
+- Which year has had the greatest number of reported incidents?
+
+---
+# Exporting data
+
+Use `filePath()` + `write_csv()`
+&lt;br&gt;
+
+
+```r
+ageSummary &lt;- bands %&gt;%
+    mutate(age = 2019 - yearOfBirth) %&gt;%
+    group_by(band) %&gt;%
+    summarise(
+        mean_age = mean(age),
+        min_age = min(age),
+        max_age = max(age))
+ageSummary
+```
+
+```
+## # A tibble: 2 x 4
+##   band       mean_age min_age max_age
+##   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 beatles        77.8      76      79
+## 2 spicegirls     44.8      43      47
+```
+
+---
+# Exporting data
+
+&lt;br&gt;
+Save the `ageSummary` data frame in your "data" folder:
+&lt;br&gt;
+
+```r
+savePath &lt;- file.path('data', 'ageSummary.csv')
+write_csv(ageSummary, savePath)
+```
+
+---
+# HW 5
+
+&lt;br&gt;
+--
+Make sure you install the package `nycflights13`
+
+
+```r
+install.packages('nycflights13')
+```
+
+&lt;br&gt;
+--
+This package includes **5 data frames**:
+
+
+```r
+airlines
+airports
+flights
+planes
+weather
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

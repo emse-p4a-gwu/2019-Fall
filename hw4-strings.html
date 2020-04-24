@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Homework 4 - Strings</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" href="images/favicon.ico">
+<style type="text/css">
+
+/* Text */
+
+h1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 60px;
+}
+h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 50px;
+}
+h3{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 26px;
+}
+blockquote{
+  background-color: #ecf0f1;
+  padding: 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+/* Images */
+
+img {
+  padding-bottom: 10px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+.tableSmall table {
+  width:30%;
+}
+.tableMedium table {
+  width:60%;
+}
+
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EMSE6574: Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map-ok"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lessons
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="L1.1-course-introduction.html">Week 1.1: Course Introduction</a>
+    </li>
+    <li>
+      <a href="L1.2-getting-started.html">Week 1.2: Getting Started</a>
+    </li>
+    <li>
+      <a href="L2-programming-basics.html">Week 2: Programming Basics</a>
+    </li>
+    <li>
+      <a href="L3-functions.html">Week 3: Functions</a>
+    </li>
+    <li>
+      <a href="L4.1-conditionals.html">Week 4.1: Conditionals</a>
+    </li>
+    <li>
+      <a href="L4.2-testing-debugging.html">Week 4.2: Testing &amp; Debugging</a>
+    </li>
+    <li>
+      <a href="L5-loops.html">Week 5: Loops</a>
+    </li>
+    <li>
+      <a href="L6-vectors.html">Week 6: Vectors</a>
+    </li>
+    <li>
+      <a href="L7-strings.html">Week 7: Strings</a>
+    </li>
+    <li>
+      <a href="dataAnalysisPrelude.html">Data Analysis Prelude</a>
+    </li>
+    <li>
+      <a href="challengerExplosion.html">Case Study on Challenger Explosion</a>
+    </li>
+    <li>
+      <a href="L10-da1-data-frames.html">Week 10: Data Analysis 1 - Data Frames</a>
+    </li>
+    <li>
+      <a href="L11-da2-data-wrangling.html">Week 11: Data Analysis 2 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="L12-da3-data-visualization.html">Week 12: Data Analysis 3 - Data Visualization</a>
+    </li>
+    <li>
+      <a href="L13-da4-communicating-information.html">Week 13: Data Analysis 4 - Communicating Information</a>
+    </li>
+    <li>
+      <a href="L15-monte-carlo-methods.html">Week 15: Monte Carlo Methods</a>
+    </li>
+    <li>
+      <a href="TurtleGraphics.html">Turtle Graphics</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="hw1-programming-basics.html">HW 1 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw2-functions.html">HW 2 - Functions Basics</a>
+    </li>
+    <li>
+      <a href="hw3-loops-vectors.html">HW 3 - Loops &amp; Vectors</a>
+    </li>
+    <li>
+      <a href="hw4-strings.html">HW 4 - Strings</a>
+    </li>
+    <li>
+      <a href="hw5-data-wrangling.html">HW 5 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="hw6-data-visualization.html">HW 6 - Data Visualization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fa fa-info"></span>
+         
+        About
+      </a>
+    </li>
+    <li>
+      <a href="LICENSE.html">
+        <span class="fa fa-gavel"></span>
+         
+        License
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://6574-s11-f19.slack.com/">
+    <span class="fa fa-slack"></span>
+     
+    Slack
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jph@gwu.edu">
+        <span class="fa fa-envelope"></span>
+         
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/">
+        <span class="fa fa-github"></span>
+         
+        GitHub
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Homework 4 - Strings</h1>
+
+</div>
+
+
+<p><strong>Due</strong>: Sunday, 27-Oct. at 8pm</p>
+<p><strong>Rules</strong>:</p>
+<ul>
+<li>This entire homework is <strong>COLLABORATIVE</strong>, which means you may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work – everyone must work on every problem. And you may not simply copy any code but rather truly work together.</li>
+<li>Even though you work collaboratively, you still must submit your own solutions.</li>
+</ul>
+<p><strong>Instructions</strong>:</p>
+<ol style="list-style-type: decimal">
+<li><p>Before beginning this assignment, be sure to have read the <a href="L7-strings.html">Strings</a> and <a href="L6-vectors.html">Vectors</a> lessons.</p></li>
+<li><p>Open RStudio and create a new project called “hw4-lastName”, replacing “lastName” with your last name.</p></li>
+<li><p>Download the <a href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw4.R">hw4.R template script</a> and place it in RStudio project folder you just created.</p></li>
+<li><p>Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the “hw4.R” file.</p></li>
+<li><p>Type all of your answers to the questions below in the “hw4.R” script.</p></li>
+<li><p>After completing the questions, create a zip file of all files in your R project folder for this assignment.</p></li>
+<li><p>Submit the zip file on Blackboard by the due deadline.</p></li>
+</ol>
+<hr />
+<p><strong>Write solutions to the following functions in your “hw4.R” script.</strong></p>
+<div id="vowelcounts-10-pts" class="section level3">
+<h3>1) <code>vowelCount(s)</code> [10 pts]</h3>
+<p>Write the function <code>vowelCount(s)</code> that takes a string <code>s</code>, and returns the number of vowels in <code>s</code>, ignoring case (so <code>&quot;A&quot;</code> and <code>&quot;a&quot;</code> are both vowels). The vowels are <code>&quot;a&quot;</code>, <code>&quot;e&quot;</code>, <code>&quot;i&quot;</code>, <code>&quot;o&quot;</code>, and <code>&quot;u&quot;</code>. So, for example, <code>vowelCount(&quot;Abc def!!! a? yzyzyz!&quot;)</code> returns <code>3</code> (two <code>&quot;a&quot;</code>’s and one <code>&quot;e&quot;</code>).</p>
+</div>
+<div id="strtolowers-10-pts" class="section level3">
+<h3>2) <code>strToLower(s)</code> [10 pts]</h3>
+<p>Write a function that does exactly what <code>str_to_lower()</code> does (i.e. returns the same string but with all letters in lower case) without using <code>str_to_lower()</code> or the Base R <code>tolower()</code> function. Hint: check out the <code>str_replace_all()</code> function!</p>
+</div>
+<div id="getmiddlecharacters-10-pts" class="section level3">
+<h3>3) <code>getMiddleCharacter(s)</code> [10 pts]</h3>
+<p>Write a function that takes a single string, <code>s</code>, and returns the middle character of the string. If the string has an even number of characters, then return the two middle characters. So <code>getMiddleCharacter(&quot;one&quot;)</code> should return <code>&quot;n&quot;</code>, and <code>getMiddleCharacter(&quot;feet&quot;)</code> should return <code>&quot;ee&quot;</code>.</p>
+</div>
+<div id="rotatestringlefts-k-10-pts" class="section level3">
+<h3>4) <code>rotateStringLeft(s, k)</code> [10 pts]</h3>
+<p>Write the function <code>rotateStringLeft(s, k)</code> that takes a string <code>s</code> and a non-negative integer <code>k</code>, and returns the string <code>s</code> rotated <code>k</code> places to the left. So, if <code>s = &quot;iknowkungfu&quot;</code> and <code>k = 2</code>, then the result should be <code>&quot;nowkungfuik&quot;</code>. If <code>k</code> is larger than the length of <code>s</code>, the function should continue to rotate the string beyond its starting point. So, if <code>s = &quot;iknowkungfu&quot;</code> and <code>k = 11</code>, then the result should be <code>&quot;iknowkungfu&quot;</code>, but if <code>k = 12</code>, the result should be <code>&quot;knowkungfui&quot;</code>.</p>
+</div>
+<div id="vectortoenglishlistv-10-pts" class="section level3">
+<h3>5) <code>vectorToEnglishList(v)</code> [10 pts]</h3>
+<p>Write a function that takes a vector, <code>v</code>, and returns a single string that contains the elements of <code>v</code> using proper English grammar for describing a list of items, i.e. the items are separated by commas, and the word “and” is inserted before the last item. Your function should use the <a href="https://en.wikipedia.org/wiki/Serial_comma">Oxford comma</a> for the last list item. For example, if <code>v &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</code>, then <code>vectorToEnglishList(v)</code> would return the string <code>&quot;a, b, and c&quot;</code>. Think carefully about what it should do if given a vector of length 0, 1, or 2.</p>
+</div>
+<div id="isdigits-10-pts" class="section level3">
+<h3>6) <code>isDigit(s)</code> [10 pts]</h3>
+<p>Write the function <code>isDigit(s)</code> that takes a string <code>s</code> and returns <code>TRUE</code> if all characters in the string are numeric integers and <code>FALSE</code> otherwise. So <code>isDigit(&quot;123&quot;)</code> should return <code>TRUE</code>, <code>isDigit(&quot;123N&quot;)</code> should return <code>FALSE</code>, and <code>isDigit(&quot;&quot;)</code> should return <code>FALSE</code>.</p>
+</div>
+<div id="getthegerundssentence-10-pts" class="section level3">
+<h3>7) <code>getTheGerunds(sentence)</code> [10 pts]</h3>
+<p>Write a function that takes a single string, <code>sentence</code>, and returns a vector of all the gerunds in it (i.e. all the words that end in <code>&quot;ing&quot;</code>). So <code>getTheGerunds(&quot;I like hiking and swimming&quot;)</code> should return <code>c(&quot;hiking&quot;, &quot;swimming&quot;)</code>. If there are no gerunds in <code>sentence</code>, the function should return <code>NULL</code>. Hint: first solve how you might separate a single-string sentence into a vector of words.</p>
+</div>
+<div id="interleaves1-s2-15-pts" class="section level3">
+<h3>8) <code>interleave(s1, s2)</code> [15 pts]</h3>
+<p>Write the function <code>interleave(s1, s2)</code> that takes two strings, <code>s1</code> and <code>s2</code>, and interleaves their characters starting with the first character in <code>s1</code>. For example, <code>interleave('pto', 'yhn')</code> would return the string <code>&quot;python&quot;</code>. If one string is longer than the other, concatenate the rest of the remaining string onto the end of the new string. For example (<code>'a#'</code>, <code>'cD!f2'</code>) would return the string <code>&quot;ac#D!f2&quot;</code>. Assume that both <code>s1</code> and <code>s2</code> will always be strings.</p>
+</div>
+<div id="samecharss1-s2-15-pts" class="section level3">
+<h3>9) <code>sameChars(s1, s2)</code> [15 pts]</h3>
+<p>Write the function <code>sameChars(s1, s2)</code> that takes two strings and returns <code>TRUE</code> if the two strings are composed of the same characters (though perhaps in different numbers and in different orders); that is, if every character that is in the first string is in the second (and vice versa), and <code>FALSE</code> otherwise. This test is case-sensitive, so <code>&quot;ABC&quot;</code> and <code>&quot;abc&quot;</code> do not contain the same characters. The function returns <code>FALSE</code> if either parameter is not a string, but returns <code>TRUE</code> if both strings are empty.</p>
+<hr />
+</div>
+<div id="bonus-credit-1-hasbalancedparenthesess-solo-2.5-pts" class="section level3">
+<h3>Bonus Credit 1) <code>hasBalancedParentheses(s)</code> [SOLO, 2.5 pts]</h3>
+<p>Write the function <code>hasBalancedParentheses(s)</code>, which takes a string <code>s</code> and returns <code>TRUE</code> if the parentheses in <code>s</code> are balanced and <code>FALSE</code> otherwise (ignoring all non-parentheses in the string). We say that parentheses are “balanced” if each right parenthesis closes (matches) an open (unmatched) left parenthesis, and no left parentheses are left unclosed (unmatched) at the end of the text. So, for example, <code>&quot;( ( ( ) ( ) ) ( ) )&quot;</code> is balanced, but <code>&quot;( ) )&quot;</code> is not balanced, and <code>&quot;( ) ) (&quot;</code> is also not balanced. Hint: keep track of how many right parentheses remain unmatched as you iterate over the string.</p>
+</div>
+<div id="bonus-credit-2-largestnumberintexttext-solo-2.5-pts" class="section level3">
+<h3>Bonus Credit 2) <code>largestNumberInText(text)</code> [SOLO, 2.5 pts]</h3>
+<p>Write the function <code>largestNumberInText(text)</code> that takes a string of text and returns the largest integer value that occurs within that text, or <code>NULL</code> if no such value occurs. You may assume that the only numbers in the text are non-negative integers and that numbers are always composed of consecutive digits (without commas, for example). For example:</p>
+<pre class="r"><code>largestNumberInText(&quot;I saw 3 dogs, 17 cats, and 14 cows!&quot;)
+17 # The numeric value 17, not the string &quot;17&quot;
+largestNumberInText(&quot;One person ate two hot dogs!&quot;)
+NULL # Value NULL, not the string &quot;NULL&quot;</code></pre>
+<p>Hint: You may want to use <code>isDigit()</code> as a helper function!</p>
+<hr />
+<p><strong>Page sources</strong>:</p>
+<p>Some content on this page has been modified from other courses, including:</p>
+<ul>
+<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112: Fundamentals of Programming</a>, by <a href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
+</ul>
+</div>
+
+
+<hr>
+
+<div>
+<center>
+    EMSE 6574, Sec. 11: Programming for Analytics (Fall 2019)
+    <br>
+    <a href="https://www.gwu.edu/">George Washington University</a> |
+    <a href="https://www.seas.gwu.edu/">School of Engineering & Applied Science</a>
+    <br>
+    <a href="https://www.jhelvy.com"><i class="fas fa-user"></i> Dr. John Paul Helveston</a> |
+    <a href="mailto:jph@gwu.edu"><i class="fas fa-envelope"></i> jph@gwu.edu</a> |
+    <i class="far fa-calendar-alt"></i> Mondays |
+    <i class="far fa-clock"></i> 6:10–8:40 PM |
+    <i class="fas fa-university"></i> Phillips Hall 108 |
+    <a href="https://twitter.com/JohnHelveston"><i class="fab fa-twitter"></i></a> |
+    <a href="https://github.com/emse6574-gwu/2019-Fall/"><i class="fab fa-github"></i></a>
+    <br>
+    This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    <br>
+    See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.
+    <br>
+    Content <i class="fab fa-creative-commons"></i> 2019 <a href="https://www.jhelvy.com">John Paul Helveston</a>
+</center>
+</div>
+
+<!-- Add function to open links to external links in new tab, from: -->
+<!-- https://yihui.name/en/2018/09/target-blank/ -->
+
+<script src="js/external-link.js"></script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

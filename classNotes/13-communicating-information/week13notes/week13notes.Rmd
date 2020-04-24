@@ -1,0 +1,81 @@
+---
+title: "My First RMarkdown Document!"
+author: "John Helveston"
+date: "11/18/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+
+# Import libraries
+library(tidyverse)
+# This is an example of loading data within a code chunk
+birds <- read_csv(file.path('data', 'birds.csv'))
+bears <- read_csv(file.path('data', 'bears.csv'))
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see [rmarkdown.rstudio.com](http://rmarkdown.rstudio.com).
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Useful tools
+
+- Quick markdown reference guide: [https://commonmark.org/help/](https://commonmark.org/help/)
+- Quick demo guide: [https://markdown-it.github.io/](https://markdown-it.github.io/).
+- Online table converter: [http://www.tablesgenerator.com](http://www.tablesgenerator.com/markdown_tables)
+
+## Link to data source of final practice today
+
+https://github.com/rfordatascience/tidytuesday/tree/master/data/2018/2018-10-16
+
+
+# Markdown practice
+
+This is a markdown sentence. Some words are in *italics*, others in **bold**, and some are ***both***! Finally, some are written in `code formatting`. Here is a markdown table:
+
+Animal | Sound
+---|-------
+Dog      | Woof
+Ca |       Meow
+Cow | Moo
+
+
+
+The value of pi is `r pi`
+
+2+2 is equal to `r 2+2`
+
+This is a sentence
+
+```{r name, include=FALSE, message=FALSE}
+# this is a comment
+myobject  <- 2+2
+myobject
+```
+
+
+```{r barplot, fig.height=3, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(data = bears) +
+    geom_bar(aes(x = month, fill = bearType))
+```
+
+Here are all the bear stories:
+
+```{r}
+bears %>%
+    select(description) %>% 
+    kable()
+```
+
+
+```{python}
+"here is one" + " sentence"
+```
+

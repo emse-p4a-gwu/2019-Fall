@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Homework 1 - Programming Basics</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" href="images/favicon.ico">
+<style type="text/css">
+
+/* Text */
+
+h1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 60px;
+}
+h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 50px;
+}
+h3{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 26px;
+}
+blockquote{
+  background-color: #ecf0f1;
+  padding: 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+/* Images */
+
+img {
+  padding-bottom: 10px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+.tableSmall table {
+  width:30%;
+}
+.tableMedium table {
+  width:60%;
+}
+
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EMSE6574: Fall 2019</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map-ok"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lessons
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="L1.1-course-introduction.html">Week 1.1: Course Introduction</a>
+    </li>
+    <li>
+      <a href="L1.2-getting-started.html">Week 1.2: Getting Started</a>
+    </li>
+    <li>
+      <a href="L2-programming-basics.html">Week 2: Programming Basics</a>
+    </li>
+    <li>
+      <a href="L3-functions.html">Week 3: Functions</a>
+    </li>
+    <li>
+      <a href="L4.1-conditionals.html">Week 4.1: Conditionals</a>
+    </li>
+    <li>
+      <a href="L4.2-testing-debugging.html">Week 4.2: Testing &amp; Debugging</a>
+    </li>
+    <li>
+      <a href="L5-loops.html">Week 5: Loops</a>
+    </li>
+    <li>
+      <a href="L6-vectors.html">Week 6: Vectors</a>
+    </li>
+    <li>
+      <a href="L7-strings.html">Week 7: Strings</a>
+    </li>
+    <li>
+      <a href="dataAnalysisPrelude.html">Data Analysis Prelude</a>
+    </li>
+    <li>
+      <a href="challengerExplosion.html">Case Study on Challenger Explosion</a>
+    </li>
+    <li>
+      <a href="L10-da1-data-frames.html">Week 10: Data Analysis 1 - Data Frames</a>
+    </li>
+    <li>
+      <a href="L11-da2-data-wrangling.html">Week 11: Data Analysis 2 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="L12-da3-data-visualization.html">Week 12: Data Analysis 3 - Data Visualization</a>
+    </li>
+    <li>
+      <a href="L13-da4-communicating-information.html">Week 13: Data Analysis 4 - Communicating Information</a>
+    </li>
+    <li>
+      <a href="L15-monte-carlo-methods.html">Week 15: Monte Carlo Methods</a>
+    </li>
+    <li>
+      <a href="TurtleGraphics.html">Turtle Graphics</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="hw1-programming-basics.html">HW 1 - Programming Basics</a>
+    </li>
+    <li>
+      <a href="hw2-functions.html">HW 2 - Functions Basics</a>
+    </li>
+    <li>
+      <a href="hw3-loops-vectors.html">HW 3 - Loops &amp; Vectors</a>
+    </li>
+    <li>
+      <a href="hw4-strings.html">HW 4 - Strings</a>
+    </li>
+    <li>
+      <a href="hw5-data-wrangling.html">HW 5 - Data Wrangling</a>
+    </li>
+    <li>
+      <a href="hw6-data-visualization.html">HW 6 - Data Visualization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fa fa-info"></span>
+         
+        About
+      </a>
+    </li>
+    <li>
+      <a href="LICENSE.html">
+        <span class="fa fa-gavel"></span>
+         
+        License
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://6574-s11-f19.slack.com/">
+    <span class="fa fa-slack"></span>
+     
+    Slack
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jph@gwu.edu">
+        <span class="fa fa-envelope"></span>
+         
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse6574-gwu/2019-Fall/">
+        <span class="fa fa-github"></span>
+         
+        GitHub
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Homework 1 - Programming Basics</h1>
+
+</div>
+
+
+<p><strong>Due</strong>: Sunday, 08-Sept. at 8pm</p>
+<p><strong>Rules</strong>:</p>
+<ul>
+<li>Problems marked <strong>SOLO</strong> may not be worked on with other classmates, though you may consult instructors for help.</li>
+<li>For problems marked <strong>COLLABORATIVE</strong>, you may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work – everyone must work on every problem. And you may not simply copy any code but rather truly work together.</li>
+<li>Even though you work collaboratively, you still must submit your own solutions.</li>
+</ul>
+<hr />
+<p><strong>Assignment</strong>:</p>
+<ol style="list-style-type: decimal">
+<li><p>Before going forward, read the <a href="#syllabus.html">Course Syllabus</a> as well as the <a href="L1.2-getting-started.html">Getting Started</a> and <a href="L2-programming-basics.html">Programming Basics</a> lessons. [5 pts]</p></li>
+<li><p>Open RStudio and create a new project called “hw1-lastName”, replacing “lastName” with your last name.</p></li>
+<li><p>Create a new R script and save it as “hw1.R” in the R project folder you just created.</p></li>
+<li><p>Copy the following code to the top of this script, and fill out your name, GW Net ID, and the names of anyone you worked with:</p></li>
+</ol>
+<pre class="r"><code># hw1.R
+# Name:      Last, First
+# GW Net ID: your_GWNetID_here
+
+# I worked with the following classmates on this assignment:
+
+# 1) Name: Last, First
+# 2) Name: Last, First</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Type all of your answers to the following questions in the “hw1.R” script. [point breakdown is listed by each problem]</p></li>
+<li><p>After completing the questions, create a zip file of all files in your R project folder for this assignment and submit the zip file on Blackboard by the due deadline (note: to receive full credit, your submission must follow the above format of using a correctly-named R Project and <code>.R</code> script). [5 pts]</p></li>
+</ol>
+<hr />
+<div id="questions-to-answer-in-hw1.r-script" class="section level2">
+<h2>Questions to answer in “hw1.R” script</h2>
+<div id="reasoning-over-code-solo-10-pts" class="section level3">
+<h3>1) Reasoning over code [SOLO, 10 pts]</h3>
+<p>Consider the following objects:</p>
+<pre class="r"><code>w &lt;- TRUE
+x &lt;- FALSE
+y &lt;- FALSE
+z &lt;- TRUE</code></pre>
+<p>Write code to answer the following questions:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Write a logical statement that compares the objects <code>x</code>, <code>y</code>, and <code>z</code> and returns <code>TRUE</code></li>
+<li>Write a logical statement that compares the objects <code>x</code>, <code>y</code>, and <code>z</code> and returns <code>FALSE</code></li>
+<li>Fill in the correct relational operators to make this statement return <code>TRUE</code>: <code>! (x __ y) &amp; ! (z __ y)</code></li>
+<li>Fill in the correct relational operators to make this statement return <code>FALSE</code>: <code>! (w __ y) | (z __ y)</code></li>
+</ol>
+</div>
+<div id="objects-solo-10-pts" class="section level3">
+<h3>2) Objects [SOLO, 10 pts]</h3>
+<p>Create objects to store each of the following values. Use names that make sense and are easy to understand:</p>
+<ul>
+<li>The number of seconds in a minute</li>
+<li>The number of minutes in an hour</li>
+<li>The number of hours in a day</li>
+<li>The number of days in a typical year (not a leap year)</li>
+</ul>
+<p>Use the objects you created to calculate the following (you may create other, intermediate objects, but you may not use numbers in your solution):</p>
+<ol style="list-style-type: lower-alpha">
+<li>The number of seconds in a day</li>
+<li>The number of seconds in a year</li>
+<li>The number of minutes in a day</li>
+<li>The number of minutes in a year</li>
+<li>The number of hours in a year</li>
+</ol>
+</div>
+<div id="character-data-solo-5-pts" class="section level3">
+<h3>3) Character data [SOLO, 5 pts]</h3>
+<p>Load the following string in R:</p>
+<pre class="r"><code>sentence &lt;- &#39;The quick Brown fox Jumped over the Lazy dog&#39;</code></pre>
+<p>Install and load the <code>stringr</code> library, then use the <code>str_to_lower()</code>, <code>str_to_upper()</code>, and <code>str_to_title()</code> functions and the <code>cat()</code> function to print out the following variations of the object <code>sentence</code> that you just created (hint: you may want to first look up what the <code>str_to_lower()</code>, <code>str_to_upper()</code>, and <code>str_to_title()</code> functions do):</p>
+<pre class="r"><code>&quot;the quick brown fox jumped over the lazy dog&quot;
+&quot;THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG&quot;
+&quot;The Quick Brown Fox Jumped Over The Lazy Dog&quot;</code></pre>
+</div>
+<div id="numeric-data-1-collaborative-15-pts" class="section level3">
+<h3>4) Numeric data 1 [COLLABORATIVE, 15 pts]</h3>
+<p>Max is looking to purchase a car and is deciding between a Toyota Prius and a Toyota Camry. He knows that based on his driving patterns, he can get an average fuel economy of 55 miles per gallon (mpg) of gasoline with the Prius, which sells for $27,600. He is also considering the cheaper Toyota Camry, which costs $24,000 but only gets 32 mpg on average. He knows he typically drives 15,000 miles each year. For the following questions, assume the price of gas will remain constant at $3.00 / gallon forever.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Create objects for the price and fuel economy of each vehicle as well as for the total miles Max drives each year and the price of gasoline. Use names that make sense and are easy to understand.</li>
+<li>Use the objects you created to compute how many years Max would need to drive the Prius such that the money he would save in lower fuel costs overcomes the Prius’s higher upfront price. You may create other, intermediate objects in solving this, but you may not use any numbers. Ignore inflation and discount rates.</li>
+<li>What would the price of gasoline need to be such that the answer to part b) is just 2 years? You may use the number <code>2</code> once in your solution, otherwise you may only use the objects you defined in parts a) and b).</li>
+</ol>
+</div>
+<div id="numeric-data-2-collaborative-15-pts" class="section level3">
+<h3>5) Numeric data 2 [COLLABORATIVE, 15 pts]</h3>
+<p>Load the following objects into R, then answer the questions below:</p>
+<pre class="r"><code>x1 &lt;- 1
+y1 &lt;- 1
+x2 &lt;- 5
+y2 &lt;- 1
+x3 &lt;- 5
+y3 &lt;- 4</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>Compute the <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean distance</a> between the points (x1, y1) and (x2, y2) and store this object as <code>d1</code>.</li>
+<li>Compute the Euclidean distance between the points (x2, y2) and (x3, y3) and store this object as <code>d2</code>.</li>
+<li>Compute the Euclidean distance between the points (x1, y1) and (x3, y3) and store this object as <code>d3</code>.</li>
+<li>Is the triangle formed by the points (x1, y1), (x2, y2), and (x3, y3) a <a href="https://en.wikipedia.org/wiki/Right_triangle">right triangle</a>? If so, prove it using the objects <code>d1</code>, <code>d2</code>, and <code>d3</code>.</li>
+</ol>
+</div>
+<div id="logical-data-collaborative-15-pts" class="section level3">
+<h3>6) Logical data [COLLABORATIVE, 15 pts]</h3>
+<p>Suppose we fielded a survey that asked respondents to specify their marital status. The responses were recorded as one of the following:</p>
+<ul>
+<li><code>&quot;single&quot;</code></li>
+<li><code>&quot;widowed&quot;</code></li>
+<li><code>&quot;married&quot;</code></li>
+<li><code>&quot;de facto&quot;</code></li>
+<li><code>&quot;missing&quot;</code></li>
+</ul>
+<p>where <code>&quot;missing&quot;</code> means the respondent left the question blank.</p>
+<p>Assume there is an object in your R environment called <code>marital_status</code> that contains one of the above responses stored as a character. For each of the following, write a single line of code that uses the <code>marital_status</code> object to create the desired new object (note that if you actually run your code in R for this exercise, you’ll get an error, because the <code>marital_status</code> object doesn’t actually exist in your R environment):</p>
+<ol style="list-style-type: lower-alpha">
+<li><code>is_single</code>: Is <code>TRUE</code> if the participant is single and <code>FALSE</code> otherwise.</li>
+<li><code>has_spouse</code>: Is <code>TRUE</code> if the participant is married or in a de facto relationship and <code>FALSE</code> otherwise.</li>
+<li><code>not_single_or_missing</code>: Is <code>TRUE</code> if the participant did respond to the question, but is not single.</li>
+</ol>
+</div>
+<div id="packages-collaborative-20-pts" class="section level3">
+<h3>7) Packages [COLLABORATIVE, 20 pts]</h3>
+<ol style="list-style-type: lower-alpha">
+<li>Read about the <code>TurtleGraphics</code> package <a href="TurtleGraphics.html">HERE</a></li>
+<li>Install the package <code>TurtleGraphics</code></li>
+<li>Load the <code>TurtleGraphics</code> library, then use the following command: <code>turtle_init()</code>. What happens?</li>
+<li>Read the help information about the <code>TurtleGraphics</code> package:</li>
+</ol>
+<pre class="r"><code>help(package=&#39;TurtleGraphics&#39;)</code></pre>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Now read the help information about the <code>turtle_move()</code> function in the <code>TurtleGraphics</code> package:</li>
+</ol>
+<pre class="r"><code>?turtle_move()</code></pre>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Read through the following commands - write down what do you think is going to happen.</li>
+</ol>
+<pre class="r"><code>turtle_init()
+turtle_move(distance = 10, direction = &quot;forward&quot;)
+turtle_move(distance = 20, direction = &quot;backward&quot;)
+turtle_reset()
+turtle_turn(angle = 90, direction = &quot;right&quot;)
+turtle_move(distance = 10, direction = &quot;forward&quot;)
+turtle_move(distance = 20, direction = &quot;backward&quot;)
+turtle_reset()</code></pre>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Now run the above commands - what happened?</li>
+<li>Using what you’ve learned about how the <code>TurtleGraphics</code> package works, write code to produce the following image:</li>
+</ol>
+<p><img src="images/turtle_hw1.png" width="456" /></p>
+</div>
+</div>
+
+
+<hr>
+
+<div>
+<center>
+    EMSE 6574, Sec. 11: Programming for Analytics (Fall 2019)
+    <br>
+    <a href="https://www.gwu.edu/">George Washington University</a> |
+    <a href="https://www.seas.gwu.edu/">School of Engineering & Applied Science</a>
+    <br>
+    <a href="https://www.jhelvy.com"><i class="fas fa-user"></i> Dr. John Paul Helveston</a> |
+    <a href="mailto:jph@gwu.edu"><i class="fas fa-envelope"></i> jph@gwu.edu</a> |
+    <i class="far fa-calendar-alt"></i> Mondays |
+    <i class="far fa-clock"></i> 6:10–8:40 PM |
+    <i class="fas fa-university"></i> Phillips Hall 108 |
+    <a href="https://twitter.com/JohnHelveston"><i class="fab fa-twitter"></i></a> |
+    <a href="https://github.com/emse6574-gwu/2019-Fall/"><i class="fab fa-github"></i></a>
+    <br>
+    This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    <br>
+    See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.
+    <br>
+    Content <i class="fab fa-creative-commons"></i> 2019 <a href="https://www.jhelvy.com">John Paul Helveston</a>
+</center>
+</div>
+
+<!-- Add function to open links to external links in new tab, from: -->
+<!-- https://yihui.name/en/2018/09/target-blank/ -->
+
+<script src="js/external-link.js"></script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

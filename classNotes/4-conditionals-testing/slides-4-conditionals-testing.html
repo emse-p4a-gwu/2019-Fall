@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 4: Conditionals &amp; Testing</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Helveston" />
+    <meta name="date" content="2019-09-16" />
+    <link rel="stylesheet" href="classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Week 4: Conditionals &amp; Testing
+## EMSE 6574, Section 11
+### John Helveston
+### September 16, 2019
+
+---
+
+
+# Announcements
+
+### 1) You can change the way RStudio looks
+
+--
+### 2) Quiz 1 (getting back at end of class)
+
+--
+### 3) HW1 update
+
+---
+# "Flow Control"
+
+### Flow control is code that alters the otherwise linear flow of operations in a program.
+ 
+--
+### This week:
+
+- `if` statements 
+- `else` statements 
+&lt;br&gt;
+
+--
+
+### Next week:
+
+- `for` loops
+- `while` loops
+- `break` statements 
+- `next` statements 
+
+---
+# The `if` statement
+
+--
+### Basic format:
+&lt;br&gt;
+.pull-left[
+
+```r
+if ( CONDITION ) {
+    STATEMENT1
+    STATEMENT2
+    ETC
+}
+```
+]
+--
+.pull-right[
+Here's the general idea:
+
+&lt;img src="images/condition_if.png" width="400"&gt;
+]
+---
+# Practice: What will this return?
+
+[60 seconds](https://www.youtube.com/watch?v=CH50zuS8DD0) - no typing!
+
+
+```r
+f &lt;- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    }
+    cat("D")
+}
+f(1)
+f(0)
+```
+
+--
+
+
+```r
+f(1)
+```
+
+```
+## AD
+```
+
+```r
+f(0)
+```
+
+```
+## ABCD
+```
+
+---
+# Example: Absolute value
+
+### Write the function `absValue()` that returns the absolute value of a number.
+&lt;br&gt;
+
+--
+
+```r
+absValue &lt;- function(x) {
+    if (x &lt; 0) {x = -1*x}
+    return(x)
+}
+```
+
+```r
+absValue(7)  # Returns 7
+```
+
+```
+## [1] 7
+```
+
+```r
+absValue(-7) # Also returns 7
+```
+
+```
+## [1] 7
+```
+
+---
+# Adding an `else` to an `if`
+
+--
+### Basic format:
+&lt;br&gt;
+.pull-left[
+
+
+```r
+if ( CONDITION ) {
+  STATEMENT1
+  STATEMENT2
+  ETC
+} else {
+  STATEMENT3
+  STATEMENT4
+  ETC
+}
+```
+]
+
+--
+.pull-right[
+Here's the general idea:
+
+&lt;img src="images/condition_if_else.png" width="400"&gt;
+]
+
+---
+# Practice: What will this return?
+
+[2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI) - no typing!
+
+.pull-left[
+
+```r
+f &lt;- function(x) {
+    cat("A")
+    if (x == 0) {
+        cat("B")
+        cat("C")
+    } else {
+        cat("D")
+        if (x == 1) {
+            cat("E")
+        } else {
+            cat("F")
+        }
+    }
+    cat("G")
+}
+f(0)
+f(1)
+f(2)
+```
+]
+
+--
+.pull-right[
+
+
+```r
+f(0)
+```
+
+```
+## ABCG
+```
+
+```r
+f(1)
+```
+
+```
+## ADEG
+```
+
+```r
+f(2)
+```
+
+```
+## ADFG
+```
+]
+---
+# `else if` chains
+
+Often times you'll need to check for more than one condition. 
+
+"Bracketing" problems (like setting grades) are a good example. 
+
+--
+.pull-left[
+
+```r
+getLetterGrade &lt;- function(score) {
+    if (score &gt;= 90) {
+        grade = "A"
+    } else if (score &gt;= 80) {
+        grade = "B"
+    } else if (score &gt;= 70) {
+        grade = "C"
+    } else if (score &gt;= 60) {
+        grade = "D"
+    } else {
+        grade = "F"
+    }
+    return(grade)
+}
+```
+]
+
+--
+.pull-right[
+
+```r
+cat(" 99 --&gt;", getLetterGrade(99))
+```
+
+```
+##  99 --&gt; A
+```
+
+```r
+cat(" 88 --&gt;", getLetterGrade(88))
+```
+
+```
+##  88 --&gt; B
+```
+
+```r
+cat(" 70 --&gt;", getLetterGrade(70))
+```
+
+```
+##  70 --&gt; C
+```
+
+```r
+cat(" 61 --&gt;", getLetterGrade(61))
+```
+
+```
+##  61 --&gt; D
+```
+
+```r
+cat(" 22 --&gt;", getLetterGrade(22))
+```
+
+```
+##  22 --&gt; F
+```
+]
+
+---
+# Practice - Write the output by hand
+
+[5 minutes](https://www.youtube.com/watch?v=_W0bSen8Qjg) - no typing!
+
+.pull-left[
+
+```r
+f1 &lt;- function(x) {
+    x = x + 1
+    if ((x %% 2) == 0) {
+        x = x - 1
+    }
+    y = 2*x
+    cat(y, '\n')
+}
+f2 &lt;- function(x) {
+    if ((x %% 3) == 0) {
+        cat('woo!\n')
+        cat(x %/% 3)
+    }
+    cat(x %% 2, '\n')
+}
+```
+]
+.pull-right[
+
+
+```r
+f3 &lt;- function(x) {
+    if (x &gt; 0) {
+        cat('cat')
+        x = 2*x
+    } else if (x &lt;= 0) {
+        x = abs(x)
+        cat('tac')
+    }
+    cat(x , '\n')
+}
+```
+
+Write the output of this code by hand:
+
+
+```r
+cat(f1(7))
+cat(f1(12))
+cat(f2(9))
+cat(f2(11))
+cat(f3(-9))
+cat(f3(15))
+```
+]
+
+---
+# Why write test functions?
+
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/test_cases_fry.png" width="400"&gt;
+&lt;/center&gt;
+
+--
+- ### They help you understand the problem
+- ### They verify that a function is working as expected
+
+---
+# Test function "syntax"
+
+--
+### Basic format:
+
+
+```r
+functionName &lt;- function(ARG1, ARG2,...) {
+    STATEMENTS 
+    return(VALUE)
+}
+
+testFunctionName &lt;- function() {
+    cat("Testing functionName()...")
+    &lt;insert test cases&gt;
+    cat("Passed!\n")
+}
+```
+
+---
+# Test case types
+
+--
+- **Normal Cases**: Typical inputs.
+
+--
+- **Large Cases**: Typical input, larger than usual. 
+
+--
+- **Edge Cases**: Pairs of inputs that bound important points, e.g., if checking whether `n &lt; 2`, two edge cases are when `n = 1.99`, `n = 2`.
+
+--
+- **Special Cases**: Negative numbers, `0` and `1` for integers, the empty string (`""`), and different type inputs, e.g. `"2"` instead of `2`.
+
+--
+- **Varying Results**: Cover multiple possible results, e.g. both `TRUE` and `FALSE` outcomes. 
+
+---
+# Testing with `stopifnot()`
+
+`stopifnot()` stops the function if whatever is inside the `()` is not `TRUE`.
+
+--
+Example:
+
+```r
+isEvenNumber &lt;- function(n) {
+    return((n %% 2) == 0)
+}
+```
+
+--
+Test cases:
+- `isEvenNumber(42)` should be `TRUE`
+- `isEvenNumber(43)` should be `FALSE`
+&lt;br&gt;
+
+--
+
+
+```r
+testIsEvenNumber &lt;- function() {
+    cat("Testing isEvenNumber()... ")
+    stopifnot(isEvenNumber(42) == TRUE)
+    stopifnot(isEvenNumber(43) == FALSE)
+    cat("Passed!\n")
+}
+```
+
+--
+
+```r
+testIsEvenNumber()
+```
+
+```
+## Testing isEvenNumber()... Passed!
+```
+
+---
+# Testing function inputs
+
+--
+What if we gave `isEvenNumber()` the wrong input type?
+
+```r
+isEvenNumber('42')
+```
+
+```
+## Error in n%%2: non-numeric argument to binary operator
+```
+
+--
+An improved function that checks inputs:
+
+
+```r
+isEvenNumber &lt;- function(n) {
+    if (! is.numeric(n)) { return(FALSE) }
+    return((n %% 2) == 0)
+}
+```
+
+--
+Now add more test cases:
+
+
+```r
+testIsEvenNumber &lt;- function() {
+    cat("Testing isEvenNumber()...")
+    stopifnot(isEvenNumber(42) == TRUE)
+    stopifnot(isEvenNumber(43) == FALSE)
+    stopifnot(isEvenNumber('not a number') == FALSE)
+    cat("Passed!\n")
+}
+```
+
+---
+# Debugging your code
+
+Use `traceback()` to find the steps that led to an error. 
+
+--
+Example: 
+
+
+```r
+f &lt;- function(x) {
+    return(x + 1)
+}
+g &lt;- function(x) {
+    return(f(x) - 1)
+}
+```
+--
+
+```r
+g('a')
+```
+
+```
+## Error in x + 1: non-numeric argument to binary operator
+```
+--
+
+```r
+traceback()
+```
+--
+```
+2: f(x) at #2
+1: g("a")
+```
+
+---
+# Group Practice 
+
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4, write the following functions:
+&lt;br&gt;
+
+For each of the following functions, start by writing a test function, e.g. `testIfFactor()`, that tests the function for a variety of values of inputs. Consider cases that you might not expect.
+
+1. Write the function `isFactor(f, n)` that takes two int values `f` and `n`, and returns `TRUE` if `f` is a factor of `n`, and `FALSE` otherwise. Note that every integer is a factor of `0`. Assume `f` and `n` will only be numeric values.
+&lt;br&gt;
+
+2. Write the function `isMultiple(m, n)` that takes two integer values `m` and `n` and returns `TRUE` if `m` is a multiple of `n` and `FALSE` otherwise. Note that `0` is a multiple of every integer other than itself. Also, you should make constructive use of the `isFactor(f, n)` function you just wrote above. Assume `m` and `n` will only be numeric values.
+&lt;br&gt;
+
+3. Write the function `isPositiveMultipleOf4Or7(n)` that returns `TRUE` if `n` is a positive multiple of 4 or 7 and `FALSE` otherwise. Allow for cases where `n` is any data type.
+
+---
+# Group Practice 
+
+### [20 minutes](https://www.youtube.com/watch?v=kxGWsHYITAw) - In groups of 4
+&lt;br&gt;
+
+Write the function `getInRange(x, bound1, bound2)` which takes 3 numeric values: `x`, `bound1`, and `bound2`, where `bound1` is not necessarily less than `bound2`. If `x` is between the two bounds, just return it unmodified. Otherwise, if `x` is less than the lower bound, return the lower bound, or if `x` is greater than the upper bound, return the upper bound. For example:
+
+- `getInRange(1, 3, 5)` returns `3` (the lower bound, since 1 is below the range [3,5])
+- `getInRange(4, 3, 5)` returns `4` (the original value, since 4 is below the range [3,5])
+- `getInRange(6, 3, 5)` returns `5` (the upper bound, since 6 is above the range [3,5])
+- `getInRange(6, 5, 3)` returns `5` (the upper bound, since 6 is above the range [3,5])
+
+**Start** by writing the test function `testGetInRange()` that tests for a variety of values of `x`, `bound1`, `bound2`.  
+&lt;br&gt;
+
+**Bonus**: Re-write `getInRange(x, bound1, bound2)` without using conditionals
+
+---
+# HW 2 
+
+### - Start now!
+### - Don't modify the test functions!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
