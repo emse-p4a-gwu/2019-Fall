@@ -845,7 +845,7 @@ library(ggplot2)</code></pre>
 </div>
 <div id="bar-charts-with-geom_bar" class="section level2">
 <h2><span class="header-section-number">3.6</span> Bar charts with <code>geom_bar()</code></h2>
-<p>You can also use <code>geom_bar()</code> to create a bar chart (as opposed to a histogram). Whereas histograms report the <em>count</em> of one variable (<code>x</code>), bar charts also have a <code>y</code> variable that determine the height of bars. To make a bar chart, you have to tell <code>geom_bar()</code> to use the actual <code>y</code> values in the <code>aes()</code> call by adding the <code>stat=&quot;identity&quot;</code> argument in <code>geom_bar()</code>, otherwise it will use the default statistic (which is <code>stat=&quot;count&quot;</code> to make a histogram).</p>
+<p>You can also use <code>geom_bar()</code> to create a bar chart (as opposed to a histogram). Whereas histograms report the <em>count</em> of one variable (<code>x</code>), bar charts also have a <code>y</code> variable that determine the height of bars. To make a bar chart, you have to tell <code>geom_bar()</code> to use the actual <code>y</code> values in the <code>aes()</code> call by adding the <code>stat="identity"</code> argument in <code>geom_bar()</code>, otherwise it will use the default statistic (which is <code>stat="count"</code> to make a histogram).</p>
 <p>For example, here is a bar chart of the number of bear killings in each year - notice how we first create a new summary data framed called <code>annualKillings</code> from the original <code>df</code>:</p>
 <pre class="r"><code>annualKillings &lt;- df %&gt;% count(year)
 ggplot(data = annualKillings) +

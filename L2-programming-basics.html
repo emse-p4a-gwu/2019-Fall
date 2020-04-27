@@ -690,7 +690,7 @@ div.tocify {
 <p>Notice that the first time I called the <code>round()</code> function I didn’t actually specify the <code>digits</code> argument at all, and yet R somehow knew that this meant it should round to the nearest whole number. How did that happen? The answer is that the <code>digits</code> argument has a <strong>default value</strong> of <code>0</code>, meaning that if you decide not to specify a value for <code>digits</code> then R will act as if you had typed <code>digits = 0</code>. This is quite handy: most of the time when you want to round a number you want to round it to the nearest <em>whole</em> number, and it would be pretty annoying to have to specify the <code>digits</code> argument every single time. On the other hand, sometimes you actually do want to round to something other than the nearest whole number, and it would be even more annoying if R didn’t allow this! Thus, by having <code>digits = 0</code> as the default value, we get the best of both worlds.</p>
 <p>Finally, not all functions have (or require) arguments:</p>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Fri Apr 24 11:23:46 2020&quot;</code></pre>
+<pre><code>## [1] &quot;Mon Apr 27 12:35:12 2020&quot;</code></pre>
 <hr />
 </div>
 </div>
@@ -779,7 +779,7 @@ Cases_matter &lt;- 2^3</code></pre>
 <tr class="odd">
 <td>character</td>
 <td>Text data, a.k.a. “strings”</td>
-<td><code>&quot;this is a string&quot;</code>, <code>&quot;3.14&quot;</code></td>
+<td><code>"this is a string"</code>, <code>"3.14"</code></td>
 </tr>
 <tr class="even">
 <td>logical</td>
@@ -824,7 +824,7 @@ Cases_matter &lt;- 2^3</code></pre>
 </div>
 <div id="character-types" class="section level2">
 <h2><span class="header-section-number">4.2</span> Character types</h2>
-<p>A character object is used to represent string values in R. Anything put between single quotes (<code>''</code>) or double quotes (<code>&quot;&quot;</code>) will be stored as a character. For example:</p>
+<p>A character object is used to represent string values in R. Anything put between single quotes (<code>''</code>) or double quotes (<code>""</code>) will be stored as a character. For example:</p>
 <pre class="r"><code>s &lt;- &#39;3.14&#39;
 class(s)</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
@@ -912,9 +912,9 @@ library(packagename)   # This also works</code></pre>
 <p>Now that you have the package installed on your computer, try loading it using <code>library(wikifacts)</code>, then trying using some of it’s functions:</p>
 <pre class="r"><code>library(wikifacts) # Load the library</code></pre>
 <pre class="r"><code>wiki_randomfact()</code></pre>
-<pre><code>## Did you know that Srećko Albini, a conductor at the Croatian National Theatre in Zagreb, composed operettas that were also performed in Venice, London, and New York? (Courtesy of Wikipedia)</code></pre>
+<pre><code>## Here&#39;s some news. In the South Korean legislative election, the ruling Democratic Party and their allies increase their majority in the National Assembly. (Courtesy of Wikipedia)</code></pre>
 <pre class="r"><code>wiki_didyouknow()</code></pre>
-<pre><code>## Did you know that before the opening of a new subway line, passengers at the 169th Street station in Queens had to wait just to get to the platform during rush hours? (Courtesy of Wikipedia)</code></pre>
+<pre><code>## Did you know that the Federal Communications Commission found that the owner of Maine radio station WKZX had &quot;abdicated financial control&quot; of the business? (Courtesy of Wikipedia)</code></pre>
 <p>In case you’re wondering, the only thing this package does is generate messages containing random facts from <a href="https://www.wikipedia.org/">Wikipedia</a>.</p>
 <hr />
 </div>
@@ -945,8 +945,8 @@ library(packagename)   # This also works</code></pre>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Technically speaking, operators are functions in R: the addition operator <code>+</code> is a convenient way of calling the addition function <code>'+'()</code>. Thus <code>10+20</code> is equivalent to the function call <code>'+'(20, 30)</code>. Not surprisingly, no-one ever uses this version.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>R does support complex numbers, but unless you explicitly specify that you want them it assumes all calculations must be real valued. By default, the square root of a negative number is treated as undefined: <code>sqrt(-9)</code> will produce <code>NaN</code> (not a number) as its output. To get complex numbers, you would type <code>sqrt(-9+0i)</code> and R would now return <code>0+3i</code>.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>Technically speaking, operators are functions in R: the addition operator <code>+</code> is a convenient way of calling the addition function <code>'+'()</code>. Thus <code>10+20</code> is equivalent to the function call <code>'+'(20, 30)</code>. Not surprisingly, no-one ever uses this version.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>R does support complex numbers, but unless you explicitly specify that you want them it assumes all calculations must be real valued. By default, the square root of a negative number is treated as undefined: <code>sqrt(-9)</code> will produce <code>NaN</code> (not a number) as its output. To get complex numbers, you would type <code>sqrt(-9+0i)</code> and R would now return <code>0+3i</code>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

@@ -607,7 +607,7 @@ div.tocify {
 </ul>
 </blockquote>
 <hr />
-<p>So far we’ve only dealt with objects that contain one value (e.g. <code>x &lt;- 1</code>), but R actually stores those values in a <em>vector</em> of length one:</p>
+<p>So far we’ve only dealt with objects that contain one value (e.g. <code>x &lt;- 1</code>), but R actually stores those values in a <em>vector</em> of length one:</p>
 <pre class="r"><code>x &lt;- 1
 length(x)</code></pre>
 <pre><code>## [1] 1</code></pre>
@@ -664,12 +664,14 @@ z &lt;- rep(10, 5) # The number 10 five times</code></pre>
 <p>If a vector has integers and floats, R makes everything a <strong>float</strong>:</p>
 <pre class="r"><code>c(1L, 2, pi)</code></pre>
 <pre><code>## [1] 1.000000 2.000000 3.141593</code></pre>
-<p>```</p>
-</div>
-<div id="deleting-vectors" class="section level2">
-<h2><span class="header-section-number">1.3</span> Deleting vectors</h2>
-<p>You can delete a vector by assigning <code>NULL</code> to it:</p>
-<pre class="r"><code>x &lt;- seq(1, 10)
+<pre><code>
+## Deleting vectors
+
+You can delete a vector by assigning `NULL` to it:
+
+
+```r
+x &lt;- seq(1, 10)
 x</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code>x &lt;- NULL
@@ -677,7 +679,7 @@ x</code></pre>
 <pre><code>## NULL</code></pre>
 </div>
 <div id="numeric-vectors" class="section level2">
-<h2><span class="header-section-number">1.4</span> Numeric vectors</h2>
+<h2><span class="header-section-number">1.3</span> Numeric vectors</h2>
 <p>As we saw in the <a href="5-loops.html">loops</a> lesson, you can create a vector of integers using the <code>:</code> operator or the <code>seq()</code> function:</p>
 <pre class="r"><code>1:10</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
@@ -733,7 +735,7 @@ v</code></pre>
 </table>
 </div>
 <div id="character-vectors" class="section level2">
-<h2><span class="header-section-number">1.5</span> Character vectors</h2>
+<h2><span class="header-section-number">1.4</span> Character vectors</h2>
 <p>Character vectors are vectors where each element is a string:</p>
 <pre class="r"><code>stringVector &lt;- c(&#39;oh&#39;, &#39;what&#39;, &#39;a&#39;, &#39;beautiful&#39;, &#39;morning&#39;)
 stringVector</code></pre>
@@ -746,7 +748,7 @@ str_c(stringVector, collapse = &#39; &#39;)</code></pre>
 <pre><code>## [1] &quot;oh what a beautiful morning&quot;</code></pre>
 </div>
 <div id="logical-vectors" class="section level2">
-<h2><span class="header-section-number">1.6</span> Logical vectors</h2>
+<h2><span class="header-section-number">1.5</span> Logical vectors</h2>
 <p>Logical vectors contain only <code>TRUE</code> or <code>FALSE</code> elements:</p>
 <pre class="r"><code>logicalVector &lt;- c(rep(TRUE, 3), rep(FALSE, 3))
 logicalVector</code></pre>
@@ -754,7 +756,7 @@ logicalVector</code></pre>
 <p>If you add a numeric type to a logical vector, the logical elements will be converted to either a <code>1</code> for <code>TRUE</code> or <code>0</code> for <code>FALSE</code>:</p>
 <pre class="r"><code>c(logicalVector, 42)</code></pre>
 <pre><code>## [1]  1  1  1  0  0  0 42</code></pre>
-<p><strong>Warning</strong>: If you add a character type to a logical vector, the logical elements will be converted to strings of <code>&quot;TRUE&quot;</code> and <code>&quot;FALSE&quot;</code>. So even though they may still <em>look</em> like logical types, they aren’t:</p>
+<p><strong>Warning</strong>: If you add a character type to a logical vector, the logical elements will be converted to strings of <code>"TRUE"</code> and <code>"FALSE"</code>. So even though they may still <em>look</em> like logical types, they aren’t:</p>
 <pre class="r"><code>y &lt;- c(logicalVector, &#39;string&#39;)
 y</code></pre>
 <pre><code>## [1] &quot;TRUE&quot;   &quot;TRUE&quot;   &quot;TRUE&quot;   &quot;FALSE&quot;  &quot;FALSE&quot;  &quot;FALSE&quot;  &quot;string&quot;</code></pre>
@@ -762,7 +764,7 @@ y</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 </div>
 <div id="comparing-vectors" class="section level2">
-<h2><span class="header-section-number">1.7</span> Comparing vectors</h2>
+<h2><span class="header-section-number">1.6</span> Comparing vectors</h2>
 <p>If you want to check if two vectors are identical (in that they contain all the same elements), you can’t use the typical <code>==</code> operator by itself. The reason is because the <code>==</code> operator is performed element-wise, so it will return a logical vector:</p>
 <pre class="r"><code>x &lt;- c(1,2,3)
 y &lt;- c(1,2,3)

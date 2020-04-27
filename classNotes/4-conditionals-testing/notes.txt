@@ -1,0 +1,113 @@
+############ HW1 Problem 4
+
+pricePrius   <- 27600
+priceCamry   <- 24000
+mpgPrius     <- 55
+mpgCamry     <- 32
+milesPerYear <- 15000
+fuelPrice    <- 3
+
+# First compute the difference in price ($):
+priceDiff <- pricePrius - priceCamry
+priceDiff
+
+# Now compute the difference in annual fuel consumed (gallons):
+annualGallonsPrius <- milesPerYear / mpgPrius
+annualGallonsCamry <- milesPerYear / mpgCamry
+annualGallonsDiff  <- annualGallonsCamry - annualGallonsPrius
+
+# Now compute the annual fuel savings ($):
+annualFuelSavings <- fuelPrice*annualGallonsDiff
+annualFuelSavings
+
+# Finally, compute the number of years until payback (years):
+priceDiff / annualFuelSavings
+
+# c) What would the price of gasoline need to be such that the answer to part b) is just 2 years?
+
+# Computed the necessary annual savings ($):
+annualFuelSavings <- priceDiff / 2
+
+# Now divide the savings by the annual difference in gallons of gas consumed:
+annualFuelSavings / annualGallonsDiff
+
+
+############ Slide 13
+absValue <- function(x) {
+    if (x < 0) {x = -1*x}
+    return(x)
+}
+
+
+############ Slide 22
+> cat(f1(7))
+14 
+> cat(f1(12))
+26 
+> cat(f2(9))
+woo!
+31 
+> cat(f2(11))
+1 
+> cat(f3(-9))
+tac9 
+> cat(f3(15))
+cat30 
+
+############ Slide 42
+
+isFactor <- function(f, n) {
+    if (n == 0) { return(TRUE) }
+    if (f == 0) { return(FALSE) }
+    return((n %% f) == 0)
+}
+
+isMultiple <- function(m, n) {
+    return(isFactor(n, m))
+}
+
+isPositiveMultipleOf4Or7 <- function(n) {
+    if (is.numeric(n) == FALSE) { return(FALSE) }
+    if ((n <= 0) | (n != as.integer(n))) { return(FALSE) }
+    return(((n %% 4) == 0) | ((n %% 7) == 0))
+}
+
+
+############ Slide 43
+# Version 1
+getInRange <- function(x, bound1, bound2) {
+    if (bound2 < bound1) {
+        temp   <- bound1
+        bound1 <- bound2
+        bound2 <- temp
+    }
+    if (x <= bound1) {
+        return(bound1)
+    } else if (x >= bound2) {
+        return(bound2)
+    } else {
+        return(x)
+    }
+}
+
+# Version 2
+getInRange <- function(x, bound1, bound2) {
+    lower <- min(bound1, bound2)
+    upper <- max(bound1, bound2)
+    if (x < lower) { x <- lower }
+    if (x > upper) { x <- upper }
+    return(x)
+}
+
+# Version 3
+getInRange <- function(x, bound1, bound2) {
+    lower <- min(bound1, bound2)
+    upper <- max(bound1, bound2)
+    return(min(max(x, lower), upper))
+}
+
+
+
+
+
+

@@ -526,7 +526,7 @@ f &lt;- function(n) {
 <ol style="list-style-type: decimal">
 <li><p>In your own words, describe the difference between the <code>sep</code> and <code>collapse</code> arguments to <code>str_c()</code>.</p></li>
 <li><p>What does <code>str_trim()</code> do? What’s the opposite function of <code>str_trim()</code>?</p></li>
-<li><p>What does splitting a string with an empty string (<code>&quot;&quot;</code>) do? For example, what would <code>str_split('hello world', '')</code> return?</p></li>
+<li><p>What does splitting a string with an empty string (<code>""</code>) do? For example, what would <code>str_split('hello world', '')</code> return?</p></li>
 </ol>
 </div>
 <div id="write-functions" class="section level1">
@@ -534,7 +534,7 @@ f &lt;- function(n) {
 <p>Here are a bunch of functions you should be able to write. Any of these may appear (directly or modified) on a quiz or exam!</p>
 <div id="reversestrings" class="section level3">
 <h3><code>reverseString(s)</code></h3>
-<p>Write a function that returns the string <code>s</code> in reverse order. So if <code>s</code> equals <code>&quot;abcde&quot;</code>, <code>reverseString(s)</code> should equal <code>&quot;edcba&quot;</code>. You may assume that <code>s</code> only contains upper and/or lower case letters, but your solution must correctly return capital letters in their appropriate order. For example, <code>reverseString(&quot;aWordWithCaps&quot;)</code> should return <code>&quot;spaChtiWdroWa&quot;</code>.</p>
+<p>Write a function that returns the string <code>s</code> in reverse order. So if <code>s</code> equals <code>"abcde"</code>, <code>reverseString(s)</code> should equal <code>"edcba"</code>. You may assume that <code>s</code> only contains upper and/or lower case letters, but your solution must correctly return capital letters in their appropriate order. For example, <code>reverseString("aWordWithCaps")</code> should return <code>"spaChtiWdroWa"</code>.</p>
 </div>
 <div id="ispalindromes" class="section level3">
 <h3><code>isPalindrome(s)</code></h3>
@@ -542,22 +542,22 @@ f &lt;- function(n) {
 </div>
 <div id="sortstrings" class="section level3">
 <h3><code>sortString(s)</code></h3>
-<p>Write the function <code>sortString(s)</code> that takes a string <code>s</code> and returns back an alphabetically sorted string. So <code>sortString(&quot;cba&quot;)</code> should return <code>&quot;abc&quot;</code>. You may assume that <code>s</code> only contains upper and/or lower case letters.</p>
+<p>Write the function <code>sortString(s)</code> that takes a string <code>s</code> and returns back an alphabetically sorted string. So <code>sortString("cba")</code> should return <code>"abc"</code>. You may assume that <code>s</code> only contains upper and/or lower case letters.</p>
 </div>
 <div id="lettercounts" class="section level3">
 <h3><code>letterCount(s)</code></h3>
-<p>Write the function <code>letterCount(s)</code> that takes a string <code>s</code> and returns a named vector with the count of each letter in <code>s</code>, spanning the alphabet. If a letter does not appear in <code>s</code>, it should have a value of <code>0</code>. You may assume that <code>s</code> only contains upper and/or lower case letters. You should ignore cases, so <code>&quot;a&quot;</code> and <code>&quot;A&quot;</code> should be both treated as <code>&quot;a&quot;</code>.</p>
-<p>For example, <code>letterCount(&quot;aaaaabbbc&quot;)</code> should return:</p>
+<p>Write the function <code>letterCount(s)</code> that takes a string <code>s</code> and returns a named vector with the count of each letter in <code>s</code>, spanning the alphabet. If a letter does not appear in <code>s</code>, it should have a value of <code>0</code>. You may assume that <code>s</code> only contains upper and/or lower case letters. You should ignore cases, so <code>"a"</code> and <code>"A"</code> should be both treated as <code>"a"</code>.</p>
+<p>For example, <code>letterCount("aaaaabbbc")</code> should return:</p>
 <pre class="r"><code>a b c d e f g h i j k l m n o p q r s t u v w x y z
 5 3 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
-<p>And <code>letterCount(&quot;someString&quot;)</code> should return:</p>
+<p>And <code>letterCount("someString")</code> should return:</p>
 <pre class="r"><code>a b c d e f g h i j k l m n o p q r s t u v w x y z
 0 0 0 0 1 0 1 0 1 0 0 0 1 1 2 0 0 1 2 1 0 0 0 0 0 0</code></pre>
 </div>
 <div id="areanagramss1-s2" class="section level3">
 <h3><code>areAnagrams(s1, s2)</code></h3>
 <p><strong>Background</strong>: An <a href="https://en.wikipedia.org/wiki/Anagram">anagram</a> is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.</p>
-<p>With that in mind, write the function <code>areAnagrams(s1, s2)</code> that takes two strings, <code>s1</code> and <code>s2</code> (that you may assume contain only upper and/or lower case letters), and returns <code>TRUE</code> if the strings are anagrams, and <code>FALSE</code> otherwise. Treat <code>&quot;a&quot;</code> and <code>&quot;A&quot;</code> as the same letters (so <code>&quot;Aba&quot;</code> and <code>&quot;BAA&quot;</code> are anagrams). Hint: you may want to use either <code>letterCount(s)</code> or <code>sortString(s)</code> as helper functions - each are helpful for different approaches.</p>
+<p>With that in mind, write the function <code>areAnagrams(s1, s2)</code> that takes two strings, <code>s1</code> and <code>s2</code> (that you may assume contain only upper and/or lower case letters), and returns <code>TRUE</code> if the strings are anagrams, and <code>FALSE</code> otherwise. Treat <code>"a"</code> and <code>"A"</code> as the same letters (so <code>"Aba"</code> and <code>"BAA"</code> are anagrams). Hint: you may want to use either <code>letterCount(s)</code> or <code>sortString(s)</code> as helper functions - each are helpful for different approaches.</p>
 <hr />
 <p><strong>Page sources</strong>:</p>
 <p>Some content on this page has been modified from other courses, including:</p>

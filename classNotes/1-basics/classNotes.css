@@ -1,3 +1,11 @@
+pre {
+    margin: 0 0 0 0;
+    margin-top: 0.5em;
+    margin-right: 0;
+    margin-bottom: 0.5em;
+    margin-left: 0;
+}
+
 .remark-slide-content {
   background-color: #FAFAFA;
   border-top: 80px solid #23373B;
@@ -114,7 +122,7 @@ position: absolute;
   /* background: #F5F5F5; /* lighter */
   background: #e7e8e2; /* darker */
   border-radius: 3px;
-  padding: 4px;
+  padding: 0px;
 }
 
 .code10 .remark-code {

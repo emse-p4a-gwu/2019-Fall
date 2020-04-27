@@ -608,14 +608,14 @@ div.tocify {
 </ul>
 </blockquote>
 <hr />
-<p>A “string” is the generic word for character type variables. Base R has many built-in functions for working with strings, but they are often difficult to remember and unintuitive to use. Fortunately, the wonderful folks over at the <a href="https://www.tidyverse.org/">tidyverse</a> developed a lovely package called <a href="https://stringr.tidyverse.org/"><code>&quot;stringr&quot;</code></a>, which makes working with strings a lot nicer.</p>
+<p>A “string” is the generic word for character type variables. Base R has many built-in functions for working with strings, but they are often difficult to remember and unintuitive to use. Fortunately, the wonderful folks over at the <a href="https://www.tidyverse.org/">tidyverse</a> developed a lovely package called <a href="https://stringr.tidyverse.org/"><code>"stringr"</code></a>, which makes working with strings a lot nicer.</p>
 <p>Before going any further, make sure you install the <code>stringr</code> package and load it before trying to use any of the functions in this lesson:</p>
 <pre class="r"><code>install.packages(&quot;stringr&quot;)
 library(stringr)</code></pre>
 <hr />
 <div id="making-a-string" class="section level1">
 <h1><span class="header-section-number">1</span> Making a string</h1>
-<p>You can create strings with either single quotes (<code>''</code>) or double quotes (<code>&quot;&quot;</code>). There is no difference in behavior.</p>
+<p>You can create strings with either single quotes (<code>''</code>) or double quotes (<code>""</code>). There is no difference in behavior.</p>
 <pre class="r"><code>cat(&quot;This is a string&quot;)</code></pre>
 <pre><code>## This is a string</code></pre>
 <pre class="r"><code>cat(&#39;This is a string&#39;)</code></pre>
@@ -623,10 +623,10 @@ library(stringr)</code></pre>
 <p>If you have a string that contains a <code>'</code> symbol, use double quotes: Use them where it makes sense, e.g.:</p>
 <pre class="r"><code>cat(&quot;It&#39;s a boy!&quot;)</code></pre>
 <pre><code>## It&#39;s a boy!</code></pre>
-<p>Likewise, if you have a string that contains a <code>&quot;</code> symbol, use single quotes: Use them where it makes sense, e.g.:</p>
+<p>Likewise, if you have a string that contains a <code>"</code> symbol, use single quotes: Use them where it makes sense, e.g.:</p>
 <pre class="r"><code>cat(&#39;I said, &quot;Hi!&quot;&#39;)</code></pre>
 <pre><code>## I said, &quot;Hi!&quot;</code></pre>
-<p>But what if you have a string that has both single and double quotes, like this: <code>It's nice to say, &quot;Hi!&quot;</code></p>
+<p>But what if you have a string that has both single and double quotes, like this: <code>It's nice to say, "Hi!"</code></p>
 <p>In this case, you have to “escape” the quotes by using the <code>\</code> symbol:</p>
 <pre class="r"><code>cat(&quot;It&#39;s nice to say, \&quot;Hi!\&quot;&quot;) # Double quotes escaped</code></pre>
 <pre><code>## It&#39;s nice to say, &quot;Hi!&quot;</code></pre>
@@ -679,7 +679,7 @@ letters</code></pre>
 ## [6] &quot;bilberry&quot;</code></pre>
 </div>
 <div id="basic-stringr-operations" class="section level1">
-<h1><span class="header-section-number">3</span> Basic <code>&quot;stringr&quot;</code> Operations</h1>
+<h1><span class="header-section-number">3</span> Basic <code>"stringr"</code> Operations</h1>
 <p>Most <code>stringr</code> functions start with <code>str_</code>, which makes it particularly easy to remember. The following table contains the main <code>stringr</code> functions we’ll cover:</p>
 <table>
 <thead>
@@ -779,7 +779,7 @@ toTitleCase(x)</code></pre>
 <p>Note that the space character has a length:</p>
 <pre class="r"><code>str_length(&quot; &quot;)</code></pre>
 <pre><code>## [1] 1</code></pre>
-<p>Also note that the “empty” string (<code>&quot;&quot;</code>) has no length:</p>
+<p>Also note that the “empty” string (<code>""</code>) has no length:</p>
 <pre class="r"><code>str_length(&quot;&quot;)</code></pre>
 <pre><code>## [1] 0</code></pre>
 </div>
@@ -804,7 +804,7 @@ x</code></pre>
 <div id="get-the-indices-of-substrings" class="section level2">
 <h2><span class="header-section-number">3.4</span> Get the indices of substrings</h2>
 <p>If you want to know the start and end indices of a particular substring, use <code>str_locate()</code>. This is a helpful function to use in combination with <code>str_sub()</code> so you don’t have to count the characters to find a substring.</p>
-<p>For example, let’s say I want to extract the substring <code>&quot;Good&quot;</code> from the following string:</p>
+<p>For example, let’s say I want to extract the substring <code>"Good"</code> from the following string:</p>
 <pre class="r"><code>x &lt;- &#39;thisIsGoodPractice&#39;</code></pre>
 <p>I could first use <code>str_locate()</code> to get the start and end indices:</p>
 <pre class="r"><code>indices &lt;- str_locate(x, &#39;Good&#39;)
@@ -915,7 +915,7 @@ str_split(x, &#39;bb&#39;) # Returns a list with two elements (each a vector)</c
 ## 
 ## [[2]]
 ## [1] &quot;scra&quot; &quot;leba&quot; &quot;le&quot;</code></pre>
-<p>A particularly useful string split is to split on the empty string (<code>&quot;&quot;</code>), which breaks a string up into its individual characters:</p>
+<p>A particularly useful string split is to split on the empty string (<code>""</code>), which breaks a string up into its individual characters:</p>
 <pre class="r"><code>str_split(string, &quot;&quot;)[[1]]</code></pre>
 <pre><code>##  [1] &quot;T&quot; &quot;h&quot; &quot;i&quot; &quot;s&quot; &quot; &quot; &quot;s&quot; &quot;t&quot; &quot;r&quot; &quot;i&quot; &quot;n&quot; &quot;g&quot; &quot; &quot; &quot;h&quot; &quot;a&quot; &quot;s&quot; &quot; &quot; &quot;s&quot; &quot;p&quot; &quot;a&quot;
 ## [20] &quot;c&quot; &quot;e&quot; &quot;s&quot; &quot;-&quot; &quot;a&quot; &quot;n&quot; &quot;d&quot; &quot;-&quot; &quot;d&quot; &quot;a&quot; &quot;s&quot; &quot;h&quot; &quot;e&quot; &quot;s&quot;</code></pre>
@@ -1022,7 +1022,7 @@ x</code></pre>
 <p>Convert all strings in <code>x</code> to upper case:</p>
 <pre class="r"><code>str_to_upper(x)</code></pre>
 <pre><code>## [1] &quot;APPLES&quot;  &quot;ORANGES&quot;</code></pre>
-<p>Replace all <code>&quot;a&quot;</code> characters with a <code>&quot;-&quot;</code> character:</p>
+<p>Replace all <code>"a"</code> characters with a <code>"-"</code> character:</p>
 <pre class="r"><code>str_replace_all(x, &quot;a&quot;, &quot;-&quot;)</code></pre>
 <pre><code>## [1] &quot;-pples&quot;  &quot;or-nges&quot;</code></pre>
 </div>
@@ -1030,14 +1030,14 @@ x</code></pre>
 <h1><span class="header-section-number">5</span> Tips</h1>
 <div id="breaking-a-string-into-characters" class="section level2">
 <h2><span class="header-section-number">5.1</span> Breaking a string into characters</h2>
-<p>Often times you’ll want to break a string into it’s individual character components. To do that, use <code>str_split()</code> with the empty string <code>&quot;&quot;</code> as the delimiter:</p>
+<p>Often times you’ll want to break a string into it’s individual character components. To do that, use <code>str_split()</code> with the empty string <code>""</code> as the delimiter:</p>
 <pre class="r"><code>chars &lt;- str_split(&quot;apples&quot;, &quot;&quot;)[[1]]
 chars</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;p&quot; &quot;p&quot; &quot;l&quot; &quot;e&quot; &quot;s&quot;</code></pre>
 </div>
 <div id="breaking-a-sentence-into-words" class="section level2">
 <h2><span class="header-section-number">5.2</span> Breaking a sentence into words</h2>
-<p>Similarly, if you have a single string that contains words separated by spaces, splitting on <code>&quot; &quot;</code> will break it into words:</p>
+<p>Similarly, if you have a single string that contains words separated by spaces, splitting on <code>" "</code> will break it into words:</p>
 <pre class="r"><code>x &lt;- &quot;If you want to view paradise, simply look around and view it&quot;
 str_split(x, &quot; &quot;)[[1]]</code></pre>
 <pre><code>##  [1] &quot;If&quot;        &quot;you&quot;       &quot;want&quot;      &quot;to&quot;        &quot;view&quot;      &quot;paradise,&quot;
@@ -1050,7 +1050,7 @@ str_split(x, &quot; &quot;)[[1]]</code></pre>
 b &lt;- &quot;apples&quot;
 a == b</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>The above returns <code>FALSE</code> because the cases are different on the <code>&quot;a&quot;</code> characters. If you want to ignore case, then a common strategy is to first convert the strings to a common case before comparing. For example:</p>
+<p>The above returns <code>FALSE</code> because the cases are different on the <code>"a"</code> characters. If you want to ignore case, then a common strategy is to first convert the strings to a common case before comparing. For example:</p>
 <pre class="r"><code>str_to_lower(a) == str_to_lower(b)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <hr />

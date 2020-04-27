@@ -731,7 +731,7 @@ div.tocify {
 <pre><code>## Hello!</code></pre>
 <pre class="r"><code>x</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>Notice that in the above example, the <code>cat(&quot;Goodbye!&quot;)</code> statement is ignored.</p>
+<p>Notice that in the above example, the <code>cat("Goodbye!")</code> statement is ignored.</p>
 <p>If you don’t include a <code>return()</code> statement, R will return the value of the last statement by default (<strong>Don’t do this</strong>):</p>
 <pre class="r"><code>f &lt;- function(x) {
     x + 42
@@ -796,7 +796,7 @@ hypotenuse(a, b)</code></pre>
 <pre><code>## [1] 5</code></pre>
 <hr />
 </div>
-<div id="local-vs.global-variables" class="section level1">
+<div id="local-vs.-global-variables" class="section level1">
 <h1><span class="header-section-number">6</span> Local vs. global variables</h1>
 <p>All variables <strong>inside</strong> a function are called <em>“local”</em> variables and will <strong>NOT</strong> be created in the working environment. They can only be used locally within the function. For example:</p>
 <pre class="r"><code>minSquared &lt;- function(x, y) {

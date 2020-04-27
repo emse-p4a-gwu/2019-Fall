@@ -722,7 +722,7 @@ bind_rows(members1, members2)</code></pre>
 ## 2 Paul      McCartney
 ## 3 Ringo     Starr    
 ## 4 George    Harrison</code></pre>
-<p>Note that to combine rows, the column names must be the same. For example, if we change the second column name in <code>members2</code> to <code>&quot;LASTNAME&quot;</code>, you’ll get a data frame with three columns, two of which will have missing values:</p>
+<p>Note that to combine rows, the column names must be the same. For example, if we change the second column name in <code>members2</code> to <code>"LASTNAME"</code>, you’ll get a data frame with three columns, two of which will have missing values:</p>
 <pre class="r"><code>colnames(members2) &lt;- c(&quot;firstName&quot;, &quot;LASTNAME&quot;)
 bind_rows(members1, members2)</code></pre>
 <pre><code>## # A tibble: 4 x 3
