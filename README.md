@@ -1,6 +1,6 @@
 ## EMSE 4574: Programming for Analytics - Fall 2019 (listed as EMSE 6574 this semester)
 
-[![Build Status](https://travis-ci.org/emse6574-gwu/2019-Fall.svg?branch=master)](https://travis-ci.org/emse6574-gwu/2019-Fall)
+![Render & Deploy Site](https://github.com/emse-p4a-gwu/2019-Fall/workflows/Render%20&%20Deploy%20Site/badge.svg)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
