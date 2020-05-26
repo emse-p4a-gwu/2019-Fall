@@ -690,7 +690,7 @@ div.tocify {
 <p>Notice that the first time I called the <code>round()</code> function I didn’t actually specify the <code>digits</code> argument at all, and yet R somehow knew that this meant it should round to the nearest whole number. How did that happen? The answer is that the <code>digits</code> argument has a <strong>default value</strong> of <code>0</code>, meaning that if you decide not to specify a value for <code>digits</code> then R will act as if you had typed <code>digits = 0</code>. This is quite handy: most of the time when you want to round a number you want to round it to the nearest <em>whole</em> number, and it would be pretty annoying to have to specify the <code>digits</code> argument every single time. On the other hand, sometimes you actually do want to round to something other than the nearest whole number, and it would be even more annoying if R didn’t allow this! Thus, by having <code>digits = 0</code> as the default value, we get the best of both worlds.</p>
 <p>Finally, not all functions have (or require) arguments:</p>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Mon Apr 27 13:10:54 2020&quot;</code></pre>
+<pre><code>## [1] &quot;Tue May 26 18:18:39 2020&quot;</code></pre>
 <hr />
 </div>
 </div>
@@ -912,9 +912,9 @@ library(packagename)   # This also works</code></pre>
 <p>Now that you have the package installed on your computer, try loading it using <code>library(wikifacts)</code>, then trying using some of it’s functions:</p>
 <pre class="r"><code>library(wikifacts) # Load the library</code></pre>
 <pre class="r"><code>wiki_randomfact()</code></pre>
-<pre><code>## Did you know that on this day in 1650 – Wars of the Three Kingdoms: Covenanter forces defeated an invading Royalist army at the Battle of Carbisdale near the village of Culrain, Scotland. (Courtesy of Wikipedia)</code></pre>
+<pre><code>## [1] &quot;Did you know that on this day in 1328 – English friar William of Ockham, who popularised the methodological principle known as Occam&#39;s razor, secretly left Avignon under threat from Pope John XXII. (Courtesy of Wikipedia)&quot;</code></pre>
 <pre class="r"><code>wiki_didyouknow()</code></pre>
-<pre><code>## Did you know that during the Mercenary War, Carthaginian rebels killed 700 prisoners by cutting off their hands, castrating them, breaking their legs, and throwing them into a pit to be buried alive? (Courtesy of Wikipedia)</code></pre>
+<pre><code>## [1] &quot;Did you know that CIA officer Howard Bane proposed that the Special Operations Group storm the Chinese embassy in Ghana and kill all its occupants during the 1966 coup? (Courtesy of Wikipedia)&quot;</code></pre>
 <p>In case you’re wondering, the only thing this package does is generate messages containing random facts from <a href="https://www.wikipedia.org/">Wikipedia</a>.</p>
 <hr />
 </div>
