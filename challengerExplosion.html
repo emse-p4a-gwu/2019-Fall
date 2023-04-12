@@ -13,17 +13,27 @@
 
 <title>A case study on turning data into information</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -89,12 +99,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -107,32 +121,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -142,10 +132,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -162,40 +148,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -223,7 +185,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -235,7 +197,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -245,11 +207,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -261,13 +240,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -275,16 +253,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -328,7 +299,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -351,7 +322,7 @@ $(document).ready(function () {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -411,7 +382,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -441,7 +412,7 @@ $(document).ready(function () {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -473,7 +444,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -501,28 +472,47 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
-<h1 class="title toc-ignore">A case study on turning data into information</h1>
+<h1 class="title toc-ignore">A case study on turning data into
+information</h1>
 
 </div>
 
 
-<p>This short case study is an example of what it means to turn “data” into “information”. In this example, we’ll be examining data about the relationship between the temperature of different NASA rocket launches and damage to the rock O-rings - the root cause of the <a href="https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster">1986 Space Shuttle Challenger explosion</a>.</p>
-<p>Don’t worry yet if you don’t understand the specific code here - just try to follow along to see how we can pull out <em>information</em> from raw data.</p>
+<p>This short case study is an example of what it means to turn “data”
+into “information”. In this example, we’ll be examining data about the
+relationship between the temperature of different NASA rocket launches
+and damage to the rock O-rings - the root cause of the <a
+href="https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster">1986
+Space Shuttle Challenger explosion</a>.</p>
+<p>Don’t worry yet if you don’t understand the specific code here - just
+try to follow along to see how we can pull out <em>information</em> from
+raw data.</p>
 <div id="the-challenger-disaster" class="section level1">
 <h1>The Challenger disaster</h1>
-<p>On January 28, 1986 the space shuttle Challenger exploded. In his book titled <a href="https://www.edwardtufte.com/tufte/books_visex">“Visual Explanations”</a>, Edward Tufte (1997) provides a detailed account of the background to the incident. In short, the temperature on the day of the launch was too low and resulted in failure of the O-rings in the rocket, which led to an explosion that destroyed the rocket and killed the 7-person crew, pictured below.</p>
-<p><img src="images/challenger_crew.jpg" /> [<a href="https://www.flickr.com/photos/gsfc/12191288154">Image source</a>]</p>
+<p>On January 28, 1986 the space shuttle Challenger exploded. In his
+book titled <a
+href="https://www.edwardtufte.com/tufte/books_visex">“Visual
+Explanations”</a>, Edward Tufte (1997) provides a detailed account of
+the background to the incident. In short, the temperature on the day of
+the launch was too low and resulted in failure of the O-rings in the
+rocket, which led to an explosion that destroyed the rocket and killed
+the 7-person crew, pictured below.</p>
+<p><img src="images/challenger_crew.jpg" /> [<a
+href="https://www.flickr.com/photos/gsfc/12191288154">Image
+source</a>]</p>
 </div>
 <div id="the-data" class="section level1">
 <h1>The data</h1>
-<p>The R package <code>DAAG</code> has a dataset called <code>orings</code> which contains data on temperatures and O-ring damage during launches prior to the Challenger incident. Let’s load the <code>DAAG</code> library and preview the data:</p>
-<pre class="r"><code>library(DAAG)</code></pre>
-<pre><code>## Loading required package: lattice</code></pre>
-<pre class="r"><code>head(orings)</code></pre>
+<p>The R package <code>DAAG</code> has a dataset called
+<code>orings</code> which contains data on temperatures and O-ring
+damage during launches prior to the Challenger incident. Let’s load the
+<code>DAAG</code> library and preview the data:</p>
+<pre class="r"><code>library(DAAG)
+head(orings)</code></pre>
 <pre><code>##   Temperature Erosion Blowby Total
 ## 1          53       3      2     5
 ## 2          57       1      0     1
@@ -530,15 +520,24 @@ $(document).ready(function () {
 ## 4          63       1      0     1
 ## 5          66       0      0     0
 ## 6          67       0      0     0</code></pre>
-<p>We can see that the dataset contains observations about the temperatures of launches and O-ring damage, but we don’t yet have <em>information</em>. One step forward towards <em>information</em> is to simply plot the data to <em>see</em> if there might be a relationship between temperature and O-ring damage:</p>
+<p>We can see that the dataset contains observations about the
+temperatures of launches and O-ring damage, but we don’t yet have
+<em>information</em>. One step forward towards <em>information</em> is
+to simply plot the data to <em>see</em> if there might be a relationship
+between temperature and O-ring damage:</p>
 <pre class="r"><code>library(ggplot2)
 plot &lt;- ggplot(orings, aes(x=Temperature, y=Total)) +
     geom_point() +
     labs(x = &#39;Temperature (F)&#39;, y = &#39;Total O-Ring Damage&#39;)
 plot</code></pre>
 <p><img src="challengerExplosion_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>The graph above shows O-ring damage on the y-axis and temperature on the x-axis. We can easily see that no prior launches below 66 degrees F were damage-free, and it appears that at lower temperatures (such as 55 degrees) the damage was even more severe.</p>
-<p>Now, what temperature was forecasted for the day of the Challenger launch? <strong>26 to 29 degrees</strong>. Let’s add that context to our plot:</p>
+<p>The graph above shows O-ring damage on the y-axis and temperature on
+the x-axis. We can easily see that no prior launches below 66 degrees F
+were damage-free, and it appears that at lower temperatures (such as 55
+degrees) the damage was even more severe.</p>
+<p>Now, what temperature was forecasted for the day of the Challenger
+launch? <strong>26 to 29 degrees</strong>. Let’s add that context to our
+plot:</p>
 <pre class="r"><code>plot +
     # Modify the x and y limits
     xlim(25, 85) +
@@ -550,16 +549,42 @@ plot</code></pre>
     annotate(&quot;text&quot;, x = 30, y = 3,
              label = &quot;Forecast \n temperature \n 26 to 29&quot;)</code></pre>
 <p><img src="challengerExplosion_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Now we have some <em>information</em>. The transformation of the raw data into a visualization makes it obvious that the temperature forecasted for the day of the Challenger launch should raise red flags. It falls far below the temperature range of prior launches, and those prior launches suggest that O-ring damage may be correlated with decreasing temperature.</p>
-<p>To their credit, the engineers working on the Challenger were worried about the potential for O-ring failure. But the critical step in making the link to temperature was not thoroughly communicated. Instead, the <em>raw data</em> was presented in tabular form along with diagrams like the one below, which show how erosion in the primary O-ring interacted with the secondary O-ring:</p>
-<p><img src="images/rockets_chart.png" width="600" /> [<a href="https://www.edwardtufte.com/tufte/books_visex">Image source</a>]</p>
-<p>While the above diagram contains a lot of <em>data</em>, the critical <strong>information</strong> about the relationship between launch temperature and O-ring damage is not obvious. In contrast, the scatterplot achieves this without putting much cognitive load on the viewer. Just about anyone can look at that plot and understand that the forecasted temperature on January 28, 1986 might be a risk for O-ring failure.</p>
+<p>Now we have some <em>information</em>. The transformation of the raw
+data into a visualization makes it obvious that the temperature
+forecasted for the day of the Challenger launch should raise red flags.
+It falls far below the temperature range of prior launches, and those
+prior launches suggest that O-ring damage may be correlated with
+decreasing temperature.</p>
+<p>To their credit, the engineers working on the Challenger were worried
+about the potential for O-ring failure. But the critical step in making
+the link to temperature was not thoroughly communicated. Instead, the
+<em>raw data</em> was presented in tabular form along with diagrams like
+the one below, which show how erosion in the primary O-ring interacted
+with the secondary O-ring:</p>
+<p><img src="images/rockets_chart.png" width="600" /> [<a
+href="https://www.edwardtufte.com/tufte/books_visex">Image
+source</a>]</p>
+<p>While the above diagram contains a lot of <em>data</em>, the critical
+<strong>information</strong> about the relationship between launch
+temperature and O-ring damage is not obvious. In contrast, the
+scatterplot achieves this without putting much cognitive load on the
+viewer. Just about anyone can look at that plot and understand that the
+forecasted temperature on January 28, 1986 might be a risk for O-ring
+failure.</p>
 <hr />
 <p><strong>References</strong>:</p>
 <ul>
-<li>The <a href="https://vizdatar.wordpress.com/2015/05/06/space-shuttle-challenger-explosion-2/">Space shuttle Challenger explosion</a> blog post, by Vikram Dayal</li>
-<li>Robison et al. (2002) <a href="https://people.rit.edu/wlrgsh/FINRobison.pdf">Representation and Misrepresentation: Tufte and the Morton Thiokol Engineers on the Challenger</a>, <em>Science and Engineering Ethics</em>, 8, 59-81.</li>
-<li>Tufte, Edward R. (1997) <a href="https://www.edwardtufte.com/tufte/books_visex">“Visual Explanations: Images and Quantities, Evidence and Narrative”</a>, Graphics Press, Cheshire, Connecticut.</li>
+<li>The <a
+href="https://vizdatar.wordpress.com/2015/05/06/space-shuttle-challenger-explosion-2/">Space
+shuttle Challenger explosion</a> blog post, by Vikram Dayal</li>
+<li>Robison et al. (2002) <a
+href="https://people.rit.edu/wlrgsh/FINRobison.pdf">Representation and
+Misrepresentation: Tufte and the Morton Thiokol Engineers on the
+Challenger</a>, <em>Science and Engineering Ethics</em>, 8, 59-81.</li>
+<li>Tufte, Edward R. (1997) <a
+href="https://www.edwardtufte.com/tufte/books_visex">“Visual
+Explanations: Images and Quantities, Evidence and Narrative”</a>,
+Graphics Press, Cheshire, Connecticut.</li>
 </ul>
 </div>
 
@@ -602,7 +627,7 @@ plot</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -620,7 +645,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

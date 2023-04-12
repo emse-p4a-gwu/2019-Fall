@@ -13,20 +13,30 @@
 
 <title>Getting Started</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,7 +554,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -593,17 +564,24 @@ div.tocify {
 
 
 <hr />
-<div id="r-and-rstudio" class="section level1">
+<div id="r-and-rstudio" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> R and RStudio</h1>
-<div id="whats-the-difference" class="section level2">
-<h2><span class="header-section-number">1.1</span> What’s the difference?</h2>
-<p>R is a programming language that runs computations while RStudio is an <em>integrated development environment (IDE)</em> - an interface for working in R with many convenient features and tools.</p>
+<div id="whats-the-difference" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> What’s the
+difference?</h2>
+<p>R is a programming language that runs computations while RStudio is
+an <em>integrated development environment (IDE)</em> - an interface for
+working in R with many convenient features and tools.</p>
 <p>You can think of the two like this:</p>
 <ul>
 <li>R is like a car’s <em>engine</em>.</li>
 <li>RStudio is like a car’s <em>dashboard</em>.</li>
 </ul>
 <table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="center">R: Engine</th>
@@ -617,21 +595,34 @@ div.tocify {
 </tr>
 </tbody>
 </table>
-<p>Your car needs an engine (R) to run, but having a speedometer and rear view mirrors (RStudio) makes driving a lot easier.</p>
+<p>Your car needs an engine (R) to run, but having a speedometer and
+rear view mirrors (RStudio) makes driving a lot easier.</p>
 </div>
-<div id="installing-r-and-rstudio" class="section level2">
-<h2><span class="header-section-number">1.2</span> Installing R and RStudio</h2>
-<p>You will first need to download and install both R and RStudio (Desktop version) on your computer.</p>
+<div id="installing-r-and-rstudio" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Installing R and
+RStudio</h2>
+<p>You will first need to download and install both R and RStudio
+(Desktop version) on your computer.</p>
 <ol style="list-style-type: decimal">
-<li><a href="https://cloud.r-project.org">Download and install R</a>.</li>
-<li><a href="https://www.rstudio.com/products/rstudio/download/preview/">Download and install RStudio (Desktop version)</a>.</li>
+<li><a href="https://cloud.r-project.org">Download and install
+R</a>.</li>
+<li><a
+href="https://www.rstudio.com/products/rstudio/download/preview/">Download
+and install RStudio (Desktop version)</a>.</li>
 </ol>
 </div>
-<div id="using-r-via-rstudio" class="section level2">
-<h2><span class="header-section-number">1.3</span> Using R via RStudio</h2>
-<p>After you install R and RStudio on your computer, you’ll have two new applications you can open. <strong>We will always work in RStudio</strong>. In other words:</p>
+<div id="using-r-via-rstudio" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Using R via
+RStudio</h2>
+<p>After you install R and RStudio on your computer, you’ll have two new
+applications you can open. <strong>We will always work in
+RStudio</strong>. In other words:</p>
 <div class="tableMedium">
 <table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="center">R: Do not open this</th>
@@ -654,17 +645,24 @@ div.tocify {
 <li>Environment/History (tabbed in upper right)</li>
 <li>Files/Plots/Packages/Help (tabbed in lower right)</li>
 </ul>
-<p>FYI: you can change the default location of the panes, among many other things: <a href="https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio">Customizing RStudio</a>.</p>
-<p>Go into the Console on the left with the <code>&gt;</code> (that’s the <em>command prompt</em>), and let’s get started!</p>
+<p>FYI: you can change the default location of the panes, among many
+other things: <a
+href="https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio">Customizing
+RStudio</a>.</p>
+<p>Go into the Console on the left with the <code>&gt;</code> (that’s
+the <em>command prompt</em>), and let’s get started!</p>
 <hr />
 </div>
 </div>
-<div id="r-as-a-calculator" class="section level1">
+<div id="r-as-a-calculator" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> R as a calculator</h1>
-<p>At its core, R is a calculator. You can use arithmetic, relational, and logical operators to evaluate a wide variety of computations.</p>
-<div id="arithmetic-operators" class="section level2">
-<h2><span class="header-section-number">2.1</span> Arithmetic operators</h2>
-<p>R can handle simple arithmetic using the following arithmetic operators:</p>
+<p>At its core, R is a calculator. You can use arithmetic, relational,
+and logical operators to evaluate a wide variety of computations.</p>
+<div id="arithmetic-operators" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Arithmetic
+operators</h2>
+<p>R can handle simple arithmetic using the following arithmetic
+operators:</p>
 <ul>
 <li>Addition: <code>+</code></li>
 <li>Subtraction: <code>-</code></li>
@@ -674,7 +672,9 @@ div.tocify {
 <li>Integer division: <code>%/%</code></li>
 <li>Modulus: <code>%%</code></li>
 </ul>
-<p>The first four basic operators (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>) are pretty straightforward and behave as expected:</p>
+<p>The first four basic operators (<code>+</code>, <code>-</code>,
+<code>*</code>, <code>/</code>) are pretty straightforward and behave as
+expected:</p>
 <pre class="r"><code>7 + 5 # Addition</code></pre>
 <pre><code>## [1] 12</code></pre>
 <pre class="r"><code>7 - 5 # Subtraction</code></pre>
@@ -683,37 +683,54 @@ div.tocify {
 <pre><code>## [1] 35</code></pre>
 <pre class="r"><code>7 / 5 # Division</code></pre>
 <pre><code>## [1] 1.4</code></pre>
-<p>Not a lot of surprises (you can ignore the <code>[1]</code> you see in the returned values…that’s just R saying there’s only one value to return). The other three arithmetic operators (<code>^</code>, <code>%/%</code>, <code>%%</code>) are a little more subtle, so let’s examine them more closely.</p>
+<p>Not a lot of surprises (you can ignore the <code>[1]</code> you see
+in the returned values…that’s just R saying there’s only one value to
+return). The other three arithmetic operators (<code>^</code>,
+<code>%/%</code>, <code>%%</code>) are a little more subtle, so let’s
+examine them more closely.</p>
 <p><strong>Powers</strong>:</p>
-<p>Powers (i.e. <span class="math inline">\(x^n\)</span>) are represented using the <code>^</code> symbol. For example, to calculate <span class="math inline">\(5^4\)</span> in R, we would type:</p>
+<p>Powers (i.e. <span class="math inline">\(x^n\)</span>) are
+represented using the <code>^</code> symbol. For example, to calculate
+<span class="math inline">\(5^4\)</span> in R, we would type:</p>
 <pre class="r"><code>5^4</code></pre>
 <pre><code>## [1] 625</code></pre>
 <p><strong>Integer division</strong>:</p>
-<p>Integer division is division in which the remainder is discarded. Note the difference between regular (<code>/</code>) and integer (<code>%/%</code>) division:</p>
+<p>Integer division is division in which the remainder is discarded.
+Note the difference between regular (<code>/</code>) and integer
+(<code>%/%</code>) division:</p>
 <pre class="r"><code>4 / 3 # Regular division</code></pre>
 <pre><code>## [1] 1.333333</code></pre>
 <pre class="r"><code>4 %/% 3 # Integer division</code></pre>
 <pre><code>## [1] 1</code></pre>
-<p>With integer division, 3 can only go into 4 once, so <code>4 %/% 3</code> returns <code>1</code>. If you try to integer divide a number by a larger number, you’ll get <code>0</code>:</p>
+<p>With integer division, 3 can only go into 4 once, so
+<code>4 %/% 3</code> returns <code>1</code>. If you try to integer
+divide a number by a larger number, you’ll get <code>0</code>:</p>
 <pre class="r"><code>4 %/% 5 # Will return 0</code></pre>
 <pre><code>## [1] 0</code></pre>
 <p><strong>Modulus operator</strong>:</p>
-<p>The <strong>modulus</strong> (aka “mod” operator) returns the remainder after doing integer division. For example:</p>
+<p>The <strong>modulus</strong> (aka “mod” operator) returns the
+remainder after doing integer division. For example:</p>
 <pre class="r"><code>17 %% 3</code></pre>
 <pre><code>## [1] 2</code></pre>
-<p>This returns <code>2</code> because because 17 / 3 is equal to 5 with a remainder of 2. The modulus returns any remainder, including decimals:</p>
+<p>This returns <code>2</code> because because 17 / 3 is equal to 5 with
+a remainder of 2. The modulus returns any remainder, including
+decimals:</p>
 <pre class="r"><code>3.1415 %% 3</code></pre>
 <pre><code>## [1] 0.1415</code></pre>
-<p>If you mod a number by itself, you’ll get <code>0</code> (because there’s no remainder):</p>
+<p>If you mod a number by itself, you’ll get <code>0</code> (because
+there’s no remainder):</p>
 <pre class="r"><code>17 %% 17 # Will return 0</code></pre>
 <pre><code>## [1] 0</code></pre>
-<p>Finally, if you mod a number by a larger number, you’ll get the smaller number back since it’s the remainder:</p>
+<p>Finally, if you mod a number by a larger number, you’ll get the
+smaller number back since it’s the remainder:</p>
 <pre class="r"><code>17 %% 20 # Will return 17</code></pre>
 <pre><code>## [1] 17</code></pre>
 </div>
-<div id="relational-operators" class="section level2">
-<h2><span class="header-section-number">2.2</span> Relational operators</h2>
-<p>R assesses whether a comparison of two values is <code>TRUE</code> or <code>FALSE</code> using the following relational operators:</p>
+<div id="relational-operators" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Relational
+operators</h2>
+<p>R assesses whether a comparison of two values is <code>TRUE</code> or
+<code>FALSE</code> using the following relational operators:</p>
 <ul>
 <li>Less than: <code>&lt;</code></li>
 <li>Less than or equal to : <code>&lt;=</code></li>
@@ -722,35 +739,45 @@ div.tocify {
 <li>Equal: <code>==</code></li>
 <li>Not equal: <code>!=</code></li>
 </ul>
-<p>The <em>less than</em> operator <code>&lt;</code> can be used to test whether one number is smaller than another number:</p>
+<p>The <em>less than</em> operator <code>&lt;</code> can be used to test
+whether one number is smaller than another number:</p>
 <pre class="r"><code>2 &lt; 5</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>If the two values are equal, the <code>&lt;</code> operator will return <code>FALSE</code>, while the <code>&lt;=</code> operator will return <code>TRUE</code>: :</p>
+<p>If the two values are equal, the <code>&lt;</code> operator will
+return <code>FALSE</code>, while the <code>&lt;=</code> operator will
+return <code>TRUE</code>: :</p>
 <pre class="r"><code>2 &lt; 2</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>2 &lt;= 2</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>The “greater than” (<code>&gt;</code>) and “greater than or equal to” (<code>&gt;=</code>) operators work the same way but in reverse:</p>
+<p>The “greater than” (<code>&gt;</code>) and “greater than or equal to”
+(<code>&gt;=</code>) operators work the same way but in reverse:</p>
 <pre class="r"><code>2 &gt; 5</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>2 &gt; 2</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>2 &gt;= 2</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>To assess whether two values are equal, we have to use a double equal sign (<code>==</code>):</p>
+<p>To assess whether two values are equal, we have to use a double equal
+sign (<code>==</code>):</p>
 <pre class="r"><code>(2 + 2) == 4</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>(2 + 2) == 5</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>To assess whether two values are <em>not</em> equal, we have to use an exclamation point sign with an equal sign (<code>!=</code>):</p>
+<p>To assess whether two values are <em>not</em> equal, we have to use
+an exclamation point sign with an equal sign (<code>!=</code>):</p>
 <pre class="r"><code>(2 + 2) != 4</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>(2 + 2) != 5</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>It’s worth noting that you can also apply equality operations to strings. R understands that a <code>"penguin"</code> is a <code>"penguin"</code> so you get this:</p>
+<p>It’s worth noting that you can also apply equality operations to
+strings. R understands that a <code>"penguin"</code> is a
+<code>"penguin"</code> so you get this:</p>
 <pre class="r"><code>&quot;penguin&quot; == &quot;penguin&quot;</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>However, R is very particular about what counts as equality. For two pieces of text to be equal, they must be <em>precisely</em> the same:</p>
+<p>However, R is very particular about what counts as equality. For two
+pieces of text to be equal, they must be <em>precisely</em> the
+same:</p>
 <pre class="r"><code>&quot;penguin&quot; == &quot;PENGUIN&quot;        # Returns FALSE
 &quot;penguin&quot; == &quot;p e n g u i n&quot;  # Returns FALSE
 &quot;penguin&quot; == &quot;penguin &quot;       # Returns FALSE</code></pre>
@@ -758,49 +785,76 @@ div.tocify {
 ## [1] FALSE
 ## [1] FALSE</code></pre>
 </div>
-<div id="logical-operators" class="section level2">
-<h2><span class="header-section-number">2.3</span> Logical operators</h2>
-<p>R assesses logical statements using the following logical operators:</p>
+<div id="logical-operators" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Logical
+operators</h2>
+<p>R assesses logical statements using the following logical
+operators:</p>
 <ul>
 <li>And: <code>&amp;</code></li>
 <li>Or: <code>|</code></li>
 <li>Not: <code>!</code></li>
 </ul>
 <p><strong>And</strong>:</p>
-<p>A logical expression <code>x &amp; y</code> is <code>TRUE</code> only if <em>both</em> <code>x</code> and <code>y</code> are <code>TRUE</code>.</p>
+<p>A logical expression <code>x &amp; y</code> is <code>TRUE</code> only
+if <em>both</em> <code>x</code> and <code>y</code> are
+<code>TRUE</code>.</p>
 <pre class="r"><code>(2 == 2) &amp; (2 == 3)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>(2 == 2) &amp; (3 == 3)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p><strong>Or</strong>:</p>
-<p>A logical expression <code>x | y</code> is <code>TRUE</code> if <em>either</em> <code>x</code> or <code>y</code> are <code>TRUE</code>.</p>
+<p>A logical expression <code>x | y</code> is <code>TRUE</code> if
+<em>either</em> <code>x</code> or <code>y</code> are
+<code>TRUE</code>.</p>
 <pre class="r"><code>(2 == 2) | (2 == 3)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p><strong>Not</strong>:</p>
-<p>The <code>!</code> operator behaves like the word <em>“not”</em> in everyday language. If a statement is “not true”, then it must be “false”. For example:</p>
+<p>The <code>!</code> operator behaves like the word <em>“not”</em> in
+everyday language. If a statement is “not true”, then it must be
+“false”. For example:</p>
 <pre class="r"><code>!TRUE</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>In practice, it is often helpful to include parentheses to clarify the statement being made. Consider the following example:</p>
+<p>In practice, it is often helpful to include parentheses to clarify
+the statement being made. Consider the following example:</p>
 <pre class="r"><code>!3 == 5</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>This returns <code>TRUE</code>, but it’s a bit confusing. Reading from left to right, you start by saying “not 3”…what does that mean?</p>
-<p>What is really going on here is R first evaluates whether 3 is equal to 5 (<code>3 == 5</code>), and then returns the “not” (<code>!</code>) of that. A better version of the same thing would be:</p>
+<p>This returns <code>TRUE</code>, but it’s a bit confusing. Reading
+from left to right, you start by saying “not 3”…what does that mean?</p>
+<p>What is really going on here is R first evaluates whether 3 is equal
+to 5 (<code>3 == 5</code>), and then returns the “not” (<code>!</code>)
+of that. A better version of the same thing would be:</p>
 <pre class="r"><code>!(3 == 5)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </div>
-<div id="order-of-operations" class="section level2">
-<h2><span class="header-section-number">2.4</span> Order of operations</h2>
-<p>R follows the typical BEDMAS order of operations. That is, you first calculate things inside <strong>B</strong>rackets, then calculate <strong>E</strong>xponents, then <strong>D</strong>ivision and <strong>M</strong>ultiplication, then <strong>A</strong>ddition and <strong>S</strong>ubtraction. For a more precise statement, see the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html">operator precedence</a> for R. For example, if I type:</p>
+<div id="order-of-operations" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Order of
+operations</h2>
+<p>R follows the typical BEDMAS order of operations. That is, you first
+calculate things inside <strong>B</strong>rackets, then calculate
+<strong>E</strong>xponents, then <strong>D</strong>ivision and
+<strong>M</strong>ultiplication, then <strong>A</strong>ddition and
+<strong>S</strong>ubtraction. For a more precise statement, see the <a
+href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Syntax.html">operator
+precedence</a> for R. For example, if I type:</p>
 <pre class="r"><code>1 + 2 * 4</code></pre>
 <pre><code>## [1] 9</code></pre>
-<p>R first computes <code>2 * 4</code> and then adds <code>1</code>. If what you actually wanted was for R to first add <code>2</code> to <code>1</code>, then you should have added parentheses around <code>1</code> and <code>2</code>:</p>
+<p>R first computes <code>2 * 4</code> and then adds <code>1</code>. If
+what you actually wanted was for R to first add <code>2</code> to
+<code>1</code>, then you should have added parentheses around
+<code>1</code> and <code>2</code>:</p>
 <pre class="r"><code>(1 + 2) * 4</code></pre>
 <pre><code>## [1] 12</code></pre>
-<p>A helpful rule of thumb to remember is that <strong>brackets always come first</strong>. So, if you’re ever unsure about what order R will do things in, an easy solution is to enclose the thing you want it to do first in brackets.</p>
+<p>A helpful rule of thumb to remember is that <strong>brackets always
+come first</strong>. So, if you’re ever unsure about what order R will
+do things in, an easy solution is to enclose the thing you want it to do
+first in brackets.</p>
 </div>
-<div id="r-ignores-excess-spacing" class="section level2">
-<h2><span class="header-section-number">2.5</span> R ignores excess spacing</h2>
-<p>When I typed <code>10 + 20</code> before, I could equally have done this</p>
+<div id="r-ignores-excess-spacing" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> R ignores excess
+spacing</h2>
+<p>When I typed <code>10 + 20</code> before, I could equally have done
+this</p>
 <pre class="r"><code>10        + 20</code></pre>
 <pre><code>## [1] 30</code></pre>
 <p>or this</p>
@@ -808,46 +862,75 @@ div.tocify {
 <pre><code>## [1] 30</code></pre>
 <p>and get exactly the same answer.</p>
 </div>
-<div id="using-comments" class="section level2">
+<div id="using-comments" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Using comments</h2>
-<p>In R, the <code>#</code> symbol is a special symbol that denotes a comment. R will ignore anything on the same line that follows the <code>#</code> symbol. This enables us to write comments around our code to explain what we’re doing:</p>
+<p>In R, the <code>#</code> symbol is a special symbol that denotes a
+comment. R will ignore anything on the same line that follows the
+<code>#</code> symbol. This enables us to write comments around our code
+to explain what we’re doing:</p>
 <pre class="r"><code>2 + 2 # This is a comment explaining that I&#39;m adding two numbers</code></pre>
 <pre><code>## [1] 4</code></pre>
-<p>Notice that R ignores the whole sentence after the <code>#</code> symbol.</p>
+<p>Notice that R ignores the whole sentence after the <code>#</code>
+symbol.</p>
 <hr />
 </div>
 </div>
-<div id="staying-organized" class="section level1">
+<div id="staying-organized" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Staying organized</h1>
-<div id="the-history-pane" class="section level2">
+<div id="the-history-pane" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> The history pane</h2>
-<p>R keeps track of your “command history”. If you hit the up key, the R console will show you the most recent command that you’ve typed. Hit it again, and it will show you the command before that.</p>
-<p>The second way to get access to your command history is to look at the history panel in Rstudio. On the upper right hand side of the Rstudio window you’ll see a tab labelled “History”. Click on that, and you’ll see a list of all your recent commands displayed in that panel. It should look something like this:</p>
+<p>R keeps track of your “command history”. If you hit the up key, the R
+console will show you the most recent command that you’ve typed. Hit it
+again, and it will show you the command before that.</p>
+<p>The second way to get access to your command history is to look at
+the history panel in Rstudio. On the upper right hand side of the
+Rstudio window you’ll see a tab labelled “History”. Click on that, and
+you’ll see a list of all your recent commands displayed in that panel.
+It should look something like this:</p>
 <center>
 <img src="images/rstudio_history.png" width="400" />
 </center>
-<p>If you double click on one of the commands, it will be copied to the R console.</p>
+<p>If you double click on one of the commands, it will be copied to the
+R console.</p>
 </div>
-<div id="working-directory" class="section level2">
-<h2><span class="header-section-number">3.2</span> Working directory</h2>
-<p>Any process running on your computer has a notion of its “working directory”. In R, this is where R will look for files you ask it to load. It’s also where any files you write to disk will go.</p>
+<div id="working-directory" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Working
+directory</h2>
+<p>Any process running on your computer has a notion of its “working
+directory”. In R, this is where R will look for files you ask it to
+load. It’s also where any files you write to disk will go.</p>
 <p>You can explicitly check your working directory with:</p>
 <pre class="r"><code>getwd()</code></pre>
 <p>It is also displayed at the top of the RStudio console.</p>
-<p>As a beginning R user, it’s OK let your home directory or any other weird directory on your computer be R’s working directory. <em>Very soon</em>, I urge you to evolve to the next level, where you organize your analytical projects into directories and, when working on project A, set R’s working directory to the associated directory.</p>
-<p><strong>Although I do not recommend it</strong>, in case you’re curious, you can set R’s working directory at the command line like so:</p>
+<p>As a beginning R user, it’s OK let your home directory or any other
+weird directory on your computer be R’s working directory. <em>Very
+soon</em>, I urge you to evolve to the next level, where you organize
+your analytical projects into directories and, when working on project
+A, set R’s working directory to the associated directory.</p>
+<p><strong>Although I do not recommend it</strong>, in case you’re
+curious, you can set R’s working directory at the command line like
+so:</p>
 <pre class="r"><code>setwd(&quot;~/myCoolProject&quot;)</code></pre>
-<p><strong>Although I do not recommend it</strong>, you can also use RStudio’s Files pane to navigate to a directory and then set it as working directory from the menu:</p>
+<p><strong>Although I do not recommend it</strong>, you can also use
+RStudio’s Files pane to navigate to a directory and then set it as
+working directory from the menu:</p>
 <blockquote>
 <p>Session &gt; Set Working Directory &gt; To Files Pane Location.</p>
 </blockquote>
-<p>You’ll see even more options there). Or within the Files pane, choose <strong>More</strong> and <strong>Set As Working Directory</strong>.</p>
-<p>But there’s a better way. A way that also puts you on the path to managing your R work like an expert.</p>
+<p>You’ll see even more options there). Or within the Files pane, choose
+<strong>More</strong> and <strong>Set As Working Directory</strong>.</p>
+<p>But there’s a better way. A way that also puts you on the path to
+managing your R work like an expert.</p>
 </div>
-<div id="rstudio-projects" class="section level2">
+<div id="rstudio-projects" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> RStudio projects</h2>
-<p>Keeping all the files associated with a project organized together – input data, R scripts, analytical results, figures – is such a wise and common practice that RStudio has built-in support for this via its <em>projects</em>.</p>
-<p><a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">Using Projects</a></p>
+<p>Keeping all the files associated with a project organized together –
+input data, R scripts, analytical results, figures – is such a wise and
+common practice that RStudio has built-in support for this via its
+<em>projects</em>.</p>
+<p><a
+href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">Using
+Projects</a></p>
 <p>Let’s make one for practice. Do this:</p>
 <blockquote>
 <p>File &gt; New Project ….</p>
@@ -856,13 +939,25 @@ div.tocify {
 <center>
 <img src="images/rstudio_new_project.png" width="400" />
 </center>
-<p>Choose “New Directory”. The directory name you choose here will be the project name. Call it whatever you want. RStudio will create a folder with that name to put all your project files.</p>
-<p>As a demo, I created a project on my Desktop called “demo”. RStudio created a new project called “demo”, and in this folder there is a file called “demo.Rproj”. If I double-click on this file, RStudio will open up, and my working directory will be automatically set to this folder! You can double check this by typing:</p>
+<p>Choose “New Directory”. The directory name you choose here will be
+the project name. Call it whatever you want. RStudio will create a
+folder with that name to put all your project files.</p>
+<p>As a demo, I created a project on my Desktop called “demo”. RStudio
+created a new project called “demo”, and in this folder there is a file
+called “demo.Rproj”. If I double-click on this file, RStudio will open
+up, and my working directory will be automatically set to this folder!
+You can double check this by typing:</p>
 <pre class="r"><code>getwd()</code></pre>
 </div>
-<div id="save-your-code-in-.r-files" class="section level2">
-<h2><span class="header-section-number">3.4</span> Save your code in .R Files</h2>
-<p>It is traditional to save R scripts with a <code>.R</code> or <code>.r</code> suffix. Any code you wish to re-run again later should be saved in this way and stored within your project folder. For example, if you wanted to re-run all of the code in this tutorial, open a new <code>.R</code> file and save it to your R project folder. Do this:</p>
+<div id="save-your-code-in-.r-files" class="section level2"
+number="3.4">
+<h2><span class="header-section-number">3.4</span> Save your code in .R
+Files</h2>
+<p>It is traditional to save R scripts with a <code>.R</code> or
+<code>.r</code> suffix. Any code you wish to re-run again later should
+be saved in this way and stored within your project folder. For example,
+if you wanted to re-run all of the code in this tutorial, open a new
+<code>.R</code> file and save it to your R project folder. Do this:</p>
 <blockquote>
 <p>File &gt; New File &gt; R Script</p>
 </blockquote>
@@ -883,24 +978,33 @@ getwd()</code></pre>
 <blockquote>
 <p>File &gt; Save</p>
 </blockquote>
-<p>I called the file “tutorial.R” and saved it in my R project folder called “demo”.</p>
-<p>Now when I open the “demo.Rproj” file, I see in my files pane the “tutorial.R” code script. I can click on that file and continue editing it!</p>
-<p>I can also run any line in the script by typing “Command + Enter” (Mac) or “Control + Enter” (Windows).</p>
+<p>I called the file “tutorial.R” and saved it in my R project folder
+called “demo”.</p>
+<p>Now when I open the “demo.Rproj” file, I see in my files pane the
+“tutorial.R” code script. I can click on that file and continue editing
+it!</p>
+<p>I can also run any line in the script by typing “Command + Enter”
+(Mac) or “Control + Enter” (Windows).</p>
 <hr />
 </div>
 </div>
-<div id="tips" class="section level1">
+<div id="tips" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Tips</h1>
-<div id="chopping-up-numbers-with-and-of-10s" class="section level2">
-<h2><span class="header-section-number">4.1</span> “Chopping” up numbers with <code>%%</code> and <code>%/%</code> of 10s</h2>
-<p>When you use the mod operator (<code>%%</code>) on a positive number <strong>with factors of 10</strong>, it “chops” a number at a particular digit and returns everything to the <em>right</em>. For example:</p>
+<div id="chopping-up-numbers-with-and-of-10s" class="section level2"
+number="4.1">
+<h2><span class="header-section-number">4.1</span> “Chopping” up numbers
+with <code>%%</code> and <code>%/%</code> of 10s</h2>
+<p>When you use the mod operator (<code>%%</code>) on a positive number
+<strong>with factors of 10</strong>, it “chops” a number at a particular
+digit and returns everything to the <em>right</em>. For example:</p>
 <pre class="r"><code>123456 %% 1 # Chops to the right of the ones digit</code></pre>
 <pre><code>## [1] 0</code></pre>
 <pre class="r"><code>123456 %% 10 # Chops to the right of the tens digit</code></pre>
 <pre><code>## [1] 6</code></pre>
 <pre class="r"><code>123456 %% 100 # Chops to the right of the hundreds digit</code></pre>
 <pre><code>## [1] 56</code></pre>
-<p>Integer division (<code>%/%</code>) does the opposite - it returns everything to the <em>left</em> of the “chop” point. For example:</p>
+<p>Integer division (<code>%/%</code>) does the opposite - it returns
+everything to the <em>left</em> of the “chop” point. For example:</p>
 <pre class="r"><code>123456 %/% 1 # &quot;Chops to the right of the ones digit</code></pre>
 <pre><code>## [1] 123456</code></pre>
 <pre class="r"><code>123456 %/% 10 # &quot;Chops to the right of the tens digit</code></pre>
@@ -912,16 +1016,20 @@ getwd()</code></pre>
 <pre><code>## [1] 0.1415</code></pre>
 <pre class="r"><code>3.1415 %/% 1</code></pre>
 <pre><code>## [1] 3</code></pre>
-<p>But <strong>be careful</strong> - this “trick” only works with <em>positive</em> numbers:</p>
+<p>But <strong>be careful</strong> - this “trick” only works with
+<em>positive</em> numbers:</p>
 <pre class="r"><code>-123.456 %% 10</code></pre>
 <pre><code>## [1] 6.544</code></pre>
 <pre class="r"><code>-123.456 %/% 10</code></pre>
 <pre><code>## [1] -13</code></pre>
 <p>Here’s some mental notes to remember how this works:</p>
 <ul>
-<li><code>%%</code> returns everything to the <em>right</em> (<code>&lt;chop&gt; -&gt;</code>)</li>
-<li><code>%/%</code> returns everything to the <em>left</em> (<code>&lt;- &lt;chop&gt;</code>)</li>
-<li>The “chop” point is always just to the <em>right</em> of the chopping digit:</li>
+<li><code>%%</code> returns everything to the <em>right</em>
+(<code>&lt;chop&gt; -&gt;</code>)</li>
+<li><code>%/%</code> returns everything to the <em>left</em>
+(<code>&lt;- &lt;chop&gt;</code>)</li>
+<li>The “chop” point is always just to the <em>right</em> of the
+chopping digit:</li>
 </ul>
 <div class="tableMedium">
 <table>
@@ -962,9 +1070,12 @@ getwd()</code></pre>
 </table>
 </div>
 </div>
-<div id="odds-and-evens-with" class="section level2">
-<h2><span class="header-section-number">4.2</span> Odds and evens with <code>%%</code></h2>
-<p>You can tell if an integer is even or odd by using mod <code>2</code>. If you get <code>0</code>, it’s even; if you <code>1</code>, it’s odd:</p>
+<div id="odds-and-evens-with" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Odds and evens with
+<code>%%</code></h2>
+<p>You can tell if an integer is even or odd by using mod
+<code>2</code>. If you get <code>0</code>, it’s even; if you
+<code>1</code>, it’s odd:</p>
 <pre class="r"><code>10 %% 2 # Even</code></pre>
 <pre><code>## [1] 0</code></pre>
 <pre class="r"><code>11 %% 2 # Odd</code></pre>
@@ -975,11 +1086,14 @@ getwd()</code></pre>
 <pre><code>## [1] 1</code></pre>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li>Danielle Navarro’s website <a href="https://psyr.org/index.html">“R for Psychological Science”</a></li>
+<li>Danielle Navarro’s website <a href="https://psyr.org/index.html">“R
+for Psychological Science”</a></li>
 <li>Jenny Bryan’s <a href="http://stat545.com/">STAT 545 Course</a></li>
-<li><a href="https://moderndive.netlify.com/">Modern Dive</a>, by Chester Ismay &amp; Albert Y. Kim</li>
+<li><a href="https://moderndive.netlify.com/">Modern Dive</a>, by
+Chester Ismay &amp; Albert Y. Kim</li>
 </ul>
 </div>
 </div>
@@ -1025,7 +1139,7 @@ getwd()</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1043,7 +1157,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -1052,6 +1166,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -1064,7 +1181,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

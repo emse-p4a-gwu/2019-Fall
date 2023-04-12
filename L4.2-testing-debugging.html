@@ -13,20 +13,30 @@
 
 <title>Testing &amp; Debugging</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,7 +554,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -601,42 +572,79 @@ div.tocify {
 </ul>
 <h3 id="suggested-readings">Suggested Readings</h3>
 <ul>
-<li><a href="https://whattheyforgot.org/debugging-r-code.html">Chapter 11</a> in Jenny Bryan and Jim Hester’s fantastic book, <a href="https://whattheyforgot.org/">“What They Forgot to Teach You About R”</a>.</li>
+<li><a href="https://whattheyforgot.org/debugging-r-code.html">Chapter
+11</a> in Jenny Bryan and Jim Hester’s fantastic book, <a
+href="https://whattheyforgot.org/">“What They Forgot to Teach You About
+R”</a>.</li>
 </ul>
 </blockquote>
-<p>Here are some other great resources: &gt; * <a href="https://resources.rstudio.com/wistia-rstudio-conf-2018-2/debugging-techniques-in-rstudio-amanda-gadrow-4">Debugging techniques in RStudio</a> - Amanda Gadrow’s talk at rstudio::conf 2018. &gt; * <a href="https://support.rstudio.com/hc/en-us/articles/200713843">Debugging in RStudio article</a></p>
+<p>Here are some other great resources: &gt; * <a
+href="https://resources.rstudio.com/wistia-rstudio-conf-2018-2/debugging-techniques-in-rstudio-amanda-gadrow-4">Debugging
+techniques in RStudio</a> - Amanda Gadrow’s talk at rstudio::conf 2018.
+&gt; * <a
+href="https://support.rstudio.com/hc/en-us/articles/200713843">Debugging
+in RStudio article</a></p>
 <hr />
-<div id="writing-test-cases" class="section level1">
+<div id="writing-test-cases" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Writing test cases</h1>
 <center>
 <img src="images/test_cases_fry.png" width="300" />
 </center>
-<p>Writing test cases is part of the process of understanding a problem; if you don’t know what the result of an example input should be, you can’t know how to solve the problem.</p>
-<p>Test cases are also used to verify that a solution to a problem is correct – that it works as expected. Without a good set of test cases, we have no idea whether our code actually works!</p>
-<div id="test-case-types" class="section level2">
+<p>Writing test cases is part of the process of understanding a problem;
+if you don’t know what the result of an example input should be, you
+can’t know how to solve the problem.</p>
+<p>Test cases are also used to verify that a solution to a problem is
+correct – that it works as expected. Without a good set of test cases,
+we have no idea whether our code actually works!</p>
+<div id="test-case-types" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Test case types</h2>
-<p>Test cases vary based on the problem, but you generally want to ensure that you have at least one or two of each of the following test case types:</p>
+<p>Test cases vary based on the problem, but you generally want to
+ensure that you have at least one or two of each of the following test
+case types:</p>
 <ul>
-<li><strong>Normal Cases</strong>: Typical input that should follow the main path through the code.</li>
-<li><strong>Large Cases</strong>: Typical input, but of a larger size than usual. This ensures that bugs don’t appear after multiple iterations.</li>
-<li><strong>Edge Cases</strong>: Pairs of inputs that test different choice points in the code. For example, if a condition in the problem checks whether <code>n &lt; 2</code>, two important edge cases are when <code>n = 2</code> and <code>n = 3</code>, which trigger different behaviors. Other edge cases include the first / last characters in a string or items in a list.</li>
-<li><strong>Special Cases</strong>: Some inputs need to be special-cased for many problems. This includes negative numbers, <code>0</code> and <code>1</code> for integers, the empty string (<code>""</code>), and input values of different types than are expected.</li>
-<li><strong>Varying Results</strong>: Finally, test cases should cover multiple possible results. This is especially important for logical functions; make sure that you have both <code>TRUE</code> and <code>FALSE</code> cases among your tests!</li>
+<li><strong>Normal Cases</strong>: Typical input that should follow the
+main path through the code.</li>
+<li><strong>Large Cases</strong>: Typical input, but of a larger size
+than usual. This ensures that bugs don’t appear after multiple
+iterations.</li>
+<li><strong>Edge Cases</strong>: Pairs of inputs that test different
+choice points in the code. For example, if a condition in the problem
+checks whether <code>n &lt; 2</code>, two important edge cases are when
+<code>n = 2</code> and <code>n = 3</code>, which trigger different
+behaviors. Other edge cases include the first / last characters in a
+string or items in a list.</li>
+<li><strong>Special Cases</strong>: Some inputs need to be special-cased
+for many problems. This includes negative numbers, <code>0</code> and
+<code>1</code> for integers, the empty string (<code>""</code>), and
+input values of different types than are expected.</li>
+<li><strong>Varying Results</strong>: Finally, test cases should cover
+multiple possible results. This is especially important for logical
+functions; make sure that you have both <code>TRUE</code> and
+<code>FALSE</code> cases among your tests!</li>
 </ul>
 </div>
-<div id="testing-with-stopifnot" class="section level2">
-<h2><span class="header-section-number">1.2</span> Testing with <code>stopifnot()</code></h2>
-<p>The <code>stopifnot()</code> function does what you might expect - it stops the function if whatever is inside the <code>()</code> is not <code>TRUE</code>. Let’s look at an example.</p>
-<p>Consider the function <code>isEvenNumber()</code>, which takes a numeric value and returns <code>TRUE</code> if it is an even number and <code>FALSE</code> otherwise:</p>
+<div id="testing-with-stopifnot" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Testing with
+<code>stopifnot()</code></h2>
+<p>The <code>stopifnot()</code> function does what you might expect - it
+stops the function if whatever is inside the <code>()</code> is not
+<code>TRUE</code>. Let’s look at an example.</p>
+<p>Consider the function <code>isEvenNumber()</code>, which takes a
+numeric value and returns <code>TRUE</code> if it is an even number and
+<code>FALSE</code> otherwise:</p>
 <pre class="r"><code>isEvenNumber &lt;- function(n) {
     # A number is &quot;even&quot; if it is divisible by 2 with no remainder
     remainder &lt;- n %% 2
     return(remainder == 0)
 }</code></pre>
-<p>Here is a simple test function for <code>isEvenNumber()</code> that uses the <code>stopifnot()</code> function to examine the following two test cases:</p>
+<p>Here is a simple test function for <code>isEvenNumber()</code> that
+uses the <code>stopifnot()</code> function to examine the following two
+test cases:</p>
 <ul>
-<li>We expect the output of <code>isEvenNumber(42)</code> to be <code>TRUE</code></li>
-<li>We expect the output of <code>isEvenNumber(43)</code> to be <code>FALSE</code></li>
+<li>We expect the output of <code>isEvenNumber(42)</code> to be
+<code>TRUE</code></li>
+<li>We expect the output of <code>isEvenNumber(43)</code> to be
+<code>FALSE</code></li>
 </ul>
 <pre class="r"><code>testIsEvenNumber &lt;- function() {
     cat(&quot;Testing isEvenNumber()... &quot;)
@@ -644,17 +652,27 @@ div.tocify {
     stopifnot(isEvenNumber(43) == FALSE)
     cat(&quot;Passed!\n&quot;)
 }</code></pre>
-<p>In this test function, we called the <code>stopifnot()</code> function and used the <code>==</code> operator to assess whether the output of <code>isEvenNumber()</code> is equal to the value we expected. We can run these cases by simply calling our test function:</p>
+<p>In this test function, we called the <code>stopifnot()</code>
+function and used the <code>==</code> operator to assess whether the
+output of <code>isEvenNumber()</code> is equal to the value we expected.
+We can run these cases by simply calling our test function:</p>
 <pre class="r"><code>testIsEvenNumber()</code></pre>
 <pre><code>## Testing isEvenNumber()... Passed!</code></pre>
 </div>
-<div id="testing-function-inputs" class="section level2">
-<h2><span class="header-section-number">1.3</span> Testing function inputs</h2>
-<p>The two test cases we used for <code>isEvenNumber()</code> are “normal” cases because they use typical inputs and test for expected outputs. A better test function would also include a few other statements to test other points of failure.</p>
-<p>One particular common error is when a user inputs the wrong data type to a function:</p>
+<div id="testing-function-inputs" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Testing function
+inputs</h2>
+<p>The two test cases we used for <code>isEvenNumber()</code> are
+“normal” cases because they use typical inputs and test for expected
+outputs. A better test function would also include a few other
+statements to test other points of failure.</p>
+<p>One particular common error is when a user inputs the wrong data type
+to a function:</p>
 <pre class="r"><code>isEvenNumber(&#39;42&#39;)</code></pre>
 <pre><code>## Error in n%%2: non-numeric argument to binary operator</code></pre>
-<p>Here we’ve input a string instead of a number, and R sent us an error message. To account for this possibility, we can modify our function and test function:</p>
+<p>Here we’ve input a string instead of a number, and R sent us an error
+message. To account for this possibility, we can modify our function and
+test function:</p>
 <pre class="r"><code>isEvenNumber &lt;- function(n) {
     # First make sure the input is a numeric type
     if (! is.numeric(n)) {
@@ -675,9 +693,15 @@ testIsEvenNumber &lt;- function() {
 testIsEvenNumber()</code></pre>
 <pre><code>## Testing isEvenNumber()... Passed!</code></pre>
 </div>
-<div id="better-error-messaging-with-stop" class="section level2">
-<h2><span class="header-section-number">1.4</span> Better error messaging with <code>stop()</code></h2>
-<p>Another approach to checking input types is to explicitly provide a better error message so the user can know what went wrong. For example, rather than return <code>FALSE</code> when we input a string to <code>isEvenNumber()</code>, we can use <code>stop()</code> to halt the function and send an error message:</p>
+<div id="better-error-messaging-with-stop" class="section level2"
+number="1.4">
+<h2><span class="header-section-number">1.4</span> Better error
+messaging with <code>stop()</code></h2>
+<p>Another approach to checking input types is to explicitly provide a
+better error message so the user can know what went wrong. For example,
+rather than return <code>FALSE</code> when we input a string to
+<code>isEvenNumber()</code>, we can use <code>stop()</code> to halt the
+function and send an error message:</p>
 <pre class="r"><code>isEvenNumber &lt;- function(n) {
     if (! is.numeric(n)) {
         stop(&#39;Oops! This function requires numeric inputs!&#39;)
@@ -690,30 +714,47 @@ isEvenNumber(&#39;42&#39;)</code></pre>
 <hr />
 </div>
 </div>
-<div id="debugging" class="section level1">
+<div id="debugging" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Debugging</h1>
-<p>Bugs are a natural part of the programming process. However, you can reduce the number of bugs you encounter by following a few tips:</p>
+<p>Bugs are a natural part of the programming process. However, you can
+reduce the number of bugs you encounter by following a few tips:</p>
 <ul>
 <li>Write code with good style.</li>
-<li>Write tests <strong>before</strong> writing functions, and test as you go.</li>
+<li>Write tests <strong>before</strong> writing functions, and test as
+you go.</li>
 <li>Make sure each function only has <strong>one</strong> task.</li>
-<li>Avoid copying and pasting code at all costs (this leads to bug propagation).</li>
+<li>Avoid copying and pasting code at all costs (this leads to bug
+propagation).</li>
 </ul>
-<div id="debugging-your-own-code" class="section level2">
-<h2><span class="header-section-number">2.1</span> Debugging your own code</h2>
-<p>The most common case you will run into a bug is when writing new code yourself. Often the mistake is obvious and easily fixed, but sometimes it only appears after multiple levels of calls and is harder to diagnose. There are a few common strategies to use when debugging your own code.</p>
+<div id="debugging-your-own-code" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Debugging your own
+code</h2>
+<p>The most common case you will run into a bug is when writing new code
+yourself. Often the mistake is obvious and easily fixed, but sometimes
+it only appears after multiple levels of calls and is harder to
+diagnose. There are a few common strategies to use when debugging your
+own code.</p>
 <ul>
-<li>Use <code>traceback()</code> to determine where a given error is occurring.</li>
-<li>Output diagnostic information in code with <code>print()</code>, <code>cat()</code> or <code>message()</code> statements.</li>
-<li>Use <code>browser()</code> to open an interactive debugger before the error</li>
-<li>Use <code>debug()</code> to automatically open a debugger at the start of a function call.</li>
-<li>Use <code>trace()</code> to start a debugger at a location inside a function.</li>
+<li>Use <code>traceback()</code> to determine where a given error is
+occurring.</li>
+<li>Output diagnostic information in code with <code>print()</code>,
+<code>cat()</code> or <code>message()</code> statements.</li>
+<li>Use <code>browser()</code> to open an interactive debugger before
+the error</li>
+<li>Use <code>debug()</code> to automatically open a debugger at the
+start of a function call.</li>
+<li>Use <code>trace()</code> to start a debugger at a location inside a
+function.</li>
 </ul>
-<div id="traceback" class="section level3">
+<div id="traceback" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> traceback()</h3>
-<p>The <code>traceback()</code> function can be used to print a summary of how your program arrived at the error. This is also called a call stack, stack trace or backtrace.</p>
-<p>In R this gives you each call that lead up to the error, which can be very useful for determining what lead to the error.</p>
-<p>You can use <code>traceback()</code> in two different ways, either by calling it immediately after the error has occurred.</p>
+<p>The <code>traceback()</code> function can be used to print a summary
+of how your program arrived at the error. This is also called a call
+stack, stack trace or backtrace.</p>
+<p>In R this gives you each call that lead up to the error, which can be
+very useful for determining what lead to the error.</p>
+<p>You can use <code>traceback()</code> in two different ways, either by
+calling it immediately after the error has occurred.</p>
 <!-- knitr messes with the tracebacks, so we just do this manually :| -->
 <pre class="r"><code>f &lt;- function(x) {
     return(x + 1)
@@ -726,55 +767,100 @@ g(&quot;a&quot;)</code></pre>
 <pre class="r"><code>traceback()</code></pre>
 <pre><code>#&gt; 2: f(x) at #1
 #&gt; 1: g(&quot;a&quot;)</code></pre>
-<p>Or by using <code>traceback()</code> as an error handler, which will call it immediately on any error. (You could even put this in your <a href="https://stackoverflow.com/questions/46819684/how-to-access-and-edit-rprofile"><code>.Rprofile</code></a>)</p>
+<p>Or by using <code>traceback()</code> as an error handler, which will
+call it immediately on any error. (You could even put this in your <a
+href="https://stackoverflow.com/questions/46819684/how-to-access-and-edit-rprofile"><code>.Rprofile</code></a>)</p>
 <pre class="r"><code>options(error = traceback)
 g(&quot;a&quot;)</code></pre>
 <pre><code>#&gt; Error in x + 1 : non-numeric argument to binary operator
 #&gt; 2: f(x) at #1
 #&gt; 1: g(&quot;a&quot;)</code></pre>
 </div>
-<div id="print" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> <code>print()</code></h3>
-<p>Once you know where an error occurs it is then helpful to know why. Often errors occur because functions are given inputs their authors did not expect, so it is useful to print the value of objects during execution.</p>
-<p>The most basic way to do this is to sprinkle messages throughout your code, with <code>print()</code> or <code>str()</code>. <code>str()</code> is often more useful because it gives more detail into the exact structure of an object, which may not be the structure you expect it to be.</p>
-<p>The main downsides to the print approach is you often have to add them in multiple places to narrow down the error, and you cannot further investigate the object.</p>
+<div id="print" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span>
+<code>print()</code></h3>
+<p>Once you know where an error occurs it is then helpful to know why.
+Often errors occur because functions are given inputs their authors did
+not expect, so it is useful to print the value of objects during
+execution.</p>
+<p>The most basic way to do this is to sprinkle messages throughout your
+code, with <code>print()</code> or <code>str()</code>.
+<code>str()</code> is often more useful because it gives more detail
+into the exact structure of an object, which may not be the structure
+you expect it to be.</p>
+<p>The main downsides to the print approach is you often have to add
+them in multiple places to narrow down the error, and you cannot further
+investigate the object.</p>
 </div>
-<div id="browser" class="section level3">
-<h3><span class="header-section-number">2.1.3</span> <code>browser()</code></h3>
-<p>A more sophisticated debugging method is to put a call to <code>browser()</code> in your code. This will stop execution at that point and open R’s interactive debugger. In the debugger you can run any R command to look at objects in the current environment, modify them and continue executing.</p>
+<div id="browser" class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span>
+<code>browser()</code></h3>
+<p>A more sophisticated debugging method is to put a call to
+<code>browser()</code> in your code. This will stop execution at that
+point and open R’s interactive debugger. In the debugger you can run any
+R command to look at objects in the current environment, modify them and
+continue executing.</p>
 <p>Some useful things to do are</p>
 <ol style="list-style-type: decimal">
-<li>Use <code>ls()</code> to determine what objects are available in the current environment. This allows you to see exactly what things you can examine.</li>
-<li>Use <code>str()</code>, <code>print()</code> etc. to examine the objects</li>
-<li>Use <code>n</code> to evaluate the next statement. Use <code>s</code> to evaluate the next statement, but step into function calls.</li>
-<li>Use <code>where</code> to print a <a href="#traceback">stack trace</a></li>
+<li>Use <code>ls()</code> to determine what objects are available in the
+current environment. This allows you to see exactly what things you can
+examine.</li>
+<li>Use <code>str()</code>, <code>print()</code> etc. to examine the
+objects</li>
+<li>Use <code>n</code> to evaluate the next statement. Use
+<code>s</code> to evaluate the next statement, but step into function
+calls.</li>
+<li>Use <code>where</code> to print a <a href="#traceback">stack
+trace</a></li>
 <li>Use <code>c</code> to leave the debugger and continue execution</li>
-<li>Use <code>Q</code> to exit the debugger and return to the R prompt.</li>
+<li>Use <code>Q</code> to exit the debugger and return to the R
+prompt.</li>
 </ol>
 </div>
 </div>
-<div id="debugging-in-rstudio" class="section level2">
-<h2><span class="header-section-number">2.2</span> Debugging in RStudio</h2>
-<div id="editor-breakpoints" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Editor breakpoints</h3>
-<p>RStudio provides some additional tooling for debugging over using R on the command line. First you can set an editor breakpoint by clicking to the left of the line number in the source file, or by pressing <code>Shift+F9</code> with your cursor on the line. A breakpoint is equivalent to a <code>browser()</code> call, but you avoid needing to change your code like <code>browser()</code>.</p>
+<div id="debugging-in-rstudio" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Debugging in
+RStudio</h2>
+<div id="editor-breakpoints" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Editor
+breakpoints</h3>
+<p>RStudio provides some additional tooling for debugging over using R
+on the command line. First you can set an editor breakpoint by clicking
+to the left of the line number in the source file, or by pressing
+<code>Shift+F9</code> with your cursor on the line. A breakpoint is
+equivalent to a <code>browser()</code> call, but you avoid needing to
+change your code like <code>browser()</code>.</p>
 <p><img src="images/editor-breakpoint.png" /></p>
 </div>
-<div id="stopping-on-error" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Stopping on error</h3>
-<p>If you are trying to hunt down a particular error it is often useful to have RStudio enter the debugger when it occurs. You can control the error behavior with (<code>Debug -&gt; On Error -&gt; Error Inspector</code>).</p>
+<div id="stopping-on-error" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Stopping on
+error</h3>
+<p>If you are trying to hunt down a particular error it is often useful
+to have RStudio enter the debugger when it occurs. You can control the
+error behavior with
+(<code>Debug -&gt; On Error -&gt; Error Inspector</code>).</p>
 <p><img src="images/break-in-code.png" /></p>
 </div>
-<div id="debugging-console" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> Debugging console</h3>
+<div id="debugging-console" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Debugging
+console</h3>
 <p><img src="images/console-window.png" /></p>
-<p>The RStudio debugging console has a few buttons to make debugging a little nicer, From left to right they are, next (equivalent to <code>n</code>), step info (<code>s</code>), continue (<code>c</code>) and Stop (<code>Q</code>).</p>
+<p>The RStudio debugging console has a few buttons to make debugging a
+little nicer, From left to right they are, next (equivalent to
+<code>n</code>), step info (<code>s</code>), continue (<code>c</code>)
+and Stop (<code>Q</code>).</p>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112: Fundamentals of Programming</a>, by <a href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
-<li>Jennifer Bryan &amp; Jim Hester’s <a href="https://whattheyforgot.org/debugging-r-code.html">“What They Forgot to Teach You About R”</a></li>
+<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112:
+Fundamentals of Programming</a>, by <a
+href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a
+href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
+<li>Jennifer Bryan &amp; Jim Hester’s <a
+href="https://whattheyforgot.org/debugging-r-code.html">“What They
+Forgot to Teach You About R”</a></li>
 </ul>
 </div>
 </div>
@@ -821,7 +907,7 @@ g(&quot;a&quot;)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -839,7 +925,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -848,6 +934,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -860,7 +949,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

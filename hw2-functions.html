@@ -13,17 +13,27 @@
 
 <title>Homework 2 - Functions</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -89,12 +99,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -107,32 +121,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -142,10 +132,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -162,40 +148,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -223,7 +185,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -235,7 +197,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -245,11 +207,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -261,13 +240,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -275,16 +253,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -328,7 +299,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -351,7 +322,7 @@ $(document).ready(function () {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -411,7 +382,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -441,7 +412,7 @@ $(document).ready(function () {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -473,7 +444,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -501,7 +472,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -513,69 +484,178 @@ $(document).ready(function () {
 <p><strong>Due</strong>: Sunday, 22-Sept. at 8pm</p>
 <p><strong>Rules</strong>:</p>
 <ul>
-<li>Problems marked <strong>SOLO</strong> may not be worked on with other classmates, though you may consult instructors for help.</li>
-<li>For problems marked <strong>COLLABORATIVE</strong>, you may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work – everyone must work on every problem. And you may not simply copy any code but rather truly work together.</li>
-<li>Even though you work collaboratively, you still must submit your own solutions.</li>
+<li>Problems marked <strong>SOLO</strong> may not be worked on with
+other classmates, though you may consult instructors for help.</li>
+<li>For problems marked <strong>COLLABORATIVE</strong>, you may work in
+groups of up to 3 students who are in this course this semester (and
+then with nobody else except the course instructors). You may not split
+up the work – everyone must work on every problem. And you may not
+simply copy any code but rather truly work together.</li>
+<li>Even though you work collaboratively, you still must submit your own
+solutions.</li>
 </ul>
 <p><strong>Instructions</strong>:</p>
 <ol style="list-style-type: decimal">
-<li><p>Before beginning this assignment, be sure to have read the <a href="L1.2-getting-started.html">Getting Started</a>, <a href="L2-programming-basics.html">Programming Basics</a>, and <a href="L3-functions.html">Functions</a> lessons.</p></li>
-<li><p>Open RStudio and create a new project called “hw2-lastName”, replacing “lastName” with your last name.</p></li>
-<li><p>Download the <a href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw2.R">hw2.R template script</a> and place it in RStudio project folder you just created.</p></li>
-<li><p>Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the “hw2.R” file.</p></li>
-<li><p>Type all of your answers to the questions below in the “hw2.R” script.</p></li>
-<li><p>After completing the questions, create a zip file of all files in your R project folder for this assignment.</p></li>
+<li><p>Before beginning this assignment, be sure to have read the <a
+href="L1.2-getting-started.html">Getting Started</a>, <a
+href="L2-programming-basics.html">Programming Basics</a>, and <a
+href="L3-functions.html">Functions</a> lessons.</p></li>
+<li><p>Open RStudio and create a new project called “hw2-lastName”,
+replacing “lastName” with your last name.</p></li>
+<li><p>Download the <a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw2.R">hw2.R
+template script</a> and place it in RStudio project folder you just
+created.</p></li>
+<li><p>Fill out your name, GW Net ID, and the names of anyone you worked
+with in the header of the “hw2.R” file.</p></li>
+<li><p>Type all of your answers to the questions below in the “hw2.R”
+script.</p></li>
+<li><p>After completing the questions, create a zip file of all files in
+your R project folder for this assignment.</p></li>
 <li><p>Submit the zip file on Blackboard by the due deadline.</p></li>
 </ol>
 <hr />
-<p><strong>Write solutions to the following functions in your “hw2.R” script.</strong></p>
+<p><strong>Write solutions to the following functions in your “hw2.R”
+script.</strong></p>
 <p>Rules:</p>
 <ul>
-<li>You may <strong>NOT</strong> use loops on any of these functions.</li>
-<li>For functions 1-7, you may <strong>NOT</strong> use loops or conditionals</li>
+<li>You may <strong>NOT</strong> use loops on any of these
+functions.</li>
+<li>For functions 1-7, you may <strong>NOT</strong> use loops or
+conditionals</li>
 </ul>
-<p><strong>Hint</strong>: Read the <a href="L1.2-getting-started.html#tips">Getting Started Tips</a>, <a href="L2-programming-basics.html#tips">Programming Basics Tips</a>, and <a href="L3-functions.html#tips">Functions Tips</a> - these could come in handy!</p>
+<p><strong>Hint</strong>: Read the <a
+href="L1.2-getting-started.html#tips">Getting Started Tips</a>, <a
+href="L2-programming-basics.html#tips">Programming Basics Tips</a>, and
+<a href="L3-functions.html#tips">Functions Tips</a> - these could come
+in handy!</p>
 <div id="integersquarerootn-solo-5-pts" class="section level3">
 <h3>1) <code>integerSquareRoot(n)</code> [SOLO, 5 pts]</h3>
-<p>Given a non-negative integer <code>n</code>, return the integer value that is closest to its square root. For example, <code>integerSquareRoot(10)</code> returns <code>3</code>.</p>
+<p>Given a non-negative integer <code>n</code>, return the integer value
+that is closest to its square root. For example,
+<code>integerSquareRoot(10)</code> returns <code>3</code>.</p>
 </div>
 <div id="fabricyardsinches-solo-5-pts" class="section level3">
 <h3>2) <code>fabricYards(inches)</code> [SOLO, 5 pts]</h3>
-<p>Fabric must be purchased in whole yards. Write a function that takes a non-negative number of inches of fabric desired, and returns the smallest number of whole yards of fabric that must be purchased. Thus, <code>fabricYards(1)</code> is <code>1</code> (you need a full yard if you buy one inch) and <code>fabricYards(36)</code> is also <code>1</code>, but <code>fabricYards(37)</code> is <code>2</code>. Hint: There are 36 inches in a yard!</p>
+<p>Fabric must be purchased in whole yards. Write a function that takes
+a non-negative number of inches of fabric desired, and returns the
+smallest number of whole yards of fabric that must be purchased. Thus,
+<code>fabricYards(1)</code> is <code>1</code> (you need a full yard if
+you buy one inch) and <code>fabricYards(36)</code> is also
+<code>1</code>, but <code>fabricYards(37)</code> is <code>2</code>.
+Hint: There are 36 inches in a yard!</p>
 </div>
 <div id="fabricexcessinches-solo-5-pts" class="section level3">
 <h3>3) <code>fabricExcess(inches)</code> [SOLO, 5 pts]</h3>
-<p>Write a function that takes a non-negative number of inches of fabric desired and returns the number of inches of excess fabric that must be purchased (as purchases must be in whole yards). Thus, since you need a whole yard when you buy 1 inch, <code>fabricExcess(1)</code> is <code>35</code>. Similarly, <code>fabricExcess(36)</code> is <code>0</code>, and <code>fabricExcess(37)</code> is <code>35</code>.</p>
-<p>Hint: there are (at least) two good ways to write this. One way involves a simple expression using one of the math operators we have learned. The other way uses <code>fabricYards(inches)</code> (which you just wrote!).</p>
+<p>Write a function that takes a non-negative number of inches of fabric
+desired and returns the number of inches of excess fabric that must be
+purchased (as purchases must be in whole yards). Thus, since you need a
+whole yard when you buy 1 inch, <code>fabricExcess(1)</code> is
+<code>35</code>. Similarly, <code>fabricExcess(36)</code> is
+<code>0</code>, and <code>fabricExcess(37)</code> is
+<code>35</code>.</p>
+<p>Hint: there are (at least) two good ways to write this. One way
+involves a simple expression using one of the math operators we have
+learned. The other way uses <code>fabricYards(inches)</code> (which you
+just wrote!).</p>
 </div>
-<div id="distancex1-y1-x2-y2-collaborative-10-pts" class="section level3">
-<h3>4) <code>distance(x1, y1, x2, y2)</code> [COLLABORATIVE, 10 pts]</h3>
-<p>Given four numeric values representing the points <code>(x1, y1)</code> and <code>(x2, y2)</code>, write the function <code>distance(x1, y1, x2, y2)</code> returns the <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean distance</a> between those points.</p>
+<div id="distancex1-y1-x2-y2-collaborative-10-pts"
+class="section level3">
+<h3>4) <code>distance(x1, y1, x2, y2)</code> [COLLABORATIVE, 10
+pts]</h3>
+<p>Given four numeric values representing the points
+<code>(x1, y1)</code> and <code>(x2, y2)</code>, write the function
+<code>distance(x1, y1, x2, y2)</code> returns the <a
+href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean
+distance</a> between those points.</p>
 </div>
-<div id="isrighttrianglex1-y1-x2-y2-x3-y3-collaborative-10-pts" class="section level3">
-<h3>5) <code>isRightTriangle(x1, y1, x2, y2, x3, y3)</code> [COLLABORATIVE, 10 pts]</h3>
-<p>Given six numeric values representing the points <code>(x1, y1)</code>, <code>(x2, y2)</code>, and <code>(x3, y3)</code>, return <code>TRUE</code> if the triangle formed by connecting the 3 points is a right triangle, and <code>FALSE</code> otherwise. You may wish to use the <code>distance(x1, y1, x2, y2)</code> function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: <a href="https://en.wikipedia.org/wiki/Pythagorean_theorem">Pythagorean theorem</a>.</p>
+<div id="isrighttrianglex1-y1-x2-y2-x3-y3-collaborative-10-pts"
+class="section level3">
+<h3>5) <code>isRightTriangle(x1, y1, x2, y2, x3, y3)</code>
+[COLLABORATIVE, 10 pts]</h3>
+<p>Given six numeric values representing the points
+<code>(x1, y1)</code>, <code>(x2, y2)</code>, and <code>(x3, y3)</code>,
+return <code>TRUE</code> if the triangle formed by connecting the 3
+points is a right triangle, and <code>FALSE</code> otherwise. You may
+wish to use the <code>distance(x1, y1, x2, y2)</code> function as a
+helper function. You may ignore the case where the 3 points are
+collinear (and so do not form a triangle). Hint: <a
+href="https://en.wikipedia.org/wiki/Pythagorean_theorem">Pythagorean
+theorem</a>.</p>
 </div>
-<div id="triangleareax1-y1-x2-y2-x3-y3-collaborative-10-pts" class="section level3">
-<h3>6) <code>triangleArea(x1, y1, x2, y2, x3, y3)</code> [COLLABORATIVE, 10 pts]</h3>
-<p>Given six numeric values representing the points <code>(x1, y1)</code>, <code>(x2, y2)</code>, and <code>(x3, y3)</code>, return the area of the triangle formed by connecting the 3 points. You may wish to use the <code>distance(x1, y1, x2, y2)</code> function as a helper function. You may ignore the case where the 3 points are collinear (and so do not form a triangle). Hint: <a href="https://en.wikipedia.org/wiki/Heron%27s_formula">Heron’s Formula</a>.</p>
+<div id="triangleareax1-y1-x2-y2-x3-y3-collaborative-10-pts"
+class="section level3">
+<h3>6) <code>triangleArea(x1, y1, x2, y2, x3, y3)</code> [COLLABORATIVE,
+10 pts]</h3>
+<p>Given six numeric values representing the points
+<code>(x1, y1)</code>, <code>(x2, y2)</code>, and <code>(x3, y3)</code>,
+return the area of the triangle formed by connecting the 3 points. You
+may wish to use the <code>distance(x1, y1, x2, y2)</code> function as a
+helper function. You may ignore the case where the 3 points are
+collinear (and so do not form a triangle). Hint: <a
+href="https://en.wikipedia.org/wiki/Heron%27s_formula">Heron’s
+Formula</a>.</p>
 </div>
-<div id="numberofpoolballsrows-collaborative-10-pts" class="section level3">
+<div id="numberofpoolballsrows-collaborative-10-pts"
+class="section level3">
 <h3>7) <code>numberOfPoolBalls(rows)</code> [COLLABORATIVE, 10 pts]</h3>
 <p><img src="images/poolballs.jpg" width="150" /></p>
-<p>Pool balls are arranged in rows where the first row contains 1 pool ball and each row contains 1 more pool ball than the previous row. Thus, for example, 3 rows contain 6 total pool balls (1+2+3). With this in mind, write the function <code>numberOfPoolBalls(rows)</code> that takes a non-negative integer value (the number of rows) and returns another integer value (the number of pool balls in that number of full rows). For example, <code>numberOfPoolBalls(3)</code> returns <code>6</code>. We will not limit our analysis to a “rack” of 15 balls; rather, our pool table can contain an unlimited number of rows. Do not use loops. Hint: For this problem you should research <a href="https://en.wikipedia.org/wiki/Triangular_number">Triangular Numbers</a>.</p>
+<p>Pool balls are arranged in rows where the first row contains 1 pool
+ball and each row contains 1 more pool ball than the previous row. Thus,
+for example, 3 rows contain 6 total pool balls (1+2+3). With this in
+mind, write the function <code>numberOfPoolBalls(rows)</code> that takes
+a non-negative integer value (the number of rows) and returns another
+integer value (the number of pool balls in that number of full rows).
+For example, <code>numberOfPoolBalls(3)</code> returns <code>6</code>.
+We will not limit our analysis to a “rack” of 15 balls; rather, our pool
+table can contain an unlimited number of rows. Do not use loops. Hint:
+For this problem you should research <a
+href="https://en.wikipedia.org/wiki/Triangular_number">Triangular
+Numbers</a>.</p>
 </div>
-<div id="isevenpositiveintx-collaborative-15-pts" class="section level3">
+<div id="isevenpositiveintx-collaborative-15-pts"
+class="section level3">
 <h3>8) <code>isEvenPositiveInt(x)</code> [COLLABORATIVE, 15 pts]</h3>
-<p>Given an arbitrary value <code>x</code>, return <code>TRUE</code> if it is an integer, and it is positive, and it is even (all 3 must be true), or <code>FALSE</code> otherwise. If the value <code>x</code> is not an integer, the function should return <code>FALSE</code> rather than error. So, <code>isEvenPositiveInt("yikes!")</code> returns <code>FALSE</code>, and <code>isEvenPositiveInt(123456)</code> returns <code>TRUE</code>. For this problem, consider integer <em>values</em> to be “integers”. So, both <code>3</code> and <code>3L</code> are to be considered integers, even though R will return <code>FALSE</code> if you type <code>is.integer(3)</code>, since <code>3</code> is technically a “double”. <strong>Hint</strong>: Read the <a href="L2-programming-basics.html#tips">Programming Basics Tips</a>.</p>
+<p>Given an arbitrary value <code>x</code>, return <code>TRUE</code> if
+it is an integer, and it is positive, and it is even (all 3 must be
+true), or <code>FALSE</code> otherwise. If the value <code>x</code> is
+not an integer, the function should return <code>FALSE</code> rather
+than error. So, <code>isEvenPositiveInt("yikes!")</code> returns
+<code>FALSE</code>, and <code>isEvenPositiveInt(123456)</code> returns
+<code>TRUE</code>. For this problem, consider integer <em>values</em> to
+be “integers”. So, both <code>3</code> and <code>3L</code> are to be
+considered integers, even though R will return <code>FALSE</code> if you
+type <code>is.integer(3)</code>, since <code>3</code> is technically a
+“double”. <strong>Hint</strong>: Read the <a
+href="L2-programming-basics.html#tips">Programming Basics Tips</a>.</p>
 </div>
 <div id="getthecentsn-collaborative-15-pts" class="section level3">
 <h3>9) <code>getTheCents(n)</code> [COLLABORATIVE, 15 pts]</h3>
-<p>Write the function <code>getTheCents(n)</code> which takes a value <code>n</code> that represents a payment in US dollars and returns the number of cents in the payment. For example, if <code>n</code> is <code>2.45</code>, the function should return <code>45</code>. If <code>n</code> is an integer, the function should return <code>0</code>, as it has <code>0</code> cents; if it isn’t a number, it should return <code>NULL</code>, because a non-number payment make no cents (ha!). If the payment has partial cents (for example, <code>3.953</code>), it should be rounded to the nearest cent (in this case, <code>95</code> cents).</p>
+<p>Write the function <code>getTheCents(n)</code> which takes a value
+<code>n</code> that represents a payment in US dollars and returns the
+number of cents in the payment. For example, if <code>n</code> is
+<code>2.45</code>, the function should return <code>45</code>. If
+<code>n</code> is an integer, the function should return <code>0</code>,
+as it has <code>0</code> cents; if it isn’t a number, it should return
+<code>NULL</code>, because a non-number payment make no cents (ha!). If
+the payment has partial cents (for example, <code>3.953</code>), it
+should be rounded to the nearest cent (in this case, <code>95</code>
+cents).</p>
 </div>
 <div id="turtlesquares-collaborative-15-pts" class="section level3">
 <h3>10) <code>turtleSquare(s)</code> [COLLABORATIVE, 15 pts]</h3>
-<p>Write the function <code>turtleSquare(s)</code> which uses the <code>TurtleGraphics</code> library to draw a square with side length <code>s &lt; 100</code> (because the turtle will “escape” the terrarium when <code>s &gt;= 100</code>). The square should be centered in the turtle’s terrarium. <strong>Note</strong>: Do not put the <code>turtle_init()</code> command inside your function - the turtle must be “initialized” inside the terrarium before calling your <code>turtleSquare(s)</code> function. You should call your <code>turtleSquare(s)</code> function inside the <code>turtle_do({})</code> call as described in the <a href="TurtleGraphics.html">TurtleGraphics lesson</a>. For example, the code below produces a square with side length of 50:</p>
+<p>Write the function <code>turtleSquare(s)</code> which uses the
+<code>TurtleGraphics</code> library to draw a square with side length
+<code>s &lt; 100</code> (because the turtle will “escape” the terrarium
+when <code>s &gt;= 100</code>). The square should be centered in the
+turtle’s terrarium. <strong>Note</strong>: Do not put the
+<code>turtle_init()</code> command inside your function - the turtle
+must be “initialized” inside the terrarium before calling your
+<code>turtleSquare(s)</code> function. You should call your
+<code>turtleSquare(s)</code> function inside the
+<code>turtle_do({})</code> call as described in the <a
+href="TurtleGraphics.html">TurtleGraphics lesson</a>. For example, the
+code below produces a square with side length of 50:</p>
 <pre class="r"><code>library(TurtleGraphics)
 turtle_init()
 turtle_do({
@@ -584,13 +664,30 @@ turtle_do({
 <p><img src="images/turtle_square.png" width="456" /></p>
 <hr />
 </div>
-<div id="bonus-credit-1-numberofpoolballrowsballs-solo-5-pts" class="section level3">
-<h3>Bonus Credit 1) <code>numberOfPoolBallRows(balls)</code> [SOLO, 5 pts]</h3>
-<p>This problem is the inverse of the <code>numberOfPoolBalls(rows)</code> problem. In this case, return the number of rows required for the given number of pool balls. Thus, <code>numberOfPoolBallRows(6)</code> returns <code>3</code>. Note that if any balls must be in a row, then you count that row, and so <code>numberOfPoolBallRows(7)</code> returns <code>4</code> (since the 4th row must have a single ball in it).</p>
+<div id="bonus-credit-1-numberofpoolballrowsballs-solo-5-pts"
+class="section level3">
+<h3>Bonus Credit 1) <code>numberOfPoolBallRows(balls)</code> [SOLO, 5
+pts]</h3>
+<p>This problem is the inverse of the
+<code>numberOfPoolBalls(rows)</code> problem. In this case, return the
+number of rows required for the given number of pool balls. Thus,
+<code>numberOfPoolBallRows(6)</code> returns <code>3</code>. Note that
+if any balls must be in a row, then you count that row, and so
+<code>numberOfPoolBallRows(7)</code> returns <code>4</code> (since the
+4th row must have a single ball in it).</p>
 </div>
-<div id="bonus-credit-2-turtletriangles-solo-5-pts" class="section level3">
+<div id="bonus-credit-2-turtletriangles-solo-5-pts"
+class="section level3">
 <h3>Bonus Credit 2) <code>turtleTriangle(s)</code> [SOLO, 5 pts]</h3>
-<p>Write the function <code>turtleTriangle(s)</code> which uses the <code>TurtleGraphics</code> library to draw an equilateral triangle with side length <code>s &lt; 100</code>. The triangle should be centered in the turtle’s terrarium. Hint: Getting the triangle centered is the tricky part - you may want to read more about <a href="https://en.wikipedia.org/wiki/Equilateral_triangle">equilateral triangles</a> and <a href="https://en.wikipedia.org/wiki/Apothem">apothems</a>. The code below produces a triangle with side length of 50:</p>
+<p>Write the function <code>turtleTriangle(s)</code> which uses the
+<code>TurtleGraphics</code> library to draw an equilateral triangle with
+side length <code>s &lt; 100</code>. The triangle should be centered in
+the turtle’s terrarium. Hint: Getting the triangle centered is the
+tricky part - you may want to read more about <a
+href="https://en.wikipedia.org/wiki/Equilateral_triangle">equilateral
+triangles</a> and <a
+href="https://en.wikipedia.org/wiki/Apothem">apothems</a>. The code
+below produces a triangle with side length of 50:</p>
 <pre class="r"><code>library(TurtleGraphics)
 turtle_init()
 turtle_do({
@@ -638,7 +735,7 @@ turtle_do({
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -656,7 +753,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

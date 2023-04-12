@@ -13,20 +13,30 @@
 
 <title>Strings</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,7 +554,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -595,44 +566,64 @@ div.tocify {
 <blockquote>
 <h3 id="learning-objectives">Learning Objectives</h3>
 <ul>
-<li>Understand basic functions in the <code>stringr</code> library for working with character data.</li>
+<li>Understand basic functions in the <code>stringr</code> library for
+working with character data.</li>
 <li>Understand how to deal with whitespace.</li>
 <li>Understand how to split strings.</li>
 <li>Understand how to match strings.</li>
 </ul>
 <h3 id="suggested-readings">Suggested readings</h3>
 <ul>
-<li><a href="https://r4ds.had.co.nz/strings.html">Chapter 14</a> of “R for Data Science”, by Garrett Grolemund and Hadley Wickham</li>
-<li><a href="https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html">Introduction to <code>stringr</code> vignette</a></li>
-<li>The <a href="https://stringr.tidyverse.org/"><code>stringr</code> package documentation</a></li>
+<li><a href="https://r4ds.had.co.nz/strings.html">Chapter 14</a> of “R
+for Data Science”, by Garrett Grolemund and Hadley Wickham</li>
+<li><a
+href="https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html">Introduction
+to <code>stringr</code> vignette</a></li>
+<li>The <a href="https://stringr.tidyverse.org/"><code>stringr</code>
+package documentation</a></li>
 </ul>
 </blockquote>
 <hr />
-<p>A “string” is the generic word for character type variables. Base R has many built-in functions for working with strings, but they are often difficult to remember and unintuitive to use. Fortunately, the wonderful folks over at the <a href="https://www.tidyverse.org/">tidyverse</a> developed a lovely package called <a href="https://stringr.tidyverse.org/"><code>"stringr"</code></a>, which makes working with strings a lot nicer.</p>
-<p>Before going any further, make sure you install the <code>stringr</code> package and load it before trying to use any of the functions in this lesson:</p>
+<p>A “string” is the generic word for character type variables. Base R
+has many built-in functions for working with strings, but they are often
+difficult to remember and unintuitive to use. Fortunately, the wonderful
+folks over at the <a href="https://www.tidyverse.org/">tidyverse</a>
+developed a lovely package called <a
+href="https://stringr.tidyverse.org/"><code>"stringr"</code></a>, which
+makes working with strings a lot nicer.</p>
+<p>Before going any further, make sure you install the
+<code>stringr</code> package and load it before trying to use any of the
+functions in this lesson:</p>
 <pre class="r"><code>install.packages(&quot;stringr&quot;)
 library(stringr)</code></pre>
 <hr />
-<div id="making-a-string" class="section level1">
+<div id="making-a-string" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Making a string</h1>
-<p>You can create strings with either single quotes (<code>''</code>) or double quotes (<code>""</code>). There is no difference in behavior.</p>
+<p>You can create strings with either single quotes (<code>''</code>) or
+double quotes (<code>""</code>). There is no difference in behavior.</p>
 <pre class="r"><code>cat(&quot;This is a string&quot;)</code></pre>
 <pre><code>## This is a string</code></pre>
 <pre class="r"><code>cat(&#39;This is a string&#39;)</code></pre>
 <pre><code>## This is a string</code></pre>
-<p>If you have a string that contains a <code>'</code> symbol, use double quotes: Use them where it makes sense, e.g.:</p>
+<p>If you have a string that contains a <code>'</code> symbol, use
+double quotes: Use them where it makes sense, e.g.:</p>
 <pre class="r"><code>cat(&quot;It&#39;s a boy!&quot;)</code></pre>
 <pre><code>## It&#39;s a boy!</code></pre>
-<p>Likewise, if you have a string that contains a <code>"</code> symbol, use single quotes: Use them where it makes sense, e.g.:</p>
+<p>Likewise, if you have a string that contains a <code>"</code> symbol,
+use single quotes: Use them where it makes sense, e.g.:</p>
 <pre class="r"><code>cat(&#39;I said, &quot;Hi!&quot;&#39;)</code></pre>
 <pre><code>## I said, &quot;Hi!&quot;</code></pre>
-<p>But what if you have a string that has both single and double quotes, like this: <code>It's nice to say, "Hi!"</code></p>
-<p>In this case, you have to “escape” the quotes by using the <code>\</code> symbol:</p>
+<p>But what if you have a string that has both single and double quotes,
+like this: <code>It's nice to say, "Hi!"</code></p>
+<p>In this case, you have to “escape” the quotes by using the
+<code>\</code> symbol:</p>
 <pre class="r"><code>cat(&quot;It&#39;s nice to say, \&quot;Hi!\&quot;&quot;) # Double quotes escaped</code></pre>
 <pre><code>## It&#39;s nice to say, &quot;Hi!&quot;</code></pre>
 <pre class="r"><code>cat(&#39;It\&#39;s nice to say, &quot;Hi!&quot;&#39;) # Single quote escaped</code></pre>
 <pre><code>## It&#39;s nice to say, &quot;Hi!&quot;</code></pre>
-<p>Escaping can be used for a lot of different string literals, such as starting a new line, adding a tab space, and even entering the <code>\</code> symbol itself:</p>
+<p>Escaping can be used for a lot of different string literals, such as
+starting a new line, adding a tab space, and even entering the
+<code>\</code> symbol itself:</p>
 <pre class="r"><code>cat(&#39;New line:&#39;, &#39;This\nthat&#39;)</code></pre>
 <pre><code>## New line: This
 ## that</code></pre>
@@ -640,11 +631,17 @@ library(stringr)</code></pre>
 <pre><code>## Tab space: This  that</code></pre>
 <pre class="r"><code>cat(&#39;Backslash:&#39;, &#39;This\\that&#39;)</code></pre>
 <pre><code>## Backslash: This\that</code></pre>
-<p>Beware that the printed representation of a string in the R console is not the same as string itself, because the printed representation shows the escapes. To see the raw contents of the string, use <code>cat()</code> or <code>writeLines()</code>.</p>
+<p>Beware that the printed representation of a string in the R console
+is not the same as string itself, because the printed representation
+shows the escapes. To see the raw contents of the string, use
+<code>cat()</code> or <code>writeLines()</code>.</p>
 </div>
-<div id="string-constants" class="section level1">
+<div id="string-constants" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> String constants</h1>
-<p>R has a small number of built-in string constants: <code>LETTERS</code>, <code>letters</code>, <code>month.abb</code>, and <code>month.name</code>. These are common values stored in variables with convenient names:</p>
+<p>R has a small number of built-in string constants:
+<code>LETTERS</code>, <code>letters</code>, <code>month.abb</code>, and
+<code>month.name</code>. These are common values stored in variables
+with convenient names:</p>
 <pre class="r"><code>LETTERS</code></pre>
 <pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot;
 ## [20] &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
@@ -656,7 +653,8 @@ library(stringr)</code></pre>
 <pre class="r"><code>month.name</code></pre>
 <pre><code>##  [1] &quot;January&quot;   &quot;February&quot;  &quot;March&quot;     &quot;April&quot;     &quot;May&quot;       &quot;June&quot;     
 ##  [7] &quot;July&quot;      &quot;August&quot;    &quot;September&quot; &quot;October&quot;   &quot;November&quot;  &quot;December&quot;</code></pre>
-<p>If you assign-over one of these constants, you can always retrieve the constant by putting the <code>base::</code> prefix in front:</p>
+<p>If you assign-over one of these constants, you can always retrieve
+the constant by putting the <code>base::</code> prefix in front:</p>
 <pre class="r"><code>letters &lt;- 7
 letters</code></pre>
 <pre><code>## [1] 7</code></pre>
@@ -664,7 +662,11 @@ letters</code></pre>
 letters</code></pre>
 <pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot;
 ## [20] &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
-<p>In addition to the Base R constants, the <code>stringr</code> library also comes with three constants: <code>words</code>, <code>sentences</code>, and <code>fruit</code>. These are much longer, so let’s use the <code>head()</code> function to just preview the first 6 elements in each:</p>
+<p>In addition to the Base R constants, the <code>stringr</code> library
+also comes with three constants: <code>words</code>,
+<code>sentences</code>, and <code>fruit</code>. These are much longer,
+so let’s use the <code>head()</code> function to just preview the first
+6 elements in each:</p>
 <pre class="r"><code>head(words)</code></pre>
 <pre><code>## [1] &quot;a&quot;        &quot;able&quot;     &quot;about&quot;    &quot;absolute&quot; &quot;accept&quot;   &quot;account&quot;</code></pre>
 <pre class="r"><code>head(sentences)</code></pre>
@@ -678,9 +680,12 @@ letters</code></pre>
 <pre><code>## [1] &quot;apple&quot;       &quot;apricot&quot;     &quot;avocado&quot;     &quot;banana&quot;      &quot;bell pepper&quot;
 ## [6] &quot;bilberry&quot;</code></pre>
 </div>
-<div id="basic-stringr-operations" class="section level1">
-<h1><span class="header-section-number">3</span> Basic <code>"stringr"</code> Operations</h1>
-<p>Most <code>stringr</code> functions start with <code>str_</code>, which makes it particularly easy to remember. The following table contains the main <code>stringr</code> functions we’ll cover:</p>
+<div id="basic-stringr-operations" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Basic
+<code>"stringr"</code> Operations</h1>
+<p>Most <code>stringr</code> functions start with <code>str_</code>,
+which makes it particularly easy to remember. The following table
+contains the main <code>stringr</code> functions we’ll cover:</p>
 <table>
 <thead>
 <tr class="header">
@@ -751,11 +756,14 @@ letters</code></pre>
 </tr>
 </tbody>
 </table>
-<p>The common <code>str_</code> prefix is particularly useful in RStudio, because typing <code>str_</code> will trigger autocomplete, allowing you to see all <code>stringr</code> functions:</p>
+<p>The common <code>str_</code> prefix is particularly useful in
+RStudio, because typing <code>str_</code> will trigger autocomplete,
+allowing you to see all <code>stringr</code> functions:</p>
 <p><img src="images/stringr-autocomplete.png" width="600" /></p>
-<div id="case-conversion" class="section level2">
+<div id="case-conversion" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Case conversion</h2>
-<p>You can convert whole strings to lower-case, upper-case, and title-case using some conveniently-named functions:</p>
+<p>You can convert whole strings to lower-case, upper-case, and
+title-case using some conveniently-named functions:</p>
 <pre class="r"><code>x &lt;- &quot;Want to hear a joke about paper? Never mind, it&#39;s tearable.&quot;</code></pre>
 <pre class="r"><code>str_to_lower(x)</code></pre>
 <pre><code>## [1] &quot;want to hear a joke about paper? never mind, it&#39;s tearable.&quot;</code></pre>
@@ -763,84 +771,121 @@ letters</code></pre>
 <pre><code>## [1] &quot;WANT TO HEAR A JOKE ABOUT PAPER? NEVER MIND, IT&#39;S TEARABLE.&quot;</code></pre>
 <pre class="r"><code>str_to_title(x)</code></pre>
 <pre><code>## [1] &quot;Want To Hear A Joke About Paper? Never Mind, It&#39;s Tearable.&quot;</code></pre>
-<p><strong>Sidenote</strong>: Notice that <code>str_to_title()</code> makes every first letter in each word upper case. This is slightly different from what you might expect, since most “titles” don’t make articles like “a” and “the” upper case. An alternative function that makes a more appropriate title case is the <code>toTitleCase()</code> function from the <strong>tools</strong> library:</p>
+<p><strong>Sidenote</strong>: Notice that <code>str_to_title()</code>
+makes every first letter in each word upper case. This is slightly
+different from what you might expect, since most “titles” don’t make
+articles like “a” and “the” upper case. An alternative function that
+makes a more appropriate title case is the <code>toTitleCase()</code>
+function from the <strong>tools</strong> library:</p>
 <pre class="r"><code>library(tools)
 toTitleCase(x)</code></pre>
 <pre><code>## [1] &quot;Want to Hear a Joke About Paper? Never Mind, It&#39;s Tearable.&quot;</code></pre>
 </div>
-<div id="get-the-number-of-characters-in-a-string" class="section level2">
-<h2><span class="header-section-number">3.2</span> Get the number of characters in a string</h2>
-<p>If you want to find how long a string is (i.e. how many characters it contains), the <code>length()</code> function won’t work:</p>
+<div id="get-the-number-of-characters-in-a-string"
+class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Get the number of
+characters in a string</h2>
+<p>If you want to find how long a string is (i.e. how many characters it
+contains), the <code>length()</code> function won’t work:</p>
 <pre class="r"><code>length(&quot;hello world&quot;)</code></pre>
 <pre><code>## [1] 1</code></pre>
-<p>That’s be <code>length()</code> returns how many elements are in a <em>vector</em> (in the above case, there’s just one element). Instead, you should use <code>str_length()</code>:</p>
+<p>That’s be <code>length()</code> returns how many elements are in a
+<em>vector</em> (in the above case, there’s just one element). Instead,
+you should use <code>str_length()</code>:</p>
 <pre class="r"><code>str_length(&quot;hello world&quot;)</code></pre>
 <pre><code>## [1] 11</code></pre>
 <p>Note that the space character has a length:</p>
 <pre class="r"><code>str_length(&quot; &quot;)</code></pre>
 <pre><code>## [1] 1</code></pre>
-<p>Also note that the “empty” string (<code>""</code>) has no length:</p>
+<p>Also note that the “empty” string (<code>""</code>) has no
+length:</p>
 <pre class="r"><code>str_length(&quot;&quot;)</code></pre>
 <pre><code>## [1] 0</code></pre>
 </div>
-<div id="access-characters-by-their-index" class="section level2">
-<h2><span class="header-section-number">3.3</span> Access characters by their index</h2>
-<p>You can access individual character using <code>str_sub()</code>. It takes three arguments: a string (or character vector), a <code>start</code> position, and an <code>end</code> position. Either position can either be a positive integer, which counts from the left, or a negative integer which counts from the right. The positions are inclusive, and if longer than the string, will be silently truncated.</p>
+<div id="access-characters-by-their-index" class="section level2"
+number="3.3">
+<h2><span class="header-section-number">3.3</span> Access characters by
+their index</h2>
+<p>You can access individual character using <code>str_sub()</code>. It
+takes three arguments: a string (or character vector), a
+<code>start</code> position, and an <code>end</code> position. Either
+position can either be a positive integer, which counts from the left,
+or a negative integer which counts from the right. The positions are
+inclusive, and if longer than the string, will be silently
+truncated.</p>
 <pre class="r"><code>x &lt;- &quot;Apple&quot;
 str_sub(x, 1, 3)</code></pre>
 <pre><code>## [1] &quot;App&quot;</code></pre>
 <pre class="r"><code># Negative numbers count backwards from the end
 str_sub(x, -3, -1)</code></pre>
 <pre><code>## [1] &quot;ple&quot;</code></pre>
-<p>Note that <code>str_sub()</code> won’t fail if the string is too short: it will just return as much as possible:</p>
+<p>Note that <code>str_sub()</code> won’t fail if the string is too
+short: it will just return as much as possible:</p>
 <pre class="r"><code>str_sub(&quot;Apple&quot;, 1, 10)</code></pre>
 <pre><code>## [1] &quot;Apple&quot;</code></pre>
-<p>You can also use the assignment form of <code>str_sub()</code> to modify specific elements in strings:</p>
+<p>You can also use the assignment form of <code>str_sub()</code> to
+modify specific elements in strings:</p>
 <pre class="r"><code>x &lt;- &#39;abcdef&#39;
 str_sub(x, 1, 3) &lt;- &#39;ABC&#39;
 x</code></pre>
 <pre><code>## [1] &quot;ABCdef&quot;</code></pre>
 </div>
-<div id="get-the-indices-of-substrings" class="section level2">
-<h2><span class="header-section-number">3.4</span> Get the indices of substrings</h2>
-<p>If you want to know the start and end indices of a particular substring, use <code>str_locate()</code>. This is a helpful function to use in combination with <code>str_sub()</code> so you don’t have to count the characters to find a substring.</p>
-<p>For example, let’s say I want to extract the substring <code>"Good"</code> from the following string:</p>
+<div id="get-the-indices-of-substrings" class="section level2"
+number="3.4">
+<h2><span class="header-section-number">3.4</span> Get the indices of
+substrings</h2>
+<p>If you want to know the start and end indices of a particular
+substring, use <code>str_locate()</code>. This is a helpful function to
+use in combination with <code>str_sub()</code> so you don’t have to
+count the characters to find a substring.</p>
+<p>For example, let’s say I want to extract the substring
+<code>"Good"</code> from the following string:</p>
 <pre class="r"><code>x &lt;- &#39;thisIsGoodPractice&#39;</code></pre>
-<p>I could first use <code>str_locate()</code> to get the start and end indices:</p>
+<p>I could first use <code>str_locate()</code> to get the start and end
+indices:</p>
 <pre class="r"><code>indices &lt;- str_locate(x, &#39;Good&#39;)
 indices</code></pre>
 <pre><code>##      start end
 ## [1,]     7  10</code></pre>
-<p>Now that I have the start and end locations, I can use them within <code>str_sub()</code>:</p>
+<p>Now that I have the start and end locations, I can use them within
+<code>str_sub()</code>:</p>
 <pre class="r"><code>str_sub(x, indices[1], indices[2])</code></pre>
 <pre><code>## [1] &quot;Good&quot;</code></pre>
 </div>
-<div id="repeat-a-string" class="section level2">
+<div id="repeat-a-string" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Repeat a string</h2>
 <p>To duplicate strings, use <code>str_dup()</code>:</p>
 <pre class="r"><code>str_dup(&quot;hola&quot;, 3)</code></pre>
 <pre><code>## [1] &quot;holaholahola&quot;</code></pre>
-<p>Note the difference with <code>rep()</code> (which returns a vector):</p>
+<p>Note the difference with <code>rep()</code> (which returns a
+vector):</p>
 <pre class="r"><code>rep(&quot;hola&quot;, 3)</code></pre>
 <pre><code>## [1] &quot;hola&quot; &quot;hola&quot; &quot;hola&quot;</code></pre>
 </div>
-<div id="removing-whitespace" class="section level2">
-<h2><span class="header-section-number">3.6</span> Removing “whitespace”</h2>
+<div id="removing-whitespace" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Removing
+“whitespace”</h2>
 <p><code>str_trim()</code> removes leading and trailing whitespace:</p>
 <pre class="r"><code>x &lt;- &quot;         aStringWithSpace        &quot;
 x</code></pre>
 <pre><code>## [1] &quot;         aStringWithSpace        &quot;</code></pre>
 <pre class="r"><code>str_trim(x)</code></pre>
 <pre><code>## [1] &quot;aStringWithSpace&quot;</code></pre>
-<p>By default, <code>str_trim()</code> removes whitespace on both sides, but you can specify a single side:</p>
+<p>By default, <code>str_trim()</code> removes whitespace on both sides,
+but you can specify a single side:</p>
 <pre class="r"><code>str_trim(x, side = &quot;left&quot;) # Only trim left side</code></pre>
 <pre><code>## [1] &quot;aStringWithSpace        &quot;</code></pre>
 <pre class="r"><code>str_trim(x, side = &quot;right&quot;) # Only trim right side</code></pre>
 <pre><code>## [1] &quot;         aStringWithSpace&quot;</code></pre>
 </div>
-<div id="add-whitespace-or-other-characters" class="section level2">
-<h2><span class="header-section-number">3.7</span> Add whitespace (or other characters)</h2>
-<p><code>str_pad()</code> pads a string to a fixed length by adding extra whitespace on the left, right, or both sides. Note that the <code>width</code> argument is the length of the <em>final</em> string (not the length of the added padding):</p>
+<div id="add-whitespace-or-other-characters" class="section level2"
+number="3.7">
+<h2><span class="header-section-number">3.7</span> Add whitespace (or
+other characters)</h2>
+<p><code>str_pad()</code> pads a string to a fixed length by adding
+extra whitespace on the left, right, or both sides. Note that the
+<code>width</code> argument is the length of the <em>final</em> string
+(not the length of the added padding):</p>
 <pre class="r"><code>x &lt;- &quot;hello&quot;
 x</code></pre>
 <pre><code>## [1] &quot;hello&quot;</code></pre>
@@ -848,22 +893,27 @@ x</code></pre>
 <pre><code>## [1] &quot;     hello&quot;</code></pre>
 <pre class="r"><code>str_pad(x, width = 10, side = &quot;both&quot;) # Pad both sides</code></pre>
 <pre><code>## [1] &quot;  hello   &quot;</code></pre>
-<p>You can pad with other characters by using the <code>pad</code> argument:</p>
+<p>You can pad with other characters by using the <code>pad</code>
+argument:</p>
 <pre class="r"><code>str_pad(x, 10, side=&quot;both&quot;, pad=&#39;-&#39;)</code></pre>
 <pre><code>## [1] &quot;--hello---&quot;</code></pre>
 <p>Also, <code>str_pad()</code> will never make a string shorter:</p>
 <pre class="r"><code>str_pad(x, 4)</code></pre>
 <pre><code>## [1] &quot;hello&quot;</code></pre>
 </div>
-<div id="combine-strings-into-one-string" class="section level2">
-<h2><span class="header-section-number">3.8</span> Combine strings into one string</h2>
+<div id="combine-strings-into-one-string" class="section level2"
+number="3.8">
+<h2><span class="header-section-number">3.8</span> Combine strings into
+one string</h2>
 <p>To combine two or more strings, use <code>str_c()</code>:</p>
 <pre class="r"><code>str_c(&#39;x&#39;, &#39;y&#39;, &#39;z&#39;)</code></pre>
 <pre><code>## [1] &quot;xyz&quot;</code></pre>
-<p>Use the <code>sep</code> argument to control how they’re separated:</p>
+<p>Use the <code>sep</code> argument to control how they’re
+separated:</p>
 <pre class="r"><code>str_c(&#39;x&#39;, &#39;y&#39;, &#39;z&#39;, sep = &quot;-&quot;)</code></pre>
 <pre><code>## [1] &quot;x-y-z&quot;</code></pre>
-<p>You can also concatenate a <em>vector</em> of strings by adding the <code>collapse</code> argument to the <code>str_c()</code> function:</p>
+<p>You can also concatenate a <em>vector</em> of strings by adding the
+<code>collapse</code> argument to the <code>str_c()</code> function:</p>
 <pre class="r"><code>str_c(letters)</code></pre>
 <pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot;
 ## [20] &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
@@ -871,7 +921,8 @@ x</code></pre>
 <pre><code>## [1] &quot;abcdefghijklmnopqrstuvwxyz&quot;</code></pre>
 <pre class="r"><code>str_c(letters, collapse = &#39;-&#39;)</code></pre>
 <pre><code>## [1] &quot;a-b-c-d-e-f-g-h-i-j-k-l-m-n-o-p-q-r-s-t-u-v-w-x-y-z&quot;</code></pre>
-<p>Objects of length <code>0</code> are silently dropped. This is particularly useful in conjunction with <code>if</code> statements:</p>
+<p>Objects of length <code>0</code> are silently dropped. This is
+particularly useful in conjunction with <code>if</code> statements:</p>
 <pre class="r"><code>printGreeting &lt;- function(name, timeOfDay, isBirthday) {
     greeting &lt;- str_c(
         &quot;Good &quot;, timeOfDay, &quot; &quot;, name,
@@ -888,9 +939,12 @@ x</code></pre>
 <pre class="r"><code>printGreeting(&#39;John&#39;, &#39;morning&#39;, isBirthday = TRUE)</code></pre>
 <pre><code>## Good morning John, and HAPPY BIRTHDAY!</code></pre>
 </div>
-<div id="split-a-string-into-multiple-strings" class="section level2">
-<h2><span class="header-section-number">3.9</span> Split a string into multiple strings</h2>
-<p>Use <code>str_split()</code> to split a string up into pieces along a particular delimiter.</p>
+<div id="split-a-string-into-multiple-strings" class="section level2"
+number="3.9">
+<h2><span class="header-section-number">3.9</span> Split a string into
+multiple strings</h2>
+<p>Use <code>str_split()</code> to split a string up into pieces along a
+particular delimiter.</p>
 <pre class="r"><code>string &lt;- &#39;This string has spaces-and-dashes&#39;</code></pre>
 <pre class="r"><code>str_split(string, &quot; &quot;) # Split on the spaces</code></pre>
 <pre><code>## [[1]]
@@ -899,7 +953,13 @@ x</code></pre>
 <pre class="r"><code>str_split(string, &quot;-&quot;) # Split on the dashes</code></pre>
 <pre><code>## [[1]]
 ## [1] &quot;This string has spaces&quot; &quot;and&quot;                    &quot;dashes&quot;</code></pre>
-<p>By default, <code>str_split()</code> returns a <code>list</code> (another R data structure) of vectors. Each item in the list is a vector of strings. In the above cases, we gave <code>str_split()</code> a single string, so there is only one item in the returned list. In these cases, the easiest way to access the resulting vector of split strings is to use the double bracket <code>[[]]</code> operator to access the first list item:</p>
+<p>By default, <code>str_split()</code> returns a <code>list</code>
+(another R data structure) of vectors. Each item in the list is a vector
+of strings. In the above cases, we gave <code>str_split()</code> a
+single string, so there is only one item in the returned list. In these
+cases, the easiest way to access the resulting vector of split strings
+is to use the double bracket <code>[[]]</code> operator to access the
+first list item:</p>
 <pre class="r"><code>str_split(string, &quot; &quot;) # Returns a list of vectors</code></pre>
 <pre><code>## [[1]]
 ## [1] &quot;This&quot;              &quot;string&quot;            &quot;has&quot;              
@@ -907,7 +967,9 @@ x</code></pre>
 <pre class="r"><code>str_split(string, &quot; &quot;)[[1]] # Returns the first vector in the list</code></pre>
 <pre><code>## [1] &quot;This&quot;              &quot;string&quot;            &quot;has&quot;              
 ## [4] &quot;spaces-and-dashes&quot;</code></pre>
-<p>If you give <code>str_split()</code> a vector of strings, it will return a list of length equal to the number of elements in the vector:</p>
+<p>If you give <code>str_split()</code> a vector of strings, it will
+return a list of length equal to the number of elements in the
+vector:</p>
 <pre class="r"><code>x &lt;- c(&#39;babble&#39;, &#39;scrabblebabble&#39;)
 str_split(x, &#39;bb&#39;) # Returns a list with two elements (each a vector)</code></pre>
 <pre><code>## [[1]]
@@ -915,14 +977,24 @@ str_split(x, &#39;bb&#39;) # Returns a list with two elements (each a vector)</c
 ## 
 ## [[2]]
 ## [1] &quot;scra&quot; &quot;leba&quot; &quot;le&quot;</code></pre>
-<p>A particularly useful string split is to split on the empty string (<code>""</code>), which breaks a string up into its individual characters:</p>
+<p>A particularly useful string split is to split on the empty string
+(<code>""</code>), which breaks a string up into its individual
+characters:</p>
 <pre class="r"><code>str_split(string, &quot;&quot;)[[1]]</code></pre>
 <pre><code>##  [1] &quot;T&quot; &quot;h&quot; &quot;i&quot; &quot;s&quot; &quot; &quot; &quot;s&quot; &quot;t&quot; &quot;r&quot; &quot;i&quot; &quot;n&quot; &quot;g&quot; &quot; &quot; &quot;h&quot; &quot;a&quot; &quot;s&quot; &quot; &quot; &quot;s&quot; &quot;p&quot; &quot;a&quot;
 ## [20] &quot;c&quot; &quot;e&quot; &quot;s&quot; &quot;-&quot; &quot;a&quot; &quot;n&quot; &quot;d&quot; &quot;-&quot; &quot;d&quot; &quot;a&quot; &quot;s&quot; &quot;h&quot; &quot;e&quot; &quot;s&quot;</code></pre>
 </div>
-<div id="word-extraction-with-word" class="section level2">
-<h2><span class="header-section-number">3.10</span> Word extraction with <code>word()</code></h2>
-<p>The <code>word()</code> function that another way to split up a longer string. It is designed to extract words from a sentence. You use <code>word()</code> by by passing it a <code>string</code> together with a <code>start</code> position of the first word to extract and an <code>end</code> position of the last word to extract. By default, the separator <code>sep</code> used between words is a single space. Here’s some examples:</p>
+<div id="word-extraction-with-word" class="section level2"
+number="3.10">
+<h2><span class="header-section-number">3.10</span> Word extraction with
+<code>word()</code></h2>
+<p>The <code>word()</code> function that another way to split up a
+longer string. It is designed to extract words from a sentence. You use
+<code>word()</code> by by passing it a <code>string</code> together with
+a <code>start</code> position of the first word to extract and an
+<code>end</code> position of the last word to extract. By default, the
+separator <code>sep</code> used between words is a single space. Here’s
+some examples:</p>
 <pre class="r"><code>sentence &lt;- c(&quot;Be the change you want to be&quot;)</code></pre>
 <pre class="r"><code># Extract first word
 word(sentence, 1)</code></pre>
@@ -937,9 +1009,12 @@ word(sentence, -1)</code></pre>
 word(sentence, 2, -1)</code></pre>
 <pre><code>## [1] &quot;the change you want to be&quot;</code></pre>
 </div>
-<div id="alphabetically-sorting-string-vectors" class="section level2">
-<h2><span class="header-section-number">3.11</span> Alphabetically sorting string vectors</h2>
-<p>You can sort a vector of strings alphabetically using <code>str_sort()</code> and <code>str_order()</code>:</p>
+<div id="alphabetically-sorting-string-vectors" class="section level2"
+number="3.11">
+<h2><span class="header-section-number">3.11</span> Alphabetically
+sorting string vectors</h2>
+<p>You can sort a vector of strings alphabetically using
+<code>str_sort()</code> and <code>str_order()</code>:</p>
 <pre class="r"><code>x &lt;- c(&#39;Y&#39;, &#39;M&#39;, &#39;C&#39;, &#39;A&#39;)</code></pre>
 <pre class="r"><code>str_sort(x)</code></pre>
 <pre><code>## [1] &quot;A&quot; &quot;C&quot; &quot;M&quot; &quot;Y&quot;</code></pre>
@@ -950,16 +1025,24 @@ word(sentence, 2, -1)</code></pre>
 <pre class="r"><code>x[str_order(x)]</code></pre>
 <pre><code>## [1] &quot;A&quot; &quot;C&quot; &quot;M&quot; &quot;Y&quot;</code></pre>
 </div>
-<div id="detect-if-a-pattern-is-in-a-string" class="section level2">
-<h2><span class="header-section-number">3.12</span> Detect if a pattern is in a string</h2>
-<p>To determine if a character vector matches a pattern, use <code>str_detect()</code>. It returns a logical vector the same length as the input:</p>
+<div id="detect-if-a-pattern-is-in-a-string" class="section level2"
+number="3.12">
+<h2><span class="header-section-number">3.12</span> Detect if a pattern
+is in a string</h2>
+<p>To determine if a character vector matches a pattern, use
+<code>str_detect()</code>. It returns a logical vector the same length
+as the input:</p>
 <pre class="r"><code>tenFruit &lt;- fruit[1:10]
 tenFruit</code></pre>
 <pre><code>##  [1] &quot;apple&quot;        &quot;apricot&quot;      &quot;avocado&quot;      &quot;banana&quot;       &quot;bell pepper&quot; 
 ##  [6] &quot;bilberry&quot;     &quot;blackberry&quot;   &quot;blackcurrant&quot; &quot;blood orange&quot; &quot;blueberry&quot;</code></pre>
 <pre class="r"><code>str_detect(tenFruit, &quot;berry&quot;)</code></pre>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE</code></pre>
-<p>Remember that when you use a logical vector in a numeric context, <code>FALSE</code> becomes <code>0</code> and <code>TRUE</code> becomes <code>1</code>. That makes <code>sum()</code> and <code>mean()</code> useful if you want to answer questions about matches across a vector:</p>
+<p>Remember that when you use a logical vector in a numeric context,
+<code>FALSE</code> becomes <code>0</code> and <code>TRUE</code> becomes
+<code>1</code>. That makes <code>sum()</code> and <code>mean()</code>
+useful if you want to answer questions about matches across a
+vector:</p>
 <pre class="r"><code># How many fruit in tenFruit contain the string &quot;berry&quot;?
 # How many words in the stringr &quot;words&quot; vector contain the letter &quot;a&quot;?
 sum(str_detect(tenFruit, &quot;berry&quot;))</code></pre>
@@ -967,14 +1050,17 @@ sum(str_detect(tenFruit, &quot;berry&quot;))</code></pre>
 <pre class="r"><code># What proportion contain the string &quot;berry&quot;?
 mean(str_detect(tenFruit, &quot;berry&quot;))</code></pre>
 <pre><code>## [1] 0.3</code></pre>
-<p>If you want to <em>count</em> the number of times a particular string pattern appears, use <code>str_count</code>:</p>
+<p>If you want to <em>count</em> the number of times a particular string
+pattern appears, use <code>str_count</code>:</p>
 <pre class="r"><code>x &lt;- c(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;)
 str_count(x, &quot;a&quot;)</code></pre>
 <pre><code>## [1] 1 3 1</code></pre>
 </div>
-<div id="anchors" class="section level2">
+<div id="anchors" class="section level2" number="3.13">
 <h2><span class="header-section-number">3.13</span> Anchors</h2>
-<p>By default, <code>str_detect()</code> will match any part of a string. But it’s often useful to <em>anchor</em> the matching condition so that it matches from the start or end of the string. You can use:</p>
+<p>By default, <code>str_detect()</code> will match any part of a
+string. But it’s often useful to <em>anchor</em> the matching condition
+so that it matches from the start or end of the string. You can use:</p>
 <ul>
 <li><code>^</code> to match the <em>start</em> of the string.</li>
 <li><code>$</code> to match the <em>end</em> of the string.</li>
@@ -987,19 +1073,26 @@ str_detect(tenFruit, &quot;e$&quot;)</code></pre>
 <pre><code>##  [1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE</code></pre>
 <p>To remember which is which, try this mnemonic:</p>
 <blockquote>
-<p>If you <em>start</em> with power (<code>^</code>), you’ll <em>end</em> up with money (<code>$</code>).</p>
+<p>If you <em>start</em> with power (<code>^</code>), you’ll
+<em>end</em> up with money (<code>$</code>).</p>
 </blockquote>
-<p>To force a match to a complete string, anchor it with both <code>^</code> and <code>$</code>:</p>
+<p>To force a match to a complete string, anchor it with both
+<code>^</code> and <code>$</code>:</p>
 <pre class="r"><code>x &lt;- c(&quot;apple pie&quot;, &quot;apple&quot;, &quot;apple cake&quot;)</code></pre>
 <pre class="r"><code>str_detect(x, &quot;apple&quot;)</code></pre>
 <pre><code>## [1] TRUE TRUE TRUE</code></pre>
 <pre class="r"><code>str_detect(x, &quot;^apple$&quot;)</code></pre>
 <pre><code>## [1] FALSE  TRUE FALSE</code></pre>
-<p>In the second example above, 1 &amp; 3 are <code>FALSE</code> because there’s a space after <code>apple</code>.</p>
+<p>In the second example above, 1 &amp; 3 are <code>FALSE</code> because
+there’s a space after <code>apple</code>.</p>
 </div>
-<div id="replacing-matched-pattern-with-another-string" class="section level2">
-<h2><span class="header-section-number">3.14</span> Replacing matched pattern with another string</h2>
-<p><code>str_replace()</code> and <code>str_replace_all()</code> allow you to replace matches with new strings. The simplest use is to replace a pattern with a fixed string:</p>
+<div id="replacing-matched-pattern-with-another-string"
+class="section level2" number="3.14">
+<h2><span class="header-section-number">3.14</span> Replacing matched
+pattern with another string</h2>
+<p><code>str_replace()</code> and <code>str_replace_all()</code> allow
+you to replace matches with new strings. The simplest use is to replace
+a pattern with a fixed string:</p>
 <pre class="r"><code>x &lt;- c(&quot;apple&quot;, &quot;pear&quot;, &quot;banana&quot;)</code></pre>
 <pre class="r"><code>str_replace(x, &quot;a&quot;, &quot;-&quot;)</code></pre>
 <pre><code>## [1] &quot;-pple&quot;  &quot;pe-r&quot;   &quot;b-nana&quot;</code></pre>
@@ -1007,9 +1100,13 @@ str_detect(tenFruit, &quot;e$&quot;)</code></pre>
 <pre><code>## [1] &quot;-pple&quot;  &quot;pe-r&quot;   &quot;b-n-n-&quot;</code></pre>
 </div>
 </div>
-<div id="stringr-functions-work-on-vectors" class="section level1">
-<h1><span class="header-section-number">4</span> <code>stringr</code> functions work on vectors</h1>
-<p>In many of the above examples, we used a single string, but most <code>stringr</code> functions are designed to work on vectors of strings. For example, consider a vector of two “fruit”:</p>
+<div id="stringr-functions-work-on-vectors" class="section level1"
+number="4">
+<h1><span class="header-section-number">4</span> <code>stringr</code>
+functions work on vectors</h1>
+<p>In many of the above examples, we used a single string, but most
+<code>stringr</code> functions are designed to work on vectors of
+strings. For example, consider a vector of two “fruit”:</p>
 <pre class="r"><code>x &lt;- c(&quot;apples&quot;, &quot;oranges&quot;)
 x</code></pre>
 <pre><code>## [1] &quot;apples&quot;  &quot;oranges&quot;</code></pre>
@@ -1022,44 +1119,62 @@ x</code></pre>
 <p>Convert all strings in <code>x</code> to upper case:</p>
 <pre class="r"><code>str_to_upper(x)</code></pre>
 <pre><code>## [1] &quot;APPLES&quot;  &quot;ORANGES&quot;</code></pre>
-<p>Replace all <code>"a"</code> characters with a <code>"-"</code> character:</p>
+<p>Replace all <code>"a"</code> characters with a <code>"-"</code>
+character:</p>
 <pre class="r"><code>str_replace_all(x, &quot;a&quot;, &quot;-&quot;)</code></pre>
 <pre><code>## [1] &quot;-pples&quot;  &quot;or-nges&quot;</code></pre>
 </div>
-<div id="tips" class="section level1">
+<div id="tips" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Tips</h1>
-<div id="breaking-a-string-into-characters" class="section level2">
-<h2><span class="header-section-number">5.1</span> Breaking a string into characters</h2>
-<p>Often times you’ll want to break a string into it’s individual character components. To do that, use <code>str_split()</code> with the empty string <code>""</code> as the delimiter:</p>
+<div id="breaking-a-string-into-characters" class="section level2"
+number="5.1">
+<h2><span class="header-section-number">5.1</span> Breaking a string
+into characters</h2>
+<p>Often times you’ll want to break a string into it’s individual
+character components. To do that, use <code>str_split()</code> with the
+empty string <code>""</code> as the delimiter:</p>
 <pre class="r"><code>chars &lt;- str_split(&quot;apples&quot;, &quot;&quot;)[[1]]
 chars</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;p&quot; &quot;p&quot; &quot;l&quot; &quot;e&quot; &quot;s&quot;</code></pre>
 </div>
-<div id="breaking-a-sentence-into-words" class="section level2">
-<h2><span class="header-section-number">5.2</span> Breaking a sentence into words</h2>
-<p>Similarly, if you have a single string that contains words separated by spaces, splitting on <code>" "</code> will break it into words:</p>
+<div id="breaking-a-sentence-into-words" class="section level2"
+number="5.2">
+<h2><span class="header-section-number">5.2</span> Breaking a sentence
+into words</h2>
+<p>Similarly, if you have a single string that contains words separated
+by spaces, splitting on <code>" "</code> will break it into words:</p>
 <pre class="r"><code>x &lt;- &quot;If you want to view paradise, simply look around and view it&quot;
 str_split(x, &quot; &quot;)[[1]]</code></pre>
 <pre><code>##  [1] &quot;If&quot;        &quot;you&quot;       &quot;want&quot;      &quot;to&quot;        &quot;view&quot;      &quot;paradise,&quot;
 ##  [7] &quot;simply&quot;    &quot;look&quot;      &quot;around&quot;    &quot;and&quot;       &quot;view&quot;      &quot;it&quot;</code></pre>
 </div>
-<div id="comparing-strings" class="section level2">
-<h2><span class="header-section-number">5.3</span> Comparing strings</h2>
-<p>If you want to compare whether two strings are the same, you must also consider their cases. For example:</p>
+<div id="comparing-strings" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Comparing
+strings</h2>
+<p>If you want to compare whether two strings are the same, you must
+also consider their cases. For example:</p>
 <pre class="r"><code>a &lt;- &quot;Apples&quot;
 b &lt;- &quot;apples&quot;
 a == b</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>The above returns <code>FALSE</code> because the cases are different on the <code>"a"</code> characters. If you want to ignore case, then a common strategy is to first convert the strings to a common case before comparing. For example:</p>
+<p>The above returns <code>FALSE</code> because the cases are different
+on the <code>"a"</code> characters. If you want to ignore case, then a
+common strategy is to first convert the strings to a common case before
+comparing. For example:</p>
 <pre class="r"><code>str_to_lower(a) == str_to_lower(b)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li><a href="https://r4ds.had.co.nz/strings.html">R for Data Science</a>, by Garrett Grolemund &amp; Hadley Wickham</li>
-<li><a href="https://www.gastonsanchez.com/r4strings/">Handling Strings with R</a>, by Gaston Sanchez</li>
-<li><a href="https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html">Introduction to <code>stringr</code> vignette</a></li>
+<li><a href="https://r4ds.had.co.nz/strings.html">R for Data
+Science</a>, by Garrett Grolemund &amp; Hadley Wickham</li>
+<li><a href="https://www.gastonsanchez.com/r4strings/">Handling Strings
+with R</a>, by Gaston Sanchez</li>
+<li><a
+href="https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html">Introduction
+to <code>stringr</code> vignette</a></li>
 </ul>
 </div>
 </div>
@@ -1105,7 +1220,7 @@ a == b</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1123,7 +1238,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -1132,6 +1247,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -1144,7 +1262,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

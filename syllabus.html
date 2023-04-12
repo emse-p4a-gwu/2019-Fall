@@ -13,20 +13,30 @@
 
 <title>Syllabus</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,7 +554,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -593,9 +564,13 @@ div.tocify {
 
 
 <hr />
-<div id="course-information" class="section level1">
+<div id="course-information" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Course Information</h1>
 <table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Instructor</th>
@@ -608,57 +583,84 @@ div.tocify {
 <td><i class="far fa-calendar"></i> Mondays</td>
 </tr>
 <tr class="even">
-<td><i class="fas fa-university"></i> Science &amp; Engineering Hall, Office 2830</td>
+<td><i class="fas fa-university"></i> Science &amp; Engineering Hall,
+Office 2830</td>
 <td><i class="fas fa-university"></i> Phillips Hall 108</td>
 </tr>
 <tr class="odd">
 <td><i class="fas fa-phone"></i> +1 (202) 994-7173</td>
-<td><i class="far fa-calendar-alt"></i> August 26 - December 9, 2019</td>
+<td><i class="far fa-calendar-alt"></i> August 26 - December 9,
+2019</td>
 </tr>
 <tr class="even">
-<td><i class="fas fa-envelope"></i> <a href="mailto:jph@gwu.edu">jpg@gwu.edu</a></td>
+<td><i class="fas fa-envelope"></i> <a
+href="mailto:jph@gwu.edu">jpg@gwu.edu</a></td>
 <td><i class="far fa-clock"></i> 6:10 - 8:40 PM</td>
 </tr>
 <tr class="odd">
-<td><i class="fab fa-twitter"></i> <a href="https://twitter.com/JohnHelveston">@JohnHelveston</a></td>
-<td><i class="fab fa-slack"></i> <a href="https://6574-s11-f19.slack.com/">Slack</a></td>
+<td><i class="fab fa-twitter"></i> <a
+href="https://twitter.com/JohnHelveston">@JohnHelveston</a></td>
+<td><i class="fab fa-slack"></i> <a
+href="https://6574-s11-f19.slack.com/">Slack</a></td>
 </tr>
 </tbody>
 </table>
 <hr />
 </div>
-<div id="course-description" class="section level1">
+<div id="course-description" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Course Description</h1>
-<div id="official-gw-bulletin-description" class="section level2">
-<h2><span class="header-section-number">2.1</span> Official GW Bulletin Description</h2>
-<p>Introduction to programming using the <a href="https://www.r-project.org/">R programming language</a>; topics include functions, conditionals, loops, strings, file input/output, plotting, coding style, Monte Carlo methods, and packages.</p>
+<div id="official-gw-bulletin-description" class="section level2"
+number="2.1">
+<h2><span class="header-section-number">2.1</span> Official GW Bulletin
+Description</h2>
+<p>Introduction to programming using the <a
+href="https://www.r-project.org/">R programming language</a>; topics
+include functions, conditionals, loops, strings, file input/output,
+plotting, coding style, Monte Carlo methods, and packages.</p>
 </div>
-<div id="unofficial-description" class="section level2">
-<h2><span class="header-section-number">2.2</span> Unofficial Description</h2>
-<p>This course provides a foundation in programming using the <a href="https://www.r-project.org/">R programming language</a>. Emphasis will be on producing clear, robust, and reasonably efficient code using top-down design, informal analysis, and effective testing and debugging. Throughout the course, students will primarily work on individual programming assignments to help practice problem solving skills, coding skills, and data science skills. Students will be assessed through quizzes, homework assignments, and exams. Teaching will involve interactive lectures with plenty of time spent live coding. This course assumes no prior programming experience and is an ideal preparation for higher level courses in data analytics.</p>
+<div id="unofficial-description" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Unofficial
+Description</h2>
+<p>This course provides a foundation in programming using the <a
+href="https://www.r-project.org/">R programming language</a>. Emphasis
+will be on producing clear, robust, and reasonably efficient code using
+top-down design, informal analysis, and effective testing and debugging.
+Throughout the course, students will primarily work on individual
+programming assignments to help practice problem solving skills, coding
+skills, and data science skills. Students will be assessed through
+quizzes, homework assignments, and exams. Teaching will involve
+interactive lectures with plenty of time spent live coding. This course
+assumes no prior programming experience and is an ideal preparation for
+higher level courses in data analytics.</p>
 </div>
-<div id="prerequisites" class="section level2">
+<div id="prerequisites" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Prerequisites</h2>
-<p>There are no prerequisites, and no prior programming experience is necessary to succeed in this class.</p>
+<p>There are no prerequisites, and no prior programming experience is
+necessary to succeed in this class.</p>
 <hr />
 </div>
 </div>
-<div id="learning-objectives" class="section level1">
-<h1><span class="header-section-number">3</span> Learning Objectives</h1>
-<p>Having successfully completed this course, students will be able to:</p>
+<div id="learning-objectives" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Learning
+Objectives</h1>
+<p>Having successfully completed this course, students will be able
+to:</p>
 <ul>
 <li>Write clear, robust, and reasonably efficient code in R using:
 <ul>
 <li>Sequential, conditional, and loop statements.</li>
-<li>Multiple data types, including numeric, string, and logical data.</li>
+<li>Multiple data types, including numeric, string, and logical
+data.</li>
 <li>Data structures, including vectors and data frames.</li>
 <li>Visualizations of data.</li>
 </ul></li>
 <li>Develop simple programs to effectively solve medium-sized tasks by:
 <ul>
 <li>Employing modular, top-down design in program construction.</li>
-<li>Demonstrating an effective programming style based on established standards, practices, and guidelines.</li>
-<li>Proactively creating and writing test cases to test and debug code.</li>
+<li>Demonstrating an effective programming style based on established
+standards, practices, and guidelines.</li>
+<li>Proactively creating and writing test cases to test and debug
+code.</li>
 <li>Applying computational problem-solving skills to new problems.</li>
 </ul></li>
 <li>Import, manipulate, visualize, and export data in R.</li>
@@ -666,47 +668,101 @@ div.tocify {
 <hr />
 <!-- This section was modified from https://evalf19.classes.andrewheiss.com/syllabus/#pep-talk -->
 </div>
-<div id="pep-talk" class="section level1">
+<div id="pep-talk" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Pep Talk!</h1>
-<p>Learning R can be challenging - it’s like learning a new language. Hadley Wickham - the chief data scientist at RStudio and the author of some amazing R packages you’ll be using like <code>ggplot2</code> - <a href="https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/">made this wise observation</a>:</p>
+<p>Learning R can be challenging - it’s like learning a new language.
+Hadley Wickham - the chief data scientist at RStudio and the author of
+some amazing R packages you’ll be using like <code>ggplot2</code> - <a
+href="https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/">made
+this wise observation</a>:</p>
 <blockquote>
-<p>It’s easy when you start out programming to get really frustrated and think, “Oh it’s me, I’m really stupid,” or, “I’m not made out to program.” But, that is absolutely not the case. Everyone gets frustrated. I still get frustrated occasionally when writing R code. It’s just a natural part of programming. So, it happens to everyone and gets less and less over time. Don’t blame yourself. Just take a break, do something fun, and then come back and try again later.</p>
+<p>It’s easy when you start out programming to get really frustrated and
+think, “Oh it’s me, I’m really stupid,” or, “I’m not made out to
+program.” But, that is absolutely not the case. Everyone gets
+frustrated. I still get frustrated occasionally when writing R code.
+It’s just a natural part of programming. So, it happens to everyone and
+gets less and less over time. Don’t blame yourself. Just take a break,
+do something fun, and then come back and try again later.</p>
 </blockquote>
-<p>If you’re finding yourself taking way too long hitting your head against a wall and not understanding, take a break, talk to classmates, ask questions in Slack, e-mail me, etc.</p>
+<p>If you’re finding yourself taking way too long hitting your head
+against a wall and not understanding, take a break, talk to classmates,
+ask questions in Slack, e-mail me, etc.</p>
 <p>I promise you can do this.</p>
 <hr />
 </div>
-<div id="required-texts-materials" class="section level1">
-<h1><span class="header-section-number">5</span> Required Texts &amp; Materials</h1>
-<div id="software" class="section level2">
+<div id="required-texts-materials" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Required Texts &amp;
+Materials</h1>
+<div id="software" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Software</h2>
-<p>All required software for this course is freely available on the web. This includes:</p>
+<p>All required software for this course is freely available on the web.
+This includes:</p>
 <ul>
-<li>R (version 3.6.0 or later), which can be downloaded from <a href="(https://cloud.r-project.org)">The Comprehensive R Archive Network (CRAN)</a></li>
-<li>RStudio (Desktop Version), a free IDE for R, which can be downloaded from <a href="https://www.rstudio.com/products/rstudio/download/preview/">RStudio</a></li>
+<li>R (version 3.6.0 or later), which can be downloaded from <a
+href="(https://cloud.r-project.org)">The Comprehensive R Archive Network
+(CRAN)</a></li>
+<li>RStudio (Desktop Version), a free IDE for R, which can be downloaded
+from <a
+href="https://www.rstudio.com/products/rstudio/download/preview/">RStudio</a></li>
 </ul>
-<p>Go to the course <a href="L1.2-getting-started.html">“Getting Started”</a> page for installation instructions.</p>
+<p>Go to the course <a href="L1.2-getting-started.html">“Getting
+Started”</a> page for installation instructions.</p>
 </div>
-<div id="texts-other-useful-resources" class="section level2">
-<h2><span class="header-section-number">5.2</span> Texts / Other Useful Resources</h2>
-<p>This course does not require any textbooks. All learning materials and resources are freely available on the web. See the course <a href="https://emse6574-gwu.github.io/2019-Fall/resources.html">resources page</a> for a list of useful resources.</p>
+<div id="texts-other-useful-resources" class="section level2"
+number="5.2">
+<h2><span class="header-section-number">5.2</span> Texts / Other Useful
+Resources</h2>
+<p>This course does not require any textbooks. All learning materials
+and resources are freely available on the web. See the course <a
+href="https://emse6574-gwu.github.io/2019-Fall/resources.html">resources
+page</a> for a list of useful resources.</p>
 <hr />
 </div>
 </div>
-<div id="assignments" class="section level1">
+<div id="assignments" class="section level1" number="6">
 <h1><span class="header-section-number">6</span> Assignments</h1>
 <p><strong>Homework Assignments</strong>:</p>
-<p>Homework assignments contain a mix of coding exercises and written exercises. They generally assess the material taught the weeks they are assigned, and should take several hours to complete. <strong>Start homeworks early</strong> (Tuesday is best, Thursday at the latest!), and come to office hours &amp; tutoring hours for help.</p>
-<p>Read the <a href="#collaboration-policy">Collaboration Policy</a> about collaborating with fellow students on homeworks. While most problems must be worked on individually, some will be marked as “collaborative”; on these problems (and <em>only</em> these problems), you may work on code with other students.</p>
-<p>Homeworks will be graded based on style (modularity, readability, commenting, etc.) and functionality (correctness on all possible test inputs). Your code should be properly annotated with comments that are well-placed, concise, and informative. Your assignments will be graded by your tutors, by automated graders, and at times by your instructor.</p>
+<p>Homework assignments contain a mix of coding exercises and written
+exercises. They generally assess the material taught the weeks they are
+assigned, and should take several hours to complete. <strong>Start
+homeworks early</strong> (Tuesday is best, Thursday at the latest!), and
+come to office hours &amp; tutoring hours for help.</p>
+<p>Read the <a href="#collaboration-policy">Collaboration Policy</a>
+about collaborating with fellow students on homeworks. While most
+problems must be worked on individually, some will be marked as
+“collaborative”; on these problems (and <em>only</em> these problems),
+you may work on code with other students.</p>
+<p>Homeworks will be graded based on style (modularity, readability,
+commenting, etc.) and functionality (correctness on all possible test
+inputs). Your code should be properly annotated with comments that are
+well-placed, concise, and informative. Your assignments will be graded
+by your tutors, by automated graders, and at times by your
+instructor.</p>
 <p><strong>Quizzes</strong>:</p>
-<p>There will be five quizzes given about once every two weeks immediately at the beginning of class. Quizzes cover material from the previous weeks and the previous homework assignments. Quizzes are designed to be time-intensive, to test for fluency, and to demonstrate where additional study is needed.</p>
+<p>There will be five quizzes given about once every two weeks
+immediately at the beginning of class. Quizzes cover material from the
+previous weeks and the previous homework assignments. Quizzes are
+designed to be time-intensive, to test for fluency, and to demonstrate
+where additional study is needed.</p>
 <p><strong>Midterm Exams</strong>:</p>
-<p>There will be two midterm exams given in class, as noted in the course schedule. Each exam will cover only material presented in the preceding weeks (as noted in the <a href="#schedule.html">schedule</a>.</p>
+<p>There will be two midterm exams given in class, as noted in the
+course schedule. Each exam will cover only material presented in the
+preceding weeks (as noted in the <a
+href="#schedule.html">schedule</a>.</p>
 <p><strong>Final Exam</strong>:</p>
-<p>There will be a standard final exam during the final exam period at the end of the semester. This exam will cover material from the entire semester. The final exam is built to allow enough time to attempt all problems.</p>
+<p>There will be a standard final exam during the final exam period at
+the end of the semester. This exam will cover material from the entire
+semester. The final exam is built to allow enough time to attempt all
+problems.</p>
 <p><strong>Class Participation</strong>:</p>
-<p>Regular class attendance is <strong>essential</strong>. Much of the class time will be spent doing exercises and coding. Multiple absences, inappropriate or unprofessional behavior during class (such as monopolizing discussions or being rude or disruptive), not participating in classroom exercises, and not being prepared for class will result in a lower grade for the class participation component. As a rule of thumb, the participation grade will be assigned according to the following rubric:</p>
+<p>Regular class attendance is <strong>essential</strong>. Much of the
+class time will be spent doing exercises and coding. Multiple absences,
+inappropriate or unprofessional behavior during class (such as
+monopolizing discussions or being rude or disruptive), not participating
+in classroom exercises, and not being prepared for class will result in
+a lower grade for the class participation component. As a rule of thumb,
+the participation grade will be assigned according to the following
+rubric:</p>
 <table>
 <colgroup>
 <col width="8%" />
@@ -729,20 +785,23 @@ div.tocify {
 <tr class="even">
 <td>Moderate</td>
 <td>Attended most classes, but often arrived late or left early</td>
-<td>Takes notes; attentive; occasionally contributes in class discussion / exercises</td>
+<td>Takes notes; attentive; occasionally contributes in class discussion
+/ exercises</td>
 </tr>
 <tr class="odd">
 <td>High</td>
 <td>Attends on time and prepared</td>
-<td>Takes notes; attentive; regularly contributes in class discussion / exercises; does not dominate conversation; listens and responds thoughtfully to comments made by others</td>
+<td>Takes notes; attentive; regularly contributes in class discussion /
+exercises; does not dominate conversation; listens and responds
+thoughtfully to comments made by others</td>
 </tr>
 </tbody>
 </table>
 <hr />
 </div>
-<div id="grading" class="section level1">
+<div id="grading" class="section level1" number="7">
 <h1><span class="header-section-number">7</span> Grading</h1>
-<div id="standard-grading" class="section level2">
+<div id="standard-grading" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Standard Grading</h2>
 <p>Final grades will be calculated as follows:</p>
 <div class="tableMedium">
@@ -784,10 +843,19 @@ div.tocify {
 </table>
 </div>
 </div>
-<div id="amd-grading" class="section level2">
+<div id="amd-grading" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> AMD Grading</h2>
-<p>This Alternative Minimum Grading (AMG) policy is available to everybody, but is designed specifically for students who struggle in the first part of the course, and then through sustained hard work and dedication manage to elevate their performance in the latter part of the course to a level that merits passing with a C (even if their Standard Grade might be lower than that).</p>
-<p>You can’t “sign up” for AMG grading. Every student will be considered both for Standard Grading and AMG, and the instructor can choose to assign the AMG grade if a student’s effort merits it. To compute your AMG score, first use the following to compute your raw score. If the resulting score is higher than a C, set it back to a C.</p>
+<p>This Alternative Minimum Grading (AMG) policy is available to
+everybody, but is designed specifically for students who struggle in the
+first part of the course, and then through sustained hard work and
+dedication manage to elevate their performance in the latter part of the
+course to a level that merits passing with a C (even if their Standard
+Grade might be lower than that).</p>
+<p>You can’t “sign up” for AMG grading. Every student will be considered
+both for Standard Grading and AMG, and the instructor can choose to
+assign the AMG grade if a student’s effort merits it. To compute your
+AMG score, first use the following to compute your raw score. If the
+resulting score is higher than a C, set it back to a C.</p>
 <div class="tableSmall">
 <table>
 <thead>
@@ -820,14 +888,16 @@ div.tocify {
 </tbody>
 </table>
 </div>
-<p>Unlike the Standard Grade, effort is heavily factored into your AMG score. To qualify for AMG you must put forth sustained effort, which means meeting the following requirements:</p>
+<p>Unlike the Standard Grade, effort is heavily factored into your AMG
+score. To qualify for AMG you must put forth sustained effort, which
+means meeting the following requirements:</p>
 <ul>
 <li>You cannot miss multiple class periods</li>
 <li>You cannot miss multiple assignments or quizzes</li>
 <li>You cannot violate the Collaboration Policy</li>
 </ul>
 </div>
-<div id="grading-scale" class="section level2">
+<div id="grading-scale" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Grading Scale</h2>
 <div class="tableMedium">
 <table>
@@ -879,15 +949,19 @@ div.tocify {
 </tbody>
 </table>
 </div>
-<p>The course instructors may choose to change the scales at their discretion. You are guaranteed that your letter grade will never become worse as a result of changing scales.</p>
+<p>The course instructors may choose to change the scales at their
+discretion. You are guaranteed that your letter grade will never become
+worse as a result of changing scales.</p>
 <hr />
 </div>
 </div>
-<div id="getting-help" class="section level1">
+<div id="getting-help" class="section level1" number="8">
 <h1><span class="header-section-number">8</span> Getting Help</h1>
-<div id="slack" class="section level2">
+<div id="slack" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> Slack</h2>
-<p>All course communication will be managed through <a href="https://6574-s11-f19.slack.com/">Slack</a> - Sign up <a href="https://join.slack.com/t/6574-s11-f19/shared_invite/enQtNzIxNzQ2OTU1MjAwLWZiYjFlOTlhMjAxNDEwMjQ0MDcwYmMxOTAyZGVhNWM4YzFhY2U2ZDIyYzMxZGQwYjMxNDBiYzMzNWRmZmQxMDY"><strong>HERE</strong></a></p>
+<p>All course communication will be managed through <a
+href="https://6574-s11-f19.slack.com/">Slack</a> - Sign up <a
+href="https://join.slack.com/t/6574-s11-f19/shared_invite/enQtNzIxNzQ2OTU1MjAwLWZiYjFlOTlhMjAxNDEwMjQ0MDcwYmMxOTAyZGVhNWM4YzFhY2U2ZDIyYzMxZGQwYjMxNDBiYzMzNWRmZmQxMDY"><strong>HERE</strong></a></p>
 <p>Watch this 2-minute video to see what Slack is all about:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/9RJZMSsH7-g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
@@ -895,157 +969,296 @@ div.tocify {
 <ul>
 <li>Ask general questions.</li>
 <li>Ask for help with an assignment.</li>
-<li>Send direct, private messages to each other or the instructors (just like email…but better!)</li>
+<li>Send direct, private messages to each other or the instructors (just
+like email…but better!)</li>
 </ul>
 <p><strong>Asking for help on Slack</strong>:</p>
-<p>You can post questions on slack and receive quick responses. This also enables other students to see answers to common questions. Be specific - if your code has an error you don’t understand, <strong>include the code and the error message</strong> in your question.</p>
+<p>You can post questions on slack and receive quick responses. This
+also enables other students to see answers to common questions. Be
+specific - if your code has an error you don’t understand,
+<strong>include the code and the error message</strong> in your
+question.</p>
 </div>
-<div id="office-hours" class="section level2">
+<div id="office-hours" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> Office hours</h2>
 <p>Please watch this video:</p>
 <iframe src="https://player.vimeo.com/video/270014784" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
 </iframe>
-<p>Office hours are set times dedicated to all of you. This means that I will be in my office (wistfully) waiting for you to come by with whatever questions you have. This is the best and easiest way to find me outside of class and the best chance for discussing class material and concerns (or anything really). Please come by!</p>
-<p>This can be a difficult class - <strong>do not suffer in silence!</strong> Come talk to me!</p>
+<p>Office hours are set times dedicated to all of you. This means that I
+will be in my office (wistfully) waiting for you to come by with
+whatever questions you have. This is the best and easiest way to find me
+outside of class and the best chance for discussing class material and
+concerns (or anything really). Please come by!</p>
+<p>This can be a difficult class - <strong>do not suffer in
+silence!</strong> Come talk to me!</p>
 </div>
-<div id="tutoring-hours" class="section level2">
+<div id="tutoring-hours" class="section level2" number="8.3">
 <h2><span class="header-section-number">8.3</span> Tutoring hours</h2>
-<p>Similar to office hours, your class tutors will each hold a specific period of time each week dedicated to help you will course assignments. Please don’t make your tutors sit and do emails for two hours - come by and ask for help!</p>
+<p>Similar to office hours, your class tutors will each hold a specific
+period of time each week dedicated to help you will course assignments.
+Please don’t make your tutors sit and do emails for two hours - come by
+and ask for help!</p>
 </div>
-<div id="library-services" class="section level2">
+<div id="library-services" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> Library Services</h2>
-<p>While the University Library is not a stand in for TAs, you can schedule a consultation for general help with Coding, Programming, Data, Statistical, and GIS. See more at <a href="https://academiccommons.gwu.edu/writing-research-help" class="uri">https://academiccommons.gwu.edu/writing-research-help</a></p>
+<p>While the University Library is not a stand in for TAs, you can
+schedule a consultation for general help with Coding, Programming, Data,
+Statistical, and GIS. See more at <a
+href="https://academiccommons.gwu.edu/writing-research-help"
+class="uri">https://academiccommons.gwu.edu/writing-research-help</a></p>
 <hr />
 </div>
 </div>
-<div id="course-policies" class="section level1">
+<div id="course-policies" class="section level1" number="9">
 <h1><span class="header-section-number">9</span> Course Policies</h1>
-<div id="tldr" class="section level2">
-<h2><span class="header-section-number">9.1</span> <a href="https://whatis.techtarget.com/definition/tldr-TLDR">tl;dr</a></h2>
+<div id="tldr" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> <a
+href="https://whatis.techtarget.com/definition/tldr-TLDR">tl;dr</a></h2>
 <ul>
 <li><strong>BE NICE. BE HONEST. DON’T CHEAT.</strong></li>
-<li>Write your own code - don’t look at others’ code &amp; don’t let others look at your code.</li>
-<li>You get <strong>5</strong> late days - use them however you want, no strings attached.</li>
-<li>You can’t use more than <strong>2</strong> late days on any one assignment.</li>
+<li>Write your own code - don’t look at others’ code &amp; don’t let
+others look at your code.</li>
+<li>You get <strong>5</strong> late days - use them however you want, no
+strings attached.</li>
+<li>You can’t use more than <strong>2</strong> late days on any one
+assignment.</li>
 </ul>
 </div>
-<div id="collaboration-policy" class="section level2">
-<h2><span class="header-section-number">9.2</span> Collaboration Policy</h2>
+<div id="collaboration-policy" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Collaboration
+Policy</h2>
 <!-- This policy is mostly copied from the course 15-112 at Carnegie Mellon University -->
-<p>Learning how to program is like learning how to ride a bicycle - to get better, you must practice writing code <strong>yourself</strong>. Therefore, we have a set of strict rules regarding what kind of collaboration is allowed, what counts as over-collaboration, and what counts as cheating.</p>
-<div id="good-collaboration" class="section level3">
-<h3><span class="header-section-number">9.2.1</span> Good Collaboration</h3>
+<p>Learning how to program is like learning how to ride a bicycle - to
+get better, you must practice writing code <strong>yourself</strong>.
+Therefore, we have a set of strict rules regarding what kind of
+collaboration is allowed, what counts as over-collaboration, and what
+counts as cheating.</p>
+<div id="good-collaboration" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Good
+Collaboration</h3>
 <ul>
-<li>Going through test cases and discussing why an input results in a certain output.</li>
+<li>Going through test cases and discussing why an input results in a
+certain output.</li>
 <li>Figuring out new input/output pairs for the problems.</li>
-<li>Discussing which general concepts might be useful in solving a problem (conditionals, loops, etc.).</li>
-<li>Asking questions about how to build an algorithm for the problem.</li>
+<li>Discussing which general concepts might be useful in solving a
+problem (conditionals, loops, etc.).</li>
+<li>Asking questions about how to build an algorithm for the
+problem.</li>
 <li>Asking for debugging help with code.</li>
 <li>Sketch out algorithms on a whiteboard together.</li>
-<li>To avoid copying the code, you should write up the solution together, discuss it, then erase the solution, wait a few minutes, and write up solutions individually.</li>
+<li>To avoid copying the code, you should write up the solution
+together, discuss it, then erase the solution, wait a few minutes, and
+write up solutions individually.</li>
 <li>Help each other debug specific parts of assignment code.</li>
 <li>General discussion of course concepts.</li>
 <li>Detailed explanations of example code on the course website.</li>
-<li>Collaboratively solving a practice problem, with any level of co-writing code and co-debugging.</li>
+<li>Collaboratively solving a practice problem, with any level of
+co-writing code and co-debugging.</li>
 </ul>
 </div>
-<div id="over-collaboration" class="section level3">
-<h3><span class="header-section-number">9.2.2</span> Over-collaboration</h3>
-<p>Over-collaboration results in a warning on the first offense, and a penalty on later offenses. Examples include:</p>
+<div id="over-collaboration" class="section level3" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span>
+Over-collaboration</h3>
+<p>Over-collaboration results in a warning on the first offense, and a
+penalty on later offenses. Examples include:</p>
 <ul>
-<li>Building <a href="https://en.wikipedia.org/wiki/Pseudocode">‘psuedocode’</a> algorithms together on a whiteboard that are essentially full programs.</li>
-<li>Explaining to a friend how to solve a problem in high-level terms by going through your own program line-by-line.</li>
+<li>Building <a
+href="https://en.wikipedia.org/wiki/Pseudocode">‘psuedocode’</a>
+algorithms together on a whiteboard that are essentially full
+programs.</li>
+<li>Explaining to a friend how to solve a problem in high-level terms by
+going through your own program line-by-line.</li>
 <li>Helping a friend debug on a non-collaborative problem.</li>
-<li>Helping a friend debug on a collaborative problem by suggesting they use your own approach to the problem.</li>
-<li>Collaborating with a student on a collaborative problem and then not including their name as a collaborator in the assignment writeup.</li>
-<li>In the case that you have taken this course before, copying your own code from the previous time you took the course.</li>
+<li>Helping a friend debug on a collaborative problem by suggesting they
+use your own approach to the problem.</li>
+<li>Collaborating with a student on a collaborative problem and then not
+including their name as a collaborator in the assignment writeup.</li>
+<li>In the case that you have taken this course before, copying your own
+code from the previous time you took the course.</li>
 </ul>
 </div>
-<div id="cheating" class="section level3">
+<div id="cheating" class="section level3" number="9.2.3">
 <h3><span class="header-section-number">9.2.3</span> Cheating</h3>
-<p>Cheating results in a penalty on the first offense, and failing the course on the second offense. Cheating on homework assignments can include:</p>
+<p>Cheating results in a penalty on the first offense, and failing the
+course on the second offense. Cheating on homework assignments can
+include:</p>
 <ul>
-<li>Copying or stealing any amount of code from someone currently in the class or someone who has taken the class before.</li>
-<li>NOTE: Copying is never okay, whether the code is provided electronically, visually, audibly, or on paper.</li>
-<li>Providing code you have written for an assignment to anyone else in the class.</li>
-<li>Again: never share your code with others in the class, including electronic sharing, showing someone code on your computer, verbally speaking the code, or writing down the code on paper.</li>
-<li>Finding code online and using it in the assignment. One exception: you may use code from the course website.</li>
+<li>Copying or stealing any amount of code from someone currently in the
+class or someone who has taken the class before.</li>
+<li>NOTE: Copying is never okay, whether the code is provided
+electronically, visually, audibly, or on paper.</li>
+<li>Providing code you have written for an assignment to anyone else in
+the class.</li>
+<li>Again: never share your code with others in the class, including
+electronic sharing, showing someone code on your computer, verbally
+speaking the code, or writing down the code on paper.</li>
+<li>Finding code online and using it in the assignment. One exception:
+you may use code from the course website.</li>
 <li>Putting code solutions from the course assignments online.</li>
-<li>Receiving code-level assistance from any person not associated with the course.</li>
+<li>Receiving code-level assistance from any person not associated with
+the course.</li>
 <li>Getting someone else to write the assignment code for you.</li>
-<li>Asking questions about the assignments on any online services outside of the course office hours and course Piazza.</li>
+<li>Asking questions about the assignments on any online services
+outside of the course office hours and course Piazza.</li>
 </ul>
 <p>Cheating on quizzes, midterms, or the final can include:</p>
 <ul>
-<li>Referring to any external resources while completing the assessment (phones, notes, etc.).</li>
-<li>Copying part of an answer off of another student’s paper, even if it is very small.</li>
-<li>Using solutions provided by students who previously took the course.</li>
+<li>Referring to any external resources while completing the assessment
+(phones, notes, etc.).</li>
+<li>Copying part of an answer off of another student’s paper, even if it
+is very small.</li>
+<li>Using solutions provided by students who previously took the
+course.</li>
 </ul>
 </div>
-<div id="penalties" class="section level3">
+<div id="penalties" class="section level3" number="9.2.4">
 <h3><span class="header-section-number">9.2.4</span> Penalties</h3>
-<p>Penalties are decided by the course instructors, and can vary based on the severity of the offense. Possible penalties include:</p>
+<p>Penalties are decided by the course instructors, and can vary based
+on the severity of the offense. Possible penalties include:</p>
 <ul>
 <li>Receiving a 0 on the assignment/quiz in question.</li>
 <li>Receiving a -100 on the assignment/quiz in question.</li>
 <li>Receiving a full letter grade deduction in the course.</li>
 <li>Automatically failing the course.</li>
 </ul>
-<p>Penalties may also be accompanied by a letter to the Dean of Student Affairs, again at the instructors’ discretion. This can lead to university-level penalties, such as being suspended or expelled.</p>
+<p>Penalties may also be accompanied by a letter to the Dean of Student
+Affairs, again at the instructors’ discretion. This can lead to
+university-level penalties, such as being suspended or expelled.</p>
 </div>
-<div id="plagiarism-detection" class="section level3">
-<h3><span class="header-section-number">9.2.5</span> Plagiarism Detection</h3>
-<p>Programs are naturally structured, which makes them <strong>very easy</strong> to compare for plagiarism. Automated plagiarism detection systems make this process even easier. <a href="http://www.kosbie.net/cmu/spring-13/15-112/automated-plagiarism-detector-demo.mp4">Watch this video</a> showing plagiarism detection software in action (this example is using Python code, but this also works for R code).</p>
-<p><strong>In short, if you copy code, we will know - don’t copy code!</strong></p>
+<div id="plagiarism-detection" class="section level3" number="9.2.5">
+<h3><span class="header-section-number">9.2.5</span> Plagiarism
+Detection</h3>
+<p>Programs are naturally structured, which makes them <strong>very
+easy</strong> to compare for plagiarism. Automated plagiarism detection
+systems make this process even easier. <a
+href="http://www.kosbie.net/cmu/spring-13/15-112/automated-plagiarism-detector-demo.mp4">Watch
+this video</a> showing plagiarism detection software in action (this
+example is using Python code, but this also works for R code).</p>
+<p><strong>In short, if you copy code, we will know - don’t copy
+code!</strong></p>
 </div>
-<div id="grace-period" class="section level3">
+<div id="grace-period" class="section level3" number="9.2.6">
 <h3><span class="header-section-number">9.2.6</span> Grace Period</h3>
-<p>Your first year of college is a time when you do a lot of learning. Sometimes, you might make bad decisions or mistakes. The most important thing for you to do is to learn from your mistakes, to constantly grow, and become a better person.</p>
-<p>Sometimes, students panic and copy code right before the deadline, then regret what they did afterwards. Therefore, you may rescind any homework submission for up to 24 hours after the deadline with no questions asked. Simply email the course instructors asking to delete the submission in question, and we will do so. Deleted submissions will not be considered during plagiarism detection, though of course they will also not be graded. However, it will always be better to get a 0 (or partial credit) on an assignment than to get a cheating violation!</p>
+<p>Your first year of college is a time when you do a lot of learning.
+Sometimes, you might make bad decisions or mistakes. The most important
+thing for you to do is to learn from your mistakes, to constantly grow,
+and become a better person.</p>
+<p>Sometimes, students panic and copy code right before the deadline,
+then regret what they did afterwards. Therefore, you may rescind any
+homework submission for up to 24 hours after the deadline with no
+questions asked. Simply email the course instructors asking to delete
+the submission in question, and we will do so. Deleted submissions will
+not be considered during plagiarism detection, though of course they
+will also not be graded. However, it will always be better to get a 0
+(or partial credit) on an assignment than to get a cheating
+violation!</p>
 </div>
 </div>
-<div id="late-policy" class="section level2">
+<div id="late-policy" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> Late Policy</h2>
-<p>Each students is allowed <strong>5</strong> late homework submission days - use them however you want, no questions asked. No more than <strong>2 days</strong> can be applied toward a single assignment. Late days are meant to cover illness, family emergencies, and religious holidays. Assignments submitted more than 2 days after the due date will not be graded. In extreme circumstances, contact the instructor.</p>
+<p>Each students is allowed <strong>5</strong> late homework submission
+days - use them however you want, no questions asked. No more than
+<strong>2 days</strong> can be applied toward a single assignment. Late
+days are meant to cover illness, family emergencies, and religious
+holidays. Assignments submitted more than 2 days after the due date will
+not be graded. In extreme circumstances, contact the instructor.</p>
 </div>
-<div id="use-of-course-materials" class="section level2">
-<h2><span class="header-section-number">9.4</span> Use of Course Materials</h2>
-<p>All <strong>solutions</strong> to homeworks, quizzes, and exams are proprietary. Don’t post them online or try to sell them - this is a violation of the <a href="https://studentconduct.gwu.edu/code-student-conduct">student code of conduct</a>.</p>
-<p>All other course materials available on the course website are developed open source - you are welcome to post and share them following the licensing guidelines listed in the <a href="LICENSE.html">license</a> page.</p>
+<div id="use-of-course-materials" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> Use of Course
+Materials</h2>
+<p>All <strong>solutions</strong> to homeworks, quizzes, and exams are
+proprietary. Don’t post them online or try to sell them - this is a
+violation of the <a
+href="https://studentconduct.gwu.edu/code-student-conduct">student code
+of conduct</a>.</p>
+<p>All other course materials available on the course website are
+developed open source - you are welcome to post and share them following
+the licensing guidelines listed in the <a
+href="LICENSE.html">license</a> page.</p>
 </div>
-<div id="what-to-do-if-the-instructor-does-not-arrive" class="section level2">
-<h2><span class="header-section-number">9.5</span> What To Do if the Instructor Does Not Arrive</h2>
-<p>Wait <strong>20 minutes</strong>, after that you’re free to leave. One member of the class should be selected to notify the EMSE Department of the Instructor’s absence by calling the EMSE Department 202-994-4892 on next business day.</p>
+<div id="what-to-do-if-the-instructor-does-not-arrive"
+class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> What To Do if the
+Instructor Does Not Arrive</h2>
+<p>Wait <strong>20 minutes</strong>, after that you’re free to leave.
+One member of the class should be selected to notify the EMSE Department
+of the Instructor’s absence by calling the EMSE Department 202-994-4892
+on next business day.</p>
 <hr />
 </div>
 </div>
-<div id="university-policies" class="section level1">
-<h1><span class="header-section-number">10</span> University Policies</h1>
-<div id="university-policy-on-religious-holidays" class="section level2">
-<h2><span class="header-section-number">10.1</span> University Policy on Religious Holidays</h2>
-<p>In accordance with University Policy, students should notify faculty during the first week of the semester of their intention to be absent from class on their day(s) of religious observance. Official university policy here: <a href="https://students.gwu.edu/accommodations-religious-holidays" class="uri">https://students.gwu.edu/accommodations-religious-holidays</a></p>
+<div id="university-policies" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> University
+Policies</h1>
+<div id="university-policy-on-religious-holidays" class="section level2"
+number="10.1">
+<h2><span class="header-section-number">10.1</span> University Policy on
+Religious Holidays</h2>
+<p>In accordance with University Policy, students should notify faculty
+during the first week of the semester of their intention to be absent
+from class on their day(s) of religious observance. Official university
+policy here: <a
+href="https://students.gwu.edu/accommodations-religious-holidays"
+class="uri">https://students.gwu.edu/accommodations-religious-holidays</a></p>
 <ul>
-<li>Students should notify faculty during the first week of the semester of their intention to be absent from class on their day(s) of religious observance.</li>
-<li>Faculty should extend to these students the courtesy of absence without penalty on such occasions, including permission to make up examinations.</li>
-<li>Faculty who intend to observe a religious holiday should arrange at the beginning of the semester to reschedule missed classes or to make other provisions for their course-related activities.</li>
+<li>Students should notify faculty during the first week of the semester
+of their intention to be absent from class on their day(s) of religious
+observance.</li>
+<li>Faculty should extend to these students the courtesy of absence
+without penalty on such occasions, including permission to make up
+examinations.</li>
+<li>Faculty who intend to observe a religious holiday should arrange at
+the beginning of the semester to reschedule missed classes or to make
+other provisions for their course-related activities.</li>
 </ul>
 </div>
-<div id="support-for-students-outside-the-classroom" class="section level2">
-<h2><span class="header-section-number">10.2</span> Support for Students Outside the Classroom</h2>
-<p><strong>Disability Support Services (DSS)</strong>: Any student who may need an accommodation based on the potential impact of a disability should contact the Disability Support Services office at 202-994-8250 in the Rome Hall, Suite 102, to establish eligibility and to coordinate reasonable accommodations. For additional information please refer to: <a href="https://disabilitysupport.gwu.edu/" class="uri">https://disabilitysupport.gwu.edu/</a></p>
-<p><strong>Mental Health Services (202-994-5300)</strong>: The University’s Mental Health Services offers 24/7 assistance and referral to address students’ personal, social, career, and study skills problems. Services for students include: crisis and emergency mental health consultations confidential assessment, counseling services (individual and small group), and referrals. <a href="https://healthcenter.gwu.edu/counseling-and-psychological-services" class="uri">https://healthcenter.gwu.edu/counseling-and-psychological-services</a></p>
+<div id="support-for-students-outside-the-classroom"
+class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Support for Students
+Outside the Classroom</h2>
+<p><strong>Disability Support Services (DSS)</strong>: Any student who
+may need an accommodation based on the potential impact of a disability
+should contact the Disability Support Services office at 202-994-8250 in
+the Rome Hall, Suite 102, to establish eligibility and to coordinate
+reasonable accommodations. For additional information please refer to:
+<a href="https://disabilitysupport.gwu.edu/"
+class="uri">https://disabilitysupport.gwu.edu/</a></p>
+<p><strong>Mental Health Services (202-994-5300)</strong>: The
+University’s Mental Health Services offers 24/7 assistance and referral
+to address students’ personal, social, career, and study skills
+problems. Services for students include: crisis and emergency mental
+health consultations confidential assessment, counseling services
+(individual and small group), and referrals. <a
+href="https://healthcenter.gwu.edu/counseling-and-psychological-services"
+class="uri">https://healthcenter.gwu.edu/counseling-and-psychological-services</a></p>
 </div>
-<div id="academic-integrity-code" class="section level2">
-<h2><span class="header-section-number">10.3</span> Academic Integrity Code</h2>
-<p>Academic dishonesty is defined as cheating of any kind, including misrepresenting one’s own work, taking credit for the work of others without crediting them and without appropriate authorization, and the fabrication of information. For the remainder of the code, see: <a href="https://studentconduct.gwu.edu/code-academic-integrity" class="uri">https://studentconduct.gwu.edu/code-academic-integrity</a></p>
-<p>In addition to the formal code of academic integrity, the instructor expects that students will treat this course with the level of professionalism required in the workplace. Remember that real firms are sponsoring student projects throughout the semester; in a workplace setting, these firms would be paying clients for the analyses being conducted. This course prepares students to succeed in the workplace, and maintaining a high degree of professionalism is expected.</p>
+<div id="academic-integrity-code" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Academic Integrity
+Code</h2>
+<p>Academic dishonesty is defined as cheating of any kind, including
+misrepresenting one’s own work, taking credit for the work of others
+without crediting them and without appropriate authorization, and the
+fabrication of information. For the remainder of the code, see: <a
+href="https://studentconduct.gwu.edu/code-academic-integrity"
+class="uri">https://studentconduct.gwu.edu/code-academic-integrity</a></p>
+<p>In addition to the formal code of academic integrity, the instructor
+expects that students will treat this course with the level of
+professionalism required in the workplace. Remember that real firms are
+sponsoring student projects throughout the semester; in a workplace
+setting, these firms would be paying clients for the analyses being
+conducted. This course prepares students to succeed in the workplace,
+and maintaining a high degree of professionalism is expected.</p>
 <hr />
 <!-- Also took this brilliant idea from https://evalf19.classes.andrewheiss.com/syllabus/#cute-animals -->
 </div>
 </div>
-<div id="cute-animals" class="section level1">
+<div id="cute-animals" class="section level1" number="11">
 <h1><span class="header-section-number">11</span> Cute Animals</h1>
-<p>Once you have read this entire syllabus and the <a href="#schedule.html">course schedule</a>, please <a href="mailto:jph@gwu.edu">click here</a> and e-mail me a picture of a cute non-feline, non-canine animal. For real. Brownie points if it’s animated.</p>
+<p>Once you have read this entire syllabus and the <a
+href="#schedule.html">course schedule</a>, please <a
+href="mailto:jph@gwu.edu">click here</a> and e-mail me a picture of a
+cute non-feline, non-canine animal. For real. Brownie points if it’s
+animated.</p>
 <p><img src="images/cute_hedgehog.gif" width="250" /></p>
 </div>
 
@@ -1090,7 +1303,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1108,7 +1321,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -1117,6 +1330,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -1129,7 +1345,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

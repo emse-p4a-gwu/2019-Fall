@@ -13,20 +13,30 @@
 
 <title>Data Analysis 3 - Data Visualization</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,7 +554,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -603,32 +574,71 @@ div.tocify {
 </ul>
 <h3 id="suggested-readings">Suggested Readings</h3>
 <ul>
-<li>The “Introduction” chapter of Rick Scavetta’s <a href="https://www.datacamp.com/courses/data-visualization-with-ggplot2-1">“Data Visualization with ggplot2 (Part 1)”</a> lesson on DataCamp (it’s free!).</li>
-<li><a href="https://r4ds.had.co.nz/data-visualisation.html">Chapter 3</a> of “R for Data Science”, by Garrett Grolemund and Hadley Wickham</li>
-<li><a href="http://socviz.co/">Data Visualization: A practical introduction</a>, by Kieran Healy</li>
-<li><a href="https://www.vox.com/2016/10/6/13170344/bear-attacks-national-state-parks">The parks where you’re most likely to be killed by a bear</a> (we’ll be using a dataset on bear attacks in N. America for this lesson).</li>
+<li>The “Introduction” chapter of Rick Scavetta’s <a
+href="https://www.datacamp.com/courses/data-visualization-with-ggplot2-1">“Data
+Visualization with ggplot2 (Part 1)”</a> lesson on DataCamp (it’s
+free!).</li>
+<li><a href="https://r4ds.had.co.nz/data-visualisation.html">Chapter
+3</a> of “R for Data Science”, by Garrett Grolemund and Hadley
+Wickham</li>
+<li><a href="http://socviz.co/">Data Visualization: A practical
+introduction</a>, by Kieran Healy</li>
+<li><a
+href="https://www.vox.com/2016/10/6/13170344/bear-attacks-national-state-parks">The
+parks where you’re most likely to be killed by a bear</a> (we’ll be
+using a dataset on bear attacks in N. America for this lesson).</li>
 </ul>
 </blockquote>
 <hr />
 <blockquote>
 <p>“The purpose of computing is insight, not numbers”</p>
-<p>- <a href="https://en.wikipedia.org/wiki/Richard_Hamming">Richard Hamming</a></p>
+<p>- <a href="https://en.wikipedia.org/wiki/Richard_Hamming">Richard
+Hamming</a></p>
 </blockquote>
-<p>…and one of the best ways to develop insights from data is to <em>visualize</em> the data. The best starting point I recommend is to go through the “Introduction” chapter of Rick Scavetta’s <a href="https://www.datacamp.com/courses/data-visualization-with-ggplot2-1">“Data Visualization with ggplot2 (Part 1)”</a> lesson on DataCamp. The introduction section is free and contains three 5-minute summary videos along with some practice exercises.</p>
-<p>Data visualization will be the primary focus of a follow-on course to this one called “Exploratory Data Analysis”. For now, we will explore a few features of R’s plotting packages.</p>
-<div id="r-setup" class="section level1">
+<p>…and one of the best ways to develop insights from data is to
+<em>visualize</em> the data. The best starting point I recommend is to
+go through the “Introduction” chapter of Rick Scavetta’s <a
+href="https://www.datacamp.com/courses/data-visualization-with-ggplot2-1">“Data
+Visualization with ggplot2 (Part 1)”</a> lesson on DataCamp. The
+introduction section is free and contains three 5-minute summary videos
+along with some practice exercises.</p>
+<p>Data visualization will be the primary focus of a follow-on course to
+this one called “Exploratory Data Analysis”. For now, we will explore a
+few features of R’s plotting packages.</p>
+<div id="r-setup" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> R Setup</h1>
-<p>Before we get started, let’s set up our analysis environment like before:</p>
+<p>Before we get started, let’s set up our analysis environment like
+before:</p>
 <ol style="list-style-type: decimal">
-<li>Open up your “data-analysis-tutorial” R Project that you created in the first data analysis lesson - if you didn’t do this, <a href="L10-data-analysis-1-data-frames.html#41_r_setup">go back and do it now</a>.</li>
-<li>Create a new <code>.R</code> file (File &gt; New File &gt; R Script), and save it as “<code>data_viz.R</code>” inside your “data-analysis-tutorial” R Project folder.</li>
-<li>This time, instead of downloading the data file and saving it in our <code>data</code> folder, let’s just read it in directly from the web!</li>
+<li>Open up your “data-analysis-tutorial” R Project that you created in
+the first data analysis lesson - if you didn’t do this, <a
+href="L10-data-analysis-1-data-frames.html#41_r_setup">go back and do it
+now</a>.</li>
+<li>Create a new <code>.R</code> file (File &gt; New File &gt; R
+Script), and save it as “<code>data_viz.R</code>” inside your
+“data-analysis-tutorial” R Project folder.</li>
+<li>This time, instead of downloading the data file and saving it in our
+<code>data</code> folder, let’s just read it in directly from the
+web!</li>
 </ol>
 <pre class="r"><code>library(readr)
 library(dplyr)
 df &lt;- read_csv(&quot;https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/north_america_bear_killings.csv&quot;)</code></pre>
-<p>For this lesson, we are going to use the <a href="https://data.world/ajsanne/north-america-bear-killings">North American Bear Killings</a> dataset, which was compiled by <a href="https://data.world/ajsanne">Ali Sanne</a> from the <a href="https://en.wikipedia.org/wiki/List_of_fatal_bear_attacks_in_North_America">Wikipedia page</a> on fatal bear attacks in North America. The dataset contains recorded killings by black, brown, or polar bears from 1900 to 2019 in North America. Each row in the dataset holds information for a single incident with the following columns:</p>
+<p>For this lesson, we are going to use the <a
+href="https://data.world/ajsanne/north-america-bear-killings">North
+American Bear Killings</a> dataset, which was compiled by <a
+href="https://data.world/ajsanne">Ali Sanne</a> from the <a
+href="https://en.wikipedia.org/wiki/List_of_fatal_bear_attacks_in_North_America">Wikipedia
+page</a> on fatal bear attacks in North America. The dataset contains
+recorded killings by black, brown, or polar bears from 1900 to 2019 in
+North America. Each row in the dataset holds information for a single
+incident with the following columns:</p>
 <table>
+<colgroup>
+<col width="21%" />
+<col width="16%" />
+<col width="61%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Variable</th>
@@ -709,36 +719,54 @@ df &lt;- read_csv(&quot;https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/d
 </tr>
 </tbody>
 </table>
-<p><strong>Side node</strong>: One thing I learned looking at this data is (kind of like squares and rectangles), all grizzly bears are brown bears, but <a href="https://www.nps.gov/katm/learn/photosmultimedia/brown-bear-frequently-asked-questions.htm#2">not all brown bears are grizzly bears</a>.</p>
-<p>To confirm that we’ve correctly loaded the data frame, let’s preview the data:</p>
+<p><strong>Side node</strong>: One thing I learned looking at this data
+is (kind of like squares and rectangles), all grizzly bears are brown
+bears, but <a
+href="https://www.nps.gov/katm/learn/photosmultimedia/brown-bear-frequently-asked-questions.htm#2">not
+all brown bears are grizzly bears</a>.</p>
+<p>To confirm that we’ve correctly loaded the data frame, let’s preview
+the data:</p>
 <pre class="r"><code>glimpse(df)</code></pre>
 <pre><code>## Rows: 166
 ## Columns: 14
-## $ name          &lt;chr&gt; &quot;Mary Porterfield&quot;, &quot;Wilie Porterfield&quot;, &quot;Henry Porterf…
-## $ age           &lt;dbl&gt; 3, 5, 7, 18, 1, 61, 60, 9, 52, NA, 60, 56, 70, 5, 11, 7…
-## $ gender        &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, NA, &quot;male&quot;, &quot;male&quot;, &quot;…
-## $ date          &lt;chr&gt; &quot;19/05/1901&quot;, &quot;19/05/1901&quot;, &quot;19/05/1901&quot;, &quot;24/11/1906&quot;,…
-## $ month         &lt;dbl&gt; 5, 5, 5, 11, 10, 9, 6, 8, 9, 10, 6, 7, 10, 10, 10, 7, 1…
-## $ year          &lt;dbl&gt; 1901, 1901, 1901, 1906, 1908, 1916, 1922, 1929, 1929, 1…
-## $ wildOrCaptive &lt;chr&gt; &quot;Wild&quot;, &quot;Wild&quot;, &quot;Wild&quot;, &quot;Wild&quot;, &quot;Captive&quot;, &quot;Wild&quot;, &quot;Wil…
-## $ location      &lt;chr&gt; &quot;Job, West Virginia&quot;, &quot;Job, West Virginia&quot;, &quot;Job, West …
-## $ description   &lt;chr&gt; &quot;The children were gathering flowers near their home wh…
-## $ bearType      &lt;chr&gt; &quot;Black&quot;, &quot;Black&quot;, &quot;Black&quot;, &quot;Black&quot;, &quot;Black&quot;, &quot;Brown&quot;, &quot;…
-## $ hunter        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-## $ grizzly       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0…
-## $ hiker         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-## $ onlyOneKilled &lt;dbl&gt; 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0…</code></pre>
+## $ name          &lt;chr&gt; &quot;Mary Porterfield&quot;, &quot;Wilie Porterfield&quot;, &quot;Henry Porterfi…
+## $ age           &lt;dbl&gt; 3, 5, 7, 18, 1, 61, 60, 9, 52, NA, 60, 56, 70, 5, 11, 76…
+## $ gender        &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, NA, &quot;male&quot;, &quot;male&quot;, &quot;f…
+## $ date          &lt;chr&gt; &quot;19/05/1901&quot;, &quot;19/05/1901&quot;, &quot;19/05/1901&quot;, &quot;24/11/1906&quot;, …
+## $ month         &lt;dbl&gt; 5, 5, 5, 11, 10, 9, 6, 8, 9, 10, 6, 7, 10, 10, 10, 7, 11…
+## $ year          &lt;dbl&gt; 1901, 1901, 1901, 1906, 1908, 1916, 1922, 1929, 1929, 19…
+## $ wildOrCaptive &lt;chr&gt; &quot;Wild&quot;, &quot;Wild&quot;, &quot;Wild&quot;, &quot;Wild&quot;, &quot;Captive&quot;, &quot;Wild&quot;, &quot;Wild…
+## $ location      &lt;chr&gt; &quot;Job, West Virginia&quot;, &quot;Job, West Virginia&quot;, &quot;Job, West V…
+## $ description   &lt;chr&gt; &quot;The children were gathering flowers near their home whe…
+## $ bearType      &lt;chr&gt; &quot;Black&quot;, &quot;Black&quot;, &quot;Black&quot;, &quot;Black&quot;, &quot;Black&quot;, &quot;Brown&quot;, &quot;B…
+## $ hunter        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ grizzly       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,…
+## $ hiker         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ onlyOneKilled &lt;dbl&gt; 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,…</code></pre>
 <p>Look’s good - let’s start making some plots!</p>
 </div>
-<div id="basic-plots-in-r" class="section level1">
+<div id="basic-plots-in-r" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Basic plots in R</h1>
-<p>R has a number of built-in tools for basic graph types. We will only cover two here because they are so common and convenient: scatterplots and histograms.</p>
-<div id="scatterplots-with-plot" class="section level2">
-<h2><span class="header-section-number">2.1</span> Scatterplots with <code>plot()</code></h2>
-<p>A scatter plot provides a graphical view of the relationship between two variables. Typically these are used for “continuous” variables, like <em>time</em>, <em>age</em>, <em>money</em>, etc…things that are not categorical in nature (as opposed to “discrete” variables, like <em>nationality</em>). Here’s a scatterplot of the age of the bear killing victims over time:</p>
+<p>R has a number of built-in tools for basic graph types. We will only
+cover two here because they are so common and convenient: scatterplots
+and histograms.</p>
+<div id="scatterplots-with-plot" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Scatterplots with
+<code>plot()</code></h2>
+<p>A scatter plot provides a graphical view of the relationship between
+two variables. Typically these are used for “continuous” variables, like
+<em>time</em>, <em>age</em>, <em>money</em>, etc…things that are not
+categorical in nature (as opposed to “discrete” variables, like
+<em>nationality</em>). Here’s a scatterplot of the age of the bear
+killing victims over time:</p>
 <pre class="r"><code>plot(x = df$year, y = df$age)</code></pre>
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>The basic inputs to the <code>plot()</code> function are <code>x</code> and <code>y</code>, which must be vectors of the same length. You can customize many features (fonts, colors, axes, shape, titles, etc.) through <a href="http://www.statmethods.net/advgraphs/parameters.html">graphic options</a>. Here’s the same plot with a few customizations:</p>
+<p>The basic inputs to the <code>plot()</code> function are
+<code>x</code> and <code>y</code>, which must be vectors of the same
+length. You can customize many features (fonts, colors, axes, shape,
+titles, etc.) through <a
+href="http://www.statmethods.net/advgraphs/parameters.html">graphic
+options</a>. Here’s the same plot with a few customizations:</p>
 <pre class="r"><code>plot(x    = df$year,
      y    = df$age,
      col  = &#39;darkblue&#39;, # &quot;col&quot; changes the point color
@@ -747,14 +775,25 @@ df &lt;- read_csv(&quot;https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/d
      xlab = &quot;Year&quot;,
      ylab = &quot;Age&quot;)</code></pre>
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>Looks like bear killings are becoming more frequent over time (hmm, why might that be?), though pretty evenly-distributed across age.</p>
+<p>Looks like bear killings are becoming more frequent over time (hmm,
+why might that be?), though pretty evenly-distributed across age.</p>
 </div>
-<div id="histograms-with-hist" class="section level2">
-<h2><span class="header-section-number">2.2</span> Histograms with <code>hist()</code></h2>
-<p>The <a href="https://en.wikipedia.org/wiki/Histogram">histogram</a> is one of the most common ways to visualize the <em>distribution</em> of a variable. The <code>hist()</code> function takes just one variable: <code>x</code>. Here’s a histogram of the <code>month</code> variable:</p>
+<div id="histograms-with-hist" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Histograms with
+<code>hist()</code></h2>
+<p>The <a href="https://en.wikipedia.org/wiki/Histogram">histogram</a>
+is one of the most common ways to visualize the <em>distribution</em> of
+a variable. The <code>hist()</code> function takes just one variable:
+<code>x</code>. Here’s a histogram of the <code>month</code>
+variable:</p>
 <pre class="r"><code>hist(x = df$month)</code></pre>
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>As you might expect, most bear attacks occur during the summer months, when parks get more visitors. As with the <code>plot()</code> function, you can customize a lot of the histogram features. One common customization is to modify the number of “bins” in the histogram by changing the <code>breaks</code> argument. Here we’ll fix the number of bins to <code>12</code> - one for each month:</p>
+<p>As you might expect, most bear attacks occur during the summer
+months, when parks get more visitors. As with the <code>plot()</code>
+function, you can customize a lot of the histogram features. One common
+customization is to modify the number of “bins” in the histogram by
+changing the <code>breaks</code> argument. Here we’ll fix the number of
+bins to <code>12</code> - one for each month:</p>
 <pre class="r"><code>hist(x      = df$month,
      breaks = 12,
      col    = &#39;darkred&#39;,
@@ -764,36 +803,64 @@ df &lt;- read_csv(&quot;https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/d
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
-<div id="advanced-figures-with-ggplot2" class="section level1">
-<h1><span class="header-section-number">3</span> Advanced figures with <code>ggplot2</code></h1>
-<p><img src="images/horst_monsters_ggplot2.png" width="500" /> <a href="https://github.com/allisonhorst">[Art by Allison Horst]</a></p>
-<p>While Base R plot functions are useful for making simple, quick plots, many R users have adopted the <a href="http://docs.ggplot2.org/"><code>ggplot2</code></a> package as their primary tool for visualizing data.</p>
-<div id="the-grammar-of-graphics" class="section level2">
-<h2><span class="header-section-number">3.1</span> The Grammar of Graphics</h2>
-<p>The <code>ggplot2</code> library is built on the <a href="https://www.springer.com/in/book/9780387245447">“Grammar of Graphics”</a> concept developed by Leland Wilkinson. A “grammar of graphics” (that’s what the “gg” in “ggplot2” stands for) is a framework that uses <em>layers</em> to describe and construct visualizations or graphics in a structured manner. Here’s a visual summary of the concept:</p>
+<div id="advanced-figures-with-ggplot2" class="section level1"
+number="3">
+<h1><span class="header-section-number">3</span> Advanced figures with
+<code>ggplot2</code></h1>
+<p><img src="images/horst_monsters_ggplot2.png" width="500" /> <a
+href="https://github.com/allisonhorst">[Art by Allison Horst]</a></p>
+<p>While Base R plot functions are useful for making simple, quick
+plots, many R users have adopted the <a
+href="http://docs.ggplot2.org/"><code>ggplot2</code></a> package as
+their primary tool for visualizing data.</p>
+<div id="the-grammar-of-graphics" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> The Grammar of
+Graphics</h2>
+<p>The <code>ggplot2</code> library is built on the <a
+href="https://www.springer.com/in/book/9780387245447">“Grammar of
+Graphics”</a> concept developed by Leland Wilkinson. A “grammar of
+graphics” (that’s what the “gg” in “ggplot2” stands for) is a framework
+that uses <em>layers</em> to describe and construct visualizations or
+graphics in a structured manner. Here’s a visual summary of the
+concept:</p>
 <center>
 <img src="images/ggPyramid.png" width="700" />
 </center>
-<p>We will start using <code>ggplot2</code> by re-creating some of the above plots, but using ggplot functions to get a feel for the syntax. But first, install and load the library:</p>
+<p>We will start using <code>ggplot2</code> by re-creating some of the
+above plots, but using ggplot functions to get a feel for the syntax.
+But first, install and load the library:</p>
 <pre class="r"><code>install.packages(&quot;ggplot2&quot;)
 library(ggplot2)</code></pre>
 </div>
-<div id="a-blank-slate" class="section level2">
+<div id="a-blank-slate" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> A blank slate</h2>
-<p>The <code>ggplot()</code> function is used to initialize the basic graph structure, and then we add layers to it. The basic idea is that you specify different parts of the plot, and add them together using the <code>+</code> operator. We will start with a blank plot and will add layers as we go along:</p>
+<p>The <code>ggplot()</code> function is used to initialize the basic
+graph structure, and then we add layers to it. The basic idea is that
+you specify different parts of the plot, and add them together using the
+<code>+</code> operator. We will start with a blank plot and will add
+layers as we go along:</p>
 <pre class="r"><code>ggplot(data = df)</code></pre>
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
-<div id="geoms-and-aesthetics" class="section level2">
-<h2><span class="header-section-number">3.3</span> Geoms and aesthetics</h2>
-<p>Geometric objects (called “geoms”) are the actual marks we put on a plot. You can have an unlimited number of layers, but at a minimum a plot <strong>must have at least one geom</strong>. Examples include:</p>
+<div id="geoms-and-aesthetics" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Geoms and
+aesthetics</h2>
+<p>Geometric objects (called “geoms”) are the actual marks we put on a
+plot. You can have an unlimited number of layers, but at a minimum a
+plot <strong>must have at least one geom</strong>. Examples include:</p>
 <ul>
-<li><code>geom_point()</code> makes a scatter plot by adding a layer of points.</li>
-<li><code>geom_line()</code> adds a layer of lines connecting data points.</li>
-<li><code>geom_bar()</code> adds bars for bar charts and histograms.</li>
+<li><code>geom_point()</code> makes a scatter plot by adding a layer of
+points.</li>
+<li><code>geom_line()</code> adds a layer of lines connecting data
+points.</li>
+<li><code>geom_bar()</code> adds bars for bar charts and
+histograms.</li>
 <li><code>geom_boxplot()</code> adds boxes for boxplots.</li>
 </ul>
-<p>Each type of geom usually has a <strong>required set of aesthetics</strong> to be set, and usually accepts only a subset of all aesthetics. Aesthetic mappings are set with the <code>aes()</code> function. Examples include:</p>
+<p>Each type of geom usually has a <strong>required set of
+aesthetics</strong> to be set, and usually accepts only a subset of all
+aesthetics. Aesthetic mappings are set with the <code>aes()</code>
+function. Examples include:</p>
 <ul>
 <li>position (i.e., on the x and y axes)</li>
 <li>color (“outside” color)</li>
@@ -803,13 +870,23 @@ library(ggplot2)</code></pre>
 <li>size (of geoms)</li>
 </ul>
 </div>
-<div id="scatterplots-with-geom_point" class="section level2">
-<h2><span class="header-section-number">3.4</span> Scatterplots with <code>geom_point()</code></h2>
-<p>Now that we know what geoms and aesthetics are, let’s put them to practice by making a scatterplot. To start, we will add the <code>geom_point()</code> geom and we’ll set the position for the x- and y-axis inside the <code>aes()</code> function:</p>
+<div id="scatterplots-with-geom_point" class="section level2"
+number="3.4">
+<h2><span class="header-section-number">3.4</span> Scatterplots with
+<code>geom_point()</code></h2>
+<p>Now that we know what geoms and aesthetics are, let’s put them to
+practice by making a scatterplot. To start, we will add the
+<code>geom_point()</code> geom and we’ll set the position for the x- and
+y-axis inside the <code>aes()</code> function:</p>
 <pre class="r"><code>ggplot(data = df) +
     geom_point(aes(x = year, y = age))</code></pre>
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>Notice how we’ve “added” the <code>geom_point()</code> layer to the previous blank slate. Also note that the names we used to define the <code>x</code> and <code>y</code> axes are column names in the data frame, <code>df</code>. These must be placed <em>inside</em> the <code>aes()</code> function, which tells ggplot to look in <code>df</code> for those columns.</p>
+<p>Notice how we’ve “added” the <code>geom_point()</code> layer to the
+previous blank slate. Also note that the names we used to define the
+<code>x</code> and <code>y</code> axes are column names in the data
+frame, <code>df</code>. These must be placed <em>inside</em> the
+<code>aes()</code> function, which tells ggplot to look in
+<code>df</code> for those columns.</p>
 <p>Let’s further customize the plot with a few more layers:</p>
 <pre class="r"><code>ggplot(data = df) +
     geom_point(aes(x = year, y = age)) +
@@ -820,15 +897,32 @@ library(ggplot2)</code></pre>
     # Change some of the overall plot looks
     theme_minimal()</code></pre>
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>In the above plot, the <code>labs()</code> layer enables you to modify the plot labels and title. The <code>theme_minimal()</code> layer changes some global aspects of the plot, such as the background color, grid lines, legend appearance, etc. There are <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">many themes to choose from</a>, but keeping things simple with <code>theme_minimal()</code> often improves the plot from the default theme settings.</p>
+<p>In the above plot, the <code>labs()</code> layer enables you to
+modify the plot labels and title. The <code>theme_minimal()</code> layer
+changes some global aspects of the plot, such as the background color,
+grid lines, legend appearance, etc. There are <a
+href="https://ggplot2.tidyverse.org/reference/ggtheme.html">many themes
+to choose from</a>, but keeping things simple with
+<code>theme_minimal()</code> often improves the plot from the default
+theme settings.</p>
 </div>
-<div id="histograms-with-geom_bar" class="section level2">
-<h2><span class="header-section-number">3.5</span> Histograms with <code>geom_bar()</code></h2>
-<p>Bar charts are great for comparing different values of a numerical variable. By default, the <code>geom_bar()</code> layer works just like a histogram in that it plots a count of the variable provided. For example, here is the same histogram as before - the count of the bear attacks for each month in the dataset:</p>
+<div id="histograms-with-geom_bar" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Histograms with
+<code>geom_bar()</code></h2>
+<p>Bar charts are great for comparing different values of a numerical
+variable. By default, the <code>geom_bar()</code> layer works just like
+a histogram in that it plots a count of the variable provided. For
+example, here is the same histogram as before - the count of the bear
+attacks for each month in the dataset:</p>
 <pre class="r"><code>ggplot(data = df) +
     geom_bar(aes(x = month))</code></pre>
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-11-1.png" width="480" style="display: block; margin: auto;" /></p>
-<p>One useful feature of bar plots is to “fill” the color of the bars by another variable in the data. To do this, add the <code>fill=</code> argument in the <code>aes()</code> call. For example, here’s the same histogram with the bar colors representing the type of bear. I’ll also adjust the x-axis so that it labels the 12 months, and I’ll adjust the theme and labels:</p>
+<p>One useful feature of bar plots is to “fill” the color of the bars by
+another variable in the data. To do this, add the <code>fill=</code>
+argument in the <code>aes()</code> call. For example, here’s the same
+histogram with the bar colors representing the type of bear. I’ll also
+adjust the x-axis so that it labels the 12 months, and I’ll adjust the
+theme and labels:</p>
 <pre class="r"><code>ggplot(data = df) +
     geom_bar(aes(x = month, fill = bearType)) +
     # Customize the x-axis scale
@@ -841,12 +935,24 @@ library(ggplot2)</code></pre>
     # Change some of the overall plot looks
     theme_minimal()</code></pre>
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>Hmm, looks like brown bears are the most frequent killers, though black bears are a close second.</p>
+<p>Hmm, looks like brown bears are the most frequent killers, though
+black bears are a close second.</p>
 </div>
-<div id="bar-charts-with-geom_bar" class="section level2">
-<h2><span class="header-section-number">3.6</span> Bar charts with <code>geom_bar()</code></h2>
-<p>You can also use <code>geom_bar()</code> to create a bar chart (as opposed to a histogram). Whereas histograms report the <em>count</em> of one variable (<code>x</code>), bar charts also have a <code>y</code> variable that determine the height of bars. To make a bar chart, you have to tell <code>geom_bar()</code> to use the actual <code>y</code> values in the <code>aes()</code> call by adding the <code>stat="identity"</code> argument in <code>geom_bar()</code>, otherwise it will use the default statistic (which is <code>stat="count"</code> to make a histogram).</p>
-<p>For example, here is a bar chart of the number of bear killings in each year - notice how we first create a new summary data framed called <code>annualKillings</code> from the original <code>df</code>:</p>
+<div id="bar-charts-with-geom_bar" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Bar charts with
+<code>geom_bar()</code></h2>
+<p>You can also use <code>geom_bar()</code> to create a bar chart (as
+opposed to a histogram). Whereas histograms report the <em>count</em> of
+one variable (<code>x</code>), bar charts also have a <code>y</code>
+variable that determine the height of bars. To make a bar chart, you
+have to tell <code>geom_bar()</code> to use the actual <code>y</code>
+values in the <code>aes()</code> call by adding the
+<code>stat="identity"</code> argument in <code>geom_bar()</code>,
+otherwise it will use the default statistic (which is
+<code>stat="count"</code> to make a histogram).</p>
+<p>For example, here is a bar chart of the number of bear killings in
+each year - notice how we first create a new summary data framed called
+<code>annualKillings</code> from the original <code>df</code>:</p>
 <pre class="r"><code>annualKillings &lt;- df %&gt;% count(year)
 ggplot(data = annualKillings) +
     # Notice the addition of the &quot;stat = &#39;identity&#39;&quot; argument in geom_bar()
@@ -856,7 +962,11 @@ ggplot(data = annualKillings) +
          title = &quot;Annual number of deadly bear attacks over time&quot;) +
     theme_minimal()</code></pre>
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Just like with histograms, you can “fill” the color of the bars with another variable. Let’s see how the number of incidents vary by the gender of the victim. Notice again how we first use the <code>count()</code> function to compute the number of killings by gender:</p>
+<p>Just like with histograms, you can “fill” the color of the bars with
+another variable. Let’s see how the number of incidents vary by the
+gender of the victim. Notice again how we first use the
+<code>count()</code> function to compute the number of killings by
+gender:</p>
 <pre class="r"><code>annualKillingsByGender &lt;- df %&gt;%
     filter(! is.na(gender)) %&gt;%
     count(year, gender)
@@ -871,37 +981,71 @@ ggplot(data = annualKillingsByGender) +
 <p><img src="L12-da3-data-visualization_files/figure-html/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 </div>
-<div id="customizing-your-ggplot" class="section level1">
-<h1><span class="header-section-number">4</span> Customizing your ggplot</h1>
-<p>While the <code>ggplot2</code> library offers a wide variety of options for customizing your plots, remembering exactly how to do specific tasks (like changing the color of a line, or changing the position of a legend) can be difficult. Fortunately, there are wonderful resources for looking up all the tricks to make the perfect ggplot. Here are a few:</p>
+<div id="customizing-your-ggplot" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Customizing your
+ggplot</h1>
+<p>While the <code>ggplot2</code> library offers a wide variety of
+options for customizing your plots, remembering exactly how to do
+specific tasks (like changing the color of a line, or changing the
+position of a legend) can be difficult. Fortunately, there are wonderful
+resources for looking up all the tricks to make the perfect ggplot. Here
+are a few:</p>
 <ul>
-<li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf">RStudio <code>ggplot2</code> Cheatsheet</a></li>
-<li><a href="https://ggplot2.tidyverse.org/reference/">Tidyverse <code>ggplot2</code> reference guide</a></li>
-<li><a href="http://www.cookbook-r.com/Graphs/">R Cookbook for <code>ggplot2</code></a></li>
-<li><a href="http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html">Top 50 <code>ggplot2</code> visualizations</a></li>
+<li><a
+href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf">RStudio
+<code>ggplot2</code> Cheatsheet</a></li>
+<li><a href="https://ggplot2.tidyverse.org/reference/">Tidyverse
+<code>ggplot2</code> reference guide</a></li>
+<li><a href="http://www.cookbook-r.com/Graphs/">R Cookbook for
+<code>ggplot2</code></a></li>
+<li><a
+href="http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html">Top
+50 <code>ggplot2</code> visualizations</a></li>
 </ul>
-<p>One particularly useful tool is the <a href="https://github.com/calligross/ggthemeassist"><strong>ggThemeAssist</strong></a> package, which is an RStudio plug in that creates a graphic interface for editing ggplots. You can install it from CRAN:</p>
+<p>One particularly useful tool is the <a
+href="https://github.com/calligross/ggthemeassist"><strong>ggThemeAssist</strong></a>
+package, which is an RStudio plug in that creates a graphic interface
+for editing ggplots. You can install it from CRAN:</p>
 <pre class="r"><code>install.packages(&quot;ggThemeAssist&quot;)</code></pre>
-<p>After installing, the tool is available in the “Addins” menu within RStudio. To edit your ggplot, just highlight a ggplot object in your current script and run the “Addin” from the Addins menu. Use the input widgets to get your ideas into shape. After terminating <strong>ggThemeAssist</strong>, a character string containing your desired changes in standard <code>ggplot2</code> notation is inserted in your script. Re-running your script now produces the plot you just configured using <strong>ggThemeAssist</strong>!</p>
-<p><a href="images/ggThemeAssist2.gif" target="_blank">Click to enlarge</a></p>
+<p>After installing, the tool is available in the “Addins” menu within
+RStudio. To edit your ggplot, just highlight a ggplot object in your
+current script and run the “Addin” from the Addins menu. Use the input
+widgets to get your ideas into shape. After terminating
+<strong>ggThemeAssist</strong>, a character string containing your
+desired changes in standard <code>ggplot2</code> notation is inserted in
+your script. Re-running your script now produces the plot you just
+configured using <strong>ggThemeAssist</strong>!</p>
+<p><a href="images/ggThemeAssist2.gif" target="_blank">Click to
+enlarge</a></p>
 <p><img src="images/ggThemeAssist2.gif" /></p>
 </div>
-<div id="saving-figures" class="section level1">
+<div id="saving-figures" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Saving figures</h1>
-<p>The first (and easiest) is to export directly from the RStudio ‘Plots’ panel, by clicking on <code>Export</code> when the image is plotted. This will give you the option of <code>.png</code> or <code>.pdf</code> and selecting the directory to which you wish to save it to. I strongly recommend you save images as <code>.pdf</code> types as these won’t pixelate when you change the image size.</p>
-<p>Another easy way to save a ggplot figure is to use the <code>ggsave()</code> function. First, create your plot and save it as an object:</p>
+<p>The first (and easiest) is to export directly from the RStudio
+‘Plots’ panel, by clicking on <code>Export</code> when the image is
+plotted. This will give you the option of <code>.png</code> or
+<code>.pdf</code> and selecting the directory to which you wish to save
+it to. I strongly recommend you save images as <code>.pdf</code> types
+as these won’t pixelate when you change the image size.</p>
+<p>Another easy way to save a ggplot figure is to use the
+<code>ggsave()</code> function. First, create your plot and save it as
+an object:</p>
 <pre class="r"><code>scatterPlot &lt;- ggplot(data = df) +
     geom_point(aes(x = year, y = age))</code></pre>
-<p>Then save the plot using <code>ggsave()</code> (make sure you create a folder called “plots” in which to save your plot):</p>
+<p>Then save the plot using <code>ggsave()</code> (make sure you create
+a folder called “plots” in which to save your plot):</p>
 <pre class="r"><code>ggsave(filename = file.path(&#39;data&#39;, &#39;scatterPlot.pdf&#39;),
        plot   = scatterPlot,
        width  = 6,
        height = 4)</code></pre>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li><a href="https://datacarpentry.org/R-genomics/index.html">Data Analysis and Visualization in R <em>alpha</em></a>, by Data Carpentry contributors.</li>
+<li><a href="https://datacarpentry.org/R-genomics/index.html">Data
+Analysis and Visualization in R <em>alpha</em></a>, by Data Carpentry
+contributors.</li>
 </ul>
 </div>
 
@@ -946,7 +1090,7 @@ ggplot(data = annualKillingsByGender) +
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -964,7 +1108,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -973,6 +1117,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -985,7 +1132,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

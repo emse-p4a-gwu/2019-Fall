@@ -13,20 +13,30 @@
 
 <title>Functions</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,7 +554,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -604,13 +575,21 @@ div.tocify {
 </ul>
 <h3 id="suggested-readings">Suggested Readings</h3>
 <ul>
-<li><a href="https://r4ds.had.co.nz/functions.html">Chapter 19</a> of “R for Data Science”, by Garrett Grolemund and Hadley Wickham</li>
-<li><a href="https://rstudio-education.github.io/hopr/basics.html#write-functions">Chapters 2.4 - 2.7</a> of “Hands-On Programming with R”, by Garrett Grolemund</li>
+<li><a href="https://r4ds.had.co.nz/functions.html">Chapter 19</a> of “R
+for Data Science”, by Garrett Grolemund and Hadley Wickham</li>
+<li><a
+href="https://rstudio-education.github.io/hopr/basics.html#write-functions">Chapters
+2.4 - 2.7</a> of “Hands-On Programming with R”, by Garrett
+Grolemund</li>
 </ul>
 </blockquote>
 <hr />
-<p>We already know how to use built-in functions like <code>sum()</code>, <code>round()</code>, <code>sqrt()</code>, etc. And we can access other functions by installing external packages. But many times there just isn’t a function out there to do what you need. Fortunately, you can write your own!</p>
-<div id="basic-syntax" class="section level1">
+<p>We already know how to use built-in functions like
+<code>sum()</code>, <code>round()</code>, <code>sqrt()</code>, etc. And
+we can access other functions by installing external packages. But many
+times there just isn’t a function out there to do what you need.
+Fortunately, you can write your own!</p>
+<div id="basic-syntax" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Basic syntax</h1>
 <p>Here’s the syntax that you use to create a function:</p>
 <pre><code>FNAME &lt;- function(ARG1, ARG2, ETC) {
@@ -618,13 +597,27 @@ div.tocify {
   STATEMENT2
   return(VALUE)
 }</code></pre>
-<p>What this does is create a function with the name <code>FNAME</code>, which has arguments <code>ARG1</code>, <code>ARG2</code>, etc. Whenever the function is called, R executes the statements within the curly braces <code>{}</code>, and then returns the <code>VALUE</code> inside the <code>return()</code> statement.</p>
-<p>There’s a lot of different pieces to making a function. The way I like to remember how they all go together is to read the following English sentence:</p>
+<p>What this does is create a function with the name <code>FNAME</code>,
+which has arguments <code>ARG1</code>, <code>ARG2</code>, etc. Whenever
+the function is called, R executes the statements within the curly
+braces <code>{}</code>, and then returns the <code>VALUE</code> inside
+the <code>return()</code> statement.</p>
+<p>There’s a lot of different pieces to making a function. The way I
+like to remember how they all go together is to read the following
+English sentence:</p>
 <blockquote>
 <p>“function name” is a function of () that does…</p>
 </blockquote>
-<p>Each piece of the above sentence corresponds with a piece of code for writing a function:</p>
+<p>Each piece of the above sentence corresponds with a piece of code for
+writing a function:</p>
 <table>
+<colgroup>
+<col width="22%" />
+<col width="8%" />
+<col width="17%" />
+<col width="30%" />
+<col width="21%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">“function name”</th>
@@ -644,9 +637,18 @@ div.tocify {
 </tr>
 </tbody>
 </table>
-<p>All the commands your function will execute go in the <code>{}</code>.</p>
-<p>For example, here’s the function <code>mySqrt(n)</code>, which returns the square root of <code>n</code>:</p>
+<p>All the commands your function will execute go in the
+<code>{}</code>.</p>
+<p>For example, here’s the function <code>mySqrt(n)</code>, which
+returns the square root of <code>n</code>:</p>
 <table>
+<colgroup>
+<col width="23%" />
+<col width="8%" />
+<col width="17%" />
+<col width="10%" />
+<col width="39%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">“function name”</th>
@@ -672,7 +674,7 @@ div.tocify {
 }</code></pre>
 <hr />
 </div>
-<div id="arguments" class="section level1">
+<div id="arguments" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Arguments</h1>
 <p>Here’s a function with one argument:</p>
 <pre class="r"><code>square &lt;- function(x) {
@@ -699,7 +701,9 @@ div.tocify {
 <pre class="r"><code>doSomething()</code></pre>
 <pre><code>## Carpe diem!</code></pre>
 <p><strong>Default arguments</strong>:</p>
-<p>Sometimes, a function has a parameter that has a natural default. We can specify that default value in the function definition, then choose whether or not to include it in the function call:</p>
+<p>Sometimes, a function has a parameter that has a natural default. We
+can specify that default value in the function definition, then choose
+whether or not to include it in the function call:</p>
 <pre class="r"><code>f &lt;- function(x, y=10) {
     return(x + y)
 }</code></pre>
@@ -709,9 +713,11 @@ div.tocify {
 <pre><code>## [1] 6</code></pre>
 <hr />
 </div>
-<div id="the-return-statement" class="section level1">
-<h1><span class="header-section-number">3</span> The <code>return()</code> statement</h1>
-<p>Here’s a basic example of using <code>return()</code> to return a value:</p>
+<div id="the-return-statement" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> The
+<code>return()</code> statement</h1>
+<p>Here’s a basic example of using <code>return()</code> to return a
+value:</p>
 <pre class="r"><code>isPositive &lt;- function(x) {
     return (x &gt; 0)
 }</code></pre>
@@ -721,7 +727,8 @@ div.tocify {
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>isPositive(0)  # FALSE</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>The <code>return()</code> statement ends the function immediately:</p>
+<p>The <code>return()</code> statement ends the function
+immediately:</p>
 <pre class="r"><code>isPositive &lt;- function(x) {
     cat(&quot;Hello!&quot;)   # Runs
     return(x &gt; 0)
@@ -731,8 +738,11 @@ div.tocify {
 <pre><code>## Hello!</code></pre>
 <pre class="r"><code>x</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>Notice that in the above example, the <code>cat("Goodbye!")</code> statement is ignored.</p>
-<p>If you don’t include a <code>return()</code> statement, R will return the value of the last statement by default (<strong>Don’t do this</strong>):</p>
+<p>Notice that in the above example, the <code>cat("Goodbye!")</code>
+statement is ignored.</p>
+<p>If you don’t include a <code>return()</code> statement, R will return
+the value of the last statement by default (<strong>Don’t do
+this</strong>):</p>
 <pre class="r"><code>f &lt;- function(x) {
     x + 42
 }</code></pre>
@@ -746,9 +756,12 @@ div.tocify {
 <pre><code>## [1] 12</code></pre>
 <hr />
 </div>
-<div id="the-cat-statement" class="section level1">
-<h1><span class="header-section-number">4</span> The <code>cat()</code> statement</h1>
-<p>The <code>cat()</code> (short for “concatenating”) statement prints whatever arguments it is given to the console. The arguments can be of mixed types and it will convert them all to a concatenated string:</p>
+<div id="the-cat-statement" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> The <code>cat()</code>
+statement</h1>
+<p>The <code>cat()</code> (short for “concatenating”) statement prints
+whatever arguments it is given to the console. The arguments can be of
+mixed types and it will convert them all to a concatenated string:</p>
 <pre class="r"><code>printX &lt;- function(x) {
   cat(&quot;The value of x provided is&quot;, x)
 }</code></pre>
@@ -756,7 +769,8 @@ div.tocify {
 <pre><code>## The value of x provided is 7</code></pre>
 <pre class="r"><code>printX(42)</code></pre>
 <pre><code>## The value of x provided is 42</code></pre>
-<p>Mixing up <code>return()</code> and <code>cat()</code> is a common early mistake. For example:</p>
+<p>Mixing up <code>return()</code> and <code>cat()</code> is a common
+early mistake. For example:</p>
 <pre class="r"><code>cubed &lt;- function(x) {
     cat(x^3)
 }</code></pre>
@@ -775,9 +789,13 @@ div.tocify {
 <pre><code>## [1] 16</code></pre>
 <hr />
 </div>
-<div id="helper-functions" class="section level1">
+<div id="helper-functions" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Helper functions</h1>
-<p>It is often useful to break down more complicated problems into smaller “helper functions”. These helpers can be called in other functions. Here’s an example of using the helper functions <code>square()</code> and <code>squareRoot()</code> to compute the hypotenuse of a triangle:</p>
+<p>It is often useful to break down more complicated problems into
+smaller “helper functions”. These helpers can be called in other
+functions. Here’s an example of using the helper functions
+<code>square()</code> and <code>squareRoot()</code> to compute the
+hypotenuse of a triangle:</p>
 <pre class="r"><code>square &lt;- function(x) {
    return(x^2)
 }
@@ -796,9 +814,13 @@ hypotenuse(a, b)</code></pre>
 <pre><code>## [1] 5</code></pre>
 <hr />
 </div>
-<div id="local-vs.-global-variables" class="section level1">
-<h1><span class="header-section-number">6</span> Local vs. global variables</h1>
-<p>All variables <strong>inside</strong> a function are called <em>“local”</em> variables and will <strong>NOT</strong> be created in the working environment. They can only be used locally within the function. For example:</p>
+<div id="local-vs.-global-variables" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Local vs. global
+variables</h1>
+<p>All variables <strong>inside</strong> a function are called
+<em>“local”</em> variables and will <strong>NOT</strong> be created in
+the working environment. They can only be used locally within the
+function. For example:</p>
 <pre class="r"><code>minSquared &lt;- function(x, y) {
     smaller = min(x, y)
     return(smaller^2)
@@ -807,14 +829,18 @@ hypotenuse(a, b)</code></pre>
 <pre><code>## [1] 9</code></pre>
 <pre class="r"><code>minSquared(4, 3)</code></pre>
 <pre><code>## [1] 9</code></pre>
-<p>If you try to call a local variable in the global environment, you’ll get an error:</p>
+<p>If you try to call a local variable in the global environment, you’ll
+get an error:</p>
 <pre class="r"><code>square &lt;- function(x) {
   y &lt;- x^2
   return(y)
 }
 y</code></pre>
 <pre><code>## Error in eval(expr, envir, enclos): object &#39;y&#39; not found</code></pre>
-<p><em>“Global”</em> variables are those in the global environment. These will show up in the “Environment” pane in RStudio. You can call these inside functions, but this is <strong>BAD</strong> practice. Here’s an example (<strong>Don’t do this!</strong>):</p>
+<p><em>“Global”</em> variables are those in the global environment.
+These will show up in the “Environment” pane in RStudio. You can call
+these inside functions, but this is <strong>BAD</strong> practice.
+Here’s an example (<strong>Don’t do this!</strong>):</p>
 <pre class="r"><code>printN &lt;- function() {
     cat(n)  # n is not local -- so it is global (bad idea!!!)
 }
@@ -824,34 +850,47 @@ printN()</code></pre>
 <pre><code>## 5</code></pre>
 <hr />
 </div>
-<div id="tips" class="section level1">
+<div id="tips" class="section level1" number="7">
 <h1><span class="header-section-number">7</span> Tips</h1>
 <p>One particularly useful function is <code>almostEqual()</code>:</p>
 <pre class="r"><code>almostEqual &lt;- function(d1, d2) {
     epsilon = 0.00001
     return(abs(d1-d2) &lt;= epsilon)
 }</code></pre>
-<p>This is useful when comparing numbers that are stored as floats and have lots of trailing zeros. For example, let’s do some simple addition:</p>
+<p>This is useful when comparing numbers that are stored as floats and
+have lots of trailing zeros. For example, let’s do some simple
+addition:</p>
 <pre class="r"><code>x &lt;- 0.1 + 0.2
 x</code></pre>
 <pre><code>## [1] 0.3</code></pre>
-<p>If we compared <code>x</code> to <code>0.3</code>, we would expect the result to be <code>TRUE</code>, right?</p>
+<p>If we compared <code>x</code> to <code>0.3</code>, we would expect
+the result to be <code>TRUE</code>, right?</p>
 <pre class="r"><code>x == 0.3</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>What went wrong here? Well, what looks like a value of 0.3 is actually a float with a lot of zeros:</p>
+<p>What went wrong here? Well, what looks like a value of 0.3 is
+actually a float with a lot of zeros:</p>
 <pre class="r"><code>print(x, digits = 20)</code></pre>
 <pre><code>## [1] 0.30000000000000004441</code></pre>
-<p>By default, R doesn’t print out all these zeros, but they are the result of many small rounding errors that occur when computers do calculations.</p>
+<p>By default, R doesn’t print out all these zeros, but they are the
+result of many small rounding errors that occur when computers do
+calculations.</p>
 <p>This is where <code>almostEqual()</code> comes in handy:</p>
 <pre class="r"><code>almostEqual(x, 0.3)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<p>It only compares numbers out to a predefined decimal place, after which it ignores everything else. This will come in handy in your homework problems where you might get unexpected results.</p>
+<p>It only compares numbers out to a predefined decimal place, after
+which it ignores everything else. This will come in handy in your
+homework problems where you might get unexpected results.</p>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112: Fundamentals of Programming</a>, by <a href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
-<li>Danielle Navarro’s website <a href="https://psyr.org/index.html">“R for Psychological Science”</a></li>
+<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112:
+Fundamentals of Programming</a>, by <a
+href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a
+href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
+<li>Danielle Navarro’s website <a href="https://psyr.org/index.html">“R
+for Psychological Science”</a></li>
 </ul>
 </div>
 
@@ -896,7 +935,7 @@ x</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -914,7 +953,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -923,6 +962,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -935,7 +977,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

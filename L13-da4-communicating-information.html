@@ -13,20 +13,30 @@
 
 <title>Data Analysis 4 - Communicating Information</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,11 +554,12 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
-<h1 class="title toc-ignore">Data Analysis 4 - Communicating Information</h1>
+<h1 class="title toc-ignore">Data Analysis 4 - Communicating
+Information</h1>
 
 </div>
 
@@ -595,63 +567,104 @@ div.tocify {
 <blockquote>
 <h3 id="learning-objectives">Learning Objectives</h3>
 <ul>
-<li>Be able to manage computational projects for reproducibility, reuse, and collaboration.</li>
-<li>Use R tools and conventions to document code and analyses and produce reproducible reports.</li>
-<li>Be able to publish, share materials, and collaborate through the web.</li>
+<li>Be able to manage computational projects for reproducibility, reuse,
+and collaboration.</li>
+<li>Use R tools and conventions to document code and analyses and
+produce reproducible reports.</li>
+<li>Be able to publish, share materials, and collaborate through the
+web.</li>
 <li>Understand why this all matters!</li>
 </ul>
 <h3 id="suggested-readings">Suggested Readings</h3>
 <ul>
-<li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a>, by Yihui Xie, J. J. Allaire, and Garrett Grolemund</li>
-<li><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">RMarkdown Cheatsheet</a></li>
+<li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The
+Definitive Guide</a>, by Yihui Xie, J. J. Allaire, and Garrett
+Grolemund</li>
+<li><a
+href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">RMarkdown
+Cheatsheet</a></li>
 </ul>
 </blockquote>
 <hr />
-<div id="literate-programming" class="section level1">
-<h1><span class="header-section-number">1</span> Literate programming</h1>
-<p>Literate programming is a paradigm first introduced by <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald E. Knuth</a>. The idea is simple:</p>
+<div id="literate-programming" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Literate
+programming</h1>
+<p>Literate programming is a paradigm first introduced by <a
+href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald E. Knuth</a>.
+The idea is simple:</p>
 <blockquote>
-<p>Treat programs as a literature understandable to <strong>human beings</strong></p>
+<p>Treat programs as a literature understandable to <strong>human
+beings</strong></p>
 </blockquote>
-<p>The goal is to integrate data analysis (executable code) with textual documentation, linking data, code, and text together in one document. Literate programming can be directly linked to the concept of <a href="https://en.wikipedia.org/wiki/Reproducibility"><strong>reproducibility</strong></a>. Basically, for someone to make a legitimate scientific claim, they should at minimum be able to fully reproduce their results from their raw data (and preferrably others should be able to reproduce them as well).</p>
-<p>This leads to the idea of having a <strong>reproducible workflow</strong> - from raw data to published results.</p>
+<p>The goal is to integrate data analysis (executable code) with textual
+documentation, linking data, code, and text together in one document.
+Literate programming can be directly linked to the concept of <a
+href="https://en.wikipedia.org/wiki/Reproducibility"><strong>reproducibility</strong></a>.
+Basically, for someone to make a legitimate scientific claim, they
+should at minimum be able to fully reproduce their results from their
+raw data (and preferrably others should be able to reproduce them as
+well).</p>
+<p>This leads to the idea of having a <strong>reproducible
+workflow</strong> - from raw data to published results.</p>
 <blockquote>
 <p>Enter RMarkdown</p>
 </blockquote>
-<p><a href="https://rmarkdown.rstudio.com/">RMarkdown</a> integrates a <strong>documentantion</strong> language (<a href="https://en.wikipedia.org/wiki/Markdown">markdown</a>) with a <strong>programming</strong> language (<code>R</code>). This enables authors to craft interactive documents of data, analysis, and results that are easily shareable, particularly through the web.</p>
+<p><a href="https://rmarkdown.rstudio.com/">RMarkdown</a> integrates a
+<strong>documentantion</strong> language (<a
+href="https://en.wikipedia.org/wiki/Markdown">markdown</a>) with a
+<strong>programming</strong> language (<code>R</code>). This enables
+authors to craft interactive documents of data, analysis, and results
+that are easily shareable, particularly through the web.</p>
 <hr />
 </div>
-<div id="rmarkdown-overview" class="section level1">
+<div id="rmarkdown-overview" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Rmarkdown overview</h1>
 <p>Watch this 1-min video to get a quick sense of what RMarkdown is:</p>
 <iframe src="https://player.vimeo.com/video/178485416?color=428bca&amp;title=0&amp;byline=0&amp;portrait=0" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
 </iframe>
 <p>
-<a href="https://vimeo.com/178485416">What is R Markdown?</a> from <a href="https://vimeo.com/rstudioinc">RStudio, Inc.</a> on <a href="https://vimeo.com">Vimeo</a>.
+<a href="https://vimeo.com/178485416">What is R Markdown?</a> from
+<a href="https://vimeo.com/rstudioinc">RStudio, Inc.</a> on
+<a href="https://vimeo.com">Vimeo</a>.
 </p>
-<p>…and watch this 1.5 min video to witness the horrors of not using a reproducible workflow:</p>
+<p>…and watch this 1.5 min video to witness the horrors of not using a
+reproducible workflow:</p>
 <iframe width="640" height="400" src="https://www.youtube.com/embed/s3JldKoA0zw" frameborder="0" allowfullscreen>
 </iframe>
 <hr />
 </div>
-<div id="elements-of-rmarkdown" class="section level1">
-<h1><span class="header-section-number">3</span> Elements of RMarkdown</h1>
-<p><img src="images/horst_monsters_rmarkdown.png" width="500" /> <a href="https://github.com/allisonhorst">[Art by Allison Horst]</a></p>
-<div id="markdown" class="section level2">
+<div id="elements-of-rmarkdown" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Elements of
+RMarkdown</h1>
+<p><img src="images/horst_monsters_rmarkdown.png" width="500" /> <a
+href="https://github.com/allisonhorst">[Art by Allison Horst]</a></p>
+<div id="markdown" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Markdown</h2>
-<p>Markdown is a simple, plain text language for converting raw text to HTML for the web (and other outputs, like pdfs). Some of its attributes include:</p>
+<p>Markdown is a simple, plain text language for converting raw text to
+HTML for the web (and other outputs, like pdfs). Some of its attributes
+include:</p>
 <ul>
-<li>It has a very small syntax (html links, tables, images, headers, italic / bold font, and a few other things).</li>
+<li>It has a very small syntax (html links, tables, images, headers,
+italic / bold font, and a few other things).</li>
 <li>It is both easy-to-read and easy-to-write.</li>
-<li>It is clean and legible across multiple platforms (including mobile phones).</li>
+<li>It is clean and legible across multiple platforms (including mobile
+phones).</li>
 <li>All formatting is handled automatically through a browser.</li>
 <li>Supports raw html as well.</li>
 </ul>
 </div>
-<div id="code" class="section level2">
+<div id="code" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Code</h2>
-<p>Code “chunks” are defined through special notation and are executed in sequence throughout the document (just like an <code>.R</code> script). You can mix code directly in with markdown (e.g. “Here’s some simple math in R: <code>2 + 2</code> produces 4”) or in separate chunks before or after markdown text. This enables you to write English language text in markdown to explain something, and then immediately follow it up with code to illustrate or demonstrate it.</p>
-<p>RMarkdown currently supports a number of different <a href="https://rmarkdown.rstudio.com/authoring_knitr_engines.html">Language Engines</a> through the <code>knitr</code> package, including:</p>
+<p>Code “chunks” are defined through special notation and are executed
+in sequence throughout the document (just like an <code>.R</code>
+script). You can mix code directly in with markdown (e.g. “Here’s some
+simple math in R: <code>2 + 2</code> produces 4”) or in separate chunks
+before or after markdown text. This enables you to write English
+language text in markdown to explain something, and then immediately
+follow it up with code to illustrate or demonstrate it.</p>
+<p>RMarkdown currently supports a number of different <a
+href="https://rmarkdown.rstudio.com/authoring_knitr_engines.html">Language
+Engines</a> through the <code>knitr</code> package, including:</p>
 <ul>
 <li><strong>R</strong> (default)</li>
 <li>Python</li>
@@ -663,32 +676,51 @@ div.tocify {
 <li>CSS</li>
 </ul>
 </div>
-<div id="outputs" class="section level2">
+<div id="outputs" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Outputs</h2>
-<p>The <code>knitr</code> package enables you to “knit” together the markdown text and R code into a variety of output formats. The default format is an html document for reading through an internet browser and sharing results across the web. Check out the <a href="https://rmarkdown.rstudio.com/gallery.html">RMarkdown Gallery</a> for some examples. Other formats include:</p>
+<p>The <code>knitr</code> package enables you to “knit” together the
+markdown text and R code into a variety of output formats. The default
+format is an html document for reading through an internet browser and
+sharing results across the web. Check out the <a
+href="https://rmarkdown.rstudio.com/gallery.html">RMarkdown Gallery</a>
+for some examples. Other formats include:</p>
 <p><img src="images/RMarkdownOutputFormats.png" width="400" /></p>
 </div>
-<div id="publish-to-the-web" class="section level2">
-<h2><span class="header-section-number">3.4</span> Publish to the web</h2>
-<p>Once you’ve written up your RMarkdown document, you can publish it to the web for free using RPubs: <a href="http://rpubs.com/" class="uri">http://rpubs.com/</a></p>
-<p>Watch this quick demo of how to publish your markdown file to the web using RPubs:</p>
+<div id="publish-to-the-web" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Publish to the
+web</h2>
+<p>Once you’ve written up your RMarkdown document, you can publish it to
+the web for free using RPubs: <a href="http://rpubs.com/"
+class="uri">http://rpubs.com/</a></p>
+<p>Watch this quick demo of how to publish your markdown file to the web
+using RPubs:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/GJ36zamYVLg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <hr />
 </div>
 </div>
-<div id="elements-of-a-.rmd-document" class="section level1">
-<h1><span class="header-section-number">4</span> Elements of a <code>.Rmd</code> document</h1>
-<div id="the-yaml-header" class="section level2">
+<div id="elements-of-a-.rmd-document" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Elements of a
+<code>.Rmd</code> document</h1>
+<div id="the-yaml-header" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> The YAML header</h2>
-<p>The yaml header contains metadata about the document - most importantly the output. Different settings can be set within different outputs. Here we’ll be focusing on on the <a href="https://bookdown.org/yihui/rmarkdown/html-document.html#table-of-contents"><code>html_document</code> output</a>.</p>
+<p>The yaml header contains metadata about the document - most
+importantly the output. Different settings can be set within different
+outputs. Here we’ll be focusing on on the <a
+href="https://bookdown.org/yihui/rmarkdown/html-document.html#table-of-contents"><code>html_document</code>
+output</a>.</p>
 <p>It is contained between these separators at the top of the file.</p>
 <pre class="r"><code>---
 
 ---</code></pre>
-<p>Markdown was originally designed for HTML output, so it may not be surprising that the HTML format has the richest features among all output formats. To create an HTML document from R Markdown, you specify the <code>html_document</code> output format in the YAML metadata of your document:</p>
+<p>Markdown was originally designed for HTML output, so it may not be
+surprising that the HTML format has the richest features among all
+output formats. To create an HTML document from R Markdown, you specify
+the <code>html_document</code> output format in the YAML metadata of
+your document:</p>
 <p><img src="images/yaml_description.png" width="600" /></p>
-<p>At a bare minimum, your yaml should include a title and output format. Here I’ve also included my name as the author, and the date:</p>
+<p>At a bare minimum, your yaml should include a title and output
+format. Here I’ve also included my name as the author, and the date:</p>
 <pre class="r"><code>---
 title: &quot;This is a demo&quot;
 author: &quot;John Helveston&quot;
@@ -698,13 +730,20 @@ output: html_document
 <p>This will produce an html page that looks like this:</p>
 <p><img src="images/rmarkdown_blank.png" width="650" /></p>
 </div>
-<div id="markdown-basics" class="section level2">
+<div id="markdown-basics" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Markdown basics</h2>
-<p>The text in an R Markdown document is written with the <a href="https://bookdown.org/yihui/rmarkdown/markdown-syntax.html">Markdown syntax</a>.</p>
+<p>The text in an R Markdown document is written with the <a
+href="https://bookdown.org/yihui/rmarkdown/markdown-syntax.html">Markdown
+syntax</a>.</p>
 <blockquote>
-<p>Check out this <a href="https://commonmark.org/help/"><strong>60-second</strong> markdown reference guide</a> to get the basics</p>
+<p>Check out this <a
+href="https://commonmark.org/help/"><strong>60-second</strong> markdown
+reference guide</a> to get the basics</p>
 </blockquote>
-<p>If you’re not sure how to make something in markdown, you can try it out first with this handy <a href="https://markdown-it.github.io/"><strong>markdown demo site</strong></a>.</p>
+<p>If you’re not sure how to make something in markdown, you can try it
+out first with this handy <a
+href="https://markdown-it.github.io/"><strong>markdown demo
+site</strong></a>.</p>
 <p>Here’s some of the most-used markdown syntax:</p>
 <div class="tableMedium">
 <table>
@@ -754,7 +793,8 @@ output: html_document
 ##### Header 5
 ###### Header 6</code></pre>
 <p><img src="images/headers.png" width="700" /></p>
-<p>To make a <strong>bullet list</strong>, use the <code>-</code> symbol:</p>
+<p>To make a <strong>bullet list</strong>, use the <code>-</code>
+symbol:</p>
 <pre class="r"><code>- first item
 - second item
 - third item</code></pre>
@@ -763,7 +803,8 @@ output: html_document
 <li>second item</li>
 <li>third item</li>
 </ul>
-<p>To make a <strong>numbered list</strong>, use numbers with a period:</p>
+<p>To make a <strong>numbered list</strong>, use numbers with a
+period:</p>
 <pre class="r"><code>1. first item
 2. second item
 3. third item</code></pre>
@@ -772,10 +813,13 @@ output: html_document
 <li>second item</li>
 <li>third item</li>
 </ol>
-<p>To make a <strong>url link</strong> to another site, use brackets with parentheses:</p>
+<p>To make a <strong>url link</strong> to another site, use brackets
+with parentheses:</p>
 <pre class="r"><code>[Download R](http://www.r-project.org/)</code></pre>
 <p><a href="http://www.r-project.org/">Download R</a></p>
-<p>To make a <strong>basic table</strong>, use the <code>|</code> symbol to break up columns, and make a header row by adding <code>--------</code> underneath the header row:</p>
+<p>To make a <strong>basic table</strong>, use the <code>|</code> symbol
+to break up columns, and make a header row by adding
+<code>--------</code> underneath the header row:</p>
 <pre class="r"><code>Table Header  | Second Header
 ------------- | -------------
 Cell 1, 1     | Cell 2, 1
@@ -798,62 +842,93 @@ Cell 1, 2     | Cell 2, 2</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Check out this handy <a href="http://www.tablesgenerator.com/markdown_tables"><strong>online table converter</strong></a></p>
+<p>Check out this handy <a
+href="http://www.tablesgenerator.com/markdown_tables"><strong>online
+table converter</strong></a></p>
 </div>
-<div id="inline-r-code" class="section level2">
+<div id="inline-r-code" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Inline R code</h2>
-<p>You can embed R code directly in a markdown sentence. For example, if you had already created an object <code>x</code>…</p>
+<p>You can embed R code directly in a markdown sentence. For example, if
+you had already created an object <code>x</code>…</p>
 <pre class="r"><code>x &lt;- 10</code></pre>
-<p>…you could use <code>x</code> in a sentence by typing a <code>`</code> followed by <code>r</code> then any R code you want:</p>
+<p>…you could use <code>x</code> in a sentence by typing a
+<code>`</code> followed by <code>r</code> then any R code you want:</p>
 <pre class="r"><code>The value of parameter `x` is `r x`, and `2*x` is `r 2*x`</code></pre>
-<p>The value of parameter <code>x</code> is 10, and <code>2*x</code> is 20</p>
+<p>The value of parameter <code>x</code> is 10, and <code>2*x</code> is
+20</p>
 <p>Wow - that’s pretty cool!</p>
 </div>
-<div id="r-code-chunks" class="section level2">
+<div id="r-code-chunks" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> R Code chunks</h2>
-<p>Code chunks are blocks of R code that are executed when you compile the <code>.Rmd</code> document. The output of the code is inserted into the RMarkdown document. Chunks can be used as a means to render R output into documents or to simply display code for illustration (e.g. with option <code>eval=FALSE</code>).</p>
-<p>Here’s an example of a <code>.Rmd</code> file with a code chunk on the left and the rendered output on the right:</p>
+<p>Code chunks are blocks of R code that are executed when you compile
+the <code>.Rmd</code> document. The output of the code is inserted into
+the RMarkdown document. Chunks can be used as a means to render R output
+into documents or to simply display code for illustration (e.g. with
+option <code>eval=FALSE</code>).</p>
+<p>Here’s an example of a <code>.Rmd</code> file with a code chunk on
+the left and the rendered output on the right:</p>
 <p><img src="images/markdownChunk.png" width="700" /></p>
-<p>You can quickly insert an <a href="https://bookdown.org/yihui/rmarkdown/r-code.html">R code chunk</a> with:</p>
+<p>You can quickly insert an <a
+href="https://bookdown.org/yihui/rmarkdown/r-code.html">R code chunk</a>
+with:</p>
 <ul>
-<li>The keyboard shortcut <strong><code>Ctrl + Alt + I</code></strong> (<strong>OS X: <code>Cmd + Option + I</code></strong>)</li>
-<li>The Add Chunk <img src="images/notebook-insert-chunk.png" /> command in the RStudio toolbar</li>
-<li>By typing the chunk delimiters <code>```{r}</code> and <code>```</code>.</li>
+<li>The keyboard shortcut <strong><code>Ctrl + Alt + I</code></strong>
+(<strong>OS X: <code>Cmd + Option + I</code></strong>)</li>
+<li>The Add Chunk <img src="images/notebook-insert-chunk.png" /> command
+in the RStudio toolbar</li>
+<li>By typing the chunk delimiters <code>```{r}</code> and
+<code>```</code>.</li>
 </ul>
-<div id="chunk-notation" class="section level3">
+<div id="chunk-notation" class="section level3" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Chunk notation</h3>
-<p>In between the chunk delimiters <code>```{r}</code> and <code>```</code>, you can write R code:</p>
+<p>In between the chunk delimiters <code>```{r}</code> and
+<code>```</code>, you can write R code:</p>
 <pre><code>```{r chunk-name}
 cat(&#39;hello world!&#39;)
 ```</code></pre>
 <p>The above R chunk renders as:</p>
 <pre><code>## hello world!</code></pre>
-<p>You don’t have to name the chunks, but it’s a good practice (like commenting your code). In the above chunk, the name of the chunk is “chunk-name”.</p>
+<p>You don’t have to name the chunks, but it’s a good practice (like
+commenting your code). In the above chunk, the name of the chunk is
+“chunk-name”.</p>
 </div>
-<div id="chunk-options" class="section level3">
+<div id="chunk-options" class="section level3" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> Chunk options</h3>
-<p>There are lots of options for customizing how markdown chunks appear. By default, code chunks print <strong>code</strong> + <strong>output</strong>:</p>
+<p>There are lots of options for customizing how markdown chunks appear.
+By default, code chunks print <strong>code</strong> +
+<strong>output</strong>:</p>
 <pre class="r"><code>cat(&#39;hello world!&#39;)</code></pre>
 <pre><code>## hello world!</code></pre>
-<p>But you can change this by inserting options immediately after the <code>r</code> in the header <code>```{r}</code> and separate them with commas. For example, if you just want to display the code but don’t want it to actually run, you can add <code>eval=FALSE</code>:</p>
+<p>But you can change this by inserting options immediately after the
+<code>r</code> in the header <code>```{r}</code> and separate them with
+commas. For example, if you just want to display the code but don’t want
+it to actually run, you can add <code>eval=FALSE</code>:</p>
 <pre><code>```{r, eval=FALSE}
 cat(&#39;hello world!&#39;)
 ```</code></pre>
-<p>If you only want to print the <strong>output</strong> (i.e. run the code, but don’t show the code itself), use <code>echo=FALSE</code>:</p>
+<p>If you only want to print the <strong>output</strong> (i.e. run the
+code, but don’t show the code itself), use <code>echo=FALSE</code>:</p>
 <pre><code>```{r, echo=FALSE}
 cat(&#39;hello world!&#39;)
 ```</code></pre>
-<p>Finally, if you want to run the code in the background but you don’t want anything to print, use <code>include=FALSE</code>:</p>
+<p>Finally, if you want to run the code in the background but you don’t
+want anything to print, use <code>include=FALSE</code>:</p>
 <pre><code>```{r, include=FALSE}
 cat(&#39;hello world!&#39;)
 ```</code></pre>
-<p>There are loads of other options for controlling how R chunks behave - here is a list of some (for more details see <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>):</p>
+<p>There are loads of other options for controlling how R chunks behave
+- here is a list of some (for more details see <a
+href="http://yihui.name/knitr/"
+class="uri">http://yihui.name/knitr/</a>):</p>
 <p><img src="images/chunks_options.png" width="600" /></p>
 </div>
 </div>
-<div id="plots" class="section level2">
+<div id="plots" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Plots</h2>
-<p>By default, figures produced by R code will be placed immediately after the code chunk they were generated from. Here’s an example using <code>ggplot2</code> to plot the relationship between a couple of variables:</p>
+<p>By default, figures produced by R code will be placed immediately
+after the code chunk they were generated from. Here’s an example using
+<code>ggplot2</code> to plot the relationship between a couple of
+variables:</p>
 <pre><code>```{r, message=FALSE, fig.height=4, fig.width=6}
 library(ggplot2)
 library(gapminder)
@@ -867,15 +942,23 @@ ggplot(gapminder) +
     geom_point(aes(x = gdpPercap, y = lifeExp, color = continent), size=0.8) +
     theme_minimal()</code></pre>
 <p><img src="L13-da4-communicating-information_files/figure-html/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>You can adjust the dimensions of plots using <code>fig.height</code> &amp; <code>fig.width</code> inside the chunk settings. For example, in the above plot the setting are <code>{r, fig.height=4, fig.width=6}</code>.</p>
+<p>You can adjust the dimensions of plots using <code>fig.height</code>
+&amp; <code>fig.width</code> inside the chunk settings. For example, in
+the above plot the setting are
+<code>{r, fig.height=4, fig.width=6}</code>.</p>
 <hr />
 </div>
 </div>
-<div id="tips" class="section level1">
+<div id="tips" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Tips</h1>
-<div id="knitting-to-other-output-formats" class="section level2">
-<h2><span class="header-section-number">5.1</span> Knitting to other output formats</h2>
-<p>As previously mentioned, the default output format for RMarkdown documents is html, but you can change this by adjusting the YAML <code>output</code>. For example, if I wanted to create a pdf document instead, I could use <code>pdf_document</code> in the YAML:</p>
+<div id="knitting-to-other-output-formats" class="section level2"
+number="5.1">
+<h2><span class="header-section-number">5.1</span> Knitting to other
+output formats</h2>
+<p>As previously mentioned, the default output format for RMarkdown
+documents is html, but you can change this by adjusting the YAML
+<code>output</code>. For example, if I wanted to create a pdf document
+instead, I could use <code>pdf_document</code> in the YAML:</p>
 <pre class="r"><code>---
 title: &quot;This is a demo&quot;
 author: &quot;John Helveston&quot;
@@ -883,9 +966,16 @@ date: &quot;11/18/2019&quot;
 output: pdf_document
 ---</code></pre>
 </div>
-<div id="convert-a-data-frame-to-a-table" class="section level2">
-<h2><span class="header-section-number">5.2</span> Convert a data frame to a table</h2>
-<p>If you have a table already organized as a data frame in R, rather than painstakingly type the content into a typical markdown table, you can just use the <code>kable()</code> function to directly convert it. Here’s an example using the <code>beatles</code> data frame from the earlier lesson on <a href="L10-da1-data-frames.html">data frames</a>:</p>
+<div id="convert-a-data-frame-to-a-table" class="section level2"
+number="5.2">
+<h2><span class="header-section-number">5.2</span> Convert a data frame
+to a table</h2>
+<p>If you have a table already organized as a data frame in R, rather
+than painstakingly type the content into a typical markdown table, you
+can just use the <code>kable()</code> function to directly convert it.
+Here’s an example using the <code>beatles</code> data frame from the
+earlier lesson on <a href="L10-da1-data-frames.html">data
+frames</a>:</p>
 <pre class="r"><code>beatles &lt;- data.frame(
     firstName   = c(&quot;John&quot;, &quot;Paul&quot;, &quot;Ringo&quot;, &quot;George&quot;),
     lastName    = c(&quot;Lennon&quot;, &quot;McCartney&quot;, &quot;Starr&quot;, &quot;Harrison&quot;),
@@ -936,29 +1026,49 @@ kable(beatles)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="inserting-a-python-code-chunk" class="section level2">
-<h2><span class="header-section-number">5.3</span> Inserting a Python code chunk</h2>
-<p>One of the most impressive things about RMarkdown code chunks is that the code itself doesn’t have to be R code. For example, if you want to use Python code instead, just change <code>{r}</code> to <code>{python}</code> in the code chunk:</p>
+<div id="inserting-a-python-code-chunk" class="section level2"
+number="5.3">
+<h2><span class="header-section-number">5.3</span> Inserting a Python
+code chunk</h2>
+<p>One of the most impressive things about RMarkdown code chunks is that
+the code itself doesn’t have to be R code. For example, if you want to
+use Python code instead, just change <code>{r}</code> to
+<code>{python}</code> in the code chunk:</p>
 <pre class="python"><code>&#39;In Python, you can concatenate strings&#39; + &#39; like this!&#39;</code></pre>
 <pre><code>## &#39;In Python, you can concatenate strings like this!&#39;</code></pre>
 <hr />
 </div>
 </div>
-<div id="additional-resources" class="section level1">
-<h1><span class="header-section-number">6</span> Additional Resources</h1>
+<div id="additional-resources" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Additional
+Resources</h1>
 <ul>
-<li><p><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive guide</a></p></li>
-<li><p><a href="http://rmarkdown.rstudio.com/">Rmarkdown documentation</a></p></li>
-<li><p><a href="https://rmarkdown.rstudio.com/html_document_format.html">Rmarkdown <code>html_document</code> format documentation</a></p></li>
-<li><p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">Rstudio Rmarkdown cheatsheet</a></p></li>
-<li><p><a href="https://www.coursera.org/learn/reproducible-research">Reproducible Research</a> coursera MOOC</p></li>
-<li><p><a href="http://deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/">Producing html documents from <code>.R</code> scripts using <code>knitr::spin</code></a></p></li>
+<li><p><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The
+Definitive guide</a></p></li>
+<li><p><a href="http://rmarkdown.rstudio.com/">Rmarkdown
+documentation</a></p></li>
+<li><p><a
+href="https://rmarkdown.rstudio.com/html_document_format.html">Rmarkdown
+<code>html_document</code> format documentation</a></p></li>
+<li><p><a
+href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">Rstudio
+Rmarkdown cheatsheet</a></p></li>
+<li><p><a
+href="https://www.coursera.org/learn/reproducible-research">Reproducible
+Research</a> coursera MOOC</p></li>
+<li><p><a
+href="http://deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/">Producing
+html documents from <code>.R</code> scripts using
+<code>knitr::spin</code></a></p></li>
 </ul>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li><a href="https://annakrystalli.me/rrresearch/">R for Reproducible Research</a>, by <a href="https://annakrystalli.me">Anna Krystalli</a></li>
+<li><a href="https://annakrystalli.me/rrresearch/">R for Reproducible
+Research</a>, by <a href="https://annakrystalli.me">Anna
+Krystalli</a></li>
 </ul>
 </div>
 
@@ -1003,7 +1113,7 @@ kable(beatles)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1021,7 +1131,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -1030,6 +1140,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -1042,7 +1155,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

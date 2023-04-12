@@ -13,17 +13,27 @@
 
 <title>Homework 6 - Data Visualization &amp; Communication</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -89,12 +99,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -107,32 +121,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -142,10 +132,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -162,40 +148,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -223,7 +185,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -235,7 +197,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -245,11 +207,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -261,13 +240,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -275,16 +253,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -328,7 +299,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -351,7 +322,7 @@ $(document).ready(function () {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -411,7 +382,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -441,7 +412,7 @@ $(document).ready(function () {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -473,7 +444,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -501,24 +472,41 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
-<h1 class="title toc-ignore">Homework 6 - Data Visualization &amp; Communication</h1>
+<h1 class="title toc-ignore">Homework 6 - Data Visualization &amp;
+Communication</h1>
 
 </div>
 
 
 <p><strong>Due</strong>: Sunday, 01-Dec. at 8pm</p>
-<p><strong>Rules</strong>: This entire assignment is <strong>SOLO</strong>. You may not work with other classmates, though you may consult instructors for help.</p>
-<p><strong>Overview</strong>: For this assignment, you will need to find a dataset of your choosing and create a short report that contains a description of the dataset as well as a few key insights about the data, including at least two summary visualizations. You will publish your report online at <a href="http://rpubs.com/" class="uri">http://rpubs.com/</a>. Before beginning the assignment, be sure to have reviewed the lessons on <a href="L10-da1-data-frames.html">Data Frames</a>, <a href="L11-da2-data-wrangling.html">Data Wrangling</a>, <a href="L12-da3-data-visualization.Rmd">Data Visualization</a> and <a href="L13-da4-communicating-information.Rmd">Communicating Information</a>.</p>
+<p><strong>Rules</strong>: This entire assignment is
+<strong>SOLO</strong>. You may not work with other classmates, though
+you may consult instructors for help.</p>
+<p><strong>Overview</strong>: For this assignment, you will need to find
+a dataset of your choosing and create a short report that contains a
+description of the dataset as well as a few key insights about the data,
+including at least two summary visualizations. You will publish your
+report online at <a href="http://rpubs.com/"
+class="uri">http://rpubs.com/</a>. Before beginning the assignment, be
+sure to have reviewed the lessons on <a
+href="L10-da1-data-frames.html">Data Frames</a>, <a
+href="L11-da2-data-wrangling.html">Data Wrangling</a>, <a
+href="L12-da3-data-visualization.Rmd">Data Visualization</a> and <a
+href="L13-da4-communicating-information.Rmd">Communicating
+Information</a>.</p>
 <hr />
 <div id="mini-data-analysis-project" class="section level1">
 <h1>Mini data analysis project</h1>
 <div id="choose-a-dataset-5-pts" class="section level3">
 <h3>1) Choose a dataset [5 pts]</h3>
-<p>You will need to select a dataset for your project. To keep things manageable, you must choose one of the following datasets from the following libraries. <strong>Note that to load any of these data frames, all you need to do is load the library</strong>:</p>
+<p>You will need to select a dataset for your project. To keep things
+manageable, you must choose one of the following datasets from the
+following libraries. <strong>Note that to load any of these data frames,
+all you need to do is load the library</strong>:</p>
 <p><strong>dplyr</strong>:</p>
 <ul>
 <li><code>storms</code></li>
@@ -533,7 +521,8 @@ $(document).ready(function () {
 <li><code>msleep</code></li>
 <li><code>txhousing</code></li>
 </ul>
-<p><a href="https://github.com/rafalab/dslabs"><strong>dslabs</strong></a>:</p>
+<p><a
+href="https://github.com/rafalab/dslabs"><strong>dslabs</strong></a>:</p>
 <ul>
 <li><code>brexit_polls</code></li>
 <li><code>gapminder</code></li>
@@ -555,60 +544,124 @@ $(document).ready(function () {
 </div>
 <div id="setup-your-analysis-environment-10-pts" class="section level3">
 <h3>2) Setup your analysis environment [10 pts]</h3>
-<p>Once you’ve chosen a dataset, start setting up your analysis environment by following these steps:</p>
+<p>Once you’ve chosen a dataset, start setting up your analysis
+environment by following these steps:</p>
 <ol style="list-style-type: decimal">
-<li>Open RStudio and create a new project called “hw6-lastName”, replacing “lastName” with your last name.</li>
-<li>Download the <a href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw6.Rmd">hw6.Rmd template script</a> and place it in RStudio project folder you just created.</li>
-<li>In the “yaml header” at the top of this file, fill out your name, and give your project a title. Your title must include the dataset name and the package from which the dataset is sourced. For example, if you are using the <code>admissions</code> dataset in the <code>dslabs</code> package, an example title might be: “Summary of the <code>admissions</code> dataset from the <code>dslabs</code> package”</li>
-<li>Create a <code>.R</code> file and save it in your project folder as <code>explore.R</code> - we’ll use this file to explore your dataset later.</li>
+<li>Open RStudio and create a new project called “hw6-lastName”,
+replacing “lastName” with your last name.</li>
+<li>Download the <a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw6.Rmd">hw6.Rmd
+template script</a> and place it in RStudio project folder you just
+created.</li>
+<li>In the “yaml header” at the top of this file, fill out your name,
+and give your project a title. Your title must include the dataset name
+and the package from which the dataset is sourced. For example, if you
+are using the <code>admissions</code> dataset in the <code>dslabs</code>
+package, an example title might be: “Summary of the
+<code>admissions</code> dataset from the <code>dslabs</code>
+package”</li>
+<li>Create a <code>.R</code> file and save it in your project folder as
+<code>explore.R</code> - we’ll use this file to explore your dataset
+later.</li>
 </ol>
 </div>
 <div id="inspect-your-data-10-pts" class="section level3">
 <h3>3) Inspect your data [10 pts]</h3>
-<p>Now that your environment is set up, open up your <code>explore.R</code> file and begin exploring your dataset. Be sure to load the library that contains the dataset.</p>
-<p>Write some code to preview and summarize the dataset using some of the methods we’ve seen in class and in the lessons on <a href="L10-da1-data-frames.html">data frames</a> and <a href="L11-da2-data-wrangling.html">data wrangling</a>. You should be able to quickly get an understanding of what variables are included in the data frame and their nature. Consider the following questions in your exploration:</p>
+<p>Now that your environment is set up, open up your
+<code>explore.R</code> file and begin exploring your dataset. Be sure to
+load the library that contains the dataset.</p>
+<p>Write some code to preview and summarize the dataset using some of
+the methods we’ve seen in class and in the lessons on <a
+href="L10-da1-data-frames.html">data frames</a> and <a
+href="L11-da2-data-wrangling.html">data wrangling</a>. You should be
+able to quickly get an understanding of what variables are included in
+the data frame and their nature. Consider the following questions in
+your exploration:</p>
 <ul>
 <li>What type of data is each variable?</li>
 <li>What is the total size of the data frame?</li>
-<li>What are the boundaries of each period of observation (e.g. what time period do the observations in the data frame span)?</li>
-<li>Do any variables have missing values, and if so which ones have more NAs than others? Why might that be the case?</li>
+<li>What are the boundaries of each period of observation (e.g. what
+time period do the observations in the data frame span)?</li>
+<li>Do any variables have missing values, and if so which ones have more
+NAs than others? Why might that be the case?</li>
 </ul>
-<p><strong>Do not brush this step off</strong> - the more thoroughly you inspect your dataset, the easier (and better) you data exploration will be. This will be important for step 4, and absolutely critical for step 5. Make sure you take the time to develop an understanding of the variables in your dataset as it is nearly impossible to imagine what summary plots might be worth creating otherwise.</p>
+<p><strong>Do not brush this step off</strong> - the more thoroughly you
+inspect your dataset, the easier (and better) you data exploration will
+be. This will be important for step 4, and absolutely critical for step
+5. Make sure you take the time to develop an understanding of the
+variables in your dataset as it is nearly impossible to imagine what
+summary plots might be worth creating otherwise.</p>
 </div>
-<div id="document-and-summarize-your-dataset-15-pts" class="section level3">
+<div id="document-and-summarize-your-dataset-15-pts"
+class="section level3">
 <h3>4) Document and summarize your dataset [15 pts]</h3>
-<p>Open up your “hw6.Rmd” file and write a paragraph in the section labeled <code># Data description</code> describing of your dataset. Include the following:</p>
+<p>Open up your “hw6.Rmd” file and write a paragraph in the section
+labeled <code># Data description</code> describing of your dataset.
+Include the following:</p>
 <ol style="list-style-type: decimal">
-<li>A brief overview of the subject matter of the dataset. What is this dataset about?</li>
-<li>A description of the data <em>source</em>. Read the package help files to identify as much information as possible about how the data were collected (when, where, by whom, etc.) and whether the data have already been pre-processed or not. If the data come from a published paper, include a citation to that paper.</li>
-<li>A summary table of each variable in the dataset. Each row should be a variable, and the columns should be the variable name and a short description of the variable (the “hw6.Rmd” template already has this table started for you).</li>
+<li>A brief overview of the subject matter of the dataset. What is this
+dataset about?</li>
+<li>A description of the data <em>source</em>. Read the package help
+files to identify as much information as possible about how the data
+were collected (when, where, by whom, etc.) and whether the data have
+already been pre-processed or not. If the data come from a published
+paper, include a citation to that paper.</li>
+<li>A summary table of each variable in the dataset. Each row should be
+a variable, and the columns should be the variable name and a short
+description of the variable (the “hw6.Rmd” template already has this
+table started for you).</li>
 </ol>
 </div>
 <div id="make-plots-30-pts-15-per-plot" class="section level3">
 <h3>5) Make plots [30 pts (15 per plot)]</h3>
-<p>Now that you have a basic understanding of the dataset, make some plots to explore the variables in the data and their potential relationships. You may use base R plotting functions or the <strong>ggplot2</strong> library to make your figures, but you must make at least two figures, including:</p>
+<p>Now that you have a basic understanding of the dataset, make some
+plots to explore the variables in the data and their potential
+relationships. You may use base R plotting functions or the
+<strong>ggplot2</strong> library to make your figures, but you must make
+at least two figures, including:</p>
 <ol style="list-style-type: decimal">
 <li>A scatterplot of involving at least two variables.</li>
 <li>A histogram or barplot involving at least one variable.</li>
 </ol>
-<p>You can choose to plot whichever variables you wish, but you must be able to interpret the results of your plot. I recommend that you first make your plots in your <code>explore.R</code> file to iterate on your code until the plots are in their final form you desire. Then copy the code for your final plots over to the appropriate code chunks in your “hw6.Rmd” file.</p>
+<p>You can choose to plot whichever variables you wish, but you must be
+able to interpret the results of your plot. I recommend that you first
+make your plots in your <code>explore.R</code> file to iterate on your
+code until the plots are in their final form you desire. Then copy the
+code for your final plots over to the appropriate code chunks in your
+“hw6.Rmd” file.</p>
 </div>
 <div id="interpret-your-plots-15-pts" class="section level3">
 <h3>6) Interpret your plots [15 pts]</h3>
-<p>Below each figure, write a description and interpretation of your plot. Make sure you address at least the following questions:</p>
+<p>Below each figure, write a description and interpretation of your
+plot. Make sure you address at least the following questions:</p>
 <ol style="list-style-type: decimal">
 <li>Describe what variables you are plotting and why.</li>
-<li>Describe the primary relationship / trend / information you hope the reader will gain from your visualization.</li>
+<li>Describe the primary relationship / trend / information you hope the
+reader will gain from your visualization.</li>
 </ol>
 </div>
 <div id="publish-your-writeup-10-pts" class="section level3">
 <h3>7) Publish your writeup [10 pts]</h3>
-<p>Once you have completed your analysis, compile the “hw6.Rmd” file by opening it in RStudio and clicking the “knit” button. In the upper-right of the window that opens showing your compiled hw6.html file, click on the “Publish” button and publish your file to <a href="http://rpubs.com/" class="uri">http://rpubs.com/</a>. You should create an account with rpubs if you have not already. Once published, you can update it by making edits to your “hw6.Rmd” file, clicking the “knit” button again, and then clicking the “Republish” button in the upper-right of the RStudio preview window.</p>
-<p>For a visual overview of the publishing process, refer to the instructions in the <a href="https://emse6574-gwu.github.io/2019-Fall/L13-da4-communicating-information.html#34_publish_to_the_web">youtube video</a> in the lesson on Communicating Information.</p>
+<p>Once you have completed your analysis, compile the “hw6.Rmd” file by
+opening it in RStudio and clicking the “knit” button. In the upper-right
+of the window that opens showing your compiled hw6.html file, click on
+the “Publish” button and publish your file to <a
+href="http://rpubs.com/" class="uri">http://rpubs.com/</a>. You should
+create an account with rpubs if you have not already. Once published,
+you can update it by making edits to your “hw6.Rmd” file, clicking the
+“knit” button again, and then clicking the “Republish” button in the
+upper-right of the RStudio preview window.</p>
+<p>For a visual overview of the publishing process, refer to the
+instructions in the <a
+href="https://emse6574-gwu.github.io/2019-Fall/L13-da4-communicating-information.html#34_publish_to_the_web">youtube
+video</a> in the lesson on Communicating Information.</p>
 </div>
 <div id="submit-your-files-on-blackboard-5-pts" class="section level3">
 <h3>8) Submit your files on Blackboard [5 pts]</h3>
-<p>After publishing your “hw6.Rmd” file, create a zip file of all files in your R project folder for this assignment and submit the zip file on Blackboard by the due deadline. <strong>Include a link to your published report on rpubs in your Blackboard submission</strong></p>
+<p>After publishing your “hw6.Rmd” file, create a zip file of all files
+in your R project folder for this assignment and submit the zip file on
+Blackboard by the due deadline. <strong>Include a link to your published
+report on rpubs in your Blackboard submission</strong></p>
 </div>
 </div>
 
@@ -651,7 +704,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -669,7 +722,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

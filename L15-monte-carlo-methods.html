@@ -13,20 +13,30 @@
 
 <title>Monte Carlo Methods</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,7 +554,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -598,41 +569,74 @@ div.tocify {
 <p><img src="images/monte_carlo_f1.gif" width="300" /></p>
 <p>But when I hear Monte Carlo, I envision this:</p>
 <p><img src="images/monte_carlo_pi.gif" width="300" /></p>
-<p>No, that’s not some grainy image coming into focus - that’s a <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo simulation</a> approximating the value of <span class="math inline">\(\pi\)</span> (3.1415927…).</p>
+<p>No, that’s not some grainy image coming into focus - that’s a <a
+href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo
+simulation</a> approximating the value of <span
+class="math inline">\(\pi\)</span> (3.1415927…).</p>
 <hr />
-<div id="what-is-monte-carlo-simulation" class="section level1">
-<h1><span class="header-section-number">1</span> What is Monte Carlo simulation?</h1>
-<div id="basic-idea" class="section level2">
+<div id="what-is-monte-carlo-simulation" class="section level1"
+number="1">
+<h1><span class="header-section-number">1</span> What is Monte Carlo
+simulation?</h1>
+<div id="basic-idea" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Basic idea</h2>
-<p>Monte Carlo simulation uses (pseudo)random numbers to solve (not-so-random) problems. The general approach goes like this:</p>
+<p>Monte Carlo simulation uses (pseudo)random numbers to solve
+(not-so-random) problems. The general approach goes like this:</p>
 <ul>
 <li>Run a series of trials.</li>
-<li>In each trial, simulate an event (e.g. a coin toss, a dice roll, etc.).</li>
+<li>In each trial, simulate an event (e.g. a coin toss, a dice roll,
+etc.).</li>
 <li>Count the number of successful trials.</li>
-<li>Guess that the Expected Odds <span class="math inline">\(\simeq\)</span> Observed Odds = <span class="math inline">\(\frac{\text{# Successful Trials}}{\text{# Total Trials}}\)</span></li>
+<li>Guess that the Expected Odds <span
+class="math inline">\(\simeq\)</span> Observed Odds = <span
+class="math inline">\(\frac{\text{# Successful Trials}}{\text{# Total
+Trials}}\)</span></li>
 </ul>
-<p>For many applications, Monte Carlo simulations result in a sufficiently accurate result with a reasonable amount of trials (~ 100,000). You can always improve your accuracy with more trials, but that comes at the expense of increased run time. To summarize:</p>
+<p>For many applications, Monte Carlo simulations result in a
+sufficiently accurate result with a reasonable amount of trials (~
+100,000). You can always improve your accuracy with more trials, but
+that comes at the expense of increased run time. To summarize:</p>
 <ol style="list-style-type: decimal">
 <li>As # of trials increases, observed odds –&gt; expected odds.</li>
 <li>More trials –&gt; more accurate (+ more time).</li>
 </ol>
 </div>
-<div id="why-the-name-monte-carlo" class="section level2">
-<h2><span class="header-section-number">1.2</span> Why the name “Monte Carlo”?</h2>
-<p>The name “Monte Carlo” comes from the (pseudo)random nature of the simulation process. Running a series of trials is similar to how many gambling games work in casinos, and <a href="https://en.wikipedia.org/wiki/Monte_Carlo">Monte Carlo</a> is famous for gambling. Of course, in the casinos the odds are always slightly in the favor of the house, so after millions of trials the odds are that the house will win more money than the gamblers.</p>
+<div id="why-the-name-monte-carlo" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Why the name “Monte
+Carlo”?</h2>
+<p>The name “Monte Carlo” comes from the (pseudo)random nature of the
+simulation process. Running a series of trials is similar to how many
+gambling games work in casinos, and <a
+href="https://en.wikipedia.org/wiki/Monte_Carlo">Monte Carlo</a> is
+famous for gambling. Of course, in the casinos the odds are always
+slightly in the favor of the house, so after millions of trials the odds
+are that the house will win more money than the gamblers.</p>
 </div>
-<div id="why-even-do-this" class="section level2">
-<h2><span class="header-section-number">1.3</span> Why even do this?</h2>
-<p>Many problems have “closed-form” solutions, meaning they can be solved with math alone. But there are also many problems for which no known closed-form solution exists. Integration is a classic example - there are many integrals for which a purely mathematical solution cannot be determined. However, solutions can be <em>approximated</em> using simulation.</p>
-<p>R comes with many tools for running (pseudo)random simulations, which is one reason R is such a popular programming language for people who build and work with statistical models that involve simulations.</p>
+<div id="why-even-do-this" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Why even do
+this?</h2>
+<p>Many problems have “closed-form” solutions, meaning they can be
+solved with math alone. But there are also many problems for which no
+known closed-form solution exists. Integration is a classic example -
+there are many integrals for which a purely mathematical solution cannot
+be determined. However, solutions can be <em>approximated</em> using
+simulation.</p>
+<p>R comes with many tools for running (pseudo)random simulations, which
+is one reason R is such a popular programming language for people who
+build and work with statistical models that involve simulations.</p>
 <hr />
 </div>
 </div>
-<div id="monte-carlo-integration" class="section level1">
-<h1><span class="header-section-number">2</span> Monte Carlo integration</h1>
-<p>Integration is ultimately about computing the area below the curve of a function. Let’s take a simple example - suppose we want to find the integral from 3 to 7 of the following function:</p>
+<div id="monte-carlo-integration" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Monte Carlo
+integration</h1>
+<p>Integration is ultimately about computing the area below the curve of
+a function. Let’s take a simple example - suppose we want to find the
+integral from 3 to 7 of the following function:</p>
 <p><span class="math display">\[f(x) = x^2\]</span></p>
-<p>That is, we want to compute the area under the curve of <span class="math inline">\(x^2\)</span> between <span class="math inline">\(3 &lt; x &lt; 7\)</span>. Here’s what that looks like:</p>
+<p>That is, we want to compute the area under the curve of <span
+class="math inline">\(x^2\)</span> between <span class="math inline">\(3
+&lt; x &lt; 7\)</span>. Here’s what that looks like:</p>
 <!-- ```{r} -->
 <!-- x1 <- seq(1, 10, by = 0.1) -->
 <!-- y1 <- x1^2 -->
@@ -642,16 +646,33 @@ div.tocify {
 <!-- polygon(c(x2, rev(x2)), c(0*y2, rev(y2)), col='#E64D334D', border=NA) -->
 <!-- ``` -->
 <p><img src="L15-monte-carlo-methods_files/figure-html/unnamed-chunk-1-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>One way to estimate the shaded area is to draw a bunch of random points inside a rectangle in the x-y plane that contains the shaded area and then count how many fall below the function line. So we’re going to randomly draw points inside this box:</p>
+<p>One way to estimate the shaded area is to draw a bunch of random
+points inside a rectangle in the x-y plane that contains the shaded area
+and then count how many fall below the function line. So we’re going to
+randomly draw points inside this box:</p>
 <p><img src="L15-monte-carlo-methods_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Let’s simulate some random points inside the box:</p>
 <pre class="r"><code>numTrials &lt;- 100000
 # The function runif() samples from a &quot;uniform&quot; distribution
 x &lt;- runif(numTrials, min = 3, max = 7) # Values of x between 3 and 7
 y &lt;- runif(numTrials, min = 0, max = 7^2) # Values of y between 0 and 7^2</code></pre>
-<p>Now that we have our points, we can use them to estimate the area under the curve. The logic here is that the ratio of points below the curve to the total number of points will be equal to the ratio of the area under <span class="math inline">\(f(x)\)</span> to the total area of the rectangle. That is:</p>
-<p><span class="math display">\[\frac{\text{# Points Under Curve}}{\text{# Total Points}} = \frac{\text{Area Under Curve}}{\text{Area of Rectangle}}\]</span></p>
-<p>So, to get the area under the curve, we need to compute the area of the rectangle and multiply it by <span class="math inline">\((\text{# Points Under Curve}) / (\text{# Total Points})\)</span>. We know the total area of the rectangle is its length (<span class="math inline">\((7 - 3) = 4\)</span>) times its height (<span class="math inline">\(7^2\)</span>), which is <span class="math inline">\(4 * 49 = 196\)</span>. So the area under the curve should be 196 times the ratio of points under the curve to the total number of points. Let’s write the code!</p>
+<p>Now that we have our points, we can use them to estimate the area
+under the curve. The logic here is that the ratio of points below the
+curve to the total number of points will be equal to the ratio of the
+area under <span class="math inline">\(f(x)\)</span> to the total area
+of the rectangle. That is:</p>
+<p><span class="math display">\[\frac{\text{# Points Under
+Curve}}{\text{# Total Points}} = \frac{\text{Area Under
+Curve}}{\text{Area of Rectangle}}\]</span></p>
+<p>So, to get the area under the curve, we need to compute the area of
+the rectangle and multiply it by <span class="math inline">\((\text{#
+Points Under Curve}) / (\text{# Total Points})\)</span>. We know the
+total area of the rectangle is its length (<span
+class="math inline">\((7 - 3) = 4\)</span>) times its height (<span
+class="math inline">\(7^2\)</span>), which is <span
+class="math inline">\(4 * 49 = 196\)</span>. So the area under the curve
+should be 196 times the ratio of points under the curve to the total
+number of points. Let’s write the code!</p>
 <pre class="r"><code># Determine which y points are less than or equal to x^2:
 belowCurve &lt;- y &lt;= x^2 # This will create a vector of TRUE and FALSE values
 # Compute the ratio of points below the curve:
@@ -660,19 +681,31 @@ totalArea &lt;- (7 - 3) * 7^2 # Rectangle length x height = 196
 areaUnderCurve &lt;- ratio * totalArea
 areaUnderCurve</code></pre>
 <pre><code>## [1] 105.6048</code></pre>
-<p>So, using Monte Carlo simulation with 100,000 points, we estimate that the area under the curve is 105.6048. How’d we do? Well, if you’re familiar with calculus, the integral of <span class="math inline">\(f(x) = x^2\)</span> has a closed-form solution (<span class="math inline">\(\frac{x^3}{3} + C\)</span>), so we can check our estimate against the pure-math solution:</p>
-<p><span class="math display">\[\int_{3}^{7} x^2 \mathrm{dx} = \left ( \frac{x^3}{3} \right ) \Big|_3^7 = \frac{7^3}{3} - \frac{3^3}{3} = 105.33\bar{3}\]</span></p>
-<p>So our estimate error is: <code>105.333 -</code> <code>105.6048</code> <code>=</code> <code>-0.2714667</code>.</p>
+<p>So, using Monte Carlo simulation with 100,000 points, we estimate
+that the area under the curve is 105.6048. How’d we do? Well, if you’re
+familiar with calculus, the integral of <span class="math inline">\(f(x)
+= x^2\)</span> has a closed-form solution (<span
+class="math inline">\(\frac{x^3}{3} + C\)</span>), so we can check our
+estimate against the pure-math solution:</p>
+<p><span class="math display">\[\int_{3}^{7} x^2 \mathrm{dx} = \left (
+\frac{x^3}{3} \right ) \Big|_3^7 = \frac{7^3}{3} - \frac{3^3}{3} =
+105.33\bar{3}\]</span></p>
+<p>So our estimate error is: <code>105.333 -</code>
+<code>105.6048</code> <code>=</code> <code>-0.2714667</code>.</p>
 <p>That’s an error of just 0.26 % - not bad!</p>
 <hr />
 </div>
-<div id="monte-carlo-pi" class="section level1">
-<h1><span class="header-section-number">3</span> Monte Carlo <span class="math inline">\(\pi\)</span></h1>
-<p>Now let’s look at something a bit trickier - approximating <span class="math inline">\(\pi\)</span>!</p>
-<p>Watch this quick video to see a summary of how this works (…I hope you like lounge music)</p>
+<div id="monte-carlo-pi" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Monte Carlo <span
+class="math inline">\(\pi\)</span></h1>
+<p>Now let’s look at something a bit trickier - approximating <span
+class="math inline">\(\pi\)</span>!</p>
+<p>Watch this quick video to see a summary of how this works (…I hope
+you like lounge music)</p>
 <iframe width="640" height="400" src="https://www.youtube.com/embed/ELetCV_wX_c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
-<p>Now let’s approximate <span class="math inline">\(\pi\)</span> ourselves! Let’s start with some basic geometry.</p>
+<p>Now let’s approximate <span class="math inline">\(\pi\)</span>
+ourselves! Let’s start with some basic geometry.</p>
 <p>The area of a circle is:</p>
 <blockquote>
 <p><span class="math inline">\(A_{circle} = \pi r^2\)</span></p>
@@ -681,13 +714,25 @@ areaUnderCurve</code></pre>
 <blockquote>
 <p><span class="math inline">\(A_{square} = 4r^2\)</span></p>
 </blockquote>
-<p>This is because each side of the square is simply <span class="math inline">\(2r\)</span>, as can be seen in this image:</p>
+<p>This is because each side of the square is simply <span
+class="math inline">\(2r\)</span>, as can be seen in this image:</p>
 <p><img src="images/pi.png" /></p>
-<p>Knowing these two equations for the areas of a circle and square, we can compute <span class="math inline">\(\pi\)</span> by taking the ratio, <span class="math inline">\(R\)</span>, of the area of a circle to that of a square containing that circle:</p>
-<p><span class="math inline">\(R = \dfrac{\pi r^2}{4r^2} = \dfrac{\pi}{4}\)</span></p>
-<p>So to compute <span class="math inline">\(\pi\)</span>, all we need to do is multiply 4 times the ratio of the area of the circle to that of the square. Just like with integration, we can approximate that ratio by simulating lots of points in the square and then simply counting the number that fall inside the circle.</p>
+<p>Knowing these two equations for the areas of a circle and square, we
+can compute <span class="math inline">\(\pi\)</span> by taking the
+ratio, <span class="math inline">\(R\)</span>, of the area of a circle
+to that of a square containing that circle:</p>
+<p><span class="math inline">\(R = \dfrac{\pi r^2}{4r^2} =
+\dfrac{\pi}{4}\)</span></p>
+<p>So to compute <span class="math inline">\(\pi\)</span>, all we need
+to do is multiply 4 times the ratio of the area of the circle to that of
+the square. Just like with integration, we can approximate that ratio by
+simulating lots of points in the square and then simply counting the
+number that fall inside the circle.</p>
 <p><strong>Let’s write the code!</strong></p>
-<p>First, generate lots of random points in a square. For this example, we’ll use a square with side length of 1 centered at <code>(x, y) = (0, 0)</code>, so we need to draw random points between <code>x = (-0.5, 0.5)</code> and <code>y = (-0.5, 0.5)</code>:</p>
+<p>First, generate lots of random points in a square. For this example,
+we’ll use a square with side length of 1 centered at
+<code>(x, y) = (0, 0)</code>, so we need to draw random points between
+<code>x = (-0.5, 0.5)</code> and <code>y = (-0.5, 0.5)</code>:</p>
 <pre class="r"><code>numTrials &lt;- 1000
 points &lt;- data.frame(
     x = runif(numTrials, -0.5, 0.5),
@@ -700,26 +745,36 @@ head(points)</code></pre>
 ## 4  0.448293833 -0.44086915
 ## 5 -0.465159468 -0.44701151
 ## 6 -0.292743448 -0.12471248</code></pre>
-<p>For this example, we’re putting the points in a data frame to make it easier to work with. Now that we have random x and y points, let’s compute the radius to each point (the distance from <code>(x, y) = (0, 0)</code>) so we can determine which points fall inside the circle (which has a radius of 0.5):</p>
+<p>For this example, we’re putting the points in a data frame to make it
+easier to work with. Now that we have random x and y points, let’s
+compute the radius to each point (the distance from
+<code>(x, y) = (0, 0)</code>) so we can determine which points fall
+inside the circle (which has a radius of 0.5):</p>
 <pre class="r"><code>library(dplyr)
 points &lt;- points %&gt;%
     mutate(
         radius = sqrt(x^2 + y^2),
         pointInCircle = ifelse(radius &lt;= 0.5, TRUE, FALSE))</code></pre>
-<p>Just to make sure we correctly labeled the points, let’s plot them, coloring them based on the <code>pointInCircle</code> variable we just created:</p>
+<p>Just to make sure we correctly labeled the points, let’s plot them,
+coloring them based on the <code>pointInCircle</code> variable we just
+created:</p>
 <pre class="r"><code>library(ggplot2)
 ggplot(points) +
     geom_point(aes(x = x, y = y, color = pointInCircle), size = 0.7) +
     theme_minimal()</code></pre>
 <p><img src="L15-monte-carlo-methods_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>Looks like we correctly labeled the points! Now we have everything we need to estimate <span class="math inline">\(\pi\)</span>!</p>
+<p>Looks like we correctly labeled the points! Now we have everything we
+need to estimate <span class="math inline">\(\pi\)</span>!</p>
 <pre class="r"><code>ratio &lt;- sum(points$pointInCircle) / nrow(points)
 piApprox &lt;- 4 * ratio
 piApprox</code></pre>
 <pre><code>## [1] 3.112</code></pre>
-<p>So our estimate error is: <code>3.1415 -</code> <code>3.112</code> <code>=</code> <code>-0.0295927</code>.</p>
+<p>So our estimate error is: <code>3.1415 -</code> <code>3.112</code>
+<code>=</code> <code>-0.0295927</code>.</p>
 <p>That’s an error of just 0.94 % - not bad for only 1,000 points!</p>
-<p>To get an even better estimate of <span class="math inline">\(\pi\)</span>, we can increase N. Let’s see what we get with 100,000 trials:</p>
+<p>To get an even better estimate of <span
+class="math inline">\(\pi\)</span>, we can increase N. Let’s see what we
+get with 100,000 trials:</p>
 <pre class="r"><code>numTrials &lt;- 100000
 points &lt;- data.frame(
     x = runif(numTrials, -0.5, 0.5),
@@ -736,12 +791,17 @@ error &lt;- piApprox - pi
 percentError &lt;- round(100*abs(error / pi), 2)
 percentError</code></pre>
 <pre><code>## [1] 0.03</code></pre>
-<p>By increasing the number of trials from 1,000 to 100,000, we improved our estimate error from 0.94 % to 0.03 %!</p>
+<p>By increasing the number of trials from 1,000 to 100,000, we improved
+our estimate error from 0.94 % to 0.03 %!</p>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112: Fundamentals of Programming</a>, by <a href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
+<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112:
+Fundamentals of Programming</a>, by <a
+href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a
+href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
 </ul>
 </div>
 
@@ -786,7 +846,7 @@ percentError</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -804,7 +864,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -813,6 +873,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -825,7 +888,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

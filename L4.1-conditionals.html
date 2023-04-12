@@ -13,20 +13,30 @@
 
 <title>Conditionals</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,7 +554,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -595,30 +566,42 @@ div.tocify {
 <blockquote>
 <h3 id="learning-objectives">Learning Objectives</h3>
 <ul>
-<li>Understand how to use <code>if</code> and <code>else</code> statements to handle conditional programming.</li>
+<li>Understand how to use <code>if</code> and <code>else</code>
+statements to handle conditional programming.</li>
 </ul>
 <h3 id="suggested-readings">Suggested Readings</h3>
 <ul>
-<li><a href="https://rstudio-education.github.io/hopr/programs.html#if-statements">Chapters 9.2 - 9.3</a> of “Hands-On Programming with R”, by Garrett Grolemund</li>
+<li><a
+href="https://rstudio-education.github.io/hopr/programs.html#if-statements">Chapters
+9.2 - 9.3</a> of “Hands-On Programming with R”, by Garrett
+Grolemund</li>
 </ul>
 </blockquote>
 <hr />
-<p>Like most programming languages, R can evaluate <strong>conditional statements</strong>. A conditional statement is a switch - it tells the code which command to execute depending on a <em>condition</em> that is specified by the programmer.</p>
-<p>The most prominent examples of a conditional statement is the <code>if</code> statement, and the accompanying <code>else</code> statement.</p>
+<p>Like most programming languages, R can evaluate <strong>conditional
+statements</strong>. A conditional statement is a switch - it tells the
+code which command to execute depending on a <em>condition</em> that is
+specified by the programmer.</p>
+<p>The most prominent examples of a conditional statement is the
+<code>if</code> statement, and the accompanying <code>else</code>
+statement.</p>
 <hr />
-<div id="if" class="section level1">
+<div id="if" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> if</h1>
-<p>The basic format of an <code>if</code> statement in R is as follows:</p>
+<p>The basic format of an <code>if</code> statement in R is as
+follows:</p>
 <pre><code>if ( CONDITION ) {
     STATEMENT1
     STATEMENT2
     ETC
 }</code></pre>
-<p>If the condition is <code>TRUE</code>, then R will execute the statements contained in the curly braces, otherwise it will skip it. This schematic illustrates the idea:</p>
+<p>If the condition is <code>TRUE</code>, then R will execute the
+statements contained in the curly braces, otherwise it will skip it.
+This schematic illustrates the idea:</p>
 <center>
 <img src="images/condition_if.png" width="400" />
 </center>
-<div id="example-1" class="section level2">
+<div id="example-1" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Example 1</h2>
 <pre class="r"><code>f &lt;- function(x) {
     cat(&quot;A&quot;)
@@ -633,9 +616,10 @@ div.tocify {
 <pre class="r"><code>f(1)</code></pre>
 <pre><code>## AD</code></pre>
 </div>
-<div id="example-2" class="section level2">
+<div id="example-2" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Example 2</h2>
-<p>Consider a simple absolute value function. Since <code>abs()</code> is a built-in function, we’ll call ours <code>absValue()</code>:</p>
+<p>Consider a simple absolute value function. Since <code>abs()</code>
+is a built-in function, we’ll call ours <code>absValue()</code>:</p>
 <pre class="r"><code>absValue &lt;- function(x) {
     if (x &lt; 0) {
         x = -1*x
@@ -648,9 +632,11 @@ div.tocify {
 <pre><code>## [1] 7</code></pre>
 </div>
 </div>
-<div id="if-else" class="section level1">
+<div id="if-else" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> if else</h1>
-<p>You can extend the <code>if</code> statement to include an <code>else</code> statement as well, leading to the following syntax:</p>
+<p>You can extend the <code>if</code> statement to include an
+<code>else</code> statement as well, leading to the following
+syntax:</p>
 <pre><code>if ( CONDITION ) {
   STATEMENT1
   STATEMENT2
@@ -660,11 +646,15 @@ div.tocify {
   STATEMENT4
   ETC
 }</code></pre>
-<p>The interpretation of this version is similar. If the condition is <code>TRUE</code>, then the contents of the first block of code are executed; but if it is <code>FALSE</code>, then the contents of the second block of code are executed instead. The schematic illustration of an if-else construction looks like this:</p>
+<p>The interpretation of this version is similar. If the condition is
+<code>TRUE</code>, then the contents of the first block of code are
+executed; but if it is <code>FALSE</code>, then the contents of the
+second block of code are executed instead. The schematic illustration of
+an if-else construction looks like this:</p>
 <center>
 <img src="images/condition_if_else.png" width="500" />
 </center>
-<div id="example" class="section level2">
+<div id="example" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Example</h2>
 <pre class="r"><code>f &lt;- function(x) {
     cat(&quot;A&quot;)
@@ -690,9 +680,13 @@ div.tocify {
 <pre><code>## ADFG</code></pre>
 </div>
 </div>
-<div id="else-if" class="section level1">
+<div id="else-if" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> else if</h1>
-<p>You can also chain multiple <code>else if</code> statements together for a more complex conditional statement. For example, if you’re trying to assign letter grades to a numeric test score, you can use a series of <code>else if</code> statements to search for the bracket the score lies in:</p>
+<p>You can also chain multiple <code>else if</code> statements together
+for a more complex conditional statement. For example, if you’re trying
+to assign letter grades to a numeric test score, you can use a series of
+<code>else if</code> statements to search for the bracket the score lies
+in:</p>
 <pre class="r"><code>getLetterGrade &lt;- function(score) {
     if (score &gt;= 90) {
         grade = &quot;A&quot;
@@ -719,10 +713,16 @@ div.tocify {
 <pre><code>##  22 --&gt; F</code></pre>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/notes/notes-conditionals.html">15-112: Fundamentals of Programming</a>, by <a href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
-<li>Danielle Navarro’s website <a href="https://psyr.org/index.html">“R for Psychological Science”</a></li>
+<li>CMU <a
+href="http://www.kosbie.net/cmu/spring-17/15-112/notes/notes-conditionals.html">15-112:
+Fundamentals of Programming</a>, by <a
+href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a
+href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
+<li>Danielle Navarro’s website <a href="https://psyr.org/index.html">“R
+for Psychological Science”</a></li>
 </ul>
 </div>
 
@@ -767,7 +767,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -785,7 +785,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -794,6 +794,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -806,7 +809,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

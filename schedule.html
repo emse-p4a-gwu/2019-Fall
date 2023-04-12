@@ -13,17 +13,27 @@
 
 <title>Course Schedule</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -89,12 +99,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -107,32 +121,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -142,10 +132,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -162,40 +148,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -223,7 +185,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -235,7 +197,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -245,11 +207,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -261,13 +240,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -275,16 +253,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -328,7 +299,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -351,7 +322,7 @@ $(document).ready(function () {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -411,7 +382,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -441,7 +412,7 @@ $(document).ready(function () {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -473,7 +444,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -501,7 +472,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -513,12 +484,12 @@ $(document).ready(function () {
 <p>Here’s your roadmap for the semester!</p>
 <table>
 <colgroup>
-<col width="0%" />
-<col width="0%" />
-<col width="24%" />
-<col width="45%" />
+<col width="3%" />
+<col width="3%" />
+<col width="36%" />
+<col width="20%" />
+<col width="17%" />
 <col width="18%" />
-<col width="9%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -534,48 +505,79 @@ $(document).ready(function () {
 <tr class="odd">
 <td align="right">1</td>
 <td align="left">08/26</td>
-<td align="left"><a href="L1.1-course-introduction.html">Course Introduction</a><br><a href="L1.2-getting-started.html">Getting Started</a><br><a href="L2-programming-basics.html">Programming Basics</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/1-basics/slides-1-basics.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/1-basics/notes-1-basics.R">notes (.R)</a></td>
+<td align="left"><a href="L1.1-course-introduction.html">Course
+Introduction</a><br><a href="L1.2-getting-started.html">Getting
+Started</a><br><a href="L2-programming-basics.html">Programming
+Basics</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/1-basics/slides-1-basics.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/1-basics/notes-1-basics.R">notes
+(.R)</a></td>
 <td align="left"><a href="P1-getting-started.html">Practice 1</a></td>
-<td align="left"><a href="hw1-programming-basics.html">HW 1</a><br>(Due 08-Sept. at 8pm)</td>
+<td align="left"><a href="hw1-programming-basics.html">HW 1</a><br>(Due
+08-Sept. at 8pm)</td>
 </tr>
 <tr class="even">
 <td align="right">2</td>
 <td align="left">09/02</td>
-<td align="left">Labor Day: <strong>No Class</strong><br>Review <a href="L2-programming-basics.html">Programming Basics</a></td>
+<td align="left">Labor Day: <strong>No Class</strong><br>Review <a
+href="L2-programming-basics.html">Programming Basics</a></td>
 <td align="left"></td>
-<td align="left"><a href="P2-programming-basics.html">Practice 2</a></td>
+<td align="left"><a href="P2-programming-basics.html">Practice
+2</a></td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
 <td align="left">09/09</td>
 <td align="left"><a href="L3-functions.html">Functions</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/3-functions/slides-3-functions.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/3-functions/notes-3-functions.R">notes (.R)</a></td>
-<td align="left">Quiz 1<br><a href="P3-functions.html">Practice 3</a></td>
-<td align="left"><a href="hw2-functions.html">HW 2</a><br>(Due 22-Sept. at 8pm)</td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/3-functions/slides-3-functions.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/3-functions/notes-3-functions.R">notes
+(.R)</a></td>
+<td align="left">Quiz 1<br><a href="P3-functions.html">Practice
+3</a></td>
+<td align="left"><a href="hw2-functions.html">HW 2</a><br>(Due
+22-Sept. at 8pm)</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
 <td align="left">09/16</td>
-<td align="left"><a href="L4.1-conditionals.html">Conditionals</a><br><a href="L4.2-testing-debugging.html">Testing &amp; Debugging</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/4-conditionals-testing/slides-4-conditionals-testing.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/4-conditionals-testing/notes-4-conditionals-testing.R">notes (.R)</a></td>
-<td align="left"><a href="P4-conditionals-testing.html">Practice 4</a></td>
+<td align="left"><a href="L4.1-conditionals.html">Conditionals</a><br><a
+href="L4.2-testing-debugging.html">Testing &amp; Debugging</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/4-conditionals-testing/slides-4-conditionals-testing.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/4-conditionals-testing/notes-4-conditionals-testing.R">notes
+(.R)</a></td>
+<td align="left"><a href="P4-conditionals-testing.html">Practice
+4</a></td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
 <td align="left">09/23</td>
 <td align="left"><a href="L5-loops.html">Loops</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/5-loops/slides-5-loops.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/5-loops/notes-5-loops.R">notes (.R)</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/5-loops/slides-5-loops.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/5-loops/notes-5-loops.R">notes
+(.R)</a></td>
 <td align="left">Quiz 2<br><a href="P5-loops.html">Practice 5</a></td>
-<td align="left"><a href="hw3-loops-vectors.html">HW 3</a><br>(Due 06-Oct. at 8pm)</td>
+<td align="left"><a href="hw3-loops-vectors.html">HW 3</a><br>(Due
+06-Oct. at 8pm)</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
 <td align="left">09/30</td>
 <td align="left"><a href="L6-vectors.html">Vectors</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/6-vectors/slides-6-vectors.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/6-vectors/notes-6-vectors.R">notes (.R)</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/6-vectors/slides-6-vectors.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/6-vectors/notes-6-vectors.R">notes
+(.R)</a></td>
 <td align="left"><a href="P6-vectors.html">Practice 6</a></td>
 <td align="left"></td>
 </tr>
@@ -583,15 +585,22 @@ $(document).ready(function () {
 <td align="right">7</td>
 <td align="left">10/07</td>
 <td align="left"><a href="L7-strings.html">Strings</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/7-strings/slides-7-strings.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/7-strings/notes-7-strings.R">notes (.R)</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/7-strings/slides-7-strings.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/7-strings/notes-7-strings.R">notes
+(.R)</a></td>
 <td align="left">Quiz 3<br><a href="P7-strings.html">Practice 7</a></td>
-<td align="left"><a href="hw4-strings.html">HW 4</a><br>(Due 27-Oct. at 8pm)</td>
+<td align="left"><a href="hw4-strings.html">HW 4</a><br>(Due 27-Oct. at
+8pm)</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
 <td align="left">10/14</td>
 <td align="left"><em>Exam 1</em> : Covers weeks 1 - 6</td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/exam1review/exam1review.pdf">slides (.pdf)</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/exam1review/exam1review.pdf">slides
+(.pdf)</a></td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
@@ -606,33 +615,59 @@ $(document).ready(function () {
 <tr class="even">
 <td align="right">10</td>
 <td align="left">10/28</td>
-<td align="left"><a href="L10-da1-data-frames.html">Data Analysis 1 - Data Frames</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/10-dataframes/slides-10-dataframes.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/10-dataframes/week10notes/week10notes.R">notes (.R)</a></td>
-<td align="left">Quiz 4<br><a href="P8-data-frames.html">Practice 8</a></td>
-<td align="left"><a href="hw5-data-wrangling.html">HW 5</a><br>(Due 10-Nov. at 8pm)</td>
+<td align="left"><a href="L10-da1-data-frames.html">Data Analysis 1 -
+Data Frames</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/10-dataframes/slides-10-dataframes.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/10-dataframes/week10notes/week10notes.R">notes
+(.R)</a></td>
+<td align="left">Quiz 4<br><a href="P8-data-frames.html">Practice
+8</a></td>
+<td align="left"><a href="hw5-data-wrangling.html">HW 5</a><br>(Due
+10-Nov. at 8pm)</td>
 </tr>
 <tr class="odd">
 <td align="right">11</td>
 <td align="left">11/04</td>
-<td align="left"><a href="L11-da2-data-wrangling.html">Data Analysis 2 - Data Wrangling</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/11-data-wrangling/slides-11-data-wrangling.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/11-data-wrangling/week11notes/week11notes.R">notes (.R)</a></td>
+<td align="left"><a href="L11-da2-data-wrangling.html">Data Analysis 2 -
+Data Wrangling</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/11-data-wrangling/slides-11-data-wrangling.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/11-data-wrangling/week11notes/week11notes.R">notes
+(.R)</a></td>
 <td align="left"><a href="P9-data-wrangling.html">Practice 9</a></td>
 <td align="left"></td>
 </tr>
 <tr class="even">
 <td align="right">12</td>
 <td align="left">11/11</td>
-<td align="left"><a href="L12-da3-data-visualization.html">Data Analysis 3 - Data Visualization</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/12-data-visualization/slides-12-data-visualization.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/12-data-visualization/week12notes/week12notes.R">notes (.R)</a></td>
-<td align="left"><a href="P10-data-visualization.html">Practice 10</a></td>
-<td align="left"><a href="hw6-data-visualization.html">HW 6</a><br>(Due 01-Dec. at 8pm)</td>
+<td align="left"><a href="L12-da3-data-visualization.html">Data Analysis
+3 - Data Visualization</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/12-data-visualization/slides-12-data-visualization.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/12-data-visualization/week12notes/week12notes.R">notes
+(.R)</a></td>
+<td align="left"><a href="P10-data-visualization.html">Practice
+10</a></td>
+<td align="left"><a href="hw6-data-visualization.html">HW 6</a><br>(Due
+01-Dec. at 8pm)</td>
 </tr>
 <tr class="odd">
 <td align="right">13</td>
 <td align="left">11/18</td>
-<td align="left"><a href="L13-da4-communicating-information.html">Data Analysis 4 - Communicating Information</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/13-communicating-information/slides-13-communicating-information.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/13-communicating-information/week13notes/week13notes.Rmd">notes (.R)</a></td>
-<td align="left">Quiz 5<br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/other/emse6574_cheatsheet.pdf">Link to cheatsheet</a></td>
+<td align="left"><a href="L13-da4-communicating-information.html">Data
+Analysis 4 - Communicating Information</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/13-communicating-information/slides-13-communicating-information.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/13-communicating-information/week13notes/week13notes.Rmd">notes
+(.R)</a></td>
+<td align="left">Quiz 5<br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/other/emse6574_cheatsheet.pdf">Link
+to cheatsheet</a></td>
 <td align="left"></td>
 </tr>
 <tr class="even">
@@ -646,8 +681,13 @@ $(document).ready(function () {
 <tr class="odd">
 <td align="right">15</td>
 <td align="left">12/02</td>
-<td align="left"><a href="L15-monte-carlo-methods.html">Monte Carlo Methods</a></td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/15-monte-carlo-methods/slides-15-monte-carlo-methods.pdf">slides (.pdf)</a><br><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/15-monte-carlo-methods/notes-15-monte-carlo-methods.R">notes (.R)</a></td>
+<td align="left"><a href="L15-monte-carlo-methods.html">Monte Carlo
+Methods</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/15-monte-carlo-methods/slides-15-monte-carlo-methods.pdf">slides
+(.pdf)</a><br><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/15-monte-carlo-methods/notes-15-monte-carlo-methods.R">notes
+(.R)</a></td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
@@ -655,7 +695,9 @@ $(document).ready(function () {
 <td align="right">16</td>
 <td align="left">12/09</td>
 <td align="left">Final Review</td>
-<td align="left"><a href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/finalReview/finalReview.pdf">slides (.pdf)</a></td>
+<td align="left"><a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/master/classNotes/finalReview/finalReview.pdf">slides
+(.pdf)</a></td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
@@ -677,7 +719,9 @@ $(document).ready(function () {
 </tr>
 </tbody>
 </table>
-<p>NOTE: In accordance with university policy, the final exam will be given during the final exam period and not the last week of the semester.</p>
+<p>NOTE: In accordance with university policy, the final exam will be
+given during the final exam period and not the last week of the
+semester.</p>
 
 
 <hr>
@@ -718,7 +762,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -736,7 +780,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

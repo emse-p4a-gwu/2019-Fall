@@ -13,17 +13,27 @@
 
 <title>Homework 4 - Strings</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -89,12 +99,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -107,32 +121,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -142,10 +132,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -162,40 +148,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -223,7 +185,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -235,7 +197,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -245,11 +207,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -261,13 +240,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -275,16 +253,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -328,7 +299,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -351,7 +322,7 @@ $(document).ready(function () {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -411,7 +382,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -441,7 +412,7 @@ $(document).ready(function () {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -473,7 +444,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -501,7 +472,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -513,75 +484,176 @@ $(document).ready(function () {
 <p><strong>Due</strong>: Sunday, 27-Oct. at 8pm</p>
 <p><strong>Rules</strong>:</p>
 <ul>
-<li>This entire homework is <strong>COLLABORATIVE</strong>, which means you may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work – everyone must work on every problem. And you may not simply copy any code but rather truly work together.</li>
-<li>Even though you work collaboratively, you still must submit your own solutions.</li>
+<li>This entire homework is <strong>COLLABORATIVE</strong>, which means
+you may work in groups of up to 3 students who are in this course this
+semester (and then with nobody else except the course instructors). You
+may not split up the work – everyone must work on every problem. And you
+may not simply copy any code but rather truly work together.</li>
+<li>Even though you work collaboratively, you still must submit your own
+solutions.</li>
 </ul>
 <p><strong>Instructions</strong>:</p>
 <ol style="list-style-type: decimal">
-<li><p>Before beginning this assignment, be sure to have read the <a href="L7-strings.html">Strings</a> and <a href="L6-vectors.html">Vectors</a> lessons.</p></li>
-<li><p>Open RStudio and create a new project called “hw4-lastName”, replacing “lastName” with your last name.</p></li>
-<li><p>Download the <a href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw4.R">hw4.R template script</a> and place it in RStudio project folder you just created.</p></li>
-<li><p>Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the “hw4.R” file.</p></li>
-<li><p>Type all of your answers to the questions below in the “hw4.R” script.</p></li>
-<li><p>After completing the questions, create a zip file of all files in your R project folder for this assignment.</p></li>
+<li><p>Before beginning this assignment, be sure to have read the <a
+href="L7-strings.html">Strings</a> and <a
+href="L6-vectors.html">Vectors</a> lessons.</p></li>
+<li><p>Open RStudio and create a new project called “hw4-lastName”,
+replacing “lastName” with your last name.</p></li>
+<li><p>Download the <a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw4.R">hw4.R
+template script</a> and place it in RStudio project folder you just
+created.</p></li>
+<li><p>Fill out your name, GW Net ID, and the names of anyone you worked
+with in the header of the “hw4.R” file.</p></li>
+<li><p>Type all of your answers to the questions below in the “hw4.R”
+script.</p></li>
+<li><p>After completing the questions, create a zip file of all files in
+your R project folder for this assignment.</p></li>
 <li><p>Submit the zip file on Blackboard by the due deadline.</p></li>
 </ol>
 <hr />
-<p><strong>Write solutions to the following functions in your “hw4.R” script.</strong></p>
+<p><strong>Write solutions to the following functions in your “hw4.R”
+script.</strong></p>
 <div id="vowelcounts-10-pts" class="section level3">
 <h3>1) <code>vowelCount(s)</code> [10 pts]</h3>
-<p>Write the function <code>vowelCount(s)</code> that takes a string <code>s</code>, and returns the number of vowels in <code>s</code>, ignoring case (so <code>"A"</code> and <code>"a"</code> are both vowels). The vowels are <code>"a"</code>, <code>"e"</code>, <code>"i"</code>, <code>"o"</code>, and <code>"u"</code>. So, for example, <code>vowelCount("Abc def!!! a? yzyzyz!")</code> returns <code>3</code> (two <code>"a"</code>’s and one <code>"e"</code>).</p>
+<p>Write the function <code>vowelCount(s)</code> that takes a string
+<code>s</code>, and returns the number of vowels in <code>s</code>,
+ignoring case (so <code>"A"</code> and <code>"a"</code> are both
+vowels). The vowels are <code>"a"</code>, <code>"e"</code>,
+<code>"i"</code>, <code>"o"</code>, and <code>"u"</code>. So, for
+example, <code>vowelCount("Abc def!!! a? yzyzyz!")</code> returns
+<code>3</code> (two <code>"a"</code>’s and one <code>"e"</code>).</p>
 </div>
 <div id="strtolowers-10-pts" class="section level3">
 <h3>2) <code>strToLower(s)</code> [10 pts]</h3>
-<p>Write a function that does exactly what <code>str_to_lower()</code> does (i.e. returns the same string but with all letters in lower case) without using <code>str_to_lower()</code> or the Base R <code>tolower()</code> function. Hint: check out the <code>str_replace_all()</code> function!</p>
+<p>Write a function that does exactly what <code>str_to_lower()</code>
+does (i.e. returns the same string but with all letters in lower case)
+without using <code>str_to_lower()</code> or the Base R
+<code>tolower()</code> function. Hint: check out the
+<code>str_replace_all()</code> function!</p>
 </div>
 <div id="getmiddlecharacters-10-pts" class="section level3">
 <h3>3) <code>getMiddleCharacter(s)</code> [10 pts]</h3>
-<p>Write a function that takes a single string, <code>s</code>, and returns the middle character of the string. If the string has an even number of characters, then return the two middle characters. So <code>getMiddleCharacter("one")</code> should return <code>"n"</code>, and <code>getMiddleCharacter("feet")</code> should return <code>"ee"</code>.</p>
+<p>Write a function that takes a single string, <code>s</code>, and
+returns the middle character of the string. If the string has an even
+number of characters, then return the two middle characters. So
+<code>getMiddleCharacter("one")</code> should return <code>"n"</code>,
+and <code>getMiddleCharacter("feet")</code> should return
+<code>"ee"</code>.</p>
 </div>
 <div id="rotatestringlefts-k-10-pts" class="section level3">
 <h3>4) <code>rotateStringLeft(s, k)</code> [10 pts]</h3>
-<p>Write the function <code>rotateStringLeft(s, k)</code> that takes a string <code>s</code> and a non-negative integer <code>k</code>, and returns the string <code>s</code> rotated <code>k</code> places to the left. So, if <code>s = "iknowkungfu"</code> and <code>k = 2</code>, then the result should be <code>"nowkungfuik"</code>. If <code>k</code> is larger than the length of <code>s</code>, the function should continue to rotate the string beyond its starting point. So, if <code>s = "iknowkungfu"</code> and <code>k = 11</code>, then the result should be <code>"iknowkungfu"</code>, but if <code>k = 12</code>, the result should be <code>"knowkungfui"</code>.</p>
+<p>Write the function <code>rotateStringLeft(s, k)</code> that takes a
+string <code>s</code> and a non-negative integer <code>k</code>, and
+returns the string <code>s</code> rotated <code>k</code> places to the
+left. So, if <code>s = "iknowkungfu"</code> and <code>k = 2</code>, then
+the result should be <code>"nowkungfuik"</code>. If <code>k</code> is
+larger than the length of <code>s</code>, the function should continue
+to rotate the string beyond its starting point. So, if
+<code>s = "iknowkungfu"</code> and <code>k = 11</code>, then the result
+should be <code>"iknowkungfu"</code>, but if <code>k = 12</code>, the
+result should be <code>"knowkungfui"</code>.</p>
 </div>
 <div id="vectortoenglishlistv-10-pts" class="section level3">
 <h3>5) <code>vectorToEnglishList(v)</code> [10 pts]</h3>
-<p>Write a function that takes a vector, <code>v</code>, and returns a single string that contains the elements of <code>v</code> using proper English grammar for describing a list of items, i.e. the items are separated by commas, and the word “and” is inserted before the last item. Your function should use the <a href="https://en.wikipedia.org/wiki/Serial_comma">Oxford comma</a> for the last list item. For example, if <code>v &lt;- c("a", "b", "c")</code>, then <code>vectorToEnglishList(v)</code> would return the string <code>"a, b, and c"</code>. Think carefully about what it should do if given a vector of length 0, 1, or 2.</p>
+<p>Write a function that takes a vector, <code>v</code>, and returns a
+single string that contains the elements of <code>v</code> using proper
+English grammar for describing a list of items, i.e. the items are
+separated by commas, and the word “and” is inserted before the last
+item. Your function should use the <a
+href="https://en.wikipedia.org/wiki/Serial_comma">Oxford comma</a> for
+the last list item. For example, if
+<code>v &lt;- c("a", "b", "c")</code>, then
+<code>vectorToEnglishList(v)</code> would return the string
+<code>"a, b, and c"</code>. Think carefully about what it should do if
+given a vector of length 0, 1, or 2.</p>
 </div>
 <div id="isdigits-10-pts" class="section level3">
 <h3>6) <code>isDigit(s)</code> [10 pts]</h3>
-<p>Write the function <code>isDigit(s)</code> that takes a string <code>s</code> and returns <code>TRUE</code> if all characters in the string are numeric integers and <code>FALSE</code> otherwise. So <code>isDigit("123")</code> should return <code>TRUE</code>, <code>isDigit("123N")</code> should return <code>FALSE</code>, and <code>isDigit("")</code> should return <code>FALSE</code>.</p>
+<p>Write the function <code>isDigit(s)</code> that takes a string
+<code>s</code> and returns <code>TRUE</code> if all characters in the
+string are numeric integers and <code>FALSE</code> otherwise. So
+<code>isDigit("123")</code> should return <code>TRUE</code>,
+<code>isDigit("123N")</code> should return <code>FALSE</code>, and
+<code>isDigit("")</code> should return <code>FALSE</code>.</p>
 </div>
 <div id="getthegerundssentence-10-pts" class="section level3">
 <h3>7) <code>getTheGerunds(sentence)</code> [10 pts]</h3>
-<p>Write a function that takes a single string, <code>sentence</code>, and returns a vector of all the gerunds in it (i.e. all the words that end in <code>"ing"</code>). So <code>getTheGerunds("I like hiking and swimming")</code> should return <code>c("hiking", "swimming")</code>. If there are no gerunds in <code>sentence</code>, the function should return <code>NULL</code>. Hint: first solve how you might separate a single-string sentence into a vector of words.</p>
+<p>Write a function that takes a single string, <code>sentence</code>,
+and returns a vector of all the gerunds in it (i.e. all the words that
+end in <code>"ing"</code>). So
+<code>getTheGerunds("I like hiking and swimming")</code> should return
+<code>c("hiking", "swimming")</code>. If there are no gerunds in
+<code>sentence</code>, the function should return <code>NULL</code>.
+Hint: first solve how you might separate a single-string sentence into a
+vector of words.</p>
 </div>
 <div id="interleaves1-s2-15-pts" class="section level3">
 <h3>8) <code>interleave(s1, s2)</code> [15 pts]</h3>
-<p>Write the function <code>interleave(s1, s2)</code> that takes two strings, <code>s1</code> and <code>s2</code>, and interleaves their characters starting with the first character in <code>s1</code>. For example, <code>interleave('pto', 'yhn')</code> would return the string <code>"python"</code>. If one string is longer than the other, concatenate the rest of the remaining string onto the end of the new string. For example (<code>'a#'</code>, <code>'cD!f2'</code>) would return the string <code>"ac#D!f2"</code>. Assume that both <code>s1</code> and <code>s2</code> will always be strings.</p>
+<p>Write the function <code>interleave(s1, s2)</code> that takes two
+strings, <code>s1</code> and <code>s2</code>, and interleaves their
+characters starting with the first character in <code>s1</code>. For
+example, <code>interleave('pto', 'yhn')</code> would return the string
+<code>"python"</code>. If one string is longer than the other,
+concatenate the rest of the remaining string onto the end of the new
+string. For example (<code>'a#'</code>, <code>'cD!f2'</code>) would
+return the string <code>"ac#D!f2"</code>. Assume that both
+<code>s1</code> and <code>s2</code> will always be strings.</p>
 </div>
 <div id="samecharss1-s2-15-pts" class="section level3">
 <h3>9) <code>sameChars(s1, s2)</code> [15 pts]</h3>
-<p>Write the function <code>sameChars(s1, s2)</code> that takes two strings and returns <code>TRUE</code> if the two strings are composed of the same characters (though perhaps in different numbers and in different orders); that is, if every character that is in the first string is in the second (and vice versa), and <code>FALSE</code> otherwise. This test is case-sensitive, so <code>"ABC"</code> and <code>"abc"</code> do not contain the same characters. The function returns <code>FALSE</code> if either parameter is not a string, but returns <code>TRUE</code> if both strings are empty.</p>
+<p>Write the function <code>sameChars(s1, s2)</code> that takes two
+strings and returns <code>TRUE</code> if the two strings are composed of
+the same characters (though perhaps in different numbers and in
+different orders); that is, if every character that is in the first
+string is in the second (and vice versa), and <code>FALSE</code>
+otherwise. This test is case-sensitive, so <code>"ABC"</code> and
+<code>"abc"</code> do not contain the same characters. The function
+returns <code>FALSE</code> if either parameter is not a string, but
+returns <code>TRUE</code> if both strings are empty.</p>
 <hr />
 </div>
-<div id="bonus-credit-1-hasbalancedparenthesess-solo-2.5-pts" class="section level3">
-<h3>Bonus Credit 1) <code>hasBalancedParentheses(s)</code> [SOLO, 2.5 pts]</h3>
-<p>Write the function <code>hasBalancedParentheses(s)</code>, which takes a string <code>s</code> and returns <code>TRUE</code> if the parentheses in <code>s</code> are balanced and <code>FALSE</code> otherwise (ignoring all non-parentheses in the string). We say that parentheses are “balanced” if each right parenthesis closes (matches) an open (unmatched) left parenthesis, and no left parentheses are left unclosed (unmatched) at the end of the text. So, for example, <code>"( ( ( ) ( ) ) ( ) )"</code> is balanced, but <code>"( ) )"</code> is not balanced, and <code>"( ) ) ("</code> is also not balanced. Hint: keep track of how many right parentheses remain unmatched as you iterate over the string.</p>
+<div id="bonus-credit-1-hasbalancedparenthesess-solo-2.5-pts"
+class="section level3">
+<h3>Bonus Credit 1) <code>hasBalancedParentheses(s)</code> [SOLO, 2.5
+pts]</h3>
+<p>Write the function <code>hasBalancedParentheses(s)</code>, which
+takes a string <code>s</code> and returns <code>TRUE</code> if the
+parentheses in <code>s</code> are balanced and <code>FALSE</code>
+otherwise (ignoring all non-parentheses in the string). We say that
+parentheses are “balanced” if each right parenthesis closes (matches) an
+open (unmatched) left parenthesis, and no left parentheses are left
+unclosed (unmatched) at the end of the text. So, for example,
+<code>"( ( ( ) ( ) ) ( ) )"</code> is balanced, but <code>"( ) )"</code>
+is not balanced, and <code>"( ) ) ("</code> is also not balanced. Hint:
+keep track of how many right parentheses remain unmatched as you iterate
+over the string.</p>
 </div>
-<div id="bonus-credit-2-largestnumberintexttext-solo-2.5-pts" class="section level3">
-<h3>Bonus Credit 2) <code>largestNumberInText(text)</code> [SOLO, 2.5 pts]</h3>
-<p>Write the function <code>largestNumberInText(text)</code> that takes a string of text and returns the largest integer value that occurs within that text, or <code>NULL</code> if no such value occurs. You may assume that the only numbers in the text are non-negative integers and that numbers are always composed of consecutive digits (without commas, for example). For example:</p>
+<div id="bonus-credit-2-largestnumberintexttext-solo-2.5-pts"
+class="section level3">
+<h3>Bonus Credit 2) <code>largestNumberInText(text)</code> [SOLO, 2.5
+pts]</h3>
+<p>Write the function <code>largestNumberInText(text)</code> that takes
+a string of text and returns the largest integer value that occurs
+within that text, or <code>NULL</code> if no such value occurs. You may
+assume that the only numbers in the text are non-negative integers and
+that numbers are always composed of consecutive digits (without commas,
+for example). For example:</p>
 <pre class="r"><code>largestNumberInText(&quot;I saw 3 dogs, 17 cats, and 14 cows!&quot;)
 17 # The numeric value 17, not the string &quot;17&quot;
 largestNumberInText(&quot;One person ate two hot dogs!&quot;)
 NULL # Value NULL, not the string &quot;NULL&quot;</code></pre>
-<p>Hint: You may want to use <code>isDigit()</code> as a helper function!</p>
+<p>Hint: You may want to use <code>isDigit()</code> as a helper
+function!</p>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112: Fundamentals of Programming</a>, by <a href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
+<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112:
+Fundamentals of Programming</a>, by <a
+href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a
+href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
 </ul>
 </div>
 
@@ -624,7 +696,7 @@ NULL # Value NULL, not the string &quot;NULL&quot;</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -642,7 +714,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

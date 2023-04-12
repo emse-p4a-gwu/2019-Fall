@@ -13,20 +13,30 @@
 
 <title>Data Analysis 2 - Data Wrangling</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,7 +554,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -596,35 +567,59 @@ div.tocify {
 <h3 id="learning-objectives">Learning Objectives</h3>
 <ul>
 <li>Describe the purpose of the <code>dplyr</code> package.</li>
-<li>Select certain <em>columns</em> in a data frame with the <code>select</code> function.</li>
-<li>Select certain <em>rows</em> in a data frame according to filtering conditions with the <code>filter</code> function.</li>
-<li>Link the output of one <code>dplyr</code> function to the input of another function with the “pipe” operator <code>%&gt;%</code>.</li>
-<li>Add new columns to a data frame that are functions of existing columns with the <code>mutate</code> function.</li>
+<li>Select certain <em>columns</em> in a data frame with the
+<code>select</code> function.</li>
+<li>Select certain <em>rows</em> in a data frame according to filtering
+conditions with the <code>filter</code> function.</li>
+<li>Link the output of one <code>dplyr</code> function to the input of
+another function with the “pipe” operator <code>%&gt;%</code>.</li>
+<li>Add new columns to a data frame that are functions of existing
+columns with the <code>mutate</code> function.</li>
 <li>Sort data frames using the <code>arrange()</code> function.</li>
 <li>Use the split-apply-combine concept for data analysis.</li>
-<li>Use <code>summarize</code>, <code>group_by</code>, and <code>count</code> to split a data frame into groups of observations, apply summary statistics for each group, and then combine the results.</li>
+<li>Use <code>summarize</code>, <code>group_by</code>, and
+<code>count</code> to split a data frame into groups of observations,
+apply summary statistics for each group, and then combine the
+results.</li>
 <li>Export a data frame to a .csv file.</li>
 </ul>
 <h3 id="suggested-readings">Suggested Readings</h3>
 <ul>
-<li><a href="https://r4ds.had.co.nz/transform.html">Chapter 5</a> of “R for Data Science”, by Garrett Grolemund and Hadley Wickham</li>
-<li><a href="https://resources.rstudio.com/the-essentials-of-data-science/data-transformation"><code>dplyr</code> cheatsheet</a></li>
+<li><a href="https://r4ds.had.co.nz/transform.html">Chapter 5</a> of “R
+for Data Science”, by Garrett Grolemund and Hadley Wickham</li>
+<li><a
+href="https://resources.rstudio.com/the-essentials-of-data-science/data-transformation"><code>dplyr</code>
+cheatsheet</a></li>
 </ul>
 </blockquote>
 <hr />
-<div id="r-setup" class="section level1">
+<div id="r-setup" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> R Setup</h1>
 <p>Before we get started, let’s set up our analysis environment:</p>
 <ol style="list-style-type: decimal">
-<li>Open up your “data-analysis-tutorial” R Project that you created in the last lesson - if you didn’t do this, <a href="L10-data-analysis-1-data-frames.html#41_r_setup">go back and do it now</a>.</li>
-<li>Create a new <code>.R</code> file (File &gt; New File &gt; R Script), and save it as “<code>data_wrangling.R</code>” inside your “data-analysis-tutorial” R Project folder.</li>
-<li>Use the <code>download.file()</code> function to download the <code>wildlife_impacts.csv</code> dataset, and save it in the <code>data</code> folder in your R Project:</li>
+<li>Open up your “data-analysis-tutorial” R Project that you created in
+the last lesson - if you didn’t do this, <a
+href="L10-data-analysis-1-data-frames.html#41_r_setup">go back and do it
+now</a>.</li>
+<li>Create a new <code>.R</code> file (File &gt; New File &gt; R
+Script), and save it as “<code>data_wrangling.R</code>” inside your
+“data-analysis-tutorial” R Project folder.</li>
+<li>Use the <code>download.file()</code> function to download the
+<code>wildlife_impacts.csv</code> dataset, and save it in the
+<code>data</code> folder in your R Project:</li>
 </ol>
 <pre class="r"><code>download.file(
     url = &quot;https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/wildlife_impacts.csv&quot;,
     destfile = file.path(&#39;data&#39;, &#39;wildlife_impacts.csv&#39;)
 )</code></pre>
-<p>For this lesson, we are going to use the <a href="https://wildlife.faa.gov/">FAA Wildlife Strike Database</a>, which contains records of reported wildlife strikes with aircraft since 1990. Since aircraft-wildlife impacts are voluntarily reported, the database only contains information from airlines, airports, pilots, and other sources and does not represent all strikes. Each row in the dataset holds information for a single strike event with the following columns:</p>
+<p>For this lesson, we are going to use the <a
+href="https://wildlife.faa.gov/">FAA Wildlife Strike Database</a>, which
+contains records of reported wildlife strikes with aircraft since 1990.
+Since aircraft-wildlife impacts are voluntarily reported, the database
+only contains information from airlines, airports, pilots, and other
+sources and does not represent all strikes. Each row in the dataset
+holds information for a single strike event with the following
+columns:</p>
 <table>
 <colgroup>
 <col width="24%" />
@@ -750,67 +745,97 @@ div.tocify {
 <pre class="r"><code>library(readr)
 library(dplyr)
 df &lt;- read_csv(file.path(&#39;data&#39;, &#39;wildlife_impacts.csv&#39;))</code></pre>
-<p>Just like in the last lesson, a good starting point when working with a new dataset is to view some quick summaries. Here’s another summary function (<code>glimpse()</code>) that is similar to <code>str()</code>:</p>
+<p>Just like in the last lesson, a good starting point when working with
+a new dataset is to view some quick summaries. Here’s another summary
+function (<code>glimpse()</code>) that is similar to
+<code>str()</code>:</p>
 <pre class="r"><code>glimpse(df)</code></pre>
 <pre><code>## Rows: 56,978
 ## Columns: 21
-## $ incident_date         &lt;dttm&gt; 2018-12-31, 2018-12-29, 2018-12-29, 2018-12-27…
-## $ state                 &lt;chr&gt; &quot;FL&quot;, &quot;IN&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;FL&quot;, &quot;FL&quot;, &quot;N…
-## $ airport_id            &lt;chr&gt; &quot;KMIA&quot;, &quot;KIND&quot;, &quot;ZZZZ&quot;, &quot;ZZZZ&quot;, &quot;ZZZZ&quot;, &quot;KMIA&quot;,…
-## $ airport               &lt;chr&gt; &quot;MIAMI INTL&quot;, &quot;INDIANAPOLIS INTL ARPT&quot;, &quot;UNKNOW…
-## $ operator              &lt;chr&gt; &quot;AMERICAN AIRLINES&quot;, &quot;AMERICAN AIRLINES&quot;, &quot;AMER…
-## $ atype                 &lt;chr&gt; &quot;B-737-800&quot;, &quot;B-737-800&quot;, &quot;UNKNOWN&quot;, &quot;B-737-900…
-## $ type_eng              &lt;chr&gt; &quot;D&quot;, &quot;D&quot;, NA, &quot;D&quot;, &quot;D&quot;, &quot;D&quot;, &quot;D&quot;, &quot;D&quot;, &quot;D&quot;, &quot;D&quot;…
-## $ species_id            &lt;chr&gt; &quot;UNKBL&quot;, &quot;R&quot;, &quot;R2004&quot;, &quot;N5205&quot;, &quot;J2139&quot;, &quot;UNKB&quot;…
-## $ species               &lt;chr&gt; &quot;Unknown bird - large&quot;, &quot;Owls&quot;, &quot;Short-eared ow…
-## $ damage                &lt;chr&gt; &quot;M?&quot;, &quot;N&quot;, NA, &quot;M?&quot;, &quot;M?&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, …
-## $ num_engs              &lt;dbl&gt; 2, 2, NA, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2…
-## $ incident_month        &lt;dbl&gt; 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,…
-## $ incident_year         &lt;dbl&gt; 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018,…
-## $ time_of_day           &lt;chr&gt; &quot;Day&quot;, &quot;Night&quot;, NA, NA, NA, &quot;Day&quot;, &quot;Night&quot;, NA,…
-## $ time                  &lt;dbl&gt; 1207, 2355, NA, NA, NA, 955, 948, NA, NA, 1321,…
-## $ height                &lt;dbl&gt; 700, 0, NA, NA, NA, NA, 600, NA, NA, 0, NA, 0, …
-## $ speed                 &lt;dbl&gt; 200, NA, NA, NA, NA, NA, 145, NA, NA, 130, NA, …
-## $ phase_of_flt          &lt;chr&gt; &quot;Climb&quot;, &quot;Landing Roll&quot;, NA, NA, NA, &quot;Approach&quot;…
-## $ sky                   &lt;chr&gt; &quot;Some Cloud&quot;, NA, NA, NA, NA, NA, &quot;Some Cloud&quot;,…
-## $ precip                &lt;chr&gt; &quot;None&quot;, NA, NA, NA, NA, NA, &quot;None&quot;, NA, NA, &quot;No…
-## $ cost_repairs_infl_adj &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</code></pre>
-<p>Wow, there have been 56,978 reported wildlife strikes over the 29 period from 1990 to 2019! On a daily average that comes out to:</p>
+## $ incident_date         &lt;dttm&gt; 2018-12-31, 2018-12-29, 2018-12-29, 2018-12-27,…
+## $ state                 &lt;chr&gt; &quot;FL&quot;, &quot;IN&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;N/A&quot;, &quot;FL&quot;, &quot;FL&quot;, &quot;N/…
+## $ airport_id            &lt;chr&gt; &quot;KMIA&quot;, &quot;KIND&quot;, &quot;ZZZZ&quot;, &quot;ZZZZ&quot;, &quot;ZZZZ&quot;, &quot;KMIA&quot;, …
+## $ airport               &lt;chr&gt; &quot;MIAMI INTL&quot;, &quot;INDIANAPOLIS INTL ARPT&quot;, &quot;UNKNOWN…
+## $ operator              &lt;chr&gt; &quot;AMERICAN AIRLINES&quot;, &quot;AMERICAN AIRLINES&quot;, &quot;AMERI…
+## $ atype                 &lt;chr&gt; &quot;B-737-800&quot;, &quot;B-737-800&quot;, &quot;UNKNOWN&quot;, &quot;B-737-900&quot;…
+## $ type_eng              &lt;chr&gt; &quot;D&quot;, &quot;D&quot;, NA, &quot;D&quot;, &quot;D&quot;, &quot;D&quot;, &quot;D&quot;, &quot;D&quot;, &quot;D&quot;, &quot;D&quot;,…
+## $ species_id            &lt;chr&gt; &quot;UNKBL&quot;, &quot;R&quot;, &quot;R2004&quot;, &quot;N5205&quot;, &quot;J2139&quot;, &quot;UNKB&quot;,…
+## $ species               &lt;chr&gt; &quot;Unknown bird - large&quot;, &quot;Owls&quot;, &quot;Short-eared owl…
+## $ damage                &lt;chr&gt; &quot;M?&quot;, &quot;N&quot;, NA, &quot;M?&quot;, &quot;M?&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;N&quot;, &quot;…
+## $ num_engs              &lt;dbl&gt; 2, 2, NA, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
+## $ incident_month        &lt;dbl&gt; 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, …
+## $ incident_year         &lt;dbl&gt; 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, …
+## $ time_of_day           &lt;chr&gt; &quot;Day&quot;, &quot;Night&quot;, NA, NA, NA, &quot;Day&quot;, &quot;Night&quot;, NA, …
+## $ time                  &lt;dbl&gt; 1207, 2355, NA, NA, NA, 955, 948, NA, NA, 1321, …
+## $ height                &lt;dbl&gt; 700, 0, NA, NA, NA, NA, 600, NA, NA, 0, NA, 0, N…
+## $ speed                 &lt;dbl&gt; 200, NA, NA, NA, NA, NA, 145, NA, NA, 130, NA, N…
+## $ phase_of_flt          &lt;chr&gt; &quot;Climb&quot;, &quot;Landing Roll&quot;, NA, NA, NA, &quot;Approach&quot;,…
+## $ sky                   &lt;chr&gt; &quot;Some Cloud&quot;, NA, NA, NA, NA, NA, &quot;Some Cloud&quot;, …
+## $ precip                &lt;chr&gt; &quot;None&quot;, NA, NA, NA, NA, NA, &quot;None&quot;, NA, NA, &quot;Non…
+## $ cost_repairs_infl_adj &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</code></pre>
+<p>Wow, there have been 56,978 reported wildlife strikes over the 29
+period from 1990 to 2019! On a daily average that comes out to:</p>
 <pre class="r"><code>nrow(df) / (2019 - 1990) / 365</code></pre>
 <pre><code>## [1] 5.3829</code></pre>
 <p>…over 5 strikes per day!</p>
 </div>
-<div id="data-wrangling-with-dplyr" class="section level1">
-<h1><span class="header-section-number">2</span> Data wrangling with <code>dplyr</code></h1>
-<p><img src="images/horst_monsters_data_wrangling.png" width="500" /> <a href="https://github.com/allisonhorst">[Art by Allison Horst]</a></p>
-<p>“Data Wrangling” refers to the art of getting your data into R in a useful form for visualization and modeling. Wrangling is the first step in the general data science process:</p>
+<div id="data-wrangling-with-dplyr" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Data wrangling with
+<code>dplyr</code></h1>
+<p><img src="images/horst_monsters_data_wrangling.png" width="500" /> <a
+href="https://github.com/allisonhorst">[Art by Allison Horst]</a></p>
+<p>“Data Wrangling” refers to the art of getting your data into R in a
+useful form for visualization and modeling. Wrangling is the first step
+in the general data science process:</p>
 <center>
 <img src="images/data-wrangle.png" />
 </center>
-<div id="what-is-dplyr" class="section level2">
-<h2><span class="header-section-number">2.1</span> What is <code>dplyr</code></h2>
-<p>As we saw in the last section, we can use brackets (<code>[]</code>) to access elements of a data frame. While this is handy, it can be cumbersome and difficult to read, especially for complicated operations.</p>
+<div id="what-is-dplyr" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> What is
+<code>dplyr</code></h2>
+<p>As we saw in the last section, we can use brackets (<code>[]</code>)
+to access elements of a data frame. While this is handy, it can be
+cumbersome and difficult to read, especially for complicated
+operations.</p>
 <p><strong>Enter <code>dplyr</code></strong></p>
-<p>The <code>dplyr</code> package was designed to make tabular data wrangling easier to perform and read. It pairs nicely with other libraries, such as <strong><code>ggplot2</code></strong> for visualizing data (which we’ll cover next week). Together, <code>dplyr</code>, <code>ggplot2</code>, and a handful of other packages make up what is known as the <a href="https://www.tidyverse.org/">“Tidyverse”</a> - an opinionated collection of R packages designed for data science. You can load all of the tidyverse packages at once using the <code>library(tidyverse)</code> command, but for now we’re just going to install and use each package one at a time - starting with <code>dplyr</code>:</p>
+<p>The <code>dplyr</code> package was designed to make tabular data
+wrangling easier to perform and read. It pairs nicely with other
+libraries, such as <strong><code>ggplot2</code></strong> for visualizing
+data (which we’ll cover next week). Together, <code>dplyr</code>,
+<code>ggplot2</code>, and a handful of other packages make up what is
+known as the <a href="https://www.tidyverse.org/">“Tidyverse”</a> - an
+opinionated collection of R packages designed for data science. You can
+load all of the tidyverse packages at once using the
+<code>library(tidyverse)</code> command, but for now we’re just going to
+install and use each package one at a time - starting with
+<code>dplyr</code>:</p>
 <pre class="r"><code>install.packages(&quot;dplyr&quot;)</code></pre>
-<p>In this lesson, we are going to learn some of the most common <code>dplyr</code> functions:</p>
+<p>In this lesson, we are going to learn some of the most common
+<code>dplyr</code> functions:</p>
 <ul>
 <li><code>select()</code>: subset columns</li>
 <li><code>filter()</code>: subset rows on conditions</li>
-<li><code>mutate()</code>: create new columns by using information from other columns</li>
+<li><code>mutate()</code>: create new columns by using information from
+other columns</li>
 <li><code>arrange()</code>: sort results</li>
-<li><code>group_by()</code>: group data to perform grouped operations</li>
-<li><code>summarize()</code>: create summary statistics (usually on grouped data)</li>
+<li><code>group_by()</code>: group data to perform grouped
+operations</li>
+<li><code>summarize()</code>: create summary statistics (usually on
+grouped data)</li>
 <li><code>count()</code>: count discrete rows</li>
 </ul>
 </div>
-<div id="select-columns-with-select" class="section level2">
-<h2><span class="header-section-number">2.2</span> Select columns with <code>select()</code></h2>
+<div id="select-columns-with-select" class="section level2"
+number="2.2">
+<h2><span class="header-section-number">2.2</span> Select columns with
+<code>select()</code></h2>
 <p><img src="images/rstudio-cheatsheet-select.png" width="500" /></p>
-<p>To select specific columns, use <code>select()</code>. The first argument to this function is the data frame (<code>df</code>), and the subsequent arguments are the columns to keep:</p>
+<p>To select specific columns, use <code>select()</code>. The first
+argument to this function is the data frame (<code>df</code>), and the
+subsequent arguments are the columns to keep:</p>
 <pre class="r"><code># Select only a few columns
 select(df, state, damage, time_of_day)</code></pre>
-<pre><code>## # A tibble: 56,978 x 3
+<pre><code>## # A tibble: 56,978 × 3
 ##    state damage time_of_day
 ##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      
 ##  1 FL    M?     Day        
@@ -823,85 +848,101 @@ select(df, state, damage, time_of_day)</code></pre>
 ##  8 N/A   N      &lt;NA&gt;       
 ##  9 N/A   N      &lt;NA&gt;       
 ## 10 FL    N      Day        
-## # … with 56,968 more rows</code></pre>
-<p>To select all columns <em>except</em> certain ones, put a <code>-</code> sign in front of the variable to exclude it:</p>
+## # ℹ 56,968 more rows</code></pre>
+<p>To select all columns <em>except</em> certain ones, put a
+<code>-</code> sign in front of the variable to exclude it:</p>
 <pre class="r"><code>select(df, -state, -damage, -time_of_day)</code></pre>
-<pre><code>## # A tibble: 56,978 x 18
-##    incident_date       airport_id airport operator atype type_eng species_id
-##    &lt;dttm&gt;              &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     
-##  1 2018-12-31 00:00:00 KMIA       MIAMI … AMERICA… B-73… D        UNKBL     
-##  2 2018-12-29 00:00:00 KIND       INDIAN… AMERICA… B-73… D        R         
-##  3 2018-12-29 00:00:00 ZZZZ       UNKNOWN AMERICA… UNKN… &lt;NA&gt;     R2004     
-##  4 2018-12-27 00:00:00 ZZZZ       UNKNOWN AMERICA… B-73… D        N5205     
-##  5 2018-12-27 00:00:00 ZZZZ       UNKNOWN AMERICA… B-73… D        J2139     
-##  6 2018-12-27 00:00:00 KMIA       MIAMI … AMERICA… A-319 D        UNKB      
-##  7 2018-12-27 00:00:00 KMCO       ORLAND… AMERICA… A-321 D        UNKBS     
-##  8 2018-12-26 00:00:00 ZZZZ       UNKNOWN AMERICA… B-73… D        ZT001     
-##  9 2018-12-23 00:00:00 ZZZZ       UNKNOWN AMERICA… A-321 D        ZT101     
-## 10 2018-12-23 00:00:00 KFLL       FORT L… AMERICA… B-73… D        I1301     
-## # … with 56,968 more rows, and 11 more variables: species &lt;chr&gt;,
-## #   num_engs &lt;dbl&gt;, incident_month &lt;dbl&gt;, incident_year &lt;dbl&gt;, time &lt;dbl&gt;,
-## #   height &lt;dbl&gt;, speed &lt;dbl&gt;, phase_of_flt &lt;chr&gt;, sky &lt;chr&gt;, precip &lt;chr&gt;,
-## #   cost_repairs_infl_adj &lt;dbl&gt;</code></pre>
-<p>Some additional options to select columns based on a specific criteria include:</p>
+<pre><code>## # A tibble: 56,978 × 18
+##    incident_date       airport_id airport     operator atype type_eng species_id
+##    &lt;dttm&gt;              &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     
+##  1 2018-12-31 00:00:00 KMIA       MIAMI INTL  AMERICA… B-73… D        UNKBL     
+##  2 2018-12-29 00:00:00 KIND       INDIANAPOL… AMERICA… B-73… D        R         
+##  3 2018-12-29 00:00:00 ZZZZ       UNKNOWN     AMERICA… UNKN… &lt;NA&gt;     R2004     
+##  4 2018-12-27 00:00:00 ZZZZ       UNKNOWN     AMERICA… B-73… D        N5205     
+##  5 2018-12-27 00:00:00 ZZZZ       UNKNOWN     AMERICA… B-73… D        J2139     
+##  6 2018-12-27 00:00:00 KMIA       MIAMI INTL  AMERICA… A-319 D        UNKB      
+##  7 2018-12-27 00:00:00 KMCO       ORLANDO IN… AMERICA… A-321 D        UNKBS     
+##  8 2018-12-26 00:00:00 ZZZZ       UNKNOWN     AMERICA… B-73… D        ZT001     
+##  9 2018-12-23 00:00:00 ZZZZ       UNKNOWN     AMERICA… A-321 D        ZT101     
+## 10 2018-12-23 00:00:00 KFLL       FORT LAUDE… AMERICA… B-73… D        I1301     
+## # ℹ 56,968 more rows
+## # ℹ 11 more variables: species &lt;chr&gt;, num_engs &lt;dbl&gt;, incident_month &lt;dbl&gt;,
+## #   incident_year &lt;dbl&gt;, time &lt;dbl&gt;, height &lt;dbl&gt;, speed &lt;dbl&gt;,
+## #   phase_of_flt &lt;chr&gt;, sky &lt;chr&gt;, precip &lt;chr&gt;, cost_repairs_infl_adj &lt;dbl&gt;</code></pre>
+<p>Some additional options to select columns based on a specific
+criteria include:</p>
 <ol style="list-style-type: decimal">
-<li><code>ends_with()</code> = Select columns that end with a character string</li>
-<li><code>contains()</code> = Select columns that contain a character string</li>
-<li><code>matches()</code> = Select columns that match a regular expression</li>
-<li><code>one_of()</code> = Select column names that are from a group of names</li>
+<li><code>ends_with()</code> = Select columns that end with a character
+string</li>
+<li><code>contains()</code> = Select columns that contain a character
+string</li>
+<li><code>matches()</code> = Select columns that match a regular
+expression</li>
+<li><code>one_of()</code> = Select column names that are from a group of
+names</li>
 </ol>
 </div>
-<div id="select-rows-with-filter" class="section level2">
-<h2><span class="header-section-number">2.3</span> Select rows with <code>filter()</code></h2>
+<div id="select-rows-with-filter" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Select rows with
+<code>filter()</code></h2>
 <p><img src="images/rstudio-cheatsheet-filter.png" width="500" /></p>
 <p>Filter the rows for wildlife impacts that occurred in DC:</p>
 <pre class="r"><code>filter(df, state == &#39;DC&#39;)</code></pre>
-<pre><code>## # A tibble: 1,228 x 21
-##    incident_date       state airport_id airport operator atype type_eng
-##    &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   
-##  1 2018-10-23 00:00:00 DC    KDCA       RONALD… AMERICA… B-73… D       
-##  2 2018-10-17 00:00:00 DC    KDCA       RONALD… AMERICA… B-73… D       
-##  3 2018-10-16 00:00:00 DC    KDCA       RONALD… AMERICA… B-73… D       
-##  4 2018-10-12 00:00:00 DC    KDCA       RONALD… AMERICA… B-73… D       
-##  5 2018-09-04 00:00:00 DC    KDCA       RONALD… AMERICA… A-319 D       
-##  6 2018-09-01 00:00:00 DC    KDCA       RONALD… AMERICA… A-321 D       
-##  7 2018-08-31 00:00:00 DC    KIAD       WASHIN… AMERICA… A-319 D       
-##  8 2018-08-23 00:00:00 DC    KDCA       RONALD… AMERICA… EMB-… D       
-##  9 2018-08-13 00:00:00 DC    KIAD       WASHIN… AMERICA… MD-82 D       
-## 10 2018-08-01 00:00:00 DC    KIAD       WASHIN… AMERICA… CRJ7… D       
-## # … with 1,218 more rows, and 14 more variables: species_id &lt;chr&gt;,
-## #   species &lt;chr&gt;, damage &lt;chr&gt;, num_engs &lt;dbl&gt;, incident_month &lt;dbl&gt;,
-## #   incident_year &lt;dbl&gt;, time_of_day &lt;chr&gt;, time &lt;dbl&gt;, height &lt;dbl&gt;,
-## #   speed &lt;dbl&gt;, phase_of_flt &lt;chr&gt;, sky &lt;chr&gt;, precip &lt;chr&gt;,
-## #   cost_repairs_infl_adj &lt;dbl&gt;</code></pre>
-<p>Filter the rows for wildlife impacts that cost more than $1 million in damages:</p>
+<pre><code>## # A tibble: 1,228 × 21
+##    incident_date       state airport_id airport          operator atype type_eng
+##    &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   
+##  1 2018-10-23 00:00:00 DC    KDCA       RONALD REAGAN W… AMERICA… B-73… D       
+##  2 2018-10-17 00:00:00 DC    KDCA       RONALD REAGAN W… AMERICA… B-73… D       
+##  3 2018-10-16 00:00:00 DC    KDCA       RONALD REAGAN W… AMERICA… B-73… D       
+##  4 2018-10-12 00:00:00 DC    KDCA       RONALD REAGAN W… AMERICA… B-73… D       
+##  5 2018-09-04 00:00:00 DC    KDCA       RONALD REAGAN W… AMERICA… A-319 D       
+##  6 2018-09-01 00:00:00 DC    KDCA       RONALD REAGAN W… AMERICA… A-321 D       
+##  7 2018-08-31 00:00:00 DC    KIAD       WASHINGTON DULL… AMERICA… A-319 D       
+##  8 2018-08-23 00:00:00 DC    KDCA       RONALD REAGAN W… AMERICA… EMB-… D       
+##  9 2018-08-13 00:00:00 DC    KIAD       WASHINGTON DULL… AMERICA… MD-82 D       
+## 10 2018-08-01 00:00:00 DC    KIAD       WASHINGTON DULL… AMERICA… CRJ7… D       
+## # ℹ 1,218 more rows
+## # ℹ 14 more variables: species_id &lt;chr&gt;, species &lt;chr&gt;, damage &lt;chr&gt;,
+## #   num_engs &lt;dbl&gt;, incident_month &lt;dbl&gt;, incident_year &lt;dbl&gt;,
+## #   time_of_day &lt;chr&gt;, time &lt;dbl&gt;, height &lt;dbl&gt;, speed &lt;dbl&gt;,
+## #   phase_of_flt &lt;chr&gt;, sky &lt;chr&gt;, precip &lt;chr&gt;, cost_repairs_infl_adj &lt;dbl&gt;</code></pre>
+<p>Filter the rows for wildlife impacts that cost more than $1 million
+in damages:</p>
 <pre class="r"><code>filter(df, cost_repairs_infl_adj &gt; 10^6)</code></pre>
-<pre><code>## # A tibble: 41 x 21
-##    incident_date       state airport_id airport operator atype type_eng
-##    &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   
-##  1 2015-05-26 00:00:00 N/A   SVMI       SIMON … AMERICA… B-73… D       
-##  2 2015-04-25 00:00:00 FL    KJAX       JACKSO… AMERICA… A-319 D       
-##  3 2015-04-02 00:00:00 MA    KBOS       GENERA… AMERICA… B-73… D       
-##  4 2001-04-02 00:00:00 N/A   LFPG       CHARLE… AMERICA… B-76… D       
-##  5 2015-10-08 00:00:00 WA    KSEA       SEATTL… DELTA A… A-330 D       
-##  6 2015-09-23 00:00:00 UT    KSLC       SALT L… DELTA A… B-73… D       
-##  7 2008-10-25 00:00:00 UT    KSLC       SALT L… DELTA A… DC-9… D       
-##  8 2007-12-02 00:00:00 N/A   GOOY       DAKAY-… DELTA A… B-76… D       
-##  9 2007-11-22 00:00:00 N/A   LFMN       NICE C… DELTA A… B-76… D       
-## 10 2011-07-30 00:00:00 CA    KBUR       BOB HO… SOUTHWE… B-73… D       
-## # … with 31 more rows, and 14 more variables: species_id &lt;chr&gt;, species &lt;chr&gt;,
-## #   damage &lt;chr&gt;, num_engs &lt;dbl&gt;, incident_month &lt;dbl&gt;, incident_year &lt;dbl&gt;,
+<pre><code>## # A tibble: 41 × 21
+##    incident_date       state airport_id airport          operator atype type_eng
+##    &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   
+##  1 2015-05-26 00:00:00 N/A   SVMI       SIMON BOLIVAR I… AMERICA… B-73… D       
+##  2 2015-04-25 00:00:00 FL    KJAX       JACKSONVILLE IN… AMERICA… A-319 D       
+##  3 2015-04-02 00:00:00 MA    KBOS       GENERAL EDWARD … AMERICA… B-73… D       
+##  4 2001-04-02 00:00:00 N/A   LFPG       CHARLES DE GAUL… AMERICA… B-76… D       
+##  5 2015-10-08 00:00:00 WA    KSEA       SEATTLE-TACOMA … DELTA A… A-330 D       
+##  6 2015-09-23 00:00:00 UT    KSLC       SALT LAKE CITY … DELTA A… B-73… D       
+##  7 2008-10-25 00:00:00 UT    KSLC       SALT LAKE CITY … DELTA A… DC-9… D       
+##  8 2007-12-02 00:00:00 N/A   GOOY       DAKAY-YOFF-LEOP… DELTA A… B-76… D       
+##  9 2007-11-22 00:00:00 N/A   LFMN       NICE COTE D&#39;AZU… DELTA A… B-76… D       
+## 10 2011-07-30 00:00:00 CA    KBUR       BOB HOPE ARPT    SOUTHWE… B-73… D       
+## # ℹ 31 more rows
+## # ℹ 14 more variables: species_id &lt;chr&gt;, species &lt;chr&gt;, damage &lt;chr&gt;,
+## #   num_engs &lt;dbl&gt;, incident_month &lt;dbl&gt;, incident_year &lt;dbl&gt;,
 ## #   time_of_day &lt;chr&gt;, time &lt;dbl&gt;, height &lt;dbl&gt;, speed &lt;dbl&gt;,
 ## #   phase_of_flt &lt;chr&gt;, sky &lt;chr&gt;, precip &lt;chr&gt;, cost_repairs_infl_adj &lt;dbl&gt;</code></pre>
 </div>
-<div id="sequence-operations-with-pipes" class="section level2">
-<h2><span class="header-section-number">2.4</span> Sequence operations with pipes (<code>%&gt;%</code>)</h2>
-<p><img src="images/magrittr.png" width="200" /> (logo is a reference to <a href="https://en.wikipedia.org/wiki/The_Treachery_of_Images">The Treachery of Images</a>)</p>
-<p>What if you want to select and filter at the same time? Well, one way to do this is to use intermediate steps. To do this, you first create a temporary data frame and then use that as input to the next function, like this:</p>
+<div id="sequence-operations-with-pipes" class="section level2"
+number="2.4">
+<h2><span class="header-section-number">2.4</span> Sequence operations
+with pipes (<code>%&gt;%</code>)</h2>
+<p><img src="images/magrittr.png" width="200" /> (logo is a reference to
+<a href="https://en.wikipedia.org/wiki/The_Treachery_of_Images">The
+Treachery of Images</a>)</p>
+<p>What if you want to select and filter at the same time? Well, one way
+to do this is to use intermediate steps. To do this, you first create a
+temporary data frame and then use that as input to the next function,
+like this:</p>
 <pre class="r"><code>dc_impacts &lt;- filter(df, state == &#39;DC&#39;)
 dc_impacts_airlineTime &lt;- select(dc_impacts, operator, time, time_of_day)
 head(dc_impacts_airlineTime)</code></pre>
-<pre><code>## # A tibble: 6 x 3
+<pre><code>## # A tibble: 6 × 3
 ##   operator           time time_of_day
 ##   &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;      
 ## 1 AMERICAN AIRLINES  2130 Night      
@@ -910,14 +951,24 @@ head(dc_impacts_airlineTime)</code></pre>
 ## 4 AMERICAN AIRLINES  2245 Night      
 ## 5 AMERICAN AIRLINES  2150 Night      
 ## 6 AMERICAN AIRLINES  2022 Night</code></pre>
-<p>This works, but it can also clutter up your workspace with lots of objects with different names.</p>
-<p>Another approach is to use <strong>pipes</strong>, which is a more recent addition to R. Pipes let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same dataset.</p>
-<p>The pipe operator is <code>%&gt;%</code> and comes from the <a href="https://github.com/tidyverse/magrittr"><code>magrittr</code></a> package, which is installed automatically with <code>dplyr</code>. If you use RStudio, you can type the pipe with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you have a PC or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you have a Mac. Here’s the same thing as the previous example but with pipes:</p>
+<p>This works, but it can also clutter up your workspace with lots of
+objects with different names.</p>
+<p>Another approach is to use <strong>pipes</strong>, which is a more
+recent addition to R. Pipes let you take the output of one function and
+send it directly to the next, which is useful when you need to do many
+things to the same dataset.</p>
+<p>The pipe operator is <code>%&gt;%</code> and comes from the <a
+href="https://github.com/tidyverse/magrittr"><code>magrittr</code></a>
+package, which is installed automatically with <code>dplyr</code>. If
+you use RStudio, you can type the pipe with <kbd>Ctrl</kbd> +
+<kbd>Shift</kbd> + <kbd>M</kbd> if you have a PC or <kbd>Cmd</kbd> +
+<kbd>Shift</kbd> + <kbd>M</kbd> if you have a Mac. Here’s the same thing
+as the previous example but with pipes:</p>
 <pre class="r"><code>df %&gt;%
     filter(state == &#39;DC&#39;) %&gt;%
     select(operator, time, time_of_day) %&gt;%
     head()</code></pre>
-<pre><code>## # A tibble: 6 x 3
+<pre><code>## # A tibble: 6 × 3
 ##   operator           time time_of_day
 ##   &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;      
 ## 1 AMERICAN AIRLINES  2130 Night      
@@ -926,9 +977,21 @@ head(dc_impacts_airlineTime)</code></pre>
 ## 4 AMERICAN AIRLINES  2245 Night      
 ## 5 AMERICAN AIRLINES  2150 Night      
 ## 6 AMERICAN AIRLINES  2022 Night</code></pre>
-<p>In the above code, we use the pipe to send the <code>df</code> data frame first through <code>filter()</code> to keep only rows from DC, and then through <code>select()</code> to keep only the columns <code>operator</code>, <code>time</code>, and <code>time_of_day</code>.</p>
-<p>Since <code>%&gt;%</code> takes the object on its left and passes it as the first argument to the function on its right, we don’t need to explicitly include the data frame as an argument to the <code>filter()</code> and <code>select()</code> functions.</p>
-<p>Consider reading the <code>%&gt;%</code> operator as the words “…and then…”. For instance, in the above example I would read the code as “First, filter to only data from DC, <strong>and then</strong> select the columns <code>operator</code>, <code>time</code>, and <code>time_of_day</code>, <strong>and then</strong> show the first 6 rows.”</p>
+<p>In the above code, we use the pipe to send the <code>df</code> data
+frame first through <code>filter()</code> to keep only rows from DC, and
+then through <code>select()</code> to keep only the columns
+<code>operator</code>, <code>time</code>, and
+<code>time_of_day</code>.</p>
+<p>Since <code>%&gt;%</code> takes the object on its left and passes it
+as the first argument to the function on its right, we don’t need to
+explicitly include the data frame as an argument to the
+<code>filter()</code> and <code>select()</code> functions.</p>
+<p>Consider reading the <code>%&gt;%</code> operator as the words “…and
+then…”. For instance, in the above example I would read the code as
+“First, filter to only data from DC, <strong>and then</strong> select
+the columns <code>operator</code>, <code>time</code>, and
+<code>time_of_day</code>, <strong>and then</strong> show the first 6
+rows.”</p>
 <p>Here’s another analogy:</p>
 <p><strong>Without Pipes</strong>:</p>
 <pre class="r"><code>leave_house(get_dressed(get_out_of_bed(wake_up(me))))</code></pre>
@@ -938,13 +1001,16 @@ head(dc_impacts_airlineTime)</code></pre>
     get_out_of_bed %&gt;%
     get_dressed %&gt;%
     leave_house</code></pre>
-<p>In the above example, adding pipes makes the flow of operations easier to read from left to right, with the <code>%&gt;%</code> operator reading as “…and then…”</p>
-<p>If you want to create a new object with the output of a “pipeline”, you just put the object name at the start of the first pipe:</p>
+<p>In the above example, adding pipes makes the flow of operations
+easier to read from left to right, with the <code>%&gt;%</code> operator
+reading as “…and then…”</p>
+<p>If you want to create a new object with the output of a “pipeline”,
+you just put the object name at the start of the first pipe:</p>
 <pre class="r"><code>dc_impacts &lt;- df %&gt;%
     filter(state == &#39;DC&#39;) %&gt;%
     select(operator, time, time_of_day)
 head(dc_impacts)</code></pre>
-<pre><code>## # A tibble: 6 x 3
+<pre><code>## # A tibble: 6 × 3
 ##   operator           time time_of_day
 ##   &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;      
 ## 1 AMERICAN AIRLINES  2130 Night      
@@ -954,61 +1020,72 @@ head(dc_impacts)</code></pre>
 ## 5 AMERICAN AIRLINES  2150 Night      
 ## 6 AMERICAN AIRLINES  2022 Night</code></pre>
 </div>
-<div id="sort-rows-with-arrange" class="section level2">
-<h2><span class="header-section-number">2.5</span> Sort rows with <code>arrange()</code></h2>
-<p>Use the <code>arrange()</code> function to sort a data frame by a column. For example, if you wanted to view the least expensive accidents, you could arrange the data frame by the variable <code>cost_repairs_infl_adj</code>:</p>
+<div id="sort-rows-with-arrange" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Sort rows with
+<code>arrange()</code></h2>
+<p>Use the <code>arrange()</code> function to sort a data frame by a
+column. For example, if you wanted to view the least expensive
+accidents, you could arrange the data frame by the variable
+<code>cost_repairs_infl_adj</code>:</p>
 <pre class="r"><code># Arrange by least expensive accident
 df %&gt;%
     arrange(cost_repairs_infl_adj)</code></pre>
-<pre><code>## # A tibble: 56,978 x 21
-##    incident_date       state airport_id airport operator atype type_eng
-##    &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   
-##  1 2013-09-05 00:00:00 MI    KFNT       BISHOP… SOUTHWE… B-73… D       
-##  2 2011-04-17 00:00:00 TX    KDFW       DALLAS… AMERICA… MD-80 D       
-##  3 2018-07-10 00:00:00 NM    KABQ       ALBUQU… SOUTHWE… B-73… D       
-##  4 2017-10-31 00:00:00 PA    KPIT       PITTSB… AMERICA… B-73… D       
-##  5 2014-01-17 00:00:00 UT    KSLC       SALT L… SOUTHWE… B-73… D       
-##  6 2006-04-28 00:00:00 TX    KIAH       GEORGE… UNITED … B-73… D       
-##  7 2005-04-13 00:00:00 N/A   ZZZZ       UNKNOWN UNITED … B-76… D       
-##  8 2004-06-17 00:00:00 N/A   ZZZZ       UNKNOWN UNITED … B-73… D       
-##  9 2004-04-22 00:00:00 N/A   ZZZZ       UNKNOWN UNITED … B-76… D       
-## 10 2018-10-20 00:00:00 TX    KDAL       DALLAS… SOUTHWE… B-73… D       
-## # … with 56,968 more rows, and 14 more variables: species_id &lt;chr&gt;,
-## #   species &lt;chr&gt;, damage &lt;chr&gt;, num_engs &lt;dbl&gt;, incident_month &lt;dbl&gt;,
-## #   incident_year &lt;dbl&gt;, time_of_day &lt;chr&gt;, time &lt;dbl&gt;, height &lt;dbl&gt;,
-## #   speed &lt;dbl&gt;, phase_of_flt &lt;chr&gt;, sky &lt;chr&gt;, precip &lt;chr&gt;,
-## #   cost_repairs_infl_adj &lt;dbl&gt;</code></pre>
-<p>To sort in descending order, add the <code>desc()</code> function inside the <code>arrange()</code> function. For example, here are the <em>most</em> expensive accidents:</p>
+<pre><code>## # A tibble: 56,978 × 21
+##    incident_date       state airport_id airport          operator atype type_eng
+##    &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   
+##  1 2013-09-05 00:00:00 MI    KFNT       BISHOP INTL ARPT SOUTHWE… B-73… D       
+##  2 2011-04-17 00:00:00 TX    KDFW       DALLAS/FORT WOR… AMERICA… MD-80 D       
+##  3 2018-07-10 00:00:00 NM    KABQ       ALBUQUERQUE INT… SOUTHWE… B-73… D       
+##  4 2017-10-31 00:00:00 PA    KPIT       PITTSBURGH INTL… AMERICA… B-73… D       
+##  5 2014-01-17 00:00:00 UT    KSLC       SALT LAKE CITY … SOUTHWE… B-73… D       
+##  6 2006-04-28 00:00:00 TX    KIAH       GEORGE BUSH INT… UNITED … B-73… D       
+##  7 2005-04-13 00:00:00 N/A   ZZZZ       UNKNOWN          UNITED … B-76… D       
+##  8 2004-06-17 00:00:00 N/A   ZZZZ       UNKNOWN          UNITED … B-73… D       
+##  9 2004-04-22 00:00:00 N/A   ZZZZ       UNKNOWN          UNITED … B-76… D       
+## 10 2018-10-20 00:00:00 TX    KDAL       DALLAS LOVE FIE… SOUTHWE… B-73… D       
+## # ℹ 56,968 more rows
+## # ℹ 14 more variables: species_id &lt;chr&gt;, species &lt;chr&gt;, damage &lt;chr&gt;,
+## #   num_engs &lt;dbl&gt;, incident_month &lt;dbl&gt;, incident_year &lt;dbl&gt;,
+## #   time_of_day &lt;chr&gt;, time &lt;dbl&gt;, height &lt;dbl&gt;, speed &lt;dbl&gt;,
+## #   phase_of_flt &lt;chr&gt;, sky &lt;chr&gt;, precip &lt;chr&gt;, cost_repairs_infl_adj &lt;dbl&gt;</code></pre>
+<p>To sort in descending order, add the <code>desc()</code> function
+inside the <code>arrange()</code> function. For example, here are the
+<em>most</em> expensive accidents:</p>
 <pre class="r"><code># Arrange by most expensive accident
 df %&gt;%
     arrange(desc(cost_repairs_infl_adj))</code></pre>
-<pre><code>## # A tibble: 56,978 x 21
-##    incident_date       state airport_id airport operator atype type_eng
-##    &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   
-##  1 2009-02-03 00:00:00 CO    KDEN       DENVER… UNITED … B-75… D       
-##  2 2007-11-22 00:00:00 N/A   LFMN       NICE C… DELTA A… B-76… D       
-##  3 2011-09-26 00:00:00 CO    KDEN       DENVER… UNITED … B-75… D       
-##  4 2017-07-11 00:00:00 CO    KDEN       DENVER… UNITED … B-73… D       
-##  5 2008-10-25 00:00:00 UT    KSLC       SALT L… DELTA A… DC-9… D       
-##  6 2011-07-30 00:00:00 CA    KBUR       BOB HO… SOUTHWE… B-73… D       
-##  7 2001-12-06 00:00:00 MI    KDTW       DETROI… SOUTHWE… B-73… D       
-##  8 2003-04-15 00:00:00 CA    KSFO       SAN FR… UNITED … B-73… D       
-##  9 2005-09-06 00:00:00 CO    KDEN       DENVER… UNITED … B-73… D       
-## 10 2005-04-20 00:00:00 N/A   ZZZZ       UNKNOWN UNITED … B-77… D       
-## # … with 56,968 more rows, and 14 more variables: species_id &lt;chr&gt;,
-## #   species &lt;chr&gt;, damage &lt;chr&gt;, num_engs &lt;dbl&gt;, incident_month &lt;dbl&gt;,
-## #   incident_year &lt;dbl&gt;, time_of_day &lt;chr&gt;, time &lt;dbl&gt;, height &lt;dbl&gt;,
-## #   speed &lt;dbl&gt;, phase_of_flt &lt;chr&gt;, sky &lt;chr&gt;, precip &lt;chr&gt;,
-## #   cost_repairs_infl_adj &lt;dbl&gt;</code></pre>
+<pre><code>## # A tibble: 56,978 × 21
+##    incident_date       state airport_id airport          operator atype type_eng
+##    &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   
+##  1 2009-02-03 00:00:00 CO    KDEN       DENVER INTL AIR… UNITED … B-75… D       
+##  2 2007-11-22 00:00:00 N/A   LFMN       NICE COTE D&#39;AZU… DELTA A… B-76… D       
+##  3 2011-09-26 00:00:00 CO    KDEN       DENVER INTL AIR… UNITED … B-75… D       
+##  4 2017-07-11 00:00:00 CO    KDEN       DENVER INTL AIR… UNITED … B-73… D       
+##  5 2008-10-25 00:00:00 UT    KSLC       SALT LAKE CITY … DELTA A… DC-9… D       
+##  6 2011-07-30 00:00:00 CA    KBUR       BOB HOPE ARPT    SOUTHWE… B-73… D       
+##  7 2001-12-06 00:00:00 MI    KDTW       DETROIT METRO W… SOUTHWE… B-73… D       
+##  8 2003-04-15 00:00:00 CA    KSFO       SAN FRANCISCO I… UNITED … B-73… D       
+##  9 2005-09-06 00:00:00 CO    KDEN       DENVER INTL AIR… UNITED … B-73… D       
+## 10 2005-04-20 00:00:00 N/A   ZZZZ       UNKNOWN          UNITED … B-77… D       
+## # ℹ 56,968 more rows
+## # ℹ 14 more variables: species_id &lt;chr&gt;, species &lt;chr&gt;, damage &lt;chr&gt;,
+## #   num_engs &lt;dbl&gt;, incident_month &lt;dbl&gt;, incident_year &lt;dbl&gt;,
+## #   time_of_day &lt;chr&gt;, time &lt;dbl&gt;, height &lt;dbl&gt;, speed &lt;dbl&gt;,
+## #   phase_of_flt &lt;chr&gt;, sky &lt;chr&gt;, precip &lt;chr&gt;, cost_repairs_infl_adj &lt;dbl&gt;</code></pre>
 </div>
-<div id="create-new-variables-with-mutate" class="section level2">
-<h2><span class="header-section-number">2.6</span> Create new variables with <code>mutate()</code></h2>
+<div id="create-new-variables-with-mutate" class="section level2"
+number="2.6">
+<h2><span class="header-section-number">2.6</span> Create new variables
+with <code>mutate()</code></h2>
 <p><img src="images/rstudio-cheatsheet-mutate.png" width="500" /></p>
-<p>You will often need to create new columns based on the values in existing columns. For this use <code>mutate()</code>. For example, let’s create a new variable converting the <code>height</code> variable from feet to miles:</p>
+<p>You will often need to create new columns based on the values in
+existing columns. For this use <code>mutate()</code>. For example, let’s
+create a new variable converting the <code>height</code> variable from
+feet to miles:</p>
 <pre class="r"><code>df %&gt;%
     mutate(height_miles = height / 5280) %&gt;%
     select(height, height_miles)</code></pre>
-<pre><code>## # A tibble: 56,978 x 2
+<pre><code>## # A tibble: 56,978 × 2
 ##    height height_miles
 ##     &lt;dbl&gt;        &lt;dbl&gt;
 ##  1    700        0.133
@@ -1021,13 +1098,14 @@ df %&gt;%
 ##  8     NA       NA    
 ##  9     NA       NA    
 ## 10      0        0    
-## # … with 56,968 more rows</code></pre>
-<p>You can also create a second new column based on the first new column within the same call of <code>mutate()</code>:</p>
+## # ℹ 56,968 more rows</code></pre>
+<p>You can also create a second new column based on the first new column
+within the same call of <code>mutate()</code>:</p>
 <pre class="r"><code>df %&gt;%
     mutate(height_miles = height / 5280,
            height_half_miles = height_miles / 2) %&gt;%
     select(height, height_miles, height_half_miles)</code></pre>
-<pre><code>## # A tibble: 56,978 x 3
+<pre><code>## # A tibble: 56,978 × 3
 ##    height height_miles height_half_miles
 ##     &lt;dbl&gt;        &lt;dbl&gt;             &lt;dbl&gt;
 ##  1    700        0.133            0.0663
@@ -1040,13 +1118,16 @@ df %&gt;%
 ##  8     NA       NA               NA     
 ##  9     NA       NA               NA     
 ## 10      0        0                0     
-## # … with 56,968 more rows</code></pre>
-<p>You’ll notice that the variables created have a lot of <code>NA</code>s - that’s because there are missing data. If you wanted to remove those, you could insert a <code>filter()</code> in the pipe chain:</p>
+## # ℹ 56,968 more rows</code></pre>
+<p>You’ll notice that the variables created have a lot of
+<code>NA</code>s - that’s because there are missing data. If you wanted
+to remove those, you could insert a <code>filter()</code> in the pipe
+chain:</p>
 <pre class="r"><code>df %&gt;%
     filter(!is.na(height)) %&gt;%
     mutate(height_miles = height / 5280) %&gt;%
     select(height, height_miles)</code></pre>
-<pre><code>## # A tibble: 38,940 x 2
+<pre><code>## # A tibble: 38,940 × 2
 ##    height height_miles
 ##     &lt;dbl&gt;        &lt;dbl&gt;
 ##  1    700       0.133 
@@ -1059,29 +1140,41 @@ df %&gt;%
 ##  8    100       0.0189
 ##  9      0       0     
 ## 10   1000       0.189 
-## # … with 38,930 more rows</code></pre>
-<p><code>is.na()</code> is a function that determines whether something is an <code>NA</code>. The <code>!</code> symbol negates the result, so we’re asking for every row where weight <em>is not</em> an <code>NA</code>.</p>
+## # ℹ 38,930 more rows</code></pre>
+<p><code>is.na()</code> is a function that determines whether something
+is an <code>NA</code>. The <code>!</code> symbol negates the result, so
+we’re asking for every row where weight <em>is not</em> an
+<code>NA</code>.</p>
 </div>
 </div>
-<div id="split-apply-combine" class="section level1">
-<h1><span class="header-section-number">3</span> Split-apply-combine</h1>
-<p>Many data analysis tasks can be approached using the <em>split-apply-combine</em> paradigm:</p>
+<div id="split-apply-combine" class="section level1" number="3">
+<h1><span class="header-section-number">3</span>
+Split-apply-combine</h1>
+<p>Many data analysis tasks can be approached using the
+<em>split-apply-combine</em> paradigm:</p>
 <ol style="list-style-type: decimal">
 <li>Split the data into groups</li>
 <li>Apply some analysis to each group</li>
 <li>Combine the results.</li>
 </ol>
-<p><code>dplyr</code> makes this very easy through the use of the <code>group_by()</code> function.</p>
-<div id="the-group_by-function" class="section level2">
-<h2><span class="header-section-number">3.1</span> The <code>group_by()</code> function</h2>
+<p><code>dplyr</code> makes this very easy through the use of the
+<code>group_by()</code> function.</p>
+<div id="the-group_by-function" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> The
+<code>group_by()</code> function</h2>
 <p><img src="images/rstudio-cheatsheet-group_by.png" width="500" /></p>
-<p>The <code>group_by()</code> function enables you to perform operations across groups within the data frame. It is typically used by inserting it in the “pipeline” before the desired group operation. For example, if we wanted to add a a new column that computed the mean height of reported wildlife impacts for each state, we could insert <code>group_by(state)</code> in the pipeline:</p>
+<p>The <code>group_by()</code> function enables you to perform
+operations across groups within the data frame. It is typically used by
+inserting it in the “pipeline” before the desired group operation. For
+example, if we wanted to add a a new column that computed the mean
+height of reported wildlife impacts for each state, we could insert
+<code>group_by(state)</code> in the pipeline:</p>
 <pre class="r"><code>df %&gt;%
     filter(!is.na(height)) %&gt;%
     group_by(state) %&gt;%          # Here we&#39;re grouping by state
     mutate(mean_height = mean(height)) %&gt;%
     select(state, mean_height)</code></pre>
-<pre><code>## # A tibble: 38,940 x 2
+<pre><code>## # A tibble: 38,940 × 2
 ## # Groups:   state [59]
 ##    state mean_height
 ##    &lt;chr&gt;       &lt;dbl&gt;
@@ -1095,18 +1188,25 @@ df %&gt;%
 ##  8 N/A          994.
 ##  9 MD          1265.
 ## 10 CA           989.
-## # … with 38,930 more rows</code></pre>
-<p>You’ll see that the same value for <code>mean_height</code> is reported for the same states (e.g. the mean height in Florida is 892 ft).</p>
+## # ℹ 38,930 more rows</code></pre>
+<p>You’ll see that the same value for <code>mean_height</code> is
+reported for the same states (e.g. the mean height in Florida is 892
+ft).</p>
 </div>
-<div id="the-summarize-function" class="section level2">
-<h2><span class="header-section-number">3.2</span> The <code>summarize()</code> function</h2>
+<div id="the-summarize-function" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> The
+<code>summarize()</code> function</h2>
 <p><img src="images/rstudio-cheatsheet-summarise.png" width="500" /></p>
-<p>The <code>group_by()</code> function is often used together with <code>summarize()</code>, which collapses each group into a single-row summary of that group. For example, we collapse the result of the previous example by using <code>summarise()</code> instead of <code>mutate()</code>:</p>
+<p>The <code>group_by()</code> function is often used together with
+<code>summarize()</code>, which collapses each group into a single-row
+summary of that group. For example, we collapse the result of the
+previous example by using <code>summarise()</code> instead of
+<code>mutate()</code>:</p>
 <pre class="r"><code>df %&gt;%
     filter(!is.na(height)) %&gt;%
     group_by(state) %&gt;%
     summarise(mean_height = mean(height))</code></pre>
-<pre><code>## # A tibble: 59 x 2
+<pre><code>## # A tibble: 59 × 2
 ##    state mean_height
 ##    &lt;chr&gt;       &lt;dbl&gt;
 ##  1 AB           327.
@@ -1119,13 +1219,16 @@ df %&gt;%
 ##  8 CO           442.
 ##  9 CT           811.
 ## 10 DC           963.
-## # … with 49 more rows</code></pre>
-<p>You can also group by multiple columns - here let’s group by state and the airline:</p>
+## # ℹ 49 more rows</code></pre>
+<p>You can also group by multiple columns - here let’s group by state
+and the airline:</p>
 <pre class="r"><code>df %&gt;%
     filter(!is.na(height)) %&gt;%
     group_by(state, operator) %&gt;%
     summarise(mean_height = mean(height))</code></pre>
-<pre><code>## # A tibble: 213 x 3
+<pre><code>## `summarise()` has grouped output by &#39;state&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 213 × 3
 ## # Groups:   state [59]
 ##    state operator           mean_height
 ##    &lt;chr&gt; &lt;chr&gt;                    &lt;dbl&gt;
@@ -1139,12 +1242,16 @@ df %&gt;%
 ##  8 AL    SOUTHWEST AIRLINES       1020.
 ##  9 AL    UNITED AIRLINES           375 
 ## 10 AR    AMERICAN AIRLINES         508.
-## # … with 203 more rows</code></pre>
-<p>Notice that in the above examples I’ve kept the early filter to drop <code>NA</code>s. This is important when performing summarizing functions like <code>mean()</code> or <code>sum()</code>. If <code>NA</code>s are present, the result will also be <code>NA</code>:</p>
+## # ℹ 203 more rows</code></pre>
+<p>Notice that in the above examples I’ve kept the early filter to drop
+<code>NA</code>s. This is important when performing summarizing
+functions like <code>mean()</code> or <code>sum()</code>. If
+<code>NA</code>s are present, the result will also be
+<code>NA</code>:</p>
 <pre class="r"><code>df %&gt;%
     group_by(state) %&gt;%
     summarise(mean_height = mean(height))</code></pre>
-<pre><code>## # A tibble: 59 x 2
+<pre><code>## # A tibble: 59 × 2
 ##    state mean_height
 ##    &lt;chr&gt;       &lt;dbl&gt;
 ##  1 AB            NA 
@@ -1157,15 +1264,20 @@ df %&gt;%
 ##  8 CO            NA 
 ##  9 CT            NA 
 ## 10 DC            NA 
-## # … with 49 more rows</code></pre>
-<p>Once the data are grouped, you can also summarize multiple variables at the same time (and not necessarily on the same variable). For instance, you could add two more columns computing the minimum and maximum height:</p>
+## # ℹ 49 more rows</code></pre>
+<p>Once the data are grouped, you can also summarize multiple variables
+at the same time (and not necessarily on the same variable). For
+instance, you could add two more columns computing the minimum and
+maximum height:</p>
 <pre class="r"><code>df %&gt;%
     filter(!is.na(height)) %&gt;%
     group_by(state, operator) %&gt;%
     summarise(mean_height = mean(height),
               min_height = min(height),
               max_height = max(height))</code></pre>
-<pre><code>## # A tibble: 213 x 5
+<pre><code>## `summarise()` has grouped output by &#39;state&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 213 × 5
 ## # Groups:   state [59]
 ##    state operator           mean_height min_height max_height
 ##    &lt;chr&gt; &lt;chr&gt;                    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
@@ -1179,15 +1291,19 @@ df %&gt;%
 ##  8 AL    SOUTHWEST AIRLINES       1020.          0      10000
 ##  9 AL    UNITED AIRLINES           375           0       2800
 ## 10 AR    AMERICAN AIRLINES         508.          0       3400
-## # … with 203 more rows</code></pre>
+## # ℹ 203 more rows</code></pre>
 </div>
-<div id="counting" class="section level2">
+<div id="counting" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Counting</h2>
-<p>Often times you will want to know the number of observations found for each variable or combination of variables. One way to do this is to use the <code>group_by()</code> and <code>summarise()</code> functions in combination. For example, here is the number of observations for each aircraft engine type:</p>
+<p>Often times you will want to know the number of observations found
+for each variable or combination of variables. One way to do this is to
+use the <code>group_by()</code> and <code>summarise()</code> functions
+in combination. For example, here is the number of observations for each
+aircraft engine type:</p>
 <pre class="r"><code>df %&gt;%
     group_by(type_eng) %&gt;%
     summarise(count = n())</code></pre>
-<pre><code>## # A tibble: 5 x 2
+<pre><code>## # A tibble: 5 × 2
 ##   type_eng count
 ##   &lt;chr&gt;    &lt;int&gt;
 ## 1 A            2
@@ -1195,10 +1311,11 @@ df %&gt;%
 ## 3 D        56705
 ## 4 F            3
 ## 5 &lt;NA&gt;       234</code></pre>
-<p>Since this is such a common task, <code>dplyr</code> provides the <code>count()</code> function to do the same thing:</p>
+<p>Since this is such a common task, <code>dplyr</code> provides the
+<code>count()</code> function to do the same thing:</p>
 <pre class="r"><code>df %&gt;%
     count(type_eng)</code></pre>
-<pre><code>## # A tibble: 5 x 2
+<pre><code>## # A tibble: 5 × 2
 ##   type_eng     n
 ##   &lt;chr&gt;    &lt;int&gt;
 ## 1 A            2
@@ -1206,10 +1323,11 @@ df %&gt;%
 ## 3 D        56705
 ## 4 F            3
 ## 5 &lt;NA&gt;       234</code></pre>
-<p>For convenience, <code>count()</code> also provides the <code>sort</code> argument:</p>
+<p>For convenience, <code>count()</code> also provides the
+<code>sort</code> argument:</p>
 <pre class="r"><code>df %&gt;%
     count(type_eng, sort = TRUE)</code></pre>
-<pre><code>## # A tibble: 5 x 2
+<pre><code>## # A tibble: 5 × 2
 ##   type_eng     n
 ##   &lt;chr&gt;    &lt;int&gt;
 ## 1 D        56705
@@ -1217,10 +1335,11 @@ df %&gt;%
 ## 3 C           34
 ## 4 F            3
 ## 5 A            2</code></pre>
-<p>You can also count the <em>combination of variables</em> by providing more than one column name to <code>count()</code>:</p>
+<p>You can also count the <em>combination of variables</em> by providing
+more than one column name to <code>count()</code>:</p>
 <pre class="r"><code>df %&gt;%
     count(type_eng, num_engs, sort = TRUE)</code></pre>
-<pre><code>## # A tibble: 10 x 3
+<pre><code>## # A tibble: 10 × 3
 ##    type_eng num_engs     n
 ##    &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;
 ##  1 D               2 53652
@@ -1233,34 +1352,58 @@ df %&gt;%
 ##  8 A               1     1
 ##  9 A               2     1
 ## 10 D              NA     1</code></pre>
-<p>Hmm, looks like most reported wildlife impacts involve planes with 2 D-type engines.</p>
+<p>Hmm, looks like most reported wildlife impacts involve planes with 2
+D-type engines.</p>
 </div>
 </div>
-<div id="exporting-data" class="section level1">
+<div id="exporting-data" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Exporting data</h1>
-<p>Now that you have learned how to use <code>dplyr</code> to extract information from or summarize your raw data, you may want to export these new data sets. Similar to the <code>read_csv()</code> function used for reading CSV files into R, there is a <code>write_csv()</code> function that generates CSV files from data frames.</p>
-<p><strong>Important</strong>: Before using <code>write_csv()</code>, create a new folder called “data_output” and put it in your R Project folder. In general, you should never write generated datasets in the same directory as your raw data. The “data” folder should only contain the raw, unaltered data, and should be left alone to make sure we don’t delete or modify it.</p>
-<p>Let’s save one of the summary data frames from the earlier examples where we computed the min, mean, and max heights of impacts by each state and airline:</p>
+<p>Now that you have learned how to use <code>dplyr</code> to extract
+information from or summarize your raw data, you may want to export
+these new data sets. Similar to the <code>read_csv()</code> function
+used for reading CSV files into R, there is a <code>write_csv()</code>
+function that generates CSV files from data frames.</p>
+<p><strong>Important</strong>: Before using <code>write_csv()</code>,
+create a new folder called “data_output” and put it in your R Project
+folder. In general, you should never write generated datasets in the
+same directory as your raw data. The “data” folder should only contain
+the raw, unaltered data, and should be left alone to make sure we don’t
+delete or modify it.</p>
+<p>Let’s save one of the summary data frames from the earlier examples
+where we computed the min, mean, and max heights of impacts by each
+state and airline:</p>
 <pre class="r"><code>heightSummary &lt;- df %&gt;%
     filter(!is.na(height)) %&gt;%
     group_by(state, operator) %&gt;%
     summarise(mean_height = mean(height),
               min_height = min(height),
               max_height = max(height))</code></pre>
-<p>Save the the new <code>heightSummary</code> data frame as a CSV file in your “data_output” folder:</p>
+<pre><code>## `summarise()` has grouped output by &#39;state&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<p>Save the the new <code>heightSummary</code> data frame as a CSV file
+in your “data_output” folder:</p>
 <pre class="r"><code>write_csv(heightSummary, path = file.path(&#39;data_output&#39;, &#39;heightSummary.csv&#39;)</code></pre>
 <hr />
 </div>
-<div id="tips" class="section level1">
+<div id="tips" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Tips</h1>
-<p>You will often need to create new variables based on a condition. To do this, you can use the <code>if_else()</code> function. Here’s the general syntax:</p>
+<p>You will often need to create new variables based on a condition. To
+do this, you can use the <code>if_else()</code> function. Here’s the
+general syntax:</p>
 <pre class="r"><code>if_else(&lt;condition&gt;, &lt;if TRUE&gt;, &lt;else&gt;)</code></pre>
-<p>The first argument is a condition. If the condition is TRUE, then the value given to the second argument will be used; if not, then the third argument value will be used.</p>
-<p>Here’s an example of creating a variable to determine which months in the wildlife impacts data are in the summer:</p>
+<p>The first argument is a condition. If the condition is TRUE, then the
+value given to the second argument will be used; if not, then the third
+argument value will be used.</p>
+<p>Here’s an example of creating a variable to determine which months in
+the wildlife impacts data are in the summer:</p>
 <pre class="r"><code>df %&gt;%
     mutate(
         summer_month = if_else(incident_month %in% c(6, 7, 8), TRUE, FALSE))</code></pre>
-<p>Of course, in this particular case the <code>if_else()</code> function isn’t even needed because the condition returns <code>TRUE</code> and <code>FALSE</code> values. However, if you wanted to extend this example to determine all four seasons, you could use a series of nested <code>if_else()</code> functions:</p>
+<p>Of course, in this particular case the <code>if_else()</code>
+function isn’t even needed because the condition returns
+<code>TRUE</code> and <code>FALSE</code> values. However, if you wanted
+to extend this example to determine all four seasons, you could use a
+series of nested <code>if_else()</code> functions:</p>
 <pre class="r"><code>df %&gt;%
     mutate(season =
         if_else(
@@ -1269,13 +1412,22 @@ df %&gt;%
             incident_month %in% c(6, 7, 8), &#39;Summer&#39;,
         if_else(
             incident_month %in% c(9, 10, 11), &#39;Fall&#39;, &#39;Winter&#39;))))</code></pre>
-<p>Note: The Base R version of this function is <code>ifelse()</code>, but I recommend using the <code>dplyr</code> version, <code>if_else()</code>, as it is a <a href="https://stackoverflow.com/questions/50646133/dplyr-if-else-vs-base-r-ifelse">stricter function</a>.</p>
+<p>Note: The Base R version of this function is <code>ifelse()</code>,
+but I recommend using the <code>dplyr</code> version,
+<code>if_else()</code>, as it is a <a
+href="https://stackoverflow.com/questions/50646133/dplyr-if-else-vs-base-r-ifelse">stricter
+function</a>.</p>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li><a href="https://datacarpentry.org/R-ecology-lesson/">Data Analysis and Visualization in R for Ecologists</a>, by François Michonneau &amp; Auriel Fournier. Zenodo: <a href="http://doi.org/10.5281/zenodo.3264888" class="uri">http://doi.org/10.5281/zenodo.3264888</a></li>
-<li>The amazing illustrations by <a href="https://github.com/allisonhorst">Allison Horst</a></li>
+<li><a href="https://datacarpentry.org/R-ecology-lesson/">Data Analysis
+and Visualization in R for Ecologists</a>, by François Michonneau &amp;
+Auriel Fournier. Zenodo: <a href="http://doi.org/10.5281/zenodo.3264888"
+class="uri">http://doi.org/10.5281/zenodo.3264888</a></li>
+<li>The amazing illustrations by <a
+href="https://github.com/allisonhorst">Allison Horst</a></li>
 </ul>
 </div>
 
@@ -1320,7 +1472,7 @@ df %&gt;%
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1338,7 +1490,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -1347,6 +1499,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -1359,7 +1514,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

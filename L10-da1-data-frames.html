@@ -13,20 +13,30 @@
 
 <title>Data Analysis 1 - Data Frames</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -92,12 +102,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -110,32 +124,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -145,10 +135,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -165,40 +151,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -226,7 +188,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -238,7 +200,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -248,11 +210,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -264,13 +243,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -278,16 +256,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -396,7 +367,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -410,7 +381,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -433,7 +404,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -493,7 +464,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -523,7 +494,7 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -555,7 +526,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -583,7 +554,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -592,35 +563,55 @@ div.tocify {
 </div>
 
 
-<p>This is the first lesson in a sequence on data analysis in R. Before reading this lesson, check out the <a href="dataAnalysisPrelude.html">“Prelude to Data Analysis”</a>.</p>
+<p>This is the first lesson in a sequence on data analysis in R. Before
+reading this lesson, check out the <a
+href="dataAnalysisPrelude.html">“Prelude to Data Analysis”</a>.</p>
 <blockquote>
 <h3 id="learning-objectives">Learning Objectives</h3>
 <ul>
 <li>Describe what a data frame is.</li>
 <li>Create data frames.</li>
-<li>Use indexing to subset and modify specific portions of data frames.</li>
+<li>Use indexing to subset and modify specific portions of data
+frames.</li>
 <li>Load external data from a .csv file into a data frame.</li>
 <li>Summarize the contents of a data frame.</li>
 </ul>
 <h3 id="suggested-readings">Suggested Readings</h3>
 <ul>
-<li><a href="https://www.datacamp.com/community/tutorials/intro-data-frame-r">“Introduction to Data frames in R”</a> Data Camp article, by Ryan Sheehy</li>
-<li><a href="https://r4ds.had.co.nz/tibbles.html">Chapter 10</a> of “R for Data Science”, by Garrett Grolemund and Hadley Wickham</li>
-<li><a href="https://rstudio-education.github.io/hopr/r-objects.html#data-frames">Chapters 5.8 - 5.11</a> of “Hands-On Programming with R”, by Garrett Grolemund</li>
+<li><a
+href="https://www.datacamp.com/community/tutorials/intro-data-frame-r">“Introduction
+to Data frames in R”</a> Data Camp article, by Ryan Sheehy</li>
+<li><a href="https://r4ds.had.co.nz/tibbles.html">Chapter 10</a> of “R
+for Data Science”, by Garrett Grolemund and Hadley Wickham</li>
+<li><a
+href="https://rstudio-education.github.io/hopr/r-objects.html#data-frames">Chapters
+5.8 - 5.11</a> of “Hands-On Programming with R”, by Garrett
+Grolemund</li>
 </ul>
 </blockquote>
 <hr />
-<div id="the-data-frame" class="section level1">
+<div id="the-data-frame" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> The data frame</h1>
-<div id="what-are-data-frames" class="section level2">
-<h2><span class="header-section-number">1.1</span> What are data frames?</h2>
-<p>Data frames are the <em>de facto</em> data structure for most tabular data in R. A data frame can be created by hand, but most commonly they are generated by reading in a data file (typically a <code>.csv</code> file).</p>
-<p>A data frame is the representation of data in the format of a table where the columns are <strong>vectors</strong> of the same length. Because columns are vectors, each column must contain a single type of data (e.g., numeric, character, integer, logical). For example, here is a figure depicting a data frame comprising a numeric, a character, and a logical vector:</p>
+<div id="what-are-data-frames" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> What are data
+frames?</h2>
+<p>Data frames are the <em>de facto</em> data structure for most tabular
+data in R. A data frame can be created by hand, but most commonly they
+are generated by reading in a data file (typically a <code>.csv</code>
+file).</p>
+<p>A data frame is the representation of data in the format of a table
+where the columns are <strong>vectors</strong> of the same length.
+Because columns are vectors, each column must contain a single type of
+data (e.g., numeric, character, integer, logical). For example, here is
+a figure depicting a data frame comprising a numeric, a character, and a
+logical vector:</p>
 <p><img src="images/data-frame.png" /></p>
 </div>
-<div id="the-data.frame-function" class="section level2">
-<h2><span class="header-section-number">1.2</span> The <code>data.frame()</code> function</h2>
-<p>You can create a data frame using the <code>data.frame()</code> function. Here is an example using of members of the Beatles band:</p>
+<div id="the-data.frame-function" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> The
+<code>data.frame()</code> function</h2>
+<p>You can create a data frame using the <code>data.frame()</code>
+function. Here is an example using of members of the Beatles band:</p>
 <pre class="r"><code>beatles &lt;- data.frame(
     firstName   = c(&quot;John&quot;, &quot;Paul&quot;, &quot;Ringo&quot;, &quot;George&quot;),
     lastName    = c(&quot;Lennon&quot;, &quot;McCartney&quot;, &quot;Starr&quot;, &quot;Harrison&quot;),
@@ -634,15 +625,31 @@ beatles</code></pre>
 ## 2      Paul McCartney       bass        1942    FALSE
 ## 3     Ringo     Starr      drums        1940    FALSE
 ## 4    George  Harrison     guitar        1943     TRUE</code></pre>
-<p>Notice how the data frame is created - you just hand the <code>data.frame()</code> function a bunch of vectors! This should hopefully help make it clear that a data frame is indeed a series of same-length vectors structured side-by-side.</p>
+<p>Notice how the data frame is created - you just hand the
+<code>data.frame()</code> function a bunch of vectors! This should
+hopefully help make it clear that a data frame is indeed a series of
+same-length vectors structured side-by-side.</p>
 </div>
-<div id="the-tibble-function" class="section level2">
-<h2><span class="header-section-number">1.3</span> The <code>tibble()</code> function</h2>
-<p>The <a href="https://r4ds.had.co.nz/tibbles.html">tibble</a> is an improved version of the Base R data frame, and it comes from the <strong>dplyr</strong> library (which we’ll get into <a href="L11-da2-data-wrangling.html">next lesson</a>). If you haven’t already, go ahead and install and load the <strong>dplyr</strong> library now:</p>
+<div id="the-tibble-function" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> The
+<code>tibble()</code> function</h2>
+<p>The <a href="https://r4ds.had.co.nz/tibbles.html">tibble</a> is an
+improved version of the Base R data frame, and it comes from the
+<strong>dplyr</strong> library (which we’ll get into <a
+href="L11-da2-data-wrangling.html">next lesson</a>). If you haven’t
+already, go ahead and install and load the <strong>dplyr</strong>
+library now:</p>
 <pre class="r"><code>install.packages(&#39;dplyr&#39;)
 library(dplyr)</code></pre>
-<p>A tibble works just like a data frame, but it has a few small features that make it a bit more useful - to the extent that from here on, we will be using tibbles as our default data frame structure. With this in mind, I’ll often use the term “data frame” to refer to both tibbles and data frames, since they serve the same purpose as a data structure.</p>
-<p>Just like with data frames, you can create a tibble using the <code>tibble()</code> function. Here’s the same example as before with the Beatles band:</p>
+<p>A tibble works just like a data frame, but it has a few small
+features that make it a bit more useful - to the extent that from here
+on, we will be using tibbles as our default data frame structure. With
+this in mind, I’ll often use the term “data frame” to refer to both
+tibbles and data frames, since they serve the same purpose as a data
+structure.</p>
+<p>Just like with data frames, you can create a tibble using the
+<code>tibble()</code> function. Here’s the same example as before with
+the Beatles band:</p>
 <pre class="r"><code>beatles &lt;- tibble(
     firstName   = c(&quot;John&quot;, &quot;Paul&quot;, &quot;Ringo&quot;, &quot;George&quot;),
     lastName    = c(&quot;Lennon&quot;, &quot;McCartney&quot;, &quot;Starr&quot;, &quot;Harrison&quot;),
@@ -651,24 +658,37 @@ library(dplyr)</code></pre>
     deceased    = c(TRUE, FALSE, FALSE, TRUE)
 )
 beatles</code></pre>
-<pre><code>## # A tibble: 4 x 5
+<pre><code>## # A tibble: 4 × 5
 ##   firstName lastName  instrument yearOfBirth deceased
 ##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
 ## 1 John      Lennon    guitar            1940 TRUE    
 ## 2 Paul      McCartney bass              1942 FALSE   
 ## 3 Ringo     Starr     drums             1940 FALSE   
 ## 4 George    Harrison  guitar            1943 TRUE</code></pre>
-<p>Here we can see a couple of the differences that make tibbles a bit more intuitive to use:</p>
+<p>Here we can see a couple of the differences that make tibbles a bit
+more intuitive to use:</p>
 <ol style="list-style-type: decimal">
-<li>It’s easier to see what type of data each column is because tibbles display this in between the <code>&lt;&gt;</code> symbols under each column name.</li>
-<li>A tibble will only print the first few rows of data when you enter the object name. In contrast, data frames will try to print <em>the entire</em> data frame (which is super annoying when you have a data frame with millions of rows of data). Here, we only have 4 rows, so this difference is not apparent.</li>
-<li>Columns of class <code>character</code> are never converted into factors (don’t worry about this for now…just know that keeping strings as a <code>character</code> class generally makes life easier in R).</li>
+<li>It’s easier to see what type of data each column is because tibbles
+display this in between the <code>&lt;&gt;</code> symbols under each
+column name.</li>
+<li>A tibble will only print the first few rows of data when you enter
+the object name. In contrast, data frames will try to print <em>the
+entire</em> data frame (which is super annoying when you have a data
+frame with millions of rows of data). Here, we only have 4 rows, so this
+difference is not apparent.</li>
+<li>Columns of class <code>character</code> are never converted into
+factors (don’t worry about this for now…just know that keeping strings
+as a <code>character</code> class generally makes life easier in
+R).</li>
 </ol>
-<p>Now that we have a data frame (tibble) defined, let’s see what we can do with it!</p>
+<p>Now that we have a data frame (tibble) defined, let’s see what we can
+do with it!</p>
 </div>
-<div id="dimensions" class="section level2">
+<div id="dimensions" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Dimensions</h2>
-<p>You can get the dimensions of a data frame using the <code>ncol()</code>, <code>nrow()</code>, and <code>dim()</code> functions:</p>
+<p>You can get the dimensions of a data frame using the
+<code>ncol()</code>, <code>nrow()</code>, and <code>dim()</code>
+functions:</p>
 <pre class="r"><code>nrow(beatles) # Returns the number of rows</code></pre>
 <pre><code>## [1] 4</code></pre>
 <pre class="r"><code>ncol(beatles) # Returns the number of columns</code></pre>
@@ -676,9 +696,14 @@ beatles</code></pre>
 <pre class="r"><code>dim(beatles) # Returns a vector of the number rows and columns</code></pre>
 <pre><code>## [1] 4 5</code></pre>
 </div>
-<div id="row-and-column-names" class="section level2">
-<h2><span class="header-section-number">1.5</span> Row and column names</h2>
-<p>Data frames <strong>must</strong> have column names, but row names are optional (by default, row names are just a sequence of numbers). The <code>names()</code> function returns the column names, or you can also be more specific and use the <code>colnames()</code> and <code>rownames()</code> functions:</p>
+<div id="row-and-column-names" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Row and column
+names</h2>
+<p>Data frames <strong>must</strong> have column names, but row names
+are optional (by default, row names are just a sequence of numbers). The
+<code>names()</code> function returns the column names, or you can also
+be more specific and use the <code>colnames()</code> and
+<code>rownames()</code> functions:</p>
 <pre class="r"><code>names(beatles) # Returns a vector of the column names</code></pre>
 <pre><code>## [1] &quot;firstName&quot;   &quot;lastName&quot;    &quot;instrument&quot;  &quot;yearOfBirth&quot; &quot;deceased&quot;</code></pre>
 <pre class="r"><code>colnames(beatles) # Also returns a vector of the column names</code></pre>
@@ -686,9 +711,11 @@ beatles</code></pre>
 <pre class="r"><code>rownames(beatles) # Returns a vector of the row names</code></pre>
 <pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot;</code></pre>
 </div>
-<div id="combining-data-frames" class="section level2">
-<h2><span class="header-section-number">1.6</span> Combining data frames</h2>
-<p>You can combine data frames using the <code>bind_cols()</code> and <code>bind_rows()</code> functions:</p>
+<div id="combining-data-frames" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Combining data
+frames</h2>
+<p>You can combine data frames using the <code>bind_cols()</code> and
+<code>bind_rows()</code> functions:</p>
 <pre class="r"><code># Combine columns
 names &lt;- tibble(
     firstName = c(&quot;John&quot;, &quot;Paul&quot;, &quot;Ringo&quot;, &quot;George&quot;),
@@ -698,7 +725,7 @@ instruments &lt;- tibble(
     instrument = c(&quot;guitar&quot;, &quot;bass&quot;, &quot;drums&quot;, &quot;guitar&quot;)
 )
 bind_cols(names, instruments)</code></pre>
-<pre><code>## # A tibble: 4 x 3
+<pre><code>## # A tibble: 4 × 3
 ##   firstName lastName  instrument
 ##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     
 ## 1 John      Lennon    guitar    
@@ -715,17 +742,20 @@ members2 &lt;- tibble(
     lastName  = c(&quot;Starr&quot;, &quot;Harrison&quot;)
 )
 bind_rows(members1, members2)</code></pre>
-<pre><code>## # A tibble: 4 x 2
+<pre><code>## # A tibble: 4 × 2
 ##   firstName lastName 
 ##   &lt;chr&gt;     &lt;chr&gt;    
 ## 1 John      Lennon   
 ## 2 Paul      McCartney
 ## 3 Ringo     Starr    
 ## 4 George    Harrison</code></pre>
-<p>Note that to combine rows, the column names must be the same. For example, if we change the second column name in <code>members2</code> to <code>"LASTNAME"</code>, you’ll get a data frame with three columns, two of which will have missing values:</p>
+<p>Note that to combine rows, the column names must be the same. For
+example, if we change the second column name in <code>members2</code> to
+<code>"LASTNAME"</code>, you’ll get a data frame with three columns, two
+of which will have missing values:</p>
 <pre class="r"><code>colnames(members2) &lt;- c(&quot;firstName&quot;, &quot;LASTNAME&quot;)
 bind_rows(members1, members2)</code></pre>
-<pre><code>## # A tibble: 4 x 3
+<pre><code>## # A tibble: 4 × 3
 ##   firstName lastName  LASTNAME
 ##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;   
 ## 1 John      Lennon    &lt;NA&gt;    
@@ -734,65 +764,78 @@ bind_rows(members1, members2)</code></pre>
 ## 4 George    &lt;NA&gt;      Harrison</code></pre>
 </div>
 </div>
-<div id="accessing-elements" class="section level1">
+<div id="accessing-elements" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Accessing elements</h1>
-<div id="using-the-operator" class="section level2">
-<h2><span class="header-section-number">2.1</span> Using the <code>$</code> operator</h2>
-<p>You can extract columns from a data frame by name by using the <code>$</code> operator plus the column name. For example, the <code>instrument</code> column can be accessed using <code>beatles$instrument</code>:</p>
+<div id="using-the-operator" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Using the
+<code>$</code> operator</h2>
+<p>You can extract columns from a data frame by name by using the
+<code>$</code> operator plus the column name. For example, the
+<code>instrument</code> column can be accessed using
+<code>beatles$instrument</code>:</p>
 <pre class="r"><code>beatles$instrument</code></pre>
 <pre><code>## [1] &quot;guitar&quot; &quot;bass&quot;   &quot;drums&quot;  &quot;guitar&quot;</code></pre>
 </div>
-<div id="using-integer-indices" class="section level2">
-<h2><span class="header-section-number">2.2</span> Using integer indices</h2>
-<p>You can access elements in a data frame using brackets <code>[]</code> and indices inside the brackets. The general form is:</p>
+<div id="using-integer-indices" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Using integer
+indices</h2>
+<p>You can access elements in a data frame using brackets
+<code>[]</code> and indices inside the brackets. The general form
+is:</p>
 <pre><code>DF[ROWS, COLUMNS]</code></pre>
-<p>To index with integers, specify the row numbers and column numbers as vectors.</p>
+<p>To index with integers, specify the row numbers and column numbers as
+vectors.</p>
 <pre class="r"><code>beatles[1, 2] # Select the element in row 1, column 2</code></pre>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##   lastName
 ##   &lt;chr&gt;   
 ## 1 Lennon</code></pre>
 <pre class="r"><code>beatles[c(1, 2), c(2, 3)] # Select the elements in rows 1 &amp; 2 and columns 2 &amp; 3</code></pre>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ##   lastName  instrument
 ##   &lt;chr&gt;     &lt;chr&gt;     
 ## 1 Lennon    guitar    
 ## 2 McCartney bass</code></pre>
 <pre class="r"><code>beatles[1:2, 2:3] # Same thing, but using the &quot;:&quot; operator</code></pre>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ##   lastName  instrument
 ##   &lt;chr&gt;     &lt;chr&gt;     
 ## 1 Lennon    guitar    
 ## 2 McCartney bass</code></pre>
-<p>If you leave either the row or column index blank, it means “selects all”:</p>
+<p>If you leave either the row or column index blank, it means “selects
+all”:</p>
 <pre class="r"><code>beatles[c(1, 2),] # Leaving the column index blank will select all columns</code></pre>
-<pre><code>## # A tibble: 2 x 5
+<pre><code>## # A tibble: 2 × 5
 ##   firstName lastName  instrument yearOfBirth deceased
 ##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
 ## 1 John      Lennon    guitar            1940 TRUE    
 ## 2 Paul      McCartney bass              1942 FALSE</code></pre>
 <pre class="r"><code>beatles[,c(1, 2)] # Leaving the row index blank will select all rows</code></pre>
-<pre><code>## # A tibble: 4 x 2
+<pre><code>## # A tibble: 4 × 2
 ##   firstName lastName 
 ##   &lt;chr&gt;     &lt;chr&gt;    
 ## 1 John      Lennon   
 ## 2 Paul      McCartney
 ## 3 Ringo     Starr    
 ## 4 George    Harrison</code></pre>
-<p>You can also use negative integers to specify rows or columns to be excluded:</p>
+<p>You can also use negative integers to specify rows or columns to be
+excluded:</p>
 <pre class="r"><code>beatles[-1, ] # Select all rows and except the first</code></pre>
-<pre><code>## # A tibble: 3 x 5
+<pre><code>## # A tibble: 3 × 5
 ##   firstName lastName  instrument yearOfBirth deceased
 ##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
 ## 1 Paul      McCartney bass              1942 FALSE   
 ## 2 Ringo     Starr     drums             1940 FALSE   
 ## 3 George    Harrison  guitar            1943 TRUE</code></pre>
 </div>
-<div id="using-character-indices" class="section level2">
-<h2><span class="header-section-number">2.3</span> Using character indices</h2>
-<p>You can use the column names to select elements in a data frame. If you do not include a <code>,</code> to designate which rows to select, R will return all the rows for the selected columns:</p>
+<div id="using-character-indices" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Using character
+indices</h2>
+<p>You can use the column names to select elements in a data frame. If
+you do not include a <code>,</code> to designate which rows to select, R
+will return all the rows for the selected columns:</p>
 <pre class="r"><code>beatles[c(&#39;firstName&#39;, &#39;lastName&#39;)] # Select all rows for the &quot;firstName&quot; and &quot;lastName&quot; columns</code></pre>
-<pre><code>## # A tibble: 4 x 2
+<pre><code>## # A tibble: 4 × 2
 ##   firstName lastName 
 ##   &lt;chr&gt;     &lt;chr&gt;    
 ## 1 John      Lennon   
@@ -800,42 +843,58 @@ bind_rows(members1, members2)</code></pre>
 ## 3 Ringo     Starr    
 ## 4 George    Harrison</code></pre>
 <pre class="r"><code>beatles[1:2, c(&#39;firstName&#39;, &#39;lastName&#39;)] # Select just the first two rows for the &quot;firstName&quot; and &quot;lastName&quot; columns</code></pre>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ##   firstName lastName 
 ##   &lt;chr&gt;     &lt;chr&gt;    
 ## 1 John      Lennon   
 ## 2 Paul      McCartney</code></pre>
 </div>
-<div id="using-logical-indices" class="section level2">
-<h2><span class="header-section-number">2.4</span> Using logical indices</h2>
-<p>When using a logical vector for indexing, the position where the logical vector is <code>TRUE</code> is returned. This is helpful for filtering data frame rows based on conditions. For example, if you wanted to filter out the rows for which Beatles members were still alive, you could first create a logical vector using the <code>deceased</code> column:</p>
+<div id="using-logical-indices" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Using logical
+indices</h2>
+<p>When using a logical vector for indexing, the position where the
+logical vector is <code>TRUE</code> is returned. This is helpful for
+filtering data frame rows based on conditions. For example, if you
+wanted to filter out the rows for which Beatles members were still
+alive, you could first create a logical vector using the
+<code>deceased</code> column:</p>
 <pre class="r"><code>beatles$deceased == FALSE</code></pre>
 <pre><code>## [1] FALSE  TRUE  TRUE FALSE</code></pre>
-<p>Then, you could insert this logical vector in the row position of the <code>[]</code> brackets to filter only the rows that are <code>TRUE</code>:</p>
+<p>Then, you could insert this logical vector in the row position of the
+<code>[]</code> brackets to filter only the rows that are
+<code>TRUE</code>:</p>
 <pre class="r"><code>beatles[beatles$deceased == FALSE,]</code></pre>
-<pre><code>## # A tibble: 2 x 5
+<pre><code>## # A tibble: 2 × 5
 ##   firstName lastName  instrument yearOfBirth deceased
 ##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;   
 ## 1 Paul      McCartney bass              1942 FALSE   
 ## 2 Ringo     Starr     drums             1940 FALSE</code></pre>
 </div>
-<div id="modifying-data-frames" class="section level2">
-<h2><span class="header-section-number">2.5</span> Modifying data frames</h2>
-<p>You can use any of the above methods for accessing elements in a data frame to also modify those elements using the assignment operator (<code>&lt;-</code>). In addition to using brackets to modify specific elements, you can use the <code>$</code> operator to create new columns in a data frame.</p>
-<p>For example, let’s create the variable <code>age</code> by subtracting the <code>yearOfBirth</code> variable from the current year:</p>
+<div id="modifying-data-frames" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Modifying data
+frames</h2>
+<p>You can use any of the above methods for accessing elements in a data
+frame to also modify those elements using the assignment operator
+(<code>&lt;-</code>). In addition to using brackets to modify specific
+elements, you can use the <code>$</code> operator to create new columns
+in a data frame.</p>
+<p>For example, let’s create the variable <code>age</code> by
+subtracting the <code>yearOfBirth</code> variable from the current
+year:</p>
 <pre class="r"><code>beatles$age &lt;- 2019 - beatles$yearOfBirth
 beatles</code></pre>
-<pre><code>## # A tibble: 4 x 6
+<pre><code>## # A tibble: 4 × 6
 ##   firstName lastName  instrument yearOfBirth deceased   age
 ##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;    &lt;dbl&gt;
 ## 1 John      Lennon    guitar            1940 TRUE        79
 ## 2 Paul      McCartney bass              1942 FALSE       77
 ## 3 Ringo     Starr     drums             1940 FALSE       79
 ## 4 George    Harrison  guitar            1943 TRUE        76</code></pre>
-<p>You can also make a new column of all the same value by just providing one value:</p>
+<p>You can also make a new column of all the same value by just
+providing one value:</p>
 <pre class="r"><code>beatles$hometown &lt;- &#39;Liverpool&#39;
 beatles</code></pre>
-<pre><code>## # A tibble: 4 x 7
+<pre><code>## # A tibble: 4 × 7
 ##   firstName lastName  instrument yearOfBirth deceased   age hometown 
 ##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;lgl&gt;    &lt;dbl&gt; &lt;chr&gt;    
 ## 1 John      Lennon    guitar            1940 TRUE        79 Liverpool
@@ -844,10 +903,18 @@ beatles</code></pre>
 ## 4 George    Harrison  guitar            1943 TRUE        76 Liverpool</code></pre>
 </div>
 </div>
-<div id="dealing-with-actual-data" class="section level1">
-<h1><span class="header-section-number">3</span> Dealing with actual data</h1>
-<p>Now that we know what a data frame is, let’s start working with actual data! We are going to use the <code>msleep</code> dataset, which contains data on sleep times and weights of different mammals. The data are taken from <a href="https://www.pnas.org/content/104/3/1051.long">V. M. Savage and G. B. West. “A quantitative, theoretical framework for understanding mammalian sleep.” <em>Proceedings of the National Academy of Sciences</em>, 104 (3):1051-1056, 2007.</a>.</p>
-<p>The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:</p>
+<div id="dealing-with-actual-data" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Dealing with actual
+data</h1>
+<p>Now that we know what a data frame is, let’s start working with
+actual data! We are going to use the <code>msleep</code> dataset, which
+contains data on sleep times and weights of different mammals. The data
+are taken from <a href="https://www.pnas.org/content/104/3/1051.long">V.
+M. Savage and G. B. West. “A quantitative, theoretical framework for
+understanding mammalian sleep.” <em>Proceedings of the National Academy
+of Sciences</em>, 104 (3):1051-1056, 2007.</a>.</p>
+<p>The dataset is stored as a comma separated value (CSV) file. Each row
+holds information for a single animal, and the columns represent:</p>
 <table>
 <thead>
 <tr class="header">
@@ -902,34 +969,51 @@ beatles</code></pre>
 </tr>
 </tbody>
 </table>
-<div id="r-setup" class="section level2">
+<div id="r-setup" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> R Setup</h2>
-<p>Before we dig into the data, let’s prepare our analysis environment by following these steps:</p>
+<p>Before we dig into the data, let’s prepare our analysis environment
+by following these steps:</p>
 <ol style="list-style-type: decimal">
-<li>Create a new R Project called “data-analysis-tutorial” and save the folder somewhere on your computer (see the <a href="L1.2-getting-started.html#33_rstudio_projects.html">“RStudio projects”</a> section from waaaaay back on week 1).</li>
-<li>Create a new <code>.R</code> file (File &gt; New File &gt; R Script), and save it as “<code>data_frames.R</code>” inside your “data-analysis-tutorial” R Project folder. From here on, we’ll type all code for this lesson inside this <code>data_frames.R</code> file.</li>
-<li>Create another folder in your R Project folder called “data” - we’ll put data in this folder real soon.</li>
+<li>Create a new R Project called “data-analysis-tutorial” and save the
+folder somewhere on your computer (see the <a
+href="L1.2-getting-started.html#33_rstudio_projects.html">“RStudio
+projects”</a> section from waaaaay back on week 1).</li>
+<li>Create a new <code>.R</code> file (File &gt; New File &gt; R
+Script), and save it as “<code>data_frames.R</code>” inside your
+“data-analysis-tutorial” R Project folder. From here on, we’ll type all
+code for this lesson inside this <code>data_frames.R</code> file.</li>
+<li>Create another folder in your R Project folder called “data” - we’ll
+put data in this folder real soon.</li>
 </ol>
 </div>
-<div id="getting-the-data" class="section level2">
+<div id="getting-the-data" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Getting the data</h2>
-<div id="method-1-loading-data-from-a-package" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> Method 1: Loading data from a package</h3>
-<p>Many R packages come with pre-loaded datasets. For example, the <strong>ggplot2</strong> library (which we’ll <a href="L12-da3-data-visualization.html">use soon</a> to make plots in R) comes with the <code>msleep</code> dataset already loaded. To see this, install <strong>ggplot2</strong> and load the library:</p>
+<div id="method-1-loading-data-from-a-package" class="section level3"
+number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Method 1: Loading
+data from a package</h3>
+<p>Many R packages come with pre-loaded datasets. For example, the
+<strong>ggplot2</strong> library (which we’ll <a
+href="L12-da3-data-visualization.html">use soon</a> to make plots in R)
+comes with the <code>msleep</code> dataset already loaded. To see this,
+install <strong>ggplot2</strong> and load the library:</p>
 <pre class="r"><code>install.packages(&quot;ggplot2&quot;)
 library(ggplot2)
 head(msleep) # Preview just the first 6 rows of the data frame</code></pre>
-<pre><code>## # A tibble: 6 x 11
-##   name  genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
-##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
-## 1 Chee… Acin… carni Carn… lc                  12.1      NA        NA      11.9
-## 2 Owl … Aotus omni  Prim… &lt;NA&gt;                17         1.8      NA       7  
-## 3 Moun… Aplo… herbi Rode… nt                  14.4       2.4      NA       9.6
-## 4 Grea… Blar… omni  Sori… lc                  14.9       2.3       0.133   9.1
-## 5 Cow   Bos   herbi Arti… domesticated         4         0.7       0.667  20  
-## 6 Thre… Brad… herbi Pilo… &lt;NA&gt;                14.4       2.2       0.767   9.6
-## # … with 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
-<p>If you want to see all of the different datasets that any particular package contains, you can call the <code>data()</code> function after loading a library. For example, here are all the dataset that are contained in the <strong>ggplot2</strong> library:</p>
+<pre><code>## # A tibble: 6 × 11
+##   name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 Cheetah Acin… carni Carn… lc                  12.1      NA        NA      11.9
+## 2 Owl mo… Aotus omni  Prim… &lt;NA&gt;                17         1.8      NA       7  
+## 3 Mounta… Aplo… herbi Rode… nt                  14.4       2.4      NA       9.6
+## 4 Greate… Blar… omni  Sori… lc                  14.9       2.3       0.133   9.1
+## 5 Cow     Bos   herbi Arti… domesticated         4         0.7       0.667  20  
+## 6 Three-… Brad… herbi Pilo… &lt;NA&gt;                14.4       2.2       0.767   9.6
+## # ℹ 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
+<p>If you want to see all of the different datasets that any particular
+package contains, you can call the <code>data()</code> function after
+loading a library. For example, here are all the dataset that are
+contained in the <strong>ggplot2</strong> library:</p>
 <pre class="r"><code>data(package = &quot;ggplot2&quot;)</code></pre>
 <pre><code>Data sets in package &#39;ggplot2&#39;:
 
@@ -947,86 +1031,116 @@ presidential            Terms of 11 presidents from Eisenhower to Obama
 seals                   Vector field of seal movements
 txhousing               Housing sales in TX</code></pre>
 </div>
-<div id="method-2-importing-data" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> Method 2: Importing data</h3>
-<p>What do you do when a dataset isn’t available from a package? Well, you can “read” the data into R from an external file. One of the most common format for storing tabular data (i.e. data that is stored as rows and columns) is the comma separated value (CSV) file.</p>
-<p>To load the same <code>msleep</code> data from an external csv file, first use the <code>download.file()</code> function to download the file. The first argument in this function is a character string with the source URL to the data file (“<a href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/msleep.csv" class="uri">https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/msleep.csv</a>”). The second argument is the destination where you want to locally save the file on your computer.</p>
+<div id="method-2-importing-data" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Method 2: Importing
+data</h3>
+<p>What do you do when a dataset isn’t available from a package? Well,
+you can “read” the data into R from an external file. One of the most
+common format for storing tabular data (i.e. data that is stored as rows
+and columns) is the comma separated value (CSV) file.</p>
+<p>To load the same <code>msleep</code> data from an external csv file,
+first use the <code>download.file()</code> function to download the
+file. The first argument in this function is a character string with the
+source URL to the data file (“<a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/msleep.csv"
+class="uri">https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/msleep.csv</a>”).
+The second argument is the destination where you want to locally save
+the file on your computer.</p>
 <pre class="r"><code>download.file(
     url = &quot;https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/data/msleep.csv&quot;,
     destfile = file.path(&#39;data&#39;, &#39;msleep.csv&#39;)
 )</code></pre>
 <blockquote>
-<p><strong>Note on making file paths</strong>: Notice the use of the <code>file.path()</code> function to generate the path to the “data” folder on your computer. This function will automatically use the correct “<code>/</code>” symbols to create the file path. This is important because the specific file path syntax is different depending on your computer operating system (e.g. mac is “<code>/</code>” and windows is “<code>\</code>”). In the above example, the destination file path used was:</p>
+<p><strong>Note on making file paths</strong>: Notice the use of the
+<code>file.path()</code> function to generate the path to the “data”
+folder on your computer. This function will automatically use the
+correct “<code>/</code>” symbols to create the file path. This is
+important because the specific file path syntax is different depending
+on your computer operating system (e.g. mac is “<code>/</code>” and
+windows is “<code>\</code>”). In the above example, the destination file
+path used was:</p>
 </blockquote>
 <pre class="r"><code>file.path(&#39;data&#39;, &#39;msleep.csv&#39;)</code></pre>
 <pre><code>## [1] &quot;data/msleep.csv&quot;</code></pre>
-<p>Now you are now ready to load the downloaded data! The Base R function for reading in a csv file is called <code>read.csv()</code>, but it has some quirky aspects in how it formats the data (in particular, character variables). So instead we are going to use an improved function, <code>read_csv()</code>, from the <code>readr</code> package.</p>
+<p>Now you are now ready to load the downloaded data! The Base R
+function for reading in a csv file is called <code>read.csv()</code>,
+but it has some quirky aspects in how it formats the data (in
+particular, character variables). So instead we are going to use an
+improved function, <code>read_csv()</code>, from the <code>readr</code>
+package.</p>
 <p>First, install the readr package if you haven’t already:</p>
 <pre class="r"><code>install.packages(&quot;readr&quot;)</code></pre>
 <p>Now load the data:</p>
 <pre class="r"><code>library(readr)
 msleep &lt;- read_csv(file.path(&#39;data&#39;, &#39;msleep.csv&#39;))</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   name = col_character(),
-##   genus = col_character(),
-##   vore = col_character(),
-##   order = col_character(),
-##   conservation = col_character(),
-##   sleep_total = col_double(),
-##   sleep_rem = col_double(),
-##   sleep_cycle = col_double(),
-##   awake = col_double(),
-##   brainwt = col_double(),
-##   bodywt = col_double()
-## )</code></pre>
-<p>R tells us that we’ve successfully read in some data and a quick summary of the data type for each column in the dataset.</p>
+<pre><code>## Rows: 83 Columns: 11
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (5): name, genus, vore, order, conservation
+## dbl (6): sleep_total, sleep_rem, sleep_cycle, awake, brainwt, bodywt
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>R tells us that we’ve successfully read in some data and a quick
+summary of the data type for each column in the dataset.</p>
 </div>
 </div>
-<div id="previewing-the-data" class="section level2">
-<h2><span class="header-section-number">3.3</span> Previewing the data</h2>
-<p>You can view the entire dataset in a tabular format (similar to how Excel looks) by using the <code>View()</code> function, which opens up another tab to view the data. Note that you cannot modify the data this way - you can just look at it:</p>
+<div id="previewing-the-data" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Previewing the
+data</h2>
+<p>You can view the entire dataset in a tabular format (similar to how
+Excel looks) by using the <code>View()</code> function, which opens up
+another tab to view the data. Note that you cannot modify the data this
+way - you can just look at it:</p>
 <pre class="r"><code>View(msleep)</code></pre>
-<p>In addition to viewing the whole dataset with <code>View()</code>, you can quickly view summaries of the data frame with a few convenient functions. For example, you can look at the first 6 rows by using the <code>head()</code> function:</p>
+<p>In addition to viewing the whole dataset with <code>View()</code>,
+you can quickly view summaries of the data frame with a few convenient
+functions. For example, you can look at the first 6 rows by using the
+<code>head()</code> function:</p>
 <pre class="r"><code>head(msleep)</code></pre>
-<pre><code>## # A tibble: 6 x 11
-##   name  genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
-##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
-## 1 Chee… Acin… carni Carn… lc                  12.1      NA        NA      11.9
-## 2 Owl … Aotus omni  Prim… &lt;NA&gt;                17         1.8      NA       7  
-## 3 Moun… Aplo… herbi Rode… nt                  14.4       2.4      NA       9.6
-## 4 Grea… Blar… omni  Sori… lc                  14.9       2.3       0.133   9.1
-## 5 Cow   Bos   herbi Arti… domesticated         4         0.7       0.667  20  
-## 6 Thre… Brad… herbi Pilo… &lt;NA&gt;                14.4       2.2       0.767   9.6
-## # … with 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
-<p>Similarly, you can view the <em>last</em> 6 rows by using the <code>tail()</code> function:</p>
+<pre><code>## # A tibble: 6 × 11
+##   name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 Cheetah Acin… carni Carn… lc                  12.1      NA        NA      11.9
+## 2 Owl mo… Aotus omni  Prim… &lt;NA&gt;                17         1.8      NA       7  
+## 3 Mounta… Aplo… herbi Rode… nt                  14.4       2.4      NA       9.6
+## 4 Greate… Blar… omni  Sori… lc                  14.9       2.3       0.133   9.1
+## 5 Cow     Bos   herbi Arti… domesticated         4         0.7       0.667  20  
+## 6 Three-… Brad… herbi Pilo… &lt;NA&gt;                14.4       2.2       0.767   9.6
+## # ℹ 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
+<p>Similarly, you can view the <em>last</em> 6 rows by using the
+<code>tail()</code> function:</p>
 <pre class="r"><code>tail(msleep)</code></pre>
-<pre><code>## # A tibble: 6 x 11
-##   name  genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
-##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
-## 1 Tenr… Tenr… omni  Afro… &lt;NA&gt;                15.6       2.3      NA       8.4
-## 2 Tree… Tupa… omni  Scan… &lt;NA&gt;                 8.9       2.6       0.233  15.1
-## 3 Bott… Turs… carni Ceta… &lt;NA&gt;                 5.2      NA        NA      18.8
-## 4 Genet Gene… carni Carn… &lt;NA&gt;                 6.3       1.3      NA      17.7
-## 5 Arct… Vulp… carni Carn… &lt;NA&gt;                12.5      NA        NA      11.5
-## 6 Red … Vulp… carni Carn… &lt;NA&gt;                 9.8       2.4       0.35   14.2
-## # … with 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
-<p>You can also view an overview summary of each column and it’s data types by using the <code>str()</code> or <code>glimpse()</code> functions (these both do the same thing, but I prefer the output of <code>glimpse()</code>):</p>
+<pre><code>## # A tibble: 6 × 11
+##   name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
+##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 Tenrec  Tenr… omni  Afro… &lt;NA&gt;                15.6       2.3      NA       8.4
+## 2 Tree s… Tupa… omni  Scan… &lt;NA&gt;                 8.9       2.6       0.233  15.1
+## 3 Bottle… Turs… carni Ceta… &lt;NA&gt;                 5.2      NA        NA      18.8
+## 4 Genet   Gene… carni Carn… &lt;NA&gt;                 6.3       1.3      NA      17.7
+## 5 Arctic… Vulp… carni Carn… &lt;NA&gt;                12.5      NA        NA      11.5
+## 6 Red fox Vulp… carni Carn… &lt;NA&gt;                 9.8       2.4       0.35   14.2
+## # ℹ 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
+<p>You can also view an overview summary of each column and it’s data
+types by using the <code>str()</code> or <code>glimpse()</code>
+functions (these both do the same thing, but I prefer the output of
+<code>glimpse()</code>):</p>
 <pre class="r"><code>glimpse(msleep)</code></pre>
 <pre><code>## Rows: 83
 ## Columns: 11
-## $ name         &lt;chr&gt; &quot;Cheetah&quot;, &quot;Owl monkey&quot;, &quot;Mountain beaver&quot;, &quot;Greater sho…
-## $ genus        &lt;chr&gt; &quot;Acinonyx&quot;, &quot;Aotus&quot;, &quot;Aplodontia&quot;, &quot;Blarina&quot;, &quot;Bos&quot;, &quot;Br…
-## $ vore         &lt;chr&gt; &quot;carni&quot;, &quot;omni&quot;, &quot;herbi&quot;, &quot;omni&quot;, &quot;herbi&quot;, &quot;herbi&quot;, &quot;car…
-## $ order        &lt;chr&gt; &quot;Carnivora&quot;, &quot;Primates&quot;, &quot;Rodentia&quot;, &quot;Soricomorpha&quot;, &quot;Ar…
-## $ conservation &lt;chr&gt; &quot;lc&quot;, NA, &quot;nt&quot;, &quot;lc&quot;, &quot;domesticated&quot;, NA, &quot;vu&quot;, NA, &quot;dom…
-## $ sleep_total  &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, 3.0, …
-## $ sleep_rem    &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6, 0.8,…
-## $ sleep_cycle  &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833333, …
-## $ awake        &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9, 21.0, …
-## $ brainwt      &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07000, …
-## $ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490, 0.0…</code></pre>
-<p>Finally, you can view summary statistics for each column using the <code>summary()</code> function:</p>
+## $ name         &lt;chr&gt; &quot;Cheetah&quot;, &quot;Owl monkey&quot;, &quot;Mountain beaver&quot;, &quot;Greater shor…
+## $ genus        &lt;chr&gt; &quot;Acinonyx&quot;, &quot;Aotus&quot;, &quot;Aplodontia&quot;, &quot;Blarina&quot;, &quot;Bos&quot;, &quot;Bra…
+## $ vore         &lt;chr&gt; &quot;carni&quot;, &quot;omni&quot;, &quot;herbi&quot;, &quot;omni&quot;, &quot;herbi&quot;, &quot;herbi&quot;, &quot;carn…
+## $ order        &lt;chr&gt; &quot;Carnivora&quot;, &quot;Primates&quot;, &quot;Rodentia&quot;, &quot;Soricomorpha&quot;, &quot;Art…
+## $ conservation &lt;chr&gt; &quot;lc&quot;, NA, &quot;nt&quot;, &quot;lc&quot;, &quot;domesticated&quot;, NA, &quot;vu&quot;, NA, &quot;dome…
+## $ sleep_total  &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, 3.0, 5…
+## $ sleep_rem    &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6, 0.8, …
+## $ sleep_cycle  &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833333, N…
+## $ awake        &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9, 21.0, 1…
+## $ brainwt      &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07000, 0…
+## $ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490, 0.04…</code></pre>
+<p>Finally, you can view summary statistics for each column using the
+<code>summary()</code> function:</p>
 <pre class="r"><code>summary(msleep)</code></pre>
 <pre><code>##      name              genus               vore              order          
 ##  Length:83          Length:83          Length:83          Length:83         
@@ -1052,11 +1166,14 @@ msleep &lt;- read_csv(file.path(&#39;data&#39;, &#39;msleep.csv&#39;))</code></p
 ##  3rd Qu.:16.15   3rd Qu.:0.12550   3rd Qu.:  41.750  
 ##  Max.   :22.10   Max.   :5.71200   Max.   :6654.000  
 ##                  NA&#39;s   :27</code></pre>
-<p>In summary, here is a non-exhaustive list of functions to get a sense of the content/structure of a data frame:</p>
+<p>In summary, here is a non-exhaustive list of functions to get a sense
+of the content/structure of a data frame:</p>
 <ul>
 <li>Size:
 <ul>
-<li><code>dim(df)</code> - returns a vector with the number of rows in the first element, and the number of columns as the second element (the <strong>dim</strong>ensions of the object).</li>
+<li><code>dim(df)</code> - returns a vector with the number of rows in
+the first element, and the number of columns as the second element (the
+<strong>dim</strong>ensions of the object).</li>
 <li><code>nrow(df)</code> - returns the number of rows.</li>
 <li><code>ncol(df)</code> - returns the number of columns.</li>
 </ul></li>
@@ -1067,25 +1184,34 @@ msleep &lt;- read_csv(file.path(&#39;data&#39;, &#39;msleep.csv&#39;))</code></p
 </ul></li>
 <li>Names:
 <ul>
-<li><code>names(df)</code> - returns the column names (synonym of <code>colnames()</code> for <code>data.frame</code> objects).</li>
+<li><code>names(df)</code> - returns the column names (synonym of
+<code>colnames()</code> for <code>data.frame</code> objects).</li>
 <li><code>rownames(df)</code> - returns the row names.</li>
 </ul></li>
 <li>Summary:
 <ul>
-<li><code>glimpse(df)</code> or <code>str(df)</code> - structure of the object and information about the class, length and content of each column.</li>
+<li><code>glimpse(df)</code> or <code>str(df)</code> - structure of the
+object and information about the class, length and content of each
+column.</li>
 <li><code>summary(df)</code> - summary statistics for each column.</li>
 </ul></li>
 </ul>
-<p>Note: most of these functions are “generic”, they can be used on other types of objects besides <code>data.frame</code>.</p>
+<p>Note: most of these functions are “generic”, they can be used on
+other types of objects besides <code>data.frame</code>.</p>
 <hr />
 </div>
 </div>
-<div id="now-what" class="section level1">
+<div id="now-what" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Now what?</h1>
-<p>Now that you’ve got some data into R and are up to speed with what a data frame / tibble is, you may be asking, “so what now?” Well, over the next two lessons we will learn more about how to manipulate data frames and explore the underlying information with visualizations.</p>
-<p>But just to give you an idea of where we’re going, here are a few pieces of information from the <code>msleep</code> dataset:</p>
+<p>Now that you’ve got some data into R and are up to speed with what a
+data frame / tibble is, you may be asking, “so what now?” Well, over the
+next two lessons we will learn more about how to manipulate data frames
+and explore the underlying information with visualizations.</p>
+<p>But just to give you an idea of where we’re going, here are a few
+pieces of information from the <code>msleep</code> dataset:</p>
 <ol style="list-style-type: decimal">
-<li>It appears that mammalian brain and body weight are logarithmically correlated - cool!</li>
+<li>It appears that mammalian brain and body weight are logarithmically
+correlated - cool!</li>
 </ol>
 <pre class="r"><code>library(ggplot2)
 ggplot(msleep, aes(x=brainwt, y=bodywt)) +
@@ -1097,7 +1223,9 @@ ggplot(msleep, aes(x=brainwt, y=bodywt)) +
     theme_minimal()</code></pre>
 <p><img src="L10-da1-data-frames_files/figure-html/unnamed-chunk-30-1.png" width="576" style="display: block; margin: auto;" /></p>
 <ol start="2" style="list-style-type: decimal">
-<li>It appears there may also be a negative, logarithmic relationship (albeit weaker) between the size of mammalian brains and how much they sleep - cool!</li>
+<li>It appears there may also be a negative, logarithmic relationship
+(albeit weaker) between the size of mammalian brains and how much they
+sleep - cool!</li>
 </ol>
 <pre class="r"><code>ggplot(msleep, aes(x=brainwt, y=sleep_total)) +
     geom_point(alpha=0.6) +
@@ -1108,7 +1236,8 @@ ggplot(msleep, aes(x=brainwt, y=bodywt)) +
     theme_minimal()</code></pre>
 <p><img src="L10-da1-data-frames_files/figure-html/unnamed-chunk-31-1.png" width="576" style="display: block; margin: auto;" /></p>
 <ol start="3" style="list-style-type: decimal">
-<li>Wow, there’s a lot of variation in how much different mammals sleep - cool!</li>
+<li>Wow, there’s a lot of variation in how much different mammals sleep
+- cool!</li>
 </ol>
 <pre class="r"><code>ggplot(msleep, aes(x=sleep_total)) +
     geom_histogram() +
@@ -1118,9 +1247,13 @@ ggplot(msleep, aes(x=brainwt, y=bodywt)) +
 <p><img src="L10-da1-data-frames_files/figure-html/unnamed-chunk-32-1.png" width="576" style="display: block; margin: auto;" /></p>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li><a href="https://datacarpentry.org/R-ecology-lesson/">Data Analysis and Visualization in R for Ecologists</a>, by François Michonneau &amp; Auriel Fournier. Zenodo: <a href="http://doi.org/10.5281/zenodo.3264888" class="uri">http://doi.org/10.5281/zenodo.3264888</a></li>
+<li><a href="https://datacarpentry.org/R-ecology-lesson/">Data Analysis
+and Visualization in R for Ecologists</a>, by François Michonneau &amp;
+Auriel Fournier. Zenodo: <a href="http://doi.org/10.5281/zenodo.3264888"
+class="uri">http://doi.org/10.5281/zenodo.3264888</a></li>
 </ul>
 </div>
 
@@ -1165,7 +1298,7 @@ ggplot(msleep, aes(x=brainwt, y=bodywt)) +
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1183,7 +1316,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -1192,6 +1325,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
@@ -1204,7 +1340,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

@@ -13,17 +13,27 @@
 
 <title>Homework 3 - Loops &amp; Vectors</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -89,12 +99,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -107,32 +121,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -142,10 +132,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -162,40 +148,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -223,7 +185,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -235,7 +197,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -245,11 +207,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -261,13 +240,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -275,16 +253,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -328,7 +299,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -351,7 +322,7 @@ $(document).ready(function () {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -411,7 +382,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -441,7 +412,7 @@ $(document).ready(function () {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -473,7 +444,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -501,7 +472,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -513,37 +484,67 @@ $(document).ready(function () {
 <p><strong>Due</strong>: Sunday, 06-Oct. at 8pm</p>
 <p><strong>Rules</strong>:</p>
 <ul>
-<li>Problems marked <strong>SOLO</strong> may not be worked on with other classmates, though you may consult instructors for help.</li>
-<li>For problems marked <strong>COLLABORATIVE</strong>, you may work in groups of up to 3 students who are in this course this semester (and then with nobody else except the course instructors). You may not split up the work – everyone must work on every problem. And you may not simply copy any code but rather truly work together.</li>
-<li>Even though you work collaboratively, you still must submit your own solutions.</li>
+<li>Problems marked <strong>SOLO</strong> may not be worked on with
+other classmates, though you may consult instructors for help.</li>
+<li>For problems marked <strong>COLLABORATIVE</strong>, you may work in
+groups of up to 3 students who are in this course this semester (and
+then with nobody else except the course instructors). You may not split
+up the work – everyone must work on every problem. And you may not
+simply copy any code but rather truly work together.</li>
+<li>Even though you work collaboratively, you still must submit your own
+solutions.</li>
 </ul>
 <p><strong>Instructions</strong>:</p>
 <ol style="list-style-type: decimal">
-<li><p>Before beginning this assignment, be sure to have read the <a href="L5-loops.html">Loops</a> and <a href="L6-vectors.html">Vectors</a> lessons.</p></li>
-<li><p>Open RStudio and create a new project called “hw3-lastName”, replacing “lastName” with your last name.</p></li>
-<li><p>Download the <a href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw3.R">hw3.R template script</a> and place it in RStudio project folder you just created.</p></li>
-<li><p>Fill out your name, GW Net ID, and the names of anyone you worked with in the header of the “hw3.R” file.</p></li>
-<li><p>Type all of your answers to the questions below in the “hw3.R” script.</p></li>
-<li><p>After completing the questions, create a zip file of all files in your R project folder for this assignment.</p></li>
+<li><p>Before beginning this assignment, be sure to have read the <a
+href="L5-loops.html">Loops</a> and <a href="L6-vectors.html">Vectors</a>
+lessons.</p></li>
+<li><p>Open RStudio and create a new project called “hw3-lastName”,
+replacing “lastName” with your last name.</p></li>
+<li><p>Download the <a
+href="https://github.com/emse6574-gwu/2019-Fall/raw/gh-pages/hw_templates/hw3.R">hw3.R
+template script</a> and place it in RStudio project folder you just
+created.</p></li>
+<li><p>Fill out your name, GW Net ID, and the names of anyone you worked
+with in the header of the “hw3.R” file.</p></li>
+<li><p>Type all of your answers to the questions below in the “hw3.R”
+script.</p></li>
+<li><p>After completing the questions, create a zip file of all files in
+your R project folder for this assignment.</p></li>
 <li><p>Submit the zip file on Blackboard by the due deadline.</p></li>
 </ol>
 <hr />
-<p><strong>Write solutions to the following functions in your “hw3.R” script.</strong></p>
+<p><strong>Write solutions to the following functions in your “hw3.R”
+script.</strong></p>
 <p>Rules:</p>
 <ul>
-<li>You may only use strings for problem #3 (which requires printing a string to the screen). On all other problems you may <strong>NOT</strong> use strings.</li>
+<li>You may only use strings for problem #3 (which requires printing a
+string to the screen). On all other problems you may
+<strong>NOT</strong> use strings.</li>
 </ul>
 <div id="loopfactorialn-solo-5-pts" class="section level3">
 <h3>1) <code>loopFactorial(n)</code> [SOLO, 5 pts]</h3>
-<p>Use a <code>for</code> loop to write the function <code>loopFactorial(n)</code> that should return <code>n!</code>, i.e. “n factorial”, which is defined for all non-negative integers. For example, <code>3! = 3*2*1 = 6</code>, <code>4! = 4*3*2*1 = 24</code>, and <code>5! = 5*4*3*2*1 = 120</code>. Note that <code>0</code> is a special case, and <code>0! = 1</code>. Assume <code>n &gt;= 0</code>.</p>
+<p>Use a <code>for</code> loop to write the function
+<code>loopFactorial(n)</code> that should return <code>n!</code>,
+i.e. “n factorial”, which is defined for all non-negative integers. For
+example, <code>3! = 3*2*1 = 6</code>, <code>4! = 4*3*2*1 = 24</code>,
+and <code>5! = 5*4*3*2*1 = 120</code>. Note that <code>0</code> is a
+special case, and <code>0! = 1</code>. Assume
+<code>n &gt;= 0</code>.</p>
 </div>
 <div id="vectorfactorialn-solo-5-pts" class="section level3">
 <h3>2) <code>vectorFactorial(n)</code> [SOLO, 5 pts]</h3>
-<p>Write the function <code>vectorFactorial(n)</code>, which again computes the factorial of <code>n</code> but use vectors to avoid using a loop. Hint: there are some useful functions listed on the <a href="L6-vectors.html#13_numeric_vectors">vectors lesson page</a> for performing operators on a vector.</p>
+<p>Write the function <code>vectorFactorial(n)</code>, which again
+computes the factorial of <code>n</code> but use vectors to avoid using
+a loop. Hint: there are some useful functions listed on the <a
+href="L6-vectors.html#13_numeric_vectors">vectors lesson page</a> for
+performing operators on a vector.</p>
 </div>
 <div id="printstartrianglen-solo-10-pts" class="section level3">
 <h3>3) <code>printStarTriangle(n)</code> [SOLO, 10 pts]</h3>
-<p>Write a function that prints a triangle of asterisks (<code>*</code>) where the number of asterisks in each row is equal to the row number. So, <code>printStarTriangle(5)</code> should print out:</p>
+<p>Write a function that prints a triangle of asterisks (<code>*</code>)
+where the number of asterisks in each row is equal to the row number.
+So, <code>printStarTriangle(5)</code> should print out:</p>
 <pre><code>*
 **
 ***
@@ -552,33 +553,70 @@ $(document).ready(function () {
 </div>
 <div id="nthhighestvaluen-x-solo-10-pts" class="section level3">
 <h3>4) <code>nthHighestValue(n, x)</code> [SOLO, 10 pts]</h3>
-<p>Write a function to find the nth highest value in a given vector. For example, if <code>x</code> equals <code>c(5, 1, 3)</code>, then <code>nthHighestValue(1, x)</code> should return <code>5</code>, because <code>5</code> is the 1st highest value in <code>x</code>, and <code>nthHighestValue(2, x)</code> should return <code>3</code> because it’s the 2nd highest value in <code>x</code>. Assume only numeric inputs, and assume that <code>n &lt;= length(x)</code>. You may not use loops.</p>
+<p>Write a function to find the nth highest value in a given vector. For
+example, if <code>x</code> equals <code>c(5, 1, 3)</code>, then
+<code>nthHighestValue(1, x)</code> should return <code>5</code>, because
+<code>5</code> is the 1st highest value in <code>x</code>, and
+<code>nthHighestValue(2, x)</code> should return <code>3</code> because
+it’s the 2nd highest value in <code>x</code>. Assume only numeric
+inputs, and assume that <code>n &lt;= length(x)</code>. You may not use
+loops.</p>
 </div>
 <div id="numdigitsn-solo-10-pts" class="section level3">
 <h3>5) <code>numDigits(n)</code> [SOLO, 10 pts]</h3>
-<p>Write the function <code>numDigits(n)</code> that takes a <em>possibly-negative</em> integer and returns the number of digits in it. So, <code>numDigits(12345)</code> returns <code>5</code>, <code>numDigits(0)</code> returns <code>1</code>, and <code>numDigits(-111)</code> returns <code>3</code>. One way you could solve this is to convert <code>n</code> to a string and use <code>str_length()</code>, but you cannot do that since you may not use strings here. This can also be solved with logarithms, but seeing as this is “loops week”, you should instead simply repeatedly remove the ones digit until you run out of digits.</p>
+<p>Write the function <code>numDigits(n)</code> that takes a
+<em>possibly-negative</em> integer and returns the number of digits in
+it. So, <code>numDigits(12345)</code> returns <code>5</code>,
+<code>numDigits(0)</code> returns <code>1</code>, and
+<code>numDigits(-111)</code> returns <code>3</code>. One way you could
+solve this is to convert <code>n</code> to a string and use
+<code>str_length()</code>, but you cannot do that since you may not use
+strings here. This can also be solved with logarithms, but seeing as
+this is “loops week”, you should instead simply repeatedly remove the
+ones digit until you run out of digits.</p>
 </div>
 <div id="happy-numbers-collaborative" class="section level2">
 <h2>6) Happy Numbers [COLLABORATIVE]</h2>
-<p><strong>Background</strong>: Read the first paragraph from the <a href="https://en.wikipedia.org/wiki/Happy_number">Wikipedia page</a> on happy numbers. After some thought, we see that no matter what number we start with, when we keep replacing the number by the sum of the squares of its digits, we’ll always either arrive at 4 (unhappy) or at 1 (happy). With that in mind, we want to write the function <code>nthHappyNumber(n)</code>. However, to write that function, we’ll first need to write <code>isHappyNumber(n)</code>, which determines whether a number is “happy” or not. And to right that function, we’ll first need to write <code>sumOfSquaresOfDigits(n)</code>. And that’s top-down design! Here we go…</p>
+<p><strong>Background</strong>: Read the first paragraph from the <a
+href="https://en.wikipedia.org/wiki/Happy_number">Wikipedia page</a> on
+happy numbers. After some thought, we see that no matter what number we
+start with, when we keep replacing the number by the sum of the squares
+of its digits, we’ll always either arrive at 4 (unhappy) or at 1
+(happy). With that in mind, we want to write the function
+<code>nthHappyNumber(n)</code>. However, to write that function, we’ll
+first need to write <code>isHappyNumber(n)</code>, which determines
+whether a number is “happy” or not. And to right that function, we’ll
+first need to write <code>sumOfSquaresOfDigits(n)</code>. And that’s
+top-down design! Here we go…</p>
 <div id="a-sumofsquaresofdigitsn-10-pts" class="section level3">
 <h3>a) <code>sumOfSquaresOfDigits(n)</code> [10 pts]</h3>
-<p>Write the function <code>sumOfSquaresOfDigits(n)</code> which takes a non-negative integer, <code>n</code>, and returns the sum of the squares of its digits (assume that <code>n</code> will always be a positive integer, so no need to check for bad inputs).</p>
+<p>Write the function <code>sumOfSquaresOfDigits(n)</code> which takes a
+non-negative integer, <code>n</code>, and returns the sum of the squares
+of its digits (assume that <code>n</code> will always be a positive
+integer, so no need to check for bad inputs).</p>
 </div>
 <div id="b-ishappynumbern-10-pts" class="section level3">
 <h3>b) <code>isHappyNumber(n)</code> [10 pts]</h3>
-<p>Write the function <code>isHappyNumber(n)</code> which takes a <em>possibly-negative</em> integer and returns <code>TRUE</code> if it is happy and <code>FALSE</code> otherwise. Note that all numbers less than 1 are not happy.</p>
+<p>Write the function <code>isHappyNumber(n)</code> which takes a
+<em>possibly-negative</em> integer and returns <code>TRUE</code> if it
+is happy and <code>FALSE</code> otherwise. Note that all numbers less
+than 1 are not happy.</p>
 </div>
 <div id="c-nthhappynumbern-10-pts" class="section level3">
 <h3>c) <code>nthHappyNumber(n)</code> [10 pts]</h3>
-<p>Write the function <code>nthHappyNumber(n)</code> which takes a non-negative integer, <code>n</code>, and returns the nth happy number, where nthHappyNumber(1) returns the first happy number (1).</p>
+<p>Write the function <code>nthHappyNumber(n)</code> which takes a
+non-negative integer, <code>n</code>, and returns the nth happy number,
+where nthHappyNumber(1) returns the first happy number (1).</p>
 </div>
 </div>
 <div id="turtle-loops-collaborative" class="section level2">
 <h2>7) Turtle loops! [COLLABORATIVE]</h2>
 <div id="a-turtlesquares-redux-5-pts" class="section level3">
 <h3>a) <code>turtleSquare(s)</code> <em>redux</em> [5 pts]</h3>
-<p>Re-write the <code>turtleSquare(s)</code> function from <a href="hw2-functions.html">HW2</a>, but this time use a <code>for</code> loop to draw the sides of the square. The following code should produce a square with a side length of 50:</p>
+<p>Re-write the <code>turtleSquare(s)</code> function from <a
+href="hw2-functions.html">HW2</a>, but this time use a <code>for</code>
+loop to draw the sides of the square. The following code should produce
+a square with a side length of 50:</p>
 <pre class="r"><code>library(TurtleGraphics)
 turtle_init()
 turtle_do({
@@ -586,9 +624,18 @@ turtle_do({
 })</code></pre>
 <p><img src="images/turtle_square.png" width="456" /></p>
 </div>
-<div id="b-concentricturtlesquaresspacing-5-10-pts" class="section level3">
+<div id="b-concentricturtlesquaresspacing-5-10-pts"
+class="section level3">
 <h3>b) <code>concentricTurtleSquares(spacing = 5)</code> [10 pts]</h3>
-<p>Write the function <code>concentricTurtleSquares(spacing)</code> that uses the <code>TurtleGraphics</code> library to draw concentric squares from the center of the terrarium and outward. The <code>spacing</code> argument determines the spacing between each square, and the default value should be <code>spacing = 5</code>. Also, <code>spacing &gt;= 1</code>, and your function must not allow the turtle to escape the terrarium. Hint: you may want to use <code>turtleSquare(s)</code> as a helper function. The following code should produce concentric squares with a spacing of 5:</p>
+<p>Write the function <code>concentricTurtleSquares(spacing)</code> that
+uses the <code>TurtleGraphics</code> library to draw concentric squares
+from the center of the terrarium and outward. The <code>spacing</code>
+argument determines the spacing between each square, and the default
+value should be <code>spacing = 5</code>. Also,
+<code>spacing &gt;= 1</code>, and your function must not allow the
+turtle to escape the terrarium. Hint: you may want to use
+<code>turtleSquare(s)</code> as a helper function. The following code
+should produce concentric squares with a spacing of 5:</p>
 <pre class="r"><code>library(TurtleGraphics)
 turtle_init()
 turtle_do({
@@ -598,7 +645,13 @@ turtle_do({
 </div>
 <div id="c-turtlecircler-15-pts" class="section level3">
 <h3>c) <code>turtleCircle(r)</code> [15 pts]</h3>
-<p>Write the function <code>turtleCircle(r)</code> that uses the <code>TurtleGraphics</code> library to draw a circle with radius <code>r &lt; 50</code>. The circle should be centered in the turtle’s terrarium. Hint: To get the circle centered, remember that a circle has 360 degrees, and the circumference of a circle is <span class="math inline">\(2\pi r\)</span>. The following code should produce a circle with a radius of 30:</p>
+<p>Write the function <code>turtleCircle(r)</code> that uses the
+<code>TurtleGraphics</code> library to draw a circle with radius
+<code>r &lt; 50</code>. The circle should be centered in the turtle’s
+terrarium. Hint: To get the circle centered, remember that a circle has
+360 degrees, and the circumference of a circle is <span
+class="math inline">\(2\pi r\)</span>. The following code should produce
+a circle with a radius of 30:</p>
 <pre class="r"><code>library(TurtleGraphics)
 turtle_init()
 turtle_do({
@@ -607,9 +660,21 @@ turtle_do({
 <p><img src="images/turtle_circle.png" width="456" /></p>
 <hr />
 </div>
-<div id="bonus-credit-1-turtlesquarerotateds-degrees-solo-2.5-pts" class="section level3">
-<h3>Bonus Credit 1) <code>turtleSquareRotated(s, degrees)</code> [SOLO, 2.5 pts]</h3>
-<p>Write the function <code>turtleSquareRotated(s, degrees)</code> that uses the <code>TurtleGraphics</code> library to draw a square with side length <code>s &lt; 100</code> and rotated by <code>degrees &lt;= 180</code> counterclockwise from the horizontal plane. The rotated square should be centered in the turtle’s terrarium. Hint: you’re going to need to use the cosine (<code>cos()</code>) and sine (<code>sin()</code>) functions; in R, these functions take angles in <strong>radians</strong> (not degrees), so remember to convert your angles (180 degrees = <span class="math inline">\(\pi\)</span>). The following code should produce a square with a side length of 30 and rotated by 30 degrees:</p>
+<div id="bonus-credit-1-turtlesquarerotateds-degrees-solo-2.5-pts"
+class="section level3">
+<h3>Bonus Credit 1) <code>turtleSquareRotated(s, degrees)</code> [SOLO,
+2.5 pts]</h3>
+<p>Write the function <code>turtleSquareRotated(s, degrees)</code> that
+uses the <code>TurtleGraphics</code> library to draw a square with side
+length <code>s &lt; 100</code> and rotated by
+<code>degrees &lt;= 180</code> counterclockwise from the horizontal
+plane. The rotated square should be centered in the turtle’s terrarium.
+Hint: you’re going to need to use the cosine (<code>cos()</code>) and
+sine (<code>sin()</code>) functions; in R, these functions take angles
+in <strong>radians</strong> (not degrees), so remember to convert your
+angles (180 degrees = <span class="math inline">\(\pi\)</span>). The
+following code should produce a square with a side length of 30 and
+rotated by 30 degrees:</p>
 <pre class="r"><code>library(TurtleGraphics)
 turtle_init()
 turtle_do({
@@ -617,9 +682,21 @@ turtle_do({
 })</code></pre>
 <p><img src="images/turtle_squareRotated.png" width="456" /></p>
 </div>
-<div id="bonus-credit-2-turtlesquarestars-degreespacing-20-solo-2.5-pts" class="section level3">
-<h3>Bonus Credit 2) <code>turtleSquareStar(s, degreeSpacing = 20)</code> [SOLO, 2.5 pts]</h3>
-<p>Write the function <code>turtleSquareStar(s, degreeSpacing)</code> that uses the <code>turtleSquareRotated(s, degrees)</code> as a helper function to draw a sequence of overlapping rotated squares with side length <code>s &lt; 70</code> to form a star. The <code>degreeSpacing</code> argument determines the spacing in degrees between each rotated square, and the default value should be <code>degreeSpacing = 20</code>. Also, <code>1 &lt;= degreeSpacing &lt;= 60</code>, and your function must not allow the turtle to escape the terrarium. The following code should produce the star of rotated squares with a side length of 50 and 20 degree spacings between each square:</p>
+<div id="bonus-credit-2-turtlesquarestars-degreespacing-20-solo-2.5-pts"
+class="section level3">
+<h3>Bonus Credit 2) <code>turtleSquareStar(s, degreeSpacing = 20)</code>
+[SOLO, 2.5 pts]</h3>
+<p>Write the function <code>turtleSquareStar(s, degreeSpacing)</code>
+that uses the <code>turtleSquareRotated(s, degrees)</code> as a helper
+function to draw a sequence of overlapping rotated squares with side
+length <code>s &lt; 70</code> to form a star. The
+<code>degreeSpacing</code> argument determines the spacing in degrees
+between each rotated square, and the default value should be
+<code>degreeSpacing = 20</code>. Also,
+<code>1 &lt;= degreeSpacing &lt;= 60</code>, and your function must not
+allow the turtle to escape the terrarium. The following code should
+produce the star of rotated squares with a side length of 50 and 20
+degree spacings between each square:</p>
 <pre class="r"><code>library(TurtleGraphics)
 turtle_init()
 turtle_do({
@@ -628,9 +705,13 @@ turtle_do({
 <p><img src="images/turtle_squareStar.png" width="456" /></p>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112: Fundamentals of Programming</a>, by <a href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
+<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112:
+Fundamentals of Programming</a>, by <a
+href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a
+href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
 </ul>
 </div>
 </div>
@@ -674,7 +755,7 @@ turtle_do({
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -692,7 +773,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

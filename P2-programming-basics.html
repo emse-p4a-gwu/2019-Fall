@@ -13,17 +13,27 @@
 
 <title>Practice 2 - Programming Basics</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <style type="text/css">
 
@@ -89,12 +99,16 @@ tr:last-child {
 
 </style>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -107,32 +121,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -142,10 +132,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -162,40 +148,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -223,7 +185,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -235,7 +197,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -245,11 +207,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -261,13 +240,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -275,16 +253,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -328,7 +299,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -351,7 +322,7 @@ $(document).ready(function () {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Lessons
      
     <span class="caret"></span>
@@ -411,7 +382,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -441,7 +412,7 @@ $(document).ready(function () {
   <a href="resources.html">Resources</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -473,7 +444,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-bars"></span>
      
      
@@ -501,7 +472,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -512,19 +483,29 @@ $(document).ready(function () {
 
 <div id="basic-functions" class="section level1">
 <h1>Basic functions</h1>
-<p>Try out a few common, basic functions to learn what they do and how they work:</p>
+<p>Try out a few common, basic functions to learn what they do and how
+they work:</p>
 <ul>
-<li>Square root: <code>sqrt(64)</code> (you could also do this: <code>64^0.5</code>)</li>
-<li>Exponential: <code>exp(0)</code>, <code>exp(1)</code>, <code>exp(-10)</code>,</li>
-<li>Natural log: <code>log(10)</code>, log(1), <code>log(0)</code>, <code>log(-1)</code>, <code>log(exp(2))</code></li>
-<li>Factorial: <code>factorial(1)</code>, <code>factorial(5)</code>, <code>factorial(-1)</code>, <code>factorial(0)</code></li>
-<li>Round: <code>round(3.1415)</code>, <code>round(3.1415, digits=2)</code></li>
+<li>Square root: <code>sqrt(64)</code> (you could also do this:
+<code>64^0.5</code>)</li>
+<li>Exponential: <code>exp(0)</code>, <code>exp(1)</code>,
+<code>exp(-10)</code>,</li>
+<li>Natural log: <code>log(10)</code>, log(1), <code>log(0)</code>,
+<code>log(-1)</code>, <code>log(exp(2))</code></li>
+<li>Factorial: <code>factorial(1)</code>, <code>factorial(5)</code>,
+<code>factorial(-1)</code>, <code>factorial(0)</code></li>
+<li>Round: <code>round(3.1415)</code>,
+<code>round(3.1415, digits=2)</code></li>
 <li>Absolute value: <code>abs(-1)</code>, <code>abs(1)</code></li>
 </ul>
 <p>Here’s a couple more to foreshadow where we’ll be going:</p>
 <ul>
-<li>Type <code>rep("hello!", 100)</code> and take a look at the output. What does <code>rep()</code> do?</li>
-<li>Type <code>hist(x=rnorm(300))</code> and see what happens. What do you think the <code>hist()</code> function does? What about the <code>rnorm()</code> function? How could you find out more about each function?</li>
+<li>Type <code>rep("hello!", 100)</code> and take a look at the output.
+What does <code>rep()</code> do?</li>
+<li>Type <code>hist(x=rnorm(300))</code> and see what happens. What do
+you think the <code>hist()</code> function does? What about the
+<code>rnorm()</code> function? How could you find out more about each
+function?</li>
 </ul>
 </div>
 <div id="objects" class="section level1">
@@ -534,29 +515,43 @@ $(document).ready(function () {
 x &lt;- 1
 y &lt;- 2
 z &lt;- 3</code></pre>
-<p>Using only these objects, try writing code to answer the following questions:</p>
+<p>Using only these objects, try writing code to answer the following
+questions:</p>
 <ul>
-<li>Write a statement comparing the magnitude of <code>z</code> to <code>w</code> that returns <code>TRUE</code></li>
-<li>Write a statement comparing the magnitude of <code>x</code> to <code>w</code> that returns <code>TRUE</code></li>
-<li>Fill in the correct relational operators to make this statement return <code>TRUE</code>: <code>(x __ y) &amp; (z __ y)</code></li>
+<li>Write a statement comparing the magnitude of <code>z</code> to
+<code>w</code> that returns <code>TRUE</code></li>
+<li>Write a statement comparing the magnitude of <code>x</code> to
+<code>w</code> that returns <code>TRUE</code></li>
+<li>Fill in the correct relational operators to make this statement
+return <code>TRUE</code>: <code>(x __ y) &amp; (z __ y)</code></li>
 </ul>
 </div>
 <div id="data-types" class="section level1">
 <h1>Data types</h1>
-<p>Try answering some of these questions <strong>before</strong> running any code - reason through the commands, then run the code and see if you were correct:</p>
+<p>Try answering some of these questions <strong>before</strong> running
+any code - reason through the commands, then run the code and see if you
+were correct:</p>
 <ul>
-<li>What happens when you try to do math with a string: <code>"3" / 4</code></li>
-<li>What do you think R will return if we divide infinity by a really big number: <code>Inf / 10^20</code></li>
-<li>Why doesn’t the following code return <code>TRUE</code> (Hint: <a href="L3-functions.html#7_tips">read ahead</a> to find out):</li>
+<li>What happens when you try to do math with a string:
+<code>"3" / 4</code></li>
+<li>What do you think R will return if we divide infinity by a really
+big number: <code>Inf / 10^20</code></li>
+<li>Why doesn’t the following code return <code>TRUE</code> (Hint: <a
+href="L3-functions.html#7_tips">read ahead</a> to find out):</li>
 </ul>
 <pre class="r"><code>(0.1 + 0.2) == 0.3</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some content on this page has been modified from other courses, including:</p>
+<p>Some content on this page has been modified from other courses,
+including:</p>
 <ul>
-<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112: Fundamentals of Programming</a>, by <a href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
-<li>Danielle Navarro’s website <a href="https://psyr.org/index.html">“R for Psychological Science”</a></li>
+<li>CMU <a href="http://www.kosbie.net/cmu/spring-17/15-112/">15-112:
+Fundamentals of Programming</a>, by <a
+href="http://www.kosbie.net/cmu/">David Kosbie</a> &amp; <a
+href="https://hcii.cmu.edu/people/kelly-rivers">Kelly Rivers</a></li>
+<li>Danielle Navarro’s website <a href="https://psyr.org/index.html">“R
+for Psychological Science”</a></li>
 </ul>
 </div>
 
@@ -599,7 +594,7 @@ z &lt;- 3</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -617,7 +612,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
